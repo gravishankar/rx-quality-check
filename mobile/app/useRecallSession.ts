@@ -10,6 +10,7 @@ import type { ManualEntry } from '../src/app/screens.ts';
 import { manualExtraction } from '../src/app/screens.ts';
 import { initialState } from '../src/engine/runner.ts';
 import type { WorkflowEvent, WorkflowState } from '../src/state/machine.ts';
+import type { LabelExtraction } from '../src/models/identity.ts';
 import type { Repositories } from '../src/storage/repositories.ts';
 import { CATALOG_JSON, POLICY_JSON, PROFILE } from './config.ts';
 import type { PlatformServices } from './platform/types.ts';
@@ -19,6 +20,8 @@ export interface RecallSession {
   busy: boolean;
   error: string | null;
   start(entry: ManualEntry): Promise<void>;
+  /** Start from a scanned label (Task 4C). */
+  startExtraction(x: LabelExtraction): Promise<void>;
   send(event: WorkflowEvent): Promise<void>;
   reset(): void;
 }
@@ -61,6 +64,7 @@ export function useRecallSession(platform: PlatformServices, repos: Repositories
       busy,
       error,
       start: (entry) => run(() => getApp().scan(manualExtraction(entry))),
+      startExtraction: (x) => run(() => getApp().scan(x)),
       send: (event) => run(() => getApp().send(state, event)),
       reset: () => {
         setState(initialState());

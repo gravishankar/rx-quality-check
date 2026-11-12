@@ -1,4 +1,3 @@
-import org.rxrecallcheck.app.scanner.core.Barcodes;
 import org.rxrecallcheck.app.scanner.core.PpOcr;
 import org.rxrecallcheck.app.scanner.core.RgbImage;
 
@@ -9,9 +8,10 @@ import java.nio.file.Files;
 import java.util.List;
 
 /**
- * Desktop harness for the app's Java scanner core (same source files as the APK). Runs the PP-OCR
- * pipeline and ZXing on each image and prints one JSON object per image (JSON Lines).
- *   java -cp <jars>:<classes> DesktopLab <models_dir> <images_dir> [detMaxSide]
+ * Desktop harness for the app's Java OCR core (same source files as the APK). Runs the PP-OCR
+ * pipeline on each image and prints one JSON object per image (JSON Lines). Barcodes are evaluated
+ * with ZXing-cpp in bakeoff.py (the same C++ engine as the app's Android library).
+ *   java -cp <onnxruntime.jar>:<classes> DesktopLab <models_dir> <images_dir> [detMaxSide]
  */
 public class DesktopLab {
     public static void main(String[] a) throws Exception {
@@ -28,28 +28,25 @@ public class DesktopLab {
                 BufferedImage bi = ImageIO.read(f);
                 int w = bi.getWidth(), h = bi.getHeight();
                 RgbImage img = new RgbImage(w, h, bi.getRGB(0, 0, w, h, null, 0, w)).downscale(1600);
-                if (!warm) { ocr.recognize(img); warm = true; }
+                if (!warm) {
+                    ocr.recognize(img);
+                    warm = true;
+                }
                 long t0 = System.nanoTime();
                 PpOcr.Result r = ocr.recognize(img);
                 long t1 = System.nanoTime();
-                List<Barcodes.Found> bcs = Barcodes.decode(img);
-                long t2 = System.nanoTime();
                 StringBuilder sb = new StringBuilder();
                 sb.append("{\"file\":").append(q(f.getName())).append(",\"ocr_ms\":").append((t1 - t0) / 1_000_000)
-                  .append(",\"det_ms\":").append(r.detMs).append(",\"rec_ms\":").append(r.recMs)
-                  .append(",\"barcode_ms\":").append((t2 - t1) / 1_000_000).append(",\"lines\":[");
+                        .append(",\"det_ms\":").append(r.detMs).append(",\"rec_ms\":").append(r.recMs).append(",\"lines\":[");
                 for (int i = 0; i < r.lines.size(); i++) {
                     PpOcr.Line l = r.lines.get(i);
                     if (i > 0) sb.append(',');
                     sb.append("{\"text\":").append(q(l.text)).append(",\"score\":").append(l.score).append(",\"box\":[");
-                    for (int k = 0; k < 8; k++) { if (k > 0) sb.append(','); sb.append(Math.round(l.box[k])); }
+                    for (int k = 0; k < 8; k++) {
+                        if (k > 0) sb.append(',');
+                        sb.append(Math.round(l.box[k]));
+                    }
                     sb.append("]}");
-                }
-                sb.append("],\"barcodes\":[");
-                for (int i = 0; i < bcs.size(); i++) {
-                    Barcodes.Found b = bcs.get(i);
-                    if (i > 0) sb.append(',');
-                    sb.append("{\"format\":").append(q(b.format)).append(",\"text\":").append(q(b.text)).append(",\"symbology\":").append(q(b.symbology)).append('}');
                 }
                 sb.append("]}");
                 System.out.println(sb);

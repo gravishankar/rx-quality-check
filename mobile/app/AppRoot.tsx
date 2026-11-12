@@ -6,12 +6,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { COPY } from '../src/copy/en.ts';
-import { confirmationEvent, screenFor } from '../src/app/screens.ts';
+import { confirmationEvent, entryFromExtraction, screenFor } from '../src/app/screens.ts';
+import { readScan } from '../src/scanner/readScan.ts';
+import { vocabularyFromConfig } from '../src/scanner/vocabulary.ts';
 import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements, type ConsentStore } from '../src/legal/consent.ts';
 import { LEGAL_DOCUMENTS, type LegalDocumentId } from '../src/legal/documents.ts';
 import { deleteAllData, openStorage, type Repositories } from '../src/storage/repositories.ts';
 import type { SqlDriver } from '../src/storage/driver.ts';
-import { PROFILE } from './config.ts';
+import { CATALOG_JSON, POLICY_JSON, PROFILE } from './config.ts';
 import type { PlatformServices } from './platform/types.ts';
 import { useRecallSession } from './useRecallSession.ts';
 import { Banner, Link, P, Screen, Working } from './ui/kit.tsx';
@@ -25,6 +27,15 @@ import { LegalDoc } from './screens/LegalDoc.tsx';
 import { NotAssessed } from './screens/NotAssessed.tsx';
 import { Problem } from './screens/Problem.tsx';
 import { Result } from './screens/Result.tsx';
+import { ScanHome } from './screens/ScanHome.tsx';
+import { ScanProblem } from './screens/ScanProblem.tsx';
+
+const VOCABULARY = vocabularyFromConfig(CATALOG_JSON, POLICY_JSON);
+
+interface ScanInfo {
+  notes: string[];
+  details: string | null;
+}
 
 type Route = { name: 'check' } | { name: 'history' } | { name: 'about' } | { name: 'doc'; id: LegalDocumentId; back: Route };
 
@@ -37,6 +48,11 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   const [acks, setAcks] = useState<Acknowledgements | null>(null);
   const [route, setRoute] = useState<Route>({ name: 'check' });
   const [entry, setEntry] = useState(EMPTY_ENTRY);
+  // Task 4C: scanning is the primary path where a scanner exists; typing is the fallback.
+  const canScan = platform.scanner !== undefined;
+  const [mode, setMode] = useState<'scan' | 'type'>(canScan ? 'scan' : 'type');
+  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; reason?: string; notice?: string }>({ phase: 'idle' });
+  const [scanInfo, setScanInfo] = useState<ScanInfo | null>(null);
   const session = useRecallSession(platform, db?.repos ?? null);
 
   useEffect(() => {
@@ -51,7 +67,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
 
   // Android Back: from any screen other than the entry screen, go back to it instead of leaving the
   // app (iOS has no Back button; the listener is a no-op there).
-  const atHome = route.name === 'check' && session.state.name === 'SCAN' && !session.busy;
+  const atHome = route.name === 'check' && session.state.name === 'SCAN' && !session.busy && (mode === 'scan' || !canScan) && scanPhase.phase !== 'problem';
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (atHome || session.busy) return session.busy; // while busy, ignore Back; at home, default (leave)
@@ -59,11 +75,13 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       else {
         session.reset();
         setRoute({ name: 'check' });
+        setScanPhase({ phase: 'idle' });
+        if (canScan && session.state.name === 'SCAN') setMode('scan');
       }
       return true;
     });
     return () => sub.remove();
-  }, [atHome, route, session]);
+  }, [atHome, route, session, canScan]);
 
   const banner = <Banner dev={PROFILE.kind === 'development'} text={PROFILE.kind === 'development' ? COPY.app.devBanner : COPY.app.pilotBanner} />;
   const openDoc = (id: LegalDocumentId) => setRoute({ name: 'doc', id, back: route });
@@ -71,6 +89,49 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   const home = useCallback(() => {
     session.reset();
     setRoute({ name: 'check' });
+    setScanPhase({ phase: 'idle' });
+    setScanInfo(null);
+    if (canScan) setMode('scan');
+  }, [session, canScan]);
+
+  // Photo → on-device OCR + barcodes → fields → existing identification/confirmation/recall flow.
+  const scan = useCallback(async () => {
+    if (!platform.scanner) return;
+    session.reset();
+    setScanInfo(null);
+    setScanPhase({ phase: 'reading' });
+    try {
+      const out = await platform.scanner.scanLabel();
+      if (out === null) {
+        setScanPhase({ phase: 'idle', notice: COPY.scan.cancelled });
+        return;
+      }
+      const r = readScan(out, VOCABULARY);
+      setEntry(entryFromExtraction(r.extraction));
+      if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
+        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields });
+        return;
+      }
+      const t = out.timings;
+      const codes = r.barcodes.filter((b) => b.kind === 'NDC_CODE').length;
+      setScanInfo({
+        notes: r.problems.includes('BARCODE_TEXT_NDC_DIFFER') ? [COPY.scan.barcodeTextDiffer] : [],
+        details:
+          PROFILE.kind === 'development' && t
+            ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}`
+            : null,
+      });
+      setScanPhase({ phase: 'idle' });
+      await session.startExtraction(r.extraction);
+    } catch {
+      setScanPhase({ phase: 'problem', reason: COPY.scan.failed });
+    }
+  }, [platform, session]);
+  const typeInstead = useCallback(() => {
+    session.reset();
+    setScanPhase({ phase: 'idle' });
+    setScanInfo(null);
+    setMode('type');
   }, [session]);
 
   if (route.name === 'doc') {
@@ -94,6 +155,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
         onDeleteAll={async () => {
           session.reset();
           setEntry(EMPTY_ENTRY);
+          setScanInfo(null);
+          setScanPhase({ phase: 'idle' });
           setRoute({ name: 'check' });
           if (db) await deleteAllData(db.driver, platform.keyStore);
           setDb(null);
@@ -116,7 +179,12 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     const text = session.state.name === 'CONFIRM' || session.state.name === 'SOURCE_UNAVAILABLE' || session.state.name === 'RATE_LIMITED' ? COPY.working.search : session.state.name === 'SCAN' ? COPY.working.identify : COPY.working.other;
     return wrap(banner, <Working text={text} />);
   }
-  if (session.state.name === 'SCAN') return wrap(banner, <><Entry busy={session.busy} notice={null} value={entry} onChange={setEntry} onSubmit={(e) => void session.start(e)} />{nav}</>);
+  if (scanPhase.phase === 'reading') return wrap(banner, <Working text={COPY.scan.reading} />);
+  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} onRescan={() => void scan()} onType={typeInstead} />);
+  if (session.state.name === 'SCAN') {
+    if (mode === 'scan' && canScan) return wrap(banner, <><ScanHome busy={session.busy} notice={scanPhase.notice ?? null} onScan={() => void scan()} onType={typeInstead} />{nav}</>);
+    return wrap(banner, <><Entry busy={session.busy} notice={canScan ? null : COPY.scan.unavailable} value={entry} onChange={setEntry} onSubmit={(e) => { setScanInfo(null); void session.start(e); }} />{nav}</>);
+  }
 
   const m = screenFor(session.state, { now: new Date().toISOString(), persistHistory: PROFILE.persistHistory, format: (iso) => new Date(iso).toLocaleString() });
   switch (m.kind) {
@@ -127,7 +195,21 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     case 'CHOOSE_PRODUCT':
       return wrap(banner, <Choose model={m} onChoose={(index) => void session.send({ type: 'CANDIDATE_CHOSEN', index })} onDone={home} />);
     case 'CONFIRM':
-      return wrap(banner, <Confirm model={m} busy={session.busy} onEdit={home} onConfirm={(ticked, release) => void session.send(confirmationEvent(ticked, m.lot, release))} />);
+      return wrap(
+        banner,
+        <>
+          <Confirm
+            model={m}
+            busy={session.busy}
+            scanned={scanInfo !== null}
+            scanNotes={scanInfo?.notes ?? []}
+            onRescan={scanInfo !== null ? () => void scan() : undefined}
+            onEdit={typeInstead}
+            onConfirm={(ticked, release) => void session.send(confirmationEvent(ticked, m.lot, release))}
+          />
+          {scanInfo?.details ? <P muted>{scanInfo.details}</P> : null}
+        </>,
+      );
     case 'RESULT':
       return wrap(banner, <><Result model={m} busy={session.busy} onOpenUrl={openUrl} onDone={home} onSave={m.canSave ? () => void session.send({ type: 'SAVE_REQUESTED' }) : null} />{nav}</>);
     case 'NOT_ASSESSED':

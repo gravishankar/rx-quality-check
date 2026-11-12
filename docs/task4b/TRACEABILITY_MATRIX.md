@@ -40,4 +40,4 @@ Priority: **P0** next task (4C), **P1** following tasks (4D–4F), **P2** later 
 | T-5 | No scores, rankings, safety verdicts or treatment recommendations (T) | Enforced by tests (prohibited wording, no success tone) | Extend lint to evidence viewer copy | — | Done/extend | — | Keep |
 | T-6 | Present unfavorable findings with scope, date, relevance, limitations; don't omit (T) | n/a (no facility evidence yet) | Evidence cards with scope/date/attribution | First-party | With B3/B4 | Fairness to firms; accuracy; counsel review | P2 |
 | T-7 | Distinguish product-, facility-, company-level evidence (T) | Product-level only | Evidence-scope model (`PROVENANCE_DATA_ARCHITECTURE.md`) | — | Feasible | — | P1 (model), P2 (data) |
-| PRD-Q-* | Requirements of the Drug Quality Score App PRD (Oct 22, 2026) | — | — | — | — | — | **Not reviewed — document not provided (OD-26)** |
+| PRD-Q-* | Requirements of the Drug Quality Score App PRD (Oct 22, 2026) | — | — | — | — | — | **Completed in Task 4C: `docs/task4c/PRD_TRACEABILITY.md` (OD-26 closed)** |

@@ -7,7 +7,7 @@ are recorded below and in the documents that cite them.
 | ID | File | Provenance | Integrity |
 |----|------|------------|-----------|
 | A | `Rx Provenance & Quality Resolution UX & Backend System Specification.pdf` | Uploaded by the project owner on 2026-11-12. Copied byte-for-byte; only the file name was restored (the upload's name had been sanitized to underscores). 12 pages; produced by the Google Docs renderer. | SHA-256 `bbede45e771ef131231f1fefe83b12916b1d4bf17ac01821463b18bfb7f533a2` |
-| (PRD-Q) | Drug Quality Score App PRD (October 22, 2026) | **Referenced in Task 4B but not provided** to this project; not reviewed (OD-26). | — |
+| PRD-Q | `Drug Quality Score App PRD.md` | Pasted by the project owner in the Task 4C message (2026-11-12); saved verbatim; two diagrams missing from the paste. Traceability: `docs/task4c/PRD_TRACEABILITY.md`. Scores/colors/rankings rejected by product decision (Task 4B). | Text as received |
 | B | `Drugs Exclusion List.md` | Supplied by the project owner as pasted text in the Task 1 conversation on 2026-11-12 (no file was uploaded). Saved verbatim as received. The trailing instruction "Use this additional data." was a message to the assistant, not document content, and was not included. Any Markdown formatting in an original file (e.g., table pipes or headings) was not visible in the paste and therefore could not be reproduced. **If an original `.md` file exists, replace this copy with it.** | Text as received |
 
 ## Adoption register

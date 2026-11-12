@@ -10,8 +10,9 @@ A privacy-first, phone-only Android app (React Native + TypeScript) that helps p
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 4A.2 (functional validation, device-test preparation) — awaiting review. Current
-> development build: 0.1.2 (build 3); install with `docs/INSTALL_ON_ANDROID.md`. Earlier: Task 4A
+> **Status:** Task 4C (scanner-first) — awaiting the owner's Pixel test and review. Current development
+> build: 0.1.3 (build 4) with on-device label scanning; test with `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.
+> Earlier: Task 4A.2 (functional validation), build 3. Earlier: Task 4A
 > (Android pilot: evidence safety, legal and regulatory readiness). A React Native app (Android first, iOS-ready) runs the Task 3 engine. Only a **development
 > APK** exists, for the owner's testing; a pilot build is blocked by `npm run release:gate`
 > (approvals, legal/clinical/regulatory sign-offs and on-device encryption verification are

@@ -1,7 +1,7 @@
 # Privacy Policy — {{PRODUCT_NAME}}
 
 Document ID: privacy
-Version: 0.1.1-draft
+Version: 0.1.2-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED
 Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
 Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in the United States.
@@ -24,6 +24,9 @@ Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in
   names, RxNorm codes, label document IDs) directly to government services. It never sends your name,
   prescription number, label photos, lot numbers, pharmacy details or medication history.
 - You can delete all app data at any time in Settings.
+- If you scan a label, the photo is taken by your phone's camera app into private app storage, read
+  **on your phone**, and deleted immediately. It is never uploaded, never saved to your photo
+  gallery, and never shared. The app does not need the camera permission.
 
 ## 3. Information on your phone
 
@@ -33,6 +36,8 @@ Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in
 | Saved results, with the data versions used | So you can review them later | On your phone (only in builds where encrypted storage is verified; development builds keep results in memory only) |
 | Cached public FDA/NLM responses | To reduce repeat requests | On your phone |
 | The version of these documents you saw | To show updated documents | On your phone |
+| A label photo you take with Scan | To read the drug name, strength, NDC and (on original packages) lot | Processed in memory on your phone; the photo file is deleted right after reading; nothing from the photo is saved |
+| Text read from the photo (including any name, prescription number or pharmacy printed on the label) | Only the drug fields are used; the rest is kept in memory to make sure it is never sent anywhere | Discarded when you leave the check |
 
 We do not receive this information.
 

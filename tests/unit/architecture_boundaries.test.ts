@@ -153,3 +153,21 @@ test('Android build: universal and ARM64-only APKs, explicit CPU filter (no part
   assert.deepEqual(archs.sort(), ['arm64-v8a', 'armeabi-v7a', 'x86_64']);
   assert.doesNotMatch(g, /minifyEnabled true/, 'R8 stays off until verified on a device');
 });
+
+test('scanner dependencies (Task 4C): no ML Kit or analytics; ONNX Runtime pinned below its telemetry; privacy gate in the build', () => {
+  const g = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'build.gradle'), 'utf8');
+  assert.match(g, /onnxruntime-android:1\.28\.0"/, 'ONNX Runtime >= 1.29.0 ships Microsoft 1DS telemetry');
+  assert.match(g, /io\.github\.zxing-cpp:android:3\.1\.1"/);
+  assert.doesNotMatch(g, /mlkit|play-services-mlkit|firebase|crashlytics|analytics/i);
+  const m = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'AndroidManifest.xml'), 'utf8');
+  assert.match(m, /android\.permission\.CAMERA" tools:node="remove"/, 'photos come from the camera app; the app holds no camera permission');
+  assert.match(m, /ACCESS_NETWORK_STATE" tools:node="remove"/);
+  assert.match(m, /ai\.onnxruntime\.TelemetryInitializer"[^>]*tools:node="remove"/);
+  assert.match(m, /android:authorities="\$\{applicationId\}\.scanprovider"\s+android:exported="false"/);
+  const sh = readFileSync(join(ROOT, 'scripts', 'android_build.sh'), 'utf8');
+  assert.match(sh, /PRIVACY GATE: unexpected permissions/);
+  assert.match(sh, /ai\/onnxruntime\/telemetry/);
+  const mod = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'java', 'org', 'rxrecallcheck', 'app', 'scanner', 'RxScannerModule.java'), 'utf8');
+  assert.doesNotMatch(mod, /java\.net|HttpURLConnection|okhttp|Log\.(d|i|v|w|e)\(/, 'scanner module: no network, no logging');
+  assert.match(mod, /deleteQuietly\(f\)/);
+});

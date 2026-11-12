@@ -1,7 +1,7 @@
 {
   "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.2",
-  "build_number": 3,
+  "version": "0.1.3",
+  "build_number": 4,
   "history": [
     {
       "build_number": 1,
@@ -30,6 +30,16 @@
       "apk_sha256": "8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de",
       "note": "First build with version and build number embedded (versionName 0.1.2-dev, versionCode 3). Two APKs: universal (29.6 MB; apk_sha256) and ARM64-only (15.2 MB; apk_sha256_arm64).",
       "apk_sha256_arm64": "31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e"
+    },
+    {
+      "build_number": 4,
+      "version": "0.1.3",
+      "task": "4C",
+      "commit": "task-4c/scanner",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f",
+      "note": "Scanner-first development build (versionName 0.1.3-dev, versionCode 4): on-device OCR (PaddleOCR PP-OCRv3 / ONNX Runtime 1.28.0, no telemetry) and barcodes (ZXing-cpp). ARM64 38.9 MB, universal 76.7 MB.",
+      "apk_sha256_arm64": "629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958"
     }
   ]
 }

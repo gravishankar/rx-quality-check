@@ -77,10 +77,15 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Not done | No code, APK or merge. The Drug Quality Score App PRD (Oct 22, 2026) was not available (OD-26) |
 | Status | **Proposal — awaiting approval** (branch `task-4b/provenance-proposal`) |
 
-## Task 4C — Scanner-first (proposed, not approved)
+## Task 4C — Scanner-first
 
-See `docs/task4b/README.md` ("Recommended Task 4C"). Earlier candidate items for "pilot hardening"
-(encrypted history after PV-4, app-switcher privacy, dark theme) move to later tasks.
+| | |
+|---|---|
+| Deliverables | OCR/barcode bake-off on reproducible synthetic labels (`scripts/scanner_lab/`, `docs/task4c/OCR_EVALUATION.md`); app OCR core in pure Java (PaddleOCR PP-OCRv3 on ONNX Runtime 1.28.0); ZXing-cpp barcodes; Android native module (photo via the phone's camera app into a private file, deleted after reading; no CAMERA permission); pure TypeScript field extraction (`mobile/src/scanner/`); scan-first home, three-group confirmation (matched in FDA records / read from your label / needs your input), rescan and correction fallback; build privacy gate; development APK build 4 (0.1.3); `PIXEL_SCAN_TEST_GUIDE.md` with a synthetic test-label sheet; PRD traceability (`docs/task4c/PRD_TRACEABILITY.md`) |
+| Decisions | OD-25 deferred; OD-26 closed (PRD provided); OD-27: open-source, no-telemetry engines used, ML Kit decision pending Pixel results; OD-28 approved (privacy drafts updated; no CAMERA permission needed); OD-29 approved |
+| Unchanged | Recall engine, safety gates, evidence classification, presentation downgrade rules, data, policy |
+| Not done | Physical Pixel test (owner); iOS scanner (Apple Vision/ONNX Runtime iOS later) |
+| Status | **Complete — awaiting device test and review** (branch `task-4c/scanner`) |
 
 ## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
 
@@ -152,8 +157,8 @@ No iOS IPA is built in Task 4A.
 | OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |
 | OD-23 | **Implemented in 4A.2** (presentation only): the confirmation screen shows "NDC not found". Original question — when an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
 | OD-24 | **Deferred (4A.2): naming belongs to the owner's partner; "MedLuma" is a temporary development placeholder only.** Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |
-| OD-25 | Allow a build-time regulatory-evidence snapshot (FDA public downloads → reviewed, versioned data shipped in the app; no server) for inspections and compliance actions | Product owner (+ counsel) | Before Task 4E |
-| OD-26 | Provide the Drug Quality Score App PRD (Oct 22, 2026) for the traceability matrix and the seven scenarios | Product owner | Any time |
-| OD-27 | Scanner OCR/barcode engine: allow Google ML Kit (may send usage metrics to Google) or require open-source, no-telemetry engines | Product owner | After the 4C.1 spike |
-| OD-28 | Add the CAMERA permission and update privacy policy/claims for scanning | Product owner + counsel | Before 4C.2 ships |
-| OD-29 | Show facility-level evidence for all candidate facilities equally, and company-level evidence separately | Product owner | Before Task 4E |
+| OD-25 | **Deferred by the owner (Task 4C).** Allow a build-time regulatory-evidence snapshot (FDA public downloads → reviewed, versioned data shipped in the app; no server) for inspections and compliance actions | Product owner (+ counsel) | Before Task 4E |
+| OD-26 | **Closed (Task 4C):** PRD provided; traceability in `docs/task4c/PRD_TRACEABILITY.md`. | Product owner | — |
+| OD-27 | Scanner OCR/barcode engine. **Task 4C evidence:** ML Kit depends on Google's Clearcut data transport (usage logs); open-source PaddleOCR + ONNX Runtime 1.28.0 + ZXing-cpp used instead (ONNX Runtime ≥ 1.29 adds Microsoft telemetry — pinned below it, gated in the build). Final decision after the Pixel test. | Product owner | After the Pixel test |
+| OD-28 | **Approved (Task 4C).** Privacy drafts updated; the app ended up needing no CAMERA permission (photo via the camera app). | Product owner + counsel | — |
+| OD-29 | **Approved (Task 4C):** facility-level evidence for all candidate facilities equally; company-level evidence separately. | Product owner | — |

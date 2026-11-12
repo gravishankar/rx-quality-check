@@ -20,6 +20,7 @@ Every identity field shown to the user carries one of these labels (`EvidenceLev
 |---|---|---|
 | `VERIFIED_SOURCE` | "From FDA records" | Read from an FDA record (NDC Directory) for the NDC the user entered. Means "FDA's listing says this", not "FDA verified your medication". |
 | `USER_CONFIRMED` | "Entered and confirmed by you" | Typed by the user and explicitly confirmed (e.g. lot). Never presented as FDA-verified. |
+| `SCANNED` (Task 4C) | "Read from your label, not checked against FDA records" | Read by the camera (OCR or barcode) and not (yet) matched to an FDA record or confirmed by the user. Never presented as typed, confirmed or verified. |
 | `USER_ENTERED` | "Entered by you, not checked against FDA records" | Typed, not matched to a listing (name-only entry). |
 | `INFERRED` | "Matched by name only" | Derived from names, e.g. catalog match without an RxCUI. |
 | `CONFLICTING` | "FDA records disagree" | The FDA record is internally inconsistent; the app does not choose a side. |

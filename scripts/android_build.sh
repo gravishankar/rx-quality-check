@@ -30,6 +30,7 @@ restore_profile() { write_profile development false; rm -f "$MARKER"; }
 
 mkdir -p "$ROOT/mobile/build"
 rm -f "$MARKER"
+bash "$ROOT/scripts/fetch_ocr_models.sh"
 
 case "$MODE" in
   dev)
@@ -74,5 +75,14 @@ mkdir -p "$DEST"
 cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-universal.apk"
 (cd "$ROOT/mobile/android" && ./gradlew --no-daemon -PreactNativeArchitectures=arm64-v8a "$TASK")
 cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-arm64-v8a.apk"
+# Privacy gate (Task 4C): refuse an APK with unexpected permissions or any known telemetry component.
+BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)"
+for f in "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-"*.apk; do
+  perms="$("$BT/aapt2" dump permissions "$f" | grep uses-permission | sed "s/.*name='\([^']*\)'.*/\1/" | grep -v "DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" | sort | tr '\n' ' ')"
+  if [ "$perms" != "android.permission.INTERNET " ]; then echo "PRIVACY GATE: unexpected permissions in $f: $perms" >&2; exit 1; fi
+  if "$BT/aapt2" dump xmltree "$f" --file AndroidManifest.xml | grep -qiE "Telemetry|datatransport|firebase|crashlytics|analytics"; then echo "PRIVACY GATE: telemetry component in manifest of $f" >&2; exit 1; fi
+  if unzip -p "$f" 'classes*.dex' | strings | grep -qE "ai/onnxruntime/telemetry|com/google/android/datatransport|com/google/firebase/analytics|com/microsoft/applications/events"; then echo "PRIVACY GATE: telemetry classes in $f" >&2; exit 1; fi
+done
+echo "Privacy gate passed: INTERNET is the only permission; no telemetry components."
 echo "APKs (version $VER, build $BUILD):"
 (cd "$DEST" && for f in "$NAME-$FLAVOR-v$VER-b$BUILD-"*.apk; do printf "%10s  " "$(stat -c %s "$f")"; sha256sum "$f"; done)

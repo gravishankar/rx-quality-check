@@ -135,6 +135,17 @@ APK (`useLegacyPackaging true`; unpacked at install) and an ARM64-only APK built
 libraries out (op-sqlite/SQLCipher is not built for x86). R8 code shrinking stays off until it can be
 verified on a device.
 
+## Scanner (Task 4C)
+
+- `scripts/android_build.sh` first runs `scripts/fetch_ocr_models.sh`, which downloads the PaddleOCR
+  PP-OCRv3 ONNX models (Apache-2.0) from the pinned RapidOCR 1.2.3 wheel on PyPI, verifies SHA-256 of
+  the wheel and each model, and places them in `mobile/android/app/src/main/assets/ocr/` (not committed).
+- Dependencies: `onnxruntime-android:1.28.0` (pinned below the version that adds telemetry),
+  `io.github.zxing-cpp:android:3.1.1`.
+- **Privacy gate:** after building, the script fails if an APK has any permission other than INTERNET or
+  contains known telemetry classes/components (ONNX Runtime telemetry, Google data transport, Firebase,
+  Microsoft 1DS).
+
 ## Builds produced so far
 
 | Build | Commit | App label | SHA-256 | Where |
@@ -143,6 +154,8 @@ verified on a device.
 | Task 4A.1 development APK (build 2) | `df0d120` | MedLuma (DEV) | `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` | Sent in the Task 4A.1 session; archived likewise |
 | Task 4A.2 build 3, ARM64 (0.1.2-dev, versionCode 3) | `task-4a2/functional-validation` | MedLuma (DEV) | `31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e` | Sent in the Task 4A.2 session; archived |
 | Task 4A.2 build 3, universal | same | MedLuma (DEV) | `8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de` | Sent in the Task 4A.2 session; archived |
+| Task 4C build 4, ARM64 (0.1.3-dev, versionCode 4, scanner) | `task-4c/scanner` | MedLuma (DEV) | `629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958` | Sent in the Task 4C session; archived |
+| Task 4C build 4, universal | same | MedLuma (DEV) | `a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f` | Sent in the Task 4C session; archived |
 
 Both are signed with the same development certificate (SHA-256
 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7`, DN still names the earlier

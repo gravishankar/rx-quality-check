@@ -8,6 +8,18 @@
     <!-- Added by react-native-keychain; the app does not use biometric prompts. -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" tools:node="remove" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" tools:node="remove" />
+    <!-- Task 4C: photos are taken by the phone's camera app via an intent, so the app itself needs no
+         CAMERA permission (and declaring it would require granting it before the intent works). -->
+    <uses-permission android:name="android.permission.CAMERA" tools:node="remove" />
+    <!-- Defense in depth against library telemetry (ONNX Runtime >= 1.29 declares this). -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+
+    <!-- Android 11+ package visibility: allow finding the camera app. -->
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
     <application
       android:name=".MainApplication"
@@ -22,6 +34,16 @@
       android:usesCleartextTraffic="false"
       android:supportsRtl="true"
       tools:replace="android:usesCleartextTraffic">
+      <!-- Defense in depth: never start ONNX Runtime's telemetry (present only in versions >= 1.29). -->
+      <provider android:name="ai.onnxruntime.TelemetryInitializer" android:authorities="${applicationId}.onnxruntime_telemetry_initializer" tools:node="remove" />
+      <!-- Shares only the private scan cache with the camera app, for one photo at a time. -->
+      <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.scanprovider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/scan_paths" />
+      </provider>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

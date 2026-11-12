@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { createRecallCheck } from '../../mobile/src/app/recallCheck.ts';
 import { confirmationEvent, screenFor } from '../../mobile/src/app/screens.ts';
 import { readScan } from '../../mobile/src/scanner/readScan.ts';
+import { vocabularyFromConfig } from '../../mobile/src/scanner/vocabulary.ts';
 import type { HttpTransport } from '../../mobile/src/services/transport.ts';
 import { liveTransport, loadCassette, recordingTransport, replayTransport, saveCassette, type Cassette } from '../lib/cassette.ts';
 
@@ -18,10 +19,7 @@ const read = (p: string) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
 export const SCAN_CASSETTE = join(ROOT, 'tests', 'fixtures', 'scanner', 'cassette.json');
 
 export function scanVocabulary(): string[] {
-  const c = read('data/drug_catalog.json') as { ingredients?: { name: string; aliases?: string[] }[] };
-  const words = new Set<string>();
-  for (const i of c.ingredients ?? []) for (const w of [i.name, ...(i.aliases ?? [])]) for (const part of w.toUpperCase().split(/[^A-Z]+/)) if (part.length >= 3) words.add(part);
-  return [...words];
+  return vocabularyFromConfig(read('data/drug_catalog.json'), read('data/exclusion_policy.json'));
 }
 
 export interface FlowResult {

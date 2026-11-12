@@ -214,6 +214,15 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+    // Task 4C on-device scanner. ONNX Runtime (MIT) runs PaddleOCR models (Apache-2.0); ZXing-cpp
+    // (Apache-2.0) decodes barcodes. ONNX Runtime is pinned to 1.28.0: from 1.29.0 the Android
+    // package adds Microsoft 1DS usage telemetry (TelemetryInitializer, HTTP client, INTERNET and
+    // ACCESS_NETWORK_STATE permissions); 1.28.0 has none (docs/task4c/OCR_EVALUATION.md). The build
+    // script fails if any telemetry component or unexpected permission appears in the APK.
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.28.0")
+    implementation("io.github.zxing-cpp:android:3.1.1")
+    implementation("androidx.core:core:1.13.1")
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

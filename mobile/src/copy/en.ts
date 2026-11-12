@@ -45,6 +45,7 @@ export const COPY = {
       'It can tell you when a recall record appears to match, might match, or when no match was found in the records it could check.',
       'It cannot tell you whether a medication is right for you. Only your pharmacist or prescriber can.',
       'Your medication details stay on this phone. Only public drug codes are sent to FDA and the National Library of Medicine.',
+      'If you scan a label, the photo is read on this phone and deleted right away. It is never uploaded.',
       'This app checks only when you ask. It does not send alerts about new recalls.',
     ],
     readTerms: 'Read the Terms of Use',
@@ -52,6 +53,36 @@ export const COPY = {
     readMedical: 'Read the Medical Disclaimer',
     acknowledge: 'I understand',
     acknowledgementNote: 'We record the version of these documents you saw, on this phone only.',
+  },
+
+  scan: {
+    title: FEATURE,
+    intro: 'Take a photo of your pharmacy label, or of the barcode on the original bottle or box.',
+    button: 'Scan medication label',
+    tips: [
+      'Lay the bottle flat, or turn it so the drug name and NDC face the camera.',
+      'Use good light and avoid glare. Fill the screen with the label.',
+    ],
+    privacy: 'The photo is read on this phone and deleted right away. It is never uploaded or saved to your photos.',
+    typeInstead: 'Type the details instead',
+    reading: 'Reading your label on this phone…',
+    scannedNote: 'These details were read from your photo. Please check each one against your label.',
+    rescan: 'Scan again',
+    correct: 'Correct the details',
+    unavailable: 'Scanning is not available on this phone yet. Please type the details.',
+    cancelled: 'No photo was taken.',
+    problemTitle: 'We couldn’t read your label',
+    nothingRead: 'We could not find any text or barcode in the photo.',
+    noDrugFields: 'We found text, but not a drug name, strength or NDC.',
+    failed: 'The photo could not be read.',
+    retryTips: 'Try again with more light, closer to the label, and without glare. Or type the details.',
+    barcodeTextDiffer: 'The barcode and the printed NDC point to different products. We will check both against FDA records; please look at your label carefully.',
+    groups: {
+      VERIFIED: 'Matched in FDA records',
+      READ_OR_ENTERED: 'Read from your label — please check',
+      NEEDS_INPUT: 'Needs your input',
+    },
+    details: 'Scan details (development)',
   },
 
   entry: {
@@ -65,7 +96,7 @@ export const COPY = {
     lotLabel: 'Lot number (optional)',
     lotHelp: 'Only on original packaging. Lot numbers are never sent anywhere.',
     submit: 'Find this medication',
-    noCamera: 'Scanning a label is not available in this version. Please type the details.',
+    noCamera: 'Type the details exactly as printed on your label.',
   },
 
   confirm: {

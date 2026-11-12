@@ -1,5 +1,8 @@
 # Functional Test Plan — development build 0.1.2 (build 3)
 
+> Build 4 (0.1.3, Task 4C) adds scanning; scan tests are in `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.
+> The manual-entry tests below still apply through *Type the details instead*.
+
 Purpose: check, on a real Android phone, that the app does what it should, and that its wording never
 goes beyond the evidence. Install first: `docs/INSTALL_ON_ANDROID.md`.
 

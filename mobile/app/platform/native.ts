@@ -4,7 +4,7 @@
  * react-native-get-random-values make no network requests; fetch is used only through the guarded
  * transport (allowlisted public hosts).
  */
-import { Linking, Platform } from 'react-native';
+import { Linking, NativeModules, Platform, TurboModuleRegistry } from 'react-native';
 import { open } from '@op-engineering/op-sqlite';
 import * as Keychain from 'react-native-keychain';
 import { fetchTransport } from '../../src/services/transport.ts';
@@ -12,6 +12,24 @@ import { openOpSqlite, type OpSqliteOpen } from '../../src/storage/drivers/opSql
 import { keychainKeyStore, type KeychainApi } from '../../src/storage/keys.ts';
 import { runEncryptionSelfTest } from '../../src/storage/encryptionSelfTest.ts';
 import type { PlatformServices } from './types.ts';
+import type { ScanOutput } from '../../src/scanner/readScan.ts';
+
+/**
+ * Android native module (mobile/android/.../scanner/RxScannerModule.java). Not present on iOS yet.
+ * Looked up through the New Architecture interop registry first, then the legacy NativeModules
+ * proxy; if neither has it, scanning is hidden and manual entry is used.
+ */
+type ScannerModule = { scanLabel(): Promise<ScanOutput | null> };
+const RxScanner: ScannerModule | undefined = (() => {
+  try {
+    const t = (TurboModuleRegistry as unknown as { get(name: string): unknown }).get('RxScanner') as ScannerModule | null;
+    if (t && typeof t.scanLabel === 'function') return t;
+  } catch {
+    // fall through to the legacy proxy
+  }
+  const legacy = (NativeModules as { RxScanner?: ScannerModule }).RxScanner;
+  return legacy && typeof legacy.scanLabel === 'function' ? legacy : undefined;
+})();
 
 const randomBytes = (n: number): Uint8Array => {
   const b = new Uint8Array(n);
@@ -51,4 +69,5 @@ export const nativePlatform: PlatformServices = {
     if (url.startsWith('https://www.fda.gov/') || url.startsWith('https://api.fda.gov/')) await Linking.openURL(url);
   },
   os: Platform.OS,
+  ...(Platform.OS === 'android' && RxScanner ? { scanner: { scanLabel: () => RxScanner.scanLabel() } } : {}),
 };

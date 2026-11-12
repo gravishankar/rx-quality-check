@@ -11,8 +11,10 @@ build installs over a lower one.
 
 | Build | Version shown in the app | File | Size | SHA-256 | Status |
 |---|---|---|---|---|---|
-| **3 (current)** | 0.1.2-dev (build 3) | `medluma-dev-v0.1.2-b3-arm64-v8a.apk` — **use this one first** | 15.2 MB | `31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e` | Recommended |
-| 3 (current) | 0.1.2-dev (build 3) | `medluma-dev-v0.1.2-b3-universal.apk` — only if the one above will not install | 29.6 MB | `8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de` | Fallback |
+| **4 (current, scanner)** | 0.1.3-dev (build 4) | `medluma-dev-v0.1.3-b4-arm64-v8a.apk` — **use this one first** | 38.9 MB | `629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958` | Recommended; test with `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md` |
+| 4 (current, scanner) | 0.1.3-dev (build 4) | `medluma-dev-v0.1.3-b4-universal.apk` | 76.7 MB | `a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f` | Fallback |
+| 3 | 0.1.2-dev (build 3) | `medluma-dev-v0.1.2-b3-arm64-v8a.apk` | 15.2 MB | `31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e` | Superseded (no scanner) |
+| 3 | 0.1.2-dev (build 3) | `medluma-dev-v0.1.2-b3-universal.apk` | 29.6 MB | `8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de` | Superseded |
 | 2 (already sent) | 0.1.0 (no build number shown) | `medluma-dev-0.1.0-task4a1.apk` | 63.5 MB | `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` | Superseded; see "Installing the already-available build" |
 | 1 | 0.1.0 | `app-dev-release.apk` ("Rx Recall Check (DEV)") | 63.5 MB | `648e9c07b4598ea570d22cefd11c5b9ff983bc56392cfb16f6ad9748fa00de11` | Superseded |
 

@@ -36,6 +36,12 @@ export function manualExtraction(e: ManualEntry): LabelExtraction {
   };
 }
 
+/** Prefill the manual form from a scan, so the user can correct what was read (Task 4C fallback). */
+export function entryFromExtraction(x: LabelExtraction): ManualEntry {
+  const ocrNdc = x.ndcTexts.find((n) => n.origin === 'OCR') ?? x.ndcTexts[0];
+  return { ndc: ocrNdc?.value ?? '', drugName: x.drugName?.value ?? '', strength: x.strength?.value ?? '', form: x.doseForm?.value ?? '', lot: x.lot?.value ?? '' };
+}
+
 /** Confirmation items the user must tick one by one (no "select all"). */
 export interface ConfirmItem {
   key: string;

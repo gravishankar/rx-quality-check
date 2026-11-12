@@ -25,3 +25,5 @@ npm-debug.log
 /vendor/bundle/
 .metro-health-check*
 /coverage
+# OCR models are fetched and verified by scripts/fetch_ocr_models.sh
+android/app/src/main/assets/ocr/*.onnx

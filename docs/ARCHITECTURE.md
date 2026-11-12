@@ -442,3 +442,22 @@ mobile/
   shared code.
 - Android packaging: explicit ABI filter from `reactNativeArchitectures`; compressed native
   libraries; ARM64-only APK from a second Gradle pass.
+
+## 16. Task 4C: scanner
+
+```
+ScanHome ─ platform.scanner.scanLabel() ─► RxScannerModule (Android, Java)
+                                             camera app → private file → memory → delete
+                                             PpOcr (PaddleOCR via ONNX Runtime 1.28.0) + ZXing-cpp
+          ◄─ { lines[], barcodes[], timings } ─┘
+readScan (mobile/src/scanner, pure TS): barcode.ts (UPC/GS1 → NDC, lot, expiry; Rx barcodes rejected)
+                                        labelText.ts (NDC anchoring, Rx-line exclusion, O/0 fixes in numbers,
+                                        word segmentation, labeled lot only, privateText)
+  → LabelExtraction(origin OCR/BARCODE) → existing engine (directory lookup, cross-validation,
+    exclusion, confirmation gates, recall evidence) → presentation (new evidence level SCANNED;
+    confirmation groups VERIFIED / READ_OR_ENTERED / NEEDS_INPUT)
+```
+
+- `scanner/` may import only `models/` and `rules/` (architecture test).
+- iOS: `PlatformServices.scanner` is absent → manual entry; an iOS implementation (Apple Vision or ONNX
+  Runtime iOS with the same models) can be added behind the same interface.

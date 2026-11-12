@@ -290,3 +290,19 @@ assertions about them were changed). Physical-device testing is still pending
 | `npm run android:dev` | build 3 (0.1.2-dev, versionCode 3): ARM64 15.2 MB, universal 29.6 MB; INTERNET only; SQLCipher/OpenSSL present per CPU type; not debuggable; same development certificate |
 
 Physical device: **not tested** (no device or emulator; no `/dev/kvm`). Plan: `docs/FUNCTIONAL_TEST_PLAN.md`.
+
+## 13. Task 4C results (2026-11-12)
+
+**Automated / simulated (desktop):**
+
+| Check | Result |
+|---|---|
+| `npm test` | **415 tests, 415 pass, 0 fail, 0 skipped** (+14 scanner extraction, +5 scanner end-to-end, +2 architecture) |
+| `npm run mobile:test` (real screens) | **25/25** (+10 scan-flow UI tests with a fake scanner returning real OCR output) |
+| Typechecks, `config:test`, `e2e` | clean / OK / 13/13 |
+| OCR bake-off (32 synthetic labels) | PaddleOCR NDC 28/28, name 32/32, strength 31/32 after extraction; Tesseract NDC 24/28; ZXing-cpp 29/32 barcodes (`docs/task4c/OCR_EVALUATION.md`) |
+| Scanned label → recall result, recorded real FDA data | 64/64 flows as expected (`tests/integration/scanner_flow.test.ts`) |
+| Printable test sheet (7 labels), live FDA data | 7/7 as expected |
+| `npm run android:dev` | build 4: ARM64 38.9 MB, universal 76.7 MB; privacy gate passed (INTERNET only; no telemetry classes/components) |
+
+**Physical device:** not tested (no device/emulator available). Pixel test: `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.

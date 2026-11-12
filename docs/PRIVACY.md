@@ -5,6 +5,19 @@ servers and collects no data.
 
 ## 1. On-device OCR and image processing
 
+**Task 4C (implemented, Android):** *Scan medication label* opens the phone's camera app through
+`ACTION_IMAGE_CAPTURE`, which writes one photo into the app's private cache (`cache/scans/`, shared
+with the camera app only through a non-exported FileProvider for that photo). The app decodes it into
+memory, deletes the file immediately (also on failure and on cancel; leftovers are cleared at start),
+runs text recognition (PaddleOCR PP-OCRv3 on ONNX Runtime 1.28.0) and barcode decoding (ZXing-cpp) on
+the phone, and returns only recognized lines and barcode payloads to the app. The app holds **no
+CAMERA permission**, writes nothing to the gallery, uploads nothing and logs nothing. All label text
+not used for identity (patient, prescriber, pharmacy, directions, Rx number) is passed to the request
+guard as private text and never transmitted (tested). Library telemetry: ML Kit not used (Google usage
+logging); ONNX Runtime pinned to 1.28.0 (later versions add Microsoft telemetry); the build fails if
+any permission other than INTERNET or any known telemetry component appears in the APK.
+
+
 - Camera frames are processed in memory by an on-device OCR and barcode engine (selection in Task 5, OD-5).
 - Images are not written to disk and not uploaded. Temporary buffers are released after extraction. Saving a label photo is out of scope for v0.1.
 - **Engine requirement:** the selected OCR/barcode library must run with no network access at inference time and must not transmit images, text or usage metrics. Libraries that download models or send diagnostics (some vendor SDKs do) must be configured to disable this, or be rejected. This is verified in Task 5 with a network capture during scanning (TEST_PLAN PV-3).
