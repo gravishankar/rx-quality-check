@@ -1,18 +1,18 @@
-# Android Device Test Plan — Rx Recall Check v0.1.0
+# Android Device Test Plan — v0.1.0 (working name MedLuma)
 
 Status at Task 4A: **not executed.** No physical device or emulator was available in the build
 environment. Every item below is pending. Results are recorded in the table at the end, with device
 model, Android version, build SHA-256 and date.
 
-Install the development APK (`docs/ANDROID_BUILD_AND_INSTALL.md`). Use only public example NDCs;
+Owner step-by-step instructions: `docs/FIRST_DEVICE_TEST_RUNBOOK.md`. Install the development APK (`docs/ANDROID_BUILD_AND_INSTALL.md`). Use only public example NDCs;
 do not enter real patient information.
 
 ## 1. Installation and launch
 
 | ID | Step | Expected |
 |---|---|---|
-| D-1 | Install APK with `adb install` | Installs as "Rx Recall Check (DEV)" (`org.rxrecallcheck.app.dev`) |
-| D-2 | Launch with no computer connected | App starts without Metro; purple "DEVELOPMENT BUILD" banner |
+| D-1 | Install APK with `adb install` | Installs as "MedLuma (DEV)" (label from `config/brand.json`; ID unchanged `org.rxrecallcheck.app.dev`) |
+| D-2 | Launch with no computer connected | App starts without Metro; purple banner "DEVELOPMENT BUILD — evaluation prototype … Not clinically validated…" |
 | D-3 | First launch | "Before you start" notice; links open Terms, Privacy, Medical Disclaimer (marked draft) |
 | D-4 | Permissions screen in system settings | No permissions requested at runtime; only network access listed |
 

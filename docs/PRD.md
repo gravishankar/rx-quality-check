@@ -1,6 +1,6 @@
-# Product Requirements — Rx Recall Check MVP v0.1
+# Product Requirements — MedLuma (working name) MVP v0.1: Medication Recall Check
 
-Patient-facing name: **Rx Recall Check** (configurable in `config/app_config.json`; the repository name `rx-quality-check` is unchanged).
+Patient-facing name: **MedLuma** (provisional working name, conflicts found — `docs/BRAND_CLEARANCE.md`), first feature **Medication Recall Check**, tagline *Know your medication. Understand the evidence.* All configured in `config/brand.json` (Task 4A.1); earlier working name Rx Recall Check. Initial audience: patients and caregivers; professional use is out of scope (`docs/BRAND_AND_PRODUCT_STRATEGY.md`). The repository name `rx-quality-check` and application IDs are unchanged.
 
 | Field | Value |
 |---|---|

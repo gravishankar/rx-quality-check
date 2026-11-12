@@ -7,6 +7,8 @@ import type { LegalDocumentId } from '../../src/legal/documents.ts';
 export function FirstLaunch({ onOpenDoc, onAccept, pilot }: { onOpenDoc: (id: LegalDocumentId) => void; onAccept: () => void; pilot: boolean }) {
   return (
     <>
+      <H1>{COPY.app.name}</H1>
+      <P muted>{COPY.app.tagline}</P>
       <H1>{COPY.firstLaunch.title}</H1>
       {COPY.firstLaunch.points.map((p) => (
         <P key={p}>• {p}</P>

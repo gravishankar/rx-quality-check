@@ -259,3 +259,20 @@ APK has not been installed or launched. Pending: `docs/ANDROID_DEVICE_TEST_PLAN.
 on-device encryption self-test and file inspection (PV-4), TalkBack and font scaling, backup
 exclusion on a device, network capture. Tests prove code behavior only; they are not clinical or
 legal validation.
+
+## 11. Task 4A.1 results (2026-11-12)
+
+| Command / check | Result |
+|---|---|
+| Baseline on `task-4a/android-pilot` (`5d50dfa`) | 380/380 pass |
+| `npm test` | **388 tests, 388 pass, 0 fail, 0 skipped** (+8 in `tests/unit/brand.test.ts`) |
+| `npm run typecheck`, `npm run mobile:typecheck` | clean |
+| `npm run config:test` | OK |
+| `npm run e2e` (recorded) | 13/13 |
+| `npm run release:gate` | **15 blockers** (adds the unclear product name) — pilot refused |
+| `npm run android:dev` | built: label "MedLuma (DEV)", `org.rxrecallcheck.app.dev`, versionName `0.1.0-dev`, INTERNET only, not debuggable, same development certificate; SHA-256 `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` |
+| Task 4A APK preserved | SHA-256 `648e9c07b4598ea570d22cefd11c5b9ff983bc56392cfb16f6ad9748fa00de11`, unchanged |
+
+Unchanged in 4A.1: engine, safety gates, evidence classification and presentation rules (no test
+assertions about them were changed). Physical-device testing is still pending
+(`docs/FIRST_DEVICE_TEST_RUNBOOK.md`).

@@ -48,6 +48,16 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Not done (blocked) | Physical-device testing (no device in the build environment); on-device encryption verification (PV-4); pilot APK (14 release-gate blockers); legal, regulatory and clinical reviews (external) |
 | Status | **Complete — awaiting review** (branch `task-4a/android-pilot`) |
 
+## Task 4A.1 — MedLuma brand preparation and first device test
+
+| | |
+|---|---|
+| Deliverables | `config/brand.json` (single source: product name, tagline, feature names, version, legal-entity reference, display labels) with generator `npm run brand:bundle` → `mobile/src/brand/brand.ts` and the iOS display name; Android label and versionName read from it; legal documents use `{{PRODUCT_NAME}}` (versions 0.1.1-draft, still DRAFT); release gate blocks a pilot until the name is cleared by counsel; `BRAND_AND_PRODUCT_STRATEGY.md`, `BRAND_CLEARANCE.md`, `FIRST_DEVICE_TEST_RUNBOOK.md`; rebuilt development APK "MedLuma (DEV)"; Task 4A APK preserved |
+| Unchanged | Engine, safety gates, evidence classification, presentation rules, drug data, policy, application/bundle IDs, signing key, repository name |
+| Findings | Brand screening found an identical healthcare-software use of "MedLuma" (Medcast, Australia) → `name_status: PROVISIONAL_CONFLICTS_FOUND`; no permanent rebrand |
+| Not done | Physical-device test (owner to run the runbook); USPTO and domain registries could not be queried from the build environment |
+| Status | **Complete — awaiting review** (branch `task-4a1/medluma-brand`) |
+
 ## Task 4B — Pilot hardening (next, not started)
 
 Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
@@ -116,3 +126,5 @@ No iOS IPA is built in Task 4A.
 | OD-20 | Application ID `org.rxrecallcheck.app` is a placeholder (no domain owned). Confirm before any distribution; it cannot change afterwards. | Product owner | Before pilot |
 | OD-21 | Should the app hide its content in the Android recents screen / iOS app switcher (FLAG_SECURE)? It protects privacy but blocks tester screenshots. | Product owner | Task 4B |
 | OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |
+| OD-23 | When an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
+| OD-24 | Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |

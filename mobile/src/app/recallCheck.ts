@@ -8,6 +8,7 @@ import { dispatch, initialState, type Ports, type RulesConfig } from '../engine/
 import type { LabelExtraction, MedicationIdentity } from '../models/identity.ts';
 import { loadRxConfig, type ConfigProblem, type LoadOptions } from '../rules/catalog.ts';
 import { RULESET_VERSION } from '../rules/version.ts';
+import { BRAND } from '../brand/brand.ts';
 import { createDailyMedClient } from '../services/dailymed.ts';
 import { createOpenFdaClient } from '../services/openfda.ts';
 import { createLivePorts } from '../services/ports.ts';
@@ -21,10 +22,13 @@ export interface AppConfig {
   acceptUnapprovedConfig: boolean;
 }
 
-/** Parse config/app_config.json (display name is configurable; repository name unchanged). */
+/**
+ * Parse config/app_config.json. The display name now comes from config/brand.json (Task 4A.1);
+ * a display_name here is accepted only for backward compatibility.
+ */
 export function parseAppConfig(json: unknown): AppConfig {
   const o = (typeof json === 'object' && json !== null ? json : {}) as Record<string, unknown>;
-  const displayName = typeof o.display_name === 'string' && o.display_name.trim() !== '' ? o.display_name.trim() : 'Rx Recall Check';
+  const displayName = typeof o.display_name === 'string' && o.display_name.trim() !== '' ? o.display_name.trim() : BRAND.productName;
   return { displayName, acceptUnapprovedConfig: o.accept_unapproved_config === true };
 }
 

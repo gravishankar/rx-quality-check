@@ -38,7 +38,7 @@ case "$MODE" in
       PASS="$(head -c 24 /dev/urandom | base64 | tr -dc 'A-Za-z0-9' | head -c 24)"
       keytool -genkeypair -v -keystore "$SIGN_DIR/dev-signing.keystore" -storetype PKCS12 -alias rxrc-dev \
         -keyalg RSA -keysize 3072 -validity 3650 -storepass "$PASS" -keypass "$PASS" \
-        -dname "CN=Rx Recall Check DEVELOPMENT, O=Development build - not for distribution" >/dev/null 2>&1
+        -dname "CN=Development build DEVELOPMENT, O=Development build - not for distribution" >/dev/null 2>&1
       printf 'storeFile=%s\nstorePassword=%s\nkeyAlias=rxrc-dev\nkeyPassword=%s\n' "$SIGN_DIR/dev-signing.keystore" "$PASS" "$PASS" > "$SIGN_DIR/dev-signing.properties"
       chmod 600 "$SIGN_DIR/dev-signing.properties" "$SIGN_DIR/dev-signing.keystore"
       echo "Generated a development signing key in $SIGN_DIR (outside the repository)."

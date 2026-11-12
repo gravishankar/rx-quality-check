@@ -1,4 +1,4 @@
-# Release Readiness Checklist — Rx Recall Check v0.1.0 pilot
+# Release Readiness Checklist — v0.1.0 pilot (working name MedLuma; see config/brand.json)
 
 No APK may be given to anyone other than the owner until **every** item below is satisfied and
 `npm run release:gate` reports no blockers. Development APKs are for the owner's own testing only.
@@ -21,6 +21,10 @@ reviewed (document version or commit). The release gate rejects a sign-off witho
 | `android_device_testing` | Android device testing | Tester | `docs/ANDROID_DEVICE_TEST_PLAN.md` on ≥ 2 physical devices / Android versions | **Not signed** |
 
 ## B. Configuration and documents
+
+- [ ] Product name cleared by trademark counsel; `config/brand.json` `name_status` set to
+      `CLEARED_BY_COUNSEL` by the owner (currently `PROVISIONAL_CONFLICTS_FOUND` — docs/BRAND_CLEARANCE.md, OD-24)
+- [ ] Decision whether to change application/bundle IDs to match the final name (before first distribution)
 
 - [ ] `data/drug_catalog.json` status `APPROVED` (currently `DRAFT_PENDING_APPROVAL`)
 - [ ] `data/exclusion_policy.json` status `APPROVED` (currently `PROPOSED_PENDING_APPROVAL`)
@@ -53,3 +57,6 @@ reviewed (document version or commit). The release gate rejects a sign-off witho
 
 `npm run release:gate` → **14 blockers** (catalog, policy, five legal documents, six sign-offs,
 device encryption). **A pilot build must not be produced.**
+
+Task 4A.1 (2026-11-12): **15 blockers** — adds "product name is PROVISIONAL_CONFLICTS_FOUND, not
+cleared by counsel". No sign-off or approval was changed.

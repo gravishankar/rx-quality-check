@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { pilotBlockers } from '../mobile/src/app/buildProfile.ts';
 import { LEGAL_DOCUMENTS } from '../mobile/src/legal/documents.ts';
 import { checkConfig } from './lib/config_check.ts';
+import { readBrand } from './bundle_brand.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -29,6 +30,7 @@ export function releaseGate(root = ROOT, signoffsPath = join(root, 'config', 're
       legalDocuments: LEGAL_DOCUMENTS.map((d) => ({ id: d.id, status: d.status })),
       signoffs: s.signoffs,
       encryptionVerifiedOnDevice: s.encryption_verified_on_device === true,
+      brandNameStatus: readBrand(root).name_status,
     }),
   ];
 }

@@ -77,13 +77,16 @@ import groovy.json.JsonSlurper
 
 /**
  * Rx Recall Check build variants (docs/ANDROID_BUILD_AND_INSTALL.md):
- *   devRelease   — development APK: standalone, labeled "Rx Recall Check (DEV)", application ID
+ *   devRelease   — development APK: standalone, labeled with display_labels.development, application ID
  *                  org.rxrecallcheck.app.dev, signed with a locally generated development key.
  *   pilotRelease — evaluation (pilot) APK: built only after `npm run release:gate` passes, signed with
  *                  a pilot key whose properties file lives OUTSIDE the repository and this environment.
  * No keystore or password is ever stored in the repository.
  */
 def profileJson = new JsonSlurper().parse(file("../../config/build_profile.json"))
+// Product identity (labels, version) from the repository's config/brand.json (Task 4A.1). The
+// application ID and signing identities are deliberately NOT taken from it.
+def brandJson = new JsonSlurper().parse(file("../../../config/brand.json"))
 def signingDir = new File(System.getProperty("user.home"), ".rx-recall-check")
 def loadProps = { File f ->
     def props = new Properties()
@@ -105,7 +108,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "0.1.0"
+        versionName brandJson.app_version
     }
 
     flavorDimensions = ["profile"]
@@ -114,11 +117,11 @@ android {
             dimension "profile"
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
-            resValue "string", "app_name", "Rx Recall Check (DEV)"
+            resValue "string", "app_name", brandJson.display_labels.development
         }
         pilot {
             dimension "profile"
-            resValue "string", "app_name", "Rx Recall Check"
+            resValue "string", "app_name", brandJson.display_labels.pilot
         }
     }
 

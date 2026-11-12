@@ -1,8 +1,9 @@
-# Data Sources and Limitations — Rx Recall Check
+# Data Sources and Limitations — {{PRODUCT_NAME}}
 
 Document ID: sources
-Version: 0.1.0-draft
+Version: 0.1.1-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED
+Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
 
 ## Sources
 

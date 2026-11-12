@@ -5,10 +5,14 @@
  *   npm run legal:bundle
  *
  * `tests/unit/claims_and_copy.test.ts` fails if the bundle is out of date.
+ *
+ * The product name is not written into the documents: they say {{PRODUCT_NAME}}, which is replaced
+ * here from config/brand.json (Task 4A.1), so a rename never edits reviewed legal text by hand.
  */
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readBrand } from './bundle_brand.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'docs', 'legal');
@@ -17,10 +21,13 @@ const FIRST_LAUNCH = new Set(['terms', 'privacy', 'medical']);
 const ORDER = ['terms', 'privacy', 'medical', 'sources', 'pilot'];
 
 export function buildLegalBundle(): string {
+  const productName = readBrand(ROOT).product_name;
   const docs = readdirSync(DIR)
     .filter((f) => f.endsWith('.md'))
     .map((file) => {
-      const text = readFileSync(join(DIR, file), 'utf8');
+      const source = readFileSync(join(DIR, file), 'utf8');
+      if (/Rx Recall Check|MedLuma/.test(source)) throw new Error(`${file}: write {{PRODUCT_NAME}} instead of a product name`);
+      const text = source.split('{{PRODUCT_NAME}}').join(productName);
       const field = (name: string) => {
         const m = new RegExp(`^${name}: (.+)$`, 'm').exec(text);
         if (!m) throw new Error(`${file}: missing "${name}:" header`);

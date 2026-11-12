@@ -11,12 +11,23 @@
  * `tests/unit/claims_and_copy.test.ts` scans this file and every screen for prohibited wording.
  * Sentences that must mention "safe" in a negated form are listed in REVIEWED_NEGATED_STATEMENTS
  * and are the only exceptions.
+ *
+ * Product and feature names come from config/brand.json via brand/brand.ts (Task 4A.1); never type
+ * a product name here.
  */
+import { BRAND } from '../brand/brand.ts';
+
+const NAME = BRAND.productName;
+const FEATURE = BRAND.features.recallCheck;
 
 export const COPY = {
   app: {
+    name: NAME,
+    tagline: BRAND.tagline,
+    feature: FEATURE,
     pilotBanner: 'Evaluation prototype. Not clinically validated. Do not use as the only basis for medication decisions.',
-    devBanner: 'DEVELOPMENT BUILD — for owner testing only. Saved history is turned off.',
+    devBanner: 'DEVELOPMENT BUILD — evaluation prototype for owner testing only. Not clinically validated. Saved history is turned off.',
+    provisionalName: `${NAME} is a working name and may change.`,
   },
 
   disclaimer: {
@@ -30,7 +41,7 @@ export const COPY = {
   firstLaunch: {
     title: 'Before you start',
     points: [
-      'Rx Recall Check looks up public FDA recall records for a medication you enter.',
+      `${FEATURE} in ${NAME} looks up public FDA recall records for a medication you enter.`,
       'It can tell you when a recall record appears to match, might match, or when no match was found in the records it could check.',
       'It cannot tell you whether a medication is right for you. Only your pharmacist or prescriber can.',
       'Your medication details stay on this phone. Only public drug codes are sent to FDA and the National Library of Medicine.',
@@ -44,7 +55,8 @@ export const COPY = {
   },
 
   entry: {
-    title: 'Check a medication',
+    title: FEATURE,
+    intro: 'Check one medication against public FDA recall records.',
     ndcLabel: 'NDC from the label (if shown)',
     ndcHelp: 'Example: 62756-142-02. Leave blank if your label has no NDC.',
     nameLabel: 'Drug name as printed',
@@ -215,7 +227,7 @@ export const COPY = {
 
   about: {
     title: 'About and privacy',
-    version: (v: string, profile: string) => `Version ${v} (${profile})`,
+    version: (v: string, profile: string) => `${NAME} version ${v} (${profile})`,
     deleteAll: 'Delete all data on this phone',
     deleteAllConfirm: 'Delete all saved medications and results from this phone? This cannot be undone.',
     deleted: 'All data on this phone was deleted.',

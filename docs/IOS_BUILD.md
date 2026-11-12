@@ -1,4 +1,4 @@
-# iOS Build (future) — Rx Recall Check
+# iOS Build (future) — working name MedLuma
 
 Status: **not built.** Task 4A prepares the architecture only; no IPA is produced. The iOS project
 (`mobile/ios/`, from the React Native 0.88.1 template) shares all JavaScript/TypeScript with Android:
@@ -15,7 +15,7 @@ uses cross-platform libraries only.
 | Random key | react-native-get-random-values 2.0.0 | Same library (SecRandomCopyBytes) | Same |
 | Network | React Native `fetch`; HTTPS only via network security config | `fetch`; App Transport Security (`NSAllowsArbitraryLoads` false) | Same allowlist in code |
 | Backup exclusion | `allowBackup=false`, data extraction rules | **Open item (B-iOS-1):** op-sqlite stores databases in `Library/`, which iCloud backs up by default. The database must be excluded (`NSURLIsExcludedFromBackupKey`) or placed in a non-backed-up location. Needs a small native helper or a library option. The backed-up file would be encrypted with a key that is not backed up, but exclusion is still required by our privacy policy. | **Blocker for iOS persistence** |
-| Display name / version | `app_name`, versionName 0.1.0 | `CFBundleDisplayName` "Rx Recall Check", `MARKETING_VERSION` 0.1.0 | Set |
+| Display name / version | `app_name` and versionName from `config/brand.json` | `CFBundleDisplayName` written by `npm run brand:bundle` (now "MedLuma"); `MARKETING_VERSION` 0.1.0 (set manually — keep equal to `app_version`) | Set; provisional name |
 | Bundle ID | `org.rxrecallcheck.app` (+ `.dev`) | `org.rxrecallcheck.app` | Placeholder; must be registered with Apple |
 | Dev vs pilot profile | Product flavors + `build_profile.json` | Xcode schemes/configurations must read the same `build_profile.json` (written by a build script) | **Open item (B-iOS-2)**: add a "Dev" configuration with a separate bundle ID suffix and app name |
 | Local networking | — | `NSAllowsLocalNetworking` true in template (Metro in debug). Remove from release configuration. | **Open item (B-iOS-3)** |

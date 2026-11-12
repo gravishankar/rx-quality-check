@@ -1,9 +1,10 @@
-# Privacy Policy — Rx Recall Check
+# Privacy Policy — {{PRODUCT_NAME}}
 
 Document ID: privacy
-Version: 0.1.0-draft
+Version: 0.1.1-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED
-Applies to: Rx Recall Check pilot v0.1.0 (Android). Intended audience: users in the United States.
+Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
+Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in the United States.
 
 > Draft for legal review. It describes the app's actual design (docs/PRIVACY.md) and must be checked
 > against the final build before publication. Bracketed items require owner input. Some state laws

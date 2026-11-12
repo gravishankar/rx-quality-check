@@ -1,9 +1,10 @@
-# Terms of Use — Rx Recall Check
+# Terms of Use — {{PRODUCT_NAME}}
 
 Document ID: terms
-Version: 0.1.0-draft
+Version: 0.1.1-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED
-Applies to: Rx Recall Check pilot v0.1.0 (Android). Intended audience: users in the United States.
+Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
+Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in the United States.
 
 > This is a draft prepared for review by qualified legal counsel. It is not legal advice and has not
 > been approved. Bracketed items must be completed by the owner. Nothing in this draft limits rights or
@@ -11,7 +12,7 @@ Applies to: Rx Recall Check pilot v0.1.0 (Android). Intended audience: users in 
 
 ## 1. Who we are
 
-Rx Recall Check ("the app") is provided by **[LEGAL ENTITY NAME]**, **[ADDRESS]** ("we", "us").
+{{PRODUCT_NAME}} ("the app") is provided by **[LEGAL ENTITY NAME]**, **[ADDRESS]** ("we", "us").
 Contact: **[CONTACT EMAIL]**.
 
 ## 2. What the app does (intended use)

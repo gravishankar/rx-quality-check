@@ -1,10 +1,11 @@
-# Pilot Tester Notice — Rx Recall Check
+# Pilot Tester Notice — {{PRODUCT_NAME}}
 
 Document ID: pilot
-Version: 0.1.0-draft
+Version: 0.1.1-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED
+Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
 
-You are testing an **evaluation prototype** of Rx Recall Check.
+You are testing an **evaluation prototype** of {{PRODUCT_NAME}}.
 
 - It has **not been clinically validated** and is not intended as the only basis for any medication
   decision.

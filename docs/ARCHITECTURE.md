@@ -414,3 +414,18 @@ mobile/
 
 - **Cross-platform.** Nothing in `mobile/src/` or the screens is platform-specific; enforced by
   `tests/unit/architecture_boundaries.test.ts`. iOS open items: `docs/IOS_BUILD.md`.
+
+## 14. Task 4A.1: brand configuration
+
+- `config/brand.json` is the single source of product identity: name, name status, tagline, feature
+  names, version, legal-entity reference, display labels. It is separate from `data/` (drug catalog,
+  exclusion policy), the workflow and the evidence rules.
+- `npm run brand:bundle` generates `mobile/src/brand/brand.ts` (imported by `copy/`, `app/` and the
+  screens only) and writes the iOS `CFBundleDisplayName`. Android's `app/build.gradle` reads the JSON
+  for `app_name` and `versionName`. Legal documents contain `{{PRODUCT_NAME}}`, filled by
+  `npm run legal:bundle`.
+- Not derived from the brand: application/bundle IDs, signing keys, repository and project names.
+- Enforced by `tests/unit/brand.test.ts`: generated files fresh; no hard-coded product name in
+  shared code, screens or legal sources; rules/state/fsm/engine/services/storage/models never import
+  the brand; brand wording passes the claims rules; a non-cleared name is a release-gate blocker.
+- Adding a feature: add a `features.<id>` entry and its screens; the core identity is unchanged.

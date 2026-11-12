@@ -1,6 +1,10 @@
-# Rx Recall Check
+# MedLuma (working name) — Medication Recall Check
 
-Repository: `rx-quality-check`. The patient-facing name is configured in `config/app_config.json`.
+*Know your medication. Understand the evidence.*
+
+Repository: `rx-quality-check`. Product name, tagline, feature names, version and app labels live in
+`config/brand.json`. **"MedLuma" is a provisional working name with a known conflict and is not
+trademark-cleared** (`docs/BRAND_CLEARANCE.md`). Earlier working name: Rx Recall Check.
 
 A privacy-first, phone-only Android app (React Native + TypeScript) that helps patients identify
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
@@ -47,7 +51,10 @@ tests/                   Deterministic unit/integration tests and real-response 
 scripts/                 API feasibility harness, Task 2 fixture capture, re-export shims
 ```
 
-## Key documents (Task 4A)
+## Key documents (Task 4A, 4A.1)
+
+- `docs/BRAND_AND_PRODUCT_STRATEGY.md`, `docs/BRAND_CLEARANCE.md`
+- `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — owner-only first phone test
 
 - `docs/EVIDENCE_AND_CLAIMS_POLICY.md` — what the app may say, the evidence each statement needs, and the tests enforcing it
 - `docs/LEGAL_REGULATORY_REVIEW.md` — issues list for counsel (no compliance conclusions)

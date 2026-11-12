@@ -1,10 +1,11 @@
-# Medical Disclaimer — Rx Recall Check
+# Medical Disclaimer — {{PRODUCT_NAME}}
 
 Document ID: medical
-Version: 0.1.0-draft
+Version: 0.1.1-draft
 Status: DRAFT — LEGAL REVIEW REQUIRED (and pharmacist/clinical review of wording)
+Product name: {{PRODUCT_NAME}} is a provisional working name inserted from config/brand.json; it is not trademark-cleared (docs/BRAND_CLEARANCE.md).
 
-- Rx Recall Check provides information from public FDA recall records. It does not provide medical
+- {{PRODUCT_NAME}} provides information from public FDA recall records. It does not provide medical
   advice, diagnosis or treatment.
 - Using the app does not create a doctor–patient or pharmacist–patient relationship.
 - **Do not stop, change or replace a prescribed medication because of this app.** Talk to your

@@ -17,7 +17,9 @@ export function Entry({ onSubmit, busy, notice }: { onSubmit: (e: ManualEntry) =
   const [v, setV] = useState<ManualEntry>({ ndc: '', drugName: '', strength: '', form: '', lot: '' });
   return (
     <>
+      <P muted>{COPY.app.name}</P>
       <H1>{COPY.entry.title}</H1>
+      <P>{COPY.entry.intro}</P>
       <P muted>{COPY.entry.noCamera}</P>
       <P muted>{COPY.disclaimer.notMonitoring}</P>
       {notice ? <P>{notice}</P> : null}

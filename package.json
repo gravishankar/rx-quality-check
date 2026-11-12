@@ -28,7 +28,8 @@
     "release:gate": "tsx scripts/release_gate.ts",
     "android:dev": "bash scripts/android_build.sh dev",
     "android:pilot": "bash scripts/android_build.sh pilot",
-    "mobile:typecheck": "cd mobile && npx tsc --noEmit -p tsconfig.json"
+    "mobile:typecheck": "cd mobile && npx tsc --noEmit -p tsconfig.json",
+    "brand:bundle": "tsx scripts/bundle_brand.ts"
   },
   "devDependencies": {
     "@types/node": "22.10.2",

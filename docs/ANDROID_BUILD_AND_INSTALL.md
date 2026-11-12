@@ -1,4 +1,4 @@
-# Android Build and Install — Rx Recall Check v0.1.0
+# Android Build and Install — v0.1.0 (working name MedLuma)
 
 The app is a React Native 0.88.1 project in `mobile/` (Android first; iOS in `docs/IOS_BUILD.md`).
 Shared logic is in `mobile/src/` (platform-independent TypeScript, tested by the root `npm test`);
@@ -8,10 +8,11 @@ screens in `mobile/app/`; Android project in `mobile/android/`.
 
 | Variant | Gradle task | App name / ID | Configuration | History | Signing | May be distributed? |
 |---|---|---|---|---|---|---|
-| Development | `assembleDevRelease` | "Rx Recall Check (DEV)" / `org.rxrecallcheck.app.dev` | Draft allowed (OD-18) | Off (memory only) | Local development key generated in `~/.rx-recall-check/` | **No** — owner testing only |
-| Pilot | `assemblePilotRelease` | "Rx Recall Check" / `org.rxrecallcheck.app` | APPROVED only (fail closed) | On only if encryption verified on device | Pilot key kept by the owner outside the repo and cloud | Only after `docs/RELEASE_READINESS_CHECKLIST.md` |
+| Development | `assembleDevRelease` | "MedLuma (DEV)" / `org.rxrecallcheck.app.dev` | Draft allowed (OD-18) | Off (memory only) | Local development key generated in `~/.rx-recall-check/` | **No** — owner testing only |
+| Pilot | `assemblePilotRelease` | "MedLuma" / `org.rxrecallcheck.app` | APPROVED only (fail closed) | On only if encryption verified on device | Pilot key kept by the owner outside the repo and cloud | Only after `docs/RELEASE_READINESS_CHECKLIST.md` |
 
-Both variants bundle the JavaScript (Hermes bytecode) into the APK, so no Metro server or computer is
+App names and `versionName` come from `config/brand.json` (Task 4A.1); application IDs and signing
+do not, and stay unchanged until the owner approves a final name. Both variants bundle the JavaScript (Hermes bytecode) into the APK, so no Metro server or computer is
 needed to run them. Version: `versionName 0.1.0` (`0.1.0-dev` for development), `versionCode 1`.
 ABIs: arm64-v8a, armeabi-v7a, x86_64.
 
@@ -115,3 +116,16 @@ produce an equivalent APK; byte-for-byte reproducibility is not yet verified (Ta
   `systemProp.org.gradle.internal.repository.max.retries=10` to `~/.gradle/gradle.properties`.
 - *build_profile.json says 'pilot' but this is a development variant*: run the npm scripts, which
   write the profile, instead of calling Gradle directly.
+
+## Builds produced so far
+
+| Build | Commit | App label | SHA-256 | Where |
+|---|---|---|---|---|
+| Task 4A development APK | `5d50dfa` | Rx Recall Check (DEV) | `648e9c07b4598ea570d22cefd11c5b9ff983bc56392cfb16f6ad9748fa00de11` | Sent in the Task 4A session; archived in the build environment (`~/.rx-recall-check/apk-archive/`) |
+| Task 4A.1 development APK | `task-4a1/medluma-brand` | MedLuma (DEV) | `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` | Sent in the Task 4A.1 session; archived likewise |
+
+Both are signed with the same development certificate (SHA-256
+`d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7`, DN still names the earlier
+working name — signing identity intentionally unchanged). APKs are never committed to the repository.
+Rebuilding the same commit with the same toolchain and key produces a functionally equivalent APK;
+byte-identical output is not guaranteed (timestamps in native libraries), so checksums are per build.

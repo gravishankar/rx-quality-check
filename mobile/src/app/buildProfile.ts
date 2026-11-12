@@ -8,6 +8,8 @@
  *  - pilot: external evaluation. Refuses draft configuration (fail closed). Built only when
  *    `npm run release:gate` reports no blockers.
  */
+import { BRAND } from '../brand/brand.ts';
+
 export type BuildKind = 'development' | 'pilot';
 
 export interface BuildProfile {
@@ -22,7 +24,8 @@ export interface BuildProfile {
   label: string;
 }
 
-export const APP_VERSION = '0.1.0';
+/** From config/brand.json (single source for the version shown in the app and the Android build). */
+export const APP_VERSION = BRAND.appVersion;
 
 export function profileFor(kind: BuildKind, encryptionVerifiedOnDevice: boolean): BuildProfile {
   if (kind === 'pilot') {
@@ -59,6 +62,8 @@ export interface ReleaseInputs {
   legalDocuments: { id: string; status: string }[];
   signoffs: Record<string, { signed: boolean; by: string | null; date: string | null }>;
   encryptionVerifiedOnDevice: boolean;
+  /** config/brand.json name_status; a pilot needs a name cleared by counsel (Task 4A.1). */
+  brandNameStatus?: string | null;
 }
 
 export const REQUIRED_SIGNOFFS = [
@@ -73,6 +78,7 @@ export const REQUIRED_SIGNOFFS = [
 /** Every reason a pilot (external) build must not be produced. Empty = no blockers. */
 export function pilotBlockers(r: ReleaseInputs): string[] {
   const out: string[] = [];
+  if (r.brandNameStatus !== undefined && r.brandNameStatus !== 'CLEARED_BY_COUNSEL') out.push(`product name is ${r.brandNameStatus ?? 'unset'}, not cleared by counsel (docs/BRAND_CLEARANCE.md)`);
   if (r.catalogStatus !== 'APPROVED') out.push(`drug catalog status is ${r.catalogStatus ?? 'invalid'}, not APPROVED (OD-2)`);
   if (r.policyStatus !== 'APPROVED') out.push(`exclusion policy status is ${r.policyStatus ?? 'invalid'}, not APPROVED (OD-2)`);
   for (const d of r.legalDocuments) if (d.status !== 'APPROVED') out.push(`legal document ${d.id} is ${d.status}`);
