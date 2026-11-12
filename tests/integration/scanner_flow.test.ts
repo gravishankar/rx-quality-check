@@ -13,7 +13,7 @@ import { SCAN_CASSETTE, runLabelFlow } from '../../scripts/scanner_lab/scan_flow
 import { ROOT } from '../helpers/fixtures.ts';
 
 const lab = JSON.parse(readFileSync(join(ROOT, 'tests', 'fixtures', 'scanner', 'ocr_lab.json'), 'utf8')) as {
-  labels: (Parameters<typeof runLabelFlow>[0] & { truth: { drug_id: string; kind: string; ndc10: string | null; rx_number: string | null; patient: string | null } })[];
+  labels: (Parameters<typeof runLabelFlow>[0] & { truth: { drug_id: string; kind: string; ndc10: string | null; lot: string | null; rx_number: string | null; patient: string | null } })[];
 };
 const cassette = loadCassette(SCAN_CASSETTE);
 
@@ -33,12 +33,16 @@ for (const useBarcodes of [false, true]) {
       const f = await runLabelFlow(l, replayTransport(cassette), { useBarcodes });
       const got = f.category ? `${f.finalState}:${f.category}` : f.finalState;
       if (l.truth.drug_id === 'furosemide_sol') {
-        // Two labels read cleanly → result; the third has the ambiguous "10OMG" → never a result for a wrong strength.
-        if (l.file.includes('hard')) assert.equal(f.finalState, 'NEEDS_CLARIFICATION', l.file);
-        else assert.equal(got, 'EXPLAIN:NO_MATCH', l.file);
+        // A label whose strength is read ambiguously ("10OMG" with PP-OCRv3) must never give a result
+        // for a wrong strength; PP-OCRv4 reads all three cleanly.
+        assert.ok(got === 'EXPLAIN:NO_MATCH' || (l.file.includes('hard') && f.finalState === 'NEEDS_CLARIFICATION'), `${l.file}: ${got}`);
         continue;
       }
-      const want = EXPECTED[l.truth.drug_id]!(l.truth.kind, l.truth.ndc10 !== null);
+      let want = EXPECTED[l.truth.drug_id]!(l.truth.kind, l.truth.ndc10 !== null);
+      // A misread lot (one hard label: "JKU4639AB") is not in the recall's lot list, so the honest
+      // outcome is "possible", never "confirmed" and never "no match".
+      const lotLine = l.ocr_lines.find((x) => /LOT/i.test(x.text))?.text ?? '';
+      if (want === 'EXPLAIN:CONFIRMED' && !(useBarcodes && l.truth.kind === 'carton') && l.truth.lot && !new RegExp(`${l.truth.lot}(?![A-Z0-9])`).test(lotLine)) want = 'EXPLAIN:POTENTIAL';
       assert.equal(got, want, `${l.file}: ${got}`);
     }
   });

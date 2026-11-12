@@ -1,7 +1,7 @@
 {
   "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.4",
-  "build_number": 5,
+  "version": "0.1.5",
+  "build_number": 6,
   "history": [
     {
       "build_number": 1,
@@ -48,8 +48,18 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "b827210c0415b4cefaffb1e77a63cefb324b4c2a709257bb9f3e7b4591a4fdf8",
-      "note": "Fixes the Pixel scan failure of build 4 (ZXing-cpp read() called with a null crop rectangle threw on every scan); text and barcodes now fail independently; development builds show the technical cause.",
+      "note": "Fixes the Pixel scan failure of build 4 (ZXing-cpp read() called with a null crop rectangle threw on every scan); text and barcodes now fail independently; development builds show the technical cause. DEVICE RESULT (owner's Pixel, 2026-11-12): no crash, but every photo gave '0 text lines' (barcode still decoded). Cause: the OCR dictionary was taken from ONNX Runtime's metadata API, which did not give the 6,623 entries the model needs, so every line decoded empty and was dropped.",
       "apk_sha256_arm64": "9972d0368bae90832c23048ef897818a96d78d6bb37a319ea886bb133b49835f"
+    },
+    {
+      "build_number": 6,
+      "version": "0.1.5",
+      "task": "4C (fix 2)",
+      "commit": "task-4c/scanner",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f",
+      "note": "OCR dictionary read from the model file and checked against the model (a mismatch now fails loudly); PP-OCRv4 models; text read from a 3200-px copy of the photo (was 1600); extractor reads a known drug name without a strength and fixes S/5 after a drug name; development detail shows OCR counts. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64).",
+      "apk_sha256_arm64": "4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6"
     }
   ]
 }

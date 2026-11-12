@@ -15,6 +15,8 @@ export interface ScanOutput {
   image?: { width: number; height: number };
   /** Partial failures inside the native scanner (development diagnostics; no label content). */
   warnings?: string[];
+  /** OCR counts (development diagnostics; no label content). */
+  ocrStats?: { regions: number; droppedEmpty: number; droppedLowScore: number; dictionary: number };
 }
 
 export type ScanProblem = 'NOTHING_READ' | 'NO_DRUG_FIELDS' | 'BARCODE_TEXT_NDC_DIFFER';

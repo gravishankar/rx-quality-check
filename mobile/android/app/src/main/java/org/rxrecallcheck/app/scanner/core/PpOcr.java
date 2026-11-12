@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * On-device text recognition with PaddleOCR PP-OCRv3 models (Apache-2.0) on ONNX Runtime (MIT).
+ * On-device text recognition with PaddleOCR PP-OCRv4 mobile models (Apache-2.0) on ONNX Runtime (MIT).
  *
  * Pure Java (no Android classes) so the identical code runs in the app and in the desktop
  * evaluation harness (scripts/scanner_lab). Pipeline:
@@ -41,15 +41,22 @@ public final class PpOcr implements AutoCloseable {
         public final List<Line> lines;
         public final long detMs;
         public final long recMs;
+        /** Diagnostics (counts only, no text): regions detected, dropped as empty or low-confidence. */
+        public final int regions;
+        public final int droppedEmpty;
+        public final int droppedLowScore;
 
-        Result(List<Line> lines, long detMs, long recMs) {
+        Result(List<Line> lines, long detMs, long recMs, int regions, int droppedEmpty, int droppedLowScore) {
             this.lines = lines;
             this.detMs = detMs;
             this.recMs = recMs;
+            this.regions = regions;
+            this.droppedEmpty = droppedEmpty;
+            this.droppedLowScore = droppedLowScore;
         }
     }
 
-    // Parameters as published for PP-OCRv3 (RapidOCR defaults), except the detector input size,
+    // Parameters as published for PP-OCRv3/v4 (RapidOCR defaults), except the detector input size,
     // which is limited on the long side for phone speed.
     private static final float[] DET_MEAN = {0.485f, 0.456f, 0.406f};
     private static final float[] DET_STD = {0.229f, 0.224f, 0.225f};
@@ -72,6 +79,18 @@ public final class PpOcr implements AutoCloseable {
         o.setIntraOpNumThreads(Math.max(1, Math.min(4, Runtime.getRuntime().availableProcessors())));
         this.det = env.createSession(detModel, o);
         this.rec = env.createSession(recModel, o);
+        // The recognizer outputs blank + dictionary + space classes. A mismatch means every line
+        // would decode wrongly or empty, so fail loudly instead of returning nothing.
+        long classes = -1;
+        ai.onnxruntime.NodeInfo outInfo = rec.getOutputInfo().values().iterator().next();
+        if (outInfo.getInfo() instanceof ai.onnxruntime.TensorInfo) {
+            long[] shape = ((ai.onnxruntime.TensorInfo) outInfo.getInfo()).getShape();
+            classes = shape[shape.length - 1];
+        }
+        if (dictionary.size() < 10 || (classes > 0 && classes != dictionary.size() + 2)) {
+            close();
+            throw new IllegalStateException("OCR dictionary size " + dictionary.size() + " does not fit model classes " + classes);
+        }
         List<String> d = new ArrayList<>(dictionary);
         d.add(" ");
         this.dict = d.toArray(new String[0]);
@@ -83,16 +102,19 @@ public final class PpOcr implements AutoCloseable {
         List<float[]> boxes = detect(img);
         long t1 = System.nanoTime();
         List<Line> lines = new ArrayList<>();
+        int empty = 0, low = 0;
         for (float[] b : boxes) {
             RgbImage crop = cropRotated(img, b);
-            if (crop == null) continue;
+            if (crop == null) { empty++; continue; }
             String[] out = new String[1];
             float score = recognizeCrop(crop, out);
-            if (score >= TEXT_SCORE && !out[0].trim().isEmpty()) lines.add(new Line(out[0], score, b));
+            if (out[0].trim().isEmpty()) empty++;
+            else if (score < TEXT_SCORE) low++;
+            else lines.add(new Line(out[0], score, b));
         }
         long t2 = System.nanoTime();
         sortReadingOrder(lines);
-        return new Result(lines, (t1 - t0) / 1_000_000, (t2 - t1) / 1_000_000);
+        return new Result(lines, (t1 - t0) / 1_000_000, (t2 - t1) / 1_000_000, boxes.size(), empty, low);
     }
 
     // ------------------------------------------------------------------ detection
@@ -372,15 +394,74 @@ public final class PpOcr implements AutoCloseable {
         });
     }
 
-    /** Model metadata helper: PP-OCR ONNX recognition models embed their character list. */
+    /**
+     * Reads the character list PP-OCR recognition models embed in their ONNX metadata (key
+     * "character"), straight from the model file bytes. Used instead of ONNX Runtime's metadata API,
+     * which returned no usable dictionary on a Pixel (build 5: every line decoded empty and was
+     * dropped). Minimal protobuf walk: ModelProto field 14 = StringStringEntryProto {key=1, value=2}.
+     */
+    public static List<String> dictionaryFromModelBytes(byte[] model) {
+        String chars = null;
+        int[] pos = {0};
+        while (pos[0] < model.length) {
+            long tag = varint(model, pos);
+            int field = (int) (tag >>> 3), wire = (int) (tag & 7);
+            if (field == 14 && wire == 2) {
+                int len = (int) varint(model, pos);
+                int end = pos[0] + len;
+                String key = null, value = null;
+                while (pos[0] < end) {
+                    long t = varint(model, pos);
+                    int f = (int) (t >>> 3);
+                    if ((t & 7) != 2) { skip(model, pos, (int) (t & 7)); continue; }
+                    int l = (int) varint(model, pos);
+                    String v = new String(model, pos[0], l, java.nio.charset.StandardCharsets.UTF_8);
+                    pos[0] += l;
+                    if (f == 1) key = v; else if (f == 2) value = v;
+                }
+                pos[0] = end;
+                if ("character".equals(key)) chars = value;
+            } else {
+                skip(model, pos, wire);
+            }
+        }
+        return splitDictionary(chars);
+    }
+
+    private static long varint(byte[] b, int[] pos) {
+        long v = 0;
+        for (int shift = 0; shift < 64; shift += 7) {
+            if (pos[0] >= b.length) throw new IllegalArgumentException("truncated model");
+            int x = b[pos[0]++] & 0xff;
+            v |= (long) (x & 0x7f) << shift;
+            if ((x & 0x80) == 0) return v;
+        }
+        throw new IllegalArgumentException("bad varint");
+    }
+
+    private static void skip(byte[] b, int[] pos, int wire) {
+        switch (wire) {
+            case 0: varint(b, pos); break;
+            case 1: pos[0] += 8; break;
+            case 2: { long l = varint(b, pos); pos[0] += (int) l; break; }
+            case 5: pos[0] += 4; break;
+            default: throw new IllegalArgumentException("unsupported wire type " + wire);
+        }
+        if (pos[0] > b.length) throw new IllegalArgumentException("truncated model");
+    }
+
+    private static List<String> splitDictionary(String chars) {
+        List<String> out = new ArrayList<>();
+        if (chars != null) for (String c : chars.split("\n", -1)) if (!c.isEmpty()) out.add(c);
+        return out;
+    }
+
+    /** ONNX Runtime metadata API (desktop cross-check only; see dictionaryFromModelBytes). */
     public static List<String> dictionaryFromMetadata(byte[] recModel) throws OrtException {
         OrtEnvironment e = OrtEnvironment.getEnvironment();
         try (OrtSession s = e.createSession(recModel, new OrtSession.SessionOptions())) {
             Map<String, String> m = s.getMetadata().getCustomMetadata();
-            String chars = m.get("character");
-            List<String> out = new ArrayList<>();
-            if (chars != null) for (String c : chars.split("\n", -1)) if (!c.isEmpty()) out.add(c);
-            return out;
+            return splitDictionary(m.get("character"));
         }
     }
 

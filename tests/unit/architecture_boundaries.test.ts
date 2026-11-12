@@ -181,3 +181,17 @@ test('scanner native module (Pixel defect, build 4): barcode read gets a non-nul
   assert.match(mod, /BARCODE_FAILED/);
   assert.match(mod, /p\.reject\("SCAN_FAILED", describe\(e\)\)/, 'failures carry a technical description for development diagnostics');
 });
+
+test('scanner OCR dictionary (Pixel defect, build 5): read from the model file, size checked against the model', () => {
+  const dir = join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'java', 'org', 'rxrecallcheck', 'app', 'scanner');
+  const mod = readFileSync(join(dir, 'RxScannerModule.java'), 'utf8');
+  const core = readFileSync(join(dir, 'core', 'PpOcr.java'), 'utf8');
+  // ONNX Runtime's metadata API returned an unusable dictionary on the phone (and drops a 4-byte
+  // character on desktop), so every line decoded empty and the scan showed "0 text lines".
+  assert.doesNotMatch(mod, /dictionaryFromMetadata/);
+  assert.match(mod, /PpOcr\.dictionaryFromModelBytes\(rec\)/);
+  assert.match(core, /does not fit model classes/, 'a dictionary/model mismatch fails loudly instead of returning no text');
+  assert.match(mod, /ocr\/ch_PP-OCRv4_(det|rec)_infer\.onnx/);
+  const fetch = readFileSync(join(ROOT, 'scripts', 'fetch_ocr_models.sh'), 'utf8');
+  assert.match(fetch, /rapidocr_onnxruntime-1\.4\.4-py3-none-any\.whl/);
+});

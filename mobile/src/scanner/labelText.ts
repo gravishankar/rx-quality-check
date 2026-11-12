@@ -68,6 +68,21 @@ export function fixDigitConfusions(s: string): string {
   return s.replace(/(\d[0-9OIL]*)(?=\s*(?:MCG|MG|ML|MEQ|%|G(?![A-Z])))/g, (run) => run.replace(/O/g, '0').replace(/[IL]/g, '1'));
 }
 
+const escapeRe = (v: string) => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * "S" (optionally with a stray apostrophe) read for "5" between a known drug name and MG/MCG:
+ * "AMLODIPINESMGT" → "AMLODIPINE 5MGT". Only directly after a known drug name of 5+ letters, so
+ * ordinary words ending in S are untouched. The value is still shown as read from the label.
+ */
+export function fixStrengthAfterName(s: string, vocabulary: readonly string[]): string {
+  let t = s;
+  for (const v of vocabulary.map((x) => x.toUpperCase()).filter((x) => x.length >= 5)) {
+    t = t.replace(new RegExp(`(${escapeRe(v)})\\s*'?S'?\\s*(?=MCG|MG)`, 'g'), '$1 5');
+  }
+  return t;
+}
+
 /**
  * Re-insert spaces in glued OCR text: between letters and digits, around units, and between
  * known words (greedy longest match). Unknown letter runs are left as they are.
@@ -143,7 +158,7 @@ export function readLabelText(lines: readonly OcrLine[], vocabulary: readonly st
   for (let i = 0; i < norm.length && r.strength === null; i++) {
     const l = norm[i] as (typeof norm)[number];
     if (RX_LINE.test(l.n) || DIRECTIONS_LINE.test(segmentWords(l.n, vocabulary)) || /\bNDC\b|\bLOT\b|\bEXP/.test(l.n)) continue;
-    const fixed = segmentWords(fixDigitConfusions(l.n), vocabulary);
+    const fixed = segmentWords(fixDigitConfusions(fixStrengthAfterName(l.n, vocabulary)), vocabulary);
     const m = new RegExp(`(\\d+(?:\\.\\d+)?)\\s*(${UNIT})(?:\\s*/\\s*(\\d*(?:\\.\\d+)?)\\s*(ML))?`).exec(fixed);
     if (!m) continue;
     const before = fixed.slice(0, m.index).trim();
@@ -179,6 +194,21 @@ export function readLabelText(lines: readonly OcrLine[], vocabulary: readonly st
     }
     used.add(i);
   }
+  // A known drug name whose strength could not be read (e.g. "AMLODIPINEMGTA" from a curved vial):
+  // keep the name only; the strength is left for the user and is never guessed.
+  if (r.drugName === null) {
+    const known = vocabulary.map((v) => v.toUpperCase()).filter((v) => v.length >= 5).sort((a, b) => b.length - a.length);
+    for (let i = 0; i < norm.length && r.drugName === null; i++) {
+      const l = norm[i] as (typeof norm)[number];
+      const seg = segmentWords(l.n, vocabulary);
+      if (RX_LINE.test(l.n) || DIRECTIONS_LINE.test(seg) || /\bNDC\b|\bLOT\b|\bEXP/.test(l.n)) continue;
+      const w = known.find((v) => new RegExp(`(^|[^A-Z])${escapeRe(v)}(?![A-Z]{2})`).test(seg));
+      if (w) {
+        r.drugName = { value: w, score: l.score };
+        used.add(i);
+      }
+    }
+  }
   // Form on another line (stock bottles: "100 Tablets").
   if (r.doseForm === null) {
     for (const l of norm)
@@ -191,7 +221,8 @@ export function readLabelText(lines: readonly OcrLine[], vocabulary: readonly st
     // OCR often glues the next field ("MFG:SUNPHARMANDC#…"): stop at "NDC" with or without a space.
     const m = /\b(?:MFG|MFR|MFD|MANUFACTURER|MANUFACTURED\s+(?:BY|FOR)|DIST(?:RIBUTED)?\s+BY|DIST)\s*[:.]?\s*([A-Z][A-Z0-9 .,&'-]{1,40}?)(?=\s*N\s?D\s?C\s*[#:.]?\s*\d|\s{2,}|$)/.exec(l.n);
     if (m && r.manufacturer === null) {
-      r.manufacturer = { value: (m[1] as string).trim(), score: l.score };
+      // Inside a word, a zero between letters is the letter O ("PRECISI0N D0SE").
+      r.manufacturer = { value: (m[1] as string).trim().replace(/(?<=[A-Z])0(?=[A-Z])|(?<=[A-Z])0\b/g, 'O'), score: l.score };
       used.add(i);
     }
   });

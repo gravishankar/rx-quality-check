@@ -221,3 +221,23 @@ test('partial native failure (barcodes failed, text read): the scan still procee
   expect(t).toContain('62756-142-02');
   expect(t).toContain('BARCODE_FAILED');
 });
+
+test('build 5 on the Pixel ("0 text lines"): the development detail shows OCR counts', async () => {
+  const r = await start(platform([{ lines: [], barcodes: [{ format: 'CODE_128', text: 'SYN12345', symbology: ']C0' }], ocrStats: { regions: 13, droppedEmpty: 13, droppedLowScore: 0, dictionary: 6623 } }]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead); // exactly what build 5 showed on the phone
+  expect(t).toContain('text regions 13 (empty 13, unclear 0); dictionary 6623');
+});
+
+test('real vial photo, drug line only ("AMLODIPINEMGTA"): name is prefilled, strength and form are asked for; nothing checked', async () => {
+  const p = platform([{ lines: [{ text: 'AMLODIPINEMGTA', score: 0.84 }, { text: 'Qty:90', score: 0.9 }], barcodes: [] }]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.partialRead);
+  const field = (lab: string) => r.root.findAll((n) => n.type === TextInput && n.props.accessibilityLabel === lab)[0]!.props.value;
+  expect(field(COPY.entry.nameLabel)).toBe('AMLODIPINE');
+  expect(field(COPY.entry.strengthLabel)).toBe('');
+  expect(t).not.toMatch(/No matching recall|Recall match found|Possible recall match/);
+});

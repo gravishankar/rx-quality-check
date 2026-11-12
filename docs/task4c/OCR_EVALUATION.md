@@ -97,7 +97,8 @@ expected; `PIXEL_SCAN_TEST_GUIDE.md`).
 | Build | ARM64 | Universal |
 |---|---|---|
 | 3 (no scanner) | 15.2 MB | 29.6 MB |
-| 4 (scanner) | **38.9 MB** | **76.7 MB** |
+| 4–5 (scanner, PP-OCRv3) | 38.9 MB | 76.7 MB |
+| 6 (PP-OCRv4) | **41.4 MB** | **79.3 MB** |
 
 Breakdown of the increase (ARM64, compressed): ONNX Runtime 1.28.0 ~11 MB, recognition model
 ~9.6 MB, detection model ~2.2 MB, ZXing-cpp ~0.7 MB. Safe future reductions (not done): ONNX Runtime
@@ -112,6 +113,41 @@ Architecture. Whether the interop lookup returns the module at run time can only
 device; if it does not, the app shows manual entry instead of failing (fallback tested in UI tests).
 No third-party camera library is used: the photo comes from the phone's camera app
 (`ACTION_IMAGE_CAPTURE`) into a private file, so the app needs no CAMERA permission.
+
+## 8a. Device results and build 6 changes (reported separately from automated results)
+
+**Physical device (owner's Pixel), 2026-11-12:**
+
+| Build | What happened | Cause |
+|---|---|---|
+| 4 | Every scan: "The photo could not be read" | Barcode library called with a null crop rectangle (Kotlin non-null parameter) — threw on every scan |
+| 5 | No crash; every photo (test labels and a real vial): "0 text lines, 1 barcodes" | OCR character list taken from ONNX Runtime's metadata API was not usable on the phone, so every line decoded empty and was dropped silently |
+| 6 | **Not yet tested on a phone** | — |
+
+**On a computer (not a device result):** ONNX Runtime 1.28.0's metadata API returns 6,621 entries
+for the 6,623-character list (one 4-byte character is garbled through JNI and the list shifts after
+it); reading the list from the model file returns exactly 6,623 = model classes − 2. Latin letters
+and digits come before the garbled entry, which is why desktop accuracy was unaffected. Build 6 reads
+the list from the file and refuses to run with a list that does not fit the model.
+
+Build 6 settings, measured on the 32 synthetic labels (text only, before extraction; desktop JVM):
+
+| Models | Image / detector | Name | Strength | NDC | Mfr | Lot | Median ms |
+|---|---|---|---|---|---|---|---|
+| PP-OCRv3 (builds 4–5) | 1600 / 960 | 32/32 | 29/32 | 28/28 | 22/22 | 4/4 | 258 |
+| PP-OCRv4 | 1600 / 960 | 32/32 | 30/32 | 28/28 | 21/22 | 4/4 | 287 |
+| **PP-OCRv4 (build 6)** | **3200 / 960** | 32/32 | 30/32 | 28/28 | 21/22* | 4/4† | 262 |
+
+\* "PRECISI0N D0SE": fixed by the extractor (zero between letters in a manufacturer name → O).
+† Raw text contains the lot, but on one hard label v4 adds a character ("JKU4639AB"); that label's
+flow ends at "Possible recall match" instead of "Recall match found" (never "no match"), and a
+scanned lot is always shown as read from the label for the user to check.
+
+The owner's real vial photo (kept out of the repository), through the full extractor: builds 4–5
+settings → no drug fields; PP-OCRv3 at 3200 → "AMLODIPINESMGT" (now corrected to AMLODIPINE 5 MG);
+**PP-OCRv4 at 3200 → AMLODIPINE, 5 MG**. The dose form ("TA…") and NDC were not legible in that
+photo, so the app would open the form prefilled and ask for the rest. One photo is not an accuracy
+measurement.
 
 ## 9. Decision requested (OD-27)
 

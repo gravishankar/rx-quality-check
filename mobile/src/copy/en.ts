@@ -85,6 +85,7 @@ export const COPY = {
     details: 'Scan details (development)',
     technical: 'Technical detail (development)',
     nothingChecked: 'Nothing was checked',
+    partialRead: 'We read some details from your photo. Please check them against your label and fill in what is missing. Nothing has been checked yet.',
   },
 
   entry: {

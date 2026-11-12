@@ -1,2 +1,2 @@
-PaddleOCR PP-OCRv3 models (Apache License 2.0), https://github.com/PaddlePaddle/PaddleOCR
-ONNX conversion as distributed in rapidocr-onnxruntime 1.2.3 (Apache License 2.0).
+PaddleOCR PP-OCRv4 mobile models (Apache License 2.0), https://github.com/PaddlePaddle/PaddleOCR
+ONNX conversion as distributed in rapidocr-onnxruntime 1.4.4 (Apache License 2.0).

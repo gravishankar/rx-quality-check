@@ -40,7 +40,7 @@ import zxingcpp.BarcodeReader;
  * On-device label scanning (Task 4C). Privacy rules:
  *  - The photo is taken by the phone's camera app straight into a private, app-only cache file
  *    (FileProvider; never the gallery), read once, and deleted immediately, success or failure.
- *  - Text recognition (PaddleOCR PP-OCRv3 on ONNX Runtime) and barcode decoding (ZXing-cpp) run on
+ *  - Text recognition (PaddleOCR PP-OCRv4 on ONNX Runtime) and barcode decoding (ZXing-cpp) run on
  *    the phone. This module has no network code; the image and the recognized text never leave it
  *    except as the returned lines/barcodes to the app's JavaScript.
  *  - Nothing is logged.
@@ -48,8 +48,11 @@ import zxingcpp.BarcodeReader;
 public final class RxScannerModule extends ReactContextBaseJavaModule {
     public static final String NAME = "RxScanner";
     private static final int REQUEST = 4243;
-    private static final int MAX_SIDE = 1600;
+    // Text is recognized from crops of this image; the detector works on a smaller copy (DET_MAX_SIDE).
+    // 1600 (builds 4-5) left a pharmacy vial's small print ~15 px tall in a phone photo; 3200 reads it.
+    private static final int MAX_SIDE = 3200;
     private static final int DET_MAX_SIDE = 960;
+    private int dictSize = -1;
 
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private Promise pending;
@@ -133,8 +136,14 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             long tOcr0 = System.nanoTime();
             WritableArray lines = Arguments.createArray();
             int lineCount = 0;
+            WritableMap ocrStats = Arguments.createMap();
             try {
                 PpOcr.Result r = engine().recognize(img);
+                // Counts only (no text): lets a development build show why nothing was read.
+                ocrStats.putInt("regions", r.regions);
+                ocrStats.putInt("droppedEmpty", r.droppedEmpty);
+                ocrStats.putInt("droppedLowScore", r.droppedLowScore);
+                ocrStats.putInt("dictionary", dictSize);
                 for (PpOcr.Line l : r.lines) {
                     WritableMap m = Arguments.createMap();
                     m.putString("text", l.text);
@@ -189,6 +198,7 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             size.putInt("height", img.height);
             out.putMap("image", size);
             out.putArray("warnings", warnings);
+            out.putMap("ocrStats", ocrStats);
             p.resolve(out);
         } catch (Throwable e) {
             p.reject("SCAN_FAILED", describe(e));
@@ -212,9 +222,11 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
     private synchronized PpOcr engine() throws Exception {
         if (ocr == null) {
             long t0 = System.nanoTime();
-            byte[] det = asset("ocr/ch_PP-OCRv3_det_infer.onnx");
-            byte[] rec = asset("ocr/ch_PP-OCRv3_rec_infer.onnx");
-            ocr = new PpOcr(det, rec, PpOcr.dictionaryFromMetadata(rec), DET_MAX_SIDE);
+            byte[] det = asset("ocr/ch_PP-OCRv4_det_infer.onnx");
+            byte[] rec = asset("ocr/ch_PP-OCRv4_rec_infer.onnx");
+            java.util.List<String> dict = PpOcr.dictionaryFromModelBytes(rec);
+            dictSize = dict.size();
+            ocr = new PpOcr(det, rec, dict, DET_MAX_SIDE);
             initMs = (System.nanoTime() - t0) / 1_000_000;
         }
         return ocr;
@@ -254,6 +266,14 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             Bitmap r = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true);
             bmp.recycle();
             bmp = r;
+        }
+        // Scale in the Bitmap first so only one full-size pixel array is ever held.
+        int longSide = Math.max(bmp.getWidth(), bmp.getHeight());
+        if (longSide > MAX_SIDE) {
+            float s = (float) MAX_SIDE / longSide;
+            Bitmap scaled = Bitmap.createScaledBitmap(bmp, Math.max(1, Math.round(bmp.getWidth() * s)), Math.max(1, Math.round(bmp.getHeight() * s)), true);
+            if (scaled != bmp) bmp.recycle();
+            bmp = scaled;
         }
         int w = bmp.getWidth(), h = bmp.getHeight();
         int[] px = new int[w * h];

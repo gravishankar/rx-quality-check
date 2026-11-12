@@ -109,7 +109,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       const r = readScan(out, VOCABULARY);
       setEntry(entryFromExtraction(r.extraction));
       if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
-        const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
+        const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
         setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
         return;
       }
@@ -119,7 +119,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
         notes: r.problems.includes('BARCODE_TEXT_NDC_DIFFER') ? [COPY.scan.barcodeTextDiffer] : [],
         details:
           PROFILE.kind === 'development' && t
-            ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}`
+            ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}`
             : null,
       });
       setScanPhase({ phase: 'idle' });
@@ -195,7 +195,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     case 'WORKING':
       return wrap(banner, <Working text={m.text} />);
     case 'ENTRY_PROBLEM':
-      return wrap(banner, <><Entry busy={session.busy} notice={m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
+      // After a scan that read only some fields, say so: the form is prefilled from the photo.
+      return wrap(banner, <><Entry busy={session.busy} notice={scanInfo !== null && m.text === COPY.errors.missing ? COPY.scan.partialRead : m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
     case 'CHOOSE_PRODUCT':
       return wrap(banner, <Choose model={m} onChoose={(index) => void session.send({ type: 'CANDIDATE_CHOSEN', index })} onDone={home} />);
     case 'CONFIRM':
@@ -225,6 +226,12 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       return never;
     }
   }
+}
+
+/** OCR counts for the development detail line (no label content). */
+function ocrStatsText(out: { ocrStats?: { regions: number; droppedEmpty: number; droppedLowScore: number; dictionary: number } }): string {
+  const s = out.ocrStats;
+  return s && s.regions !== undefined ? `; text regions ${s.regions} (empty ${s.droppedEmpty}, unclear ${s.droppedLowScore}); dictionary ${s.dictionary}` : '';
 }
 
 function wrap(banner: React.ReactNode, body: React.ReactNode) {
