@@ -1,0 +1,89 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 583
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "60760-669",
+        "generic_name": "gabapentin",
+        "labeler_name": "St. Mary's Medical Park Pharmacy",
+        "brand_name": "GABAPENTIN",
+        "active_ingredients": [
+          {
+            "name": "GABAPENTIN",
+            "strength": "100 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "60760-669-30",
+            "description": "30 CAPSULE in 1 BOTTLE, PLASTIC (60760-669-30)",
+            "marketing_start_date": "20250422",
+            "sample": false
+          },
+          {
+            "package_ndc": "60760-669-60",
+            "description": "60 CAPSULE in 1 BOTTLE, PLASTIC (60760-669-60)",
+            "marketing_start_date": "20240906",
+            "sample": false
+          },
+          {
+            "package_ndc": "60760-669-90",
+            "description": "90 CAPSULE in 1 BOTTLE, PLASTIC (60760-669-90)",
+            "marketing_start_date": "20250205",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "St. Mary's Medical Park Pharmacy"
+          ],
+          "rxcui": [
+            "310430"
+          ],
+          "spl_set_id": [
+            "235a6954-318a-9e3a-e063-6394a90a0e21"
+          ],
+          "nui": [
+            "N0000008486"
+          ],
+          "pharm_class_pe": [
+            "Decreased Central Nervous System Disorganized Electrical Activity [PE]"
+          ],
+          "unii": [
+            "6CW7F3G59X"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "CAPSULE",
+        "spl_id": "550bbb8b-ae3a-9440-e063-6394a90ab525",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20240906",
+        "product_id": "60760-669_550bbb8b-ae3a-9440-e063-6394a90ab525",
+        "application_number": "ANDA214956",
+        "brand_name_base": "GABAPENTIN",
+        "pharm_class": [
+          "Decreased Central Nervous System Disorganized Electrical Activity [PE]"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 263
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "50090-6448",
+        "generic_name": "Metoprolol Succinate",
+        "labeler_name": "A-S Medication Solutions",
+        "brand_name": "Metoprolol Succinate",
+        "active_ingredients": [
+          {
+            "name": "METOPROLOL TARTRATE",
+            "strength": "50 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "50090-6448-0",
+            "description": "30 TABLET, EXTENDED RELEASE in 1 BOTTLE (50090-6448-0)",
+            "marketing_start_date": "20230426",
+            "sample": false
+          },
+          {
+            "package_ndc": "50090-6448-1",
+            "description": "90 TABLET, EXTENDED RELEASE in 1 BOTTLE (50090-6448-1)",
+            "marketing_start_date": "20230426",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20261231",
+        "openfda": {
+          "manufacturer_name": [
+            "A-S Medication Solutions"
+          ],
+          "rxcui": [
+            "866436"
+          ],
+          "spl_set_id": [
+            "e91e8ee2-4a54-4932-9d8b-5831121377a4"
+          ],
+          "unii": [
+            "W5S57Y3A5L"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET, EXTENDED RELEASE",
+        "spl_id": "d30564b1-14c8-4a83-9925-b81a743d8485",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20220427",
+        "product_id": "50090-6448_d30564b1-14c8-4a83-9925-b81a743d8485",
+        "application_number": "ANDA207206",
+        "brand_name_base": "Metoprolol Succinate",
+        "pharm_class": [
+          "Adrenergic beta-Antagonists [MoA]",
+          "beta-Adrenergic Blocker [EPC]"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 584
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "68788-8793",
+        "generic_name": "Levothyroxine Sodium",
+        "labeler_name": "Preferred Pharmaceuticals Inc.",
+        "brand_name": "Levothyroxine Sodium",
+        "active_ingredients": [
+          {
+            "name": "LEVOTHYROXINE SODIUM",
+            "strength": ".175 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "68788-8793-3",
+            "description": "30 TABLET in 1 BOTTLE (68788-8793-3)",
+            "marketing_start_date": "20241217",
+            "sample": false
+          },
+          {
+            "package_ndc": "68788-8793-9",
+            "description": "90 TABLET in 1 BOTTLE (68788-8793-9)",
+            "marketing_start_date": "20241217",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20261231",
+        "openfda": {
+          "manufacturer_name": [
+            "Preferred Pharmaceuticals Inc."
+          ],
+          "rxcui": [
+            "966249"
+          ],
+          "spl_set_id": [
+            "a0ffe111-3574-4481-a732-b68a7d58ef71"
+          ],
+          "unii": [
+            "9J765S329G"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET",
+        "spl_id": "a0ffe111-3574-4481-a732-b68a7d58ef71",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20241217",
+        "product_id": "68788-8793_a0ffe111-3574-4481-a732-b68a7d58ef71",
+        "application_number": "ANDA209713",
+        "brand_name_base": "Levothyroxine Sodium",
+        "pharm_class": [
+          "Thyroxine [CS]",
+          "l-Thyroxine [EPC]"
+        ]
+      }
+    ]
+  }
+}

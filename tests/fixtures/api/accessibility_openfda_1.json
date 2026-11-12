@@ -1,0 +1,86 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 1,
+        "total": 397
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "23155-878",
+        "generic_name": "lisinopril",
+        "labeler_name": "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc.(780779901)",
+        "brand_name": "lisinopril",
+        "active_ingredients": [
+          {
+            "name": "LISINOPRIL",
+            "strength": "10 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "23155-878-01",
+            "description": "100 TABLET in 1 BOTTLE (23155-878-01)",
+            "marketing_start_date": "20230906",
+            "sample": false
+          },
+          {
+            "package_ndc": "23155-878-10",
+            "description": "1000 TABLET in 1 BOTTLE (23155-878-10)",
+            "marketing_start_date": "20230906",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc.(780779901)"
+          ],
+          "rxcui": [
+            "197884",
+            "205326",
+            "311353",
+            "311354",
+            "314076",
+            "314077"
+          ],
+          "spl_set_id": [
+            "c6c55efa-36bd-4613-98ca-2eb589a31e53"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "unii": [
+            "E7199S1YWR"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET",
+        "spl_id": "cb748971-2531-4478-8dff-e01cd87dec09",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20230906",
+        "product_id": "23155-878_cb748971-2531-4478-8dff-e01cd87dec09",
+        "application_number": "ANDA076102",
+        "brand_name_base": "lisinopril",
+        "pharm_class": [
+          "Angiotensin Converting Enzyme Inhibitor [EPC]",
+          "Angiotensin-converting Enzyme Inhibitors [MoA]"
+        ]
+      }
+    ]
+  }
+}

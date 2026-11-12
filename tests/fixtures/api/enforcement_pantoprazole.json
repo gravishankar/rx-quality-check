@@ -1,0 +1,101 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 27
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Salisbury",
+        "state": "MD",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "82523",
+        "recalling_firm": "Jubilant Cadista Pharmaceuticals, Inc.",
+        "address_1": "207 Kiley Dr",
+        "address_2": "N/A",
+        "postal_code": "21801-2249",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the USA.",
+        "recall_number": "D-1074-2019",
+        "product_description": "Pantoprazole Sodium Delayed-Release Tablets, USP, 40 mg*, 90-count bottle, Rx Only, Manufactured by: Jubilant Generics Ltd., Roorkee - 247661, India; Marketed by: Jubilant Cadista Pharmaceuticals Inc., Salisbury, MD  21801; NDC 59746-284-90.",
+        "product_quantity": "12,960 bottles",
+        "reason_for_recall": "Discoloration: Expansion of an earlier recall due to the presence of dark brown discoloration on the edges of the tablets.",
+        "recall_initiation_date": "20190329",
+        "center_classification_date": "20190401",
+        "termination_date": "20190920",
+        "report_date": "20190410",
+        "code_info": "Lot #: PA217060A, Exp 05/2020"
+      },
+      {
+        "status": "Terminated",
+        "city": "Plainsboro",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "74949",
+        "recalling_firm": "Aurobindo Pharma USA Inc",
+        "address_1": "666 Plainsboro Rd Ste 210",
+        "address_2": "N/A",
+        "postal_code": "08536-3004",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "CA",
+        "recall_number": "D-1499-2016",
+        "product_description": "Pantoprazole Sodium Delayed-Release Tablets USP, 40 mg Rx Only, 90 tablets per bottle, Manufactured for Aurobindo Pharma USA, Inc 2400 Route 130 North Dayton, NJ 08810, Manufactured by: Aurobindo Pharma Limited Unit-VII (SE2), Mahaboob Nagar (Dt) - 509302, India , NDC 65862-0560-90",
+        "product_quantity": "23016 bottles",
+        "reason_for_recall": "Presence of Foreign Tablets/Capsules: Firm received a market complaint stating the presence of one foreign tablet (Montelukast Sodium Chewable Tab 4mg) in the product bottle of Pantoprazole.",
+        "recall_initiation_date": "20160803",
+        "center_classification_date": "20160914",
+        "termination_date": "20180608",
+        "report_date": "20160921",
+        "code_info": "PSSB16011-A, Exp 01/18",
+        "more_code_info": ""
+      },
+      {
+        "country": "United States",
+        "city": "Vancouver",
+        "address_1": "14301 Se 1st St",
+        "reason_for_recall": "Labeling:Label Mixup; PANTOPRAZOLE SODIUM DR Tablet, 20 mg may be potentially mislabeled as    FOSINOPRIL SODIUM, Tablet, 20 mg, NDC 60505251102, Pedigree: AD70690_1, EXP: 5/29/2014.",
+        "address_2": "",
+        "product_quantity": "90 Tablets",
+        "code_info": "PANTOPRAZOLE SODIUM DR Tablet, 20 mg has the following codes    Pedigree: AD70690_4, EXP: 5/29/2014.",
+        "center_classification_date": "20140116",
+        "distribution_pattern": "Repacked drugs were distributed in Arizona, California, Oregon, and Washington.",
+        "state": "WA",
+        "product_description": "PANTOPRAZOLE SODIUM DR Tablet, 20 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 64679043304",
+        "report_date": "20140122",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Aidapak Services, LLC",
+        "recall_number": "D-689-2014",
+        "initial_firm_notification": "Telephone",
+        "product_type": "Drugs",
+        "event_id": "65707",
+        "termination_date": "20140207",
+        "more_code_info": "",
+        "recall_initiation_date": "20130702",
+        "postal_code": "98684-3501",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      }
+    ]
+  }
+}

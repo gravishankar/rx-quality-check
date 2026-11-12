@@ -1,0 +1,192 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 98
+      }
+    },
+    "results": [
+      {
+        "country": "United States",
+        "city": "Suffern",
+        "address_1": "25 Old Mill Rd",
+        "reason_for_recall": "Chemical Contamination: Novartis Pharmaceuticals Corporation has recalled physician sample bottles of Diovan, Exforge, Exforge HCT,Lescol XL, Stalevo, Tekturna and Tekturna HCT Tablets due to contamination with Darocur 1173 a photocuring agent used in inks on shrink-wrap sleeves.",
+        "address_2": "",
+        "product_quantity": "174,848 bottles",
+        "code_info": "Product code: 715515; Lot Number: F0012, Exp 10/31/2013; F0013, Exp 02/28/2014; F0014, Exp 03/31/2014",
+        "center_classification_date": "20131206",
+        "distribution_pattern": "Nationwide and Puerto Rico",
+        "state": "NY",
+        "product_description": "Exforge HCT (amlodipine, valsartan, hydrochlorothiazide) 5/160/25 mg, Rx only, 7 tablets per bottle, Physician Sample - Not For Sale. Manufactured by: Novartis Pharma Stein AG Stein, Switzerland.  Distributed by: Novartis Pharmaceuticals Corp. East Hanover, New Jersey 07936, NDC # 0078-9560-89",
+        "report_date": "20131218",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Novartis Pharmaceuticals Corp.",
+        "recall_number": "D-332-2014",
+        "initial_firm_notification": "Letter",
+        "product_type": "Drugs",
+        "event_id": "66015",
+        "termination_date": "20151221",
+        "more_code_info": "",
+        "recall_initiation_date": "20130808",
+        "postal_code": "10901-4106",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      },
+      {
+        "status": "Terminated",
+        "city": "Naples",
+        "state": "FL",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA078466"
+          ],
+          "brand_name": [
+            "AMLODIPINE BESYLATE AND BENAZEPRIL HYDROCHLORIDE"
+          ],
+          "generic_name": [
+            "AMLODIPINE BESYLATE AND BENAZEPRIL HYDROCHLORIDE"
+          ],
+          "manufacturer_name": [
+            "Lupin Pharmaceuticals, Inc."
+          ],
+          "product_ndc": [
+            "68180-459",
+            "68180-755",
+            "68180-756",
+            "68180-472",
+            "68180-463",
+            "68180-473",
+            "68180-759",
+            "68180-760",
+            "68180-757",
+            "68180-758"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "AMLODIPINE BESYLATE",
+            "BENAZEPRIL HYDROCHLORIDE"
+          ],
+          "rxcui": [
+            "898342",
+            "898346",
+            "898350",
+            "898353",
+            "898356",
+            "898359"
+          ],
+          "spl_id": [
+            "53566d4f-ff40-4815-b922-3416cde56fb1"
+          ],
+          "spl_set_id": [
+            "968c611b-43a7-40f0-9ed3-aa67ee88364b"
+          ],
+          "package_ndc": [
+            "68180-755-01",
+            "68180-755-02",
+            "68180-755-03",
+            "68180-756-01",
+            "68180-756-02",
+            "68180-756-03",
+            "68180-459-01",
+            "68180-459-02",
+            "68180-459-03",
+            "68180-472-01",
+            "68180-472-02",
+            "68180-472-03",
+            "68180-463-01",
+            "68180-463-02",
+            "68180-463-03",
+            "68180-473-01",
+            "68180-473-02",
+            "68180-473-03",
+            "68180-759-01",
+            "68180-759-02",
+            "68180-759-03",
+            "68180-760-01",
+            "68180-760-02",
+            "68180-760-03",
+            "68180-757-01",
+            "68180-757-02",
+            "68180-757-03",
+            "68180-758-01",
+            "68180-758-02",
+            "68180-758-03"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0368180459019"
+          ],
+          "unii": [
+            "864V2Q084H",
+            "N1SN99T69T"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "97182",
+        "recalling_firm": "Lupin Pharmaceuticals Inc.",
+        "address_1": "5801 Pelican Bay Blvd",
+        "address_2": "Suite 500",
+        "postal_code": "34108-2755",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the US",
+        "recall_number": "D-0542-2025",
+        "product_description": "Amlodipine and Benazepril HCl Capsules USP 2.5 mg/10 mg, 100 Capsules bottle, Rx Only, Manufactured for: Lupin Pharmaceuticals, Inc., Naples, FL, 34108, United States, Manufactured by: Lupin Limited, Goa 103 722, INDIA, NDC 68180-755-01.",
+        "product_quantity": "7668 bottles",
+        "reason_for_recall": "Labeling: Incorrect or Missing Lot and/or Exp Date: released with wrong expiry date as Feb.2027 instead of Jan.2027",
+        "recall_initiation_date": "20250702",
+        "center_classification_date": "20250728",
+        "termination_date": "20260730",
+        "report_date": "20250806",
+        "code_info": "Lot GB01616, expiration 2/28/2027",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Columbus",
+        "state": "OH",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "71553",
+        "recalling_firm": "American Health Packaging",
+        "address_1": "2550 John Glenn Ave",
+        "address_2": "Suite A",
+        "postal_code": "43217-1188",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-1218-2015",
+        "product_description": "Amlodipine besylate tablets, USP 2.5mg, packaged in 10-count blisters (NDC 68084-498-11); 10 blister packs per carton (NDC 68084-498-01); Rx only,  Manufactured by: Wockhardt Limited, Mumbai, India, Distributed by: Wockhardt, USA, LLC 20 Waterview Blvd. Parsippany, NJ 07054 USA for American Health Packaging 2550-A John Glenn Avenue, Columbus, OH 43217.",
+        "product_quantity": "1,896 cartons",
+        "reason_for_recall": "CGMP Deviations: Firm did not adequately investigate customer complaints.",
+        "recall_initiation_date": "20150601",
+        "center_classification_date": "20150708",
+        "termination_date": "20170222",
+        "report_date": "20150715",
+        "code_info": "Lot #: 131924, Exp 07/31/2015"
+      }
+    ]
+  }
+}

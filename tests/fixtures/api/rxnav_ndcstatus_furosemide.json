@@ -1,0 +1,38 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "68094075662",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "197730",
+      "conceptName": "furosemide 10 MG/ML Oral Solution",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "GS",
+          "MMSL",
+          "MMX",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "197730",
+          "originalRxcui": "197730",
+          "startDate": "201302",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

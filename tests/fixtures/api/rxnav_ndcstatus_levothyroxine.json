@@ -1,0 +1,34 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "68788879303",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "966249",
+      "conceptName": "levothyroxine sodium 0.175 MG Oral Tablet",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "MMX",
+          "MTHSPL",
+          "RXNORM"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "966249",
+          "originalRxcui": "966249",
+          "startDate": "202502",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

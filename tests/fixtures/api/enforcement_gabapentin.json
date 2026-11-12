@@ -1,0 +1,136 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 25
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Elizabeth",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "brand_name": [
+            "GABA 300-EZS"
+          ],
+          "generic_name": [
+            "GABAPENTIN"
+          ],
+          "manufacturer_name": [
+            "PureTek Corporation"
+          ],
+          "product_ndc": [
+            "59088-725"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "rxcui": [
+            "310431"
+          ],
+          "spl_id": [
+            "b43e4780-f902-89d9-e053-2a95a90a6792"
+          ],
+          "spl_set_id": [
+            "bb29692e-1546-4d05-a46a-93baf4172c7d"
+          ],
+          "package_ndc": [
+            "59088-725-00",
+            "45963-556-11"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0731477272217"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "70001",
+        "recalling_firm": "Actavis Elizabeth LLC",
+        "address_1": "200 Elmora Ave",
+        "address_2": "N/A",
+        "postal_code": "07202-1106",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Puerto Rico",
+        "recall_number": "D-0337-2015",
+        "product_description": "Gabapentin Capsules, USP, 300 mg, Rx Only, 100 capsules per bottle, Manufactured by: Actavis Pharma Manufacturing Pvt. Ltd., Plot No 101, 102, 107, & 108, SIDCO Pharmaceutical Complex, Alathurt, Kanchipuram Dist-603 110, Tamlinadu, India, Distributed by: Actavis Elizabeth LLC, 700 Elmora Ave, Elizabeth, NJ 07207 USA, NDC 45963-556-11",
+        "product_quantity": "24,240 Bottles",
+        "reason_for_recall": "Failed Capsule/Tablet Specifications: Actavis has received several complaint for clumping and breaking of capsules with some bottles showing popped out bottle bottom (round bottom) and creased labels from one distribution center.",
+        "recall_initiation_date": "20141215",
+        "center_classification_date": "20150108",
+        "termination_date": "20151120",
+        "report_date": "20150114",
+        "code_info": "Lot #s: G01960A1, Exp 09/2015, G01967A1, Exp 10/2015",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Hauppauge",
+        "state": "NY",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "91717",
+        "recalling_firm": "Sciegen Pharmaceuticals Inc",
+        "address_1": "89 Arkay Dr",
+        "address_2": "N/A",
+        "postal_code": "11788-3727",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the USA and Puerto Rico",
+        "recall_number": "D-0354-2023",
+        "product_description": "Gabapentin Tablets, USP 600 mg, 500 tablets per bottle, RX Only, Manufactured by ScieGen Pharmaceuticals Inc., Hauppauge, NY 11788, NDC: 50228-177-05.",
+        "product_quantity": "4,392 bottles",
+        "reason_for_recall": "Presence of Foreign Tablets/Capsules: Pharmacist reported presence of some Gabapentin tablets 800 mg comingled in Gabapentin 600 mg 500 count bottles.",
+        "recall_initiation_date": "20230217",
+        "center_classification_date": "20230227",
+        "termination_date": "20240617",
+        "report_date": "20230308",
+        "code_info": "Lot # G177092, Exp. 11/24",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Mesa",
+        "state": "AZ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "83669",
+        "recalling_firm": "First Royal Care Co. LLC, dba Red Mountain Compounding Pharmacy",
+        "address_1": "6828 E Brown Rd Ste 101",
+        "address_2": "N/A",
+        "postal_code": "85207-3761",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the USA",
+        "recall_number": "D-0208-2020",
+        "product_description": "S-CALM INJECTION, (MAG S04/GABAPENTIN/TAURINE/THEANINE 50/50/50/50MG/ML) MDV,  10 ml glass vial, Red Mountain Compounding Rx",
+        "product_quantity": "N/A",
+        "reason_for_recall": "Lack of Assurance of Sterility",
+        "recall_initiation_date": "20190812",
+        "center_classification_date": "20191105",
+        "termination_date": "20230413",
+        "report_date": "20191113",
+        "code_info": "Lot #: S07312019DH@15, Exp 8/31/19"
+      }
+    ]
+  }
+}

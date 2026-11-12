@@ -1,0 +1,33 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "68071196303",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "314200",
+      "conceptName": "pantoprazole 40 MG Delayed Release Oral Tablet",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "MTHSPL",
+          "RXNORM"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "314200",
+          "originalRxcui": "314200",
+          "startDate": "201706",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

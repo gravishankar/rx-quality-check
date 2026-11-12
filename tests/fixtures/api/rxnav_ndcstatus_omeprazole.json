@@ -1,0 +1,38 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "55111064301",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "199119",
+      "conceptName": "omeprazole 10 MG Delayed Release Oral Capsule",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "GS",
+          "MMSL",
+          "MMX",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "199119",
+          "originalRxcui": "199119",
+          "startDate": "201404",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

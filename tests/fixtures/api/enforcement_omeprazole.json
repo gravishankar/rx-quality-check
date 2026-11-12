@@ -1,0 +1,154 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 17
+      }
+    },
+    "results": [
+      {
+        "country": "United States",
+        "city": "Vancouver",
+        "address_1": "14301 Se 1st St",
+        "reason_for_recall": "Labeling: Label Mixup; OMEPRAZOLE/SODIUM BICARBONATE, Capsule, 20 mg/1110 mg may be potentially mislabeled as    LACTOBACILLUS GG, Capsule, NDC 49100036374, Pedigree: AD70655_8, EXP: 5/29/2014;  PYRIDOXINE HCL, Tablet, 100 mg, NDC 00536440901, Pedigree: AD73627_32, EXP: 5/30/2014.",
+        "address_2": "",
+        "product_quantity": "210 Capsules",
+        "code_info": "OMEPRAZOLE/SODIUM BICARBONATE, Capsule, 20 mg/1110 mg has the following codes    Pedigree: AD70655_20, EXP: 5/29/2014;  Pedigree: AD73627_35, EXP: 5/30/2014.",
+        "center_classification_date": "20140116",
+        "distribution_pattern": "Repacked drugs were distributed in Arizona, California, Oregon, and Washington.",
+        "state": "WA",
+        "product_description": "OMEPRAZOLE/SODIUM BICARBONATE, Capsule, 20 mg/1110 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 11523726503",
+        "report_date": "20140122",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Aidapak Services, LLC",
+        "recall_number": "D-504-2014",
+        "initial_firm_notification": "Telephone",
+        "product_type": "Drugs",
+        "event_id": "65707",
+        "termination_date": "20140207",
+        "more_code_info": "",
+        "recall_initiation_date": "20130702",
+        "postal_code": "98684-3501",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      },
+      {
+        "status": "Ongoing",
+        "city": "Princeton",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA075576"
+          ],
+          "brand_name": [
+            "OMEPRAZOLE"
+          ],
+          "generic_name": [
+            "OMEPRAZOLE"
+          ],
+          "manufacturer_name": [
+            "Quallent Pharmaceuticals Health LLC"
+          ],
+          "product_ndc": [
+            "82009-022"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "OMEPRAZOLE"
+          ],
+          "rxcui": [
+            "198051"
+          ],
+          "spl_id": [
+            "17380ad5-9506-8e44-aa84-b6ce52ac7b9b"
+          ],
+          "spl_set_id": [
+            "665e9877-85ac-fdb6-54ac-1c47941ceab8"
+          ],
+          "package_ndc": [
+            "82009-022-10"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "nui": [
+            "N0000175525",
+            "N0000000147",
+            "N0000182140"
+          ],
+          "pharm_class_epc": [
+            "Proton Pump Inhibitor [EPC]"
+          ],
+          "pharm_class_moa": [
+            "Proton Pump Inhibitors [MoA]",
+            "Cytochrome P450 2C19 Inhibitors [MoA]"
+          ],
+          "unii": [
+            "KG60484QX9"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "97161",
+        "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+        "address_1": "107 College Rd E",
+        "address_2": "N/A",
+        "postal_code": "08540-6623",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "USA Nationwide",
+        "recall_number": "D-0525-2025",
+        "product_description": "Omeprazole Delayed-release Capsules, USP, 20mg, 1000-count bottle, Rx Only, Manufactured by: Dr. Reddy's Laboratories Limited, Bachupally - 500 090 INDIA, Manufactured for: Qualient Pharmaceuticals Health LLC, Grand Cayman, Cayman Islands, NDC 82009-022-10.  NDC 82009-022-10",
+        "product_quantity": "1476 bottles",
+        "reason_for_recall": "Presence of foreign tablets/capsules: presence of foreign Divalproex Sodium Extended-Release 250mg tablet in a bottle of omeprazole capsules.",
+        "recall_initiation_date": "20250630",
+        "center_classification_date": "20250714",
+        "report_date": "20250723",
+        "code_info": "Lot: C2403017, Exp 12/31/2026"
+      },
+      {
+        "status": "Terminated",
+        "city": "Wilmington",
+        "state": "MA",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "75490",
+        "recalling_firm": "CutisPharma, Inc.",
+        "address_1": "841 Woburn St",
+        "address_2": "N/A",
+        "postal_code": "01887-3414",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-0139-2017",
+        "product_description": "FIRST Omeprazole 2mg/mL in FIRST PPI Suspension Compounding Kit , 3 OZ, Rx only,  Manufactured for CutisPharma Wilmington, MA,  NDC# 65628-070-03",
+        "product_quantity": "5904 kits",
+        "reason_for_recall": "Labeling: Label error on declared strength. Package Insert -Error in the Description section of the package insert refers to the strength as 3mg per mL; however it should state 2mg per mL",
+        "recall_initiation_date": "20161020",
+        "center_classification_date": "20161116",
+        "termination_date": "20170912",
+        "report_date": "20161123",
+        "code_info": "Lot #: E1396, Exp. 08/2018"
+      }
+    ]
+  }
+}

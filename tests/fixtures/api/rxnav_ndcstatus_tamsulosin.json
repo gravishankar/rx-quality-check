@@ -1,0 +1,36 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "71610091030",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "863669",
+      "conceptName": "tamsulosin hydrochloride 0.4 MG Oral Capsule",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "MMSL",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "863669",
+          "originalRxcui": "863669",
+          "startDate": "202507",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

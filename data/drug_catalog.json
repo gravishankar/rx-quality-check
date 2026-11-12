@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "catalog_version": "0.1.0",
+  "status": "DRAFT_PENDING_APPROVAL",
+  "description": "MVP v0.1 supported drug scope. Identity is matched on the exact normalized ingredient set (RxNorm IN RxCUIs). Strength, dosage form and release mechanism are preserved by matching at the RxNorm clinical-drug (SCD) level, never collapsed to ingredient only.",
+  "provenance": {
+    "scope_source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+    "rxcui_source": "RxNav REST /REST/rxcui.json?name=<ingredient> and /REST/rxcui/{id}/properties.json",
+    "rxcui_retrieved_at": "2026-11-12",
+    "rxnorm_release": "02-Nov-2026"
+  },
+  "scope_rules": {
+    "routes": ["ORAL"],
+    "product_types": ["HUMAN PRESCRIPTION DRUG"],
+    "ingredient_set_match": "EXACT",
+    "combination_products_containing_a_supported_ingredient": "UNSUPPORTED unless the exact ingredient set is listed below",
+    "identity_level_for_assessment": "RxNorm SCD (ingredient + strength + dose form) plus product NDC",
+    "open_decisions": ["OD-3 (OTC versions of supported ingredients)"]
+  },
+  "drugs": [
+    { "id": "atorvastatin", "display_name": "Atorvastatin", "part_d_rank_2023": 1, "ingredients": [{ "name": "atorvastatin", "rxcui": "83367" }] },
+    { "id": "amlodipine", "display_name": "Amlodipine", "part_d_rank_2023": 2, "ingredients": [{ "name": "amlodipine", "rxcui": "17767" }] },
+    { "id": "levothyroxine", "display_name": "Levothyroxine", "part_d_rank_2023": 3, "ingredients": [{ "name": "levothyroxine", "rxcui": "10582" }], "notes": "Listed as narrow therapeutic index in Document A §3. No NTI-specific patient messaging in v0.1 (see docs/references adoption table, A-12)." },
+    { "id": "lisinopril", "display_name": "Lisinopril", "part_d_rank_2023": 4, "ingredients": [{ "name": "lisinopril", "rxcui": "29046" }] },
+    { "id": "gabapentin", "display_name": "Gabapentin", "part_d_rank_2023": 5, "ingredients": [{ "name": "gabapentin", "rxcui": "25480" }], "notes": "Immediate-release and extended-release/gastroretentive and prodrug (gabapentin enacarbil) products are distinct identities; gabapentin enacarbil is a different ingredient and is UNSUPPORTED." },
+    { "id": "losartan", "display_name": "Losartan", "part_d_rank_2023": 6, "ingredients": [{ "name": "losartan", "rxcui": "52175" }] },
+    { "id": "metformin", "display_name": "Metformin", "part_d_rank_2023": 7, "ingredients": [{ "name": "metformin", "rxcui": "6809" }], "notes": "Immediate-release and extended-release tablets are distinct identities." },
+    { "id": "metoprolol_succinate", "display_name": "Metoprolol succinate", "part_d_rank_2023": 8, "ingredients": [{ "name": "metoprolol", "rxcui": "6918" }], "required_precise_ingredient": { "name": "metoprolol succinate", "rxcui": "221124" }, "notes": "Scope is the succinate salt (extended-release). Metoprolol tartrate (PIN 203191) is UNSUPPORTED in v0.1." },
+    { "id": "omeprazole", "display_name": "Omeprazole", "part_d_rank_2023": 9, "ingredients": [{ "name": "omeprazole", "rxcui": "7646" }], "notes": "Prescription delayed-release forms in scope; OTC forms pending OD-3." },
+    { "id": "rosuvastatin", "display_name": "Rosuvastatin", "part_d_rank_2023": 10, "ingredients": [{ "name": "rosuvastatin", "rxcui": "301542" }] },
+    { "id": "pantoprazole", "display_name": "Pantoprazole", "part_d_rank_2023": 11, "ingredients": [{ "name": "pantoprazole", "rxcui": "40790" }] },
+    { "id": "furosemide", "display_name": "Furosemide", "part_d_rank_2023": 12, "ingredients": [{ "name": "furosemide", "rxcui": "4603" }] },
+    { "id": "hydrocodone_acetaminophen", "display_name": "Hydrocodone/acetaminophen", "part_d_rank_2023": 14, "ingredients": [{ "name": "hydrocodone", "rxcui": "5489" }, { "name": "acetaminophen", "rxcui": "161" }], "notes": "Exact two-ingredient set. Single-ingredient hydrocodone or acetaminophen products are UNSUPPORTED. Schedule II controlled substance; no dosing or diversion-related content is shown." },
+    { "id": "tamsulosin", "display_name": "Tamsulosin", "part_d_rank_2023": 15, "ingredients": [{ "name": "tamsulosin", "rxcui": "77492" }] }
+  ]
+}

@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# React Native / Android (added in later tasks)
+mobile/android/app/build/
+mobile/android/.gradle/
+mobile/ios/Pods/
+*.keystore
+!debug.keystore
+local.properties
+
+# Environment and secrets — never commit
+.env
+.env.*
+*.pem
+*.p12
+
+# Patient data must never be committed (images, scans, local databases)
+*.db
+*.sqlite
+*.sqlite3
+scans/
+captures/
+
+# Feasibility harness scratch output (committed reports live in docs/feasibility/)
+scripts/output/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log

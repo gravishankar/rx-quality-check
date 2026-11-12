@@ -1,0 +1,38 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "23155087801",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "314076",
+      "conceptName": "lisinopril 10 MG Oral Tablet",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "GS",
+          "MMSL",
+          "MMX",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "314076",
+          "originalRxcui": "314076",
+          "startDate": "202311",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

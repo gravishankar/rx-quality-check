@@ -1,0 +1,101 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 43
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Parsippany",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "67933",
+        "recalling_firm": "Wockhardt Usa Inc.",
+        "address_1": "20 Waterview Blvd., Suite 3",
+        "address_2": "N/A",
+        "postal_code": "07054",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-1300-2014",
+        "product_description": "Metoprolol Succinate Extended-Release Tablets, USP, 50 mg, 30-count bottle, Rx only, Manufactured by: Wockhardt Limited, Mumbai, India; Distributed by: Wockhardt USA LLC., 20 Waterview Blvd., Parsippany, NJ  07054, USA; NDC 64679-735-09, UPC 3 64679 73509 1.",
+        "product_quantity": "109,744 bottles",
+        "reason_for_recall": "Failed Dissolution Specifications: failure of dissolution test observed at nine month time point.",
+        "recall_initiation_date": "20140401",
+        "center_classification_date": "20140502",
+        "termination_date": "20150512",
+        "report_date": "20140514",
+        "code_info": "Lot #: LN10686, LN10687, LN10688, LN10707, LN10708, Exp 02/15"
+      },
+      {
+        "status": "Terminated",
+        "city": "Parsippany",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "91442",
+        "recalling_firm": "Ascend Laboratories, LLC",
+        "address_1": "339 Jefferson Rd Ste 101",
+        "address_2": "N/A",
+        "postal_code": "07054-3707",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "E-Mail",
+        "distribution_pattern": "Nationwide and Puerto Rico",
+        "recall_number": "D-0169-2023",
+        "product_description": "Metoprolol Succinate Extended-Release Tablets, USP 25 mg, Rx Only, 100 Tablets per bottle,  Manufactured by: Alkem Laboratories Ltd., Mumbai - 400 013, India, Distributed by: Ascend Laboratories, LLC, Parsippany NJ 07054, NDC 67877-590-01.",
+        "product_quantity": "49,632 bottles",
+        "reason_for_recall": "Failed Dissolution Specification",
+        "recall_initiation_date": "20230105",
+        "center_classification_date": "20230120",
+        "termination_date": "20240815",
+        "report_date": "20230201",
+        "code_info": "Lot #s: 21143094, 21143095, 21143119, 21143121, 21142389, Exp 03/31/2023.",
+        "more_code_info": ""
+      },
+      {
+        "country": "United States",
+        "city": "Vancouver",
+        "address_1": "14301 Se 1st St",
+        "reason_for_recall": "Labeling:Label Mixup; METOPROLOL TARTRATE, Tablet, 12.5 mg (1/2 of 25 mg) may be potentially mislabeled as    PIOGLITAZONE, Tablet, 15 mg, NDC 00591320530, Pedigree: AD22845_1, EXP: 4/30/2014;  LEVOTHYROXINE SODIUM, Tablet, 12.5 mcg (1/2 of 25 mcg), NDC 00527134101, Pedigree: AD73525_49, EXP: 5/30/2014.",
+        "address_2": "",
+        "product_quantity": "420 Tablets",
+        "code_info": "METOPROLOL TARTRATE, Tablet, 12.5 mg (1/2 of 25 mg) has the following codes    Pedigree: AD21790_67, EXP: 5/1/2014;  Pedigree: AD73525_52, EXP: 5/30/2014.",
+        "center_classification_date": "20140116",
+        "distribution_pattern": "Repacked drugs were distributed in Arizona, California, Oregon, and Washington.",
+        "state": "WA",
+        "product_description": "METOPROLOL TARTRATE Tablet, 12.5 mg (1/2 of 25 mg), Rx only, Distributed by: AidaPak Service, LLC, NDC 63304057901",
+        "report_date": "20140122",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Aidapak Services, LLC",
+        "recall_number": "D-678-2014",
+        "initial_firm_notification": "Telephone",
+        "product_type": "Drugs",
+        "event_id": "65707",
+        "termination_date": "20140207",
+        "more_code_info": "",
+        "recall_initiation_date": "20130702",
+        "postal_code": "98684-3501",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 202
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "13107-213",
+        "generic_name": "Hydrocodone Bitartrate and Acetaminophen",
+        "labeler_name": "Aurolife Pharma, LLC",
+        "dea_schedule": "CII",
+        "brand_name": "Hydrocodone Bitartrate and Acetaminophen",
+        "active_ingredients": [
+          {
+            "name": "HYDROCODONE BITARTRATE",
+            "strength": "10 mg/1"
+          },
+          {
+            "name": "ACETAMINOPHEN",
+            "strength": "300 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "13107-213-01",
+            "description": "100 TABLET in 1 BOTTLE (13107-213-01)",
+            "marketing_start_date": "20150506",
+            "sample": false
+          },
+          {
+            "package_ndc": "13107-213-05",
+            "description": "500 TABLET in 1 BOTTLE (13107-213-05)",
+            "marketing_start_date": "20150506",
+            "sample": false
+          },
+          {
+            "package_ndc": "13107-213-30",
+            "description": "30 TABLET in 1 BOTTLE (13107-213-30)",
+            "marketing_start_date": "20150506",
+            "sample": false
+          },
+          {
+            "package_ndc": "13107-213-99",
+            "description": "1000 TABLET in 1 BOTTLE (13107-213-99)",
+            "marketing_start_date": "20150506",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "Aurolife Pharma, LLC"
+          ],
+          "rxcui": [
+            "856980",
+            "856987",
+            "856992"
+          ],
+          "spl_set_id": [
+            "392a846e-7325-462d-b19b-8afda44c5cb0"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0313107213014",
+            "0313107211010"
+          ],
+          "unii": [
+            "362O9ITL9D",
+            "NO70W886KK"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET",
+        "spl_id": "265ff2e7-c060-4a82-909b-26e71c262dd6",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20150506",
+        "product_id": "13107-213_265ff2e7-c060-4a82-909b-26e71c262dd6",
+        "application_number": "ANDA207709",
+        "brand_name_base": "Hydrocodone Bitartrate and Acetaminophen",
+        "pharm_class": [
+          "Opioid Agonist [EPC]",
+          "Opioid Agonists [MoA]"
+        ]
+      }
+    ]
+  }
+}

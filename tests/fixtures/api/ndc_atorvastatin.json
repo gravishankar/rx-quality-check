@@ -1,0 +1,81 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 405
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "68071-2991",
+        "generic_name": "Atorvastatin Calcium",
+        "labeler_name": "NuCare Pharmaceuticals,Inc.",
+        "brand_name": "Atorvastatin Calcium",
+        "active_ingredients": [
+          {
+            "name": "ATORVASTATIN CALCIUM TRIHYDRATE",
+            "strength": "40 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "68071-2991-3",
+            "description": "30 TABLET in 1 BOTTLE (68071-2991-3)",
+            "marketing_start_date": "20230425",
+            "sample": false
+          },
+          {
+            "package_ndc": "68071-2991-9",
+            "description": "90 TABLET in 1 BOTTLE (68071-2991-9)",
+            "marketing_start_date": "20230425",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "NuCare Pharmaceuticals,Inc."
+          ],
+          "rxcui": [
+            "617311"
+          ],
+          "spl_set_id": [
+            "fa2d8d38-dbd0-43fd-e053-6294a90a4e94"
+          ],
+          "upc": [
+            "0368071299199"
+          ],
+          "unii": [
+            "48A5M73Z4Q"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET",
+        "spl_id": "1858a056-ce29-a5fb-e063-6394a90a283f",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20220829",
+        "product_id": "68071-2991_1858a056-ce29-a5fb-e063-6394a90a283f",
+        "application_number": "ANDA214659",
+        "brand_name_base": "Atorvastatin Calcium",
+        "pharm_class": [
+          "HMG-CoA Reductase Inhibitor [EPC]",
+          "Hydroxymethylglutaryl-CoA Reductase Inhibitors [MoA]"
+        ]
+      }
+    ]
+  }
+}

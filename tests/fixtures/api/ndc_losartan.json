@@ -1,0 +1,84 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 312
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "50090-4712",
+        "generic_name": "Losartan Potassium",
+        "labeler_name": "A-S Medication Solutions",
+        "brand_name": "Losartan Potassium",
+        "active_ingredients": [
+          {
+            "name": "LOSARTAN POTASSIUM",
+            "strength": "100 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "50090-4712-0",
+            "description": "90 TABLET, FILM COATED in 1 BOTTLE (50090-4712-0)",
+            "marketing_start_date": "20191112",
+            "sample": false
+          },
+          {
+            "package_ndc": "50090-4712-1",
+            "description": "30 TABLET, FILM COATED in 1 BOTTLE (50090-4712-1)",
+            "marketing_start_date": "20191112",
+            "sample": false
+          },
+          {
+            "package_ndc": "50090-4712-2",
+            "description": "100 TABLET, FILM COATED in 1 BOTTLE (50090-4712-2)",
+            "marketing_start_date": "20240805",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20261231",
+        "openfda": {
+          "manufacturer_name": [
+            "A-S Medication Solutions"
+          ],
+          "rxcui": [
+            "979480"
+          ],
+          "spl_set_id": [
+            "27e783ce-3353-448a-b0a3-c954dfd2e4c7"
+          ],
+          "unii": [
+            "3ST302B24A"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET, FILM COATED",
+        "spl_id": "1fd5cd7c-9ae2-4c09-97fb-0c2708743423",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20150819",
+        "product_id": "50090-4712_1fd5cd7c-9ae2-4c09-97fb-0c2708743423",
+        "application_number": "ANDA203835",
+        "brand_name_base": "Losartan Potassium",
+        "pharm_class": [
+          "Angiotensin 2 Receptor Antagonists [MoA]",
+          "Angiotensin 2 Receptor Blocker [EPC]"
+        ]
+      }
+    ]
+  }
+}

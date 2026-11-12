@@ -1,0 +1,112 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 395
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "55111-643",
+        "generic_name": "Omeprazole",
+        "labeler_name": "Dr. Reddy's Laboratories Limited",
+        "brand_name": "Omeprazole",
+        "active_ingredients": [
+          {
+            "name": "OMEPRAZOLE",
+            "strength": "10 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "55111-643-01",
+            "description": "100 CAPSULE, DELAYED RELEASE in 1 BOTTLE (55111-643-01)",
+            "marketing_start_date": "20260309",
+            "sample": false
+          },
+          {
+            "package_ndc": "55111-643-05",
+            "description": "500 CAPSULE, DELAYED RELEASE in 1 BOTTLE (55111-643-05)",
+            "marketing_start_date": "20140301",
+            "sample": false
+          },
+          {
+            "package_ndc": "55111-643-30",
+            "description": "30 CAPSULE, DELAYED RELEASE in 1 BOTTLE (55111-643-30)",
+            "marketing_start_date": "20260309",
+            "sample": false
+          },
+          {
+            "package_ndc": "55111-643-78",
+            "description": "10 BLISTER PACK in 1 CARTON (55111-643-78)  / 10 CAPSULE, DELAYED RELEASE in 1 BLISTER PACK (55111-643-79)",
+            "marketing_start_date": "20140301",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "Dr. Reddy's Laboratories Limited"
+          ],
+          "rxcui": [
+            "198051",
+            "199119",
+            "200329"
+          ],
+          "spl_set_id": [
+            "603d2d06-c5e8-4378-a422-8dca1a410af7"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0355111643012",
+            "0355111644019"
+          ],
+          "nui": [
+            "N0000175525",
+            "N0000000147",
+            "N0000182140"
+          ],
+          "pharm_class_epc": [
+            "Proton Pump Inhibitor [EPC]"
+          ],
+          "pharm_class_moa": [
+            "Proton Pump Inhibitors [MoA]",
+            "Cytochrome P450 2C19 Inhibitors [MoA]"
+          ],
+          "unii": [
+            "KG60484QX9"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "CAPSULE, DELAYED RELEASE",
+        "spl_id": "8ebe8fd4-472a-4fb0-3a62-4bb87eb0381d",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20140301",
+        "product_id": "55111-643_8ebe8fd4-472a-4fb0-3a62-4bb87eb0381d",
+        "application_number": "ANDA078490",
+        "brand_name_base": "Omeprazole",
+        "pharm_class": [
+          "Cytochrome P450 2C19 Inhibitors [MoA]",
+          "Proton Pump Inhibitor [EPC]",
+          "Proton Pump Inhibitors [MoA]"
+        ]
+      }
+    ]
+  }
+}

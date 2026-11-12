@@ -1,0 +1,48 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 1,
+        "total": 41
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Princeton",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "74326",
+        "recalling_firm": "Sandoz Inc",
+        "address_1": "100 College Rd W",
+        "address_2": "",
+        "postal_code": "08540-6604",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-1036-2016",
+        "product_description": "Lisinopril Tablets USP, 30 mg, 100-count bottle, Rx Only,  Manufactured by Sandoz  Inc., Princeton, NJ 08540, NDC 0185-0630-01",
+        "product_quantity": "3,048 bottles ( 304,800 tablets)",
+        "reason_for_recall": "Labeling: Incorrect or Missing Package Insert",
+        "recall_initiation_date": "20160525",
+        "center_classification_date": "20160616",
+        "termination_date": "20170425",
+        "report_date": "20160622",
+        "code_info": "Lot # FC1960; Exp.: 02/18",
+        "more_code_info": ""
+      }
+    ]
+  }
+}

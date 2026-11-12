@@ -1,0 +1,87 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 117
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "68071-1963",
+        "generic_name": "Pantoprazole Sodium",
+        "labeler_name": "NuCare Pharmaceuticals, Inc.",
+        "brand_name": "Pantoprazole Sodium",
+        "active_ingredients": [
+          {
+            "name": "PANTOPRAZOLE SODIUM",
+            "strength": "40 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "68071-1963-3",
+            "description": "30 TABLET, DELAYED RELEASE in 1 BOTTLE (68071-1963-3)",
+            "marketing_start_date": "20110120",
+            "sample": false
+          },
+          {
+            "package_ndc": "68071-1963-4",
+            "description": "14 TABLET, DELAYED RELEASE in 1 BOTTLE (68071-1963-4)",
+            "marketing_start_date": "20110120",
+            "sample": false
+          },
+          {
+            "package_ndc": "68071-1963-6",
+            "description": "60 TABLET, DELAYED RELEASE in 1 BOTTLE (68071-1963-6)",
+            "marketing_start_date": "20110120",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "NuCare Pharmaceuticals, Inc."
+          ],
+          "rxcui": [
+            "314200"
+          ],
+          "spl_set_id": [
+            "4fbec80c-b38d-122c-e054-00144ff88e88"
+          ],
+          "upc": [
+            "0368071196344"
+          ],
+          "unii": [
+            "6871619Q5X"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET, DELAYED RELEASE",
+        "spl_id": "1d4be162-1637-896d-e063-6394a90a39f0",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20110120",
+        "product_id": "68071-1963_1d4be162-1637-896d-e063-6394a90a39f0",
+        "application_number": "ANDA090074",
+        "brand_name_base": "Pantoprazole Sodium",
+        "pharm_class": [
+          "Proton Pump Inhibitor [EPC]",
+          "Proton Pump Inhibitors [MoA]"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 22
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Corona",
+        "state": "CA",
+        "country": "United States",
+        "classification": "Class I",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "63246",
+        "recalling_firm": "Watson Laboratories Inc",
+        "address_1": "311 Bonnie Cir",
+        "address_2": "N/A",
+        "postal_code": "92880-2882",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Press Release",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-058-2013",
+        "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets USP, 10 mg/500 mg, 500-count Tablets per bottle, Rx only, Manufactured By: Watson Laboratories, Inc., Corona, CA  92880 USA, NDC 00591-0540-05.",
+        "product_quantity": "4,874 bottles",
+        "reason_for_recall": "Superpotent (Multiple Ingredient) Drug: There is the potential for oversized and superpotent tablets.",
+        "recall_initiation_date": "20120921",
+        "center_classification_date": "20121116",
+        "termination_date": "20140324",
+        "report_date": "20121128",
+        "code_info": "Lot #: 519406A, 521759A, Exp 04/14"
+      },
+      {
+        "status": "Terminated",
+        "city": "Somerset",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {
+          "application_number": [
+            "ANDA091528"
+          ],
+          "brand_name": [
+            "HYDROCODONE BITARTRATE AND HOMATROPINE METHYLBROMIDE"
+          ],
+          "generic_name": [
+            "HYDROCODONE BITARTRATE AND HOMATROPINE METHYLBROMIDE"
+          ],
+          "manufacturer_name": [
+            "Lupin Pharmaceuticals,Inc."
+          ],
+          "product_ndc": [
+            "43386-118"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "HYDROCODONE BITARTRATE",
+            "HOMATROPINE METHYLBROMIDE"
+          ],
+          "rxcui": [
+            "992656"
+          ],
+          "spl_id": [
+            "116df522-26b7-42de-8c0b-16cc60c2e764"
+          ],
+          "spl_set_id": [
+            "41ac90b3-f007-4eb2-9d41-ea626ced2017"
+          ],
+          "package_ndc": [
+            "43386-118-03",
+            "43386-118-01",
+            "43386-118-05",
+            "3433861180"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0343386118038",
+            "343386118038"
+          ],
+          "unii": [
+            "NO70W886KK",
+            "68JRS2HC1C"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "79298",
+        "recalling_firm": "Novel Laboratories, Inc.",
+        "address_1": "400 Campus Dr",
+        "address_2": "",
+        "postal_code": "08873-1145",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-0599-2018",
+        "product_description": "Lupin Hydrocodone Bitartrate and Homatropine Methylbromide Tablets, USP 5/1.5 mg Rx Only 30 Tablets Manufactured by: Novel Laboratories, Inc. Somerset, NJ 08873 Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, MD 21202   NDC 43386-118-03  UPC 343386118038",
+        "product_quantity": "134,364 bottles (4,030,920 tablets)",
+        "reason_for_recall": "Failed Impurities/Degradation Specifications",
+        "recall_initiation_date": "20180305",
+        "center_classification_date": "20180314",
+        "termination_date": "20200608",
+        "report_date": "20180321",
+        "code_info": "M16002A (02/2018);   M16246A (04/2018);   M16246B (04/2018);   M16434A (07/2018);   M16569A (10/2018);   M17015A (01/2019);   S700271 (04/2019);",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Central Islip",
+        "state": "NY",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA211487"
+          ],
+          "brand_name": [
+            "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+          ],
+          "generic_name": [
+            "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+          ],
+          "manufacturer_name": [
+            "Camber Pharmaceuticals, Inc."
+          ],
+          "product_ndc": [
+            "31722-996",
+            "31722-997"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "HYDROCODONE BITARTRATE",
+            "ACETAMINOPHEN"
+          ],
+          "rxcui": [
+            "856999",
+            "857002"
+          ],
+          "spl_id": [
+            "d745e0ac-ee48-44c7-8430-8da0a69d2735"
+          ],
+          "spl_set_id": [
+            "ed6af366-753c-4f3b-a6a2-c9a183c50035"
+          ],
+          "package_ndc": [
+            "31722-996-01",
+            "31722-996-05",
+            "31722-997-01",
+            "31722-997-05"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0331722997010",
+            "0331722996013"
+          ],
+          "unii": [
+            "NO70W886KK",
+            "362O9ITL9D"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "89060",
+        "recalling_firm": "Ascent Pharmaceuticals, Inc.",
+        "address_1": "400 S Technology Dr",
+        "address_2": "N/A",
+        "postal_code": "11722-4402",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "USA Nationwide",
+        "recall_number": "D-0276-2022",
+        "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP 10 mg/325 mg, 100-count bottle, Rx only, Manufactured for: Camber Pharmaceuticals, Inc. Piscataway, NJ 08854, Manufactured by: Ascent Pharmaceuticals, Inc., Central Islip, NY 11722, NDC 31722-997-01.",
+        "product_quantity": "9744 bottles",
+        "reason_for_recall": "Product Mix-up",
+        "recall_initiation_date": "20211119",
+        "center_classification_date": "20211207",
+        "termination_date": "20231206",
+        "report_date": "20211215",
+        "code_info": "Lot #: 21070817, Exp 6/2023",
+        "more_code_info": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 223
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "68094-756",
+        "generic_name": "Furosemide",
+        "labeler_name": "Precision Dose Inc.",
+        "brand_name": "Furosemide",
+        "active_ingredients": [
+          {
+            "name": "FUROSEMIDE",
+            "strength": "40 mg/4mL"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "68094-756-62",
+            "description": "3 TRAY in 1 CASE (68094-756-62)  / 10 CUP, UNIT-DOSE in 1 TRAY / 4 mL in 1 CUP, UNIT-DOSE (68094-756-59)",
+            "marketing_start_date": "20121023",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20261231",
+        "openfda": {
+          "manufacturer_name": [
+            "Precision Dose Inc."
+          ],
+          "rxcui": [
+            "197730"
+          ],
+          "spl_set_id": [
+            "4a746634-379b-4847-a965-7607d2a71bed"
+          ],
+          "nui": [
+            "N0000175366",
+            "N0000175590"
+          ],
+          "pharm_class_pe": [
+            "Increased Diuresis at Loop of Henle [PE]"
+          ],
+          "pharm_class_epc": [
+            "Loop Diuretic [EPC]"
+          ],
+          "unii": [
+            "7LXU5N7ZO5"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "SOLUTION",
+        "spl_id": "2a35f26b-d831-48a5-ab87-14c61f0341bf",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20121023",
+        "product_id": "68094-756_2a35f26b-d831-48a5-ab87-14c61f0341bf",
+        "application_number": "ANDA070434",
+        "brand_name_base": "Furosemide",
+        "pharm_class": [
+          "Increased Diuresis at Loop of Henle [PE]",
+          "Loop Diuretic [EPC]"
+        ]
+      }
+    ]
+  }
+}

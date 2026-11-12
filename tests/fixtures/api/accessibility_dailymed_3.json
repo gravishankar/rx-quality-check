@@ -1,0 +1,28 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "data": [
+      {
+        "spl_version": 14,
+        "published_date": "Nov 09, 2026",
+        "title": "LISINOPRIL TABLET [PD-RX PHARMACEUTICALS, INC.]",
+        "setid": "bf59ff89-a9fa-4fe3-b167-a5d0cba9e438"
+      }
+    ],
+    "metadata": {
+      "db_published_date": "Nov 11, 2026 08:02:44PM EST",
+      "elements_per_page": 1,
+      "current_url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lisinopril&pagesize=1",
+      "next_page_url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lisinopril&pagesize=1&page=2",
+      "total_elements": 377,
+      "total_pages": 377,
+      "current_page": 1,
+      "previous_page": "null",
+      "previous_page_url": "null",
+      "next_page": 2
+    }
+  }
+}

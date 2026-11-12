@@ -1,0 +1,38 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "68180045501",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "197361",
+      "conceptName": "amlodipine 5 MG Oral Tablet",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "GS",
+          "MMSL",
+          "MMX",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "197361",
+          "originalRxcui": "197361",
+          "startDate": "202405",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

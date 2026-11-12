@@ -1,0 +1,101 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 188
+      }
+    },
+    "results": [
+      {
+        "country": "United States",
+        "city": "Olive Branch",
+        "address_1": "1 & 2",
+        "reason_for_recall": "Failed Content Uniformity Specifications: Product was manufactured using an adulterated active pharmaceutical ingredient; additionally, lack of process controls and good manufacturing practices resulted in finished product failing content uniformity specifications which can result in a product having a strength that is more or less than is labeled.",
+        "address_2": "154 Downing Street",
+        "product_quantity": "Unknown",
+        "code_info": "Lot #: 15617VP03, 15617VP01, 15617VP-02, Exp 7/31/2019;  15617VP06, 15617VP05, Exp 11/30/2019; 15617VP04, 15618004, 15618002, Exp 12/31/2019; 15618009, 15618008, Exp 2/29/2020; 15618011, Exp 3/31/2020.",
+        "center_classification_date": "20180907",
+        "distribution_pattern": "Nationwide in the USA and Puerto Rico",
+        "state": "MS",
+        "product_description": "Levothyroxine and Liothyronine (Thyroid Tablets, USP), 1 grain (60 mg), 100-count bottles, Rx Only, Manufactured for: Westminster Pharmaceuticals, LLC, 154 Downing Street, Unit 1 & 2, Olive Branch, MS 38654, NDC 69367-156-04.",
+        "report_date": "20180829",
+        "classification": "Class I",
+        "openfda": {},
+        "recalling_firm": "Westminster Pharmaceuticals LLC",
+        "recall_number": "D-1178-2018",
+        "initial_firm_notification": "Letter",
+        "product_type": "Drugs",
+        "event_id": "80719",
+        "termination_date": "20200603",
+        "more_code_info": "",
+        "recall_initiation_date": "20180803",
+        "postal_code": "38654",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      },
+      {
+        "status": "Ongoing",
+        "city": "Canonsburg",
+        "state": "PA",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "95768",
+        "recalling_firm": "Viatris Inc",
+        "address_1": "1000 Mylan Blvd",
+        "address_2": "",
+        "postal_code": "15317-5853",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide within the United States and Puerto Rico",
+        "recall_number": "D-0120-2025",
+        "product_description": "Levothyroxine Sodium Tablets USP, 150 mcg, packaged in a) 90-count bottles (NDC 0378-1815-77) and b) 1000-count bottles (NDC 0378-1815-10), Rx only, Manufactured for: Mylan Pharmaceuticals Inc. Morgantown, WV 26505 U.S.A.",
+        "product_quantity": "9,828 bottles",
+        "reason_for_recall": "Superpotent Drug and Subpotent Drug: potency failures obtained",
+        "recall_initiation_date": "20241118",
+        "center_classification_date": "20241212",
+        "report_date": "20241218",
+        "code_info": "Lot #: a) 8177720, Exp. Date Jun 2025; b) 3200218, Exp. Date Jun 2025",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Toronto",
+        "state": "",
+        "country": "Canada",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "70452",
+        "recalling_firm": "Attix Pharmaceuticals",
+        "address_1": "184 Front St E",
+        "address_2": "unit 801",
+        "postal_code": "N/A",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Two or more of the following: Email, Fax, Letter, Press Release, Telephone, Visit",
+        "distribution_pattern": "Nationwide to compounding pharmacies and research organizations.",
+        "recall_number": "D-761-2015",
+        "product_description": "Levothyroxine Sodium (T4) active pharmaceutical ingredient packaged in varying grams or kg in bags or drums, Attix Pharmaceuticals, 184 Front Street East, Unit 801, Toronto, Ontario M5A 4N3, Canada",
+        "product_quantity": "4605 grams",
+        "reason_for_recall": "Penicillin Cross Contamination: All lots of all products repackaged and distributed between 01/05/12 and 02/12/15 are being recalled because they were repackaged in a facility with penicillin products without adequate separation which could introduce the potential for cross contamination with penicillin.",
+        "recall_initiation_date": "20141114",
+        "center_classification_date": "20150420",
+        "termination_date": "20151007",
+        "report_date": "20150429",
+        "code_info": "All lots repackaged and distributed between 01/05/12 to 02/12/15",
+        "more_code_info": ""
+      }
+    ]
+  }
+}

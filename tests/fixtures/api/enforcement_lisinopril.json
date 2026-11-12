@@ -1,0 +1,271 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 41
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Princeton",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "74326",
+        "recalling_firm": "Sandoz Inc",
+        "address_1": "100 College Rd W",
+        "address_2": "",
+        "postal_code": "08540-6604",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-1036-2016",
+        "product_description": "Lisinopril Tablets USP, 30 mg, 100-count bottle, Rx Only,  Manufactured by Sandoz  Inc., Princeton, NJ 08540, NDC 0185-0630-01",
+        "product_quantity": "3,048 bottles ( 304,800 tablets)",
+        "reason_for_recall": "Labeling: Incorrect or Missing Package Insert",
+        "recall_initiation_date": "20160525",
+        "center_classification_date": "20160616",
+        "termination_date": "20170425",
+        "report_date": "20160622",
+        "code_info": "Lot # FC1960; Exp.: 02/18",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Glasgow",
+        "state": "KY",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {
+          "application_number": [
+            "ANDA075022",
+            "ANDA077321"
+          ],
+          "brand_name": [
+            "BUSPIRONE HYDROCHLORIDE",
+            "LISINOPRIL"
+          ],
+          "generic_name": [
+            "BUSPIRONE HYDROCHLORIDE",
+            "LISINOPRIL"
+          ],
+          "manufacturer_name": [
+            "NCS HealthCare of KY, LLC dba Vangard Labs"
+          ],
+          "product_ndc": [
+            "0615-7689",
+            "0615-7714",
+            "0615-7718",
+            "0615-8252",
+            "0615-8253",
+            "0615-8256",
+            "0615-8254",
+            "0615-8255"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "BUSPIRONE HYDROCHLORIDE",
+            "LISINOPRIL"
+          ],
+          "rxcui": [
+            "866018",
+            "866083",
+            "866094",
+            "197884",
+            "311353",
+            "311354",
+            "314076",
+            "314077"
+          ],
+          "spl_id": [
+            "77cbe6b7-dd55-4745-a49e-1e22072beccd",
+            "e5a3bed2-db01-4bc5-b231-ff76cecb7225"
+          ],
+          "spl_set_id": [
+            "72bff09c-826e-4394-a7e7-41d56ce9605b",
+            "43fa9a16-c112-419f-8d7b-177f580462f2"
+          ],
+          "package_ndc": [
+            "0615-7714-39",
+            "0615-7714-05",
+            "0615-7714-30",
+            "0615-7718-39",
+            "0615-7718-31",
+            "0615-7718-05",
+            "0615-7718-28",
+            "0615-7689-39",
+            "0615-7689-31",
+            "0615-7689-05",
+            "0615-8252-39",
+            "0615-8252-05",
+            "0615-8253-39",
+            "0615-8253-05",
+            "0615-8253-30",
+            "0615-8256-39",
+            "0615-8256-05",
+            "0615-8254-39",
+            "0615-8254-05",
+            "0615-8254-30",
+            "0615-8255-39",
+            "0615-8255-05",
+            "0615-8255-30"
+          ],
+          "original_packager_product_ndc": [
+            "0093-0053",
+            "0093-0054",
+            "0093-1003",
+            "68180-512",
+            "68180-513",
+            "68180-517",
+            "68180-980",
+            "68180-981"
+          ],
+          "unii": [
+            "207LT9J9OC",
+            "E7199S1YWR"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "93336",
+        "recalling_firm": "NCS Healthcare of Kentucky Inc",
+        "address_1": "120 Carroll Knicely Dr",
+        "address_2": "N/A",
+        "postal_code": "42141-7224",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide USA",
+        "recall_number": "D-0114-2024",
+        "product_description": "Lisinopril Tablets USP 20 mg, packaged in a) 15-count blister card (NDC 0615-7718-05), b) 30-count blister card (NDC 0615-8255-39), Rx only, Mfd By Lupin, PKG by Vangard Glasgow, KY 42141.",
+        "product_quantity": "12 cards",
+        "reason_for_recall": "Presence of Foreign Tablets: Potential of stray tablet(s) of Amlodipine Besylate 10 mg Tablet within the recalled lots",
+        "recall_initiation_date": "20231027",
+        "center_classification_date": "20231121",
+        "termination_date": "20240714",
+        "report_date": "20231129",
+        "code_info": "Lot#: a) 8255-3012, Exp 08/31/2024; b) 8255-3012, Exp 08/31/2024",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Baltimore",
+        "state": "MD",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {
+          "application_number": [
+            "ANDA077912"
+          ],
+          "brand_name": [
+            "LISINOPRIL AND HYDROCHLOROTHIAZIDE"
+          ],
+          "generic_name": [
+            "LISINOPRIL AND HYDROCHLOROTHIAZIDE"
+          ],
+          "manufacturer_name": [
+            "Lupin Pharmaceuticals, Inc."
+          ],
+          "product_ndc": [
+            "68180-518",
+            "68180-519",
+            "68180-520"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "HYDROCHLOROTHIAZIDE",
+            "LISINOPRIL"
+          ],
+          "rxcui": [
+            "197885",
+            "197886",
+            "197887"
+          ],
+          "spl_id": [
+            "4035482a-7e09-464f-ae01-a8a75fc3c4c1"
+          ],
+          "spl_set_id": [
+            "515f735c-5dba-43d9-8a58-97a319cafd56"
+          ],
+          "package_ndc": [
+            "68180-518-02",
+            "68180-518-01",
+            "68180-518-30",
+            "68180-519-30",
+            "68180-519-01",
+            "68180-519-02",
+            "68180-520-02",
+            "68180-520-30",
+            "68180-520-01"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0368180519010",
+            "0368180518013",
+            "0368180520016"
+          ],
+          "nui": [
+            "N0000175359",
+            "N0000175419",
+            "M0471776"
+          ],
+          "pharm_class_pe": [
+            "Increased Diuresis [PE]"
+          ],
+          "pharm_class_epc": [
+            "Thiazide Diuretic [EPC]"
+          ],
+          "pharm_class_cs": [
+            "Thiazides [CS]"
+          ],
+          "unii": [
+            "0J48LPH2TH",
+            "E7199S1YWR"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "73848",
+        "recalling_firm": "Lupin Pharmaceuticals Inc.",
+        "address_1": "111 S Calvert St Fl 21ST",
+        "address_2": "",
+        "postal_code": "21202-6174",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "E-Mail",
+        "distribution_pattern": "Nationwide and Puerto Rico",
+        "recall_number": "D-1052-2016",
+        "product_description": "Lisinopril & Hydrochlorothiazide Tables, USP 20mg/12.5mg, packaged in a)100-count bottles and b) 5000-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202, Manufactured by: Lupin Limited Pithampur (M.P.) 454 775 India, a) NDC 68180-519-01, b) 68180-519-30",
+        "product_quantity": "59,520 Bottles",
+        "reason_for_recall": "CGMP Deviations: finished products manufactured using active pharmaceutical ingredients whose intermediates failed specifications.",
+        "recall_initiation_date": "20160404",
+        "center_classification_date": "20160624",
+        "termination_date": "20170601",
+        "report_date": "20160706",
+        "code_info": "Lot #: a) H303459, b) H303460, Exp 09/2016",
+        "more_code_info": ""
+      }
+    ]
+  }
+}

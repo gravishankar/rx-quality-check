@@ -1,0 +1,36 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "43353098230",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "861007",
+      "conceptName": "metformin hydrochloride 500 MG Oral Tablet",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "MMSL",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "861007",
+          "originalRxcui": "861007",
+          "startDate": "201506",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

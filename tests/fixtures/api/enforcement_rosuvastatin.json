@@ -1,0 +1,241 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 13
+      }
+    },
+    "results": [
+      {
+        "status": "Ongoing",
+        "city": "Anaheim",
+        "state": "CA",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "91952",
+        "recalling_firm": "Preferred Pharmaceuticals, Inc.",
+        "address_1": "1250 N Lakeview Ave Ste O",
+        "address_2": "",
+        "postal_code": "92807-1801",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "USA Nationwide",
+        "recall_number": "D-0520-2023",
+        "product_description": "Rosuvastatin Tablets, USP, 5mg, 30-count bottle, Rx only, Manufactured: Accord Healthcare, Inc., Durham, NC 27703, NDC 68788-7971-3",
+        "product_quantity": "264 Bottles",
+        "reason_for_recall": "cGMP Deviations for the manufacturing Firm (Accord Healthcare) after their inspection.",
+        "recall_initiation_date": "20230323",
+        "center_classification_date": "20230406",
+        "report_date": "20230412",
+        "code_info": "Lot: A1723C, Exp 8/31/2025; Lot: A1922B, Exp 6/30/2024; Lot: D0622M and Lot: F2922I, Exp 7/31/2024; Lot: G3021L, Exp 1/31/2024; Lot:H2622P & Lot: J0722C, Exp 10/31/2024.",
+        "more_code_info": ""
+      },
+      {
+        "status": "Terminated",
+        "city": "Durham",
+        "state": "NC",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA206434"
+          ],
+          "brand_name": [
+            "ROSUVASTATIN"
+          ],
+          "generic_name": [
+            "ROSUVASTATIN"
+          ],
+          "manufacturer_name": [
+            "Accord Healthcare Inc."
+          ],
+          "product_ndc": [
+            "16729-284",
+            "16729-285",
+            "16729-286",
+            "16729-287"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "ROSUVASTATIN CALCIUM"
+          ],
+          "rxcui": [
+            "859419",
+            "859424",
+            "859747",
+            "859751"
+          ],
+          "spl_id": [
+            "4390ed19-e509-95ab-e063-6294a90a2b08"
+          ],
+          "spl_set_id": [
+            "3ffe0294-3997-2755-e054-00144ff8d46c"
+          ],
+          "package_ndc": [
+            "16729-284-10",
+            "16729-284-15",
+            "16729-284-17",
+            "16729-285-10",
+            "16729-285-15",
+            "16729-285-17",
+            "16729-286-10",
+            "16729-286-15",
+            "16729-286-17",
+            "16729-287-10",
+            "16729-287-15",
+            "16729-287-17"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "unii": [
+            "83MVU38M7Q"
+          ],
+          "upc": [
+            "316729286152",
+            "316729286176"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "91657",
+        "recalling_firm": "Accord Healthcare, Inc.",
+        "address_1": "1009 Slater Rd Ste 210B",
+        "address_2": "N/A",
+        "postal_code": "27703-8446",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "United States including Puerto Rico and Canada",
+        "recall_number": "D-0406-2023",
+        "product_description": "Rosuvastatin Tablets, USP 20 mg* Rx Only, Packaged as:  a) 90-count bottle NDC 16729-286-15, UPC 3 16729 28615 2; b) 1,000-count bottles NDC 16729-286-17, UPC 3 16729 28617 6; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703. Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213 INDIA",
+        "product_quantity": "43,302 bottles",
+        "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+        "recall_initiation_date": "20230207",
+        "center_classification_date": "20230302",
+        "termination_date": "20240422",
+        "report_date": "20230308",
+        "code_info": "Batches: a) P2006560, Exp. Date 11/30/2023; P2101562, Exp. Date 2/28/2024;  b) P2006561, Exp. Date 11/30/2023; P2006562, Exp. Date 11/30/2023; P2006587, Exp. Date 11/30/2023; P2100035, Exp. Date 11/30/2023; P2006600, Exp. Date 11/30/2023; P2006603, Exp. Date 11/30/2023; P2006604, Exp. Date 11/30/2023; P2006605, Exp. Date 11/30/2023; P2006606, Exp. Date 11/30/2023; P2100542, Exp. Date 12/31/2023; P2100543, Exp. Date 12/31/2023; P2100544, Exp. Date 12/31/2023; P2100545, Exp. Date 12/31/2023; P2101485, Exp. Date 2/28/2024; P2101484, Exp. Date 2/29/2024; P2205235, Exp. Date 8/31/2025; P2205236, Exp. Date 8/31/2025;",
+        "more_code_info": ""
+      },
+      {
+        "status": "Ongoing",
+        "city": "Mahwah",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA079172"
+          ],
+          "brand_name": [
+            "ROSUVASTATIN CALCIUM"
+          ],
+          "generic_name": [
+            "ROSUVASTATIN CALCIUM"
+          ],
+          "manufacturer_name": [
+            "Glenmark Pharmaceutials Inc., USA"
+          ],
+          "product_ndc": [
+            "68462-261",
+            "68462-262",
+            "68462-263",
+            "68462-264"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "ROSUVASTATIN CALCIUM"
+          ],
+          "rxcui": [
+            "859419",
+            "859424",
+            "859747",
+            "859751"
+          ],
+          "spl_id": [
+            "760efcac-6dbc-4e58-b2cc-9fc5f9b5603f"
+          ],
+          "spl_set_id": [
+            "392657a9-955c-42c2-814c-1890ece45afa"
+          ],
+          "package_ndc": [
+            "68462-261-30",
+            "68462-261-50",
+            "68462-261-90",
+            "68462-261-01",
+            "68462-261-10",
+            "68462-261-11",
+            "68462-262-30",
+            "68462-262-50",
+            "68462-262-90",
+            "68462-262-01",
+            "68462-262-10",
+            "68462-262-11",
+            "68462-263-30",
+            "68462-263-50",
+            "68462-263-90",
+            "68462-263-01",
+            "68462-263-10",
+            "68462-263-11",
+            "68462-264-30",
+            "68462-264-50",
+            "68462-264-90",
+            "68462-264-01",
+            "68462-264-05",
+            "68462-264-10"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0368462263907",
+            "0368462261903",
+            "0368462262900",
+            "0368462264300"
+          ],
+          "unii": [
+            "83MVU38M7Q"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "96474",
+        "recalling_firm": "Glenmark Pharmaceuticals Inc., USA",
+        "address_1": "750 Corporate Dr",
+        "address_2": "N/A",
+        "postal_code": "07430-2009",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "U.S. Nationwide",
+        "recall_number": "D-0339-2025",
+        "product_description": "Rosuvastatin Tablets 40mg, 30-count bottle, Rx Only, Manufactured by: Glenmark Pharmaceuticals Limited, Pithampur, Madhya Pradesh 454775, India, Manufactured for: Glenmark Pharmaceuticals Inc. USA, Mahwah, NJ 07430. NDC# 68462-264-30",
+        "product_quantity": "N/A",
+        "reason_for_recall": "CGMP Deviations",
+        "recall_initiation_date": "20250313",
+        "center_classification_date": "20250408",
+        "report_date": "20250416",
+        "code_info": "Lot #  17240389, exp. date Feb-26 17240390, exp. date Feb-26 17240426, exp. date Feb-26 17240427, exp. date Feb-26 17240428, exp. date Feb-26 17240778, exp. date Apr-26 17241055, exp. date May-26 17241074, exp. date  Jun-26 17241075, exp. date  Jun-26 17241091, exp. date  Jun-26 17241100, exp. date  Jun-26"
+      }
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 5
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Parsippany",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "71104",
+        "recalling_firm": "Wockhardt Usa Inc.",
+        "address_1": "20 Waterview Blvd Ste 3",
+        "address_2": "N/A",
+        "postal_code": "07054-1271",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "U.S. Nationwide including Puerto Rico.",
+        "recall_number": "D-1253-2015",
+        "product_description": "Tamsulosin Hydrochloride Capsules, USP*, 0.4 mg Capsules, Packaged in A) 100 Count Bottles (NDC: 64679-516-02) and B) 500 Count Bottles (NDC: 64679-516-03), Rx Only. Manufactured by: Wockhardt Limited, Mumbai, India. Distributed by: Wockhardt USA LLC 20 Waterview Blvd. Parsippany, NJ 07054 USA.",
+        "product_quantity": "407,958 Bottles",
+        "reason_for_recall": "CGMP Deviations: Firm did not adequately investigate customer complaints.",
+        "recall_initiation_date": "20150422",
+        "center_classification_date": "20150717",
+        "termination_date": "20180509",
+        "report_date": "20150729",
+        "code_info": "A) Lot #: LN10896, Expiry: 4/30/2015; Lot #: LN10901, Expiry: 4/30/2015; Lot #:LN10902, Expiry: 4/30/2015; Lot #: LN10903, Expiry: 4/30/2015; Lot #: LN11020, Expiry: 5/31/2015; Lot #:  LN11021, Expiry: 5/31/2015; Lot #: LN11055, Expiry: 5/31/2015; Lot #: LN11056, Expiry: 5/31/2015; Lot #: LN11149, Expiry: 5/31/2015, Lot #: LN11150, Expiry: 5/31/2015; Lot #: LN11267, Expiry: 6/30/2015; Lot #: LN11357, Expiry: 7/31/2015; Lot #: LN11387, Expiry: 8/31/2015; Lot #: LN11421, Expiry: 9/30/2015.        B) Lot #: LN10808, Expiry: 4/30/2015; Lot #: LN11083, Expiry: 5/31/2015; Lot #: LN11084, Expiry: 5/31/2015; Lot #: LN11085, Expiry: 5/31/2015; Lot #: LN11089, Expiry: 5/31/2015; Lot #: LN11109, Expiry: 5/31/2015; Lot #: LN11110, Expiry: 5/31/2015, Lot #: LN11120, Expiry: 5/31/2015; Lot #: LN11121, Expiry: 5/31/2015; Lot #: LN11186, Expiry: 5/31/2015; Lot #: LN11187, Expiry: 6/30/2015; Lot #: LN11188, Expiry: 6/30/2015; Lot #: LN11206, Expiry: 6/30/2015; Lot #: LN11226, Expiry: 6/30/2015; Lot #: LN11227, Expiry: 6/30/2015; Lot #: LN11233, Expiry: 6/30/2015; Lot #: LN11251, Expiry: 6/30/2015; Lot #: LN11257, Expiry: 6/30/2015; Lot #: LN11262, Expiry: 7/31/2015; Lot #: LN11263, Expiry:7/31/2015;  Lot #: LN11274, Expiry: 7/31/2015; Lot#: LN11288, Expiry: 7/31/2015; Lot #: LN11370; Expiry: 8/31/2015; Lot #: LN11371, Expiry: 8/31/2015; Lot #: LN11378, Expiry: 8/31/2015; Lot #: LN11384, Expiry: 8/31/2015; Lot #: LN11400, Expiry: 9/30/2015; Lot #: LN11402, Expiry: 9/30/2015; Lot #: LN11406, Expiry: 9/30/2015; Lot #: LN11412, Expiry: 9/30/2015; Lot #: LN11416, Expiry: 9/30/2015; Lot #: LN11428, Expiry: 9/30/2015."
+      },
+      {
+        "status": "Terminated",
+        "city": "North Wales",
+        "state": "PA",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "78364",
+        "recalling_firm": "Teva Pharmaceuticals USA",
+        "address_1": "1090 Horsham Rd",
+        "address_2": "N/A",
+        "postal_code": "19454-1505",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the USA and Puerto Rico.",
+        "recall_number": "D-0069-2018",
+        "product_description": "Dutasteride and Tamsulosin HCl Capsules, 0.5 mg/ 0.4 mg, packaged in a) 30-count bottle (NDC 0591-3771-30), b) 90-count bottle (NDC 0591-3771-19), Rx only, Manufactured by: Actavis Laboratories FL, Inc. Fort Lauderdale, FL 33314 USA; Distributed by: Actavis Pharma, Inc. Parsippany, NJ 07054 USA.",
+        "product_quantity": "140,993 bottles",
+        "reason_for_recall": "Failed dissolution specifications; all lots within expiry are being recalled due to out of specification dissolution results.",
+        "recall_initiation_date": "20171025",
+        "center_classification_date": "20171102",
+        "termination_date": "20180502",
+        "report_date": "20171108",
+        "code_info": "Lot Numbers: a) 1089376A, 1089382A, 1095210M, 1117768M, 1117769A, Exp. 11/17; 1128452A, 1128453A, 1137658A, 1154207A, 1156087A, Exp. 03/18; b) 1089379A, 1091533M, 1125206A, Exp. 11/17; 1128456A, 1147665A,  1154208A,  1156088A, Exp. 03/18."
+      },
+      {
+        "status": "Terminated",
+        "city": "Plainsboro",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA204645"
+          ],
+          "brand_name": [
+            "TAMSULOSIN HYDROCHLORIDE"
+          ],
+          "generic_name": [
+            "TAMSULOSIN HYDROCHLORIDE"
+          ],
+          "manufacturer_name": [
+            "Macleods Pharmaceuticals Limited"
+          ],
+          "product_ndc": [
+            "33342-159"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "TAMSULOSIN HYDROCHLORIDE"
+          ],
+          "rxcui": [
+            "863669"
+          ],
+          "spl_id": [
+            "95b0ff14-97b3-4b8c-8545-f066a45c2f82"
+          ],
+          "spl_set_id": [
+            "2912fbbc-89bf-4bf0-86fe-bd98f3168e84"
+          ],
+          "package_ndc": [
+            "33342-159-07",
+            "33342-159-11",
+            "33342-159-44",
+            "33342-159-12",
+            "33342-159-15"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0333342159106",
+            "0333342159113"
+          ],
+          "unii": [
+            "11SV1951MR"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "83414",
+        "recalling_firm": "Macleods Pharma Usa Inc",
+        "address_1": "666 Plainsboro Rd Bldg 200 Ste 230",
+        "address_2": "N/A",
+        "postal_code": "08536-0009",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-1844-2019",
+        "product_description": "Tamsulosin Hydrochloride Capsules, USP 0.4 mg Rx only   a) 100 count (NDC 33342-159-11), b) 500 count (NDC 33342-159-15) and c) 1000 count (NDC 33342-159-44) bottles, Manufactured : Macleods Pharma USA, Inc Plainsboro, NJ Manufactured by: Macleods Pharmaceuticals Ltd Baddi, Himchal Pradesh, INDIA",
+        "product_quantity": "a) 5448 bottles b) 972 bottles c) 158 bottles",
+        "reason_for_recall": "Failed Dissolution Specifications",
+        "recall_initiation_date": "20190717",
+        "center_classification_date": "20190828",
+        "termination_date": "20210209",
+        "report_date": "20190821",
+        "code_info": "a) BTP803A, exp 08/2020;  b) BTP802A, exp 07/2020, BTP901A, exp 12/2020;  c) BTP802B, exp 07/2020"
+      }
+    ]
+  }
+}

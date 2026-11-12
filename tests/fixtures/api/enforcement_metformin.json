@@ -1,0 +1,215 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 91
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Dublin",
+        "state": "OH",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "NDA205649"
+          ],
+          "brand_name": [
+            "XIGDUO"
+          ],
+          "generic_name": [
+            "DAPAGLIFLOZIN AND METFORMIN HYDROCHLORIDE"
+          ],
+          "manufacturer_name": [
+            "AstraZeneca Pharmaceuticals LP"
+          ],
+          "product_ndc": [
+            "0310-6225",
+            "0310-6270",
+            "0310-6280",
+            "0310-6250",
+            "0310-6260"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "DAPAGLIFLOZIN PROPANEDIOL",
+            "METFORMIN HYDROCHLORIDE"
+          ],
+          "rxcui": [
+            "1593058",
+            "1593068",
+            "1593070",
+            "1593072",
+            "1593775",
+            "1593831",
+            "1593833",
+            "1593835",
+            "1940496",
+            "1940498"
+          ],
+          "spl_id": [
+            "d3afc286-b96b-4fbd-b4bd-486a3f24e2f4"
+          ],
+          "spl_set_id": [
+            "ac8a0f7b-9f69-4495-abbc-3a47cd75a859"
+          ],
+          "package_ndc": [
+            "0310-6270-30",
+            "0310-6270-95",
+            "0310-6280-30",
+            "0310-6280-95",
+            "0310-6250-30",
+            "0310-6250-95",
+            "0310-6260-30",
+            "0310-6260-60",
+            "0310-6260-94",
+            "0310-6260-95",
+            "0310-6225-60",
+            "0310-6225-94"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "unii": [
+            "786Z46389E",
+            "887K2391VH"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "87512",
+        "recalling_firm": "Cardinal Health Inc.",
+        "address_1": "7000 Cardinal Pl",
+        "address_2": "N/A",
+        "postal_code": "43017-1091",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "FL, GA, SC",
+        "recall_number": "D-0435-2021",
+        "product_description": "xigduo XR (dapgliflozin/metformin HCl extended-release) tablets 10 mg/1000 mg 30 Tablets Rx only NDC 0310-6280-30 Manufactured for: AstraZeneca Pharmaceuticals LP Wilmington, DE 19850  Manufactured by: Bristol-Myers Squibb Manufacturing Company Humacao, Puerto Rico 00791",
+        "product_quantity": "664 bottles",
+        "reason_for_recall": "CGMP Deviations: Intermittent exposure to temperature excursion during storage.",
+        "recall_initiation_date": "20210315",
+        "center_classification_date": "20210524",
+        "termination_date": "20240617",
+        "report_date": "20210602",
+        "code_info": "MP0077"
+      },
+      {
+        "status": "Terminated",
+        "city": "Princeton",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class III",
+        "openfda": {
+          "application_number": [
+            "ANDA077336"
+          ],
+          "brand_name": [
+            "METFORMIN HYDROCHLORIDE"
+          ],
+          "generic_name": [
+            "METFORMIN HYDROCHLORIDE"
+          ],
+          "manufacturer_name": [
+            "Sun Pharmaceutical Industries, Inc."
+          ],
+          "product_ndc": [
+            "62756-142",
+            "62756-143"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "METFORMIN HYDROCHLORIDE"
+          ],
+          "spl_id": [
+            "5513972d-0ee6-c934-e063-6394a90a2f52"
+          ],
+          "spl_set_id": [
+            "41a8bb80-7b0b-476c-8134-5d161c3239c8"
+          ],
+          "package_ndc": [
+            "62756-142-01",
+            "62756-142-02",
+            "62756-143-01"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0362756142015",
+            "0362756143012"
+          ],
+          "unii": [
+            "786Z46389E"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "87617",
+        "recalling_firm": "SUN PHARMACEUTICAL INDUSTRIES INC",
+        "address_1": "2 Independence Way",
+        "address_2": "N/A",
+        "postal_code": "08540-6620",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide in the USA",
+        "recall_number": "D-0325-2021",
+        "product_description": "Metformin HCl Extended-Release Tablets, USP, 500 mg, Rx Only, 500-count bottle, Rx only, Distributed by: Sun Pharmaceutical Industries, Inc., Cranbury, NJ 08512; Manufactured by: Sun Pharmaceutical Industries Ltd., Halol-Baroda HIghway, Halol-389 350 Gujarat, India, NDC 62756-142-02.",
+        "product_quantity": "2520 bottles",
+        "reason_for_recall": "Failed Moisture Limits: Out of specification for water content",
+        "recall_initiation_date": "20210325",
+        "center_classification_date": "20210407",
+        "termination_date": "20220414",
+        "report_date": "20210414",
+        "code_info": "Lot #JKU4639A, Exp 10/2022"
+      },
+      {
+        "status": "Terminated",
+        "city": "Parsippany",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "85797",
+        "recalling_firm": "Teva Pharmaceuticals USA",
+        "address_1": "400 Interpace Pkwy",
+        "address_2": "N/A",
+        "postal_code": "07054-1120",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Press Release",
+        "distribution_pattern": "Product was distributed throughout the United States, including Puerto Rico.",
+        "recall_number": "D-1331-2020",
+        "product_description": "Metformin Hydrochloride Extended - Release Tablets, USP, 500 mg, a) 100 (NDC 62037-571-01) and b) 1,000 (NDC 62037-571-10) count bottles, Rx Only, Manufactured by: Watson Pharma Private Limited, Verna, Salcette Goa, Distributed by: Actavis Pharma, Inc., Parsippany, NJ",
+        "product_quantity": "a) 92,793 bottles and b) 4,824 bottles",
+        "reason_for_recall": "CGMP Deviations: FDA analysis detected N-Nitrosodimethylamine (NDMA) impurity above the acceptable intake level",
+        "recall_initiation_date": "20200602",
+        "center_classification_date": "20200619",
+        "termination_date": "20240412",
+        "report_date": "20200701",
+        "code_info": "a)  1329548A, exp. date 06/2020  1338302M, exp. date  10/2020  1348968M, exp. date  10/2020  1348969M, exp. date  10/2020  1348970M, exp. date  11/2020  1376339M,, exp. date  09/2021  b)   1323460M, exp. date  06/2020  1330919M, exp. date  6/2020  1338300A, exp. date 10/2020  1341135M, exp. date  12/2020  1391828M, exp. date  11/2021"
+      }
+    ]
+  }
+}

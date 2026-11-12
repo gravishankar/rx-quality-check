@@ -1,0 +1,90 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 205
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "82009-018",
+        "generic_name": "Rosuvastatin Calcium",
+        "labeler_name": "Quallent Pharmaceuticals Health LLC",
+        "brand_name": "Rosuvastatin Calcium",
+        "active_ingredients": [
+          {
+            "name": "ROSUVASTATIN CALCIUM",
+            "strength": "10 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "82009-018-10",
+            "description": "1000 TABLET, FILM COATED in 1 BOTTLE (82009-018-10)",
+            "marketing_start_date": "20220309",
+            "sample": false
+          },
+          {
+            "package_ndc": "82009-018-90",
+            "description": "90 TABLET, FILM COATED in 1 BOTTLE (82009-018-90)",
+            "marketing_start_date": "20220309",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "Quallent Pharmaceuticals Health LLC"
+          ],
+          "rxcui": [
+            "859419",
+            "859424",
+            "859747",
+            "859751"
+          ],
+          "spl_set_id": [
+            "6f978191-775e-4745-9c07-99e5be888afe"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "upc": [
+            "0382009019901",
+            "0382009020303",
+            "0382009018904",
+            "0382009017907"
+          ],
+          "unii": [
+            "83MVU38M7Q"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET, FILM COATED",
+        "spl_id": "86597300-9b2c-44cf-9650-503f5bdbf5bb",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20220309",
+        "product_id": "82009-018_86597300-9b2c-44cf-9650-503f5bdbf5bb",
+        "application_number": "ANDA208898",
+        "brand_name_base": "Rosuvastatin Calcium",
+        "pharm_class": [
+          "HMG-CoA Reductase Inhibitor [EPC]",
+          "Hydroxymethylglutaryl-CoA Reductase Inhibitors [MoA]"
+        ]
+      }
+    ]
+  }
+}

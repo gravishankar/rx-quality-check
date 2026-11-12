@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "aliases_version": "0.0.0",
+  "status": "EMPTY_PENDING_CURATION",
+  "description": "Maps pharmacy-label manufacturer strings (e.g., truncated pharmacy-system mnemonics) to FDA labeler codes. Intentionally empty: Document A §UC-3 describes the need but supplies only illustrative examples, and no verified mapping source has been reviewed. Entries may only be added with a cited, verifiable source and must be filtered at runtime to labelers that hold an active product NDC for the identified RxCUI.",
+  "entry_schema": {
+    "alias": "string, upper-case as printed on label",
+    "labeler_codes": "array of FDA labeler codes (4 or 5 digits, as published in the NDC Directory)",
+    "labeler_name": "string, as published in the NDC Directory",
+    "source": "citation for the mapping",
+    "verified_on": "YYYY-MM-DD"
+  },
+  "entries": []
+}

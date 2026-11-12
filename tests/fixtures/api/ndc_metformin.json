@@ -1,0 +1,116 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 560
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "43353-982",
+        "generic_name": "METFORMIN HYDROCHLORIDE",
+        "labeler_name": "Aphena Pharma Solutions - Tennessee, LLC",
+        "brand_name": "METFORMIN HYDROCHLORIDE",
+        "active_ingredients": [
+          {
+            "name": "METFORMIN HYDROCHLORIDE",
+            "strength": "500 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "43353-982-30",
+            "description": "30 TABLET in 1 BOTTLE (43353-982-30)",
+            "marketing_start_date": "20141111",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-53",
+            "description": "60 TABLET in 1 BOTTLE (43353-982-53)",
+            "marketing_start_date": "20151116",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-60",
+            "description": "90 TABLET in 1 BOTTLE (43353-982-60)",
+            "marketing_start_date": "20150513",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-70",
+            "description": "120 TABLET in 1 BOTTLE (43353-982-70)",
+            "marketing_start_date": "20190514",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-80",
+            "description": "180 TABLET in 1 BOTTLE (43353-982-80)",
+            "marketing_start_date": "20150512",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-92",
+            "description": "270 TABLET in 1 BOTTLE (43353-982-92)",
+            "marketing_start_date": "20150512",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-94",
+            "description": "360 TABLET in 1 BOTTLE (43353-982-94)",
+            "marketing_start_date": "20150512",
+            "sample": false
+          },
+          {
+            "package_ndc": "43353-982-96",
+            "description": "450 TABLET in 1 BOTTLE (43353-982-96)",
+            "marketing_start_date": "20150328",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20271231",
+        "openfda": {
+          "manufacturer_name": [
+            "Aphena Pharma Solutions - Tennessee, LLC"
+          ],
+          "rxcui": [
+            "861004",
+            "861007",
+            "861010"
+          ],
+          "spl_set_id": [
+            "273d86b0-9d30-48c9-8918-c5e1ececa951"
+          ],
+          "unii": [
+            "786Z46389E"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "TABLET",
+        "spl_id": "4900492c-70fa-e5b5-e063-6294a90af743",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20130911",
+        "product_id": "43353-982_4900492c-70fa-e5b5-e063-6294a90af743",
+        "application_number": "ANDA203769",
+        "brand_name_base": "METFORMIN HYDROCHLORIDE",
+        "pharm_class": [
+          "Biguanide [EPC]",
+          "Biguanides [CS]"
+        ]
+      }
+    ]
+  }
+}

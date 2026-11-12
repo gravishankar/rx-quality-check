@@ -1,0 +1,96 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-11",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 68
+      }
+    },
+    "results": [
+      {
+        "product_ndc": "71610-910",
+        "generic_name": "Tamsulosin hydrochloride",
+        "labeler_name": "Aphena Pharma Solutions - Tennessee, LLC",
+        "brand_name": "Tamsulosin hydrochloride",
+        "active_ingredients": [
+          {
+            "name": "TAMSULOSIN HYDROCHLORIDE",
+            "strength": ".4 mg/1"
+          }
+        ],
+        "finished": true,
+        "packaging": [
+          {
+            "package_ndc": "71610-910-30",
+            "description": "30 CAPSULE in 1 BOTTLE (71610-910-30)",
+            "marketing_start_date": "20250520",
+            "sample": false
+          },
+          {
+            "package_ndc": "71610-910-53",
+            "description": "60 CAPSULE in 1 BOTTLE (71610-910-53)",
+            "marketing_start_date": "20250520",
+            "sample": false
+          },
+          {
+            "package_ndc": "71610-910-60",
+            "description": "90 CAPSULE in 1 BOTTLE (71610-910-60)",
+            "marketing_start_date": "20250520",
+            "sample": false
+          },
+          {
+            "package_ndc": "71610-910-70",
+            "description": "120 CAPSULE in 1 BOTTLE (71610-910-70)",
+            "marketing_start_date": "20250520",
+            "sample": false
+          },
+          {
+            "package_ndc": "71610-910-80",
+            "description": "180 CAPSULE in 1 BOTTLE (71610-910-80)",
+            "marketing_start_date": "20250520",
+            "sample": false
+          }
+        ],
+        "listing_expiration_date": "20261231",
+        "openfda": {
+          "manufacturer_name": [
+            "Aphena Pharma Solutions - Tennessee, LLC"
+          ],
+          "rxcui": [
+            "863669"
+          ],
+          "spl_set_id": [
+            "35bbb655-19e2-00c2-e063-6394a90afbe3"
+          ],
+          "unii": [
+            "11SV1951MR"
+          ]
+        },
+        "marketing_category": "ANDA",
+        "dosage_form": "CAPSULE",
+        "spl_id": "35bbb655-19e3-00c2-e063-6394a90afbe3",
+        "product_type": "HUMAN PRESCRIPTION DRUG",
+        "route": [
+          "ORAL"
+        ],
+        "marketing_start_date": "20240301",
+        "product_id": "71610-910_35bbb655-19e3-00c2-e063-6394a90afbe3",
+        "application_number": "ANDA078801",
+        "brand_name_base": "Tamsulosin hydrochloride",
+        "pharm_class": [
+          "Adrenergic alpha-Antagonists [MoA]",
+          "alpha-Adrenergic Blocker [EPC]"
+        ]
+      }
+    ]
+  }
+}

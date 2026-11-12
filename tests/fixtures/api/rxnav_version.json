@@ -1,0 +1,10 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "version": "02-Nov-2026",
+    "apiVersion": "3.1.357"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "ndcStatus": {
+      "ndc11": "60760066930",
+      "status": "ACTIVE",
+      "active": "YES",
+      "rxnormNdc": "YES",
+      "rxcui": "310430",
+      "conceptName": "gabapentin 100 MG Oral Capsule",
+      "conceptStatus": "ACTIVE",
+      "sourceList": {
+        "sourceName": [
+          "MMX",
+          "MTHSPL",
+          "NDDF",
+          "RXNORM",
+          "VANDF"
+        ]
+      },
+      "altNdc": "N",
+      "comment": null,
+      "ndcHistory": [
+        {
+          "activeRxcui": "310430",
+          "originalRxcui": "310430",
+          "startDate": "202505",
+          "endDate": "202611"
+        }
+      ]
+    }
+  }
+}

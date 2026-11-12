@@ -1,0 +1,157 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 117
+      }
+    },
+    "results": [
+      {
+        "country": "United States",
+        "city": "Parsippany",
+        "address_1": "400 Interpace Pkwy",
+        "reason_for_recall": "CGMP Deviations: impurity for N-Nitroso-N-methyl-4-aminobutyric acid (NMBA) detected in the active pharmaceutical ingredient (API) used to manufacture finished products.",
+        "address_2": "",
+        "product_quantity": "2,924,000 tablets",
+        "code_info": "Arrow Malta (Teva) Bulk Product Lot #  1169752A, exp. date 01/2020, 1000 tablets/bottle  1169753A, exp. date 01/2020, 90 tablets/bottle    Golden State Medical Finished Product Lot #  GS017387, exp. date 01/2020  GS017651, exp. date 01/2020  GS017479, exp. date 01/2020",
+        "center_classification_date": "20190709",
+        "distribution_pattern": "Nationwide by 4 major distributors.",
+        "state": "NJ",
+        "product_description": "LOSARTAN POTASSIUM 50 mg TABLET BULK  90 count bottles and 1000 count bottles, NDC 00591-3746-00",
+        "report_date": "20190717",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Teva Pharmaceuticals USA",
+        "recall_number": "D-1455-2019",
+        "initial_firm_notification": "E-Mail",
+        "product_type": "Drugs",
+        "event_id": "83050",
+        "more_code_info": "",
+        "recall_initiation_date": "20190606",
+        "postal_code": "07054-1120",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Ongoing"
+      },
+      {
+        "status": "Terminated",
+        "city": "Plainsboro",
+        "state": "NJ",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "ANDA202230"
+          ],
+          "brand_name": [
+            "LOSARTAN POTASSIUM"
+          ],
+          "generic_name": [
+            "LOSARTAN POTASSIUM"
+          ],
+          "manufacturer_name": [
+            "Macleods Pharmaceuticals Limited"
+          ],
+          "product_ndc": [
+            "33342-044",
+            "33342-045",
+            "33342-046"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "ORAL"
+          ],
+          "substance_name": [
+            "LOSARTAN POTASSIUM"
+          ],
+          "rxcui": [
+            "979480",
+            "979485",
+            "979492"
+          ],
+          "spl_id": [
+            "81824d1f-61f4-457c-8723-cd43d5429029"
+          ],
+          "spl_set_id": [
+            "85d69d02-c5ef-467e-94aa-903100218795"
+          ],
+          "package_ndc": [
+            "33342-044-10",
+            "33342-044-12",
+            "33342-044-07",
+            "33342-044-44",
+            "33342-045-10",
+            "33342-045-12",
+            "33342-045-07",
+            "33342-045-44",
+            "33342-046-10",
+            "33342-046-12",
+            "33342-046-07",
+            "33342-046-44"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "unii": [
+            "3ST302B24A"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "90037",
+        "recalling_firm": "Macleods Pharma Usa Inc",
+        "address_1": "666 Plainsboro Rd Bldg 200 Ste 230",
+        "address_2": "N/A",
+        "postal_code": "08536-0009",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Product was distributed nationwide.",
+        "recall_number": "D-0833-2022",
+        "product_description": "Losartan Potassium Tablets, USP, 50 mg, a) 30-count bottles (NDC # 33342-045-07), b) 90-count bottles (NDC # 33342-045-10), c) 1000-count bottles (NDC # 33342-045-44), Rx Only, MFR: Macleods Pharma USA, Inc. Plainsboro, NJ 08536",
+        "product_quantity": "3216/30 count bottles; 47,904/90 count bottles; 4269/1000 count bottles = 8,676,840 tablets",
+        "reason_for_recall": "CGMP Deviations- AZIDO Impurity levels observed to be above acceptable limits",
+        "recall_initiation_date": "20220415",
+        "center_classification_date": "20220503",
+        "termination_date": "20231013",
+        "report_date": "20220511",
+        "code_info": "Lot #  BLI2002A, exp. date 11/2022  BLI2004A, exp. date 11/2022  BLI2104B, exp. date 05/2023"
+      },
+      {
+        "status": "Terminated",
+        "city": "Toronto",
+        "state": "N/A",
+        "country": "Canada",
+        "classification": "Class II",
+        "openfda": {},
+        "product_type": "Drugs",
+        "event_id": "71418",
+        "recalling_firm": "Apotex Inc.",
+        "address_1": "150 Signet Drive",
+        "address_2": "N/A",
+        "postal_code": "N/A",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide, Hawaii and Puerto Rico",
+        "recall_number": "D-1212-2015",
+        "product_description": "Losartan potassium tablets USP, 25 mg, 90- count bottle, Rx only, Manufactured for Apotex Inc 150 Signet Drive, ON M9L1T9 by Apotex Research Private Limited, Plot 1 & 2, Bommasandra Industrial Area, 4th Phase Jigani Link Road, Bangalore, Karnataka, 560099, India  NDC 60505-3160-9",
+        "product_quantity": "45,708 bottles",
+        "reason_for_recall": "Failed Content Uniformity Specifications: The product may not meet the limit for blend uniformity specification.",
+        "recall_initiation_date": "20150529",
+        "center_classification_date": "20150707",
+        "termination_date": "20170303",
+        "report_date": "20150715",
+        "code_info": "Lot #: KP4726, Exp date 9/2015"
+      }
+    ]
+  }
+}

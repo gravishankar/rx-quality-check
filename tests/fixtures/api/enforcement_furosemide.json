@@ -1,0 +1,222 @@
+{
+  "_fixture": {
+    "source": "live public API response, trimmed to ≤3 records; no patient data",
+    "capturedAt": "2026-11-12T02:04:49.737Z"
+  },
+  "data": {
+    "meta": {
+      "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+      "terms": "https://open.fda.gov/terms/",
+      "license": "https://open.fda.gov/license/",
+      "last_updated": "2026-11-04",
+      "results": {
+        "skip": 0,
+        "limit": 100,
+        "total": 14
+      }
+    },
+    "results": [
+      {
+        "status": "Terminated",
+        "city": "Lake Forest",
+        "state": "IL",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "NDA018667"
+          ],
+          "brand_name": [
+            "FUROSEMIDE"
+          ],
+          "generic_name": [
+            "FUROSEMIDE"
+          ],
+          "manufacturer_name": [
+            "Hospira, Inc."
+          ],
+          "product_ndc": [
+            "0409-6102"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "INTRAMUSCULAR",
+            "INTRAVENOUS"
+          ],
+          "substance_name": [
+            "FUROSEMIDE"
+          ],
+          "rxcui": [
+            "1719286",
+            "1719290",
+            "1719291"
+          ],
+          "spl_id": [
+            "981d5143-60cd-4987-9b47-dec24c10de42"
+          ],
+          "spl_set_id": [
+            "39fd32f2-6bb7-4a65-d298-e48d26bc80c7"
+          ],
+          "package_ndc": [
+            "0409-6102-19",
+            "0409-6102-02",
+            "0409-6102-18",
+            "0409-6102-04",
+            "0409-6102-20",
+            "0409-6102-10"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "nui": [
+            "N0000175366",
+            "N0000175590"
+          ],
+          "pharm_class_pe": [
+            "Increased Diuresis at Loop of Henle [PE]"
+          ],
+          "pharm_class_epc": [
+            "Loop Diuretic [EPC]"
+          ],
+          "unii": [
+            "7LXU5N7ZO5"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "65077",
+        "recalling_firm": "Hospira Inc.",
+        "address_1": "275 N Field Dr",
+        "address_2": "N/A",
+        "postal_code": "60045-2579",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide and Puerto Rico",
+        "recall_number": "D-314-2013",
+        "product_description": "Furosemide Injection, USP, 40 mg/4mL (10 mg/mL), 4 ml Single-Dose Vial, Rx only, HOSPIRA, INC. LAKE FOREST, IL 60045 USA,  NDC 0409-6102-04",
+        "product_quantity": "259,050 vials",
+        "reason_for_recall": "Lack of Assurance of Sterility: Loose crimp applied to the fliptop vial.",
+        "recall_initiation_date": "20130226",
+        "center_classification_date": "20130506",
+        "termination_date": "20141110",
+        "report_date": "20130515",
+        "code_info": "Lot 20-564-DK Exp. 02/14"
+      },
+      {
+        "country": "United States",
+        "city": "Springerville",
+        "address_1": "105 W Main St",
+        "reason_for_recall": "Lack of Assurance of Sterility",
+        "address_2": "",
+        "product_quantity": "1 container",
+        "code_info": "all lots",
+        "center_classification_date": "20151201",
+        "distribution_pattern": "Nationwide in US: Arizona, California, Georgia, New Mexico, South Carolina, South Dakota, Texas, and Utah",
+        "state": "AZ",
+        "product_description": "Furosemide 20 mg/mL svn Sol, Rx, Western Drug Inc. 106 E. Main Street, Springerville, Arizona 85938",
+        "report_date": "20151209",
+        "classification": "Class II",
+        "openfda": {},
+        "recalling_firm": "Western Drug",
+        "recall_number": "D-0405-2016",
+        "initial_firm_notification": "Telephone",
+        "product_type": "Drugs",
+        "event_id": "72520",
+        "termination_date": "20161001",
+        "more_code_info": "",
+        "recall_initiation_date": "20151019",
+        "postal_code": "85938-7203",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "status": "Terminated"
+      },
+      {
+        "status": "Terminated",
+        "city": "Rocky Mount",
+        "state": "NC",
+        "country": "United States",
+        "classification": "Class II",
+        "openfda": {
+          "application_number": [
+            "NDA018667"
+          ],
+          "brand_name": [
+            "FUROSEMIDE"
+          ],
+          "generic_name": [
+            "FUROSEMIDE"
+          ],
+          "manufacturer_name": [
+            "Hospira, Inc."
+          ],
+          "product_ndc": [
+            "0409-6102"
+          ],
+          "product_type": [
+            "HUMAN PRESCRIPTION DRUG"
+          ],
+          "route": [
+            "INTRAMUSCULAR",
+            "INTRAVENOUS"
+          ],
+          "substance_name": [
+            "FUROSEMIDE"
+          ],
+          "rxcui": [
+            "1719286",
+            "1719290",
+            "1719291"
+          ],
+          "spl_id": [
+            "981d5143-60cd-4987-9b47-dec24c10de42"
+          ],
+          "spl_set_id": [
+            "39fd32f2-6bb7-4a65-d298-e48d26bc80c7"
+          ],
+          "package_ndc": [
+            "0409-6102-19",
+            "0409-6102-02",
+            "0409-6102-18",
+            "0409-6102-04",
+            "0409-6102-20",
+            "0409-6102-10"
+          ],
+          "is_original_packager": [
+            true
+          ],
+          "nui": [
+            "N0000175366",
+            "N0000175590"
+          ],
+          "pharm_class_pe": [
+            "Increased Diuresis at Loop of Henle [PE]"
+          ],
+          "pharm_class_epc": [
+            "Loop Diuretic [EPC]"
+          ],
+          "unii": [
+            "7LXU5N7ZO5"
+          ]
+        },
+        "product_type": "Drugs",
+        "event_id": "64083",
+        "recalling_firm": "Hospira, Inc.",
+        "address_1": "Hwy. 301 N. + 4285 North Wesleyan Blvd.",
+        "address_2": "N/A",
+        "postal_code": "27804",
+        "voluntary_mandated": "Voluntary: Firm initiated",
+        "initial_firm_notification": "Letter",
+        "distribution_pattern": "Nationwide",
+        "recall_number": "D-169-2013",
+        "product_description": "Furosemide Injection USP (10 mg/mL), 4 mL in 5 mL Fliptop Vial, Rx only, Hospira Inc., Lake Forest, IL --- NDC 0409-6102-04",
+        "product_quantity": "63,900 vials",
+        "reason_for_recall": "Lack of Assurance of Sterility; possible loose crimp applied to fliptop vial",
+        "recall_initiation_date": "20130110",
+        "center_classification_date": "20130226",
+        "termination_date": "20141008",
+        "report_date": "20130306",
+        "code_info": "18-099-DK"
+      }
+    ]
+  }
+}
