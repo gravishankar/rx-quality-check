@@ -31,6 +31,10 @@ NODE_USE_ENV_PROXY=1 npm run feasibility
 
 Exit code: 0 = no FAIL, 1 = FAIL present, 2 = BLOCKED.
 
+> **Scope update (Task 2):** manufacturer provenance was removed from MVP v0.1. Item 9 below and the
+> SPL establishment statistics are kept as a historical feasibility record; they do not drive any app
+> behavior.
+
 ## Representative records
 
 One real finished, oral, prescription product NDC per supported drug, selected automatically from

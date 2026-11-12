@@ -16,7 +16,7 @@ servers and collects no data.
 |---|---|---|
 | Identify product | api.fda.gov, rxnav.nlm.nih.gov | One NDC (or candidates derived from it), or an ingredient/strength name |
 | Recall lookup | api.fda.gov | Ingredient keyword and/or product NDC |
-| Establishment/labeling | dailymed.nlm.nih.gov | SPL set ID or package NDC |
+| Repackager source product (Task 3) | dailymed.nlm.nih.gov | SPL set ID or package NDC |
 | Freshness | all three | No identifiers |
 
 Never sent: images, OCR text, lot or expiry, fill dates, pharmacy or prescriber names, patient names,

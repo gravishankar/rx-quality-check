@@ -1,6 +1,12 @@
 # Architecture — Rx Quality Check MVP v0.1
 
-Status: design for approval (Task 1). Interfaces below are specifications; code arrives in Tasks 2–6.
+Status: Task 2 implemented `models/`, `rules/`, `state/` and `engine/` (pure TypeScript library under
+`mobile/src/`). Interfaces for `services/`, `storage/` and `scanner/` remain specifications for Tasks 3–6.
+
+**Scope update (Task 2):** manufacturer provenance is removed from MVP v0.1. The app does not identify
+manufacturing facilities, map establishments, show inspection history, score plants or infer where a
+product was made. Labeler names are kept only where they are part of product identity or appear in
+recall records.
 
 ## 1. Phone-only architecture
 
@@ -29,7 +35,7 @@ reached directly over HTTPS with no credentials.
 
 1. **Pure core, thin shell.** `state/` and `rules/` are pure TypeScript with no I/O, so they can be tested exhaustively with fixtures.
 2. **The state machine decides *what happens next*; the rules decide *what evidence means*.** Neither imports the other's internals. The machine calls rules through a typed interface and treats the output as data.
-3. **Fail closed toward uncertainty.** Any failure moves toward `SOURCE_UNAVAILABLE` / `INSUFFICIENT_DATA` / `POSSIBLE_RECALL`, never toward "no match".
+3. **Fail closed toward uncertainty.** Any failure moves toward `SOURCE_UNAVAILABLE` / `UNRESOLVED` / `POTENTIAL_MATCH`, never toward "no match".
 4. **User confirmation is an explicit state**, not an implicit side effect of OCR confidence.
 
 ## 3. Module boundaries
@@ -38,14 +44,18 @@ reached directly over HTTPS with no credentials.
 |---|---|---|---|
 | `models/` | Shared types: identifiers, identity, evidence, result states | — | anything with I/O |
 | `rules/` | NDC normalization, cross-validation, exclusion policy evaluation, recall relevance, lot comparison, refill diff, explanation selection | `models/`, `data/` (read-only JSON) | `services/`, `storage/`, `scanner/`, React |
-| `state/` | Workflow state machine: states, events, transitions, effect descriptors | `models/` | `services/`, `storage/`, `scanner/`, React |
+| `state/` | Workflow state machine: states, events, transitions, effect descriptors | `models/` | `rules/`, `services/`, `storage/`, `scanner/`, React |
+| `engine/` | Effect runner: executes effects with injected ports and the pure rules, returns events | `models/`, `rules/`, `state/` | concrete network, storage or OCR code (received as ports) |
 | `scanner/` | Camera capture, on-device OCR, barcode decode, field extraction to `RawExtraction` | `models/` | `services/` |
 | `services/` | API clients (openFDA, DailyMed, RxNav), outcome classification, retry/backoff, cache read-through | `models/`, `storage/` (cache repo only) | `state/`, React |
 | `storage/` | Encrypted SQLite, migrations, repositories, deletion | `models/` | `services/` |
 | `screens/`, `components/` | Presentation; dispatch events; render view models; copy | `state/` (selectors), `models/` | `services/`, `storage/` directly |
 
-The Task 1 helpers in `scripts/lib/` (`ndc.ts`, `http.ts`, `schemas.ts`, `strength.ts`, `spl.ts`)
-are the seeds for `rules/` and `services/`. Task 2/3 move them under `mobile/src/` and keep their tests.
+Task 2 moved `scripts/lib/ndc.ts` → `rules/ndc.ts`, `schemas.ts` → `models/openfda.ts`, the
+strength helpers → `rules/strength.ts` and the `LookupOutcome` types → `models/lookup.ts`; the old
+paths re-export them for the feasibility harness. `http.ts` (fetch + classification) moves to
+`services/` in Task 3. `spl.ts` (establishment scanning) stays a Task 1 feasibility tool only and is not
+part of the app. Module boundaries are enforced by `tests/unit/architecture_boundaries.test.ts`.
 
 ## 4. Deterministic workflow state machine
 
@@ -58,97 +68,119 @@ are the seeds for `rules/` and `services/`. Task 2/3 move them under `mobile/src
 | State | Kind | Description |
 |---|---|---|
 | `SCAN` | main | Capture image(s) or barcode; or manual entry |
-| `EXTRACT` | main | On-device OCR/barcode → `RawExtraction` (NDC candidates, name, strength, form, mfr string, lot, expiry) |
-| `IDENTIFY` | main | Normalize NDCs; confirm candidates against NDC Directory/RxNav; cross-validate with printed name/strength; resolve RxCUI (SCD) |
-| `CHECK_EXCLUSION` | main | Evaluate catalog scope and exclusion policy on normalized ingredient RxCUIs |
-| `CONFIRM` | main | User reviews identified product (each field marked scanned/derived/user-entered) |
-| `FETCH_EVIDENCE` | main | Retrieve recall records, SPL establishment summary, source freshness; cache-aware |
-| `EVALUATE` | main | Apply evidence rules → `EvidenceAssessment` |
-| `EXPLAIN` | main | Select explanation templates for the assessment; render |
+| `EXTRACT` | main | On-device OCR/barcode → `LabelExtraction` (NDC texts, name, strength, form, labeler text, lot, expiry), each field tagged with origin and OCR confidence |
+| `IDENTIFY` | main | Normalize NDCs; confirm candidates against the NDC Directory; cross-validate with printed name/strength/form/release; otherwise build an ingredient-level identity from printed fields |
+| `CHECK_EXCLUSION` | main | Evaluate catalog scope and exclusion policy; compute the fields the user must confirm |
+| `CONFIRM` | main | User reviews the identity; uncertain OCR fields, the lot and an unprinted release mechanism must be confirmed before anything is fetched |
+| `FETCH_EVIDENCE` | main | Retrieve recall records (all pages of every planned query, plus the positive control); cache-aware |
+| `EVALUATE` | main | Apply evidence rules → `RecallFinding` |
+| `EXPLAIN` | main | Select explanation templates for the finding; render. An ingredient-level identity is explained with `IDENTITY_INGREDIENT_LEVEL_ONLY` (the former `INSUFFICIENT_DATA` presentation) |
 | `SAVE` | main | Persist medication, fill and assessment locally (user choice) |
-| `AMBIGUOUS_IDENTITY` | alternative | >1 confirmed candidate product, or OCR fields conflict; user must choose or correct |
-| `NEEDS_CLARIFICATION` | alternative/terminal | Exclusion eligibility depends on unknown information (e.g., everolimus indication, unlisted class match) |
+| `SAVED` | terminal | Assessment stored |
+| `AMBIGUOUS_IDENTITY` | alternative | ≥2 directory-confirmed candidates consistent with the label; user must choose or correct |
+| `MISSING_INFORMATION` | alternative | Nothing usable was read, a required field is missing, or the NDC was discarded twice; user enters or corrects fields |
+| `USER_CORRECTION` | alternative | User edits fields on request; returns to `IDENTIFY` |
+| `NEEDS_CLARIFICATION` | terminal | Eligibility depends on unknown information (everolimus indication, unlisted class match, unknown salt, unknown route) |
 | `EXCLUDED` | terminal | Recognized; deliberately not assessed |
-| `UNSUPPORTED` | terminal | Outside MVP drug/formulation scope |
-| `INSUFFICIENT_DATA` | alternative | Supported but product identity insufficient; may continue at ingredient-strength-form level |
-| `SOURCE_UNAVAILABLE` | alternative | A required source failed (network, 5xx, invalid response) |
-| `RATE_LIMITED` | alternative | A source returned 429; waits for `retryAfter` or user action |
-| `USER_CORRECTION` | alternative | User edits a field; returns to `IDENTIFY` |
-| `RETRY` | alternative | Bounded retry of the failed effect with backoff |
-| `OFFLINE_CACHED_RESULT` | alternative/terminal | Showing a previously saved assessment because live sources are unavailable; age shown |
+| `UNSUPPORTED` | terminal | Outside MVP drug/formulation scope, or policy/catalog invalid (fail closed) |
+| `SOURCE_UNAVAILABLE` | alternative | A required source failed after the retry budget, with no evidence retrieved |
+| `RATE_LIMITED` | alternative | A source returned 429; one automatic retry, then user action |
+| `RETRY` | alternative | Waiting for a scheduled bounded retry of the failed effect |
+| `OFFLINE_CACHED_RESULT` | alternative | Showing a previously saved assessment because live sources are unavailable; age shown |
 
 ### 4.3 Transition table (events → next state)
 
-| From | Event | To |
+Implemented in `mobile/src/state/machine.ts`; every row has a table-driven test (`tests/unit/state_machine.test.ts`).
+
+| From | Event | To (effects) |
 |---|---|---|
-| `SCAN` | `CAPTURED` / `MANUAL_ENTRY` | `EXTRACT` |
-| `EXTRACT` | `EXTRACTED` (≥1 usable field) | `IDENTIFY` |
-| `EXTRACT` | `EXTRACTION_EMPTY` | `USER_CORRECTION` |
-| `IDENTIFY` | `IDENTITY_RESOLVED` (exactly one product, cross-validation passed) | `CHECK_EXCLUSION` |
-| `IDENTIFY` | `IDENTITY_AMBIGUOUS` | `AMBIGUOUS_IDENTITY` |
-| `IDENTIFY` | `IDENTITY_PARTIAL` (RxCUI known, product unknown) | `CHECK_EXCLUSION` (flag `productLevel=false`) |
-| `IDENTIFY` | `CROSS_VALIDATION_FAILED` | `IDENTIFY` with NDC discarded (once), then `USER_CORRECTION` |
-| `IDENTIFY` | `LOOKUP_UNAVAILABLE` / `LOOKUP_RATE_LIMITED` | `SOURCE_UNAVAILABLE` / `RATE_LIMITED` |
-| `AMBIGUOUS_IDENTITY` | `CANDIDATE_CHOSEN` | `CHECK_EXCLUSION` |
-| `AMBIGUOUS_IDENTITY` | `EDIT_REQUESTED` | `USER_CORRECTION` |
-| `CHECK_EXCLUSION` | policy → `EXCLUDED` | `EXCLUDED` |
-| `CHECK_EXCLUSION` | policy → `NEEDS_CLARIFICATION` | `NEEDS_CLARIFICATION` |
-| `CHECK_EXCLUSION` | policy → `UNSUPPORTED` | `UNSUPPORTED` |
-| `CHECK_EXCLUSION` | policy → `ELIGIBLE` | `CONFIRM` |
-| `CONFIRM` | `USER_CONFIRMED` | `FETCH_EVIDENCE` |
+| `SCAN` | `CAPTURED` (image or manual entry) | `EXTRACT` (`RUN_EXTRACTION`) |
+| `EXTRACT` | `EXTRACTED` | `IDENTIFY` (`RESOLVE_IDENTITY`) |
+| `EXTRACT` | `EXTRACTION_EMPTY` | `MISSING_INFORMATION` |
+| `IDENTIFY` | `IDENTITY_RESOLVED` (one confirmed product, cross-validation not contradicted) / `IDENTITY_PARTIAL` (ingredient-level) | `CHECK_EXCLUSION` (`CHECK_EXCLUSION`) |
+| `IDENTIFY` | `IDENTITY_AMBIGUOUS` (≥2 options) | `AMBIGUOUS_IDENTITY` |
+| `IDENTIFY` | `CROSS_VALIDATION_FAILED` / `NDC_REJECTED` | `IDENTIFY` with the NDC discarded (once), then `MISSING_INFORMATION` |
+| `IDENTIFY` | `IDENTITY_INCOMPLETE` | `MISSING_INFORMATION` |
+| `IDENTIFY` | `LOOKUP_UNAVAILABLE` / `LOOKUP_RATE_LIMITED` | `RETRY` / `RATE_LIMITED` (bounded; see below) |
+| `AMBIGUOUS_IDENTITY` | `CANDIDATE_CHOSEN` / `EDIT_REQUESTED` | `CHECK_EXCLUSION` / `USER_CORRECTION` |
+| `CHECK_EXCLUSION` | `EXCLUSION_DECIDED` → EXCLUDED / UNSUPPORTED / NEEDS_CLARIFICATION / ELIGIBLE | same-named state / `CONFIRM` |
+| `CONFIRM` | `USER_CONFIRMED` with every required field (and a release if unprinted) | `FETCH_EVIDENCE` (`FETCH_RECALL_EVIDENCE`) |
+| `CONFIRM` | `USER_CONFIRMED` missing a required field | `CONFIRM` (lists unconfirmed fields; no effect) |
 | `CONFIRM` | `EDIT_REQUESTED` | `USER_CORRECTION` |
-| `USER_CORRECTION` | `FIELDS_UPDATED` | `IDENTIFY` |
-| `FETCH_EVIDENCE` | `EVIDENCE_READY` (all required queries OK/NO_MATCH, controls passed) | `EVALUATE` |
-| `FETCH_EVIDENCE` | `SOURCE_FAILED` | `RETRY` (if attempts remain) else `SOURCE_UNAVAILABLE` |
-| `FETCH_EVIDENCE` | `RATE_LIMITED` | `RATE_LIMITED` |
-| `RETRY` | `RETRY_DUE` | the state whose effect failed |
-| `SOURCE_UNAVAILABLE` / `RATE_LIMITED` | `CACHE_AVAILABLE` | `OFFLINE_CACHED_RESULT` |
-| `SOURCE_UNAVAILABLE` / `RATE_LIMITED` | `USER_RETRY` | `RETRY` |
+| `USER_CORRECTION` / `MISSING_INFORMATION` | `FIELDS_UPDATED` | `IDENTIFY` |
+| `FETCH_EVIDENCE` | `EVIDENCE_READY` | `EVALUATE` (`EVALUATE_EVIDENCE`) |
+| `FETCH_EVIDENCE` | `SOURCE_FAILED` | `RETRY` while attempts remain; then `EVALUATE` if any evidence was retrieved, else `SOURCE_UNAVAILABLE` (`LOAD_CACHED_RESULT`) |
+| `FETCH_EVIDENCE` | `RATE_LIMITED` | `RATE_LIMITED` with one automatic retry; a second time: `EVALUATE` (partial) or `RATE_LIMITED` (`LOAD_CACHED_RESULT`) |
+| `RETRY` | `RETRY_DUE` (only while a retry is pending) | the state whose effect failed, re-emitting it |
+| `SOURCE_UNAVAILABLE` / `RATE_LIMITED` | `CACHE_AVAILABLE` / `USER_RETRY` | `OFFLINE_CACHED_RESULT` / the failed step |
+| `OFFLINE_CACHED_RESULT` | `USER_RETRY` | the failed step |
 | `EVALUATE` | `ASSESSED` | `EXPLAIN` |
-| `EVALUATE` | `INSUFFICIENT` (no product-level identity) | `INSUFFICIENT_DATA` → `EXPLAIN` (ingredient-level evidence with "may or may not apply") |
-| `EXPLAIN` | `SAVE_REQUESTED` | `SAVE` |
-| `EXPLAIN` / terminal states | `DONE` / `RESTART` | `SCAN` |
+| `EXPLAIN` | `SAVE_REQUESTED` | `SAVE` (`PERSIST_ASSESSMENT`) → `SAVED`, or back to `EXPLAIN` on `PERSIST_FAILED` |
+| `EXCLUDED` / `UNSUPPORTED` / `NEEDS_CLARIFICATION` | `EDIT_REQUESTED` | `USER_CORRECTION` |
+| result, terminal and waiting states | `DONE` / `RESTART` | `SCAN` |
 
 Rules for the machine:
-- Pure reducer `(state, event) → { state, effects[] }`. Effects (`RUN_OCR`, `LOOKUP_NDC`, `FETCH_RECALLS`, `PERSIST`…) are executed by the effect runner, which returns events.
-- Every transition is total: unknown events in a state leave the state unchanged and are logged locally in debug builds only.
-- Retry budget: max 3 attempts per effect, exponential backoff 2 s / 4 s / 8 s with jitter; `RATE_LIMITED` honors `Retry-After` and never auto-retries more than once.
-- `EXCLUDED`, `UNSUPPORTED`, `NEEDS_CLARIFICATION` happen **before** any evidence fetch, so no recall query is sent for excluded drugs.
+- Pure reducer `(state, event) → { state, effects[], ignored }`. Effects are descriptors (`RUN_EXTRACTION`, `RESOLVE_IDENTITY`, `CHECK_EXCLUSION`, `FETCH_RECALL_EVIDENCE`, `EVALUATE_EVIDENCE`, `PERSIST_ASSESSMENT`, `LOAD_CACHED_RESULT`, `SCHEDULE_RETRY`) executed by the effect runner (`mobile/src/engine/runner.ts`), which calls the pure rules and injected I/O ports and returns events. The reducer imports only `models/`.
+- Every transition is total: unknown events leave the state unchanged and return `ignored: true`.
+- Retry budget: 3 attempts per effect, backoff 2 s / 4 s (the runner may add jitter). `RATE_LIMITED` honors `Retry-After` (default 60 s) and retries automatically at most once. A `RETRY_DUE` with no outstanding retry (late timer) is ignored.
+- Evidence already retrieved when retries run out is still evaluated, so a recall found by one query is never hidden by another query's failure; the finding then carries `SOME_QUERIES_INCOMPLETE`.
+- `EXCLUDED`, `UNSUPPORTED` and `NEEDS_CLARIFICATION` are reached before any evidence fetch and emit no effects, so no recall query is ever sent for them (RG-3, property-tested).
 
 ## 5. Local inference rules (`rules/`)
 
-All rules are pure, versioned (`RULESET_VERSION`) and recorded with every saved assessment.
+All rules are pure and versioned (`RULESET_VERSION`, `mobile/src/rules/version.ts`, currently `0.2.0`), and recorded with every saved assessment.
 
 ### 5.1 Identity rules
-- **R-ID-1 NDC normalization:** enumerate candidates (`scripts/lib/ndc.ts`); barcode check digits must pass.
-- **R-ID-2 Directory confirmation:** a candidate is confirmed only by an `OK` NDC Directory or RxNav `ndcstatus` ACTIVE response. Exactly one confirmed → resolved; >1 → ambiguous; 0 with any `SOURCE_UNAVAILABLE` → unavailable; 0 with all `NO_MATCH` → NDC rejected.
-- **R-ID-3 Cross-validation:** confirmed NDC's ingredient set, normalized strength and release mechanism must equal the OCR/printed values (Doc A UC-2). Mismatch → discard NDC.
-- **R-ID-4 Strength equivalence:** units are normalized (leading-dot decimals, per-unit concentration); mg ≠ mcg unless explicitly converted (`scripts/lib/strength.ts`).
-- **R-ID-5 Repackager traversal:** SPL with REPACK/RELABEL and no MANUFACTURE → follow `asEquivalentEntity` source NDC; depth ≤ 3; cycle detection; result records the chain.
+- **R-ID-1 NDC normalization:** enumerate candidates (`rules/ndc.ts`); barcode check digits must pass. NDCs are compared by a layout-independent 9-digit product key / 11-digit package key, which also reads hyphenated 5-4-2 forms such as `00591-0540-05` seen in recall text.
+- **R-ID-2 Directory confirmation:** a candidate is confirmed only by an `OK` NDC Directory answer that lists that exact package. Exactly one confirmed and every candidate answered → resolved; ≥2 → ambiguous (never "take the first"); any candidate unanswered (unavailable / rate-limited) → unavailable, even if another candidate was confirmed; all `NO_MATCH` → NDC rejected.
+- **R-ID-3 Cross-validation:** the confirmed NDC's ingredient set, strength, dose form and release mechanism must not contradict the printed label (Doc A UC-2). A contradiction discards the NDC; an unprinted value (e.g. no "ER" on an ER product) requires user confirmation. When several confirmed candidates exist, only those consistent with the label are offered; if exactly one remains it is used and still shown for confirmation.
+- **R-ID-4 Strength equivalence:** units are normalized; mcg and g are converted to mg exactly (so "175 MCG" equals ".175 mg/1"), while a value printed with the wrong unit ("175 MG") stays different. Liquids normalize to per-mL. Combination strengths compare as multisets.
+- **R-ID-5 Release mechanism:** directory `dosage_form` is authoritative (IR / ER / DR). In free text, absence of a marker is `UNSPECIFIED` (never assumed IR) and contradictory markers are `CONFLICTING`.
+- **R-ID-6 Source conflicts:** if the directory's generic name and active-ingredient list disagree on the salt (observed: product 50090-6448, "Metoprolol Succinate" ER listing METOPROLOL TARTRATE), the salt is treated as unknown.
+- **R-ID-7 User confirmation:** OCR fields without a confidence or below 0.90, an OCR NDC not corroborated by cross-validation, any lot, and an unprinted release mechanism must be confirmed in `CONFIRM`. A lot is used for matching only when confirmed there.
+- **R-ID-8 Repackager source products (identity only, Task 3):** a repackaged product may carry the product NDCs it was repackaged from (`relatedSourceProductNdcs`), used solely to surface recalls of the source product as potential matches (RP-4). No manufacturing facility, establishment or site is inferred.
 
 ### 5.2 Exclusion rules (evaluated in order)
-1. Any ingredient RxCUI listed in policy with decision `NEEDS_CLARIFICATION` → `NEEDS_CLARIFICATION`.
-2. Any ingredient RxCUI listed with decision `EXCLUDED` and route oral or unknown → `EXCLUDED`.
+1. Any ingredient listed in policy with decision `NEEDS_CLARIFICATION` → `NEEDS_CLARIFICATION`.
+2. Any ingredient listed with decision `EXCLUDED` and route oral or unknown → `EXCLUDED`.
 3. Listed ingredient with a non-oral route → `UNSUPPORTED` (`ADMINISTRATION_RULE_PENDING`, OD-1).
 4. Unlisted ingredient whose FDA EPC matches a policy class signal → `NEEDS_CLARIFICATION` (`POLICY_CLASS_MATCH_UNLISTED`).
-5. Ingredient set not exactly equal to a catalog entry, or route/product type outside scope → `UNSUPPORTED`.
-6. Otherwise → `ELIGIBLE`.
+5. Route / product type outside scope (`ROUTE_OUT_OF_SCOPE`, `OTC_PENDING_DECISION`), ingredient set not exactly a catalog entry (`NOT_IN_CATALOG`, `COMBINATION_NOT_IN_CATALOG`), required salt different (`SALT_NOT_IN_SCOPE`) → `UNSUPPORTED`; required salt unknown (`SALT_UNKNOWN`) or a liquid with no stated route (`ROUTE_UNKNOWN`) → `NEEDS_CLARIFICATION`.
+6. Otherwise → `ELIGIBLE`, recording whether the catalog match was by RxCUI or by normalized name.
 
-### 5.3 Evidence rules (recall relevance)
-Per recall record, against a confirmed identity:
-- **R-EV-1 Product match:** an NDC parsed from `product_description` has the confirmed product NDC (labeler-product). → `PRODUCT_MATCH`.
-- **R-EV-2 Structured support:** confirmed product NDC appears in `openfda.product_ndc` **and** the description's strength and form match → `PRODUCT_MATCH`; if the strength in text differs → `OTHER_PRODUCT` (openfda over-includes every strength on a label; observed in D-0374-2023).
-- **R-EV-3 Possible match:** ingredient set, strength and release mechanism match but no product-level evidence, or the record text cannot be parsed → `POSSIBLE_MATCH`.
-- **R-EV-4 Other product:** explicit evidence of a different product NDC, strength, form or ingredient set (e.g., combination product) → `OTHER_PRODUCT`.
-- **R-EV-5 Unparseable never clears:** if any required field is missing or ambiguous, the record is `POSSIBLE_MATCH`, never `OTHER_PRODUCT`.
-- **R-EV-6 Lot comparison (user-supplied lot only):** `LOT_LISTED` if the normalized lot string appears in `code_info`; otherwise `LOT_NOT_FOUND_IN_LISTING` (explicitly not "unaffected"); `LOT_UNKNOWN` when no lot provided.
-- **R-EV-7 Aggregation:** any `PRODUCT_MATCH` → `MATCHED_RECALL`; else any `POSSIBLE_MATCH` → `POSSIBLE_RECALL`; else `NO_MATCHING_RECALL_FOUND` **only if** every required query returned `OK`/`NO_MATCH` and the positive-control query for that source in this session returned `OK`.
-- **R-EV-8 Establishment provenance:** report MANUFACTURE establishments count (0 → "not identified in public filings"; >1 → "one of N facilities; which one made your package cannot be determined"). No facility-level judgment.
+Policy entries match by RxCUI when the identity carries one, otherwise by normalized base name (errs toward exclusion). An invalid policy or catalog fails closed: `UNSUPPORTED` (`POLICY_INVALID` / `CATALOG_INVALID`) for every medication.
+
+### 5.3 Recall evidence rules (`rules/recallRecord.ts`, `rules/recallEvidence.ts`)
+
+**Queries.** For a confirmed identity: (1) `product_description:"<ingredient>"` (AND-ed for combinations), (2) `openfda.product_ndc:"<product NDC>"` when the product is known, (3) one query per related source product NDC, and (4) the positive control. Every page of every query is fetched. Only public identifiers are sent; never the lot, label text or images.
+
+**Per record** (against the confirmed identity):
+- **R-EV-1 Product match:** the record's own text (description, or a labeled NDC in `code_info`) names the identity's product NDC → `PRODUCT_MATCH`. If the same text states a different strength, form, release or ingredient set, it is downgraded to potential (`TEXT_NDC_STRENGTH_CONFLICT`). If the user's package NDC is known and the record lists only other packages of that product → potential (`PACKAGE_NOT_LISTED`).
+- **R-EV-2 Structured support only:** `openfda.product_ndc` lists the product but the text names no NDC → `POSSIBLE_MATCH` (`STRUCTURED_NDC_ONLY`). `openfda.product_ndc` covers every strength on a label, so it never establishes a product match by itself.
+- **R-EV-3 Possible match:** ingredient set, strength, form and release are compatible or unstated and there is no product-level evidence either way → `POSSIBLE_MATCH`. Ingredient-level identities can only ever reach `POSSIBLE_MATCH` (`PRODUCT_NOT_IDENTIFIED`).
+- **R-EV-4 Other product (explicit evidence only):** a fully parsed text NDC list that names only other products; or an explicitly different ingredient set (combination partner joined by "and", "&", "/", "+", "with" or a list comma), salt, strength, dose form, release, a non-oral route or an active-ingredient (API) record → `OTHER_PRODUCT`.
+- **R-EV-5 Unparseable never clears:** an "NDC" mention that cannot be parsed (e.g. `NDC 53746-0178-BULK`) makes the NDC list incomplete → `POSSIBLE_MATCH`; a record missing required fields → `UNPARSEABLE`.
+- **R-EV-6 Lot (user-confirmed lot only):** lot scope is read from `code_info` (`ALL_LOTS`, conditional all-lots, lot-specific with lots / ranges / patterns, or unknown). Comparison is exact after normalizing case, whitespace and a leading "Lot"/"#"; hyphen-only differences or partial codes are `LOT_POSSIBLY_LISTED`. Absence is `LOT_NOT_FOUND_IN_LISTING`, never "not affected".
+
+**Record classification.** `PRODUCT_MATCH` + (`ALL_LOTS`, or lot-specific / unknown scope with `LOT_LISTED`) → `CONFIRMED_MATCH`. Any other `PRODUCT_MATCH` (lot not provided, not found, possibly listed, conditional scope, package not listed) and every `POSSIBLE_MATCH` → `POTENTIAL_MATCH`. `OTHER_PRODUCT` → `NOT_APPLICABLE` (kept visible). `UNPARSEABLE` → `UNRESOLVED`. A product-level NDC match alone never confirms a lot-specific recall.
+
+**R-EV-7 Coverage and aggregation.** A query is `COMPLETE` only when it returned a single well-formed "no results" answer, or OK pages whose `skip` values are contiguous, whose `total` is constant and whose records add up to `total`. Anything else is `NOT_RUN`, `SOURCE_UNAVAILABLE`, `RATE_LIMITED`, `INCOMPLETE_PAGINATION`, `INCONSISTENT_PAGINATION` or `PARSE_ERROR`. The positive control passes only if it returns D-0325-2021 **and** the parser reads its NDC.
+
+| Finding | Condition |
+|---|---|
+| `CONFIRMED_MATCH` | ≥1 record `CONFIRMED_MATCH` |
+| `POTENTIAL_MATCH` | else ≥1 record `POTENTIAL_MATCH` |
+| `UNRESOLVED` | else any query not `COMPLETE`, the control not passed, or any record `UNRESOLVED` |
+| `NO_MATCH_FOUND` | else (complete coverage, control passed, every record parsed and not applicable) |
+
+Every finding carries per-query coverage (outcome per page, records retrieved vs reported total, dataset `last_updated`, retrieval time), the control result and limitations. Standing limitations: `ABSENCE_IS_NOT_SAFETY`, `FDA_DATA_MAY_BE_INCOMPLETE_OR_DELAYED`, `FREE_TEXT_PARSED_CONSERVATIVELY`, `REPACKAGED_PRODUCTS_MAY_NOT_NAME_YOUR_NDC`, `TEXT_QUERY_MAY_MISS_ABBREVIATIONS`; contextual: `PRODUCT_NOT_IDENTIFIED`, `LOT_NOT_PROVIDED`, `SOME_QUERIES_INCOMPLETE`, `POSITIVE_CONTROL_NOT_PASSED`, `SOME_RECORDS_UNPARSEABLE`.
+
+**Positive control (RG-2).** openFDA answers a misspelled or renamed field with HTTP 404 `NOT_FOUND`, identical to a real empty result. The control therefore queries `recall_number:"D-0325-2021" AND product_description:"metformin" AND openfda.product_ndc:"62756-142"`, exercising every field the plan uses; drift in any field fails the control (verified live 2026-11-12) and blocks `NO_MATCH_FOUND`.
 
 No rule produces a numeric score.
 
 ### 5.4 Refill comparison rules
-Compare current vs previous confirmed identity field by field: `productNdc`, `labeler`, `strength`, `doseForm`, `release`, `rxcui`. Output a list of typed differences; strength/form/release changes are flagged `CHECK_WITH_PHARMACIST`.
+Compare current vs previous confirmed identity: product NDC (by product key), labeler, ingredient set, strength, dose form, release. Output typed differences; ingredient, strength, form and release changes are flagged `checkWithPharmacist`; a labeler change alone is reported neutrally. Any difference requires re-evaluation of recall evidence for the new fill.
 
 ## 6. Data model and SQLite schema
 
@@ -190,7 +222,7 @@ CREATE TABLE assessment (
   id                 TEXT PRIMARY KEY,
   fill_id            TEXT NOT NULL REFERENCES fill(id) ON DELETE CASCADE,
   evaluated_at       TEXT NOT NULL,
-  result_state       TEXT NOT NULL,            -- MATCHED_RECALL|POSSIBLE_RECALL|NO_MATCHING_RECALL_FOUND|EXCLUDED|UNSUPPORTED|NEEDS_CLARIFICATION|INSUFFICIENT_DATA|SOURCE_UNAVAILABLE|RATE_LIMITED
+  result_state       TEXT NOT NULL,            -- CONFIRMED_MATCH|POTENTIAL_MATCH|NO_MATCH_FOUND|UNRESOLVED|EXCLUDED|UNSUPPORTED|NEEDS_CLARIFICATION|SOURCE_UNAVAILABLE|RATE_LIMITED
   reason_codes       TEXT NOT NULL,            -- JSON array
   ruleset_version    TEXT NOT NULL,
   policy_version     TEXT NOT NULL,
@@ -201,8 +233,9 @@ CREATE TABLE assessment (
 CREATE TABLE assessment_evidence (
   assessment_id      TEXT NOT NULL REFERENCES assessment(id) ON DELETE CASCADE,
   recall_number      TEXT NOT NULL,
-  relevance          TEXT NOT NULL CHECK (relevance IN ('PRODUCT_MATCH','POSSIBLE_MATCH','OTHER_PRODUCT')),
-  lot_result         TEXT CHECK (lot_result IN ('LOT_LISTED','LOT_NOT_FOUND_IN_LISTING','LOT_UNKNOWN')),
+  relevance          TEXT NOT NULL CHECK (relevance IN ('PRODUCT_MATCH','POSSIBLE_MATCH','OTHER_PRODUCT','UNPARSEABLE')),
+  classification     TEXT NOT NULL CHECK (classification IN ('CONFIRMED_MATCH','POTENTIAL_MATCH','NOT_APPLICABLE','UNRESOLVED')),
+  lot_result         TEXT CHECK (lot_result IN ('LOT_LISTED','LOT_POSSIBLY_LISTED','LOT_NOT_FOUND_IN_LISTING','LOT_UNKNOWN','LOT_NOT_REQUIRED')),
   rule_ids           TEXT NOT NULL,            -- JSON array of rule IDs that fired
   PRIMARY KEY (assessment_id, recall_number)
 );
@@ -259,7 +292,8 @@ interface RecallClient {
 }
 interface SplClient {
   setIdsByNdc(packageNdc: string): Promise<LookupOutcome<SplSummary[]>>;
-  establishments(setId: string): Promise<LookupOutcome<SplEstablishmentSummary>>;
+  // Repackager source product NDCs only (R-ID-8). No establishment or facility data is read.
+  sourceProductNdcs(setId: string): Promise<LookupOutcome<string[]>>;
 }
 ```
 
@@ -282,8 +316,8 @@ Details in `docs/PRIVACY.md`.
 ## 9. Offline and cached-data behavior
 
 - Cache keys are public queries; failures are never cached.
-- TTLs (proposed, confirm in Task 3): NDC Directory/RxNav identity 30 days; SPL establishment summary 30 days; recall queries 24 hours.
-- On `SOURCE_UNAVAILABLE`/`RATE_LIMITED`: if a saved assessment or cached evidence exists, enter `OFFLINE_CACHED_RESULT`, show the age ("Last checked 3 days ago; FDA data dated …") and a retry control. Never present cached `NO_MATCHING_RECALL_FOUND` without its date.
+- TTLs (proposed, confirm in Task 3): NDC Directory/RxNav identity 30 days; SPL repackager source NDCs 30 days; recall queries 24 hours.
+- On `SOURCE_UNAVAILABLE`/`RATE_LIMITED`: if a saved assessment or cached evidence exists, enter `OFFLINE_CACHED_RESULT`, show the age ("Last checked 3 days ago; FDA data dated …") and a retry control. Never present a cached `NO_MATCH_FOUND` without its date and coverage.
 - Expired cache may be shown only as `OFFLINE_CACHED_RESULT`, never as a fresh result.
 - Recall cache refresh strategy (OD-4): per-medication queries vs refreshing all 14 catalog drugs together. The latter avoids revealing which drug the user takes (≈28 requests per refresh) and is the recommended default.
 
@@ -295,7 +329,7 @@ Details in `docs/PRIVACY.md`.
 | HTTP 429 | `RATE_LIMITED` | Wait `Retry-After` (or 60 s), one automatic retry, then user-initiated |
 | HTTP 5xx (incl. openFDA malformed query) | `HTTP_5XX` | Retry; if persistent, treat as query bug: log locally, surface `SOURCE_UNAVAILABLE` |
 | Schema change | `SCHEMA_VIOLATION` | No retry; `SOURCE_UNAVAILABLE`; app update required |
-| Misspelled field / silent query bug | Positive-control query fails to find known recall | Block `NO_MATCHING_RECALL_FOUND` for that session; show `SOURCE_UNAVAILABLE` |
+| Misspelled field / silent query bug | Multi-field positive-control query fails to return and parse the known recall | Block `NO_MATCH_FOUND`; finding is `UNRESOLVED` |
 | OCR misread NDC | Cross-validation mismatch | Discard NDC, fall back to name/strength path |
 | Corrupt DB / migration failure | SQLite error on open | Restore from pre-migration copy; else offer reset (data loss warning) |
 | Policy file invalid | Startup validation | Fail closed: treat all drugs as `UNSUPPORTED` until a valid policy is bundled |
@@ -305,7 +339,7 @@ Details in `docs/PRIVACY.md`.
 
 - Additional drugs: add catalog entries plus tests; no code change if rules are generic.
 - Policy updates: new `exclusion_policy.json` version shipped in-app (no remote config in v0.1).
-- Facility evidence (Doc A A-6) if an official, keyless public API is validated.
+- Manufacturer provenance (facilities, establishments, inspections) is out of MVP scope; any return requires a new product decision and an official keyless API.
 - Pill-imprint narrowing via RxNav `ndcproperties` (Doc A A-13/A-14).
 - iOS build; background re-check with local notifications (requires battery and privacy decisions).
 - Optional user-provided openFDA API key stored in Keystore (raises quotas; never shipped by us).

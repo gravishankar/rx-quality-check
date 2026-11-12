@@ -4,8 +4,11 @@ A privacy-first, phone-only Android app (React Native + TypeScript) that helps p
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 1 of 6 (repository initialization and API feasibility). There is no mobile app
-> code yet. See `docs/IMPLEMENTATION_PLAN.md`.
+> **Status:** Task 2 of 6 (state machine and recall evidence engine) — awaiting approval. The core
+> library in `mobile/src/` is pure TypeScript (no React Native, network or storage code yet). There is
+> no user interface yet. See `docs/IMPLEMENTATION_PLAN.md`.
+>
+> Manufacturer provenance (facilities, establishments, inspections) is out of scope for MVP v0.1.
 
 ## Principles
 
@@ -28,10 +31,11 @@ CLAUDE.md, AGENTS.md     Agent and contributor rules
 docs/                    PRD, architecture, data sources, privacy, exclusions, test & implementation plans
 docs/references/         Reference documents A and B (unmodified) + adoption register
 docs/feasibility/        Machine-readable results of the latest API feasibility run
-mobile/                  React Native app (scaffolded in Task 4; directories only for now)
+mobile/src/              Core library: models/, rules/ (identity, exclusion, recall evidence), state/ (workflow
+                         state machine), engine/ (effect runner with injected I/O ports)
 data/                    Versioned local data: drug catalog, exclusion policy, manufacturer aliases
 tests/                   Deterministic unit/integration tests and real-response fixtures
-scripts/                 API feasibility harness and shared normalization/parsing helpers
+scripts/                 API feasibility harness, Task 2 fixture capture, re-export shims
 ```
 
 ## Commands
@@ -44,6 +48,10 @@ npm install
 
 ```bash
 npm run typecheck
+```
+
+```bash
+npm run test:coverage
 ```
 
 ```bash

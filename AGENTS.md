@@ -8,6 +8,9 @@ Phone-only Android app (React Native + TypeScript) that identifies generic medic
 public FDA recall/quality information with explicit uncertainty. Read `docs/PRD.md`,
 `docs/ARCHITECTURE.md`, `docs/IMPLEMENTATION_PLAN.md` before changing code.
 
+## Scope
+Manufacturer provenance (facility identification, establishment mapping, inspection history, plant risk scoring, provenance inference) is out of MVP v0.1.
+
 ## Hard rules
 1. No backend, cloud database, accounts, analytics or telemetry. Everything patient-specific stays on the device (SQLite, encrypted).
 2. Network: direct HTTPS to `api.fda.gov`, `dailymed.nlm.nih.gov`, `rxnav.nlm.nih.gov` only. Send only public drug identifiers.

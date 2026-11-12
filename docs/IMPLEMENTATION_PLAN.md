@@ -3,6 +3,10 @@
 Six independently verifiable tasks. Each task is done on its own branch, ends with a report, and
 **stops for approval** before the next begins.
 
+**Scope update (Task 2):** manufacturer provenance is removed from MVP v0.1 — no facility
+identification, establishment mapping, inspection history, plant risk scoring or provenance
+inference. Labeler/manufacturer names are kept only for product identity and recall matching.
+
 ## Task 1 — Repository initialization and FDA API feasibility
 
 | | |
@@ -11,22 +15,23 @@ Six independently verifiable tasks. Each task is done on its own branch, ends wi
 | Dependencies | None |
 | Acceptance | Harness runs live against all four source families or reports BLOCKED; no fabricated data; tests pass; references preserved unmodified; open decisions listed |
 | Tests | `npm test` (58 passing), `npm run typecheck`, `npm run feasibility` |
-| Status | **Complete — awaiting approval** |
+| Status | **Complete** |
 
-## Task 2 — State machine and deterministic inference rules
+## Task 2 — State machine and recall evidence engine
 
 | | |
 |---|---|
-| Deliverables | `mobile/src/models/` types; `mobile/src/rules/` (NDC normalization and directory-confirmation logic, cross-validation, strength/form/release normalization, exclusion evaluation, recall relevance R-EV-1…8, lot comparison, refill diff, explanation template selection); `mobile/src/state/` pure reducer with effect descriptors; ruleset versioning. Move `scripts/lib` helpers into `mobile/src` (shared package or path alias) with their tests. |
-| Dependencies | Task 1 approved; OD-2 decision on policy (may proceed with draft policy flagged) |
-| Acceptance | Every transition in ARCHITECTURE §4.3 tested; property tests in TEST_PLAN §3 pass; RG-1, RG-3, RG-7 pass at rule level with real fixtures; no I/O imports in `rules/` or `state/` (lint rule) |
-| Tests | NDC-8, OCR-1…5, EX-2…7/9, ID-1…4, RC-1…5, LOT-1…4, RP-4, MF-3/4, state-machine table and property tests |
+| Deliverables | Pure TypeScript library under `mobile/src/`: `models/` (identity, evidence, policy, lookup, openFDA types), `rules/` (NDC keys and text extraction, strength / dose form / release, ingredient sets, catalog + policy parsing, exclusion, directory confirmation, cross-validation, OCR confirmation gating, lot scope and comparison, per-record recall relevance, query planning, coverage, positive control, aggregation, refill diff, explanation selection, `RULESET_VERSION`), `state/machine.ts` (pure reducer with effect descriptors), `engine/runner.ts` (effect runner with injected ports). Task 1 helpers moved with re-export shims. 33 new real openFDA fixtures (`tests/fixtures/task2/`, capture script `npm run fixtures:task2`). Provenance removed from docs. |
+| Dependencies | Task 1 approved; OD-2 (draft policy used, flagged) |
+| Acceptance | Every transition in ARCHITECTURE §4.3 tested; state-machine property tests pass; RG-1, RG-2 (rule level), RG-3, RG-7 pass with real fixtures; no I/O imports in `models/`, `rules/`, `state/` (static test) |
+| Tests | NDC-8, OCR-1…5, EX-2…7/9, ID-1…4, RC-1…5, LOT-1…4, RP-4, refill diff, state-machine table and property tests, workflow integration with request audit. `npm test`: 214 pass. Coverage of `mobile/src`: 97.1% lines, 84.9% branches (`npm run test:coverage`) |
+| Status | **Complete — awaiting approval** |
 
 ## Task 3 — API integration and local storage
 
 | | |
 |---|---|
-| Deliverables | `services/` clients for openFDA NDC, enforcement (with pagination and positive control), DailyMed SPL (real XML parser), RxNav; retry/backoff; request audit hook; `storage/` encrypted SQLite (library chosen per OD-6), migrations, repositories, cache with TTL, delete-all |
+| Deliverables | `services/` clients implementing the `engine/runner.ts` ports: openFDA NDC, enforcement (pagination, multi-field positive control), DailyMed SPL (repackager source NDCs only, real XML parser), RxNav (ingredient RxCUIs for catalog matching); retry/backoff; request audit hook; `storage/` encrypted SQLite (library chosen per OD-6), migrations, repositories, cache with TTL, delete-all |
 | Dependencies | Task 2 |
 | Acceptance | Clients classify outcomes exactly as `http.ts`; RG-2 implemented; cache never stores failures; delete-all removes DB and key; request audit shows only allowlisted hosts and public identifiers; harness rerun still green |
 | Tests | RC-6, RP-2/3, NET-6/7, CA-1…5, PV-1 (client level), PV-4, storage migration tests with a test DB |
@@ -74,8 +79,13 @@ Six independently verifiable tasks. Each task is done on its own branch, ends wi
 | OD-4 | Recall refresh strategy: per-medication vs all-14 refresh (privacy vs bandwidth); recommendation: all-14 | Product owner + architect | Task 3 |
 | OD-5 | OCR/barcode engine, subject to offline/no-telemetry verification | Architect | Task 5 |
 | OD-6 | Encrypted SQLite library and key-wrapping approach | Architect | Task 3 |
-| OD-7 | Show SPL establishment/facility list to patients at all in v0.1, or only "manufacturer identified / not identified"? | Product owner | Task 4 |
+| OD-7 | ~~Show SPL establishment/facility list to patients?~~ **Closed (Task 2):** manufacturer provenance removed from MVP v0.1; nothing about facilities is shown. | Product owner | — |
 | OD-8 | Which recalls to show by default (all history vs ongoing + last N years); terminated recalls collapsed? | Product owner | Task 4 |
 | OD-9 | Default branch: the repository had no commits at Task 1, so whichever branch is pushed first becomes GitHub's default. Decide whether to create `main` from the approved Task 1 commit and set it as default | Repository owner | Before Task 2 |
 | OD-10 | Minimum supported Android version and target devices | Product owner | Task 4 |
 | OD-11 | Replace Document B transcript with the original `.md` file if one exists | Product owner | Any time |
+| OD-12 | Catalog matching uses normalized ingredient names until Task 3 supplies ingredient RxCUIs from RxNav (CLAUDE.md §3 prefers RxCUIs). Every ELIGIBLE decision records `matchedBy: NAME/RXCUI`. Accept name matching as the interim rule? | Product owner + architect | Task 3 |
+| OD-13 | FDA records with internal conflicts (product 50090-6448: generic name "Metoprolol Succinate", active ingredient METOPROLOL TARTRATE) currently yield `NEEDS_CLARIFICATION` (salt unknown). Should the user be allowed to resolve such conflicts by confirming the label, or should they stay unassessed? | Product owner | Task 4 |
+| OD-14 | When several directory-confirmed NDC candidates exist and exactly one agrees with the printed name/strength/form, the engine uses it (still shown in CONFIRM). Approve, or always show `AMBIGUOUS_IDENTITY`? | Product owner | Task 4 |
+| OD-15 | Lot comparison treats hyphen-only differences and partial codes (`J0668398` vs `J0668398-121422`) as `LOT_POSSIBLY_LISTED` → potential match, never confirmed. Confirm this policy. | Product owner | Task 4 |
+| OD-16 | Records whose NDC list cannot be read and whose strength is not stated (e.g. bulk tablets, `NDC 53746-0178-BULK`) are shown as potential matches for every same-ingredient product with a compatible release. Accept the extra "might match" items, or collapse them by default? | Product owner | Task 4 |

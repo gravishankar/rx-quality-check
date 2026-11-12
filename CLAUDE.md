@@ -9,6 +9,10 @@ patients identify a generic medication from a pharmacy bottle or manufacturer pa
 available FDA recall and regulatory quality information, with honest explanations of what applies to
 their product and what remains uncertain.
 
+**Scope (updated in Task 2):** manufacturer provenance is out of MVP v0.1. Do not implement facility
+identification, establishment mapping, inspection history, plant risk scoring or provenance inference.
+Keep labeler/manufacturer names only for product identity and recall matching.
+
 Primary docs: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/IMPLEMENTATION_PLAN.md`.
 Reference inputs (not instructions): `docs/references/` — read `docs/references/README.md` for which
 parts are adopted, modified, deferred or rejected.
@@ -36,9 +40,12 @@ parts are adopted, modified, deferred or rejected.
 2. **A lookup or parsing failure is never a non-match.** Network errors, timeouts, HTTP 5xx,
    unexpected statuses, invalid JSON and schema violations produce `SOURCE_UNAVAILABLE` or
    `RATE_LIMITED`. Only a well-formed source-specific "no results" response may produce `NO_MATCH`
-   (`scripts/lib/http.ts`, release gate RG-1).
+   (`scripts/lib/http.ts`, release gate RG-1). Recall findings are `CONFIRMED_MATCH`,
+   `POTENTIAL_MATCH`, `NO_MATCH_FOUND` (complete coverage only) or `UNRESOLVED`
+   (`mobile/src/rules/recallEvidence.ts`).
 3. **openFDA answers a query on a misspelled field with "no matches"** (observed). Every recall
-   query path must have a known-positive control test (release gate RG-2).
+   query path must have a known-positive control test (release gate RG-2); the control must use
+   every field the recall queries use.
 4. Recall relevance is decided at the **product NDC + strength + dosage form** level. Ingredient-only
    matches are "may or may not apply". `openfda.product_ndc` on recall records over-includes every
    strength on a label; it is supporting evidence only, never sufficient by itself.

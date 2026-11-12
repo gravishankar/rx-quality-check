@@ -55,7 +55,7 @@ Limitations (verified):
 | Unknown set ID (`/ndcs.json`) | HTTP 200 with a data object of empty strings (verified) — must be treated as no data, not a valid document |
 | Freshness marker | `metadata.db_published_date` (verified `Nov 11, 2026 08:02:44PM EST`) |
 
-SPL XML elements used (verified on 20 documents):
+SPL XML elements (verified on 20 documents). **Scope update (Task 2):** establishment and operation data below was examined for feasibility only. Manufacturer provenance is out of MVP scope; the app reads SPL only to relate a repackaged product to its source product NDC.
 - Establishments: `author/assignedEntity/representedOrganization/assignedEntity/assignedOrganization` with DUNS `id[@root="1.3.6.1.4.1.519.1"]/@extension`, `name`, and `performance/actDefinition/code` operation codes.
 - Operation codes observed: `C43360` MANUFACTURE, `C84731` PACK, `C84732` LABEL, `C25391` ANALYSIS, `C73606` REPACK, `C73607` RELABEL. **Document A's `C43215` for MANUFACTURE was not observed.** `C82401` (API MANUFACTURE) was not observed in this sample.
 - `displayName` casing varies between documents (`MANUFACTURE` vs `manufacture`).
