@@ -56,7 +56,7 @@ export type ScreenModel =
   | { kind: 'WORKING'; text: string }
   | { kind: 'ENTRY_PROBLEM'; text: string; missing: string[] }
   | { kind: 'CHOOSE_PRODUCT'; text: string; options: { index: number; title: string; fields: FieldView[] }[] }
-  | { kind: 'CONFIRM'; fields: FieldView[]; items: ConfirmItem[]; askRelease: boolean; lot: string | null }
+  | { kind: 'CONFIRM'; fields: FieldView[]; items: ConfirmItem[]; askRelease: boolean; lot: string | null; notice: string | null }
   | { kind: 'RESULT'; view: ResultView; fields: FieldView[]; canSave: boolean; saved: boolean; saveError: string | null }
   | { kind: 'NOT_ASSESSED'; view: NotAssessedView }
   | { kind: 'SOURCE_PROBLEM'; headline: string; body: string; canRetry: boolean };
@@ -106,7 +106,10 @@ export function screenFor(s: WorkflowState, o: ScreenOptions): ScreenModel {
       const lot = c.extraction?.lot?.value ?? null;
       const items = keys.filter((k) => k !== 'release').map((k) => ({ key: k, text: CONFIRM_TEXT[k] ?? `I checked: ${k}` }));
       if (lot && !keys.includes('lot')) items.push({ key: 'lot', text: COPY.confirm.lotConfirm });
-      return { kind: 'CONFIRM', fields: identityFields(c.identity, c.extraction), items, askRelease: keys.includes('release'), lot };
+      // An NDC was typed but no FDA listing was used: say so (OD-23), instead of only "Not identified".
+      const ndcTyped = (c.extraction?.ndcTexts.length ?? 0) > 0;
+      const notice = ndcTyped && c.identity.productNdc === null ? COPY.confirm.ndcNotFound : null;
+      return { kind: 'CONFIRM', fields: identityFields(c.identity, c.extraction), items, askRelease: keys.includes('release'), lot, notice };
     }
     case 'EXPLAIN':
     case 'SAVED':

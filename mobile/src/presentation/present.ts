@@ -110,7 +110,14 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
       ? f('labeler', COPY.fields.labeler, identity.labelerName, 'VERIFIED_SOURCE', COPY.fields.labelerNote)
       : f('labeler', COPY.fields.labeler, 'Not identified', 'UNAVAILABLE'),
   );
-  out.push(identity.lot ? f('lot', COPY.fields.lot, identity.lot, 'USER_CONFIRMED', COPY.fields.lotNote) : f('lot', COPY.fields.lot, 'Not entered', 'UNAVAILABLE'));
+  const typedLot = extraction?.lot?.value ?? null;
+  out.push(
+    identity.lot
+      ? f('lot', COPY.fields.lot, identity.lot, 'USER_CONFIRMED', COPY.fields.lotNote)
+      : typedLot
+        ? f('lot', COPY.fields.lot, typedLot, 'USER_ENTERED', COPY.fields.lotUnconfirmedNote)
+        : f('lot', COPY.fields.lot, 'Not entered', 'UNAVAILABLE'),
+  );
   switch (identity.sourceProductStatus) {
     case 'VERIFIED':
       out.push(f('source', COPY.fields.source, identity.relatedSourceProductNdcs.join(', '), 'VERIFIED_SOURCE', COPY.fields.sourceVerified));

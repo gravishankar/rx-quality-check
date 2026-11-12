@@ -10,7 +10,6 @@ export interface Brand {
   nameStatus: BrandNameStatus;
   tagline: string;
   features: { recallCheck: string };
-  appVersion: string;
   legalEntity: string;
   displayLabels: { development: string; pilot: string };
 }
@@ -22,7 +21,6 @@ export const BRAND: Brand = {
   "features": {
     "recallCheck": "Medication Recall Check"
   },
-  "appVersion": "0.1.0",
   "legalEntity": "[LEGAL ENTITY NAME]",
   "displayLabels": {
     "development": "MedLuma (DEV)",

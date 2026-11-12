@@ -62,6 +62,17 @@ case "$MODE" in
     ;;
 esac
 
+# Versioned copies (Task 4A.2): <name>-<flavor>-v<version>-b<build>-<abi>.apk in mobile/build/apk/.
+FLAVOR="$MODE"
+NAME="$(node -p "require('$ROOT/config/brand.json').product_name.toLowerCase().replace(/[^a-z0-9]+/g,'-')")"
+VER="$(node -p "require('$ROOT/config/app_version.json').version")"
+BUILD="$(node -p "require('$ROOT/config/app_version.json').build_number")"
+DEST="$ROOT/mobile/build/apk"
+mkdir -p "$DEST"
+# 1) Universal APK (arm64-v8a, armeabi-v7a, x86_64). 2) ARM64-only APK (most phones since ~2017).
 (cd "$ROOT/mobile/android" && ./gradlew --no-daemon "$TASK")
-echo "APK: $OUT"
-sha256sum "$OUT"
+cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-universal.apk"
+(cd "$ROOT/mobile/android" && ./gradlew --no-daemon -PreactNativeArchitectures=arm64-v8a "$TASK")
+cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-arm64-v8a.apk"
+echo "APKs (version $VER, build $BUILD):"
+(cd "$DEST" && for f in "$NAME-$FLAVOR-v$VER-b$BUILD-"*.apk; do printf "%10s  " "$(stat -c %s "$f")"; sha256sum "$f"; done)

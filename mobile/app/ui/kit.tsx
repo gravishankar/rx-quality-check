@@ -5,7 +5,7 @@
  *  - Text scales with the system font size; touch targets are at least 48 dp; contrast ≥ 4.5:1.
  */
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { Tone } from '../../src/presentation/present.ts';
 
@@ -44,6 +44,16 @@ export function Screen({ banner, children }: { banner: React.ReactNode; children
         {children}
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+/** Progress while the app looks things up. Announced to screen readers. */
+export function Working({ text }: { text: string }) {
+  return (
+    <View accessible accessibilityRole="progressbar" accessibilityLabel={text} accessibilityLiveRegion="polite" style={{ paddingVertical: 32, alignItems: 'center' }}>
+      <ActivityIndicator size="large" color={COLORS.link} />
+      <Text style={[s.p, { marginTop: 16, textAlign: 'center' }]}>{text}</Text>
+    </View>
   );
 }
 
@@ -91,10 +101,11 @@ export function Tick({ label, value, onChange }: { label: string; value: boolean
   );
 }
 
-export function Card({ tone, children }: { tone: Tone; children: React.ReactNode }) {
+/** Bordered box. `label` names what the box is (e.g. the result category); defaults to the tone word. */
+export function Card({ tone, label, children }: { tone: Tone; label?: string; children: React.ReactNode }) {
   return (
     <View style={[s.card, { borderLeftColor: COLORS[tone] }]}>
-      <Text style={[s.toneWord, { color: COLORS[tone] }]}>{TONE_WORD[tone]}</Text>
+      <Text accessibilityRole="header" style={[s.toneWord, { color: COLORS[tone] }]}>{label ?? TONE_WORD[tone]}</Text>
       {children}
     </View>
   );

@@ -1,5 +1,9 @@
 # First Device Test Runbook — owner only
 
+> **Updated in Task 4A.2:** for installation use `docs/INSTALL_ON_ANDROID.md` (beginner-friendly,
+> MacBook steps, current build 3) and for testing use `docs/FUNCTIONAL_TEST_PLAN.md` (F-01…F-30).
+> This runbook remains valid for build 2.
+
 For the owner's first test of the **development** APK on their own Android phone. Do not give this
 APK to anyone else: it accepts draft configuration, is signed with a development key, and has had no
 legal, clinical or security review. Record every result in `docs/ANDROID_DEVICE_TEST_PLAN.md`.

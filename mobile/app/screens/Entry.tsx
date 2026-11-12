@@ -1,5 +1,5 @@
 /** Home / manual entry. No camera or OCR in v0.1 (Task 4A §9). */
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, TextInput } from 'react-native';
 import { COPY } from '../../src/copy/en.ts';
 import type { ManualEntry } from '../../src/app/screens.ts';
@@ -13,8 +13,12 @@ const FIELDS: { key: keyof ManualEntry; label: string; help?: string }[] = [
   { key: 'lot', label: COPY.entry.lotLabel, help: COPY.entry.lotHelp },
 ];
 
-export function Entry({ onSubmit, busy, notice }: { onSubmit: (e: ManualEntry) => void; busy: boolean; notice: string | null }) {
-  const [v, setV] = useState<ManualEntry>({ ndc: '', drugName: '', strength: '', form: '', lot: '' });
+export const EMPTY_ENTRY: ManualEntry = { ndc: '', drugName: '', strength: '', form: '', lot: '' };
+
+/** Values are owned by the caller so they survive the progress and error screens. */
+export function Entry({ onSubmit, busy, notice, value, onChange }: { onSubmit: (e: ManualEntry) => void; busy: boolean; notice: string | null; value: ManualEntry; onChange: (e: ManualEntry) => void }) {
+  const v = value;
+  const setV = onChange;
   return (
     <>
       <P muted>{COPY.app.name}</P>

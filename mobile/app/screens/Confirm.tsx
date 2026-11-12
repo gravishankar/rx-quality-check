@@ -7,7 +7,7 @@ import { COPY } from '../../src/copy/en.ts';
 import type { ReleaseMechanism } from '../../src/models/identity.ts';
 import type { ScreenModel } from '../../src/app/screens.ts';
 import { FieldList } from '../ui/FieldList.tsx';
-import { Button, H1, H2, P, Tick } from '../ui/kit.tsx';
+import { Button, Card, H1, H2, P, Tick } from '../ui/kit.tsx';
 
 type Confirm = Extract<ScreenModel, { kind: 'CONFIRM' }>;
 
@@ -19,6 +19,11 @@ export function Confirm({ model, onConfirm, onEdit, busy }: { model: Confirm; on
   return (
     <>
       <H1>{COPY.confirm.title}</H1>
+      {model.notice ? (
+        <Card tone="CAUTION" label={COPY.confirm.ndcNotFoundTitle}>
+          <P>{model.notice}</P>
+        </Card>
+      ) : null}
       <P>{COPY.confirm.intro}</P>
       <FieldList fields={model.fields} />
       {model.askRelease ? (

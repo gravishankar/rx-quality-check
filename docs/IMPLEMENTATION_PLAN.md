@@ -58,6 +58,16 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Not done | Physical-device test (owner to run the runbook); USPTO and domain registries could not be queried from the build environment |
 | Status | **Complete — awaiting review** (branch `task-4a1/medluma-brand`) |
 
+## Task 4A.2 — Functional validation and Android device-test preparation
+
+| | |
+|---|---|
+| Deliverables | UI flow tests on the real screens (Jest + react-test-renderer, recorded real responses); defect fixes (progress screen, typed values kept, typed lot shown as entered, "NDC not found" notice, per-outcome result labels, Android Back, delete-all clears the form, x86 packaging); app versioning (`config/app_version.json`, build 3 = 0.1.2); APK size: universal 63.5 → 29.6 MB, new ARM64-only 15.2 MB; `INSTALL_ON_ANDROID.md`, `FUNCTIONAL_TEST_PLAN.md`, `UX_REVIEW_4A2.md` |
+| Decisions | Naming deferred to the owner's partner; "MedLuma" stays a temporary development placeholder; no further brand work; app IDs not finalized (OD-24) |
+| Unchanged | Engine, safety gates, evidence classification, presentation downgrade rules, drug data, policy, release gate |
+| Not done | Physical-device testing (no device in the build environment) |
+| Status | **Complete — awaiting review** (branch `task-4a2/functional-validation`) |
+
 ## Task 4B — Pilot hardening (next, not started)
 
 Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
@@ -126,5 +136,5 @@ No iOS IPA is built in Task 4A.
 | OD-20 | Application ID `org.rxrecallcheck.app` is a placeholder (no domain owned). Confirm before any distribution; it cannot change afterwards. | Product owner | Before pilot |
 | OD-21 | Should the app hide its content in the Android recents screen / iOS app switcher (FLAG_SECURE)? It protects privacy but blocks tester screenshots. | Product owner | Task 4B |
 | OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |
-| OD-23 | When an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
-| OD-24 | Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |
+| OD-23 | **Implemented in 4A.2** (presentation only): the confirmation screen shows "NDC not found". Original question — when an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
+| OD-24 | **Deferred (4A.2): naming belongs to the owner's partner; "MedLuma" is a temporary development placeholder only.** Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |

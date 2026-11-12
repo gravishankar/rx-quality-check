@@ -75,3 +75,26 @@ test('confirmation event: lot sent only if its item was ticked; release recorded
   assert.deepEqual(confirmationEvent(['identity'], 'ABC123', null), { type: 'USER_CONFIRMED', confirmedFields: ['identity'], lot: null });
   assert.deepEqual(confirmationEvent(['lot', 'identity'], 'ABC123', 'ER'), { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot', 'release'], lot: 'ABC123', release: 'ER' });
 });
+
+test('confirmation: an NDC that is not in the FDA directory is reported (OD-23); typed lot shown as entered, not confirmed', async () => {
+  const { identityFromPrintedFields } = await import('../../mobile/src/rules/identity.ts');
+  const r = identityFromPrintedFields({ drugName: 'METFORMIN', strength: '500 MG', doseForm: 'TABLET' }, ['metformin'], null);
+  assert.ok(r.ok);
+  if (!r.ok) return;
+  const extraction = { ndcTexts: [{ value: '00000-0000-00', origin: 'USER' as const, confidence: null, confirmedByUser: false }], drugName: null, strength: null, doseForm: null, labelerText: null, lot: { value: 'ABC123', origin: 'USER' as const, confidence: null, confirmedByUser: false }, expiry: null, containerType: 'UNKNOWN' as const };
+  const m = screenFor(at('CONFIRM', { identity: r.identity, extraction, requiredConfirmations: ['identity'] }), O);
+  assert.ok(m.kind === 'CONFIRM');
+  if (m.kind !== 'CONFIRM') return;
+  assert.equal(m.notice, COPY.confirm.ndcNotFound);
+  const lot = m.fields.find((f) => f.key === 'lot')!;
+  assert.equal(lot.value, 'ABC123');
+  assert.equal(lot.evidence, 'USER_ENTERED', 'a typed lot is not "confirmed" until the user confirms it');
+  const noNdc = screenFor(at('CONFIRM', { identity: r.identity, extraction: { ...extraction, ndcTexts: [] }, requiredConfirmations: ['identity'] }), O);
+  assert.ok(noNdc.kind === 'CONFIRM' && noNdc.notice === null);
+});
+
+test('each result category has its own label; none is reassuring', () => {
+  const l = COPY.result.categoryLabel;
+  assert.equal(new Set([l.CONFIRMED, l.POTENTIAL, l.NO_MATCH, l.UNABLE]).size, 4);
+  for (const x of Object.values(l)) assert.doesNotMatch(x, /\bsafe\b|clear|no recall\b|ok\b|passed/i);
+});

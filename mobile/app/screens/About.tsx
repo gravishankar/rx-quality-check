@@ -28,7 +28,7 @@ export function About(p: {
   return (
     <>
       <H1>{COPY.about.title}</H1>
-      <P>{COPY.about.version(p.profile.appVersion, p.profile.label)}</P>
+      <P>{COPY.about.version(p.profile.appVersion, p.profile.buildNumber, p.profile.label)}</P>
       <P muted>{COPY.app.tagline}</P>
       <P muted>{COPY.app.provisionalName}</P>
       <P muted>{`Platform: ${p.os}`}</P>

@@ -87,6 +87,8 @@ def profileJson = new JsonSlurper().parse(file("../../config/build_profile.json"
 // Product identity (labels, version) from the repository's config/brand.json (Task 4A.1). The
 // application ID and signing identities are deliberately NOT taken from it.
 def brandJson = new JsonSlurper().parse(file("../../../config/brand.json"))
+// Version and build number (Task 4A.2): every APK gets a new build number.
+def versionJson = new JsonSlurper().parse(file("../../../config/app_version.json"))
 def signingDir = new File(System.getProperty("user.home"), ".rx-recall-check")
 def loadProps = { File f ->
     def props = new Properties()
@@ -107,8 +109,8 @@ android {
         applicationId "org.rxrecallcheck.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName brandJson.app_version
+        versionCode versionJson.build_number
+        versionName versionJson.version
     }
 
     flavorDimensions = ["profile"]
@@ -157,8 +159,24 @@ android {
     productFlavors.dev.signingConfig signingConfigs.dev
     productFlavors.pilot.signingConfig signingConfigs.pilot
 
+    // APK size (Task 4A.2). The CPU types packaged are exactly those built (gradle property
+    // reactNativeArchitectures): the universal APK uses the default list; the ARM64-only APK is built
+    // with -PreactNativeArchitectures=arm64-v8a (scripts/android_build.sh). An explicit filter is
+    // needed because React Native also ships 32-bit x86 libraries, while op-sqlite/SQLCipher is not
+    // built for x86 — an x86 device must refuse the install rather than start without the
+    // encrypted-database library. Every APK contains the same code, data and encryption library.
+    defaultConfig {
+        ndk {
+            abiFilters.addAll((project.findProperty("reactNativeArchitectures") ?: "armeabi-v7a,arm64-v8a,x86_64").toString().split(",").collect { it.trim() })
+        }
+    }
+
+    // Store native libraries compressed in the APK (smaller download; Android unpacks them at
+    // install). No library is removed.
     packagingOptions {
-        jniLibs { useLegacyPackaging false }
+        jniLibs {
+            useLegacyPackaging true
+        }
     }
 }
 

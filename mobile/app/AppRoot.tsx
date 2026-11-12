@@ -3,22 +3,22 @@
  * models from src/app/screens.ts; every result passes through the presentation layer.
  */
 import React, { useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { COPY } from '../src/copy/en.ts';
 import { confirmationEvent, screenFor } from '../src/app/screens.ts';
-import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements } from '../src/legal/consent.ts';
+import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements, type ConsentStore } from '../src/legal/consent.ts';
 import { LEGAL_DOCUMENTS, type LegalDocumentId } from '../src/legal/documents.ts';
 import { deleteAllData, openStorage, type Repositories } from '../src/storage/repositories.ts';
 import type { SqlDriver } from '../src/storage/driver.ts';
 import { PROFILE } from './config.ts';
 import type { PlatformServices } from './platform/types.ts';
 import { useRecallSession } from './useRecallSession.ts';
-import { Banner, Link, P, Screen } from './ui/kit.tsx';
+import { Banner, Link, P, Screen, Working } from './ui/kit.tsx';
 import { About } from './screens/About.tsx';
 import { Choose } from './screens/Choose.tsx';
 import { Confirm } from './screens/Confirm.tsx';
-import { Entry } from './screens/Entry.tsx';
+import { EMPTY_ENTRY, Entry } from './screens/Entry.tsx';
 import { FirstLaunch } from './screens/FirstLaunch.tsx';
 import { History } from './screens/History.tsx';
 import { LegalDoc } from './screens/LegalDoc.tsx';
@@ -30,12 +30,13 @@ type Route = { name: 'check' } | { name: 'history' } | { name: 'about' } | { nam
 
 // Development builds keep acknowledgements in memory only (nothing is persisted), so the notice is
 // shown at every launch. Persisted builds store them in the encrypted database (Task 4B).
-const consent = memoryConsentStore();
+const defaultConsent = memoryConsentStore();
 
-export function AppRoot({ platform }: { platform: PlatformServices }) {
+export function AppRoot({ platform, consent = defaultConsent }: { platform: PlatformServices; consent?: ConsentStore }) {
   const [db, setDb] = useState<{ driver: SqlDriver; repos: Repositories } | null>(null);
   const [acks, setAcks] = useState<Acknowledgements | null>(null);
   const [route, setRoute] = useState<Route>({ name: 'check' });
+  const [entry, setEntry] = useState(EMPTY_ENTRY);
   const session = useRecallSession(platform, db?.repos ?? null);
 
   useEffect(() => {
@@ -47,6 +48,22 @@ export function AppRoot({ platform }: { platform: PlatformServices }) {
       setDb({ driver, repos });
     })();
   }, [platform]);
+
+  // Android Back: from any screen other than the entry screen, go back to it instead of leaving the
+  // app (iOS has no Back button; the listener is a no-op there).
+  const atHome = route.name === 'check' && session.state.name === 'SCAN' && !session.busy;
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (atHome || session.busy) return session.busy; // while busy, ignore Back; at home, default (leave)
+      if (route.name === 'doc') setRoute(route.back);
+      else {
+        session.reset();
+        setRoute({ name: 'check' });
+      }
+      return true;
+    });
+    return () => sub.remove();
+  }, [atHome, route, session]);
 
   const banner = <Banner dev={PROFILE.kind === 'development'} text={PROFILE.kind === 'development' ? COPY.app.devBanner : COPY.app.pilotBanner} />;
   const openDoc = (id: LegalDocumentId) => setRoute({ name: 'doc', id, back: route });
@@ -76,6 +93,8 @@ export function AppRoot({ platform }: { platform: PlatformServices }) {
         onSelfTest={PROFILE.kind === 'development' ? platform.encryptionSelfTest : null}
         onDeleteAll={async () => {
           session.reset();
+          setEntry(EMPTY_ENTRY);
+          setRoute({ name: 'check' });
           if (db) await deleteAllData(db.driver, platform.keyStore);
           setDb(null);
           await consent.clear();
@@ -92,14 +111,19 @@ export function AppRoot({ platform }: { platform: PlatformServices }) {
     </View>
   );
   if (session.error) return wrap(banner, <Problem headline={COPY.errors.generic} body={COPY.errors.sourceUnavailable.body} onRetry={null} onDone={home} />);
-  if (session.state.name === 'SCAN') return wrap(banner, <><Entry busy={session.busy} notice={null} onSubmit={(e) => void session.start(e)} />{nav}</>);
+  // While the engine works (lookups, retries), show progress instead of the previous screen.
+  if (session.busy) {
+    const text = session.state.name === 'CONFIRM' || session.state.name === 'SOURCE_UNAVAILABLE' || session.state.name === 'RATE_LIMITED' ? COPY.working.search : session.state.name === 'SCAN' ? COPY.working.identify : COPY.working.other;
+    return wrap(banner, <Working text={text} />);
+  }
+  if (session.state.name === 'SCAN') return wrap(banner, <><Entry busy={session.busy} notice={null} value={entry} onChange={setEntry} onSubmit={(e) => void session.start(e)} />{nav}</>);
 
   const m = screenFor(session.state, { now: new Date().toISOString(), persistHistory: PROFILE.persistHistory, format: (iso) => new Date(iso).toLocaleString() });
   switch (m.kind) {
     case 'WORKING':
-      return wrap(banner, <P>{m.text}</P>);
+      return wrap(banner, <Working text={m.text} />);
     case 'ENTRY_PROBLEM':
-      return wrap(banner, <><Entry busy={session.busy} notice={m.text} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
+      return wrap(banner, <><Entry busy={session.busy} notice={m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
     case 'CHOOSE_PRODUCT':
       return wrap(banner, <Choose model={m} onChoose={(index) => void session.send({ type: 'CANDIDATE_CHOSEN', index })} onDone={home} />);
     case 'CONFIRM':
@@ -121,10 +145,10 @@ function wrap(banner: React.ReactNode, body: React.ReactNode) {
   return <Screen banner={banner}>{body}</Screen>;
 }
 
-export function App({ platform }: { platform: PlatformServices }) {
+export function App({ platform, consent }: { platform: PlatformServices; consent?: ConsentStore }) {
   return (
     <SafeAreaProvider>
-      <AppRoot platform={platform} />
+      <AppRoot platform={platform} {...(consent ? { consent } : {})} />
     </SafeAreaProvider>
   );
 }

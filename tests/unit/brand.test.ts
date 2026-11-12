@@ -29,7 +29,8 @@ test('working name, tagline and first feature are as instructed; the name is mar
   assert.equal(b.tagline, 'Know your medication. Understand the evidence.');
   assert.equal(b.features.recall_check?.name, 'Medication Recall Check');
   assert.notEqual(b.name_status, 'CLEARED_BY_COUNSEL', 'clearance requires counsel; never set automatically');
-  assert.equal(APP_VERSION, b.app_version);
+  assert.equal((b as unknown as Record<string, unknown>).app_version, undefined, 'version lives in config/app_version.json');
+  assert.match(APP_VERSION, /^\d+\.\d+\.\d+$/);
 });
 
 test('package identifiers and signing are unchanged by the brand', () => {
@@ -38,7 +39,8 @@ test('package identifiers and signing are unchanged by the brand', () => {
   assert.match(g, /namespace "org\.rxrecallcheck\.app"/);
   assert.match(g, /applicationIdSuffix "\.dev"/);
   assert.match(g, /resValue "string", "app_name", brandJson\.display_labels\.development/);
-  assert.match(g, /versionName brandJson\.app_version/);
+  assert.match(g, /versionName versionJson\.version/);
+  assert.match(g, /versionCode versionJson\.build_number/);
   assert.match(read('mobile', 'ios', 'RxRecallCheck.xcodeproj', 'project.pbxproj'), /PRODUCT_BUNDLE_IDENTIFIER = "org\.rxrecallcheck\.app"/);
   assert.equal(readBrand().unchanged_identifiers.android_application_id, 'org.rxrecallcheck.app');
 });

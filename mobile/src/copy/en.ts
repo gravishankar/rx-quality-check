@@ -78,6 +78,8 @@ export const COPY = {
     releaseER: 'Yes, extended release (ER, XR, XL, SR)',
     releaseDR: 'Yes, delayed release (DR, EC)',
     lotConfirm: 'I checked the lot number against my package',
+    ndcNotFoundTitle: 'NDC not found',
+    ndcNotFound: 'We could not find this NDC in FDA’s directory. The details below are what you typed. They were not checked against FDA records.',
   },
 
   evidence: {
@@ -101,6 +103,7 @@ export const COPY = {
     ndcListingNote: 'Listed in the FDA NDC Directory. A listing is not FDA approval of this product.',
     labelerNote: 'The labeler is the company named in the FDA listing. It may not be the company that made the medication.',
     lotNote: 'Your lot number is compared with the text of recall notices only. It is not checked by FDA.',
+    lotUnconfirmedNote: 'Turn on the lot number item below to use it in the check.',
     sourceVerified: 'Declared in the repackager’s FDA labeling and found in the FDA NDC Directory.',
     sourceUnknown: 'We could not confirm which product this was repackaged from.',
     sourceNotChecked: 'Not checked.',
@@ -109,6 +112,13 @@ export const COPY = {
   },
 
   result: {
+    /** Short label shown on every result, so the four outcomes are easy to tell apart. */
+    categoryLabel: {
+      CONFIRMED: 'Recall match found',
+      POTENTIAL: 'Possible recall match',
+      NO_MATCH: 'No match in the records checked',
+      UNABLE: 'Could not determine',
+    },
     CONFIRMED: {
       headline: 'Available recall information matches the medication details you provided.',
       tone: 'This means a recall record names your product and its conditions appear to apply.',
@@ -205,6 +215,12 @@ export const COPY = {
     },
   },
 
+  working: {
+    identify: 'Looking up your medication in the FDA NDC Directory…',
+    search: 'Searching FDA recall records… This can take up to a minute.',
+    other: 'Working…',
+  },
+
   errors: {
     sourceUnavailable: { headline: 'We couldn’t reach FDA’s data.', body: 'Nothing was checked. Please try again later.' },
     rateLimited: { headline: 'FDA’s service asked us to wait.', body: 'Nothing was checked. Please try again in a few minutes.' },
@@ -227,7 +243,7 @@ export const COPY = {
 
   about: {
     title: 'About and privacy',
-    version: (v: string, profile: string) => `${NAME} version ${v} (${profile})`,
+    version: (v: string, build: number, profile: string) => `${NAME} version ${v} (build ${build}) — ${profile}`,
     deleteAll: 'Delete all data on this phone',
     deleteAllConfirm: 'Delete all saved medications and results from this phone? This cannot be undone.',
     deleted: 'All data on this phone was deleted.',

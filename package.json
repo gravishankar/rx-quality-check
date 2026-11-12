@@ -29,7 +29,9 @@
     "android:dev": "bash scripts/android_build.sh dev",
     "android:pilot": "bash scripts/android_build.sh pilot",
     "mobile:typecheck": "cd mobile && npx tsc --noEmit -p tsconfig.json",
-    "brand:bundle": "tsx scripts/bundle_brand.ts"
+    "brand:bundle": "tsx scripts/bundle_brand.ts",
+    "version:bundle": "tsx scripts/bundle_version.ts",
+    "mobile:test": "cd mobile && npx jest"
   },
   "devDependencies": {
     "@types/node": "22.10.2",

@@ -276,3 +276,17 @@ legal validation.
 Unchanged in 4A.1: engine, safety gates, evidence classification and presentation rules (no test
 assertions about them were changed). Physical-device testing is still pending
 (`docs/FIRST_DEVICE_TEST_RUNBOOK.md`).
+
+## 12. Task 4A.2 results (2026-11-12)
+
+| Command / check | Result |
+|---|---|
+| Baseline (`task-4a1/medluma-brand`, `df0d120`) | 388/388 |
+| `npm test` | **395 tests, 395 pass, 0 fail, 0 skipped** (+4 version, +2 screen-model, +1 Android packaging) |
+| `npm run mobile:test` (new: real screens, recorded real responses) | **15/15 pass** |
+| `npm run typecheck`, `npm run mobile:typecheck` | clean |
+| `npm run config:test` / `npm run e2e` | OK / 13/13 |
+| `npm run release:gate` | 15 blockers (unchanged) |
+| `npm run android:dev` | build 3 (0.1.2-dev, versionCode 3): ARM64 15.2 MB, universal 29.6 MB; INTERNET only; SQLCipher/OpenSSL present per CPU type; not debuggable; same development certificate |
+
+Physical device: **not tested** (no device or emulator; no `/dev/kvm`). Plan: `docs/FUNCTIONAL_TEST_PLAN.md`.

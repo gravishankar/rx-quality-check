@@ -139,3 +139,15 @@ test('Android manifest: only the INTERNET permission, backup disabled, cleartext
   assert.match(m, /android:dataExtractionRules="@xml\/data_extraction_rules"/);
   assert.match(m, /android:usesCleartextTraffic="false"/);
 });
+
+test('Android build: universal and ARM64-only APKs, explicit CPU filter (no partial x86 set), compressed native libraries', () => {
+  const g = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'build.gradle'), 'utf8');
+  assert.match(g, /abiFilters\.addAll\(\(project\.findProperty\("reactNativeArchitectures"\)/);
+  assert.match(g, /useLegacyPackaging true/);
+  const sh = readFileSync(join(ROOT, 'scripts', 'android_build.sh'), 'utf8');
+  assert.match(sh, /-universal\.apk/);
+  assert.match(sh, /-PreactNativeArchitectures=arm64-v8a/);
+  const archs = /^reactNativeArchitectures=(.+)$/m.exec(readFileSync(join(ROOT, 'mobile', 'android', 'gradle.properties'), 'utf8'))?.[1]?.split(',') ?? [];
+  assert.deepEqual(archs.sort(), ['arm64-v8a', 'armeabi-v7a', 'x86_64']);
+  assert.doesNotMatch(g, /minifyEnabled true/, 'R8 stays off until verified on a device');
+});

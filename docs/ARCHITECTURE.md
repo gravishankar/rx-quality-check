@@ -429,3 +429,16 @@ mobile/
   shared code, screens or legal sources; rules/state/fsm/engine/services/storage/models never import
   the brand; brand wording passes the claims rules; a non-cleared name is a release-gate blocker.
 - Adding a feature: add a `features.<id>` entry and its screens; the core identity is unchanged.
+
+## 15. Task 4A.2: versioning, UI flow tests, packaging
+
+- `config/app_version.json` → `npm run version:bundle` → `mobile/src/app/version.ts` and the iOS
+  project; Gradle reads it for `versionCode`/`versionName`. Separate from `config/brand.json`.
+- `mobile/__tests__/flows.test.tsx` (`npm run mobile:test`) renders the real screens with a fake
+  `PlatformServices` (recorded responses; fake key store/self-test) — test-only dependencies `jest`,
+  `react-test-renderer`, `@react-native/jest-preset` (no runtime network use; not in the APK).
+- `AppRoot` keeps entry values, shows a progress screen while the engine works, handles Android Back
+  (a no-op on iOS) and accepts an injectable acknowledgement store. Nothing Android-only was added to
+  shared code.
+- Android packaging: explicit ABI filter from `reactNativeArchitectures`; compressed native
+  libraries; ARM64-only APK from a second Gradle pass.

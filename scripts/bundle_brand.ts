@@ -18,7 +18,6 @@ export interface BrandJson {
   name_status_note: string;
   tagline: string;
   features: Record<string, { name: string; status: string }>;
-  app_version: string;
   legal_entity: string;
   display_labels: { development: string; pilot: string };
   audience: { initial: string; future_candidate: string };
@@ -32,9 +31,8 @@ export function readBrand(root = ROOT): BrandJson {
   const b = JSON.parse(readFileSync(join(root, 'config', 'brand.json'), 'utf8')) as BrandJson;
   const problems: string[] = [];
   if (b.schema !== 1) problems.push('schema must be 1');
-  for (const k of ['product_name', 'tagline', 'app_version', 'legal_entity'] as const) if (typeof b[k] !== 'string' || b[k].trim() === '') problems.push(`${k} is required`);
+  for (const k of ['product_name', 'tagline', 'legal_entity'] as const) if (typeof b[k] !== 'string' || b[k].trim() === '') problems.push(`${k} is required`);
   if (!NAME_STATUSES.includes(b.name_status)) problems.push(`name_status must be one of ${NAME_STATUSES.join(', ')}`);
-  if (!/^\d+\.\d+\.\d+$/.test(b.app_version)) problems.push('app_version must be MAJOR.MINOR.PATCH');
   if (!b.features?.recall_check?.name) problems.push('features.recall_check.name is required');
   if (!b.display_labels?.development?.includes('DEV')) problems.push('display_labels.development must contain "DEV"');
   if (b.display_labels?.pilot?.includes('DEV')) problems.push('display_labels.pilot must not contain "DEV"');
@@ -48,7 +46,6 @@ export function buildBrandModule(b = readBrand()): string {
     nameStatus: b.name_status,
     tagline: b.tagline,
     features: { recallCheck: b.features.recall_check!.name },
-    appVersion: b.app_version,
     legalEntity: b.legal_entity,
     displayLabels: b.display_labels,
   };
@@ -64,7 +61,6 @@ export interface Brand {
   nameStatus: BrandNameStatus;
   tagline: string;
   features: { recallCheck: string };
-  appVersion: string;
   legalEntity: string;
   displayLabels: { development: string; pilot: string };
 }

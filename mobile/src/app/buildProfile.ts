@@ -8,13 +8,15 @@
  *  - pilot: external evaluation. Refuses draft configuration (fail closed). Built only when
  *    `npm run release:gate` reports no blockers.
  */
-import { BRAND } from '../brand/brand.ts';
+import { APP_VERSION, BUILD_NUMBER } from './version.ts';
 
 export type BuildKind = 'development' | 'pilot';
 
 export interface BuildProfile {
   kind: BuildKind;
   appVersion: string;
+  /** Increases with every APK built (config/app_version.json). */
+  buildNumber: number;
   /** Accept DRAFT/PROPOSED catalog and policy files. Never true for pilot. */
   allowUnapprovedConfig: boolean;
   /** Persist medications and results in the encrypted database. */
@@ -24,14 +26,14 @@ export interface BuildProfile {
   label: string;
 }
 
-/** From config/brand.json (single source for the version shown in the app and the Android build). */
-export const APP_VERSION = BRAND.appVersion;
+export { APP_VERSION, BUILD_NUMBER };
 
 export function profileFor(kind: BuildKind, encryptionVerifiedOnDevice: boolean): BuildProfile {
   if (kind === 'pilot') {
     return {
       kind,
       appVersion: APP_VERSION,
+      buildNumber: BUILD_NUMBER,
       allowUnapprovedConfig: false,
       persistHistory: encryptionVerifiedOnDevice,
       encryptionVerifiedOnDevice,
@@ -41,6 +43,7 @@ export function profileFor(kind: BuildKind, encryptionVerifiedOnDevice: boolean)
   return {
     kind,
     appVersion: APP_VERSION,
+    buildNumber: BUILD_NUMBER,
     allowUnapprovedConfig: true,
     // OD-18 / Task 4A §10: no persistent medication history without verified encryption.
     persistHistory: false,

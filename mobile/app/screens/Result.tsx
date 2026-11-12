@@ -19,7 +19,7 @@ export function Result({ model, onOpenUrl, onSave, onDone, busy }: { model: Resu
   return (
     <>
       <H1>Recall check result</H1>
-      <Card tone={v.tone}>
+      <Card tone={v.tone} label={COPY.result.categoryLabel[v.category]}>
         <Text accessibilityRole="header" style={[s.p, { fontWeight: '700', fontSize: 18 }]}>
           {v.headline}
         </Text>

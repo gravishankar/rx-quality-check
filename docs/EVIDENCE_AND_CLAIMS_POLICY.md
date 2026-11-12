@@ -61,6 +61,9 @@ or an unresolved/possible result, never to a chosen value.
 | `NO_MATCH_FOUND` | NO_MATCH (tone NEUTRAL) | C15 evidence | UNABLE (flagged when inconsistent; not flagged when merely stale) |
 | `UNRESOLVED` | UNABLE (tone NEUTRAL) | — | — |
 
+Each category has its own label on the result (Task 4A.2): "Recall match found", "Possible recall
+match", "No match in the records checked", "Could not determine" (`COPY.result.categoryLabel`).
+
 Downgrades never go toward reassurance. There is no "success" tone, no green, no check mark and no
 celebratory icon anywhere in the app (`mobile/app/ui/kit.tsx`). Each tone is also stated in words.
 

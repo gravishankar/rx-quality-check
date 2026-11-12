@@ -1,0 +1,35 @@
+{
+  "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
+  "version": "0.1.2",
+  "build_number": 3,
+  "history": [
+    {
+      "build_number": 1,
+      "version": "0.1.0",
+      "task": "4A",
+      "commit": "5d50dfa",
+      "label": "Rx Recall Check (DEV)",
+      "apk_sha256": "648e9c07b4598ea570d22cefd11c5b9ff983bc56392cfb16f6ad9748fa00de11",
+      "note": "Built with versionName 0.1.0-dev, versionCode 1."
+    },
+    {
+      "build_number": 2,
+      "version": "0.1.1",
+      "task": "4A.1",
+      "commit": "df0d120",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907",
+      "note": "Assigned retroactively. The binary itself still says versionName 0.1.0-dev, versionCode 1; tell it apart from build 1 by its label and checksum."
+    },
+    {
+      "build_number": 3,
+      "version": "0.1.2",
+      "task": "4A.2",
+      "commit": "task-4a2/functional-validation",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de",
+      "note": "First build with version and build number embedded (versionName 0.1.2-dev, versionCode 3). Two APKs: universal (29.6 MB; apk_sha256) and ARM64-only (15.2 MB; apk_sha256_arm64).",
+      "apk_sha256_arm64": "31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e"
+    }
+  ]
+}

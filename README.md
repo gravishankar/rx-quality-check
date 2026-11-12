@@ -10,8 +10,9 @@ A privacy-first, phone-only Android app (React Native + TypeScript) that helps p
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 4A (Android pilot: evidence safety, legal and regulatory readiness) — awaiting
-> review. A React Native app (Android first, iOS-ready) runs the Task 3 engine. Only a **development
+> **Status:** Task 4A.2 (functional validation, device-test preparation) — awaiting review. Current
+> development build: 0.1.2 (build 3); install with `docs/INSTALL_ON_ANDROID.md`. Earlier: Task 4A
+> (Android pilot: evidence safety, legal and regulatory readiness). A React Native app (Android first, iOS-ready) runs the Task 3 engine. Only a **development
 > APK** exists, for the owner's testing; a pilot build is blocked by `npm run release:gate`
 > (approvals, legal/clinical/regulatory sign-offs and on-device encryption verification are
 > missing). This is an evaluation prototype: not clinically validated, not reviewed by counsel, not
@@ -54,7 +55,8 @@ scripts/                 API feasibility harness, Task 2 fixture capture, re-exp
 ## Key documents (Task 4A, 4A.1)
 
 - `docs/BRAND_AND_PRODUCT_STRATEGY.md`, `docs/BRAND_CLEARANCE.md`
-- `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — owner-only first phone test
+- `docs/INSTALL_ON_ANDROID.md`, `docs/FUNCTIONAL_TEST_PLAN.md`, `docs/UX_REVIEW_4A2.md` — Task 4A.2
+- `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — owner-only first phone test (build 2)
 
 - `docs/EVIDENCE_AND_CLAIMS_POLICY.md` — what the app may say, the evidence each statement needs, and the tests enforcing it
 - `docs/LEGAL_REGULATORY_REVIEW.md` — issues list for counsel (no compliance conclusions)

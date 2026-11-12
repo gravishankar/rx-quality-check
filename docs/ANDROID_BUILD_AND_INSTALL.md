@@ -117,12 +117,32 @@ produce an equivalent APK; byte-for-byte reproducibility is not yet verified (Ta
 - *build_profile.json says 'pilot' but this is a development variant*: run the npm scripts, which
   write the profile, instead of calling Gradle directly.
 
+## Versions and APK files (Task 4A.2)
+
+`config/app_version.json` holds `version` and `build_number` (Android `versionName`/`versionCode`,
+iOS `MARKETING_VERSION`/`CURRENT_PROJECT_VERSION`, the About screen). Increase `build_number` for every
+APK, then `npm run version:bundle`. `npm run android:dev` builds two APKs and writes versioned copies
+to `mobile/build/apk/`:
+
+| File | CPU types | Size (build 3) |
+|---|---|---|
+| `<name>-dev-v<version>-b<build>-arm64-v8a.apk` | arm64 (almost all phones since ~2017) | 15.2 MB |
+| `<name>-dev-v<version>-b<build>-universal.apk` | arm64, armeabi-v7a, x86_64 | 29.6 MB |
+
+Size changes (build 2 → 3), with no code or library removed: native libraries stored compressed in the
+APK (`useLegacyPackaging true`; unpacked at install) and an ARM64-only APK built with
+`-PreactNativeArchitectures=arm64-v8a`. An explicit CPU filter keeps React Native's 32-bit x86
+libraries out (op-sqlite/SQLCipher is not built for x86). R8 code shrinking stays off until it can be
+verified on a device.
+
 ## Builds produced so far
 
 | Build | Commit | App label | SHA-256 | Where |
 |---|---|---|---|---|
 | Task 4A development APK | `5d50dfa` | Rx Recall Check (DEV) | `648e9c07b4598ea570d22cefd11c5b9ff983bc56392cfb16f6ad9748fa00de11` | Sent in the Task 4A session; archived in the build environment (`~/.rx-recall-check/apk-archive/`) |
-| Task 4A.1 development APK | `task-4a1/medluma-brand` | MedLuma (DEV) | `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` | Sent in the Task 4A.1 session; archived likewise |
+| Task 4A.1 development APK (build 2) | `df0d120` | MedLuma (DEV) | `0718180fb5a107c0fb99bf6cc2ffde256c1b9a81a35b9380f44fe97bec2b3907` | Sent in the Task 4A.1 session; archived likewise |
+| Task 4A.2 build 3, ARM64 (0.1.2-dev, versionCode 3) | `task-4a2/functional-validation` | MedLuma (DEV) | `31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e` | Sent in the Task 4A.2 session; archived |
+| Task 4A.2 build 3, universal | same | MedLuma (DEV) | `8dedb5e7226d41de3dba326f5bb7fa2f8ca800ec6e83292863784eca297481de` | Sent in the Task 4A.2 session; archived |
 
 Both are signed with the same development certificate (SHA-256
 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7`, DN still names the earlier
