@@ -1,0 +1,158 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:02.644Z",
+  "endpoint": "enforcement",
+  "search": "openfda.product_ndc:\"62756-142\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.product_ndc%3A%2262756-142%22&limit=100",
+  "purpose": "Known recalled product (metformin ER 500 mg, Sun); four lot-specific recalls, complete result set"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 4
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0325-2021",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Metformin HCl Extended-Release Tablets, USP, 500 mg, Rx Only, 500-count bottle, Rx only, Distributed by: Sun Pharmaceutical Industries, Inc., Cranbury, NJ 08512; Manufactured by: Sun Pharmaceutical Industries Ltd., Halol-Baroda HIghway, Halol-389 350 Gujarat, India, NDC 62756-142-02.",
+    "code_info": "Lot #JKU4639A, Exp 10/2022",
+    "recalling_firm": "SUN PHARMACEUTICAL INDUSTRIES INC",
+    "reason_for_recall": "Failed Moisture Limits: Out of specification for water content",
+    "report_date": "20210414",
+    "recall_initiation_date": "20210325",
+    "termination_date": "20220414",
+    "product_type": "Drugs",
+    "product_quantity": "2520 bottles",
+    "openfda": {
+     "product_ndc": [
+      "62756-142",
+      "62756-143"
+     ],
+     "generic_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1089-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Metformin HCl  Extended-Release Tablets, USP, 500 mg, Rx only, 500 count bottles, Manufactured by: Sun Pharmaceutical Inc. Ltd, Andheri (East) Mumbai-400 059, India, Distributed by: Caraco Pharmaceutical Laboratories, Ltd, Detroit, MI --- NDC 62756-142-02",
+    "code_info": "Batch JKM2433A, Mfg Date 04/2013; Exp 03/2016",
+    "recalling_firm": "Caraco Pharmaceutical Laboratories, Ltd.",
+    "reason_for_recall": "Presence of Foreign Tablet; customer complaint of some tablets of Gabapentin found in a bottle of Metformin HCl ER",
+    "report_date": "20140305",
+    "recall_initiation_date": "20140128",
+    "termination_date": "20140929",
+    "product_type": "Drugs",
+    "product_quantity": "2528 bottles",
+    "openfda": {
+     "product_ndc": [
+      "62756-142",
+      "62756-143"
+     ],
+     "generic_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0924-2018",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Metformin Hydrochloride Extended Release Tablets, USP, 500 mg, packaged in a 500-count bottle, Rx only, Distributed by: Sun Pharmaceutical Industries, Inc. Cranbury, NJ 08512, Manufactured by: Sun Pharmaceutical Industries Ltd. Halol-Baroda Highway, Halol-389 350 Gujarat. India, NDC 62756-142-02",
+    "code_info": "Lot #: JKT0042A, Exp 1/2021",
+    "recalling_firm": "Sun Pharmaceutical Industries, Inc.",
+    "reason_for_recall": "Presence of foreign substance: One lot fo Metformin Hydrochloride Extended Release Tablets, USP, 500 mg (500 Count) contains foreign matter identified as a piece of rubber glove detected in one tablet.",
+    "report_date": "20180725",
+    "recall_initiation_date": "20180703",
+    "termination_date": "20191105",
+    "product_type": "Drugs",
+    "product_quantity": "2508 bottles",
+    "openfda": {
+     "product_ndc": [
+      "62756-142",
+      "62756-143"
+     ],
+     "generic_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0372-2021",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Metformin HCl Extended-Release Tablets, USP, 500 mg, packaged in 500-count bottles, Rx only, Distributed by: Sun Pharmaceutical Industries, Inc. Cranbury, NJ 08512, Manufactured by: Sun Pharmaceutical Industries Ltd., Halol-Baroda Highway, Halol-389 350, Gujarat, India, NDC 62756-142-02.",
+    "code_info": "Lots #: JKX2749A, JKX2803A, JKX2804A, JKX2805A, JKX806A, JKX2945A,JKX2946A, JXK2947A, JKX2948A, JKX2952A, JKX2953A, JKX2954A & JKX3224A, Exp 6/2032; JKX3211A, JKX3212A, Exp 7/2023.",
+    "recalling_firm": "SUN PHARMACEUTICAL INDUSTRIES INC",
+    "reason_for_recall": "Presence of foreign substance: identified as activated carbon.",
+    "report_date": "20210519",
+    "recall_initiation_date": "20210504",
+    "termination_date": "20230627",
+    "product_type": "Drugs",
+    "product_quantity": "50868 bottles",
+    "openfda": {
+     "product_ndc": [
+      "62756-142",
+      "62756-143"
+     ],
+     "generic_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

@@ -1,16 +1,18 @@
-# Product Requirements — Rx Quality Check MVP v0.1
+# Product Requirements — MedLuma (working name) MVP v0.1: Medication Recall Check
+
+Patient-facing name: **MedLuma** (provisional working name, conflicts found — `docs/BRAND_CLEARANCE.md`), first feature **Medication Recall Check**, tagline *Know your medication. Understand the evidence.* All configured in `config/brand.json` (Task 4A.1); earlier working name Rx Recall Check. Initial audience: patients and caregivers; professional use is out of scope (`docs/BRAND_AND_PRODUCT_STRATEGY.md`). The repository name `rx-quality-check` and application IDs are unchanged.
 
 | Field | Value |
 |---|---|
-| Status | Draft for approval (Task 1) |
+| Status | Draft for approval (Task 1); scope updated in Task 2 (manufacturer provenance removed); patient-facing wording and claims governed by `docs/EVIDENCE_AND_CLAIMS_POLICY.md` (Task 4A) |
 | Platform | Android phone first (React Native + TypeScript) |
 | Purpose of MVP | Assess patient interest, usability and the usefulness of public regulatory data |
 
 ## 1. Patient problem
 
-Generic medications with the same ingredient and strength are made by many labelers and, often, at
-several manufacturing sites. Patients usually receive them in pharmacy vials that show a drug name
-and strength, sometimes an NDC and a short manufacturer string, and rarely any facility information.
+Generic medications with the same ingredient and strength are sold by many labelers. Patients usually
+receive them in pharmacy vials that show a drug name and strength, and sometimes an NDC and a short
+labeler string.
 When patients hear about a drug recall, they cannot easily tell whether it concerns **their**
 product, their strength, or their lot. Public FDA data exists but is spread across several systems,
 uses identifiers patients don't know, and is easy to misread. In particular, "no recall found" is
@@ -30,7 +32,7 @@ level ≤ grade 8), no time-limited interactions.
 1. **Scan** a pharmacy prescription label or original manufacturer packaging (camera; on-device OCR and barcode reading).
 2. **Identify** drug, strength, dosage form (including IR/ER/DR), NDC and labeler where possible, with the user confirming or correcting each field.
 3. **Check exclusion policy** before any assessment.
-4. **Retrieve evidence** from public sources: FDA NDC Directory, FDA drug recall (enforcement) reports, DailyMed SPL, RxNorm.
+4. **Retrieve evidence** from public sources: FDA NDC Directory, FDA drug recall (enforcement) reports, RxNorm, and DailyMed SPL (only to relate a repackaged product to its source product NDC).
 5. **Explain** which recall records apply to the confirmed product, which might apply, and what is unknown, with sources and dates.
 6. **Save** medications locally and **compare refills** (detect changes in NDC, labeler, strength or form between fills).
 7. **Re-check** saved medications on demand, with visible data dates. Cached results are clearly marked offline.
@@ -42,6 +44,8 @@ Supported (exact ingredient set; oral outpatient formulations; prescription prod
 atorvastatin, amlodipine, levothyroxine, lisinopril, gabapentin, losartan, metformin,
 metoprolol succinate, omeprazole, rosuvastatin, pantoprazole, furosemide,
 hydrocodone/acetaminophen, tamsulosin. Source: `data/drug_catalog.json`.
+
+Over-the-counter products are excluded from MVP v0.1 (policy rule `OTC-MVP`; OD-3 closed). The catalog and policy are data: adding a drug or an exclusion needs no code change (`docs/DRUG_CATALOG_GUIDE.md`, `docs/EXCLUSION_POLICY_GUIDE.md`).
 
 Excluded by policy (recognized, **not assessed**): warfarin, apixaban, rivaroxaban, dabigatran,
 edoxaban, tacrolimus, cyclosporine, sirolimus, everolimus (transplant use → `NEEDS_CLARIFICATION`),
@@ -77,12 +81,11 @@ Result states that must stay distinct in UI and storage:
 1. User scans the barcode (UPC-A / GTIN-14 / DataMatrix) or the printed NDC; lot and expiry are read from the DataMatrix when present, or typed by the user.
 2. Barcode check digits are validated, and candidate NDCs are confirmed against the directory.
 3. Lot is compared with recall `code_info` text (user-confirmed comparison).
-4. If the packaging prints a "Manufactured by / Made in" line, the user may capture it as label information. It is not converted into a facility judgment.
 
-### J4 — Unknown manufacturer or incomplete identity
+### J4 — Unknown labeler or incomplete identity
 - Missing labeler, unreadable NDC or conflicting fields lead to explicit choices: correct the field, enter it manually, or proceed at ingredient/strength level with `INSUFFICIENT_DATA` labeling.
-- A repackaged product whose SPL lists no manufacturing establishment shows "the manufacturer is not identified in public filings". If the originating labeler is traceable through the repackager's source NDC, it is shown with that provenance.
-- The app never infers a facility from pill appearance (Doc A A-1).
+- A repackaged product is assessed on its own product NDC. When its source product NDC is known (Task 3), recalls naming the source product are shown as "might match".
+- The app does not identify manufacturing facilities or infer where a product was made (out of scope for v0.1).
 
 ### J5 — Refill comparison
 1. User scans a new fill of a saved medication.
@@ -104,7 +107,7 @@ Every result screen shows:
    - "Recalls that might match": same ingredient, strength and form but the product is unconfirmed, or the record text is incomplete.
    - "Recalls for other products with the same ingredient", collapsed by default.
 4. **For matched recalls:** recall class (with a plain-language description of FDA's class definitions), status (ongoing, completed or terminated), dates, reason as published, recalling firm, and lot comparison if a lot was provided.
-5. **What we could not determine**, e.g., facility, lot, or exact product.
+5. **What we could not determine**, e.g., lot or exact product.
 6. **Standing disclaimer** (always shown):
    > "Not finding a recall does not mean a medication is safe or free of quality problems. FDA's
    > public data can be incomplete or delayed. Excluding some medications from this app does not mean
@@ -115,13 +118,31 @@ Every result screen shows:
 Prohibited: any "safe", "clean", "verified", "green" or score/grade presentation; ranking labelers or
 facilities; NTI "switching" warnings (Doc A A-11).
 
+**Task 4A wording (supersedes earlier draft wording where they differ).** Results are shown in four
+categories, each only when the evidence supports it, otherwise downgraded toward uncertainty
+(`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §2–§3):
+
+| Category | Headline |
+|---|---|
+| Confirmed | "Available recall information matches the medication details you provided." |
+| Potential | "This medication may be affected by a reported recall. More information is needed to determine whether your specific supply is included." |
+| No match | "No matching recall was identified in the sources successfully checked as of <date>. This does not establish that the medication is free from recalls or other quality problems." |
+| Unable | "We could not reliably determine whether this medication is affected by a recall." |
+
+Every result also states: "Do not stop, change or replace a prescribed medication because of this app
+alone." The app checks one medication at a time, on request; it does not monitor or notify (OD-4).
+Pilot builds are labeled "Evaluation prototype. Not clinically validated."
+
 ## 7. Result categories (evidence, not safety)
 
-| Category | Condition |
+Renamed in Task 2 (former names in brackets). Rules: `docs/ARCHITECTURE.md` §5.3.
+
+| Finding | Condition |
 |---|---|
-| `MATCHED_RECALL` | ≥1 recall record whose text NDC (or verified structured NDC plus matching strength and form) matches the confirmed product NDC |
-| `POSSIBLE_RECALL` | ≥1 record matches ingredient + strength + form but product-level evidence is missing or ambiguous, or the record could not be fully parsed |
-| `NO_MATCHING_RECALL_FOUND` | All relevant queries succeeded (positive controls passed) and no record matches at product or possible level |
+| `CONFIRMED_MATCH` [`MATCHED_RECALL`] | A recall record's own text names the confirmed product NDC, nothing in the text contradicts the product, and the recall's criteria apply: all lots, or the user's confirmed lot is listed. A product NDC match alone never confirms a lot-specific recall. |
+| `POTENTIAL_MATCH` [`POSSIBLE_RECALL`] | Relevant evidence exists but applicability is uncertain: lot not provided or not found in the listing, product named only in structured fields, same ingredient/strength/form without product-level evidence, NDC list unreadable, or identity known only at ingredient level |
+| `NO_MATCH_FOUND` [`NO_MATCHING_RECALL_FOUND`] | Every planned query completed (all pages), the positive control passed, every record was parsed and none applies. Always shown with sources, dates, coverage and limitations. |
+| `UNRESOLVED` (new) | Evidence insufficient, incomplete or unavailable: a failed or incomplete query, failed control, or unreadable record, with no confirmed or potential match |
 | plus `EXCLUDED`, `UNSUPPORTED`, `NEEDS_CLARIFICATION`, `INSUFFICIENT_DATA`, `SOURCE_UNAVAILABLE`, `RATE_LIMITED` | see §4 |
 
 ## 8. Success metrics (MVP study)
@@ -143,7 +164,7 @@ Interest and usability data is collected only through opt-in study sessions or q
 
 1. All 14 supported drugs can be identified from a real NDC to a product NDC and RxNorm clinical drug, preserving strength and form.
 2. All 11 exclusion entries produce `EXCLUDED` (or `NEEDS_CLARIFICATION` for everolimus) before any recall lookup, with policy version shown.
-3. A known recall fixture is never classified as `NO_MATCHING_RECALL_FOUND` under any injected failure (network, timeout, 5xx, 429, truncated JSON, schema change, misspelled field).
+3. A known recall fixture is never classified as `NO_MATCH_FOUND` under any injected failure (network, timeout, 5xx, 429, truncated JSON, schema change, misspelled field).
 4. Every result screen shows sources, dataset dates, retrieval time and the standing disclaimer.
 5. No network request includes images, OCR text, lot numbers, device or user identifiers (verified by an automated request audit).
 6. All patient data can be deleted in-app; uninstall removes it; it is excluded from cloud backup.
@@ -153,8 +174,9 @@ Interest and usability data is collected only through opt-in study sessions or q
 
 - Any backend, account, sync, cloud backup of app data, or web version; iOS release.
 - LLM/chatbot features; numerical safety, quality or manufacturer scores; labeler or facility rankings.
+- **Manufacturer provenance** (removed in Task 2): manufacturing-facility identification, establishment mapping, inspection history, plant risk scoring and provenance inference.
 - FDA inspection classifications, Form 483s, warning letters, import alerts, DUNS/FEI crosswalks (Doc A A-6, A-17, A-18).
 - Pill-imprint identification and faceted pill picker (A-14); NTI switching warnings and "alternative product" suggestions (A-11).
-- Drugs beyond the 14 listed; injectables, topicals, inhalers, compounded drugs, OTC products (pending OD-3).
+- Drugs beyond the 14 listed; injectables, topicals, inhalers, compounded drugs, OTC products (excluded by policy, Task 3).
 - Push notifications or background recall monitoring (requires decisions on battery and privacy; future extension).
 - Dosing, interaction, adherence or substitution advice; pharmacy integrations; insurance data.

@@ -1,0 +1,2670 @@
+{
+  "probe": "task4b",
+  "started": "2026-11-12T16:57:22.566Z",
+  "finished": "2026-11-12T16:58:21.602Z",
+  "products": [
+    {
+      "drug": "atorvastatin calcium",
+      "product_ndc": "60290-041",
+      "labeler": "Umedica Laboratories USA Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA213853",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "5a7594ca-30be-4350-827f-ef745a2a7e18",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "UMEDICA LABORATORIES PRIVATE LIMITED",
+          "duns": "920635096",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "atorvastatin calcium",
+      "product_ndc": "60505-2578",
+      "labeler": "Apotex Corp.",
+      "is_original_packager": true,
+      "application_number": "ANDA090548",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "d9adb9e4-c495-9530-e5e3-7e3b01d53e4c",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "atorvastatin calcium",
+      "product_ndc": "42385-940",
+      "labeler": "Laurus Labs Limited",
+      "is_original_packager": true,
+      "application_number": "ANDA214513",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "9f8ca507-b784-4d18-8d3e-d7d68072c416",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Laurus Labs Limited (VSP2)",
+          "duns": "650885309",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "atorvastatin calcium",
+      "product_ndc": "76420-946",
+      "labeler": "Asclemed USA, Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA209288",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "60d51f39-8086-4434-affe-88ab8ca0c7e5",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "ASCLEMED USA INC. DBA ENOVACHEM",
+          "duns": "059888437",
+          "operations": [
+            "C73607",
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "67877-512",
+        "67877-511",
+        "67877-513",
+        "67877-514"
+      ],
+      "operation_counts": {
+        "C73607": 1,
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "atorvastatin calcium",
+      "product_ndc": "70518-3037",
+      "labeler": "REMEDYREPACK INC.",
+      "is_original_packager": null,
+      "application_number": "ANDA209288",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "09cb8375-075c-47e8-a4eb-8ac667ed849e",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [
+        "67877-512"
+      ],
+      "operation_counts": {}
+    },
+    {
+      "drug": "amlodipine besylate",
+      "product_ndc": "82009-027",
+      "labeler": "Quallent Pharmaceuticals Health LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA077073",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "c262dedb-1d13-4447-9355-f11e1dbbfb4d",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "CIPLA LIMITED GOA",
+          "duns": "650072015",
+          "operations": [
+            "C43360",
+            "C25391",
+            "C84732",
+            "C84731"
+          ]
+        },
+        {
+          "name": "CIPLA LIMITED VIRGONAGAR",
+          "duns": "915154892",
+          "operations": [
+            "C25391",
+            "C82401"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1,
+        "C25391": 2,
+        "C84732": 1,
+        "C84731": 1,
+        "C82401": 1
+      }
+    },
+    {
+      "drug": "amlodipine besylate",
+      "product_ndc": "58151-355",
+      "labeler": "Viatris Specialty LLC",
+      "is_original_packager": true,
+      "application_number": "NDA019787",
+      "marketing_category": "NDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "7367289c-b0b0-466a-83e2-558e2985c29f",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "amlodipine besylate",
+      "product_ndc": "51407-950",
+      "labeler": "GSMS, Incorporated",
+      "is_original_packager": true,
+      "application_number": "ANDA076719",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "9c0f83f4-06ad-4bb1-a8e3-dcac43b840cf",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "amlodipine besylate",
+      "product_ndc": "50090-6808",
+      "labeler": "A-S Medication Solutions",
+      "is_original_packager": null,
+      "application_number": "ANDA203245",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "5c50c3fe-afe5-459e-95c0-c9af4cbb6909",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "A-S Medication Solutions",
+          "duns": "830016429",
+          "operations": [
+            "C73607",
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "29300-398"
+      ],
+      "operation_counts": {
+        "C73607": 1,
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "amlodipine besylate",
+      "product_ndc": "71335-1278",
+      "labeler": "Bryant Ranch Prepack",
+      "is_original_packager": null,
+      "application_number": "ANDA078925",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "1b449c22-0181-4a50-94b3-26139b90b978",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Bryant Ranch Prepack",
+          "duns": "171714327",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "67877-199",
+        "67877-198"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "levothyroxine sodium",
+      "product_ndc": "42023-203",
+      "labeler": "ENDO USA, Inc.",
+      "is_original_packager": true,
+      "application_number": "NDA202231",
+      "marketing_category": "NDA",
+      "dosage_form": "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION",
+      "spl_set_id": "9d815416-11c9-470e-a82f-89b0bf232e12",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Fresenius Kabi USA, LLC",
+          "duns": "023648251",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "levothyroxine sodium",
+      "product_ndc": "0480-8718",
+      "labeler": "Teva Pharmaceuticals, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA207588",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "60cadfd7-82b5-4207-97e1-1dd0655efb27",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "levothyroxine sodium",
+      "product_ndc": "47781-643",
+      "labeler": "Alvogen, Inc.",
+      "is_original_packager": true,
+      "application_number": "NDA021116",
+      "marketing_category": "NDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "4ddcaec1-a58f-340b-9bc1-bbe048b8c885",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "levothyroxine sodium",
+      "product_ndc": "0615-8599",
+      "labeler": "NCS HealthCare of KY, LLC dba Vangard Labs",
+      "is_original_packager": null,
+      "application_number": "NDA021210",
+      "marketing_category": "NDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "abe173cc-1579-43a5-b12d-a31958d0a539",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "NCS HealthCare of KY, LLC dba Vangard Labs",
+          "duns": "050052943",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "69238-1830",
+        "69238-1831",
+        "69238-1832",
+        "69238-1833",
+        "69238-1834",
+        "69238-1835",
+        "69238-1836",
+        "69238-1837",
+        "69238-1838",
+        "69238-1839"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "levothyroxine sodium",
+      "product_ndc": "51655-484",
+      "labeler": "Northwind Health Company, LLC",
+      "is_original_packager": null,
+      "application_number": "ANDA209713",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "f317a597-4644-746a-e053-2995a90a807f",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Northwind Health Company, LLC",
+          "duns": "036986393",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "68180-971"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "lisinopril",
+      "product_ndc": "31722-172",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA075903",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "8f20acd7-2635-4a9b-b732-2a84ea93dea7",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Evaric Pharmaceuticals Inc",
+          "duns": "080470330",
+          "operations": [
+            "C25391",
+            "C84732",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C84732": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "lisinopril",
+      "product_ndc": "31722-172",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA075903",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "387068e7-7fb9-44f3-ae1c-e45ebc755a3e",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Evaric Pharmaceuticals Inc",
+          "duns": "080470330",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "lisinopril",
+      "product_ndc": "23155-876",
+      "labeler": "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc.(780779901)",
+      "is_original_packager": true,
+      "application_number": "ANDA076102",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "c6c55efa-36bd-4613-98ca-2eb589a31e53",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "CorePharma, LLC",
+          "duns": "031192276",
+          "operations": [
+            "C43360",
+            "C25391",
+            "C84731",
+            "C84732"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1,
+        "C25391": 1,
+        "C84731": 1,
+        "C84732": 1
+      }
+    },
+    {
+      "drug": "lisinopril",
+      "product_ndc": "67046-2097",
+      "labeler": "Coupler LLC",
+      "is_original_packager": null,
+      "application_number": "ANDA076164",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "560513ef-4d2c-8ca0-e063-6394a90a674a",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Coupler LLC",
+          "duns": "119003108",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "43547-352"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "lisinopril",
+      "product_ndc": "50090-4725",
+      "labeler": "A-S Medication Solutions",
+      "is_original_packager": null,
+      "application_number": "ANDA076164",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "d81deeaf-7e5e-44c5-9348-5923c4e3ccd6",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "A-S Medication Solutions",
+          "duns": "830016429",
+          "operations": [
+            "C73607",
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "43547-354"
+      ],
+      "operation_counts": {
+        "C73607": 1,
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "gabapentin",
+      "product_ndc": "64380-728",
+      "labeler": "Strides Pharma Science Limited",
+      "is_original_packager": true,
+      "application_number": "ANDA203244",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "bec31452-b52b-4698-ba4c-0b614780ee84",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Strides Pharma Science Limited",
+          "duns": "871402375",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "gabapentin",
+      "product_ndc": "72888-131",
+      "labeler": "Advagen Pharma Ltd",
+      "is_original_packager": true,
+      "application_number": "ANDA077661",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "401b30fc-e143-4906-aae1-e5b5c190d4a8",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Rubicon Research Limited",
+          "duns": "677604197",
+          "operations": [
+            "C43360",
+            "C25391",
+            "C84732"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1,
+        "C25391": 1,
+        "C84732": 1
+      }
+    },
+    {
+      "drug": "gabapentin",
+      "product_ndc": "65841-706",
+      "labeler": "Zydus Lifesciences Limited",
+      "is_original_packager": true,
+      "application_number": "ANDA078926",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "b033c169-4943-4ad9-ace0-7e4a1f0dc100",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Zydus Lifesciences Limited",
+          "duns": "918596198",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "gabapentin",
+      "product_ndc": "63629-8489",
+      "labeler": "Bryant Ranch Prepack",
+      "is_original_packager": null,
+      "application_number": "ANDA205101",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "a75c9157-a1fc-44cc-89f8-c5a3742fb9ed",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Bryant Ranch Prepack",
+          "duns": "171714327",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "50228-178"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "gabapentin",
+      "product_ndc": "71335-0214",
+      "labeler": "Bryant Ranch Prepack",
+      "is_original_packager": null,
+      "application_number": "ANDA078428",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "657349fb-41a9-4814-b4ac-4c5afbdde947",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Bryant Ranch Prepack",
+          "duns": "171714327",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65162-103"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "losartan potassium",
+      "product_ndc": "65841-730",
+      "labeler": "Zydus Lifesciences Limited",
+      "is_original_packager": true,
+      "application_number": "ANDA078243",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "9ccd6823-e813-472c-99cd-c6ef25e74bed",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Zydus Lifesciences Limited",
+          "duns": "677605858",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        },
+        {
+          "name": "Zydus Lifesciences Limited",
+          "duns": "918596198",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        },
+        {
+          "name": "Zydus Pharmaceuticals Limited",
+          "duns": "650173735",
+          "operations": [
+            "C43360",
+            "C25391"
+          ]
+        }
+      ],
+      "manufacture_count": 3,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 3,
+        "C43360": 3
+      }
+    },
+    {
+      "drug": "losartan potassium",
+      "product_ndc": "72865-143",
+      "labeler": "XLCare Pharmaceuticals, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA203835",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "20421665-0401-4f6e-9e1d-232c654efb0f",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Ascent pharmaceuticals, Inc.",
+          "duns": "080938961",
+          "operations": [
+            "C43360",
+            "C25391",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1,
+        "C25391": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "losartan potassium",
+      "product_ndc": "65862-201",
+      "labeler": "Aurobindo Pharma Limited",
+      "is_original_packager": true,
+      "application_number": "ANDA090083",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "31366b4b-dfd6-4fda-babe-2cb3d2c14a2b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Aurobindo Pharma Limited",
+          "duns": "918917642",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        },
+        {
+          "name": "APL HEALTHCARE LIMITED",
+          "duns": "650918514",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 2,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 2,
+        "C43360": 2
+      }
+    },
+    {
+      "drug": "losartan potassium",
+      "product_ndc": "68071-5040",
+      "labeler": "NuCare Pharmaceuticals,Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA090083",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "91305ca4-7d56-2052-e053-2995a90a5d61",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "NuCare Pharmaceuticals,Inc.",
+          "duns": "010632300",
+          "operations": [
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65862-202"
+      ],
+      "operation_counts": {
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "losartan potassium",
+      "product_ndc": "0904-7049",
+      "labeler": "Major Pharmaceuticals",
+      "is_original_packager": null,
+      "application_number": "ANDA078243",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "c15387df-87a4-4784-acb5-7dd550498f8f",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [
+        "68382-135",
+        "68382-136",
+        "68382-137"
+      ],
+      "operation_counts": {}
+    },
+    {
+      "drug": "metformin hydrochloride",
+      "product_ndc": "24658-790",
+      "labeler": "PuraCap Laboratories LLC dba Blu Pharmaceuticals",
+      "is_original_packager": true,
+      "application_number": "ANDA075965",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "5c2581e3-2b30-4da5-8bed-228173ca20d2",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Epic Pharma, LLC",
+          "duns": "827915443",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "metformin hydrochloride",
+      "product_ndc": "71093-134",
+      "labeler": "ACI Healthcare USA, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA203769",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "e18b60f9-721e-4db6-9f61-d3437e18faf2",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "ScieGen Pharmaceuticals, Inc.",
+          "duns": "079391286",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "metformin hydrochloride",
+      "product_ndc": "68094-804",
+      "labeler": "Precision Dose, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA078321",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, EXTENDED RELEASE",
+      "spl_set_id": "60142fb2-16da-4f54-a542-74f9a70b9c8b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "CSPC Ouyi Pharmaceutical Co., Ltd.",
+          "duns": "421303775",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "metformin hydrochloride",
+      "product_ndc": "63187-238",
+      "labeler": "Proficient Rx LP",
+      "is_original_packager": null,
+      "application_number": "ANDA077095",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "1b9b6db9-1bac-4252-a03c-18dc0271f05f",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Proficient Rx LP",
+          "duns": "079196022",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65862-008",
+        "65862-010"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "metformin hydrochloride",
+      "product_ndc": "68071-3575",
+      "labeler": "NuCare Pharmaceuticals,Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA213320",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "1182bf60-3578-a0ed-e063-6394a90aa50f",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "NuCare Pharmaceuticals,Inc.",
+          "duns": "010632300",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "23155-842"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "metoprolol succinate",
+      "product_ndc": "31722-592",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA205541",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED, EXTENDED RELEASE",
+      "spl_set_id": "74a28333-53c1-493e-b6ad-2192fdc35391",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Hetero Labs Limited Unit III",
+          "duns": "676162024",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "metoprolol succinate",
+      "product_ndc": "42806-726",
+      "labeler": "Epic Pharma, LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA213854",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, EXTENDED RELEASE",
+      "spl_set_id": "2c70177a-615b-4ed7-a58f-a298212e8fae",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Yichang Humanwell Oral Solid Dosge Plant",
+          "duns": "421371958",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "metoprolol succinate",
+      "product_ndc": "69097-408",
+      "labeler": "Cipla USA Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA207465",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, EXTENDED RELEASE",
+      "spl_set_id": "3a4966a2-2728-4c99-999f-576b3e2df90c",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "CTX life sciences-API metoprolol succinate",
+          "duns": "676190180",
+          "operations": [
+            "C82401"
+          ]
+        },
+        {
+          "name": "Cipla Ltd. Indore",
+          "duns": "918596409",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84732",
+            "C84731"
+          ]
+        },
+        {
+          "name": "Moehs Catalana S.L",
+          "duns": "460021629",
+          "operations": [
+            "C82401"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C82401": 2,
+        "C25391": 1,
+        "C43360": 1,
+        "C84732": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "metoprolol succinate",
+      "product_ndc": "51655-919",
+      "labeler": "Northwind Health Company, LLC",
+      "is_original_packager": null,
+      "application_number": "ANDA213854",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, EXTENDED RELEASE",
+      "spl_set_id": "fa16cb4e-d70a-d07f-e053-6294a90a9512",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Northwind Health Company, LLC",
+          "duns": "036986393",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "70436-183"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "metoprolol succinate",
+      "product_ndc": "50090-5418",
+      "labeler": "A-S Medication Solutions",
+      "is_original_packager": null,
+      "application_number": "ANDA203894",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, EXTENDED RELEASE",
+      "spl_set_id": "cbc32a80-717b-4cf2-b76a-6d03a3720419",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "A-S Medication Solutions",
+          "duns": "830016429",
+          "operations": [
+            "C73607",
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "68382-564"
+      ],
+      "operation_counts": {
+        "C73607": 1,
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "omeprazole",
+      "product_ndc": "0363-9980",
+      "labeler": "Walgreen Company",
+      "is_original_packager": true,
+      "application_number": "ANDA210593",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE, DELAYED RELEASE",
+      "spl_set_id": "537b9a46-ecc8-4537-9657-c9ff7821dd4b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Ohm Laboratories Inc.",
+          "duns": "184769029",
+          "operations": [
+            "C43360"
+          ]
+        },
+        {
+          "name": "Srini Pharmaceuticals Private Limited",
+          "duns": "725914795",
+          "operations": [
+            "C82401"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1,
+        "C82401": 1
+      }
+    },
+    {
+      "drug": "omeprazole",
+      "product_ndc": "68196-700",
+      "labeler": "Sam's West Inc",
+      "is_original_packager": true,
+      "application_number": "NDA022032",
+      "marketing_category": "NDA",
+      "dosage_form": "TABLET, DELAYED RELEASE",
+      "spl_set_id": "907e9974-46b8-4dae-be92-518c076cb98f",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "omeprazole",
+      "product_ndc": "68462-395",
+      "labeler": "Glenmark Pharmaceuticals Inc., USA",
+      "is_original_packager": true,
+      "application_number": "ANDA091672",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE, DELAYED RELEASE",
+      "spl_set_id": "c6c22be1-659d-4e71-b292-701e27da201b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Glenmark Pharmaceuticals Limited",
+          "duns": "677318665",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "omeprazole",
+      "product_ndc": "87441-063",
+      "labeler": "Unit Dose Solutions, Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA091672",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE, DELAYED RELEASE",
+      "spl_set_id": "557d4c2c-5541-3a51-e063-6394a90ad278",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Unit Dose Solutions, Inc.",
+          "duns": "360804194",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "68462-396"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "omeprazole",
+      "product_ndc": "37808-006",
+      "labeler": "HEB",
+      "is_original_packager": null,
+      "application_number": "ANDA078878",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE, DELAYED RELEASE",
+      "spl_set_id": "5d8b3f5f-f680-64ae-b360-c0bd06b2ac92",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [
+        "55111-397"
+      ],
+      "operation_counts": {}
+    },
+    {
+      "drug": "rosuvastatin calcium",
+      "product_ndc": "16714-990",
+      "labeler": "NorthStar RxLLC",
+      "is_original_packager": true,
+      "application_number": "ANDA079172",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "17d71c80-fade-4735-acec-60738d26dd01",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Glenmark Pharmaceuticals Ltd.",
+          "duns": "677318665",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "rosuvastatin calcium",
+      "product_ndc": "70377-008",
+      "labeler": "Biocon Pharma Inc",
+      "is_original_packager": true,
+      "application_number": "ANDA207752",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "033d8c8f-bbe9-96b5-fd53-cb0ef929857a",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Recipharm Pharmaservices Private Limited",
+          "duns": "871401927",
+          "operations": [
+            "C43360"
+          ]
+        },
+        {
+          "name": "Biocon Limited",
+          "duns": "650173537",
+          "operations": [
+            "C82401"
+          ]
+        },
+        {
+          "name": "Biocon Pharma Limited",
+          "duns": "871412155",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 2,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 2,
+        "C82401": 1
+      }
+    },
+    {
+      "drug": "rosuvastatin calcium",
+      "product_ndc": "60290-043",
+      "labeler": "Umedica Laboratories USA Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA207626",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "989dffcf-0254-439d-9f3f-3b0e9d32de0a",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "UMEDICA LABORATORIES PRIVATE LIMITED",
+          "duns": "920635096",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "rosuvastatin calcium",
+      "product_ndc": "71205-820",
+      "labeler": "Proficient Rx LP",
+      "is_original_packager": null,
+      "application_number": "ANDA206465",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, FILM COATED",
+      "spl_set_id": "76bbea68-52d8-4ba9-a772-0ba75a38f2eb",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Proficient Rx LP",
+          "duns": "079196022",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "67877-440"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "rosuvastatin calcium",
+      "product_ndc": "50090-7976",
+      "labeler": "A-S Medication Solutions",
+      "is_original_packager": null,
+      "application_number": "ANDA207626",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "9d5f8ff6-c622-4101-805d-70bdc888b27e",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "A-S Medication Solutions",
+          "duns": "830016429",
+          "operations": [
+            "C73607",
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "72603-364"
+      ],
+      "operation_counts": {
+        "C73607": 1,
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "pantoprazole sodium",
+      "product_ndc": "0338-9648",
+      "labeler": "Baxter Healthcare Company",
+      "is_original_packager": true,
+      "application_number": "NDA217512",
+      "marketing_category": "NDA",
+      "dosage_form": "INJECTION, SOLUTION",
+      "spl_set_id": "a476e063-9450-4793-9a22-16b0a0a61cd0",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Baxter Healthcare Corporation",
+          "duns": "194684502",
+          "operations": [
+            "C25391",
+            "C84732",
+            "C43360",
+            "C84731",
+            "C84382"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C84732": 1,
+        "C43360": 1,
+        "C84731": 1,
+        "C84382": 1
+      }
+    },
+    {
+      "drug": "pantoprazole sodium",
+      "product_ndc": "0143-9284",
+      "labeler": "Hikma Pharmaceuticals USA Inc.",
+      "is_original_packager": true,
+      "application_number": "NDA209463",
+      "marketing_category": "NDA",
+      "dosage_form": "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION",
+      "spl_set_id": "b02f3f85-8f9b-4d06-8eae-73e592626f3e",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "pantoprazole sodium",
+      "product_ndc": "72603-128",
+      "labeler": "Northstar Rx LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA215860",
+      "marketing_category": "ANDA",
+      "dosage_form": "INJECTION, POWDER, FOR SOLUTION",
+      "spl_set_id": "7e0c5dac-6832-4692-b012-ca59d5e88987",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Nanjing King-Friend Biochemical Pharmaceutical Co., Ltd.",
+          "duns": "421297554",
+          "operations": [
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "pantoprazole sodium",
+      "product_ndc": "87441-065",
+      "labeler": "Unit Dose Solutions, Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA202038",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, DELAYED RELEASE",
+      "spl_set_id": "5566b4b1-b4f5-4020-e063-6394a90a5257",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Unit Dose Solutions, Inc.",
+          "duns": "360804194",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65862-559"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "pantoprazole sodium",
+      "product_ndc": "80425-0406",
+      "labeler": "Advanced Rx of Tennessee, LLC",
+      "is_original_packager": null,
+      "application_number": "ANDA202038",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET, DELAYED RELEASE",
+      "spl_set_id": "1c46140c-2399-5ca3-e063-6394a90af33b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Advanced Rx of Tennessee, LLC",
+          "duns": "117023142",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65862-559"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "furosemide",
+      "product_ndc": "0143-9157",
+      "labeler": "Hikma Pharmaceuticals USA Inc.",
+      "is_original_packager": true,
+      "application_number": "NDA018267",
+      "marketing_category": "NDA",
+      "dosage_form": "INJECTION",
+      "spl_set_id": "ddfc41a9-37d4-49c1-bbf3-969a98cd649c",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "HIKMA FARMACEUTICA (PORTUGAL), S.A",
+          "duns": "452742943",
+          "operations": [
+            "C25391",
+            "C84732",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C84732": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "furosemide",
+      "product_ndc": "72572-190",
+      "labeler": "Civica, Inc.",
+      "is_original_packager": true,
+      "application_number": "ANDA202747",
+      "marketing_category": "ANDA",
+      "dosage_form": "INJECTION, SOLUTION",
+      "spl_set_id": "7ecaa5af-d186-4380-b105-e7e528f75cc7",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "BAXTER PHARMACEUTICALS INDIA PRIVATE LIMITED",
+          "duns": "918603338",
+          "operations": [
+            "C25391",
+            "C84382",
+            "C84732",
+            "C43360",
+            "C84731"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C84382": 1,
+        "C84732": 1,
+        "C43360": 1,
+        "C84731": 1
+      }
+    },
+    {
+      "drug": "furosemide",
+      "product_ndc": "72603-474",
+      "labeler": "NorthStar Rx LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA203428",
+      "marketing_category": "ANDA",
+      "dosage_form": "INJECTION, SOLUTION",
+      "spl_set_id": "fc3194a3-7e75-4551-8334-4a5cc22d9f8b",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Emcure Pharmaceuticals Limited",
+          "duns": "675467924",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731",
+            "C84732"
+          ]
+        },
+        {
+          "name": "Maiva Pharma Private Limited",
+          "duns": "725656438",
+          "operations": [
+            "C25391",
+            "C43360",
+            "C84731",
+            "C84732"
+          ]
+        }
+      ],
+      "manufacture_count": 2,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 2,
+        "C43360": 2,
+        "C84731": 2,
+        "C84732": 2
+      }
+    },
+    {
+      "drug": "furosemide",
+      "product_ndc": "68788-8799",
+      "labeler": "Preferred Pharmaceuticals Inc.",
+      "is_original_packager": null,
+      "application_number": "ANDA216629",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "adda78ee-0cf5-4613-a748-5d6571afe354",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Preferred Pharmaceuticals Inc.",
+          "duns": "791119022",
+          "operations": [
+            "C73606"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "64980-563"
+      ],
+      "operation_counts": {
+        "C73606": 1
+      }
+    },
+    {
+      "drug": "furosemide",
+      "product_ndc": "70518-4679",
+      "labeler": "REMEDYREPACK INC.",
+      "is_original_packager": null,
+      "application_number": "ANDA078010",
+      "marketing_category": "ANDA",
+      "dosage_form": "TABLET",
+      "spl_set_id": "e8c27f1c-dc81-44b1-8663-a7d663bad89f",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [
+        "83980-002"
+      ],
+      "operation_counts": {}
+    },
+    {
+      "drug": "tamsulosin hydrochloride",
+      "product_ndc": "82009-025",
+      "labeler": "Quallent Pharmaceuticals Health LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA078225",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "12ba3063-a134-41e2-8447-45933d4f0f58",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Zydus Lifesciences Limited",
+          "duns": "918596198",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "tamsulosin hydrochloride",
+      "product_ndc": "72603-115",
+      "labeler": "NorthStar Rx LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA202433",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "7ab14f88-414a-448f-b7bf-de8c9e1b1eb3",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "Aurobindo Pharma Limited",
+          "duns": "650381903",
+          "operations": [
+            "C25391",
+            "C43360"
+          ]
+        }
+      ],
+      "manufacture_count": 1,
+      "no_establishment_section": false,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {
+        "C25391": 1,
+        "C43360": 1
+      }
+    },
+    {
+      "drug": "tamsulosin hydrochloride",
+      "product_ndc": "62135-775",
+      "labeler": "Chartwell RX, LLC",
+      "is_original_packager": true,
+      "application_number": "ANDA207405",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "14db58df-7584-410b-8cf4-4b928dada859",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [],
+      "operation_counts": {}
+    },
+    {
+      "drug": "tamsulosin hydrochloride",
+      "product_ndc": "60760-598",
+      "labeler": "St. Mary's Medical Park Pharmacy",
+      "is_original_packager": null,
+      "application_number": "ANDA202433",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "6142d7b6-e5ea-1af0-e053-2991aa0a00cd",
+      "spl_status": 200,
+      "establishments": [
+        {
+          "name": "St. Mary's Medical Park Pharmacy",
+          "duns": "063050751",
+          "operations": [
+            "C73606",
+            "C73607"
+          ]
+        }
+      ],
+      "manufacture_count": 0,
+      "no_establishment_section": false,
+      "repack_or_relabel": true,
+      "equivalent_source_ndcs": [
+        "65862-598"
+      ],
+      "operation_counts": {
+        "C73606": 1,
+        "C73607": 1
+      }
+    },
+    {
+      "drug": "tamsulosin hydrochloride",
+      "product_ndc": "55154-2636",
+      "labeler": "Cardinal Health 107, LLC",
+      "is_original_packager": null,
+      "application_number": "ANDA202433",
+      "marketing_category": "ANDA",
+      "dosage_form": "CAPSULE",
+      "spl_set_id": "0e3206ba-db3e-40b3-b46b-c7ae4703fdea",
+      "spl_status": 200,
+      "establishments": [],
+      "manufacture_count": 0,
+      "no_establishment_section": true,
+      "repack_or_relabel": false,
+      "equivalent_source_ndcs": [
+        "0904-7383"
+      ],
+      "operation_counts": {}
+    }
+  ],
+  "drugsfda": [
+    {
+      "application_number": "ANDA213853",
+      "status": 200,
+      "sponsor_name": "UMEDICA",
+      "product_count": 4,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA090548",
+      "status": 200,
+      "sponsor_name": "APOTEX INC",
+      "product_count": 4,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA214513",
+      "status": 200,
+      "sponsor_name": "LAURUS",
+      "product_count": 4,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA209288",
+      "status": 200,
+      "sponsor_name": "ALKEM LABS LTD",
+      "product_count": 4,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA077073",
+      "status": 200,
+      "sponsor_name": "CIPLA",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "NDA019787",
+      "status": 200,
+      "sponsor_name": "VIATRIS",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA076719",
+      "status": 200,
+      "sponsor_name": "MACLEODS PHARMS",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA203245",
+      "status": 200,
+      "sponsor_name": "UNICHEM",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA078925",
+      "status": 200,
+      "sponsor_name": "ALKEM",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "NDA202231",
+      "status": 200,
+      "sponsor_name": "FRESENIUS KABI USA",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA207588",
+      "status": 200,
+      "sponsor_name": "WATSON LABS TEVA",
+      "product_count": 12,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "NDA021116",
+      "status": 200,
+      "sponsor_name": "ALVOGEN",
+      "product_count": 12,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "NDA021210",
+      "status": 200,
+      "sponsor_name": "STEVENS J",
+      "product_count": 12,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA209713",
+      "status": 200,
+      "sponsor_name": "LUPIN",
+      "product_count": 12,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA075903",
+      "status": 200,
+      "sponsor_name": "ANNORA PHARMA",
+      "product_count": 6,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA076102",
+      "status": 200,
+      "sponsor_name": "HERITAGE",
+      "product_count": 6,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA076164",
+      "status": 200,
+      "sponsor_name": "PRINSTON INC",
+      "product_count": 6,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA203244",
+      "status": 200,
+      "sponsor_name": "STRIDES PHARMA",
+      "product_count": 2,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA077661",
+      "status": 200,
+      "sponsor_name": "RUBICON RESEARCH",
+      "product_count": 2,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA078926",
+      "status": 200,
+      "sponsor_name": "ZYDUS PHARMS USA INC",
+      "product_count": 2,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA205101",
+      "status": 200,
+      "sponsor_name": "SCIEGEN PHARMS",
+      "product_count": 2,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA078428",
+      "status": 200,
+      "sponsor_name": "AMNEAL PHARMS NY",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA078243",
+      "status": 200,
+      "sponsor_name": "ZYDUS PHARMS USA INC",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA203835",
+      "status": 200,
+      "sponsor_name": "HETERO LABS LTD V",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    },
+    {
+      "application_number": "ANDA090083",
+      "status": 200,
+      "sponsor_name": "AUROBINDO PHARMA",
+      "product_count": 3,
+      "meta_last_updated": "2026-11-10"
+    }
+  ],
+  "imprints": [
+    {
+      "product_ndc": "60290-041",
+      "drug": "atorvastatin calcium",
+      "labeler": "Umedica Laboratories USA Inc.",
+      "imprint": [
+        "ATO;40"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "60505-2578",
+      "drug": "atorvastatin calcium",
+      "labeler": "Apotex Corp.",
+      "imprint": [
+        "APO;A10"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "42385-940",
+      "drug": "atorvastatin calcium",
+      "labeler": "Laurus Labs Limited",
+      "imprint": [
+        "LA37"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "76420-946",
+      "drug": "atorvastatin calcium",
+      "labeler": "Asclemed USA, Inc.",
+      "imprint": [
+        "40;ATS"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "70518-3037",
+      "drug": "atorvastatin calcium",
+      "labeler": "REMEDYREPACK INC.",
+      "imprint": [
+        "20;ATS"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "82009-027",
+      "drug": "amlodipine besylate",
+      "labeler": "Quallent Pharmaceuticals Health LLC",
+      "imprint": [
+        "127;C"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "58151-355",
+      "drug": "amlodipine besylate",
+      "labeler": "Viatris Specialty LLC",
+      "imprint": [
+        "NORVASC;10"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "51407-950",
+      "drug": "amlodipine besylate",
+      "labeler": "GSMS, Incorporated",
+      "imprint": [
+        "C;46"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "50090-6808",
+      "drug": "amlodipine besylate",
+      "labeler": "A-S Medication Solutions",
+      "imprint": [
+        "U;10"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "71335-1278",
+      "drug": "amlodipine besylate",
+      "labeler": "Bryant Ranch Prepack",
+      "imprint": [
+        "210"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "42023-203",
+      "drug": "levothyroxine sodium",
+      "labeler": "ENDO USA, Inc.",
+      "imprint": [],
+      "color": [],
+      "shape": [],
+      "status": 200
+    },
+    {
+      "product_ndc": "0480-8718",
+      "drug": "levothyroxine sodium",
+      "labeler": "Teva Pharmaceuticals, Inc.",
+      "imprint": [
+        "175;T;V"
+      ],
+      "color": [
+        "C48327"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "47781-643",
+      "drug": "levothyroxine sodium",
+      "labeler": "Alvogen, Inc.",
+      "imprint": [
+        "50;T;4"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "0615-8599",
+      "drug": "levothyroxine sodium",
+      "labeler": "NCS HealthCare of KY, LLC dba Vangard Labs",
+      "imprint": [
+        "JSP;516"
+      ],
+      "color": [
+        "C48330"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "51655-484",
+      "drug": "levothyroxine sodium",
+      "labeler": "Northwind Health Company, LLC",
+      "imprint": [
+        "L22"
+      ],
+      "color": [
+        "C48332"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "31722-172",
+      "drug": "lisinopril",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "imprint": [
+        "E1"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "31722-172",
+      "drug": "lisinopril",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "imprint": [
+        "E1"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "23155-876",
+      "drug": "lisinopril",
+      "labeler": "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc.(780779901)",
+      "imprint": [
+        "C52"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "67046-2097",
+      "drug": "lisinopril",
+      "labeler": "Coupler LLC",
+      "imprint": [
+        "H;145"
+      ],
+      "color": [
+        "C48330"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "50090-4725",
+      "drug": "lisinopril",
+      "labeler": "A-S Medication Solutions",
+      "imprint": [
+        "H;147"
+      ],
+      "color": [
+        "C48328"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "64380-728",
+      "drug": "gabapentin",
+      "labeler": "Strides Pharma Science Limited",
+      "imprint": [
+        "NT;151"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "72888-131",
+      "drug": "gabapentin",
+      "labeler": "Advagen Pharma Ltd",
+      "imprint": [
+        "UpArrowhead;A21"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "65841-706",
+      "drug": "gabapentin",
+      "labeler": "Zydus Lifesciences Limited",
+      "imprint": [
+        "ZE71"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "63629-8489",
+      "drug": "gabapentin",
+      "labeler": "Bryant Ranch Prepack",
+      "imprint": [
+        "SG;178"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "71335-0214",
+      "drug": "gabapentin",
+      "labeler": "Bryant Ranch Prepack",
+      "imprint": [
+        "IP103"
+      ],
+      "color": [
+        "C48332"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "65841-730",
+      "drug": "losartan potassium",
+      "labeler": "Zydus Lifesciences Limited",
+      "imprint": [
+        "Z16"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "72865-143",
+      "drug": "losartan potassium",
+      "labeler": "XLCare Pharmaceuticals, Inc.",
+      "imprint": [
+        "T;7"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48351"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "65862-201",
+      "drug": "losartan potassium",
+      "labeler": "Aurobindo Pharma Limited",
+      "imprint": [
+        "E;45"
+      ],
+      "color": [
+        "C48329"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "68071-5040",
+      "drug": "losartan potassium",
+      "labeler": "NuCare Pharmaceuticals,Inc.",
+      "imprint": [
+        "E;4;6"
+      ],
+      "color": [
+        "C48329"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "0904-7049",
+      "drug": "losartan potassium",
+      "labeler": "Major Pharmaceuticals",
+      "imprint": [
+        "Z18"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48336"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "24658-790",
+      "drug": "metformin hydrochloride",
+      "labeler": "PuraCap Laboratories LLC dba Blu Pharmaceuticals",
+      "imprint": [
+        "E;213"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "71093-134",
+      "drug": "metformin hydrochloride",
+      "labeler": "ACI Healthcare USA, Inc.",
+      "imprint": [
+        "SG;107"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "68094-804",
+      "drug": "metformin hydrochloride",
+      "labeler": "Precision Dose, Inc.",
+      "imprint": [
+        "OE;585"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "63187-238",
+      "drug": "metformin hydrochloride",
+      "labeler": "Proficient Rx LP",
+      "imprint": [
+        "A;12"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "68071-3575",
+      "drug": "metformin hydrochloride",
+      "labeler": "NuCare Pharmaceuticals,Inc.",
+      "imprint": [
+        "002;850"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "31722-592",
+      "drug": "metoprolol succinate",
+      "labeler": "Camber Pharmaceuticals, Inc.",
+      "imprint": [
+        "J;78"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "42806-726",
+      "drug": "metoprolol succinate",
+      "labeler": "Epic Pharma, LLC",
+      "imprint": [
+        "YH;163"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "69097-408",
+      "drug": "metoprolol succinate",
+      "labeler": "Cipla USA Inc.",
+      "imprint": [
+        "C;L;408"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48348"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "51655-919",
+      "drug": "metoprolol succinate",
+      "labeler": "Northwind Health Company, LLC",
+      "imprint": [
+        "YH;165"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    },
+    {
+      "product_ndc": "50090-5418",
+      "drug": "metoprolol succinate",
+      "labeler": "A-S Medication Solutions",
+      "imprint": [
+        "564"
+      ],
+      "color": [
+        "C48325"
+      ],
+      "shape": [
+        "C48345"
+      ],
+      "status": 200
+    }
+  ]
+}

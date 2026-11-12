@@ -5,6 +5,14 @@ observed by `scripts/check_api_feasibility.ts` on **2026-11-12** (report:
 `docs/feasibility/latest-run.json`; fixtures: `tests/fixtures/api/`, `tests/fixtures/spl/`).
 "Documented" means stated by the provider and **not** verified by the harness.
 
+**Task 4A.** Attribution ("Data from the U.S. Food and Drug Administration (openFDA) and the National
+Library of Medicine (RxNorm, DailyMed). Neither FDA nor NLM endorses this app.") is shown in About;
+terms and licenses are listed in `docs/legal/DATA_SOURCES_AND_LIMITATIONS.md`. Lookup order (OD-19):
+NDC Directory → local exclusion policy → RxNav/DailyMed only for eligible medications → recall
+queries only after the user confirms identity. Each result shows openFDA `meta.last_updated` and the
+device retrieval time; a no-match is not shown when the result is older than 24 hours or FDA's
+dataset is older than 45 days.
+
 ## 1. openFDA — NDC Directory
 
 | Item | Detail |
@@ -55,7 +63,7 @@ Limitations (verified):
 | Unknown set ID (`/ndcs.json`) | HTTP 200 with a data object of empty strings (verified) — must be treated as no data, not a valid document |
 | Freshness marker | `metadata.db_published_date` (verified `Nov 11, 2026 08:02:44PM EST`) |
 
-SPL XML elements used (verified on 20 documents):
+SPL XML elements (verified on 20 documents). **Scope update (Task 2):** establishment and operation data below was examined for feasibility only. Manufacturer provenance is out of MVP scope; the app reads SPL only to relate a repackaged product to its source product NDC.
 - Establishments: `author/assignedEntity/representedOrganization/assignedEntity/assignedOrganization` with DUNS `id[@root="1.3.6.1.4.1.519.1"]/@extension`, `name`, and `performance/actDefinition/code` operation codes.
 - Operation codes observed: `C43360` MANUFACTURE, `C84731` PACK, `C84732` LABEL, `C25391` ANALYSIS, `C73606` REPACK, `C73607` RELABEL. **Document A's `C43215` for MANUFACTURE was not observed.** `C82401` (API MANUFACTURE) was not observed in this sample.
 - `displayName` casing varies between documents (`MANUFACTURE` vs `manufacture`).
@@ -97,3 +105,14 @@ Carrier-grade NAT can make many users share one IP; the client must handle `429`
 | FDA Data Dashboard (inspections, 483s), warning letters, Import Alerts | Not in the mandated set; Doc A's approach needs a backend ETL/scraping (see references A-6, A-17, A-18) |
 | `download.open.fda.gov` bulk files | Not tested in Task 1; possible future offline-refresh path (size and update cadence unknown) |
 | Commercial drug databases (e.g., imprint libraries) | Licensing and privacy; not public |
+
+## Task 3: endpoints used by the app
+
+| Client (`mobile/src/services/`) | Request | Purpose |
+|---|---|---|
+| `openfda.ts` | `/drug/ndc.json?search=packaging.package_ndc:"<pkg>"` or `product_ndc:"<prod>"` | Confirm NDC candidates; verify repackager source products |
+| `openfda.ts` | `/drug/enforcement.json?search=<plan query>&limit=100&skip=<n>` | Recall evidence (all pages), including the multi-field positive control |
+| `rxnav.ts` | `/REST/ndcstatus.json?ndc=<ndc11>`, `/REST/rxcui/<scd>/related.json?tty=IN PIN` | Ingredient RxCUIs for catalog and policy matching |
+| `dailymed.ts` | `/dailymed/services/v2/spls/<setid>.xml` (`Accept: */*`) | Repackager source product NDC (`asEquivalentEntity`) only |
+
+Observed 2026-11-12: openFDA does not always publish `openfda.is_original_packager` (for example, product 68094-756), so the SPL is read whenever the flag is not `true` (OD-17).

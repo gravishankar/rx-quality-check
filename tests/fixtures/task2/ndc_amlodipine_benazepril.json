@@ -1,0 +1,76 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:20.182Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"amlodipine and benazepril\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22amlodipine+and+benazepril%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Combination containing a supported ingredient (UNSUPPORTED)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 41
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "50090-3357",
+    "generic_name": "Amlodipine and Benazepril Hydrochloride",
+    "brand_name": "Amlodipine and Benazepril Hydrochloride",
+    "labeler_name": "A-S Medication Solutions",
+    "dosage_form": "CAPSULE",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA202239",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "AMLODIPINE BESYLATE",
+      "strength": "5 mg/1"
+     },
+     {
+      "name": "BENAZEPRIL HYDROCHLORIDE",
+      "strength": "40 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "50090-3357-0",
+      "description": "90 CAPSULE in 1 BOTTLE (50090-3357-0)"
+     }
+    ],
+    "pharm_class": [
+     "Angiotensin Converting Enzyme Inhibitor [EPC]",
+     "Angiotensin-converting Enzyme Inhibitors [MoA]",
+     "Calcium Channel Antagonists [MoA]",
+     "Calcium Channel Blocker [EPC]",
+     "Cytochrome P450 3A Inhibitors [MoA]",
+     "Decreased Blood Pressure [PE]",
+     "Dihydropyridine Calcium Channel Blocker [EPC]",
+     "Dihydropyridines [CS]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "898346",
+      "898359"
+     ]
+    }
+   }
+  ]
+ }
+}

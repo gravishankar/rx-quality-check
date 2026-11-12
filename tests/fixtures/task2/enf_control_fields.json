@@ -1,0 +1,62 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T03:06:45.958Z",
+  "endpoint": "enforcement",
+  "search": "recall_number:\"D-0325-2021\" AND product_description:\"metformin\" AND openfda.product_ndc:\"62756-142\"",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number%3A%22D-0325-2021%22+AND+product_description%3A%22metformin%22+AND+openfda.product_ndc%3A%2262756-142%22&limit=1",
+  "purpose": "Positive control exercising every field the recall queries use (RG-2)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0325-2021",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Metformin HCl Extended-Release Tablets, USP, 500 mg, Rx Only, 500-count bottle, Rx only, Distributed by: Sun Pharmaceutical Industries, Inc., Cranbury, NJ 08512; Manufactured by: Sun Pharmaceutical Industries Ltd., Halol-Baroda HIghway, Halol-389 350 Gujarat, India, NDC 62756-142-02.",
+    "code_info": "Lot #JKU4639A, Exp 10/2022",
+    "recalling_firm": "SUN PHARMACEUTICAL INDUSTRIES INC",
+    "reason_for_recall": "Failed Moisture Limits: Out of specification for water content",
+    "report_date": "20210414",
+    "recall_initiation_date": "20210325",
+    "termination_date": "20220414",
+    "product_type": "Drugs",
+    "product_quantity": "2520 bottles",
+    "openfda": {
+     "product_ndc": [
+      "62756-142",
+      "62756-143"
+     ],
+     "generic_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "METFORMIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

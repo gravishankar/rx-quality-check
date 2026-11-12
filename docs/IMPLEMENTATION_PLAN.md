@@ -3,6 +3,10 @@
 Six independently verifiable tasks. Each task is done on its own branch, ends with a report, and
 **stops for approval** before the next begins.
 
+**Scope update (Task 2):** manufacturer provenance is removed from MVP v0.1 — no facility
+identification, establishment mapping, inspection history, plant risk scoring or provenance
+inference. Labeler/manufacturer names are kept only for product identity and recall matching.
+
 ## Task 1 — Repository initialization and FDA API feasibility
 
 | | |
@@ -11,34 +15,98 @@ Six independently verifiable tasks. Each task is done on its own branch, ends wi
 | Dependencies | None |
 | Acceptance | Harness runs live against all four source families or reports BLOCKED; no fabricated data; tests pass; references preserved unmodified; open decisions listed |
 | Tests | `npm test` (58 passing), `npm run typecheck`, `npm run feasibility` |
+| Status | **Complete** |
+
+## Task 2 — State machine and recall evidence engine
+
+| | |
+|---|---|
+| Deliverables | Pure TypeScript library under `mobile/src/`: `models/` (identity, evidence, policy, lookup, openFDA types), `rules/` (NDC keys and text extraction, strength / dose form / release, ingredient sets, catalog + policy parsing, exclusion, directory confirmation, cross-validation, OCR confirmation gating, lot scope and comparison, per-record recall relevance, query planning, coverage, positive control, aggregation, refill diff, explanation selection, `RULESET_VERSION`), `state/machine.ts` (pure reducer with effect descriptors), `engine/runner.ts` (effect runner with injected ports). Task 1 helpers moved with re-export shims. Refinement: generic `fsm/` core, declarative rule table, mandatory safety gates, `createRxWorkflow` variants, `RxRules` interface for the runner, `docs/STATE_MACHINE_GUIDE.md`. 33 new real openFDA fixtures (`tests/fixtures/task2/`, capture script `npm run fixtures:task2`). Provenance removed from docs. |
+| Dependencies | Task 1 approved; OD-2 (draft policy used, flagged) |
+| Acceptance | Every transition in ARCHITECTURE §4.3 tested; state-machine property tests pass; RG-1, RG-2 (rule level), RG-3, RG-7 pass with real fixtures; no I/O imports in `models/`, `rules/`, `state/` (static test) |
+| Tests | NDC-8, OCR-1…5, EX-2…7/9, ID-1…4, RC-1…5, LOT-1…4, RP-4, refill diff, state-machine table and property tests, workflow integration with request audit. `npm test`: 234 pass. Coverage of `mobile/src`: 97.7% lines, 83.7% branches (`npm run test:coverage`) |
 | Status | **Complete — awaiting approval** |
 
-## Task 2 — State machine and deterministic inference rules
+## Task 3 — Live FDA integration, local database, extensible catalog and policy
 
 | | |
 |---|---|
-| Deliverables | `mobile/src/models/` types; `mobile/src/rules/` (NDC normalization and directory-confirmation logic, cross-validation, strength/form/release normalization, exclusion evaluation, recall relevance R-EV-1…8, lot comparison, refill diff, explanation template selection); `mobile/src/state/` pure reducer with effect descriptors; ruleset versioning. Move `scripts/lib` helpers into `mobile/src` (shared package or path alias) with their tests. |
-| Dependencies | Task 1 approved; OD-2 decision on policy (may proceed with draft policy flagged) |
-| Acceptance | Every transition in ARCHITECTURE §4.3 tested; property tests in TEST_PLAN §3 pass; RG-1, RG-3, RG-7 pass at rule level with real fixtures; no I/O imports in `rules/` or `state/` (lint rule) |
-| Tests | NDC-8, OCR-1…5, EX-2…7/9, ID-1…4, RC-1…5, LOT-1…4, RP-4, MF-3/4, state-machine table and property tests |
-
-## Task 3 — API integration and local storage
-
-| | |
-|---|---|
-| Deliverables | `services/` clients for openFDA NDC, enforcement (with pagination and positive control), DailyMed SPL (real XML parser), RxNav; retry/backoff; request audit hook; `storage/` encrypted SQLite (library chosen per OD-6), migrations, repositories, cache with TTL, delete-all |
+| Deliverables | **Configuration:** schema-2 catalog (ingredient definitions with RxNav-verified precise ingredients and aliases; drugs with status, rx scope and restrictions) and policy (ingredient, route and product-type rules; class signal behavior; explanations); JSON Schemas; fail-closed runtime validation; documented precedence; `catalog:validate`, `policy:validate`, `config:validate` and `config:test`; worked examples (`data/examples/`); `docs/DRUG_CATALOG_GUIDE.md`; `docs/EXCLUSION_POLICY_GUIDE.md`. **Services:** transport (timeout, cancellation, allowlist, privacy guard, audit); openFDA, RxNav and DailyMed clients; production `Ports` with cache and identity enrichment (RxNav RxCUIs, verified repackager source products). **Storage:** driver interface, op-sqlite/SQLCipher and keychain adapters, Node SQLite for tests, migrations, repositories, immutable versioned assessments, delete-all. **App:** composition root and configurable display name ("Rx Recall Check"). **Integration:** `npm run e2e` (recorded real responses), `e2e:live`, `e2e:record` |
 | Dependencies | Task 2 |
-| Acceptance | Clients classify outcomes exactly as `http.ts`; RG-2 implemented; cache never stores failures; delete-all removes DB and key; request audit shows only allowlisted hosts and public identifiers; harness rerun still green |
-| Tests | RC-6, RP-2/3, NET-6/7, CA-1…5, PV-1 (client level), PV-4, storage migration tests with a test DB |
+| Acceptance | All met at library level: Task 2 tests still pass; adding a drug or an exclusion needs no state-machine or recall-engine change (e2e scenarios); exclusions override the catalog; invalid configuration cannot authorize an assessment; API failures never yield `NO_MATCH_FOUND`; pagination and completeness verified; migrations tested; privacy audit passes; a complete assessment runs on live and recorded data. Device-only items are listed in TEST_PLAN §9. |
+| Tests | 323 pass (`npm test`); e2e 13/13 recorded and live; `config:test` 51/51; feasibility re-run 5 PASS / 5 WARN / 0 FAIL |
+| Status | **Complete — awaiting approval** (branch `task-3/live-integration`) |
 
-## Task 4 — Patient-facing mobile interface
+## Task 4A — Android pilot: evidence safety, legal and regulatory readiness
 
 | | |
 |---|---|
-| Deliverables | React Native Android app scaffold under `mobile/`; screens: Home/medication list, Scan entry (manual entry first), Confirm identity, Result (grouped evidence, uncertainty, sources/dates, disclaimer), Excluded/Unsupported/Needs-clarification, Medication detail and history, Settings (delete data, about data sources, policy version); centralized copy; accessibility (TalkBack, dynamic type, contrast) |
-| Dependencies | Tasks 2–3 |
-| Acceptance | All result states render with distinct copy; RG-4 copy lint passes; RG-5 satisfied on every result; manual-entry flow works end to end on emulator against live APIs; accessibility checks pass |
-| Tests | Component tests per state; EX-8; snapshot of copy; E2E manual-entry happy path and each alternative state |
+| Deliverables | React Native 0.88.1 app in `mobile/` (Android + iOS projects; shared TypeScript in `mobile/src/`, screens in `mobile/app/`, native code only behind `mobile/app/platform/`); presentation layer that never shows more than the evidence (`presentation/present.ts`) and one copy file (`copy/en.ts`); screens: entry, product choice, confirmation with evidence labels, result with sources/limitations, not-assessed, errors, history (disabled without verified encryption), about/legal/privacy/delete-all, first-launch notice; build profiles (development/pilot) with product flavors; release gate; encryption self-test; draft legal documents; `EVIDENCE_AND_CLAIMS_POLICY.md`, `LEGAL_REGULATORY_REVIEW.md`, ADR-0001, Android build/install, device test plan, iOS build doc, release-readiness checklist |
+| Decisions | OD-2, OD-4, OD-17, OD-18, OD-19 decided by the product owner (ADR-0001) |
+| Acceptance | All Task 3 tests still pass; uncertainty can never be presented as reassurance (negative and property tests); prohibited wording absent from copy, screens and legal drafts; excluded/unsupported/blocked never presented as passed; no RxNav/DailyMed request for locally excluded medications; development APK builds without Metro; pilot build impossible while the release gate has blockers |
+| Tests | See TEST_PLAN §10 and `EVIDENCE_AND_CLAIMS_POLICY.md` §6 |
+| Not done (blocked) | Physical-device testing (no device in the build environment); on-device encryption verification (PV-4); pilot APK (14 release-gate blockers); legal, regulatory and clinical reviews (external) |
+| Status | **Complete — awaiting review** (branch `task-4a/android-pilot`) |
+
+## Task 4A.1 — MedLuma brand preparation and first device test
+
+| | |
+|---|---|
+| Deliverables | `config/brand.json` (single source: product name, tagline, feature names, version, legal-entity reference, display labels) with generator `npm run brand:bundle` → `mobile/src/brand/brand.ts` and the iOS display name; Android label and versionName read from it; legal documents use `{{PRODUCT_NAME}}` (versions 0.1.1-draft, still DRAFT); release gate blocks a pilot until the name is cleared by counsel; `BRAND_AND_PRODUCT_STRATEGY.md`, `BRAND_CLEARANCE.md`, `FIRST_DEVICE_TEST_RUNBOOK.md`; rebuilt development APK "MedLuma (DEV)"; Task 4A APK preserved |
+| Unchanged | Engine, safety gates, evidence classification, presentation rules, drug data, policy, application/bundle IDs, signing key, repository name |
+| Findings | Brand screening found an identical healthcare-software use of "MedLuma" (Medcast, Australia) → `name_status: PROVISIONAL_CONFLICTS_FOUND`; no permanent rebrand |
+| Not done | Physical-device test (owner to run the runbook); USPTO and domain registries could not be queried from the build environment |
+| Status | **Complete — awaiting review** (branch `task-4a1/medluma-brand`) |
+
+## Task 4A.2 — Functional validation and Android device-test preparation
+
+| | |
+|---|---|
+| Deliverables | UI flow tests on the real screens (Jest + react-test-renderer, recorded real responses); defect fixes (progress screen, typed values kept, typed lot shown as entered, "NDC not found" notice, per-outcome result labels, Android Back, delete-all clears the form, x86 packaging); app versioning (`config/app_version.json`, build 3 = 0.1.2); APK size: universal 63.5 → 29.6 MB, new ARM64-only 15.2 MB; `INSTALL_ON_ANDROID.md`, `FUNCTIONAL_TEST_PLAN.md`, `UX_REVIEW_4A2.md` |
+| Decisions | Naming deferred to the owner's partner; "MedLuma" stays a temporary development placeholder; no further brand work; app IDs not finalized (OD-24) |
+| Unchanged | Engine, safety gates, evidence classification, presentation downgrade rules, drug data, policy, release gate |
+| Not done | Physical-device testing (no device in the build environment) |
+| Status | **Complete — awaiting review** (branch `task-4a2/functional-validation`) |
+
+## Task 4B — Provenance, regulatory evidence and scanner proposal (research only)
+
+| | |
+|---|---|
+| Deliverables | `docs/task4b/` — traceability matrix, evidence-source feasibility (re-verified live where reachable), provenance graph architecture, screen designs, scanner technical design and library comparison, validation scenarios, risk and privacy assessment, go/no-go per capability, scanner-first Task 4C proposal |
+| Product direction | Provenance and regulatory-evidence transparency is the long-term objective; no scores, rankings or verdicts; unfavorable first-party facts shown with scope, date and limits |
+| Not done | No code, APK or merge. The Drug Quality Score App PRD (Oct 22, 2026) was not available (OD-26) |
+| Status | **Proposal — awaiting approval** (branch `task-4b/provenance-proposal`) |
+
+## Task 4C — Scanner-first
+
+| | |
+|---|---|
+| Deliverables | OCR/barcode bake-off on reproducible synthetic labels (`scripts/scanner_lab/`, `docs/task4c/OCR_EVALUATION.md`); app OCR core in pure Java (PaddleOCR PP-OCRv3 on ONNX Runtime 1.28.0); ZXing-cpp barcodes; Android native module (photo via the phone's camera app into a private file, deleted after reading; no CAMERA permission); pure TypeScript field extraction (`mobile/src/scanner/`); scan-first home, three-group confirmation (matched in FDA records / read from your label / needs your input), rescan and correction fallback; build privacy gate; development APK build 4 (0.1.3); `PIXEL_SCAN_TEST_GUIDE.md` with a synthetic test-label sheet; PRD traceability (`docs/task4c/PRD_TRACEABILITY.md`) |
+| Decisions | OD-25 deferred; OD-26 closed (PRD provided); OD-27: open-source, no-telemetry engines used, ML Kit decision pending Pixel results; OD-28 approved (privacy drafts updated; no CAMERA permission needed); OD-29 approved |
+| Unchanged | Recall engine, safety gates, evidence classification, presentation downgrade rules, data, policy |
+| Device fixes | Build 5: barcode reader null crop rectangle (build 4 failed every scan). Build 6: OCR dictionary read from the model file (build 5 read no text), PaddleOCR PP-OCRv4, 3200-px recognition source, extractor fixes |
+| Build 7 (approved 2026-11-12) | Summary-first result screen (`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §3a): counts by group, limits directly below the result, prominent match/possible/unreadable cards, excluded records counted by a fixed primary reason and listed on request, plain-language record details. Categories and matching logic unchanged |
+| Device results | Build 4: every scan failed. Build 5: no text read. Build 6: label scanned, recall check completed (no matching recall). Build 7: typed-entry flow gave the expected results on the Android Emulator (owner, laptop); scanning and the Pixel test not yet done |
+| Not done | iOS scanner (Apple Vision/ONNX Runtime iOS later) |
+| Status | **Build 7 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`). Task 4D not started |
+
+## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
+
+Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
+PV-4 passes; app-switcher privacy (FLAG_SECURE / iOS snapshot) decision; TalkBack/large-font fixes
+from device testing; OD-8, OD-13, OD-14, OD-15, OD-16 product decisions reflected in copy.
+
+## iOS track (roadmap)
+
+| Step | Content | Depends on |
+|---|---|---|
+| iOS-1 | Close architectural items B-iOS-1 (exclude database from iCloud backup), B-iOS-2 (Dev/Pilot schemes reading `build_profile.json`), B-iOS-3 (no local networking in release) — `docs/IOS_BUILD.md` | Task 4A |
+| iOS-2 | Build and run on the owner's iPhone from Xcode on a MacBook Pro; run the device test plan and the encryption self-test on iOS | iOS-1 |
+| iOS-3 | Apple Developer Program enrollment (organization), bundle ID registration, signing in the owner's Apple account | Legal entity |
+| iOS-4 | TestFlight internal testing; then external testing after Beta App Review | Release gate passes |
+| iOS-5 | App Store submission: App Privacy label, review guidelines 1.4.1 / 5.1.3, regulatory documentation if requested | Legal/regulatory sign-off |
+
+No iOS IPA is built in Task 4A.
 
 ## Task 5 — Camera, OCR and refill comparison
 
@@ -69,13 +137,31 @@ Six independently verifiable tasks. Each task is done on its own branch, ends wi
 | ID | Decision needed | Owner | Needed by |
 |---|---|---|---|
 | OD-1 | Administration-based exclusion rule (injectable / hospital-administered) | Product owner | Before release (Task 6); interim behavior defined |
-| OD-2 | Approve exclusion policy `0.1.0-draft` (Document B says "pending your decision"); confirm ingredient- vs indication-based criterion for azathioprine/mycophenolate | Product owner | Task 2 (can proceed with draft) |
-| OD-3 | Include OTC versions of supported ingredients (e.g., omeprazole)? | Product owner | Task 2 |
-| OD-4 | Recall refresh strategy: per-medication vs all-14 refresh (privacy vs bandwidth); recommendation: all-14 | Product owner + architect | Task 3 |
+| OD-2 | **Decided (Task 4A, ADR-0001):** keep the draft; mark `APPROVED` only after review of the exact contents and version (not a legal/clinical approval); pilot builds refuse unapproved files. Remaining action: the review itself. Earlier note — approve exclusion policy (now `0.2.0-draft`). **Partly decided (Task 3):** azathioprine and mycophenolate are excluded by ingredient regardless of indication; listed anticoagulants and transplant immunosuppressants are excluded. Formal approval (status `APPROVED`, effective date) is still needed; release builds refuse unapproved files. | Product owner | Before release |
+| OD-3 | ~~Include OTC versions of supported ingredients?~~ **Closed (Task 3):** OTC products are excluded from MVP v0.1 (policy rule `OTC-MVP`). | Product owner | — |
+| OD-4 | ~~Recall refresh strategy~~ **Decided (Task 4A, ADR-0001):** per-medication lookup on request; no monitoring or notifications implied; every result shows retrieval date, coverage and refresh status. | Product owner | — |
 | OD-5 | OCR/barcode engine, subject to offline/no-telemetry verification | Architect | Task 5 |
-| OD-6 | Encrypted SQLite library and key-wrapping approach | Architect | Task 3 |
-| OD-7 | Show SPL establishment/facility list to patients at all in v0.1, or only "manufacturer identified / not identified"? | Product owner | Task 4 |
+| OD-6 | ~~Encrypted SQLite library and key wrapping~~ **Decided (Task 3):** `@op-engineering/op-sqlite` 19.0.5 with SQLCipher; key in `react-native-keychain` 11.0.0 (Android Keystore). Adapters written and tested with fakes; **device verification pending (Task 6)**. | Architect | Task 6 (verify) |
+| OD-7 | ~~Show SPL establishment/facility list to patients?~~ **Closed (Task 2):** manufacturer provenance removed from MVP v0.1; nothing about facilities is shown. | Product owner | — |
 | OD-8 | Which recalls to show by default (all history vs ongoing + last N years); terminated recalls collapsed? | Product owner | Task 4 |
 | OD-9 | Default branch: the repository had no commits at Task 1, so whichever branch is pushed first becomes GitHub's default. Decide whether to create `main` from the approved Task 1 commit and set it as default | Repository owner | Before Task 2 |
 | OD-10 | Minimum supported Android version and target devices | Product owner | Task 4 |
 | OD-11 | Replace Document B transcript with the original `.md` file if one exists | Product owner | Any time |
+| OD-12 | Catalog matching by name is now the fallback only. Directory-confirmed products get RxNav IN RxCUIs (exact name match) and match by RxCUI; name-only labels still match by name (recorded as `matchedBy: NAME`). Accept? | Product owner + architect | Task 4 |
+| OD-13 | FDA records with internal conflicts (product 50090-6448: generic name "Metoprolol Succinate", active ingredient METOPROLOL TARTRATE) currently yield `NEEDS_CLARIFICATION` (salt unknown). Should the user be allowed to resolve such conflicts by confirming the label, or should they stay unassessed? | Product owner | Task 4 |
+| OD-14 | When several directory-confirmed NDC candidates exist and exactly one agrees with the printed name/strength/form, the engine uses it (still shown in CONFIRM). Approve, or always show `AMBIGUOUS_IDENTITY`? | Product owner | Task 4 |
+| OD-15 | Lot comparison treats hyphen-only differences and partial codes (`J0668398` vs `J0668398-121422`) as `LOT_POSSIBLY_LISTED` → potential match, never confirmed. Confirm this policy. | Product owner | Task 4 |
+| OD-16 | Records whose NDC list cannot be read and whose strength is not stated (e.g. bulk tablets, `NDC 53746-0178-BULK`) are shown as potential matches for every same-ingredient product with a compatible release. Accept the extra "might match" items, or collapse them by default? | Product owner | Task 4 |
+| OD-17 | **Decided (Task 4A, ADR-0001):** accept conservative uncertainty; no inference; no unqualified no-match when missing source information could affect coverage; never identify plant/manufacturer/source NDC without evidence. Background — openFDA omits `is_original_packager` for some products (e.g. 68094-756). The app then reads the product's own SPL: a declared and verified source is used; if none is declared, the status is `NOT_ESTABLISHED`, which adds the limitation `SOURCE_PRODUCT_NOT_ESTABLISHED`. Accept this conservative default? | Product owner | Task 4 |
+| OD-18 | **Decided (Task 4A, ADR-0001):** drafts only in explicitly labeled development builds (`.dev` app ID, DEV name and banner), never in pilot/release APKs; enforced by build profile + Gradle check + release gate. Background — development builds accept draft configuration (`config/app_config.json` `accept_unapproved_config: true`); release builds must not. Confirm the build-flag approach for Task 6. | Architect | Task 6 |
+| OD-19 | **Decided and implemented (Task 4A, ADR-0001):** local exclusions run before optional RxNav/DailyMed lookups; identifiers per service documented. Background — identity enrichment called RxNav and DailyMed before the exclusion check, so an excluded drug's public identifiers are still looked up there (no recall request is sent). Move enrichment after an ELIGIBLE decision to reduce queries? | Architect | Task 4 |
+| OD-20 | Application ID `org.rxrecallcheck.app` is a placeholder (no domain owned). Confirm before any distribution; it cannot change afterwards. | Product owner | Before pilot |
+| OD-21 | Should the app hide its content in the Android recents screen / iOS app switcher (FLAG_SECURE)? It protects privacy but blocks tester screenshots. | Product owner | Task 4B |
+| OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |
+| OD-23 | **Implemented in 4A.2** (presentation only): the confirmation screen shows "NDC not found". Original question — when an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
+| OD-24 | **Deferred (4A.2): naming belongs to the owner's partner; "MedLuma" is a temporary development placeholder only.** Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |
+| OD-25 | **Deferred by the owner (Task 4C).** Allow a build-time regulatory-evidence snapshot (FDA public downloads → reviewed, versioned data shipped in the app; no server) for inspections and compliance actions | Product owner (+ counsel) | Before Task 4E |
+| OD-26 | **Closed (Task 4C):** PRD provided; traceability in `docs/task4c/PRD_TRACEABILITY.md`. | Product owner | — |
+| OD-27 | Scanner OCR/barcode engine. **Task 4C evidence:** ML Kit depends on Google's Clearcut data transport (usage logs); open-source PaddleOCR + ONNX Runtime 1.28.0 + ZXing-cpp used instead (ONNX Runtime ≥ 1.29 adds Microsoft telemetry — pinned below it, gated in the build). Final decision after the Pixel test. | Product owner | After the Pixel test |
+| OD-28 | **Approved (Task 4C).** Privacy drafts updated; the app ended up needing no CAMERA permission (photo via the camera app). | Product owner + counsel | — |
+| OD-29 | **Approved (Task 4C):** facility-level evidence for all candidate facilities equally; company-level evidence separately. | Product owner | — |

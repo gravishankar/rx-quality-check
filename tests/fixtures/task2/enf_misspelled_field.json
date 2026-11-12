@@ -1,0 +1,24 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:11.088Z",
+  "endpoint": "enforcement",
+  "search": "openfda.product_ndcx:\"62756-142\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.product_ndcx%3A%2262756-142%22&limit=100",
+  "purpose": "Misspelled field: openFDA answers 404 NOT_FOUND, indistinguishable from no results"
+ },
+ "http": {
+  "status": 404,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "error": {
+   "code": "NOT_FOUND",
+   "message": "No matches found!"
+  }
+ }
+}

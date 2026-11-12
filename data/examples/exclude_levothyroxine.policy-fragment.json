@@ -1,0 +1,28 @@
+{
+  "description": "WORKED EXAMPLE (not a policy decision, not shipped): how a new exclusion rule is added. It excludes levothyroxine only to demonstrate that an exclusion overrides catalog inclusion without any code change. Levothyroxine IN RxCUI 10582 and PIN 40144 'levothyroxine sodium' are taken from data/drug_catalog.json (RxNav-verified 2026-11-12). The class NARROW_THERAPEUTIC_INDEX_EXAMPLE is illustrative. Test: tests/integration/config_extensibility.test.ts.",
+  "classes": [
+    {
+      "id": "NARROW_THERAPEUTIC_INDEX_EXAMPLE",
+      "criterion": "Illustrative class for the documentation example",
+      "rationale": "Illustrative only.",
+      "explanation": "This medication is not assessed by this version of the app. This is a policy choice, not a finding about the medication.",
+      "fda_epc_signals": [],
+      "unlisted_signal_behavior": "IGNORE"
+    }
+  ],
+  "ingredient_rules": [
+    {
+      "id": "EXCL-LEVOTHYROXINE-EXAMPLE",
+      "ingredient": "levothyroxine",
+      "rxcuis": ["10582", "40144"],
+      "names": ["levothyroxine sodium"],
+      "class": "NARROW_THERAPEUTIC_INDEX_EXAMPLE",
+      "decision": "EXCLUDED",
+      "applies_to": { "routes": ["ORAL"] },
+      "include_combinations": true,
+      "source": "Documentation example; identifiers from data/drug_catalog.json",
+      "verified_on": "2026-11-12"
+    }
+  ],
+  "change_log_entry": { "date": "2026-11-12", "version": "0.3.0-draft", "change": "EXAMPLE: exclude levothyroxine.", "source": "docs/EXCLUSION_POLICY_GUIDE.md example" }
+}

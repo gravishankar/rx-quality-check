@@ -1,36 +1,606 @@
 {
-  "schema_version": 1,
-  "catalog_version": "0.1.0",
+  "$schema": "./schemas/drug_catalog.schema.json",
+  "schema_version": 2,
+  "catalog_version": "0.2.0",
   "status": "DRAFT_PENDING_APPROVAL",
-  "description": "MVP v0.1 supported drug scope. Identity is matched on the exact normalized ingredient set (RxNorm IN RxCUIs). Strength, dosage form and release mechanism are preserved by matching at the RxNorm clinical-drug (SCD) level, never collapsed to ingredient only.",
+  "effective_date": null,
+  "compatibility": {
+    "min_ruleset_version": "0.3.0"
+  },
+  "description": "MVP v0.1 supported drug scope. Ingredient definitions (RxNorm IN with verified precise ingredients and aliases) are separate from drug/formulation eligibility (exact ingredient set plus optional route, prescription-scope, salt, dose-form, release and strength restrictions). Exclusions in data/exclusion_policy.json always take precedence.",
   "provenance": {
     "scope_source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
     "rxcui_source": "RxNav REST /REST/rxcui.json?name=<ingredient> and /REST/rxcui/{id}/properties.json",
     "rxcui_retrieved_at": "2026-11-12",
     "rxnorm_release": "02-Nov-2026"
   },
-  "scope_rules": {
-    "routes": ["ORAL"],
-    "product_types": ["HUMAN PRESCRIPTION DRUG"],
-    "ingredient_set_match": "EXACT",
-    "combination_products_containing_a_supported_ingredient": "UNSUPPORTED unless the exact ingredient set is listed below",
-    "identity_level_for_assessment": "RxNorm SCD (ingredient + strength + dose form) plus product NDC",
-    "open_decisions": ["OD-3 (OTC versions of supported ingredients)"]
+  "scope_defaults": {
+    "routes": [
+      "ORAL"
+    ],
+    "rx_scope": "PRESCRIPTION_ONLY",
+    "ingredient_set_match": "EXACT"
   },
+  "ingredients": [
+    {
+      "id": "atorvastatin",
+      "name": "atorvastatin",
+      "rxcui": "83367",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "83366",
+          "name": "atorvastatin calcium"
+        },
+        {
+          "rxcui": "2569977",
+          "name": "atorvastatin calcium anhydrous"
+        },
+        {
+          "rxcui": "1483793",
+          "name": "atorvastatin calcium propylene glycol solvate"
+        },
+        {
+          "rxcui": "1297766",
+          "name": "atorvastatin calcium trihydrate"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/83367/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "amlodipine",
+      "name": "amlodipine",
+      "rxcui": "17767",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "2184116",
+          "name": "amlodipine benzoate"
+        },
+        {
+          "rxcui": "104416",
+          "name": "amlodipine besylate"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/17767/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "levothyroxine",
+      "name": "levothyroxine",
+      "rxcui": "10582",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "40144",
+          "name": "levothyroxine sodium"
+        },
+        {
+          "rxcui": "1372638",
+          "name": "levothyroxine sodium anhydrous"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/10582/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "lisinopril",
+      "name": "lisinopril",
+      "rxcui": "29046",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "1546022",
+          "name": "lisinopril anhydrous"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/29046/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "gabapentin",
+      "name": "gabapentin",
+      "rxcui": "25480",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "1101333",
+          "name": "gabapentin enacarbil"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/25480/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "losartan",
+      "name": "losartan",
+      "rxcui": "52175",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "203160",
+          "name": "losartan potassium"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/52175/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "metformin",
+      "name": "metformin",
+      "rxcui": "6809",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "235743",
+          "name": "metformin hydrochloride"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/6809/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "metoprolol",
+      "name": "metoprolol",
+      "rxcui": "6918",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "102313",
+          "name": "metoprolol fumarate"
+        },
+        {
+          "rxcui": "221124",
+          "name": "metoprolol succinate"
+        },
+        {
+          "rxcui": "203191",
+          "name": "metoprolol tartrate"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/6918/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "omeprazole",
+      "name": "omeprazole",
+      "rxcui": "7646",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "236486",
+          "name": "omeprazole magnesium"
+        },
+        {
+          "rxcui": "1792108",
+          "name": "omeprazole sodium"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/7646/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "rosuvastatin",
+      "name": "rosuvastatin",
+      "rxcui": "301542",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "323828",
+          "name": "rosuvastatin calcium"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/301542/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "pantoprazole",
+      "name": "pantoprazole",
+      "rxcui": "40790",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "236632",
+          "name": "pantoprazole (as pantoprazole sodium sesquihydrate)"
+        },
+        {
+          "rxcui": "253191",
+          "name": "pantoprazole sodium"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/40790/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "furosemide",
+      "name": "furosemide",
+      "rxcui": "4603",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/4603/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "hydrocodone",
+      "name": "hydrocodone",
+      "rxcui": "5489",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "142439",
+          "name": "hydrocodone bitartrate"
+        },
+        {
+          "rxcui": "236931",
+          "name": "hydrocodone hydrochloride"
+        },
+        {
+          "rxcui": "221107",
+          "name": "hydrocodone polistirex"
+        },
+        {
+          "rxcui": "314667",
+          "name": "hydrocodone resin complex"
+        },
+        {
+          "rxcui": "597355",
+          "name": "hydrocodone tannate"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/5489/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "acetaminophen",
+      "name": "acetaminophen",
+      "rxcui": "161",
+      "tty": "IN",
+      "aliases": [
+        "apap"
+      ],
+      "precise_ingredients": [],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/161/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      },
+      "alias_provenance": {
+        "apap": "Standard pharmacy abbreviation for acetaminophen; observed in FDA recall text (e.g. recall descriptions in tests/fixtures/task2/enf_text_hydrocodone_acetaminophen.json). Previously hard-coded in rules/ingredients.ts."
+      }
+    },
+    {
+      "id": "tamsulosin",
+      "name": "tamsulosin",
+      "rxcui": "77492",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [
+        {
+          "rxcui": "236495",
+          "name": "tamsulosin hydrochloride"
+        }
+      ],
+      "provenance": {
+        "source": "RxNav /REST/rxcui/77492/properties.json and /related.json?tty=PIN",
+        "rxnorm_release": "02-Nov-2026",
+        "verified_on": "2026-11-12"
+      }
+    }
+  ],
   "drugs": [
-    { "id": "atorvastatin", "display_name": "Atorvastatin", "part_d_rank_2023": 1, "ingredients": [{ "name": "atorvastatin", "rxcui": "83367" }] },
-    { "id": "amlodipine", "display_name": "Amlodipine", "part_d_rank_2023": 2, "ingredients": [{ "name": "amlodipine", "rxcui": "17767" }] },
-    { "id": "levothyroxine", "display_name": "Levothyroxine", "part_d_rank_2023": 3, "ingredients": [{ "name": "levothyroxine", "rxcui": "10582" }], "notes": "Listed as narrow therapeutic index in Document A §3. No NTI-specific patient messaging in v0.1 (see docs/references adoption table, A-12)." },
-    { "id": "lisinopril", "display_name": "Lisinopril", "part_d_rank_2023": 4, "ingredients": [{ "name": "lisinopril", "rxcui": "29046" }] },
-    { "id": "gabapentin", "display_name": "Gabapentin", "part_d_rank_2023": 5, "ingredients": [{ "name": "gabapentin", "rxcui": "25480" }], "notes": "Immediate-release and extended-release/gastroretentive and prodrug (gabapentin enacarbil) products are distinct identities; gabapentin enacarbil is a different ingredient and is UNSUPPORTED." },
-    { "id": "losartan", "display_name": "Losartan", "part_d_rank_2023": 6, "ingredients": [{ "name": "losartan", "rxcui": "52175" }] },
-    { "id": "metformin", "display_name": "Metformin", "part_d_rank_2023": 7, "ingredients": [{ "name": "metformin", "rxcui": "6809" }], "notes": "Immediate-release and extended-release tablets are distinct identities." },
-    { "id": "metoprolol_succinate", "display_name": "Metoprolol succinate", "part_d_rank_2023": 8, "ingredients": [{ "name": "metoprolol", "rxcui": "6918" }], "required_precise_ingredient": { "name": "metoprolol succinate", "rxcui": "221124" }, "notes": "Scope is the succinate salt (extended-release). Metoprolol tartrate (PIN 203191) is UNSUPPORTED in v0.1." },
-    { "id": "omeprazole", "display_name": "Omeprazole", "part_d_rank_2023": 9, "ingredients": [{ "name": "omeprazole", "rxcui": "7646" }], "notes": "Prescription delayed-release forms in scope; OTC forms pending OD-3." },
-    { "id": "rosuvastatin", "display_name": "Rosuvastatin", "part_d_rank_2023": 10, "ingredients": [{ "name": "rosuvastatin", "rxcui": "301542" }] },
-    { "id": "pantoprazole", "display_name": "Pantoprazole", "part_d_rank_2023": 11, "ingredients": [{ "name": "pantoprazole", "rxcui": "40790" }] },
-    { "id": "furosemide", "display_name": "Furosemide", "part_d_rank_2023": 12, "ingredients": [{ "name": "furosemide", "rxcui": "4603" }] },
-    { "id": "hydrocodone_acetaminophen", "display_name": "Hydrocodone/acetaminophen", "part_d_rank_2023": 14, "ingredients": [{ "name": "hydrocodone", "rxcui": "5489" }, { "name": "acetaminophen", "rxcui": "161" }], "notes": "Exact two-ingredient set. Single-ingredient hydrocodone or acetaminophen products are UNSUPPORTED. Schedule II controlled substance; no dosing or diversion-related content is shown." },
-    { "id": "tamsulosin", "display_name": "Tamsulosin", "part_d_rank_2023": 15, "ingredients": [{ "name": "tamsulosin", "rxcui": "77492" }] }
+    {
+      "id": "atorvastatin",
+      "display_name": "Atorvastatin",
+      "status": "ACTIVE",
+      "ingredients": [
+        "atorvastatin"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 1,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "amlodipine",
+      "display_name": "Amlodipine",
+      "status": "ACTIVE",
+      "ingredients": [
+        "amlodipine"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 2,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "levothyroxine",
+      "display_name": "Levothyroxine",
+      "status": "ACTIVE",
+      "ingredients": [
+        "levothyroxine"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 3,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Listed as narrow therapeutic index in Document A \u00a73. No NTI-specific patient messaging in v0.1 (see docs/references adoption table, A-12)."
+    },
+    {
+      "id": "lisinopril",
+      "display_name": "Lisinopril",
+      "status": "ACTIVE",
+      "ingredients": [
+        "lisinopril"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 4,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "gabapentin",
+      "display_name": "Gabapentin",
+      "status": "ACTIVE",
+      "ingredients": [
+        "gabapentin"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {
+        "precise_ingredients": {
+          "gabapentin": {
+            "deny": [
+              "1101333"
+            ]
+          }
+        }
+      },
+      "part_d_rank_2023": 5,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Immediate-release and extended-release/gastroretentive and prodrug (gabapentin enacarbil) products are distinct identities; gabapentin enacarbil is a different ingredient and is UNSUPPORTED."
+    },
+    {
+      "id": "losartan",
+      "display_name": "Losartan",
+      "status": "ACTIVE",
+      "ingredients": [
+        "losartan"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 6,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "metformin",
+      "display_name": "Metformin",
+      "status": "ACTIVE",
+      "ingredients": [
+        "metformin"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 7,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Immediate-release and extended-release tablets are distinct identities."
+    },
+    {
+      "id": "metoprolol_succinate",
+      "display_name": "Metoprolol succinate",
+      "status": "ACTIVE",
+      "ingredients": [
+        "metoprolol"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {
+        "precise_ingredients": {
+          "metoprolol": {
+            "allow": [
+              "221124"
+            ]
+          }
+        }
+      },
+      "part_d_rank_2023": 8,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Scope is the succinate salt (extended-release). Metoprolol tartrate (PIN 203191) is UNSUPPORTED in v0.1."
+    },
+    {
+      "id": "omeprazole",
+      "display_name": "Omeprazole",
+      "status": "ACTIVE",
+      "ingredients": [
+        "omeprazole"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 9,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Prescription delayed-release forms in scope; OTC forms pending OD-3."
+    },
+    {
+      "id": "rosuvastatin",
+      "display_name": "Rosuvastatin",
+      "status": "ACTIVE",
+      "ingredients": [
+        "rosuvastatin"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 10,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "pantoprazole",
+      "display_name": "Pantoprazole",
+      "status": "ACTIVE",
+      "ingredients": [
+        "pantoprazole"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 11,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "furosemide",
+      "display_name": "Furosemide",
+      "status": "ACTIVE",
+      "ingredients": [
+        "furosemide"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 12,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    },
+    {
+      "id": "hydrocodone_acetaminophen",
+      "display_name": "Hydrocodone/acetaminophen",
+      "status": "ACTIVE",
+      "ingredients": [
+        "hydrocodone",
+        "acetaminophen"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 14,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      },
+      "notes": "Exact two-ingredient set. Single-ingredient hydrocodone or acetaminophen products are UNSUPPORTED. Schedule II controlled substance; no dosing or diversion-related content is shown."
+    },
+    {
+      "id": "tamsulosin",
+      "display_name": "Tamsulosin",
+      "status": "ACTIVE",
+      "ingredients": [
+        "tamsulosin"
+      ],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": {},
+      "part_d_rank_2023": 15,
+      "provenance": {
+        "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
+        "verified_on": "2026-11-12"
+      }
+    }
+  ],
+  "change_log": [
+    {
+      "date": "2026-11-12",
+      "version": "0.1.0",
+      "change": "Initial 14-drug catalog (schema 1).",
+      "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded)."
+    },
+    {
+      "date": "2026-11-12",
+      "version": "0.2.0",
+      "change": "Schema 2: ingredient-level definitions with RxNav-verified precise ingredients; drug-level status, aliases, rx scope and restrictions; metoprolol succinate allow-list (PIN 221124) and gabapentin enacarbil deny-list (PIN 1101333) made explicit; acetaminophen alias \"apap\" moved from code to data.",
+      "source": "RxNav 02-Nov-2026 (retrieved 2026-11-12); Task 3 brief"
+    }
   ]
 }

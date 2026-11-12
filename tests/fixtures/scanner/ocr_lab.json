@@ -1,0 +1,2242 @@
+{
+  "_fixture": {
+    "description": "SYNTHETIC medication labels (scripts/scanner_lab/generate_labels.py, seed 20261112) read by the app OCR core (PP-OCRv4 mobile via ONNX Runtime 1.28.0, mobile/android/.../scanner/core/PpOcr.java, detector max side 960, image long side 3200; dictionary read from the model file (build 6)) and by ZXing-cpp 2.x (python binding; same C++ core as the Android wrapper). Drug codes, labelers and lot JKU4639A are real public values; patient, pharmacy, prescriber, Rx numbers, phones and serial numbers are SYNTHETIC.",
+    "generated": "2026-11-12"
+  },
+  "labels": [
+    {
+      "file": "01_pharmacy_label_metformin_er_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 62756-0142-02",
+        "ndc10": "62756-142-02",
+        "mfr": "SUN PHARMA",
+        "lot": null,
+        "rx_number": "7655911",
+        "patient": "JOHN Q EXAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7655911",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #9278",
+          "score": 0.9687
+        },
+        {
+          "text": "100 EXAMPLE ST,SPRINGFIELD （555） 016-5092",
+          "score": 0.9308
+        },
+        {
+          "text": "Rx# 7655911",
+          "score": 0.9855
+        },
+        {
+          "text": "DATE: 10/13/2026",
+          "score": 0.9791
+        },
+        {
+          "text": "JOHN Q EXAMPLE",
+          "score": 0.9939
+        },
+        {
+          "text": "TAKE ONE TABLET BY MOUTH AT BEDTIME",
+          "score": 0.9811
+        },
+        {
+          "text": "METFORMIN HCL ER 5O0 MG TAB",
+          "score": 0.9604
+        },
+        {
+          "text": "MFG: SUN PHARMA",
+          "score": 0.9788
+        },
+        {
+          "text": "NDC 62756-0142-02",
+          "score": 0.9904
+        },
+        {
+          "text": "QTY:60",
+          "score": 0.996
+        },
+        {
+          "text": "REFILLS:2",
+          "score": 0.9966
+        },
+        {
+          "text": "DR.A. EXAMPLE",
+          "score": 0.9623
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9921
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7655911",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "02_pharmacy_label_metformin_er_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC: 62756-142-02",
+        "ndc10": "62756-142-02",
+        "mfr": "SUN PHARMA",
+        "lot": null,
+        "rx_number": "7664539",
+        "patient": "PAT PLACEHOLDER",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7664539",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #8770",
+          "score": 0.9464
+        },
+        {
+          "text": "100 EXAMPLE ST，SPRINGFIELD (555） 013-4792",
+          "score": 0.936
+        },
+        {
+          "text": "Rx#7664539",
+          "score": 0.9973
+        },
+        {
+          "text": "DATE: 10/25/2026",
+          "score": 0.9694
+        },
+        {
+          "text": "PAT PLACEHOLDER",
+          "score": 0.9784
+        },
+        {
+          "text": "TAKE 1 TABLET EVERY MORNING ONAN EMPTY STOMACH",
+          "score": 0.9355
+        },
+        {
+          "text": "METFORMIN HCL ER 5OO MG TAB",
+          "score": 0.9384
+        },
+        {
+          "text": "MFG: SUN PHARMA",
+          "score": 0.9609
+        },
+        {
+          "text": "NDC:62756-142-02",
+          "score": 0.9978
+        },
+        {
+          "text": "QTY:60",
+          "score": 0.9945
+        },
+        {
+          "text": "REFILLS:0",
+          "score": 0.9688
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.9954
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9801
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7664539",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "03_pharmacy_label_metformin_er_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC#62756014202",
+        "ndc10": "62756-142-02",
+        "mfr": "SUN PHARMA",
+        "lot": null,
+        "rx_number": "6686229",
+        "patient": "SAM SAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6686229",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#4101",
+          "score": 0.9873
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD（555016-5845",
+          "score": 0.9423
+        },
+        {
+          "text": "RX#6686229 DATE:10/11/2026",
+          "score": 0.9571
+        },
+        {
+          "text": "SAM SAMPLE",
+          "score": 0.9342
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTHDAILYWITHEVENINGMEAL",
+          "score": 0.9849
+        },
+        {
+          "text": "METFORMIN HCLER500MGTAB",
+          "score": 0.9723
+        },
+        {
+          "text": "MFG:SUN PHARMA NDC#62756014202",
+          "score": 0.967
+        },
+        {
+          "text": "QTY:60REFILLS:5DR.A.EXAMPLE",
+          "score": 0.9763
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9739
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6686229",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "04_pharmacy_label_rosuvastatin_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC: 82009-018-10",
+        "ndc10": "82009-018-10",
+        "mfr": "QUALLENT",
+        "lot": null,
+        "rx_number": "6590174",
+        "patient": "RIVER DEMO",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6590174",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #4604",
+          "score": 0.9729
+        },
+        {
+          "text": "100 EXAMPLE ST，SPRINGFIELD (555) 012-1063",
+          "score": 0.9372
+        },
+        {
+          "text": "Rx# 6590174",
+          "score": 0.9744
+        },
+        {
+          "text": "DATE: 10/13/2026",
+          "score": 0.9706
+        },
+        {
+          "text": "RIVER DEMO",
+          "score": 0.9965
+        },
+        {
+          "text": "TAKE 1 TABLET BY MOUTH DAILY",
+          "score": 0.9795
+        },
+        {
+          "text": "ROSUVASTATIN CALCIUM 10 MG TAB",
+          "score": 0.9533
+        },
+        {
+          "text": "MFG: QUALLENT",
+          "score": 0.9898
+        },
+        {
+          "text": "NDC: 82009-018-10",
+          "score": 0.9721
+        },
+        {
+          "text": "QTY:90",
+          "score": 0.9933
+        },
+        {
+          "text": "REFILLS:1",
+          "score": 0.9971
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.995
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9921
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6590174",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "05_pharmacy_label_rosuvastatin_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC#82009001810",
+        "ndc10": "82009-018-10",
+        "mfr": "QUALLENT",
+        "lot": null,
+        "rx_number": "6990645",
+        "patient": "SAM SAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6990645",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #8518",
+          "score": 0.9684
+        },
+        {
+          "text": "100 EXAMPLEST,SPRINGFIELD (555)010-8035",
+          "score": 0.9732
+        },
+        {
+          "text": "RX#6990645DATE:10/14/2026",
+          "score": 0.9808
+        },
+        {
+          "text": "SAM SAMPLE",
+          "score": 0.9558
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTH ONCEDAILYAS DIRECTED",
+          "score": 0.9758
+        },
+        {
+          "text": "ROSUVASTATINCALCIUM10MGTAB",
+          "score": 0.9877
+        },
+        {
+          "text": "MFG:QUALLENT NDC#82009001810",
+          "score": 0.9848
+        },
+        {
+          "text": "QTY:90 REFILLS:0 DR.A.EXAMPLE",
+          "score": 0.9659
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9743
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6990645",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "06_pharmacy_label_rosuvastatin_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 82009-0018-10",
+        "ndc10": "82009-018-10",
+        "mfr": "QUALLENT",
+        "lot": null,
+        "rx_number": "7413634",
+        "patient": "JANE SYNTHETIC-PATIENT",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7413634",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#3379",
+          "score": 0.9859
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD（555）013-6544",
+          "score": 0.9156
+        },
+        {
+          "text": "RX#7413634 DATE:10/19/2026",
+          "score": 0.9636
+        },
+        {
+          "text": "JANESYNTHETIC-PATIENT",
+          "score": 0.9876
+        },
+        {
+          "text": "TAKE1TABLETEVERYMORNINGONANEMPTYSTOMACH",
+          "score": 0.988
+        },
+        {
+          "text": "ROSUVASTATINCALCIUM10MGTAB",
+          "score": 0.9857
+        },
+        {
+          "text": "MFG:QUALLENT NDC82009-0018-10",
+          "score": 0.9781
+        },
+        {
+          "text": "QTY:60REFILLS:1DR.A.EXAMPLE",
+          "score": 0.9696
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9638
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7413634",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "07_pharmacy_label_warfarin_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "warfarin",
+        "name": "WARFARIN",
+        "strength": "1 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC#67046207203",
+        "ndc10": "67046-2072-3",
+        "mfr": "COUPLER",
+        "lot": null,
+        "rx_number": "6924991",
+        "patient": "ALEX TESTPERSON",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6924991",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#6003",
+          "score": 0.9915
+        },
+        {
+          "text": "100 EXAMPLE ST, SPRINGFIELD(555) 018-8379",
+          "score": 0.9571
+        },
+        {
+          "text": "Rx#6924991DATE:10/11/2026",
+          "score": 0.9914
+        },
+        {
+          "text": "ALEX TESTPERSON",
+          "score": 0.9857
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTHDAILYWITHEVENINGMEAL",
+          "score": 0.9909
+        },
+        {
+          "text": "WARFARINSODIUM1MGTAB",
+          "score": 0.9882
+        },
+        {
+          "text": "MFG:COUPLER NDC#67046207203",
+          "score": 0.9909
+        },
+        {
+          "text": "QTY: 60 REFILLS:1 DR.A. EXAMPLE",
+          "score": 0.9841
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9725
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6924991",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "08_pharmacy_label_warfarin_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "warfarin",
+        "name": "WARFARIN",
+        "strength": "1 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 67046-2072-03",
+        "ndc10": "67046-2072-3",
+        "mfr": "COUPLER",
+        "lot": null,
+        "rx_number": "6040655",
+        "patient": "ALEX TESTPERSON",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6040655",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #4505",
+          "score": 0.9562
+        },
+        {
+          "text": "100 EXAMPLEST,SPRINGFIELD(555) 017-5721",
+          "score": 0.9552
+        },
+        {
+          "text": "Rx#6040655 DATE:10/21/2026",
+          "score": 0.9786
+        },
+        {
+          "text": "ALEX TESTPERSON",
+          "score": 0.973
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTH ONCEDAILYASDIRECTED",
+          "score": 0.9822
+        },
+        {
+          "text": "WARFARINSODIUM1MGTAB",
+          "score": 0.9893
+        },
+        {
+          "text": "MFG:COUPLER NDC 67046-2072-03",
+          "score": 0.9909
+        },
+        {
+          "text": "QTY:90 REFILLS:2 DR.A.EXAMPLE",
+          "score": 0.9847
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9636
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6040655",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "09_pharmacy_label_warfarin_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "warfarin",
+        "name": "WARFARIN",
+        "strength": "1 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC: 67046-2072-3",
+        "ndc10": "67046-2072-3",
+        "mfr": "COUPLER",
+        "lot": null,
+        "rx_number": "7721646",
+        "patient": "JOHN Q EXAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7721646",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#7078",
+          "score": 0.983
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD(555)017-8800",
+          "score": 0.9509
+        },
+        {
+          "text": "RX#7721646DATE:10/23/2026",
+          "score": 0.9824
+        },
+        {
+          "text": "JOHNQEXAMPLE",
+          "score": 0.994
+        },
+        {
+          "text": "TAKE1TABLETEVERYMORNINGONANEMPTYSTOMACH",
+          "score": 0.983
+        },
+        {
+          "text": "WARFARINSODIUM1MGTAB",
+          "score": 0.9797
+        },
+        {
+          "text": "MFG:COUPLER NDC:67046-2072-3",
+          "score": 0.9665
+        },
+        {
+          "text": "QTY:60REFILLS:2DR.A.EXAMPLE",
+          "score": 0.9626
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9673
+        }
+      ],
+      "barcodes": []
+    },
+    {
+      "file": "10_pharmacy_label_furosemide_sol_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "furosemide_sol",
+        "name": "FUROSEMIDE",
+        "strength": "10 MG/ML",
+        "form": "ORAL SOLUTION",
+        "ndc_printed": "NDC 68094-0756-62",
+        "ndc10": "68094-756-62",
+        "mfr": "PRECISION DOSE",
+        "lot": null,
+        "rx_number": "7406709",
+        "patient": "ALEX TESTPERSON",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7406709",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#6855",
+          "score": 0.991
+        },
+        {
+          "text": "100 EXAMPLE ST, SPRINGFIELD (555) 018-4967",
+          "score": 0.9617
+        },
+        {
+          "text": "Rx#7406709DATE:10/13/2026",
+          "score": 0.9899
+        },
+        {
+          "text": "ALEX TESTPERSON",
+          "score": 0.9839
+        },
+        {
+          "text": "TAKE4MLBYMOUTHTWICEDAILY",
+          "score": 0.9925
+        },
+        {
+          "text": "FUROSEMIDE10MG/MLORALSOLN",
+          "score": 0.9927
+        },
+        {
+          "text": "MFG:PRECISION DOSE NDC 68094-0756-62",
+          "score": 0.9794
+        },
+        {
+          "text": "QTY: 90 REFILLS:3 DR.A. EXAMPLE",
+          "score": 0.9797
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9725
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7406709",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "11_pharmacy_label_furosemide_sol_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "furosemide_sol",
+        "name": "FUROSEMIDE",
+        "strength": "10 MG/ML",
+        "form": "ORAL SOLUTION",
+        "ndc_printed": "NDC: 68094-756-62",
+        "ndc10": "68094-756-62",
+        "mfr": "PRECISION DOSE",
+        "lot": null,
+        "rx_number": "7009614",
+        "patient": "JANE SYNTHETIC-PATIENT",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7009614",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #8285",
+          "score": 0.961
+        },
+        {
+          "text": "100 EXAMPLEST,SPRINGFIELD (555)013-4796",
+          "score": 0.9718
+        },
+        {
+          "text": "Rx#7009614 DATE:10/23/2026",
+          "score": 0.9729
+        },
+        {
+          "text": "JANE SYNTHETIC-PATIENT",
+          "score": 0.9736
+        },
+        {
+          "text": "TAKE 4ML BYMOUTH TWICE DAILY",
+          "score": 0.9521
+        },
+        {
+          "text": "FUROSEMIDE 10 MG/ML ORAL SOLN",
+          "score": 0.9805
+        },
+        {
+          "text": "MFG:PRECISION DOSE NDC:68094-756-62",
+          "score": 0.9772
+        },
+        {
+          "text": "QTY:90 REFILLS:3 DR.A.EXAMPLE",
+          "score": 0.9649
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9872
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7009614",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "12_pharmacy_label_furosemide_sol_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "furosemide_sol",
+        "name": "FUROSEMIDE",
+        "strength": "10 MG/ML",
+        "form": "ORAL SOLUTION",
+        "ndc_printed": "NDC#68094075662",
+        "ndc10": "68094-756-62",
+        "mfr": "PRECISION DOSE",
+        "lot": null,
+        "rx_number": "6027404",
+        "patient": "RIVER DEMO",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6027404",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY #8239",
+          "score": 0.9744
+        },
+        {
+          "text": "100 EXAMPLE ST,SPRINGFIELD （555)011-9016",
+          "score": 0.9355
+        },
+        {
+          "text": "Rx# 6027404",
+          "score": 0.9484
+        },
+        {
+          "text": "DATE:10/26/2026",
+          "score": 0.9863
+        },
+        {
+          "text": "RIVER DEMO",
+          "score": 0.9892
+        },
+        {
+          "text": "TAKE 4ML BY MOUTH TWICE DAILY",
+          "score": 0.9324
+        },
+        {
+          "text": "FUROSEMIDE 10 MG/ML ORAL SOLN",
+          "score": 0.916
+        },
+        {
+          "text": "MFG:PRECISI0N D0SENDC#68094075662",
+          "score": 0.9757
+        },
+        {
+          "text": "QTY:90",
+          "score": 0.9678
+        },
+        {
+          "text": "REFILLS:4DR.A.EXAMPLE",
+          "score": 0.9836
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9747
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6027404",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "13_pharmacy_label_levothyroxine_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "levothyroxine",
+        "name": "LEVOTHYROXINE",
+        "strength": "175 MCG",
+        "form": "TABLET",
+        "ndc_printed": "NDC: 68788-8793-3",
+        "ndc10": "68788-8793-3",
+        "mfr": "PREFERRED PHARM",
+        "lot": null,
+        "rx_number": "7437768",
+        "patient": "JOHN Q EXAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7437768",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #9709",
+          "score": 0.9744
+        },
+        {
+          "text": "100 EXAMPLE ST，SPRINGFIELD (555) 010-6620",
+          "score": 0.9358
+        },
+        {
+          "text": "Rx# 7437768",
+          "score": 0.9764
+        },
+        {
+          "text": "DATE: 10/17/2026",
+          "score": 0.9716
+        },
+        {
+          "text": "JOHN Q EXAMPLE",
+          "score": 0.9939
+        },
+        {
+          "text": "TAKE 1 TABLET BY MOUTH ONCE DAILY AS DIRECTED",
+          "score": 0.9777
+        },
+        {
+          "text": "LEVOTHYROXINE SOD 175 MCG TAB",
+          "score": 0.9653
+        },
+        {
+          "text": "MFG:PREFERRED PHARM",
+          "score": 0.9956
+        },
+        {
+          "text": "NDC: 68788-8793-3",
+          "score": 0.9744
+        },
+        {
+          "text": "QTY:90",
+          "score": 0.9947
+        },
+        {
+          "text": "REFILLS:4",
+          "score": 0.9975
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.9964
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9921
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7437768",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "14_pharmacy_label_levothyroxine_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "levothyroxine",
+        "name": "LEVOTHYROXINE",
+        "strength": "175 MCG",
+        "form": "TABLET",
+        "ndc_printed": "NDC#68788879303",
+        "ndc10": "68788-8793-3",
+        "mfr": "PREFERRED PHARM",
+        "lot": null,
+        "rx_number": "7885274",
+        "patient": "RIVER DEMO",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7885274",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #7086",
+          "score": 0.961
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD (555)013-6246",
+          "score": 0.958
+        },
+        {
+          "text": "Rx#7885274 DATE:10/23/2026",
+          "score": 0.9741
+        },
+        {
+          "text": "RIVER DEMO",
+          "score": 0.9857
+        },
+        {
+          "text": "TAKE1TABLETEVERYMORNING ONANEMPTYSTOMACH",
+          "score": 0.9819
+        },
+        {
+          "text": "LEVOTHYROXINESOD175MCGTAB",
+          "score": 0.9951
+        },
+        {
+          "text": "MFG:PREFERREDPHARM NDC#68788879303",
+          "score": 0.9836
+        },
+        {
+          "text": "QTY:90 REFILLS:4 DR.A.EXAMPLE",
+          "score": 0.9879
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9804
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7885274",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "15_pharmacy_label_levothyroxine_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "levothyroxine",
+        "name": "LEVOTHYROXINE",
+        "strength": "175 MCG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68788-8793-03",
+        "ndc10": "68788-8793-3",
+        "mfr": "PREFERRED PHARM",
+        "lot": null,
+        "rx_number": "6483845",
+        "patient": "RIVER DEMO",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6483845",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#7384",
+          "score": 0.9891
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD（555）141897",
+          "score": 0.9003
+        },
+        {
+          "text": "RX#6483845 DATE:10/12/2026",
+          "score": 0.964
+        },
+        {
+          "text": "RIVERDEMO",
+          "score": 0.9909
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTHDAILYWITHEVENINGMEAL",
+          "score": 0.9668
+        },
+        {
+          "text": "LEVOTHYROXINESOD175MCGTAB",
+          "score": 0.9921
+        },
+        {
+          "text": "MFG:PREFERREDPHARMNDC68788-8793-03",
+          "score": 0.9917
+        },
+        {
+          "text": "QTY:30REFILLS:3DR.A.EXAMPLE",
+          "score": 0.9747
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9829
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6483845",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "16_pharmacy_label_sertraline_clean.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "sertraline",
+        "name": "SERTRALINE",
+        "strength": "100 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC#68180035309",
+        "ndc10": "68180-353-09",
+        "mfr": "LUPIN",
+        "lot": null,
+        "rx_number": "7822970",
+        "patient": "PAT PLACEHOLDER",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7822970",
+            "is_ndc": false
+          }
+        ],
+        "quality": "clean"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #7267",
+          "score": 0.964
+        },
+        {
+          "text": "100 EXAMPLE ST，SPRINGFIELD (555) 013-6868",
+          "score": 0.9373
+        },
+        {
+          "text": "Rx# 7822970",
+          "score": 0.9703
+        },
+        {
+          "text": "DATE: 10/22/2026",
+          "score": 0.9799
+        },
+        {
+          "text": "PAT PLACEHOLDER",
+          "score": 0.9842
+        },
+        {
+          "text": "TAKE 1 TABLET BY MOUTH ONCE DAILY AS DIRECTED",
+          "score": 0.9777
+        },
+        {
+          "text": "SERTRALINE HCL 100 MG TAB",
+          "score": 0.9519
+        },
+        {
+          "text": "MFG: LUPIN",
+          "score": 0.9898
+        },
+        {
+          "text": "NDC#68180035309",
+          "score": 0.988
+        },
+        {
+          "text": "QTY:30",
+          "score": 0.9901
+        },
+        {
+          "text": "REFILLS:1",
+          "score": 0.9977
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.9963
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.9921
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7822970",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "17_pharmacy_label_sertraline_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "sertraline",
+        "name": "SERTRALINE",
+        "strength": "100 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68180-0353-09",
+        "ndc10": "68180-353-09",
+        "mfr": "LUPIN",
+        "lot": null,
+        "rx_number": "7555556",
+        "patient": "RIVER DEMO",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7555556",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #1668",
+          "score": 0.9808
+        },
+        {
+          "text": "100 EXAMPLE ST,SPRINGFIELD (555) 017-5599",
+          "score": 0.9475
+        },
+        {
+          "text": "Rx# 7555556",
+          "score": 0.9608
+        },
+        {
+          "text": "DATE:10/28/2026",
+          "score": 0.9947
+        },
+        {
+          "text": "RIVER DEMO",
+          "score": 0.9978
+        },
+        {
+          "text": "TAKE ONE TABLET BY MOUTH AT BEDTIME",
+          "score": 0.9732
+        },
+        {
+          "text": "SERTRALINE HCL 100 MG TAB",
+          "score": 0.9719
+        },
+        {
+          "text": "MFG: LUPIN",
+          "score": 0.9748
+        },
+        {
+          "text": "NDC 68180-0353-09",
+          "score": 0.9905
+        },
+        {
+          "text": "QTY:30",
+          "score": 0.9873
+        },
+        {
+          "text": "REFILLS:1",
+          "score": 0.9898
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.9939
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9859
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7555556",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "18_pharmacy_label_sertraline_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "sertraline",
+        "name": "SERTRALINE",
+        "strength": "100 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC: 68180-353-09",
+        "ndc10": "68180-353-09",
+        "mfr": "LUPIN",
+        "lot": null,
+        "rx_number": "6016616",
+        "patient": "SAM SAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6016616",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #9007",
+          "score": 0.9663
+        },
+        {
+          "text": "100 EXAMPLEST,SPRINGFIELD (555)017-7585",
+          "score": 0.9523
+        },
+        {
+          "text": "Rx# 6016616",
+          "score": 0.9777
+        },
+        {
+          "text": "DATE:10/15/2026",
+          "score": 0.9865
+        },
+        {
+          "text": "SAM SAMPLE",
+          "score": 0.9783
+        },
+        {
+          "text": "TAKE ONETABLET BY MOUTH AT BEDTIME",
+          "score": 0.9364
+        },
+        {
+          "text": "SERTRALINE HCL 100 MG TAB",
+          "score": 0.9411
+        },
+        {
+          "text": "MFG:LUPINNDC:68180-353-09",
+          "score": 0.9939
+        },
+        {
+          "text": "QTY:60REFILLS:5DR.A.EXAMPLE",
+          "score": 0.9775
+        },
+        {
+          "text": "DISCARD AFTER:10/14/2027",
+          "score": 0.969
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6016616",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "19_pharmacy_label_metformin_er_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": null,
+        "ndc10": null,
+        "mfr": "SUN PHARMA",
+        "lot": null,
+        "rx_number": "6401046",
+        "patient": "ALEX TESTPERSON",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6401046",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#7531",
+          "score": 0.9922
+        },
+        {
+          "text": "100 EXAMPLE ST, SPRINGFIELD (555) 011-3569",
+          "score": 0.9694
+        },
+        {
+          "text": "Rx# 6401046 DATE:10/24/2026",
+          "score": 0.9573
+        },
+        {
+          "text": "ALEX TESTPERSON",
+          "score": 0.973
+        },
+        {
+          "text": "TAKE 1 TABLETBYMOUTH DAILY",
+          "score": 0.9529
+        },
+        {
+          "text": "METFORMIN HCL ER 500MG TAB",
+          "score": 0.9545
+        },
+        {
+          "text": "MFG: SUN PHARMA",
+          "score": 0.9719
+        },
+        {
+          "text": "QTY:30 REFILLS:3 DR.A. EXAMPLE",
+          "score": 0.9663
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9785
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6401046",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "20_pharmacy_label_metformin_er_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": null,
+        "ndc10": null,
+        "mfr": "SUN PHARMA",
+        "lot": null,
+        "rx_number": "6183887",
+        "patient": "PAT PLACEHOLDER",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "6183887",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#6532",
+          "score": 0.99
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD(555)016-1569",
+          "score": 0.9278
+        },
+        {
+          "text": "Rx#6183887DATE:10/17/2026",
+          "score": 0.9708
+        },
+        {
+          "text": "PATPLACEHOLDER",
+          "score": 0.9948
+        },
+        {
+          "text": "TAKE1TABLETEVERYMORNINGONANEMPTYSTOMACH",
+          "score": 0.9895
+        },
+        {
+          "text": "METFORMINHCLER500MGTAB",
+          "score": 0.9904
+        },
+        {
+          "text": "MFG:SUNPHARMA",
+          "score": 0.9706
+        },
+        {
+          "text": "QTY:60REFILLS:0DR.A.EXAMPLE",
+          "score": 0.9736
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9858
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "6183887",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "21_pharmacy_label_rosuvastatin_mild.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": null,
+        "ndc10": null,
+        "mfr": "QUALLENT",
+        "lot": null,
+        "rx_number": "7134580",
+        "patient": "SAM SAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7134580",
+            "is_ndc": false
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETIC PHARMACY #7153",
+          "score": 0.9623
+        },
+        {
+          "text": "100 EXAMPLE ST, SPRINGFIELD (555) 014-8521",
+          "score": 0.949
+        },
+        {
+          "text": "Rx# 7134580",
+          "score": 0.978
+        },
+        {
+          "text": "DATE:10/27/2026",
+          "score": 0.9954
+        },
+        {
+          "text": "SAM SAMPLE",
+          "score": 0.99
+        },
+        {
+          "text": "TAKE 1 TABLET BY MOUTH DAILY",
+          "score": 0.971
+        },
+        {
+          "text": "ROSUVASTATIN CALCIUM 10 MG TAB",
+          "score": 0.9742
+        },
+        {
+          "text": "MFG: QUALLENT",
+          "score": 0.9706
+        },
+        {
+          "text": "QTY:90",
+          "score": 0.9943
+        },
+        {
+          "text": "REFILLS:2",
+          "score": 0.9918
+        },
+        {
+          "text": "DR.A.EXAMPLE",
+          "score": 0.9944
+        },
+        {
+          "text": "DISCARD AFTER: 10/14/2027",
+          "score": 0.9833
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7134580",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "22_pharmacy_label_rosuvastatin_hard.jpg",
+      "truth": {
+        "kind": "pharmacy_label",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": null,
+        "ndc10": null,
+        "mfr": "QUALLENT",
+        "lot": null,
+        "rx_number": "7310082",
+        "patient": "SAM SAMPLE",
+        "barcodes": [
+          {
+            "format": "Code128",
+            "content": "7310082",
+            "is_ndc": false
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SYNTHETICPHARMACY#6868",
+          "score": 0.9883
+        },
+        {
+          "text": "100EXAMPLEST,SPRINGFIELD（555019-725",
+          "score": 0.874
+        },
+        {
+          "text": "RX#7310082 DATE:10/24/2026",
+          "score": 0.9593
+        },
+        {
+          "text": "SAMSAMPLE",
+          "score": 0.9762
+        },
+        {
+          "text": "TAKE1TABLETBYMOUTHDAILY",
+          "score": 0.9876
+        },
+        {
+          "text": "ROSUVASTATINCALCIUM10MGTAB",
+          "score": 0.9866
+        },
+        {
+          "text": "MFG:QUALLENT",
+          "score": 0.9825
+        },
+        {
+          "text": "QTY:30REFILLS:3DR.A.EXAMPLE",
+          "score": 0.9569
+        },
+        {
+          "text": "DISCARDAFTER:10/14/2027",
+          "score": 0.9896
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "CODE_128",
+          "text": "7310082",
+          "symbology": "]C0"
+        }
+      ]
+    },
+    {
+      "file": "23_stock_bottle_metformin_er_mild.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 62756-142-02",
+        "ndc10": "62756-142-02",
+        "mfr": null,
+        "lot": "JKU4639A",
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "362756142022",
+            "is_ndc": true
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC 62756-142-02",
+          "score": 0.9834
+        },
+        {
+          "text": "Metformin Hydrochloride Extended-Release T:",
+          "score": 0.9781
+        },
+        {
+          "text": "500 mg",
+          "score": 0.9996
+        },
+        {
+          "text": "Rx only",
+          "score": 0.993
+        },
+        {
+          "text": "100 Tablets",
+          "score": 0.9771
+        },
+        {
+          "text": "Lot: JKU4639A",
+          "score": 0.9914
+        },
+        {
+          "text": "Exp: 08/2027",
+          "score": 0.9818
+        },
+        {
+          "text": "Manufactured for:SunPharmaceutical Industries,Inc.",
+          "score": 0.958
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "EAN_13",
+          "text": "0362756142022",
+          "symbology": "]E0"
+        }
+      ]
+    },
+    {
+      "file": "24_stock_bottle_metformin_er_hard.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 62756-142-02",
+        "ndc10": "62756-142-02",
+        "mfr": null,
+        "lot": "JKU4639A",
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "362756142022",
+            "is_ndc": true
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC62756-142-02",
+          "score": 0.9983
+        },
+        {
+          "text": "Metformin HydrochlorideExtended-ReleaseT",
+          "score": 0.9821
+        },
+        {
+          "text": "500 mg",
+          "score": 0.9992
+        },
+        {
+          "text": "Rx only",
+          "score": 0.953
+        },
+        {
+          "text": "100 Tablets",
+          "score": 0.9706
+        },
+        {
+          "text": "Lot:JKU4639AB",
+          "score": 0.9487
+        },
+        {
+          "text": "Exp:08/2027",
+          "score": 0.9895
+        },
+        {
+          "text": "Manufacturedfor:SunPharmaceuticalIndustriesInc.",
+          "score": 0.9518
+        }
+      ],
+      "barcodes": []
+    },
+    {
+      "file": "25_stock_bottle_rosuvastatin_mild.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 82009-018-10",
+        "ndc10": "82009-018-10",
+        "mfr": null,
+        "lot": null,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "382009018102",
+            "is_ndc": true
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC 82009-018-10",
+          "score": 0.9984
+        },
+        {
+          "text": "Rosuvastatin Calcium Tablets",
+          "score": 0.9762
+        },
+        {
+          "text": "10 mg",
+          "score": 0.9991
+        },
+        {
+          "text": "Rx only",
+          "score": 0.9915
+        },
+        {
+          "text": "100 Tablets",
+          "score": 0.9916
+        },
+        {
+          "text": "Manufactured for:QuallentPharmaceuticals HealthLLC",
+          "score": 0.9474
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "EAN_13",
+          "text": "0382009018102",
+          "symbology": "]E0"
+        }
+      ]
+    },
+    {
+      "file": "26_stock_bottle_rosuvastatin_hard.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "rosuvastatin",
+        "name": "ROSUVASTATIN",
+        "strength": "10 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 82009-018-10",
+        "ndc10": "82009-018-10",
+        "mfr": null,
+        "lot": null,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "382009018102",
+            "is_ndc": true
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC82009-018-10",
+          "score": 0.9988
+        },
+        {
+          "text": "Rosuvastatin CalciumTablets",
+          "score": 0.9761
+        },
+        {
+          "text": "10 mg",
+          "score": 0.9993
+        },
+        {
+          "text": "Rx only",
+          "score": 0.9865
+        },
+        {
+          "text": "100Tablets",
+          "score": 0.9964
+        },
+        {
+          "text": "Manufacturedfor:QuallentPharmaceuticalsHealthLLC",
+          "score": 0.9571
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "EAN_13",
+          "text": "0382009018102",
+          "symbology": "]E0"
+        }
+      ]
+    },
+    {
+      "file": "27_stock_bottle_levothyroxine_mild.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "levothyroxine",
+        "name": "LEVOTHYROXINE",
+        "strength": "175 MCG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68788-8793-3",
+        "ndc10": "68788-8793-3",
+        "mfr": null,
+        "lot": null,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "368788879332",
+            "is_ndc": true
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC 68788-8793-3",
+          "score": 0.9966
+        },
+        {
+          "text": "Levothyroxine Sodium Tablets, USP",
+          "score": 0.9983
+        },
+        {
+          "text": "175 mcg",
+          "score": 0.9998
+        },
+        {
+          "text": "Rx only",
+          "score": 0.9968
+        },
+        {
+          "text": "100 Tablets",
+          "score": 0.9949
+        },
+        {
+          "text": "Manufactured for:Preferred Pharmaceuticals Inc.",
+          "score": 0.9537
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "EAN_13",
+          "text": "0368788879332",
+          "symbology": "]E0"
+        }
+      ]
+    },
+    {
+      "file": "28_stock_bottle_levothyroxine_hard.jpg",
+      "truth": {
+        "kind": "stock_bottle",
+        "drug_id": "levothyroxine",
+        "name": "LEVOTHYROXINE",
+        "strength": "175 MCG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68788-8793-3",
+        "ndc10": "68788-8793-3",
+        "mfr": null,
+        "lot": null,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "UPCA",
+            "content": "368788879332",
+            "is_ndc": true
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "NDC68788-8793-3",
+          "score": 0.9966
+        },
+        {
+          "text": "LevothyroxineSodiumTablets,USP",
+          "score": 0.9622
+        },
+        {
+          "text": "175 mcg",
+          "score": 0.9992
+        },
+        {
+          "text": "Rx only",
+          "score": 0.9951
+        },
+        {
+          "text": "100 Tablets",
+          "score": 0.9794
+        },
+        {
+          "text": "Manufacturedfor:PreferredPharmaceuticaisInc.",
+          "score": 0.9747
+        }
+      ],
+      "barcodes": []
+    },
+    {
+      "file": "29_carton_metformin_er_mild.jpg",
+      "truth": {
+        "kind": "carton",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 62756-142-02",
+        "ndc10": "62756-142-02",
+        "mfr": null,
+        "lot": "JKU4639A",
+        "lot_is_synthetic": false,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "DataMatrix",
+            "content": "01003627561420221727083110JKU4639A\u001d21SYN530326",
+            "is_ndc": true,
+            "gtin": "00362756142022",
+            "serial_synthetic": "SYN530326"
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "Metformin Hydrochloride Extended-Release Tablets, USP",
+          "score": 0.993
+        },
+        {
+          "text": "500 mg",
+          "score": 0.9849
+        },
+        {
+          "text": "NDC 62756-142-02",
+          "score": 0.9716
+        },
+        {
+          "text": "GTIN:00362756142022",
+          "score": 0.9949
+        },
+        {
+          "text": "EXP:08/2027",
+          "score": 0.9937
+        },
+        {
+          "text": "LOT: JKU4639A",
+          "score": 0.9583
+        },
+        {
+          "text": "SN: SYN530326",
+          "score": 0.9743
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "DATA_MATRIX",
+          "text": "01003627561420221727083110JKU4639A\u001d21SYN530326",
+          "symbology": "]d1"
+        }
+      ]
+    },
+    {
+      "file": "30_carton_metformin_er_hard.jpg",
+      "truth": {
+        "kind": "carton",
+        "drug_id": "metformin_er",
+        "name": "METFORMIN",
+        "strength": "500 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 62756-142-02",
+        "ndc10": "62756-142-02",
+        "mfr": null,
+        "lot": "JKU4639A",
+        "lot_is_synthetic": false,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "DataMatrix",
+            "content": "01003627561420221727083110JKU4639A\u001d21SYN210646",
+            "is_ndc": true,
+            "gtin": "00362756142022",
+            "serial_synthetic": "SYN210646"
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "MetforminHydrochlorideExtended-ReleaseTablets,UsP",
+          "score": 0.9665
+        },
+        {
+          "text": "500 mg",
+          "score": 0.9993
+        },
+        {
+          "text": "NDC62756-142-02",
+          "score": 0.9971
+        },
+        {
+          "text": "GTIN:00362756142022",
+          "score": 0.9893
+        },
+        {
+          "text": "EXP:08/2027",
+          "score": 0.9878
+        },
+        {
+          "text": "LOT:JKU4639A",
+          "score": 0.9875
+        },
+        {
+          "text": "SN:SYN210646",
+          "score": 0.9835
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "DATA_MATRIX",
+          "text": "01003627561420221727083110JKU4639A\u001d21SYN210646",
+          "symbology": "]d1"
+        }
+      ]
+    },
+    {
+      "file": "31_carton_sertraline_mild.jpg",
+      "truth": {
+        "kind": "carton",
+        "drug_id": "sertraline",
+        "name": "SERTRALINE",
+        "strength": "100 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68180-353-09",
+        "ndc10": "68180-353-09",
+        "mfr": null,
+        "lot": "SYNLOT62",
+        "lot_is_synthetic": true,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "DataMatrix",
+            "content": "01003681803530961727083110SYNLOT62\u001d21SYN870928",
+            "is_ndc": true,
+            "gtin": "00368180353096",
+            "serial_synthetic": "SYN870928"
+          }
+        ],
+        "quality": "mild"
+      },
+      "ocr_lines": [
+        {
+          "text": "Sertraline Hydrochloride Tablets, USP",
+          "score": 0.9909
+        },
+        {
+          "text": "100 mg",
+          "score": 0.9994
+        },
+        {
+          "text": "NDC 68180-353-09",
+          "score": 0.9824
+        },
+        {
+          "text": "GTIN: 00368180353096",
+          "score": 0.9703
+        },
+        {
+          "text": "EXP:08/2027",
+          "score": 0.9924
+        },
+        {
+          "text": "LOT:SYNLOT62",
+          "score": 0.987
+        },
+        {
+          "text": "SN:SYN870928",
+          "score": 0.9935
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "DATA_MATRIX",
+          "text": "01003681803530961727083110SYNLOT62\u001d21SYN870928",
+          "symbology": "]d1"
+        }
+      ]
+    },
+    {
+      "file": "32_carton_sertraline_hard.jpg",
+      "truth": {
+        "kind": "carton",
+        "drug_id": "sertraline",
+        "name": "SERTRALINE",
+        "strength": "100 MG",
+        "form": "TABLET",
+        "ndc_printed": "NDC 68180-353-09",
+        "ndc10": "68180-353-09",
+        "mfr": null,
+        "lot": "SYNLOT48",
+        "lot_is_synthetic": true,
+        "rx_number": null,
+        "patient": null,
+        "barcodes": [
+          {
+            "format": "DataMatrix",
+            "content": "01003681803530961727083110SYNLOT48\u001d21SYN483157",
+            "is_ndc": true,
+            "gtin": "00368180353096",
+            "serial_synthetic": "SYN483157"
+          }
+        ],
+        "quality": "hard"
+      },
+      "ocr_lines": [
+        {
+          "text": "SertralineHydrochlorideTablets,USP",
+          "score": 0.9553
+        },
+        {
+          "text": "100 mg",
+          "score": 0.9989
+        },
+        {
+          "text": "NDC68180-353-09",
+          "score": 0.9967
+        },
+        {
+          "text": "GTIN:00368180353096",
+          "score": 0.9883
+        },
+        {
+          "text": "EXP:08/2027",
+          "score": 0.9901
+        },
+        {
+          "text": "LOT:SYNLOT48",
+          "score": 0.9628
+        },
+        {
+          "text": "SN:SYN483157",
+          "score": 0.9913
+        }
+      ],
+      "barcodes": [
+        {
+          "format": "DATA_MATRIX",
+          "text": "01003681803530961727083110SYNLOT48\u001d21SYN483157",
+          "symbology": "]d1"
+        }
+      ]
+    }
+  ]
+}

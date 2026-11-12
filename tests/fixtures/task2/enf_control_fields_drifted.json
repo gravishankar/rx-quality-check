@@ -1,0 +1,24 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T03:06:46.538Z",
+  "endpoint": "enforcement",
+  "search": "recall_number:\"D-0325-2021\" AND product_descriptionx:\"metformin\" AND openfda.product_ndc:\"62756-142\"",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number%3A%22D-0325-2021%22+AND+product_descriptionx%3A%22metformin%22+AND+openfda.product_ndc%3A%2262756-142%22&limit=1",
+  "purpose": "Positive control with one drifted field name: openFDA answers 404 NOT_FOUND"
+ },
+ "http": {
+  "status": 404,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "error": {
+   "code": "NOT_FOUND",
+   "message": "No matches found!"
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+  "$comment": "Single source of the product identity (Task 4A.1). Separate from drug data, exclusion policy, workflow logic and regulatory evidence. Consumers: scripts/bundle_brand.ts (generates mobile/src/brand/brand.ts and the iOS display name), scripts/bundle_legal_docs.ts ({{PRODUCT_NAME}}), mobile/android/app/build.gradle (app label). After editing run `npm run brand:bundle && npm run legal:bundle`. Package IDs and signing identities are NOT derived from this file and must not change until the owner approves a final brand.",
+  "schema": 1,
+  "product_name": "MedLuma",
+  "name_status": "PROVISIONAL_CONFLICTS_FOUND",
+  "name_status_note": "Working name only. Brand clearance found an existing healthcare-software use of MEDLUMA (docs/BRAND_CLEARANCE.md). Not trademark-cleared. Do not use publicly.",
+  "tagline": "Know your medication. Understand the evidence.",
+  "features": {
+    "recall_check": {
+      "name": "Medication Recall Check",
+      "status": "ACTIVE"
+    }
+  },
+  "legal_entity": "[LEGAL ENTITY NAME]",
+  "display_labels": {
+    "development": "MedLuma (DEV)",
+    "pilot": "MedLuma"
+  },
+  "audience": {
+    "initial": "Patients and caregivers",
+    "future_candidate": "Pharmacists and healthcare organizations (not in scope; requires demonstrated demand and regulatory review)"
+  },
+  "former_names": [
+    "Rx Recall Check"
+  ],
+  "unchanged_identifiers": {
+    "android_application_id": "org.rxrecallcheck.app",
+    "ios_bundle_id": "org.rxrecallcheck.app",
+    "repository": "rx-quality-check"
+  }
+}

@@ -1,0 +1,63 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:05.626Z",
+  "endpoint": "enforcement",
+  "search": "openfda.product_ndc:\"31722-997\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.product_ndc%3A%2231722-997%22&limit=100",
+  "purpose": "Combination product recall (hydrocodone/acetaminophen 10/325 mg, Camber)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0276-2022",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP 10 mg/325 mg, 100-count bottle, Rx only, Manufactured for: Camber Pharmaceuticals, Inc. Piscataway, NJ 08854, Manufactured by: Ascent Pharmaceuticals, Inc., Central Islip, NY 11722, NDC 31722-997-01.",
+    "code_info": "Lot #: 21070817, Exp 6/2023",
+    "recalling_firm": "Ascent Pharmaceuticals, Inc.",
+    "reason_for_recall": "Product Mix-up",
+    "report_date": "20211215",
+    "recall_initiation_date": "20211119",
+    "termination_date": "20231206",
+    "product_type": "Drugs",
+    "product_quantity": "9744 bottles",
+    "openfda": {
+     "product_ndc": [
+      "31722-996",
+      "31722-997"
+     ],
+     "generic_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "brand_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "substance_name": [
+      "HYDROCODONE BITARTRATE",
+      "ACETAMINOPHEN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

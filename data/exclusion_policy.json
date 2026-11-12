@@ -1,54 +1,311 @@
 {
-  "schema_version": 1,
-  "policy_version": "0.1.0-draft",
+  "$schema": "./schemas/exclusion_policy.schema.json",
+  "schema_version": 2,
+  "policy_version": "0.2.0-draft",
   "status": "PROPOSED_PENDING_APPROVAL",
   "effective_date": null,
   "last_reviewed": "2026-11-12",
   "next_review_due": "2027-05-12",
   "review_interval_months": 6,
+  "compatibility": {
+    "min_ruleset_version": "0.3.0"
+  },
   "source_document": "docs/references/Drugs Exclusion List.md",
   "principles": [
     "Exclusions are set by drug class using a published criterion, not by drug-by-drug judgment.",
     "An excluded medication is recognized but deliberately NOT assessed. The app must show a message distinct from 'no data'.",
     "Exclusion of these medications does not imply that any other medication is safe. Every result states this.",
     "The app never assumes a clinical indication it cannot establish. Indication-dependent entries resolve to NEEDS_CLARIFICATION.",
-    "Matching uses normalized RxNorm ingredient identifiers (IN/PIN RxCUIs), never free-text names alone."
+    "Matching uses normalized RxNorm ingredient identifiers (IN/PIN RxCUIs), never free-text names alone.",
+    "A therapeutic-class label alone never excludes a drug. Only listed ingredient rules exclude; a class signal on an unlisted ingredient follows the class's unlisted_signal_behavior (NEEDS_CLARIFICATION by default).",
+    "An applicable exclusion always overrides inclusion in the supported-drug catalog."
   ],
   "classes": [
     {
       "id": "ANTICOAGULANT",
       "criterion": "Anticoagulant class",
       "rationale": "A small error in dose or quality can cause serious bleeding or clotting. Warfarin and the newer anticoagulants carry boxed warnings for these risks, per FDA labels (not yet checked against current versions).",
-      "fda_epc_signals": ["Vitamin K Antagonist [EPC]", "Factor Xa Inhibitor [EPC]", "Direct Thrombin Inhibitor [EPC]", "Anti-coagulant [EPC]", "Low Molecular Weight Heparin [EPC]", "Unfractionated Heparin [EPC]"]
+      "fda_epc_signals": [
+        "Vitamin K Antagonist [EPC]",
+        "Factor Xa Inhibitor [EPC]",
+        "Direct Thrombin Inhibitor [EPC]",
+        "Anti-coagulant [EPC]",
+        "Low Molecular Weight Heparin [EPC]",
+        "Unfractionated Heparin [EPC]"
+      ],
+      "explanation": "Blood thinners (anticoagulants) are not assessed by this app because a small error in identification or quality interpretation could have serious consequences. This is a policy choice, not a finding about the medication.",
+      "unlisted_signal_behavior": "NEEDS_CLARIFICATION"
     },
     {
       "id": "TRANSPLANT_IMMUNOSUPPRESSANT",
       "criterion": "Transplant immunosuppressant",
       "rationale": "Levels that drop too low risk organ rejection, and levels that run too high risk toxicity. Clinicians monitor these drugs with blood tests.",
-      "fda_epc_signals": ["Calcineurin Inhibitor Immunosuppressant [EPC]", "mTOR Inhibitor Immunosuppressant [EPC]", "Antimetabolite Immunosuppressant [EPC]"]
+      "fda_epc_signals": [
+        "Calcineurin Inhibitor Immunosuppressant [EPC]",
+        "mTOR Inhibitor Immunosuppressant [EPC]",
+        "Antimetabolite Immunosuppressant [EPC]"
+      ],
+      "explanation": "Transplant immunosuppressants are not assessed by this app because their levels are closely monitored by clinicians and small differences matter. This is a policy choice, not a finding about the medication.",
+      "unlisted_signal_behavior": "NEEDS_CLARIFICATION"
     }
   ],
-  "fda_epc_signals_note": "EPC strings observed in openFDA NDC Directory pharm_class fields on 2026-11-12. An EPC signal on an ingredient NOT listed below yields NEEDS_CLARIFICATION with reason POLICY_CLASS_MATCH_UNLISTED and is logged for policy review; it does not silently extend the list. Azathioprine's observed EPC is 'Purine Antimetabolite [EPC]', so it is matched by ingredient only.",
-  "entries": [
-    { "ingredient": "warfarin", "rxcuis": ["11289"], "class": "ANTICOAGULANT", "decision": "EXCLUDED", "note": "Also narrow therapeutic index; excluded under the anticoagulant rule." },
-    { "ingredient": "apixaban", "rxcuis": ["1364430"], "class": "ANTICOAGULANT", "decision": "EXCLUDED", "note": "Part D 2023 rank 13; removed from MVP scope by this policy." },
-    { "ingredient": "rivaroxaban", "rxcuis": ["1114195"], "class": "ANTICOAGULANT", "decision": "EXCLUDED" },
-    { "ingredient": "dabigatran", "rxcuis": ["1546356", "1037042"], "class": "ANTICOAGULANT", "decision": "EXCLUDED", "note": "RxCUI 1037042 is 'dabigatran etexilate' (also tty IN in RxNorm 02-Nov-2026)." },
-    { "ingredient": "edoxaban", "rxcuis": ["1599538"], "class": "ANTICOAGULANT", "decision": "EXCLUDED" },
-    { "ingredient": "tacrolimus", "rxcuis": ["42316"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "EXCLUDED", "route_note": "Topical tacrolimus exists with non-transplant use; non-oral products are handled by the pending administration rule (OD-1)." },
-    { "ingredient": "cyclosporine", "rxcuis": ["3008"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "EXCLUDED", "route_note": "Ophthalmic and topical cyclosporine exist with non-transplant use; non-oral products are handled by OD-1." },
-    { "ingredient": "sirolimus", "rxcuis": ["35302"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "EXCLUDED", "route_note": "Topical sirolimus exists; non-oral products are handled by OD-1." },
-    { "ingredient": "everolimus", "rxcuis": ["141704"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "NEEDS_CLARIFICATION", "note": "Document B lists 'Everolimus (transplant)'. Oral everolimus is also marketed for non-transplant indications, and the app cannot establish indication from a label. Not in MVP scope, so it is never assessed either way." },
-    { "ingredient": "mycophenolate", "rxcuis": ["265323", "7145", "408142"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "EXCLUDED", "note": "265323 mycophenolate (IN), 7145 mycophenolic acid (IN), 408142 mycophenolate sodium (PIN). Verify mycophenolate mofetil mapping in Task 2 fixtures." },
-    { "ingredient": "azathioprine", "rxcuis": ["1256"], "class": "TRANSPLANT_IMMUNOSUPPRESSANT", "decision": "EXCLUDED", "note": "Excluded by ingredient irrespective of indication, per Document B list; flagged for review because it is also used outside transplantation (see EXCLUSIONS.md §5)." }
+  "ingredient_rules": [
+    {
+      "id": "EXCL-WARFARIN",
+      "ingredient": "warfarin",
+      "rxcuis": [
+        "11289"
+      ],
+      "names": [],
+      "class": "ANTICOAGULANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "Also narrow therapeutic index; excluded under the anticoagulant rule."
+    },
+    {
+      "id": "EXCL-APIXABAN",
+      "ingredient": "apixaban",
+      "rxcuis": [
+        "1364430"
+      ],
+      "names": [],
+      "class": "ANTICOAGULANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "Part D 2023 rank 13; removed from MVP scope by this policy."
+    },
+    {
+      "id": "EXCL-RIVAROXABAN",
+      "ingredient": "rivaroxaban",
+      "rxcuis": [
+        "1114195"
+      ],
+      "names": [],
+      "class": "ANTICOAGULANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12"
+    },
+    {
+      "id": "EXCL-DABIGATRAN",
+      "ingredient": "dabigatran",
+      "rxcuis": [
+        "1546356",
+        "1037042"
+      ],
+      "names": [
+        "dabigatran etexilate"
+      ],
+      "class": "ANTICOAGULANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "RxCUI 1037042 is 'dabigatran etexilate' (also tty IN in RxNorm 02-Nov-2026)."
+    },
+    {
+      "id": "EXCL-EDOXABAN",
+      "ingredient": "edoxaban",
+      "rxcuis": [
+        "1599538"
+      ],
+      "names": [],
+      "class": "ANTICOAGULANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12"
+    },
+    {
+      "id": "EXCL-TACROLIMUS",
+      "ingredient": "tacrolimus",
+      "rxcuis": [
+        "42316"
+      ],
+      "names": [],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "route_note": "Topical tacrolimus exists with non-transplant use; non-oral products are handled by the pending administration rule (OD-1)."
+    },
+    {
+      "id": "EXCL-CYCLOSPORINE",
+      "ingredient": "cyclosporine",
+      "rxcuis": [
+        "3008"
+      ],
+      "names": [],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "route_note": "Ophthalmic and topical cyclosporine exist with non-transplant use; non-oral products are handled by OD-1."
+    },
+    {
+      "id": "EXCL-SIROLIMUS",
+      "ingredient": "sirolimus",
+      "rxcuis": [
+        "35302"
+      ],
+      "names": [],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "route_note": "Topical sirolimus exists; non-oral products are handled by OD-1."
+    },
+    {
+      "id": "EXCL-EVEROLIMUS",
+      "ingredient": "everolimus",
+      "rxcuis": [
+        "141704"
+      ],
+      "names": [],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "NEEDS_CLARIFICATION",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "Document B lists 'Everolimus (transplant)'. Oral everolimus is also marketed for non-transplant indications, and the app cannot establish indication from a label. Not in MVP scope, so it is never assessed either way.",
+      "explanation": "This medication is excluded only for some uses, and the app cannot tell the use from a label, so it does not assess it."
+    },
+    {
+      "id": "EXCL-MYCOPHENOLATE",
+      "ingredient": "mycophenolate",
+      "rxcuis": [
+        "265323",
+        "7145",
+        "408142"
+      ],
+      "names": [
+        "mycophenolic acid",
+        "mycophenolate sodium"
+      ],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "Excluded by ingredient regardless of indication (product owner decision, Task 3 brief, 2026-11-12). 265323 mycophenolate (IN), 7145 mycophenolic acid (IN), 408142 mycophenolate sodium (PIN)."
+    },
+    {
+      "id": "EXCL-AZATHIOPRINE",
+      "ingredient": "azathioprine",
+      "rxcuis": [
+        "1256"
+      ],
+      "names": [],
+      "class": "TRANSPLANT_IMMUNOSUPPRESSANT",
+      "decision": "EXCLUDED",
+      "applies_to": {
+        "routes": [
+          "ORAL"
+        ]
+      },
+      "include_combinations": true,
+      "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
+      "verified_on": "2026-11-12",
+      "note": "Excluded by ingredient regardless of indication (product owner decision, Task 3 brief, 2026-11-12)."
+    }
   ],
-  "administration_rule": {
-    "status": "OPEN_DECISION",
-    "decision_id": "OD-1",
-    "statement": "Document B: injectable and hospital-administered anticoagulants and immunosuppressants fall under an administration rule that has not been decided.",
-    "interim_behavior": "Non-oral products are outside MVP formulation scope and resolve to UNSUPPORTED with reason ADMINISTRATION_RULE_PENDING. No rule is invented."
-  },
+  "route_rules": [
+    {
+      "id": "ADMIN-NON-ORAL",
+      "status": "OPEN_DECISION",
+      "decision_id": "OD-1",
+      "routes": "NON_ORAL",
+      "scope": "LISTED_INGREDIENTS",
+      "interim_decision": "UNSUPPORTED",
+      "interim_reason": "ADMINISTRATION_RULE_PENDING",
+      "statement": "Document B: injectable and hospital-administered anticoagulants and immunosuppressants fall under an administration rule that has not been decided.",
+      "interim_behavior": "Non-oral products are outside MVP formulation scope and resolve to UNSUPPORTED with reason ADMINISTRATION_RULE_PENDING. No rule is invented."
+    }
+  ],
+  "product_type_rules": [
+    {
+      "id": "OTC-MVP",
+      "product_types": [
+        "HUMAN OTC DRUG"
+      ],
+      "decision": "EXCLUDED",
+      "explanation": "Over-the-counter products are not assessed in this version of the app. This is a scope choice, not a finding about the medication.",
+      "source": "Product owner decision in the Task 3 brief (2026-11-12): exclude OTC products from MVP v0.1 (closes OD-3).",
+      "decided_on": "2026-11-12"
+    }
+  ],
   "change_log": [
-    { "date": "2026-11-12", "version": "0.1.0-draft", "change": "Initial proposed policy transcribed from Document B; RxCUIs from RxNav; EPC signals from openFDA.", "source": "docs/references/Drugs Exclusion List.md; RxNav 02-Nov-2026; openFDA NDC Directory", "approved_by": null }
+    {
+      "date": "2026-11-12",
+      "version": "0.1.0-draft",
+      "change": "Initial proposed policy transcribed from Document B; RxCUIs from RxNav; EPC signals from openFDA.",
+      "source": "docs/references/Drugs Exclusion List.md; RxNav 02-Nov-2026; openFDA NDC Directory",
+      "approved_by": null
+    },
+    {
+      "date": "2026-11-12",
+      "version": "0.2.0-draft",
+      "change": "Schema 2: ingredient rules with ids, RxNorm names, formulation scope (applies_to), combination handling and explanations; class explanations and explicit unlisted-signal behavior; administration rule kept as OPEN_DECISION; OTC products excluded (OD-3 closed); azathioprine and mycophenolate confirmed as ingredient-based exclusions.",
+      "source": "Task 3 brief (product owner decisions); RxNav 02-Nov-2026",
+      "approved_by": null
+    }
   ]
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HTTPS only. Hosts are further restricted in code to api.fda.gov, dailymed.nlm.nih.gov and
+     rxnav.nlm.nih.gov (mobile/src/services/transport.ts). User-installed CAs are not trusted. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

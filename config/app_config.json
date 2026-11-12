@@ -1,0 +1,4 @@
+{
+  "$comment": "Build-time app configuration. The product name, version and display labels moved to config/brand.json (Task 4A.1). accept_unapproved_config is superseded by build profiles (mobile/config/build_profile.json, OD-18) and kept for the command-line integration only.",
+  "accept_unapproved_config": true
+}

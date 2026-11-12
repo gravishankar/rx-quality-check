@@ -1,0 +1,270 @@
+{
+ "probe": "prd-cases",
+ "run": "2026-11-12T18:51:05.262Z",
+ "cases": [
+  {
+   "case": "levothyroxine_jerome_stevens",
+   "query": "generic_name:\"levothyroxine\"+AND+labeler_name:\"Jerome Stevens\"",
+   "status": 404,
+   "products": []
+  },
+  {
+   "case": "rosuvastatin_msn_72205-003",
+   "query": "product_ndc:\"72205-003\"",
+   "status": 200,
+   "products": [
+    {
+     "product_ndc": "72205-003",
+     "labeler": "Novadoz Pharmaceuticals LLC",
+     "brand": "Rosuvastatin Calcium",
+     "generic": "Rosuvastatin Calcium",
+     "form": "TABLET, FILM COATED",
+     "strengths": [
+      "10 mg/1"
+     ],
+     "spl_set_id": "d58f1f63-4bb6-413c-9730-ded3e8078618",
+     "manufacture_sites": [
+      {
+       "name": "MSN LABORATORIES  PRIVATE LIMITED",
+       "duns": "650786952"
+      },
+      {
+       "name": "MSN Pharmaceuticals Inc.",
+       "duns": "079229051"
+      },
+      {
+       "name": "MSN LABORATORIES PRIVATE LIMITED",
+       "duns": "854405955"
+      }
+     ],
+     "api_sites": [],
+     "no_establishment_section": false,
+     "imprint": [
+      "R10"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "telmisartan_inventia",
+   "query": "generic_name:\"telmisartan\"+AND+openfda.manufacturer_name:\"Inventia\"",
+   "status": 404,
+   "products": []
+  },
+  {
+   "case": "progesterone_bionpharma",
+   "query": "generic_name:\"progesterone\"+AND+labeler_name:\"Bionpharma\"",
+   "status": 200,
+   "products": [
+    {
+     "product_ndc": "69452-148",
+     "labeler": "Bionpharma Inc.",
+     "brand": "PROGESTERONE",
+     "generic": "PROGESTERONE",
+     "form": "CAPSULE",
+     "strengths": [
+      "100 mg/1"
+     ],
+     "spl_set_id": "3acad9b0-7ec6-4d5e-9852-32ffadbbed6d",
+     "manufacture_sites": [
+      {
+       "name": "Patheon Softgels Inc.",
+       "duns": "002193829"
+      }
+     ],
+     "api_sites": [],
+     "no_establishment_section": false,
+     "imprint": [
+      "P;1"
+     ]
+    },
+    {
+     "product_ndc": "69452-233",
+     "labeler": "Bionpharma Inc.",
+     "brand": "PROGESTERONE",
+     "generic": "PROGESTERONE",
+     "form": "CAPSULE",
+     "strengths": [
+      "100 mg/1"
+     ],
+     "spl_set_id": "41b3c3a7-5fb8-4451-a96c-2bd02613c021",
+     "manufacture_sites": [
+      {
+       "name": "Patheon Softgels Inc.",
+       "duns": "002193829"
+      },
+      {
+       "name": "Steril-Gene Life Sciences Private Limited",
+       "duns": "864148801"
+      }
+     ],
+     "api_sites": [],
+     "no_establishment_section": false,
+     "imprint": [
+      "P;3"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "anastrozole_zydus",
+   "query": "generic_name:\"anastrozole\"+AND+labeler_name:\"Zydus\"",
+   "status": 200,
+   "products": [
+    {
+     "product_ndc": "65841-743",
+     "labeler": "Zydus Lifesciences Limited",
+     "brand": "Anastrozole",
+     "generic": "Anastrozole",
+     "form": "TABLET, COATED",
+     "strengths": [
+      "1 mg/1"
+     ],
+     "spl_set_id": "965c4cb1-f6b8-47ac-bf13-c36639aa908f",
+     "manufacture_sites": [
+      {
+       "name": "Zydus Lifesciences Limited",
+       "duns": "918596198"
+      }
+     ],
+     "api_sites": [],
+     "no_establishment_section": false,
+     "imprint": [
+      "A7"
+     ]
+    },
+    {
+     "product_ndc": "68382-209",
+     "labeler": "Zydus Pharmaceuticals USA Inc.",
+     "brand": "Anastrozole",
+     "generic": "Anastrozole",
+     "form": "TABLET, COATED",
+     "strengths": [
+      "1 mg/1"
+     ],
+     "spl_set_id": "ca16f8de-d9a5-4c6c-957b-ae28497b67ac",
+     "manufacture_sites": [
+      {
+       "name": "Zydus Lifesciences Limited",
+       "duns": "918596198"
+      }
+     ],
+     "api_sites": [],
+     "no_establishment_section": false,
+     "imprint": [
+      "A7"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "arimidex_ani",
+   "query": "brand_name:\"Arimidex\"",
+   "status": 200,
+   "products": [
+    {
+     "product_ndc": "62559-670",
+     "labeler": "ANI Pharmaceuticals, Inc.",
+     "brand": "ARIMIDEX",
+     "generic": "Anastrozole",
+     "form": "TABLET",
+     "strengths": [
+      "1 mg/1"
+     ],
+     "spl_set_id": "acbfaaa9-503c-4691-9828-76a7146ed6de",
+     "manufacture_sites": [],
+     "api_sites": [],
+     "no_establishment_section": true,
+     "imprint": [
+      "Adx;1"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "estradiol_patch_mylan",
+   "query": "generic_name:\"estradiol\"+AND+labeler_name:\"Mylan\"+AND+dosage_form:\"PATCH\"",
+   "status": 200,
+   "products": [
+    {
+     "product_ndc": "0378-3351",
+     "labeler": "Mylan Pharmaceuticals Inc.",
+     "brand": "Estradiol",
+     "generic": "estradiol",
+     "form": "PATCH",
+     "strengths": [
+      ".075 mg/d"
+     ],
+     "spl_set_id": "e7e6da3b-8485-1382-61c9-e9b369018b98",
+     "manufacture_sites": [],
+     "api_sites": [],
+     "no_establishment_section": true,
+     "imprint": []
+    },
+    {
+     "product_ndc": "0378-4619",
+     "labeler": "Mylan Pharmaceuticals Inc.",
+     "brand": "Estradiol",
+     "generic": "estradiol",
+     "form": "PATCH",
+     "strengths": [
+      ".025 mg/d"
+     ],
+     "spl_set_id": "f4efb0bf-b96f-4e20-a0f2-0806ab92b2d4",
+     "manufacture_sites": [],
+     "api_sites": [],
+     "no_establishment_section": true,
+     "imprint": []
+    },
+    {
+     "product_ndc": "0378-4640",
+     "labeler": "Mylan Pharmaceuticals Inc.",
+     "brand": "Estradiol",
+     "generic": "estradiol",
+     "form": "PATCH",
+     "strengths": [
+      ".1 mg/d"
+     ],
+     "spl_set_id": "d28bec8f-762e-4f05-a20d-96a42970d6a7",
+     "manufacture_sites": [],
+     "api_sites": [],
+     "no_establishment_section": true,
+     "imprint": []
+    },
+    {
+     "product_ndc": "0378-3340",
+     "labeler": "Mylan Pharmaceuticals Inc.",
+     "brand": "XULANE",
+     "generic": "norelgestromin and ethinyl estradiol",
+     "form": "PATCH",
+     "strengths": [
+      "150 ug/d",
+      "35 ug/d"
+     ],
+     "spl_set_id": "f7848550-086a-43d8-8ae5-047f4b9e4382",
+     "manufacture_sites": [],
+     "api_sites": [],
+     "no_establishment_section": true,
+     "imprint": []
+    }
+   ]
+  }
+ ],
+ "manual_checks": [
+  {
+   "check": "Unithroid (Jerome Stevens levothyroxine, labeler Amneal)",
+   "query": "brand_name:\"Unithroid\"",
+   "result": "SPL 07562e72-7eaa-4ce6-94f0-e08814787e50 lists no establishments; RxNav imprints 60846-801 JSP;513, 60846-803 JSP;515"
+  },
+  {
+   "check": "Inventia recalls (openFDA enforcement)",
+   "query": "recalling_firm:\"Inventia\"",
+   "result": "3 records: D-0610-2026 (2026-06-24, Class II, chlorthalidone 25 mg, failed dissolution, ongoing); D-0852-2026 (2026-09-23, Class II, chlorthalidone 25 mg, failed dissolution, ongoing); D-0224-2017 (duloxetine, terminated)"
+  },
+  {
+   "check": "Inventia telmisartan NDC listing",
+   "query": "generic_name:\"telmisartan\" AND labeler_name/openfda.manufacturer_name:\"Inventia\"",
+   "result": "404 no listing found"
+  }
+ ]
+}

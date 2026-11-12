@@ -84,8 +84,21 @@ interface CatalogDrug {
   ingredients: { name: string; rxcui: string }[];
   required_precise_ingredient?: { name: string; rxcui: string };
 }
-const catalog = JSON.parse(readFileSync(join(ROOT, 'data/drug_catalog.json'), 'utf8')) as {
-  drugs: CatalogDrug[];
+// Task 3: the catalog is schema 2 (drugs reference ingredient ids); resolve them to the Task 1 shape.
+const rawCatalog = JSON.parse(readFileSync(join(ROOT, 'data/drug_catalog.json'), 'utf8')) as {
+  ingredients: { id: string; name: string; rxcui: string }[];
+  drugs: { id: string; display_name: string; ingredients: string[] }[];
+};
+const catalog: { drugs: CatalogDrug[] } = {
+  drugs: rawCatalog.drugs.map((d) => ({
+    id: d.id,
+    display_name: d.display_name,
+    ingredients: d.ingredients.map((id) => {
+      const i = rawCatalog.ingredients.find((x) => x.id === id);
+      if (!i) throw new Error(`catalog drug ${d.id} references unknown ingredient ${id}`);
+      return { name: i.name, rxcui: i.rxcui };
+    }),
+  })),
 };
 
 /** openFDA generic_name search term per catalog drug (exact phrase as FDA lists generic names). */

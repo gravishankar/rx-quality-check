@@ -1,0 +1,69 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:14.413Z",
+  "endpoint": "ndc",
+  "search": "product_ndc:\"16729-046\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc%3A%2216729-046%22&limit=100",
+  "purpose": "Atorvastatin 40 mg (Accord)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "16729-046",
+    "generic_name": "ATORVASTATIN CALCIUM",
+    "brand_name": "ATORVASTATIN CALCIUM",
+    "labeler_name": "Accord Healthcare Inc.",
+    "dosage_form": "TABLET, FILM COATED",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA207687",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "ATORVASTATIN CALCIUM TRIHYDRATE",
+      "strength": "40 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "16729-046-15",
+      "description": "90 TABLET, FILM COATED in 1 BOTTLE (16729-046-15)"
+     },
+     {
+      "package_ndc": "16729-046-17",
+      "description": "1000 TABLET, FILM COATED in 1 BOTTLE (16729-046-17)"
+     }
+    ],
+    "pharm_class": [
+     "HMG-CoA Reductase Inhibitor [EPC]",
+     "Hydroxymethylglutaryl-CoA Reductase Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

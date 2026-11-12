@@ -1,0 +1,334 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:07.356Z",
+  "endpoint": "enforcement",
+  "search": "product_description:\"rosuvastatin\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22rosuvastatin%22&limit=100",
+  "purpose": "Complete ingredient text query (small total)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 13
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0520-2023",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP, 5mg, 30-count bottle, Rx only, Manufactured: Accord Healthcare, Inc., Durham, NC 27703, NDC 68788-7971-3",
+    "code_info": "Lot: A1723C, Exp 8/31/2025; Lot: A1922B, Exp 6/30/2024; Lot: D0622M and Lot: F2922I, Exp 7/31/2024; Lot: G3021L, Exp 1/31/2024; Lot:H2622P & Lot: J0722C, Exp 10/31/2024.",
+    "recalling_firm": "Preferred Pharmaceuticals, Inc.",
+    "reason_for_recall": "cGMP Deviations for the manufacturing Firm (Accord Healthcare) after their inspection.",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230323",
+    "product_type": "Drugs",
+    "product_quantity": "264 Bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0406-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP 20 mg* Rx Only, Packaged as:  a) 90-count bottle NDC 16729-286-15, UPC 3 16729 28615 2; b) 1,000-count bottles NDC 16729-286-17, UPC 3 16729 28617 6; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703. Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213 INDIA",
+    "code_info": "Batches: a) P2006560, Exp. Date 11/30/2023; P2101562, Exp. Date 2/28/2024;  b) P2006561, Exp. Date 11/30/2023; P2006562, Exp. Date 11/30/2023; P2006587, Exp. Date 11/30/2023; P2100035, Exp. Date 11/30/2023; P2006600, Exp. Date 11/30/2023; P2006603, Exp. Date 11/30/2023; P2006604, Exp. Date 11/30/2023; P2006605, Exp. Date 11/30/2023; P2006606, Exp. Date 11/30/2023; P2100542, Exp. Date 12/31/2023; P2100543, Exp. Date 12/31/2023; P2100544, Exp. Date 12/31/2023; P2100545, Exp. Date 12/31/2023; P2101485, Exp. Date 2/28/2024; P2101484, Exp. Date 2/29/2024; P2205235, Exp. Date 8/31/2025; P2205236, Exp. Date 8/31/2025;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "43,302 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-284",
+      "16729-285",
+      "16729-286",
+      "16729-287"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0339-2025",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets 40mg, 30-count bottle, Rx Only, Manufactured by: Glenmark Pharmaceuticals Limited, Pithampur, Madhya Pradesh 454775, India, Manufactured for: Glenmark Pharmaceuticals Inc. USA, Mahwah, NJ 07430. NDC# 68462-264-30",
+    "code_info": "Lot #  17240389, exp. date Feb-26 17240390, exp. date Feb-26 17240426, exp. date Feb-26 17240427, exp. date Feb-26 17240428, exp. date Feb-26 17240778, exp. date Apr-26 17241055, exp. date May-26 17241074, exp. date  Jun-26 17241075, exp. date  Jun-26 17241091, exp. date  Jun-26 17241100, exp. date  Jun-26",
+    "recalling_firm": "Glenmark Pharmaceuticals Inc., USA",
+    "reason_for_recall": "CGMP Deviations",
+    "report_date": "20250416",
+    "recall_initiation_date": "20250313",
+    "product_type": "Drugs",
+    "product_quantity": "N/A",
+    "openfda": {
+     "product_ndc": [
+      "68462-261",
+      "68462-262",
+      "68462-263",
+      "68462-264"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0407-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP 40 mg* Rx Only, Packaged as: a) 30-count bottle NDC 16729-287-10, UPC 3 16729 28710 4; b) 90-count bottle NDC 16729-287-15, UPC 3 16729 28715 9; c) 1,000-count bottle NDC 16729-287-17, UPC 3 16729 28717 3; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703. Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213 INDIA",
+    "code_info": "Batches: a) P2100343, Exp. Date 12/31/2023; P2102371, Exp. Date 3/31/2024;  b) P2101966, Exp. Date 2/28/2024; P2104545, Exp. Date 6/30/2024; P2204500, Exp. Date 7/31/2025; P2205415, Exp. Date 8/31/2025;  c) P2101591, Exp. Date 2/28/2023; P2200062, Exp. Date 12/31/2024; P2204336, Exp. Date 7/31/2025; P2204337, Exp. Date 7/31/2025; P2205416, Exp. Date 8/31/2025;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "102,360 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-284",
+      "16729-285",
+      "16729-286",
+      "16729-287"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-887-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "ROSUVASTATIN CALCIUM, Tablet, 5 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 00310075590.",
+    "code_info": "ROSUVASTATIN CALCIUM, Tablet, 5 mg has the following codes:   Pedigree: W002567, EXP: 6/3/2014;  Pedigree: AD21811_10, EXP: 5/2/2014.",
+    "recalling_firm": "Aidapak Services, LLC",
+    "reason_for_recall": "Labeling: Label Mixup: ROSUVASTATIN CALCIUM, Tablet, 5 mg may have potentially been mislabeled as one of the following drugs:  IBUPROFEN, Tablet, 400 mg, NDC 67877029401, Pedigree: W002577, EXP: 6/3/2014;  ASCORBIC ACID, Tablet, 250 mg, NDC 00904052260, Pedigree: AD21846_49, EXP: 5/1/2014.",
+    "report_date": "20140129",
+    "recall_initiation_date": "20130702",
+    "termination_date": "20140207",
+    "product_type": "Drugs",
+    "product_quantity": "180 Tablets",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0292-2026",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP, 10 mg, Rx Only, 50 Tablets (5 x 10) Unit Dose per carton, Manufactured for: AvKARE, Pulaski, TN 38478.  NDC:  50268-709-15",
+    "code_info": "Lot #49124, Exp Date 12/31/2026",
+    "recalling_firm": "AvKARE",
+    "reason_for_recall": "Out of specification for dissolution.",
+    "report_date": "20260114",
+    "recall_initiation_date": "20251231",
+    "product_type": "Drugs",
+    "product_quantity": "7,991 5x10 cartons",
+    "openfda": {
+     "product_ndc": [
+      "50268-709",
+      "50268-710",
+      "50268-711"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0502-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin 40mg tablets, packaged in a) 45-count bottles (NDC 70518-1311-01), and b) 90-count bottles (NDC 70518-0484-00), Rx only, Repackaged by: RemedyRepack Inc., Indiana, PA 15701.",
+    "code_info": "Lot # a): B2038806-123022, B2014185-121422, B1925528-102522, Exp. Date 07/31/2025. Lot #: b): B2080829-012823, B1938007-110222, B2038746-123022, Exp. Date 07/31/2025.",
+    "recalling_firm": "RemedyRepack Inc.",
+    "reason_for_recall": "cGMP Deviations",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230320",
+    "termination_date": "20231019",
+    "product_type": "Drugs",
+    "product_quantity": "a) 76 bottles, b)151 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0405-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP, 10 mg*, Rx Only,  Packaged as: a) 90-count bottle, NDC 16729-285-15, UPC 3 16729 28515 5; b) 1,000-count bottle NDC 16729-285-17, UPC 3 16729 28517 9; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703. Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213 INDIA",
+    "code_info": "Batches: a) P2006824, Exp. Date 11/30/2023; P2102223, Exp. Date 3/31/2024;   b) P2004949, Exp. Date 8/31/2023; P2004948, Exp. Date 8/31/2023; P2004950, Exp. Date 8/31/2023; P2004953, Exp. Date 8/31/2023; P2004954, Exp. Date 8/31/2023; P2004956, Exp. Date 8/31/2023; P2004955, Exp. Date 8/31/2023; P2004957, Exp. Date 8/31/2023; P2004958, Exp. Date 8/31/2023; P2004959, Exp. Date 8/31/2023; P2005252, Exp. Date 9/30/2023; P2006607, Exp. Date 11/30/2023; P2101368, Exp. Date 2/29/2024; P2101777, Exp. Date 2/29/2024; P2102224, Exp. Date 3/31/2024; P2104397, Exp. Date 6/30/2024; P2104395, Exp. Date 6/30/2024; P2104398, Exp. Date 6/30/2024; P2105120, Exp. Date 7/31/2024; P2204835, Exp. Date 7/31/2025; P2204834, Exp. Date 7/31/2025; P2204837, Exp. Date 7/31/2025; P2205832, Exp. Date 9/30/2025; P2205833, Exp. Date 9/30/2025;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "56,862 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-284",
+      "16729-285",
+      "16729-286",
+      "16729-287"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0404-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP, 5 mg*, Rx Only,  Packaged as: a) 90-count bottle, NDC 16729-284-15, UPC 3 16729 28415 8; b) 1,000-count bottle, NDC 16729-284-17, UPC 3 16729 28417 2; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703. Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213 INDIA.",
+    "code_info": "Batches: a) P2101063, Exp. Date 1/31/2024; P2101707, Exp. Date 2/29/2024; P2203913 Exp. Date 6/30/2025;  b) P2101064, Exp. Date 1/31/2024; P2101539,  Exp. Date 1/31/2024; P2101709, Exp. Date 2/29/2024; P2102138, Exp. Date 2/29/2024; P2103186, Exp. Date 5/31/2024; P2104430, Exp. Date 6/30/2024; P2104703, Exp. Date 7/31/2024; P2104704, Exp. Date 7/31/2024; P2104705, Exp. Date 7/31/2024; P2104702, Exp. Date 7/31/2024; P2107176, Exp. Date 10/31/2024; P2107177, Exp. Date 10/31/2024; P2107178, Exp. Date 10/31/2024; P2107181, Exp. Date 10/31/2024; P2203915, Exp. Date 6/30/2025; P2203914, Exp. Date 6/30/2025; P2204998, Exp. Date 8/31/2025; P2204999, Exp. Date 8/31/202;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "63,247 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-284",
+      "16729-285",
+      "16729-286",
+      "16729-287"
+     ],
+     "generic_name": [
+      "ROSUVASTATIN"
+     ],
+     "brand_name": [
+      "ROSUVASTATIN"
+     ],
+     "substance_name": [
+      "ROSUVASTATIN CALCIUM"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0495-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin 5mg tablets, 30-count bottles, Rx only, Repackaged by: RemedyRepack Inc., Indiana, PA 15701, NDC 70518-3519-00.",
+    "code_info": "Lot #: J0668398-121422, Exp. Date 12/31/2023; J0661225-111522, J0654053-101822 Exp. Date 11/30/2023; J0646383-091422, Exp. Date 09/30/2023",
+    "recalling_firm": "RemedyRepack Inc.",
+    "reason_for_recall": "cGMP Deviations",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230320",
+    "termination_date": "20231019",
+    "product_type": "Drugs",
+    "product_quantity": "399 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0519-2023",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin Tablets, USP, 10 mg, Packaged as: a) 30-count bottle (NDC 68788-7086-3); b) 90-count bottle (NDC 68788-7086-9), Rx only, Manufactured: Accord Healthcare, Inc., Durham, NC 27703.",
+    "code_info": "a) Lot: F2022N, Exp. Date: 2/29/2024; b) Lot: F0322I, Exp. Date: 8/31/2023; Lot: J1322H, Exp. Date: 2/29/2024; Lot: K0222N, Exp. Date: 6/30/2024; Lot: L2322D and Lot: L2822J, Exp. Date:7/31/2025.",
+    "recalling_firm": "Preferred Pharmaceuticals, Inc.",
+    "reason_for_recall": "cGMP Deviations for the manufacturing Firm (Accord Healthcare) after their inspection.",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230323",
+    "product_type": "Drugs",
+    "product_quantity": "a) 59 Bottles, b) 77 Bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0500-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin 5mg tablets, 30-count bottles, Rx only, Repackaged by: RemedyRepack Inc., Indiana, PA 15701, NDC 70518-3519-00",
+    "code_info": "Lot#: J0668398-121422, Exp. Date 12/31/2023; J0661225-111522, J0654053-101822 Exp. Date 11/30/2023; J0646383-091422, Exp. Date 09/30/2023",
+    "recalling_firm": "RemedyRepack Inc.",
+    "reason_for_recall": "cGMP Deviations",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230320",
+    "termination_date": "20231019",
+    "product_type": "Drugs",
+    "product_quantity": "132 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0501-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Rosuvastatin 10mg tablets, packaged in a) 30-count bottles (NDC 70518-0375-03 and 70518-0375-01) and b) 90-count bottles (NDC 70518-0375-00), Rx only, Repackaged by: RemedyRepack Inc., Indiana, PA 15701.",
+    "code_info": "Lot#: a) NDC 70518-0375-03: J0674788-011123, Exp. Date 01/31/2024; J0664118-112922 J0664118-112922, Exp. Date 12/31/2023; J0653727-101722, Exp. Date 10/31/2023. NDC 70518-0375-01: B2057931-011223, Exp. Date 07/31/2025  b) Lot #: B2075815-012523, Exp. Date 09/30/2025; B2011634-121322, Exp. Date 07/31/2025 B1970205-112022, Exp. Date 06/30/2024; B1862598-092022, Exp. Date 03/31/2024; B2077226-012523, B2070444-012023, Exp. Date 07/31/2025.",
+    "recalling_firm": "RemedyRepack Inc.",
+    "reason_for_recall": "cGMP Deviations",
+    "report_date": "20230412",
+    "recall_initiation_date": "20230320",
+    "termination_date": "20231019",
+    "product_type": "Drugs",
+    "product_quantity": "a) 399 bottles, b)445 bottles",
+    "openfda": {}
+   }
+  ]
+ }
+}

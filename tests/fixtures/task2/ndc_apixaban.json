@@ -1,0 +1,66 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:17.275Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"apixaban\" AND route:\"ORAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22apixaban%22+AND+route%3A%22ORAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Excluded ingredient (anticoagulant)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 18
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "70518-4462",
+    "generic_name": "apixaban",
+    "brand_name": "ELIQUIS",
+    "labeler_name": "REMEDYREPACK INC.",
+    "dosage_form": "TABLET, FILM COATED",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "NDA",
+    "application_number": "NDA202155",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "APIXABAN",
+      "strength": "5 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "70518-4462-0",
+      "description": "30 TABLET, FILM COATED in 1 BLISTER PACK (70518-4462-0)"
+     }
+    ],
+    "pharm_class": [
+     "Factor Xa Inhibitor [EPC]",
+     "Factor Xa Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "1364445",
+      "1364447"
+     ]
+    }
+   }
+  ]
+ }
+}

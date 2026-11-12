@@ -1,0 +1,306 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:08.703Z",
+  "endpoint": "enforcement",
+  "search": "product_description:\"hydrocodone\" AND product_description:\"acetaminophen\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22hydrocodone%22+AND+product_description%3A%22acetaminophen%22&limit=100",
+  "purpose": "Complete text query for a combination product"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 16
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-058-2013",
+    "status": "Terminated",
+    "classification": "Class I",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets USP, 10 mg/500 mg, 500-count Tablets per bottle, Rx only, Manufactured By: Watson Laboratories, Inc., Corona, CA  92880 USA, NDC 00591-0540-05.",
+    "code_info": "Lot #: 519406A, 521759A, Exp 04/14",
+    "recalling_firm": "Watson Laboratories Inc",
+    "reason_for_recall": "Superpotent (Multiple Ingredient) Drug: There is the potential for oversized and superpotent tablets.",
+    "report_date": "20121128",
+    "recall_initiation_date": "20120921",
+    "termination_date": "20140324",
+    "product_type": "Drugs",
+    "product_quantity": "4,874 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0276-2022",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP 10 mg/325 mg, 100-count bottle, Rx only, Manufactured for: Camber Pharmaceuticals, Inc. Piscataway, NJ 08854, Manufactured by: Ascent Pharmaceuticals, Inc., Central Islip, NY 11722, NDC 31722-997-01.",
+    "code_info": "Lot #: 21070817, Exp 6/2023",
+    "recalling_firm": "Ascent Pharmaceuticals, Inc.",
+    "reason_for_recall": "Product Mix-up",
+    "report_date": "20211215",
+    "recall_initiation_date": "20211119",
+    "termination_date": "20231206",
+    "product_type": "Drugs",
+    "product_quantity": "9744 bottles",
+    "openfda": {
+     "product_ndc": [
+      "31722-996",
+      "31722-997"
+     ],
+     "generic_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "brand_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "substance_name": [
+      "HYDROCODONE BITARTRATE",
+      "ACETAMINOPHEN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-138-2013",
+    "status": "Terminated",
+    "classification": "Class I",
+    "product_description": "Hydrocodone bitartrate and acetaminophen Tablets, USP, 10 mg/500 mg, packaged in a) 30-count bottles, NDC 0603-3888-16; b) 60-count bottles, NDC 0603-3888-20; c) 90-count bottles, NDC 0603-3888-02; d) 100-count bottles, NDC 0603-3888-21; e) 120-count bottles, NDC 0603-3888-22; f) 150-count bottles, NDC 0603-3888-26; g) 180-count bottles, NDC 0603-3888-04; h) 500-count bottles, NDC 0603-3888-28; and i) 1000-count bottles, NDC 0603-3888-32, Rx only, Mfg. for: Qualitest Pharmaceuticals, Huntsville, AL 35811.",
+    "code_info": "Lot #: All that begin with the letter \"C\" a) C1160712C, Exp 12/13; b) C0930812A, C1110412A, C1141012B, C1160712A, Exp 12/13; c) C0950812B, C1110412B, C1151012B, C1160712B, C1530512A, Exp 12/13; d)  C0540212A, C0550212A, C0560212A, C0710312A, C0720312A, C0730112B, C0730312A, C0740112B, C0740312A, C0750112A, C0760112A, C0770112C, C0780112C, C0790112C, C0860812A, C0870812A, C0880812A, C0890812A, C0900812A, C0910812A, C0920812A, C0950412A, C0950812D, C0960412A, C0970412A, C0980412A, C1030412A, C1040412A, C1050412A, C1060412A, C1061012A, C1070412A, C1071012A, C1081012A, C1101012A, C1111012A, C1120412A, C1121012A, C1130412A, C1131012A, C1140412A, C1141012A, C1160712D, C1440512A, C1450512A, C1460512A, C1470512A, C1510512A, C1520512A, C1530512B, C1540512A, C1550512A, C1560512A, C1570512A, Exp 12/13; e) C0670312A, C0680312A, C0930812B, C0950812C, Exp 12/13; f) C1160712E, Exp 12/13; g) C0950812A, C1110412C, Exp 12/13; h) C0630212B, C0640212B, C0690312A, C0700312A, C0720112B,C0940812A, C0941112A, C0960812A, C1010412B, C1020412B, C1080412A, C1090412A, C1100412A, C1170712A, C1180712A, C1480512A, C1490512A, C1500512A, Exp 12/13; i) C0570212B, C0580212B, C0590212B, C0600212A, C0610212A, C0620212A, C0750312A, C0760312A, C0930812C, C0970812A, C0990412A, C1000412A, Exp 12/13",
+    "recalling_firm": "Vintage Pharmaceuticals LLC DBA Qualitest Pharmaceuticals",
+    "reason_for_recall": "Superpotent (Multiple Ingredient) Drug: Complaint received of oversized tablets.",
+    "report_date": "20130206",
+    "recall_initiation_date": "20121206",
+    "termination_date": "20210720",
+    "product_type": "Drugs",
+    "product_quantity": "897,379 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-057-2013",
+    "status": "Ongoing",
+    "classification": "Class I",
+    "product_description": "HYDROCODONE BITARTRATE and ACETAMINOPHEN TABLETS, USP, 10 mg/500 mg, 100-count bottle, Rx only, Mfg. for:  QUALITEST PHARMACEUTICALS, HUNTSVILLE, AL 35811, NDC 0603-3888-21",
+    "code_info": "Lot number: C1440512A, Exp 12/13",
+    "recalling_firm": "Vintage Pharmaceuticals LLC DBA Qualitest Pharmaceuticals",
+    "reason_for_recall": "Superpotent (Multiple Ingredient) Drug: Confirmed customer complaints of oversized tablets resulting in superpotent assays of both the hydrocodone and acetaminophen components.",
+    "report_date": "20121128",
+    "recall_initiation_date": "20120910",
+    "product_type": "Drugs",
+    "product_quantity": "14,445 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-609-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "HYDROcodone BITARTRATE/ ACETAMINOPHEN Tablet, 7.5 mg/325 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 52544016201",
+    "code_info": "HYDROcodone BITARTRATE/ ACETAMINOPHEN, Tablet, 7.5 mg/325 mg has the following code    Pedigree: W004005, EXP: 7/1/2014.",
+    "recalling_firm": "Aidapak Services, LLC",
+    "reason_for_recall": "Labeling: Label Mixup; HYDROcodone BITARTRATE/ ACETAMINOPHEN, Tablet, 7.5 mg/325 mg may be potentially mislabeled as    MELATONIN, Tablet, 3 mg, NDC 51991001406, Pedigree: W003999, EXP: 7/1/2014.",
+    "report_date": "20140122",
+    "recall_initiation_date": "20130702",
+    "termination_date": "20140207",
+    "product_type": "Drugs",
+    "product_quantity": "100 Tablets",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1139-2017",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Oral Solution 7.5 mg/325 mg per 15 mL (Cherry Flavored), 473 mL bottles, Rx only, Manufactured by: VistaPharm, Inc. Largo, FL 33771 ---- NDC 66689-023-16",
+    "code_info": "Lot: 494700 Exp. 10/2018",
+    "recalling_firm": "VistaPharm, Inc.",
+    "reason_for_recall": "Labeling: Not Elsewhere Classified; product is incorrectly labeled as Class III controlled substance instead of  Class II controlled substance",
+    "report_date": "20170920",
+    "recall_initiation_date": "20170817",
+    "termination_date": "20190311",
+    "product_type": "Drugs",
+    "product_quantity": "3084 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0458-2017",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Oral Solution,  7.5 mg/325 mg per 15 mL C-II, a) 4 fl.oz .(120 mL), 12 bottles per case (NDC 66689-023-04), b) 16 fl.oz. (473 mL), 12 bottles per case (NDC 66689-023-16), c) 50 unit dose cups of 15 mL per case, (NDC No. 66689-023-50), Rx only, Manufactured by VistaPharm, Largo, FL 33771",
+    "code_info": "a). Lot No. 419000 (Exp. 03/17)  b.) Lot No. 419800 (Exp. 03/17), 429100 (Exp. 06/17)  c). Lot No.  418200 (Exp. 03/17), 430100 (Exp. 06/17), 423800 (Exp. 04/17), 413100 (Exp. 02/17), 410700 (Exp. 01/17)",
+    "recalling_firm": "VistaPharm, Inc.",
+    "reason_for_recall": "CGMP Deviations: Purified water used to manufacture the drug products may have been contaminated with Burkholderia cepacia.",
+    "report_date": "20170208",
+    "recall_initiation_date": "20170118",
+    "termination_date": "20210826",
+    "product_type": "Drugs",
+    "product_quantity": "32,027 bottles and 16,310 unit dose cups",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-166-2013",
+    "status": "Terminated",
+    "classification": "Class I",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP, 10 mg/500 mg; 100 Tablets (5 x 20), 5 cards each containing 20 blistered tablets per carton, Rx only; Manufactured for: Qualitest Pharmaceuticals, Huntsville, AL 35811, Pkg by &amp;amp; Distributed by UDL Laboratories, Inc., Rockford, IL 61103; NDC 51079-254-21.",
+    "code_info": "Lot #: 3037841, 3040859, 3042573, Exp 12/13",
+    "recalling_firm": "Mylan Institutional, Inc. (d.b.a. UDL Laboratories)",
+    "reason_for_recall": "Superpotent (Multiple Ingredient) Drug: Oversized tablets resulting in superpotent assays of both the hydrocodone and acetaminophen components.",
+    "report_date": "20130227",
+    "recall_initiation_date": "20121214",
+    "termination_date": "20160809",
+    "product_type": "Drugs",
+    "product_quantity": "3,407 cartons",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0097-2021",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP 10 mg/325mg 100-count bottles, Rx Only, Manufactured for : Camber Pharmaceuticals, Inc. Piscataway, NJ 08854, Manufactured by: Ascent Pharmaceuticals, Inc. Central Islip, NY 11722, NDC 31722-943-01",
+    "code_info": "Lot #: 20070518, Exp. Date June 2022",
+    "recalling_firm": "Ascent Pharmaceuticals, Inc.",
+    "reason_for_recall": "Presence of Foreign Tablet/Capsule: One bottle of Hydrocodone Bitartrate and Acetaminophen Tablets USP 10mg/325 mg contains one Losartan Potassium Tablets, USP 100 mg.",
+    "report_date": "20201125",
+    "recall_initiation_date": "20201026",
+    "termination_date": "20230217",
+    "product_type": "Drugs",
+    "product_quantity": "9768 Bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1431-2012",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Oral Solution, 7.5 mg/500 mg per 15 mL, 16 fl oz (473 mL) bottle, Rx only, Mallinckrodt Inc., Hazelwood, MO 63042 USA, NDC 0406-0375-16, UPC 3 0406-0375-16 1.",
+    "code_info": "Lot #: 0375P76192, Exp 07/12; 0375T80512, Exp 08/13; 0375T81209, Exp 09/13",
+    "recalling_firm": "Mallinckrodt Inc.",
+    "reason_for_recall": "CGMP Deviations: This product is being recalled because expired flavoring was used in the manufacturing of these lots.",
+    "report_date": "20120808",
+    "recall_initiation_date": "20120525",
+    "termination_date": "20150417",
+    "product_type": "Drugs",
+    "product_quantity": "44,330 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1053-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets USP, CIII, 10 mg/ 660 mg, 100 count bottles, Rx only.  Manufactured by Watson Laboratories, Inc., Corona, CA 92880.  Distributed by: Watson Pharma, Inc. NDC: 00591-0517-01.",
+    "code_info": "Lot #: 697316A, Expiry: Mar 2015.",
+    "recalling_firm": "Watson Laboratories Inc",
+    "reason_for_recall": "Failed Tablet/Capsule Specifications; Product contains broken tablets.",
+    "report_date": "20140205",
+    "recall_initiation_date": "20140115",
+    "termination_date": "20140725",
+    "product_type": "Drugs",
+    "product_quantity": "717 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1416-2012",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Hydrocodone Bitartrate & Acetaminophen Oral Solution 7.5 mg/325 mg per 15 mL, a) 15 mL Unit Dose Cups (50 unit dose cups per case), b) 473 mL Bottles, C III, Rx Only, Warning May be habit forming, Manufactured by VistaPharm, Largo, FL 33771, NDC a) 66689-023-50, b) NDC 66689-023-16.",
+    "code_info": "Lot #'s a) 251400, Exp 07/13; b) 251500 Exp 07/13.",
+    "recalling_firm": "VistaPharm, Inc.",
+    "reason_for_recall": "Impurities/Degradation Products: exceeded specification at 3 month stability testing",
+    "report_date": "20120718",
+    "recall_initiation_date": "20120530",
+    "termination_date": "20130522",
+    "product_type": "Drugs",
+    "product_quantity": "a) 949 Cases, b) 188 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0413-2018",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "NORCO (Hydrocodone Bitartrate and Acetaminophen) Tablets, USP, 10 mg/325 mg, 100-count bottles, Rx Only, Distributed by: Allergan USA, Inc., Irvine, CA 92612, NDC 0023-6022-01.",
+    "code_info": "Lot # 544821A, Exp 07/19",
+    "recalling_firm": "ALLERGAN",
+    "reason_for_recall": "Labeling: Not Elsewhere Classified: does not have the required \"CII\" controlled drug classification indication on the primary label.",
+    "report_date": "20180221",
+    "recall_initiation_date": "20180202",
+    "termination_date": "20190207",
+    "product_type": "Drugs",
+    "product_quantity": "8 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1061-2013",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, 7.5 mg/650 mg Tablets, 500 Count Bottle, Manufactured by: Watson Laboratories, Inc, Cocona, CA 92880, NDC 0591-2611-05.",
+    "code_info": "Lot 706224A and 706225A, Exp. 04/15.",
+    "recalling_firm": "Watson Laboratories Inc",
+    "reason_for_recall": "Defective Container:  Defective bottles may not have tamper evident seals properly seated, and therefore it may be difficult to determine if the product had been opened or tampered with.",
+    "report_date": "20130925",
+    "recall_initiation_date": "20130830",
+    "termination_date": "20140725",
+    "product_type": "Drugs",
+    "product_quantity": "875 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1430-2012",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Oral Solution, 7.5 mg/500 mg per 15 mL, 16 fl oz (473 mL) bottle, Rx only, Mallinckrodt Inc., Hazelwood, MO 63042 USA, NDC 0406-0375-16, UPC 3 0406-0375-16 1.",
+    "code_info": "Lot #: 0375T79384, Exp 05/13; 0375T81348,  Exp 09/13; 0375U82277, Exp 01/14",
+    "recalling_firm": "Mallinckrodt Inc.",
+    "reason_for_recall": "Subpotent (Multiple Ingredient) Drug: Low out of specification assay results for the hydrocodone bitartrate ingredient was found.",
+    "report_date": "20120808",
+    "recall_initiation_date": "20120525",
+    "termination_date": "20150417",
+    "product_type": "Drugs",
+    "product_quantity": "41,100 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0836-2018",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Hydrocodone Bitartrate and Acetaminophen Tablets, USP, 5 mg/325 mg, 1000-count bottle Rx Only, Manufactured by: Novel Laboratories, Inc. Somerset NJ 08873  Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, MD 212020  NDC 43386-356-10  UPC 343386356102",
+    "code_info": "Lot # S800257; Exp. 01/20",
+    "recalling_firm": "LUPIN SOMERSET",
+    "reason_for_recall": "Labeling: Missing Label",
+    "report_date": "20180606",
+    "recall_initiation_date": "20180524",
+    "termination_date": "20210126",
+    "product_type": "Drugs",
+    "product_quantity": "1,672 (1000-count) bottles",
+    "openfda": {
+     "product_ndc": [
+      "43386-356",
+      "43386-358",
+      "43386-357"
+     ],
+     "generic_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "brand_name": [
+      "HYDROCODONE BITARTRATE AND ACETAMINOPHEN"
+     ],
+     "substance_name": [
+      "HYDROCODONE BITARTRATE",
+      "ACETAMINOPHEN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

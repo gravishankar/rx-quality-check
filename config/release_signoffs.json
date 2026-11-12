@@ -1,0 +1,13 @@
+{
+  "$comment": "Pilot release sign-offs (docs/RELEASE_READINESS_CHECKLIST.md). Each must be completed by a named, qualified person with a date before `npm run release:gate` allows a pilot build. Automated tests are not a substitute for any of these.",
+  "release": "0.1.0",
+  "encryption_verified_on_device": false,
+  "signoffs": {
+    "regulatory_classification": { "signed": false, "by": null, "date": null, "evidence": null },
+    "legal_review": { "signed": false, "by": null, "date": null, "evidence": null },
+    "clinical_pharmacist_wording_review": { "signed": false, "by": null, "date": null, "evidence": null },
+    "configuration_approval": { "signed": false, "by": null, "date": null, "evidence": null },
+    "security_testing": { "signed": false, "by": null, "date": null, "evidence": null },
+    "android_device_testing": { "signed": false, "by": null, "date": null, "evidence": null }
+  }
+}
