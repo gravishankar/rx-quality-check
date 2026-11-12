@@ -1,213 +1,81 @@
-# Test the Development App on a Mac or Windows Laptop (no Android phone needed)
+# Try MedLuma (DEV) on a Mac or Windows Laptop
 
-For the owner and invited testers only. You will run a **virtual Android phone** (the Android
-Emulator, free from Google) on your computer and install the MedLuma (DEV) app on it.
-"MedLuma" is a temporary working name.
+No Android phone needed. You'll run a free "virtual Android phone" in a window on your computer.
+It takes about 30–45 minutes the first time, mostly waiting for downloads.
 
-> **Before you start:** this is an evaluation prototype for testing only. It is not clinically
-> validated, its legal documents are drafts, and it must not be used for real medication decisions.
-> Test only with the test medications in `docs/FUNCTIONAL_TEST_PLAN.md` and the synthetic test labels
-> in `scan-test-labels-SYNTHETIC.pdf`. Never type or scan your own medication, name or prescription.
+Use only the test medications listed below. Never enter your own medication or personal details.
+This is a test version (not clinically validated). This setup hasn't been tried on a laptop yet, so
+please tell us if something looks different.
 
-> **Status: this setup has NOT yet been tested on a Mac or Windows emulator.** The app has been built
-> and tested automatically, and build 6 scanned a label on a real Pixel. The cloud environment that
-> builds the app cannot run an emulator. If something in this guide does not match what you see,
-> please report it (section 9).
+## 1. Get the app file
 
-## 1. What you need
+Download the file the owner shared with you:
 
-| | Mac | Windows laptop |
-|---|---|---|
-| System | macOS 12 or newer; Apple Silicon (M1–M4) or Intel | Windows 10 or 11, 64-bit |
-| Memory | 16 GB recommended (8 GB works, slowly) | 16 GB recommended (8 GB works, slowly) |
-| Free disk | About 20 GB | About 20 GB |
-| Other | Internet connection | Internet connection; **virtualization turned on** (section 3) |
-| Time | About 45 minutes the first time (mostly downloads) | About 45 minutes the first time |
+- **Mac with an Apple chip (M1, M2, M3, M4):** `medluma-dev-v0.1.6-b7-arm64-v8a.apk`
+- **Any other Mac, or a Windows laptop:** `medluma-dev-v0.1.6-b7-universal.apk`
 
-## 2. Which app file to use
+Not sure which Mac you have? Apple menu → **About This Mac** → "Chip: Apple M…" means an Apple chip.
 
-Ask the owner for the file (shared privately, e.g. a restricted Google Drive link). Build 7:
+## 2. Install Android Studio
 
-| Your computer | Use this file | SHA-256 |
-|---|---|---|
-| **Mac with Apple Silicon** (Apple menu → About This Mac shows "Chip: Apple M…") | `medluma-dev-v0.1.6-b7-arm64-v8a.apk` (41.4 MB) | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` |
-| **Mac with Intel** ("Processor: Intel …") or **any Windows laptop** | `medluma-dev-v0.1.6-b7-universal.apk` (79.3 MB) | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` |
+1. Go to **developer.android.com/studio** and click **Download**.
+2. Install it like any other app, then open it.
+3. When it asks, choose **Standard** and click **Next / Accept / Finish** until it's done downloading.
+   No account or sign-in needed.
 
-Why: the virtual phone uses the same kind of processor as your computer. The ARM64 file does not
-run on an Intel/AMD virtual phone; the universal file contains the Intel/AMD (x86_64) version too
-(checked: it has the same 19 native libraries for both).
+## 3. Start a virtual phone
 
-Check the file is intact before installing:
+1. On the welcome window, click **More Actions → Virtual Device Manager**.
+2. Click **+**, choose **Pixel 8**, click **Next**, keep the suggested Android version (click the
+   download arrow if shown), click **Next**, then **Finish**.
+3. Click **▶** next to the phone. A phone appears on your screen (the first start takes a few minutes).
 
-Mac (Terminal: Applications → Utilities → Terminal):
+## 4. Install the app
 
-```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
-```
+Drag the app file from your **Downloads** folder onto the virtual phone. After about 30 seconds,
+swipe up on the phone's home screen and open **MedLuma (DEV)**.
 
-Windows (PowerShell: Start menu → type "PowerShell"):
+## 5. Try it
 
-```powershell
-Get-FileHash $HOME\Downloads\medluma-dev-v0.1.6-b7-universal.apk -Algorithm SHA256
-```
+1. Tap **I understand**.
+2. Tap **Type the details instead** and enter:
 
-The long code must match the table exactly (Windows prints it in capital letters; that is fine).
-If it does not match, delete the file and download it again.
+   | Field | Type |
+   |---|---|
+   | NDC | `62756-142-02` |
+   | Drug name | `METFORMIN HCL ER` |
+   | Strength | `500 MG` |
+   | Form | `TABLET` |
 
-## 3. Windows only: make sure virtualization is on
+3. Tap **Find this medication**, switch on each item, then tap **Yes, these details match my label**.
+4. You should see **Possible recall match**, a one-line summary of the records checked, and
+   **Important limits of this result**.
 
-1. Press **Ctrl + Shift + Esc** → **Performance** tab → **CPU**. Look for **Virtualization: Enabled**.
-2. If it says **Disabled**, it must be turned on in the laptop's BIOS/UEFI settings (usually called
-   "Intel VT-x", "Intel Virtualization Technology" or "SVM Mode" for AMD). How to reach these settings
-   differs by laptop maker; search "<your laptop model> enable virtualization". If this is a work
-   laptop, ask your IT department.
-3. Start menu → type **"Turn Windows features on or off"** → tick **Windows Hypervisor Platform** →
-   OK → restart when asked.
+More to try:
 
-Macs need nothing extra.
-
-## 4. Install Android Studio (includes the emulator)
-
-1. Go to **https://developer.android.com/studio** and download Android Studio for your system
-   (on a Mac, pick **Apple chip** or **Intel chip** to match section 2).
-2. Install it:
-   - **Mac:** open the `.dmg`, drag **Android Studio** into **Applications**, then open it from
-     Applications.
-   - **Windows:** run the `.exe` and accept the defaults (keep **Android Virtual Device** ticked).
-3. On first launch, the **Setup Wizard** opens: choose **Standard**, accept the licenses, and let it
-   download the components (this takes a while). You do not need to create a project or sign in.
-
-## 5. Create a virtual phone
-
-1. On the **Welcome to Android Studio** window, click **More Actions → Virtual Device Manager**
-   (in some versions: **Device Manager**).
-2. Click **+** (or **Create Virtual Device**).
-3. Choose **Phone → Pixel 8** (any recent Pixel is fine) → **Next**.
-4. Choose a system image:
-   - Pick a recent Android version (API 34, 35 or 36) labeled **Google APIs** or **Google Play**.
-   - The **ABI** column must match your computer: **arm64-v8a** on Apple Silicon Macs, **x86_64** on
-     Intel Macs and Windows. Click the download icon next to it if needed, then **Next**.
-5. **Camera (needed only for scanning, section 8):** click **Show Advanced Settings** (or the
-   **Advanced** tab) → **Camera → Back:** choose **Webcam0** (your laptop's camera). Leave Front as is.
-6. Click **Finish**, then the **▶ (play)** button next to the new phone. A phone window opens and
-   boots in a minute or two (the first start is slow).
-
-## 6. Install the app on the virtual phone
-
-**Easiest:** drag the `.apk` file from Finder (Mac) or File Explorer (Windows) **onto the virtual
-phone's window**. Wait about 30 seconds; the app appears in the phone's app list (swipe up on the
-home screen) as **MedLuma (DEV)**.
-
-**If dragging does not work**, use the command line:
-
-Mac:
-
-```bash
-~/Library/Android/sdk/platform-tools/adb install -r ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
-```
-
-Windows (PowerShell):
-
-```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" install -r "$HOME\Downloads\medluma-dev-v0.1.6-b7-universal.apk"
-```
-
-`Success` means it is installed. `INSTALL_FAILED_NO_MATCHING_ABIS` means the wrong file for this
-virtual phone — use the other file from section 2.
-
-## 7. Open the app and check the version
-
-1. Open **MedLuma (DEV)**. A purple **DEVELOPMENT BUILD** banner appears on every screen.
-2. Read **Before you start** and tap **I understand** (this shows at every launch in this build).
-3. Tap **About and privacy**: it must say **version 0.1.6 (build 7)**.
-
-The app needs internet for its lookups; the virtual phone uses your computer's connection.
-
-## 8. What to test
-
-### A. Typing the details (works fully on a computer — start here)
-
-On the scan screen tap **Type the details instead**, then follow `docs/FUNCTIONAL_TEST_PLAN.md` with
-its test medications D1–D8, and the result-screen checks **R1–R10** in
-`docs/task4c/PIXEL_SCAN_TEST_GUIDE.md` (section 4a). Use your computer keyboard to type.
-
-Quick example (D2 — possible recall match):
-
-| Field | Type |
+| Enter | You should see |
 |---|---|
-| NDC from the label | `62756-142-02` |
-| Drug name as printed | `METFORMIN HCL ER` |
-| Strength as printed | `500 MG` |
-| Form | `TABLET` |
-| Lot number | *(leave empty)* |
+| Same as above, plus Lot number `JKU4639A` | **Recall match found** |
+| NDC `82009-018-10`, `ROSUVASTATIN CALCIUM`, `10 MG`, `TABLET` | **No matching recall found in the FDA records checked** |
+| NDC `67046-2072-3`, `WARFARIN SODIUM`, `1 MG`, `TABLET` | **We don't check this medication** |
 
-Tap **Find this medication**, switch on each item, tap **Yes, these details match my label**. Expected:
-**Possible recall match**, a one-sentence count of the records checked, then **Important limits of this
-result**.
+On each result, try **Show these … records** and **Official FDA record**.
 
-### B. Scanning (optional; not tested on an emulator)
+Scanning with your laptop's camera usually can't read small labels. Typing the details is the way to
+test on a computer.
 
-Scanning uses the virtual phone's camera app, which shows what your laptop's webcam sees (if you set
-**Back camera: Webcam0** in section 5).
+## 6. Tell us what happened
 
-1. Open `scan-test-labels-SYNTHETIC.pdf` on a phone or tablet, or print it.
-2. In the app tap **Scan medication label**; the camera app opens.
-3. Hold one test label 15–30 cm from the webcam, steady and well lit, then press the shutter and ✓.
+Take a screenshot (Mac: **Cmd + Shift + 4**; Windows: **Win + Shift + S**) and note:
 
-Laptop webcams usually have low resolution and fixed focus, so small print often cannot be read. A
-"We couldn't read your label" message on a computer does **not** mean scanning fails on phones —
-please note it and use typing instead. If the camera shows a 3-D room instead of your webcam, the
-camera setting in section 5 was not applied: Device Manager → ✎ (edit) the phone → Advanced →
-Camera → Back: Webcam0.
+- what you entered and what the screen said
+- Mac or Windows
 
-Optional extra: in the emulator's side toolbar, **⋯ (Extended controls) → Camera**, some emulator
-versions let you place a picture into the virtual room ("virtual scene"). If yours offers this, you can
-place an image of a test label there and point the virtual camera at it. This depends on the emulator
-version and is not documented by us in detail.
+## If something goes wrong
 
-## 9. Report results (no personal data)
+- **The virtual phone won't start (Windows):** your laptop may need a setting called
+  "virtualization" turned on. Send a screenshot of the message and we'll help.
+- **"App not installed":** you probably have the wrong file. Use the **universal** file.
+- **"We couldn't reach FDA's data":** check your internet connection and try again.
 
-For each test write: test number (e.g. F-07, R4), what you did, what the screen said, PASS/FAIL.
-Include: **Mac or Windows**, computer model, **virtual phone** (e.g. Pixel 8, API 35, x86_64), and
-which APK file. Screenshots of the emulator window are fine (**Cmd + Shift + 4** on Mac, **Win + Shift + S**
-on Windows) because they only show test medications.
-
-If the app closes by itself, run this and send the file (it contains only crash reports):
-
-Mac:
-
-```bash
-~/Library/Android/sdk/platform-tools/adb logcat -b crash -d > ~/Desktop/medluma-crash.txt
-```
-
-Windows (PowerShell):
-
-```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" logcat -b crash -d > "$HOME\Desktop\medluma-crash.txt"
-```
-
-## 10. Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| Virtual phone does not start; message about "HAXM", "hypervisor" or "virtualization" (Windows) | Section 3: turn on virtualization and Windows Hypervisor Platform, restart |
-| Virtual phone is very slow | Close other apps; in Device Manager → ✎ edit → Advanced, set RAM to 2048 MB or more; give it a few minutes on first boot |
-| `INSTALL_FAILED_NO_MATCHING_ABIS` | Wrong file for this virtual phone; use the universal file (Intel Mac / Windows) |
-| "App not installed" / `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | An older copy signed differently is installed: long-press the app → Uninstall, then install again |
-| "We couldn't reach FDA's data" | The computer is offline or a firewall/VPN blocks api.fda.gov, rxnav.nlm.nih.gov or dailymed.nlm.nih.gov; try another network |
-| Camera shows a 3-D room | Section 8B: set Back camera to Webcam0 |
-| macOS asks to allow camera access for "qemu" or Android Studio | Allow it (System Settings → Privacy & Security → Camera), then restart the virtual phone |
-
-## 11. Remove everything afterwards
-
-- Uninstall the app: long-press **MedLuma (DEV)** on the virtual phone → **Uninstall**.
-- Delete the virtual phone: Device Manager → **⋮** next to it → **Delete**.
-- Uninstall Android Studio as you would any other application (Mac: drag it to the Bin; also delete
-  `~/Library/Android` to free the space. Windows: Settings → Apps → Android Studio → Uninstall; also
-  delete `%LOCALAPPDATA%\Android`).
-
-## No iPhone version yet
-
-The app's shared code also runs on iOS, but scanning is Android-only so far and no iPhone build has
-been produced. Testing on an iPhone, or on a Mac using the iOS Simulator, would need separate work
-(Xcode, an Apple Developer account for TestFlight) and is not available today.
+When you're done, you can uninstall Android Studio like any other app.
