@@ -57,6 +57,7 @@ scripts/                 API feasibility harness, Task 2 fixture capture, re-exp
 
 - `docs/BRAND_AND_PRODUCT_STRATEGY.md`, `docs/BRAND_CLEARANCE.md`
 - `docs/INSTALL_ON_ANDROID.md`, `docs/FUNCTIONAL_TEST_PLAN.md`, `docs/UX_REVIEW_4A2.md` — Task 4A.2
+- `docs/TEST_ON_COMPUTER.md` — test the development app on a Mac or Windows laptop with the Android Emulator (no Android phone needed)
 - `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — owner-only first phone test (build 2)
 
 - `docs/EVIDENCE_AND_CLAIMS_POLICY.md` — what the app may say, the evidence each statement needs, and the tests enforcing it

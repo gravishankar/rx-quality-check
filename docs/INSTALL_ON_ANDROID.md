@@ -4,6 +4,8 @@ For the owner only. This is a **development build** (name on the phone: "MedLuma
 is a temporary placeholder). It is an evaluation prototype, not clinically validated, and must not be
 shared with anyone else. You do **not** need to build anything.
 
+No Android phone? See `docs/TEST_ON_COMPUTER.md` (Mac or Windows laptop, Android Emulator).
+
 ## Which file to install
 
 Every build has a version and a build number. The build number goes up with every APK; a higher
