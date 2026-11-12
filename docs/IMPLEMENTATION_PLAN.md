@@ -86,7 +86,7 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Unchanged | Recall engine, safety gates, evidence classification, presentation downgrade rules, data, policy |
 | Device fixes | Build 5: barcode reader null crop rectangle (build 4 failed every scan). Build 6: OCR dictionary read from the model file (build 5 read no text), PaddleOCR PP-OCRv4, 3200-px recognition source, extractor fixes |
 | Build 7 (approved 2026-11-12) | Summary-first result screen (`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §3a): counts by group, limits directly below the result, prominent match/possible/unreadable cards, excluded records counted by a fixed primary reason and listed on request, plain-language record details. Categories and matching logic unchanged |
-| Device results | Build 4: every scan failed. Build 5: no text read. Build 6: label scanned, recall check completed (no matching recall). Build 7: not yet tested |
+| Device results | Build 4: every scan failed. Build 5: no text read. Build 6: label scanned, recall check completed (no matching recall). Build 7: typed-entry flow gave the expected results on the Android Emulator (owner, laptop); scanning and the Pixel test not yet done |
 | Not done | iOS scanner (Apple Vision/ONNX Runtime iOS later) |
 | Status | **Build 7 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`). Task 4D not started |
 

@@ -68,7 +68,7 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c",
-      "note": "Summary-first result screen: record counts by group; limits and disclaimer directly below the result; matching, possibly matching and unreadable records always shown as cards with plain-language details; records the engine excluded are counted once each by a fixed primary-reason order and listed only on request. Categories and matching logic unchanged. Scanner unchanged from build 6. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64).",
+      "note": "Summary-first result screen: record counts by group; limits and disclaimer directly below the result; matching, possibly matching and unreadable records always shown as cards with plain-language details; records the engine excluded are counted once each by a fixed primary-reason order and listed only on request. Categories and matching logic unchanged. Scanner unchanged from build 6. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). EMULATOR RESULT (owner, 2026-11-12, Android Emulator on a laptop): details typed in, results as expected. Scanning was not tried on the emulator. Not yet tested on the Pixel.",
       "apk_sha256_arm64": "c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73"
     }
   ]

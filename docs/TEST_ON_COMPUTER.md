@@ -4,8 +4,8 @@ No Android phone needed. You'll run a free "virtual Android phone" in a window o
 It takes about 30–45 minutes the first time, mostly waiting for downloads.
 
 Use only the test medications listed below. Never enter your own medication or personal details.
-This is a test version (not clinically validated). This setup hasn't been tried on a laptop yet, so
-please tell us if something looks different.
+This is a test version (not clinically validated). The owner has used this setup on a laptop: typing the
+details worked as expected. Please tell us if something looks different.
 
 ## 1. Get the app file
 
