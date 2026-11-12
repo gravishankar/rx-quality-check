@@ -1,12 +1,15 @@
-# Rx Quality Check
+# Rx Recall Check
+
+Repository: `rx-quality-check`. The patient-facing name is configured in `config/app_config.json`.
 
 A privacy-first, phone-only Android app (React Native + TypeScript) that helps patients identify
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 2 of 6 (state machine and recall evidence engine) — awaiting approval. The core
-> library in `mobile/src/` is pure TypeScript (no React Native, network or storage code yet). There is
-> no user interface yet. See `docs/IMPLEMENTATION_PLAN.md`.
+> **Status:** Task 3 of 6 (live FDA integration, local database, extensible catalog and policy) —
+> awaiting approval. The library in `mobile/src/` is pure TypeScript: workflow engine, rules, API
+> clients and storage behind injected interfaces. There is no user interface yet (Task 4). See
+> `docs/IMPLEMENTATION_PLAN.md`.
 >
 > Manufacturer provenance (facilities, establishments, inspections) is out of scope for MVP v0.1.
 
@@ -33,7 +36,8 @@ docs/references/         Reference documents A and B (unmodified) + adoption reg
 docs/feasibility/        Machine-readable results of the latest API feasibility run
 mobile/src/              Core library: models/, rules/ (identity, exclusion, recall evidence), state/ (workflow
                          state machine), engine/ (effect runner with injected I/O ports)
-data/                    Versioned local data: drug catalog, exclusion policy, manufacturer aliases
+data/                    Versioned config: drug catalog, exclusion policy (+ schemas/, examples/), aliases
+config/                  App configuration (patient-facing display name)
 tests/                   Deterministic unit/integration tests and real-response fixtures
 scripts/                 API feasibility harness, Task 2 fixture capture, re-export shims
 ```
@@ -68,6 +72,40 @@ Behind an HTTPS proxy (Node's built-in `fetch` ignores `HTTPS_PROXY` unless told
 
 ```bash
 NODE_USE_ENV_PROXY=1 npm run feasibility
+```
+
+Validate the drug catalog and exclusion policy (guides: `docs/DRUG_CATALOG_GUIDE.md`,
+`docs/EXCLUSION_POLICY_GUIDE.md`):
+
+```bash
+npm run config:test
+```
+
+```bash
+npm run catalog:validate
+```
+
+```bash
+npm run policy:validate
+```
+
+End-to-end integration through the production engine, replaying recorded real FDA, RxNav and
+DailyMed responses:
+
+```bash
+npm run e2e
+```
+
+The same scenarios against the live public APIs (add `NODE_USE_ENV_PROXY=1` behind a proxy):
+
+```bash
+npm run e2e:live
+```
+
+Re-record the responses used by `npm run e2e`:
+
+```bash
+NODE_USE_ENV_PROXY=1 npm run e2e:record
 ```
 
 Refresh the real-response fixtures in `tests/fixtures/api/`:

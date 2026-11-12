@@ -97,3 +97,14 @@ Carrier-grade NAT can make many users share one IP; the client must handle `429`
 | FDA Data Dashboard (inspections, 483s), warning letters, Import Alerts | Not in the mandated set; Doc A's approach needs a backend ETL/scraping (see references A-6, A-17, A-18) |
 | `download.open.fda.gov` bulk files | Not tested in Task 1; possible future offline-refresh path (size and update cadence unknown) |
 | Commercial drug databases (e.g., imprint libraries) | Licensing and privacy; not public |
+
+## Task 3: endpoints used by the app
+
+| Client (`mobile/src/services/`) | Request | Purpose |
+|---|---|---|
+| `openfda.ts` | `/drug/ndc.json?search=packaging.package_ndc:"<pkg>"` or `product_ndc:"<prod>"` | Confirm NDC candidates; verify repackager source products |
+| `openfda.ts` | `/drug/enforcement.json?search=<plan query>&limit=100&skip=<n>` | Recall evidence (all pages), including the multi-field positive control |
+| `rxnav.ts` | `/REST/ndcstatus.json?ndc=<ndc11>`, `/REST/rxcui/<scd>/related.json?tty=IN PIN` | Ingredient RxCUIs for catalog and policy matching |
+| `dailymed.ts` | `/dailymed/services/v2/spls/<setid>.xml` (`Accept: */*`) | Repackager source product NDC (`asEquivalentEntity`) only |
+
+Observed 2026-11-12: openFDA does not always publish `openfda.is_original_packager` (for example, product 68094-756), so the SPL is read whenever the flag is not `true` (OD-17).

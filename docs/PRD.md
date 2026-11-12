@@ -1,4 +1,6 @@
-# Product Requirements — Rx Quality Check MVP v0.1
+# Product Requirements — Rx Recall Check MVP v0.1
+
+Patient-facing name: **Rx Recall Check** (configurable in `config/app_config.json`; the repository name `rx-quality-check` is unchanged).
 
 | Field | Value |
 |---|---|
@@ -42,6 +44,8 @@ Supported (exact ingredient set; oral outpatient formulations; prescription prod
 atorvastatin, amlodipine, levothyroxine, lisinopril, gabapentin, losartan, metformin,
 metoprolol succinate, omeprazole, rosuvastatin, pantoprazole, furosemide,
 hydrocodone/acetaminophen, tamsulosin. Source: `data/drug_catalog.json`.
+
+Over-the-counter products are excluded from MVP v0.1 (policy rule `OTC-MVP`; OD-3 closed). The catalog and policy are data: adding a drug or an exclusion needs no code change (`docs/DRUG_CATALOG_GUIDE.md`, `docs/EXCLUSION_POLICY_GUIDE.md`).
 
 Excluded by policy (recognized, **not assessed**): warfarin, apixaban, rivaroxaban, dabigatran,
 edoxaban, tacrolimus, cyclosporine, sirolimus, everolimus (transplant use → `NEEDS_CLARIFICATION`),
@@ -158,6 +162,6 @@ Interest and usability data is collected only through opt-in study sessions or q
 - **Manufacturer provenance** (removed in Task 2): manufacturing-facility identification, establishment mapping, inspection history, plant risk scoring and provenance inference.
 - FDA inspection classifications, Form 483s, warning letters, import alerts, DUNS/FEI crosswalks (Doc A A-6, A-17, A-18).
 - Pill-imprint identification and faceted pill picker (A-14); NTI switching warnings and "alternative product" suggestions (A-11).
-- Drugs beyond the 14 listed; injectables, topicals, inhalers, compounded drugs, OTC products (pending OD-3).
+- Drugs beyond the 14 listed; injectables, topicals, inhalers, compounded drugs, OTC products (excluded by policy, Task 3).
 - Push notifications or background recall monitoring (requires decisions on battery and privacy; future extension).
 - Dosing, interaction, adherence or substitution advice; pharmacy integrations; insurance data.

@@ -27,14 +27,15 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Tests | NDC-8, OCR-1…5, EX-2…7/9, ID-1…4, RC-1…5, LOT-1…4, RP-4, refill diff, state-machine table and property tests, workflow integration with request audit. `npm test`: 234 pass. Coverage of `mobile/src`: 97.7% lines, 83.7% branches (`npm run test:coverage`) |
 | Status | **Complete — awaiting approval** |
 
-## Task 3 — API integration and local storage
+## Task 3 — Live FDA integration, local database, extensible catalog and policy
 
 | | |
 |---|---|
-| Deliverables | `services/` clients implementing the `engine/runner.ts` ports: openFDA NDC, enforcement (pagination, multi-field positive control), DailyMed SPL (repackager source NDCs only, real XML parser), RxNav (ingredient RxCUIs for catalog matching); retry/backoff; request audit hook; `storage/` encrypted SQLite (library chosen per OD-6), migrations, repositories, cache with TTL, delete-all |
+| Deliverables | **Configuration:** schema-2 catalog (ingredient definitions with RxNav-verified precise ingredients and aliases; drugs with status, rx scope and restrictions) and policy (ingredient, route and product-type rules; class signal behavior; explanations); JSON Schemas; fail-closed runtime validation; documented precedence; `catalog:validate`, `policy:validate`, `config:validate` and `config:test`; worked examples (`data/examples/`); `docs/DRUG_CATALOG_GUIDE.md`; `docs/EXCLUSION_POLICY_GUIDE.md`. **Services:** transport (timeout, cancellation, allowlist, privacy guard, audit); openFDA, RxNav and DailyMed clients; production `Ports` with cache and identity enrichment (RxNav RxCUIs, verified repackager source products). **Storage:** driver interface, op-sqlite/SQLCipher and keychain adapters, Node SQLite for tests, migrations, repositories, immutable versioned assessments, delete-all. **App:** composition root and configurable display name ("Rx Recall Check"). **Integration:** `npm run e2e` (recorded real responses), `e2e:live`, `e2e:record` |
 | Dependencies | Task 2 |
-| Acceptance | Clients classify outcomes exactly as `http.ts`; RG-2 implemented; cache never stores failures; delete-all removes DB and key; request audit shows only allowlisted hosts and public identifiers; harness rerun still green |
-| Tests | RC-6, RP-2/3, NET-6/7, CA-1…5, PV-1 (client level), PV-4, storage migration tests with a test DB |
+| Acceptance | All met at library level: Task 2 tests still pass; adding a drug or an exclusion needs no state-machine or recall-engine change (e2e scenarios); exclusions override the catalog; invalid configuration cannot authorize an assessment; API failures never yield `NO_MATCH_FOUND`; pagination and completeness verified; migrations tested; privacy audit passes; a complete assessment runs on live and recorded data. Device-only items are listed in TEST_PLAN §9. |
+| Tests | 323 pass (`npm test`); e2e 13/13 recorded and live; `config:test` 51/51; feasibility re-run 5 PASS / 5 WARN / 0 FAIL |
+| Status | **Complete — awaiting approval** (branch `task-3/live-integration`) |
 
 ## Task 4 — Patient-facing mobile interface
 
@@ -74,18 +75,21 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | ID | Decision needed | Owner | Needed by |
 |---|---|---|---|
 | OD-1 | Administration-based exclusion rule (injectable / hospital-administered) | Product owner | Before release (Task 6); interim behavior defined |
-| OD-2 | Approve exclusion policy `0.1.0-draft` (Document B says "pending your decision"); confirm ingredient- vs indication-based criterion for azathioprine/mycophenolate | Product owner | Task 2 (can proceed with draft) |
-| OD-3 | Include OTC versions of supported ingredients (e.g., omeprazole)? | Product owner | Task 2 |
+| OD-2 | Approve exclusion policy (now `0.2.0-draft`). **Partly decided (Task 3):** azathioprine and mycophenolate are excluded by ingredient regardless of indication; listed anticoagulants and transplant immunosuppressants are excluded. Formal approval (status `APPROVED`, effective date) is still needed; release builds refuse unapproved files. | Product owner | Before release |
+| OD-3 | ~~Include OTC versions of supported ingredients?~~ **Closed (Task 3):** OTC products are excluded from MVP v0.1 (policy rule `OTC-MVP`). | Product owner | — |
 | OD-4 | Recall refresh strategy: per-medication vs all-14 refresh (privacy vs bandwidth); recommendation: all-14 | Product owner + architect | Task 3 |
 | OD-5 | OCR/barcode engine, subject to offline/no-telemetry verification | Architect | Task 5 |
-| OD-6 | Encrypted SQLite library and key-wrapping approach | Architect | Task 3 |
+| OD-6 | ~~Encrypted SQLite library and key wrapping~~ **Decided (Task 3):** `@op-engineering/op-sqlite` 19.0.5 with SQLCipher; key in `react-native-keychain` 11.0.0 (Android Keystore). Adapters written and tested with fakes; **device verification pending (Task 6)**. | Architect | Task 6 (verify) |
 | OD-7 | ~~Show SPL establishment/facility list to patients?~~ **Closed (Task 2):** manufacturer provenance removed from MVP v0.1; nothing about facilities is shown. | Product owner | — |
 | OD-8 | Which recalls to show by default (all history vs ongoing + last N years); terminated recalls collapsed? | Product owner | Task 4 |
 | OD-9 | Default branch: the repository had no commits at Task 1, so whichever branch is pushed first becomes GitHub's default. Decide whether to create `main` from the approved Task 1 commit and set it as default | Repository owner | Before Task 2 |
 | OD-10 | Minimum supported Android version and target devices | Product owner | Task 4 |
 | OD-11 | Replace Document B transcript with the original `.md` file if one exists | Product owner | Any time |
-| OD-12 | Catalog matching uses normalized ingredient names until Task 3 supplies ingredient RxCUIs from RxNav (CLAUDE.md §3 prefers RxCUIs). Every ELIGIBLE decision records `matchedBy: NAME/RXCUI`. Accept name matching as the interim rule? | Product owner + architect | Task 3 |
+| OD-12 | Catalog matching by name is now the fallback only. Directory-confirmed products get RxNav IN RxCUIs (exact name match) and match by RxCUI; name-only labels still match by name (recorded as `matchedBy: NAME`). Accept? | Product owner + architect | Task 4 |
 | OD-13 | FDA records with internal conflicts (product 50090-6448: generic name "Metoprolol Succinate", active ingredient METOPROLOL TARTRATE) currently yield `NEEDS_CLARIFICATION` (salt unknown). Should the user be allowed to resolve such conflicts by confirming the label, or should they stay unassessed? | Product owner | Task 4 |
 | OD-14 | When several directory-confirmed NDC candidates exist and exactly one agrees with the printed name/strength/form, the engine uses it (still shown in CONFIRM). Approve, or always show `AMBIGUOUS_IDENTITY`? | Product owner | Task 4 |
 | OD-15 | Lot comparison treats hyphen-only differences and partial codes (`J0668398` vs `J0668398-121422`) as `LOT_POSSIBLY_LISTED` → potential match, never confirmed. Confirm this policy. | Product owner | Task 4 |
 | OD-16 | Records whose NDC list cannot be read and whose strength is not stated (e.g. bulk tablets, `NDC 53746-0178-BULK`) are shown as potential matches for every same-ingredient product with a compatible release. Accept the extra "might match" items, or collapse them by default? | Product owner | Task 4 |
+| OD-17 | openFDA omits `is_original_packager` for some products (e.g. 68094-756). The app then reads the product's own SPL: a declared and verified source is used; if none is declared, the status is `NOT_ESTABLISHED`, which adds the limitation `SOURCE_PRODUCT_NOT_ESTABLISHED`. Accept this conservative default? | Product owner | Task 4 |
+| OD-18 | Development builds accept draft configuration (`config/app_config.json` `accept_unapproved_config: true`); release builds must not. Confirm the build-flag approach for Task 6. | Architect | Task 6 |
+| OD-19 | Identity enrichment calls RxNav and DailyMed before the exclusion check, so an excluded drug's public identifiers are still looked up there (no recall request is sent). Move enrichment after an ELIGIBLE decision to reduce queries? | Architect | Task 4 |

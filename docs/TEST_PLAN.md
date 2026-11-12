@@ -69,7 +69,7 @@ Status column: **Done** = implemented and passing in Task 1; otherwise the task 
 | RC-3 | Record without openfda block and without a parsable NDC, same ingredient/strength/form → `POSSIBLE_MATCH` | Done |
 | RC-4 | Combination product record → `OTHER_PRODUCT` for single-ingredient identity | Done |
 | RC-5 | Parsing failure on any required field → never `OTHER_PRODUCT` | Done (→ `UNRESOLVED` record; see §5.3 of ARCHITECTURE) |
-| RC-6 | Pagination: results beyond first page are fetched (total > limit) | Done — rule level (real 2-page fixture); client in Task 3 |
+| RC-6 | Pagination: results beyond first page are fetched (total > limit) | Done (`e2e_scenarios.test.ts` incomplete-response; `workflow.test.ts` two real pages) |
 
 ### 2.6 Lot-specific uncertainty
 | ID | Case | Status |
@@ -83,8 +83,8 @@ Status column: **Done** = implemented and passing in Task 1; otherwise the task 
 | ID | Case | Status |
 |---|---|---|
 | RP-1 | Real repackager SPL: REPACK, no MANUFACTURE, source NDC extracted | Done (`strength_and_spl.test.ts`) |
-| RP-2 | Traversal depth ≤ 3, cycle detection, chain recorded | Task 3 |
-| RP-3 | Source NDC not found → "originating manufacturer not identified" | Task 3 |
+| RP-2 | Traversal depth ≤ 3, cycle detection, chain recorded | Done — depth 3 + cycle set in `services/ports.ts`; real one-hop chain verified (`api_clients.test.ts`) |
+| RP-3 | Source NDC not found → "originating manufacturer not identified" | Done — `NOT_ESTABLISHED`/`UNAVAILABLE` + limitation `SOURCE_PRODUCT_NOT_ESTABLISHED` |
 | RP-4 | Recall on source product NDC is surfaced for the repackaged product as `POSSIBLE_MATCH` unless lot/text confirms | Done — rule (`relatedSourceProductNdcs`); traversal in Task 3 |
 
 ### 2.8 Missing manufacturer or facility information — removed (Task 2)
@@ -100,25 +100,25 @@ app library contains no establishment/facility logic (`architecture_boundaries.t
 | NET-3 | 429 with/without Retry-After → `RATE_LIMITED` | Done |
 | NET-4 | DailyMed empty vs malformed; RxNav empty vs malformed | Done |
 | NET-5 | Timeout and DNS failure → `SOURCE_UNAVAILABLE` (live harness verified) | Done (LIVE) |
-| NET-6 | Retry/backoff budget and `Retry-After` honored (fake clock) | Task 3 |
-| NET-7 | Positive-control query failure blocks `NO_MATCH_FOUND` | Done — rule level (`recall_engine.test.ts`); client in Task 3 |
+| NET-6 | Retry/backoff budget and `Retry-After` honored (fake clock) | Done (`state_machine.test.ts`, `e2e` network-failure) |
+| NET-7 | Positive-control query failure blocks `NO_MATCH_FOUND` | Done (`recall_engine.test.ts`, multi-field control recorded live) |
 
 ### 2.10 Cache expiration
 | ID | Case | Status |
 |---|---|---|
-| CA-1 | Fresh cache used; expired cache not presented as fresh | Task 3 |
-| CA-2 | Failures never cached | Task 3 |
-| CA-3 | Offline with cache → `OFFLINE_CACHED_RESULT` showing age and source dates | Task 3/4 |
-| CA-4 | Offline without cache → `SOURCE_UNAVAILABLE` | Task 3 |
-| CA-5 | Source `last_updated` stored and displayed | Task 3/4 |
+| CA-1 | Fresh cache used; expired cache not presented as fresh | Done (`api_clients.test.ts`, `storage.test.ts`) |
+| CA-2 | Failures never cached | Done (`api_clients.test.ts`, CHECK constraint in `storage.test.ts`) |
+| CA-3 | Offline with cache → `OFFLINE_CACHED_RESULT` showing age and source dates | Done — engine (`e2e` offline-cached); display in Task 4 |
+| CA-4 | Offline without cache → `SOURCE_UNAVAILABLE` | Done (`e2e` network-failure) |
+| CA-5 | Source `last_updated` stored and displayed | Done — stored (`source_cache.source_last_updated`, `assessment.dataset_last_updated`); display in Task 4 |
 
 ### 2.11 Privacy boundaries
 | ID | Case | Status |
 |---|---|---|
-| PV-1 | Request audit: every outbound URL/header contains only allowlisted hosts and public identifiers (no lot, OCR text, IDs) | Task 3 (client), Task 6 (device) |
+| PV-1 | Request audit: every outbound URL/header contains only allowlisted hosts and public identifiers (no lot, OCR text, IDs) | Done — library level (`api_clients.test.ts`, `e2e_scenarios.test.ts`); device in Task 6 |
 | PV-2 | Backup exclusion and `allowBackup=false` verified in merged manifest | Task 6 |
 | PV-3 | OCR/barcode run with network disabled; packet capture during scan shows no traffic | Task 5 |
-| PV-4 | Delete-all removes DB file and key; uninstall leaves nothing | Task 3/6 |
+| PV-4 | Delete-all removes DB file and key; uninstall leaves nothing | Done — Node SQLite (`storage.test.ts`); device + SQLCipher in Task 6 |
 | PV-5 | Release logs contain no identifiers (log capture scan) | Task 6 |
 | PV-6 | Dependency/manifest scan for telemetry SDKs | Task 6 |
 
@@ -194,3 +194,37 @@ Fixtures: 33 real openFDA responses in `tests/fixtures/task2/` (records reduced 
 reads; captured 2026-11-12; `INDEX.json`). Task 1 test change: `strength_and_spl.test.ts` previously asserted "75 mcg ≠ 0.075 mg"; it now asserts exact unit conversion and that a wrong unit ("75 mg") still mismatches (R-ID-4). Synthetic inputs are limited to labeled format-only cases:
 HTTP 429 bodies, network/timeout outcomes, an ambiguous-candidate pairing, and "modified real" records
 (one field changed, labeled at use).
+
+## 9. Task 3 results
+
+| Command | Result |
+|---|---|
+| `npm run typecheck` | clean |
+| `npm test` | **323 tests, 323 pass, 0 fail, 0 skipped** (18 files). The Task 2 suite (234) still passes; see the note below. |
+| `npm run test:coverage` (`mobile/src`) | 98.2% lines, 85.4% branches, 96.8% functions |
+| `npm run config:test` | 0 errors, 0 warnings; precedence self-test 51/51 |
+| `npm run e2e` (recorded) | 13/13 scenarios |
+| `npm run e2e:live` (live HTTPS, 2026-11-12) | 13/13 scenarios |
+| `npm run feasibility` (live, re-run) | 5 PASS, 5 WARN, 0 FAIL, 0 BLOCKED (`docs/feasibility/task3-run.json`) |
+
+New test files:
+- `tests/unit/config_validation.test.ts` (39): actionable errors, fail-closed loading, disable, alias, combination, restrictions, precedence.
+- `tests/integration/api_clients.test.ts` (17): guard, timeouts, cancellation, failure kinds, input refusal, recorded responses, XML/SPL, cache rules, source verification.
+- `tests/integration/storage.test.ts` (13): migrations (fresh, idempotent, rollback, newer-schema refusal), repositories, refill history, immutable history across policy versions, cache, delete-all, key store, op-sqlite adapter through a fake `open()` (native module untested).
+- `tests/integration/e2e_scenarios.test.ts` (15): the 13 scenarios in recorded mode, scenario coverage, and the privacy audit.
+
+Changed earlier tests (assertions updated for approved Task 3 decisions, not weakened):
+- `data_files.test.ts`: the same invariants, restated for schema 2.
+- `exclusion_rules.test.ts`:
+  - OTC is now `EXCLUDED` (`OTC-MVP`, closing OD-3) instead of `UNSUPPORTED`/`OTC_PENDING_DECISION`;
+  - the policy version is now `0.2.0-draft`;
+  - the rule id and explanation are now asserted.
+- `architecture_boundaries.test.ts`: covers the new layers; the Node-only SQLite driver is allowed only as an unimported module; the provenance check ignores comments.
+
+Recorded fixtures: `tests/fixtures/task3/cassette.json` holds 34 real responses from openFDA, RxNav and DailyMed, recorded 2026-11-12 by `npm run e2e:record` and replayed by exact URL. An unrecorded request fails, so mocks are never silently substituted. Synthetic inputs are labeled per scenario: patient text, injected network failures, and a truncated page (modified real data).
+
+**Not verified (needs an Android device, Tasks 4/6):**
+- SQLCipher encryption at rest and the op-sqlite and react-native-keychain adapters against the native modules;
+- backup exclusion in the merged manifest;
+- network behavior from mobile networks;
+- the OS key store under Keystore reset.

@@ -1,0 +1,3423 @@
+{
+  "harness": "scripts/check_api_feasibility.ts",
+  "startedAt": "2026-11-12T04:10:18.837Z",
+  "finishedAt": "2026-11-12T04:11:38.546Z",
+  "node": "v22.23.4",
+  "credentialsUsed": false,
+  "totals": {
+    "PASS": 5,
+    "WARN": 5
+  },
+  "results": [
+    {
+      "id": "C1",
+      "title": "Direct HTTPS accessibility without private credentials",
+      "status": "PASS",
+      "summary": "4/4 endpoints returned schema-valid data over HTTPS with no API key.",
+      "details": [
+        {
+          "endpoint": "openFDA NDC Directory",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "elapsedMs": 652,
+          "corsAllowOrigin": "*",
+          "rateLimitHeaders": {
+            "limit": null,
+            "remaining": null
+          },
+          "credentialsSent": false
+        },
+        {
+          "endpoint": "openFDA Enforcement",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "elapsedMs": 650,
+          "corsAllowOrigin": "*",
+          "rateLimitHeaders": {
+            "limit": null,
+            "remaining": null
+          },
+          "credentialsSent": false
+        },
+        {
+          "endpoint": "DailyMed SPL list",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "elapsedMs": 389,
+          "corsAllowOrigin": null,
+          "rateLimitHeaders": {
+            "limit": null,
+            "remaining": null
+          },
+          "credentialsSent": false
+        },
+        {
+          "endpoint": "RxNav rxcui by name",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "elapsedMs": 340,
+          "corsAllowOrigin": "*",
+          "rateLimitHeaders": {
+            "limit": null,
+            "remaining": null
+          },
+          "credentialsSent": false
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22lisinopril%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:19.490Z",
+          "elapsedMs": 652
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22lisinopril%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:20.491Z",
+          "elapsedMs": 650
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lisinopril&pagesize=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:21.231Z",
+          "elapsedMs": 389
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=lisinopril",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:21.921Z",
+          "elapsedMs": 340
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "NDC normalization and product identification",
+      "status": "PASS",
+      "summary": "14/14 real package NDCs round-tripped 10→11→candidate→directory to a unique match; 0 failed; 0 source-unavailable.",
+      "details": [
+        {
+          "drug": "atorvastatin",
+          "labeler": "NuCare Pharmaceuticals,Inc.",
+          "packageNdc": "68071-2991-3",
+          "ndc11": "68071299103",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "68071-2991-3"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "68071-2991-3",
+              "outcome": "OK",
+              "matchedProductNdc": "68071-2991"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "617311",
+            "conceptName": "atorvastatin 40 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "amlodipine",
+          "labeler": "Lupin Pharmaceuticals, Inc.",
+          "packageNdc": "68180-455-01",
+          "ndc11": "68180045501",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "68180-455-01",
+            "68180-0455-1"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "68180-455-01",
+              "outcome": "OK",
+              "matchedProductNdc": "68180-455"
+            },
+            {
+              "candidate": "68180-0455-1",
+              "outcome": "NO_MATCH"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "197361",
+            "conceptName": "amlodipine 5 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "levothyroxine",
+          "labeler": "Preferred Pharmaceuticals Inc.",
+          "packageNdc": "68788-8793-3",
+          "ndc11": "68788879303",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "68788-8793-3"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "68788-8793-3",
+              "outcome": "OK",
+              "matchedProductNdc": "68788-8793"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "966249",
+            "conceptName": "levothyroxine sodium 0.175 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "lisinopril",
+          "labeler": "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc.(780779901)",
+          "packageNdc": "23155-878-01",
+          "ndc11": "23155087801",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "23155-878-01",
+            "23155-0878-1"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "23155-878-01",
+              "outcome": "OK",
+              "matchedProductNdc": "23155-878"
+            },
+            {
+              "candidate": "23155-0878-1",
+              "outcome": "NO_MATCH"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "314076",
+            "conceptName": "lisinopril 10 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "gabapentin",
+          "labeler": "St. Mary's Medical Park Pharmacy",
+          "packageNdc": "60760-669-30",
+          "ndc11": "60760066930",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "60760-669-30"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "60760-669-30",
+              "outcome": "OK",
+              "matchedProductNdc": "60760-669"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "310430",
+            "conceptName": "gabapentin 100 MG Oral Capsule"
+          }
+        },
+        {
+          "drug": "losartan",
+          "labeler": "A-S Medication Solutions",
+          "packageNdc": "50090-4712-0",
+          "ndc11": "50090471200",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "50090-4712-0"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "50090-4712-0",
+              "outcome": "OK",
+              "matchedProductNdc": "50090-4712"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "979480",
+            "conceptName": "losartan potassium 100 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "metformin",
+          "labeler": "Aphena Pharma Solutions - Tennessee, LLC",
+          "packageNdc": "43353-982-30",
+          "ndc11": "43353098230",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "43353-982-30"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "43353-982-30",
+              "outcome": "OK",
+              "matchedProductNdc": "43353-982"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "861007",
+            "conceptName": "metformin hydrochloride 500 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "metoprolol_succinate",
+          "labeler": "A-S Medication Solutions",
+          "packageNdc": "50090-6448-0",
+          "ndc11": "50090644800",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "50090-6448-0"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "50090-6448-0",
+              "outcome": "OK",
+              "matchedProductNdc": "50090-6448"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "866436",
+            "conceptName": "24 HR metoprolol succinate 50 MG Extended Release Oral Tablet"
+          }
+        },
+        {
+          "drug": "omeprazole",
+          "labeler": "Dr. Reddy's Laboratories Limited",
+          "packageNdc": "55111-643-01",
+          "ndc11": "55111064301",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "55111-643-01",
+            "55111-0643-1"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "55111-643-01",
+              "outcome": "OK",
+              "matchedProductNdc": "55111-643"
+            },
+            {
+              "candidate": "55111-0643-1",
+              "outcome": "NO_MATCH"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "199119",
+            "conceptName": "omeprazole 10 MG Delayed Release Oral Capsule"
+          }
+        },
+        {
+          "drug": "rosuvastatin",
+          "labeler": "Quallent Pharmaceuticals Health LLC",
+          "packageNdc": "82009-018-10",
+          "ndc11": "82009001810",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "82009-018-10"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "82009-018-10",
+              "outcome": "OK",
+              "matchedProductNdc": "82009-018"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "859747",
+            "conceptName": "rosuvastatin calcium 10 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "pantoprazole",
+          "labeler": "NuCare Pharmaceuticals, Inc.",
+          "packageNdc": "68071-1963-3",
+          "ndc11": "68071196303",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "68071-1963-3"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "68071-1963-3",
+              "outcome": "OK",
+              "matchedProductNdc": "68071-1963"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "314200",
+            "conceptName": "pantoprazole 40 MG Delayed Release Oral Tablet"
+          }
+        },
+        {
+          "drug": "furosemide",
+          "labeler": "Precision Dose Inc.",
+          "packageNdc": "68094-756-62",
+          "ndc11": "68094075662",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "68094-756-62"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "68094-756-62",
+              "outcome": "OK",
+              "matchedProductNdc": "68094-756"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "197730",
+            "conceptName": "furosemide 10 MG/ML Oral Solution"
+          }
+        },
+        {
+          "drug": "hydrocodone_acetaminophen",
+          "labeler": "Aurolife Pharma, LLC",
+          "packageNdc": "13107-213-01",
+          "ndc11": "13107021301",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "13107-213-01",
+            "13107-0213-1"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "13107-213-01",
+              "outcome": "OK",
+              "matchedProductNdc": "13107-213"
+            },
+            {
+              "candidate": "13107-0213-1",
+              "outcome": "NO_MATCH"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "856980",
+            "conceptName": "acetaminophen 300 MG / hydrocodone bitartrate 10 MG Oral Tablet"
+          }
+        },
+        {
+          "drug": "tamsulosin",
+          "labeler": "Aphena Pharma Solutions - Tennessee, LLC",
+          "packageNdc": "71610-910-30",
+          "ndc11": "71610091030",
+          "inputKind": "DIGITS_11",
+          "candidates": [
+            "71610-910-30"
+          ],
+          "directoryConfirmations": [
+            {
+              "candidate": "71610-910-30",
+              "outcome": "OK",
+              "matchedProductNdc": "71610-910"
+            }
+          ],
+          "roundTrip": "UNIQUE_MATCH_TO_ORIGINAL",
+          "rxnav": {
+            "status": "ACTIVE",
+            "rxcui": "863669",
+            "conceptName": "tamsulosin hydrochloride 0.4 MG Oral Capsule"
+          }
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22atorvastatin%20calcium%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:22.589Z",
+          "elapsedMs": 317
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268071-2991-3%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:23.146Z",
+          "elapsedMs": 203
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=68071299103",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:23.544Z",
+          "elapsedMs": 48
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22amlodipine%20besylate%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:24.114Z",
+          "elapsedMs": 219
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268180-455-01%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:24.643Z",
+          "elapsedMs": 178
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268180-0455-1%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:10:25.165Z",
+          "elapsedMs": 172
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=68180045501",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:25.561Z",
+          "elapsedMs": 45
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22levothyroxine%20sodium%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:26.129Z",
+          "elapsedMs": 217
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268788-8793-3%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:26.645Z",
+          "elapsedMs": 163
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=68788879303",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:27.042Z",
+          "elapsedMs": 47
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22lisinopril%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:27.609Z",
+          "elapsedMs": 217
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2223155-878-01%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:28.131Z",
+          "elapsedMs": 168
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2223155-0878-1%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:10:28.645Z",
+          "elapsedMs": 163
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=23155087801",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:29.043Z",
+          "elapsedMs": 48
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22gabapentin%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:29.994Z",
+          "elapsedMs": 601
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2260760-669-30%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:30.510Z",
+          "elapsedMs": 164
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=60760066930",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:30.906Z",
+          "elapsedMs": 45
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22losartan%20potassium%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:31.467Z",
+          "elapsedMs": 210
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2250090-4712-0%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:31.986Z",
+          "elapsedMs": 168
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=50090471200",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:32.385Z",
+          "elapsedMs": 48
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22metformin%20hydrochloride%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:33.021Z",
+          "elapsedMs": 285
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2243353-982-30%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:33.573Z",
+          "elapsedMs": 200
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=43353098230",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:33.969Z",
+          "elapsedMs": 45
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22metoprolol%20succinate%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:34.540Z",
+          "elapsedMs": 221
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2250090-6448-0%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:35.062Z",
+          "elapsedMs": 171
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=50090644800",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:35.468Z",
+          "elapsedMs": 55
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22omeprazole%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:36.026Z",
+          "elapsedMs": 208
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2255111-643-01%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:36.542Z",
+          "elapsedMs": 164
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2255111-0643-1%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:10:37.057Z",
+          "elapsedMs": 164
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=55111064301",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:37.455Z",
+          "elapsedMs": 47
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22rosuvastatin%20calcium%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:38.006Z",
+          "elapsedMs": 201
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2282009-018-10%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:38.537Z",
+          "elapsedMs": 179
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=82009001810",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:38.930Z",
+          "elapsedMs": 42
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22pantoprazole%20sodium%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:39.486Z",
+          "elapsedMs": 206
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268071-1963-3%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:40.005Z",
+          "elapsedMs": 165
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=68071196303",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:40.400Z",
+          "elapsedMs": 45
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22furosemide%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:40.953Z",
+          "elapsedMs": 201
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2268094-756-62%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:41.471Z",
+          "elapsedMs": 167
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=68094075662",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:41.867Z",
+          "elapsedMs": 45
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22hydrocodone%20bitartrate%20and%20acetaminophen%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:42.517Z",
+          "elapsedMs": 300
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2213107-213-01%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:43.062Z",
+          "elapsedMs": 194
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2213107-0213-1%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:10:43.680Z",
+          "elapsedMs": 268
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=13107021301",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:44.078Z",
+          "elapsedMs": 47
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22tamsulosin%20hydrochloride%22+AND+finished:true&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:44.614Z",
+          "elapsedMs": 186
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc:%2271610-910-30%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:45.130Z",
+          "elapsedMs": 164
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=71610091030",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:45.526Z",
+          "elapsedMs": 46
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "title": "Ingredient, strength and formulation matching (openFDA vs RxNav)",
+      "status": "PASS",
+      "summary": "14/14 representative products agree on ingredient set, strength and release mechanism across openFDA and RxNav; 0 disagreements need rule handling.",
+      "details": [
+        {
+          "drug": "atorvastatin",
+          "productNdc": "68071-2991",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "ATORVASTATIN CALCIUM TRIHYDRATE",
+                "strength": "40 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "atorvastatin 40 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 40,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 40,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 405,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "TABLET": 16,
+              "TABLET, FILM COATED": 80,
+              "TABLET, COATED": 4
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "ATORVASTATIN CALCIUM TRIHYDRATE": 70,
+              "ATORVASTATIN CALCIUM PROPYLENE GLYCOL SOLVATE": 23,
+              "ATORVASTATIN": 7
+            }
+          }
+        },
+        {
+          "drug": "amlodipine",
+          "productNdc": "68180-455",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "AMLODIPINE BESYLATE",
+                "strength": "5 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "amlodipine 5 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 5,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 5,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 319,
+            "productsWithDifferentIngredientSet": 37,
+            "dosageForms": {
+              "TABLET": 63,
+              "TABLET, FILM COATED": 23,
+              "CAPSULE": 14
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "AMLODIPINE BESYLATE": 63,
+              "AMLODIPINE BESYLATE + HYDROCHLOROTHIAZIDE + OLMESARTAN MEDOXOMIL": 17,
+              "AMLODIPINE BESYLATE + BENAZEPRIL HYDROCHLORIDE": 14,
+              "AMLODIPINE BESYLATE + HYDROCHLOROTHIAZIDE + VALSARTAN": 4,
+              "AMLODIPINE BESYLATE + VALSARTAN": 2
+            }
+          }
+        },
+        {
+          "drug": "levothyroxine",
+          "productNdc": "68788-8793",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "LEVOTHYROXINE SODIUM",
+                "strength": ".175 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "levothyroxine sodium 0.175 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 0.175,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 0.175,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 584,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION": 7,
+              "TABLET": 88,
+              "SOLUTION": 5
+            },
+            "routes": {
+              "INTRAVENOUS": 7,
+              "ORAL": 93
+            },
+            "ingredientSets": {
+              "LEVOTHYROXINE SODIUM ANHYDROUS": 7,
+              "LEVOTHYROXINE SODIUM": 93
+            }
+          }
+        },
+        {
+          "drug": "lisinopril",
+          "productNdc": "23155-878",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "LISINOPRIL",
+                "strength": "10 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "lisinopril 10 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 370,
+            "productsWithDifferentIngredientSet": 28,
+            "dosageForms": {
+              "TABLET": 100
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "LISINOPRIL": 72,
+              "HYDROCHLOROTHIAZIDE + LISINOPRIL": 28
+            }
+          }
+        },
+        {
+          "drug": "gabapentin",
+          "productNdc": "60760-669",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "GABAPENTIN",
+                "strength": "100 mg/1"
+              }
+            ],
+            "dosageForm": "CAPSULE",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "gabapentin 100 MG Oral Capsule",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 100,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 100,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 583,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "CAPSULE": 60,
+              "TABLET, FILM COATED": 8,
+              "TABLET": 20,
+              "TABLET, COATED": 5,
+              "SOLUTION": 7
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "GABAPENTIN": 100
+            }
+          }
+        },
+        {
+          "drug": "losartan",
+          "productNdc": "50090-4712",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "LOSARTAN POTASSIUM",
+                "strength": "100 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "losartan potassium 100 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 100,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 100,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 312,
+            "productsWithDifferentIngredientSet": 36,
+            "dosageForms": {
+              "TABLET, FILM COATED": 89,
+              "TABLET": 11
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "LOSARTAN POTASSIUM": 64,
+              "HYDROCHLOROTHIAZIDE + LOSARTAN POTASSIUM": 36
+            }
+          }
+        },
+        {
+          "drug": "metformin",
+          "productNdc": "43353-982",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "METFORMIN HYDROCHLORIDE",
+                "strength": "500 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "metformin hydrochloride 500 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 500,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 500,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 560,
+            "productsWithDifferentIngredientSet": 30,
+            "dosageForms": {
+              "TABLET, EXTENDED RELEASE": 15,
+              "TABLET": 26,
+              "TABLET, FILM COATED": 41,
+              "SOLUTION": 2,
+              "TABLET, FILM COATED, EXTENDED RELEASE": 10,
+              "TABLET, COATED": 6
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "EMPAGLIFLOZIN + LINAGLIPTIN + METFORMIN HYDROCHLORIDE": 2,
+              "METFORMIN HYDROCHLORIDE": 70,
+              "GLYBURIDE + METFORMIN HYDROCHLORIDE": 4,
+              "METFORMIN HYDROCHLORIDE + SITAGLIPTIN": 10,
+              "LINAGLIPTIN + METFORMIN HYDROCHLORIDE": 3,
+              "GLIPIZIDE + METFORMIN HYDROCHLORIDE": 4,
+              "METFORMIN HYDROCHLORIDE + PIOGLITAZONE HYDROCHLORIDE": 4,
+              "METFORMIN HYDROCHLORIDE + SITAGLIPTIN PHOSPHATE": 2,
+              "ALOGLIPTIN BENZOATE + METFORMIN HYDROCHLORIDE": 1
+            }
+          }
+        },
+        {
+          "drug": "metoprolol_succinate",
+          "productNdc": "50090-6448",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "METOPROLOL TARTRATE",
+                "strength": "50 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET, EXTENDED RELEASE",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "24 HR metoprolol succinate 50 MG Extended Release Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 50,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 50,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "ER",
+            "rxnav": "ER",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 263,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "TABLET, EXTENDED RELEASE": 49,
+              "TABLET, FILM COATED, EXTENDED RELEASE": 47,
+              "CAPSULE, EXTENDED RELEASE": 4
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "METOPROLOL TARTRATE": 5,
+              "METOPROLOL SUCCINATE": 95
+            }
+          }
+        },
+        {
+          "drug": "omeprazole",
+          "productNdc": "55111-643",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "OMEPRAZOLE",
+                "strength": "10 mg/1"
+              }
+            ],
+            "dosageForm": "CAPSULE, DELAYED RELEASE",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "omeprazole 10 MG Delayed Release Oral Capsule",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "DR",
+            "rxnav": "DR",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 395,
+            "productsWithDifferentIngredientSet": 6,
+            "dosageForms": {
+              "TABLET, DELAYED RELEASE": 36,
+              "CAPSULE, DELAYED RELEASE": 53,
+              "TABLET, ORALLY DISINTEGRATING, DELAYED RELEASE": 4,
+              "POWDER, FOR SUSPENSION": 4,
+              "CAPSULE, GELATIN COATED": 1,
+              "CAPSULE, DELAYED RELEASE PELLETS": 1,
+              "CAPSULE": 1
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "OMEPRAZOLE MAGNESIUM": 19,
+              "OMEPRAZOLE": 75,
+              "OMEPRAZOLE + SODIUM BICARBONATE": 6
+            }
+          }
+        },
+        {
+          "drug": "rosuvastatin",
+          "productNdc": "82009-018",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "ROSUVASTATIN CALCIUM",
+                "strength": "10 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "rosuvastatin calcium 10 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 205,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "TABLET, FILM COATED": 79,
+              "TABLET": 21
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "ROSUVASTATIN CALCIUM": 100
+            }
+          }
+        },
+        {
+          "drug": "pantoprazole",
+          "productNdc": "68071-1963",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "PANTOPRAZOLE SODIUM",
+                "strength": "40 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET, DELAYED RELEASE",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "pantoprazole 40 MG Delayed Release Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 40,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 40,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "DR",
+            "rxnav": "DR",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 117,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "INJECTION, POWDER, FOR SOLUTION": 15,
+              "TABLET, DELAYED RELEASE": 62,
+              "GRANULE, DELAYED RELEASE": 5,
+              "SUSPENSION": 1,
+              "INJECTION, POWDER, LYOPHILIZED, FOR SOLUTION": 9,
+              "POWDER, FOR SOLUTION": 2,
+              "INJECTION, SOLUTION": 3,
+              "FOR SUSPENSION": 1,
+              "TABLET": 2
+            },
+            "routes": {
+              "INTRAVENOUS": 29,
+              "ORAL": 71
+            },
+            "ingredientSets": {
+              "PANTOPRAZOLE SODIUM": 100
+            }
+          }
+        },
+        {
+          "drug": "furosemide",
+          "productNdc": "68094-756",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "FUROSEMIDE",
+                "strength": "40 mg/4mL"
+              }
+            ],
+            "dosageForm": "SOLUTION",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "furosemide 10 MG/ML Oral Solution",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "ML"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "ML"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 223,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "SOLUTION": 4,
+              "INJECTION": 12,
+              "TABLET": 62,
+              "INJECTION, SOLUTION": 22
+            },
+            "routes": {
+              "ORAL": 66,
+              "INTRAMUSCULAR": 21,
+              "INTRAVENOUS": 32,
+              "SUBCUTANEOUS": 2
+            },
+            "ingredientSets": {
+              "FUROSEMIDE": 100
+            }
+          }
+        },
+        {
+          "drug": "hydrocodone_acetaminophen",
+          "productNdc": "13107-213",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "HYDROCODONE BITARTRATE",
+                "strength": "10 mg/1"
+              },
+              {
+                "name": "ACETAMINOPHEN",
+                "strength": "300 mg/1"
+              }
+            ],
+            "dosageForm": "TABLET",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "acetaminophen 300 MG / hydrocodone bitartrate 10 MG Oral Tablet",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              },
+              {
+                "value": 300,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 300,
+                "unit": "MG",
+                "per": "1"
+              },
+              {
+                "value": 10,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 202,
+            "productsWithDifferentIngredientSet": 0,
+            "dosageForms": {
+              "TABLET": 94,
+              "SOLUTION": 5,
+              "LIQUID": 1
+            },
+            "routes": {
+              "ORAL": 100
+            },
+            "ingredientSets": {
+              "ACETAMINOPHEN + HYDROCODONE BITARTRATE": 100
+            }
+          }
+        },
+        {
+          "drug": "tamsulosin",
+          "productNdc": "71610-910",
+          "openFda": {
+            "ingredients": [
+              {
+                "name": "TAMSULOSIN HYDROCHLORIDE",
+                "strength": ".4 mg/1"
+              }
+            ],
+            "dosageForm": "CAPSULE",
+            "route": [
+              "ORAL"
+            ]
+          },
+          "rxnavConceptName": "tamsulosin hydrochloride 0.4 MG Oral Capsule",
+          "ingredientSetMatchesCatalog": true,
+          "strengthFoundInRxNavConcept": true,
+          "strengthsNormalized": {
+            "openFda": [
+              {
+                "value": 0.4,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rxnav": [
+              {
+                "value": 0.4,
+                "unit": "MG",
+                "per": "1"
+              }
+            ],
+            "rawTextIdentical": false
+          },
+          "releaseMechanism": {
+            "openFda": "IR_OR_UNSPECIFIED",
+            "rxnav": "IR_OR_UNSPECIFIED",
+            "consistent": true
+          },
+          "observedAcross100Products": {
+            "totalFinishedProductsForGenericName": 68,
+            "productsWithDifferentIngredientSet": 4,
+            "dosageForms": {
+              "CAPSULE": 68
+            },
+            "routes": {
+              "ORAL": 68
+            },
+            "ingredientSets": {
+              "TAMSULOSIN HYDROCHLORIDE": 64,
+              "DUTASTERIDE + TAMSULOSIN HYDROCHLORIDE": 4
+            }
+          }
+        }
+      ],
+      "requests": []
+    },
+    {
+      "id": "C4",
+      "title": "Recall lookup and product-level relevance",
+      "status": "WARN",
+      "summary": "Recall records are retrievable for the supported drugs, but product-level relevance cannot rely on structured fields: 15176 of 18110 drug enforcement records (83.8%) lack the openfda block. In the per-drug sample, 40.2% had openfda data, 87.0% had an NDC parsable from product_description, and 84 were combination products matched by a single-ingredient keyword.",
+      "details": {
+        "globalTotal": 18110,
+        "globalMissingOpenfda": 15176,
+        "perDrug": [
+          {
+            "drug": "atorvastatin",
+            "structuredSearchTotal": 42,
+            "freeTextSearchTotal": 68,
+            "sampled": 68,
+            "sampledWithOpenfdaSection": 41,
+            "sampledWithNdcParsableFromDescription": 63,
+            "sampledCombinationProducts": 13,
+            "representativeProductNdc": "68071-2991",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 42,
+              "Class III": 26
+            },
+            "statuses": {
+              "Terminated": 59,
+              "Ongoing": 9
+            }
+          },
+          {
+            "drug": "amlodipine",
+            "structuredSearchTotal": 43,
+            "freeTextSearchTotal": 98,
+            "sampled": 98,
+            "sampledWithOpenfdaSection": 43,
+            "sampledWithNdcParsableFromDescription": 95,
+            "sampledCombinationProducts": 37,
+            "representativeProductNdc": "68180-455",
+            "sampledRecallsReferencingRepresentativeProduct": [
+              "D-0899-2023",
+              "D-1492-2016",
+              "D-1493-2016"
+            ],
+            "classifications": {
+              "Class II": 77,
+              "Class III": 21
+            },
+            "statuses": {
+              "Terminated": 63,
+              "Ongoing": 35
+            }
+          },
+          {
+            "drug": "levothyroxine",
+            "structuredSearchTotal": 98,
+            "freeTextSearchTotal": 188,
+            "sampled": 100,
+            "sampledWithOpenfdaSection": 47,
+            "sampledWithNdcParsableFromDescription": 92,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "68788-8793",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class I": 7,
+              "Class II": 93
+            },
+            "statuses": {
+              "Terminated": 68,
+              "Ongoing": 32
+            }
+          },
+          {
+            "drug": "lisinopril",
+            "structuredSearchTotal": 14,
+            "freeTextSearchTotal": 41,
+            "sampled": 41,
+            "sampledWithOpenfdaSection": 14,
+            "sampledWithNdcParsableFromDescription": 35,
+            "sampledCombinationProducts": 6,
+            "representativeProductNdc": "23155-878",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class III": 7,
+              "Class II": 34
+            },
+            "statuses": {
+              "Terminated": 39,
+              "Completed": 1,
+              "Ongoing": 1
+            }
+          },
+          {
+            "drug": "gabapentin",
+            "structuredSearchTotal": 13,
+            "freeTextSearchTotal": 25,
+            "sampled": 25,
+            "sampledWithOpenfdaSection": 13,
+            "sampledWithNdcParsableFromDescription": 22,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "60760-669",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 18,
+              "Class III": 7
+            },
+            "statuses": {
+              "Terminated": 18,
+              "Ongoing": 7
+            }
+          },
+          {
+            "drug": "losartan",
+            "structuredSearchTotal": 32,
+            "freeTextSearchTotal": 117,
+            "sampled": 100,
+            "sampledWithOpenfdaSection": 27,
+            "sampledWithNdcParsableFromDescription": 88,
+            "sampledCombinationProducts": 12,
+            "representativeProductNdc": "50090-4712",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 100
+            },
+            "statuses": {
+              "Ongoing": 34,
+              "Terminated": 66
+            }
+          },
+          {
+            "drug": "metformin",
+            "structuredSearchTotal": 32,
+            "freeTextSearchTotal": 91,
+            "sampled": 91,
+            "sampledWithOpenfdaSection": 32,
+            "sampledWithNdcParsableFromDescription": 69,
+            "sampledCombinationProducts": 9,
+            "representativeProductNdc": "43353-982",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 84,
+              "Class III": 6,
+              "Class I": 1
+            },
+            "statuses": {
+              "Terminated": 67,
+              "Completed": 2,
+              "Ongoing": 22
+            }
+          },
+          {
+            "drug": "metoprolol_succinate",
+            "structuredSearchTotal": 15,
+            "freeTextSearchTotal": 43,
+            "sampled": 43,
+            "sampledWithOpenfdaSection": 15,
+            "sampledWithNdcParsableFromDescription": 37,
+            "sampledCombinationProducts": 1,
+            "representativeProductNdc": "50090-6448",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 40,
+              "Class III": 3
+            },
+            "statuses": {
+              "Terminated": 34,
+              "Ongoing": 9
+            }
+          },
+          {
+            "drug": "omeprazole",
+            "structuredSearchTotal": 4,
+            "freeTextSearchTotal": 17,
+            "sampled": 17,
+            "sampledWithOpenfdaSection": 4,
+            "sampledWithNdcParsableFromDescription": 13,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "55111-643",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 15,
+              "Class III": 2
+            },
+            "statuses": {
+              "Terminated": 14,
+              "Ongoing": 2,
+              "Completed": 1
+            }
+          },
+          {
+            "drug": "rosuvastatin",
+            "structuredSearchTotal": 6,
+            "freeTextSearchTotal": 13,
+            "sampled": 13,
+            "sampledWithOpenfdaSection": 6,
+            "sampledWithNdcParsableFromDescription": 9,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "82009-018",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 13
+            },
+            "statuses": {
+              "Ongoing": 4,
+              "Terminated": 9
+            }
+          },
+          {
+            "drug": "pantoprazole",
+            "structuredSearchTotal": 10,
+            "freeTextSearchTotal": 27,
+            "sampled": 27,
+            "sampledWithOpenfdaSection": 10,
+            "sampledWithNdcParsableFromDescription": 24,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "68071-1963",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 23,
+              "Class III": 3,
+              "Class I": 1
+            },
+            "statuses": {
+              "Terminated": 23,
+              "Completed": 1,
+              "Ongoing": 3
+            }
+          },
+          {
+            "drug": "furosemide",
+            "structuredSearchTotal": 7,
+            "freeTextSearchTotal": 14,
+            "sampled": 14,
+            "sampledWithOpenfdaSection": 7,
+            "sampledWithNdcParsableFromDescription": 7,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "68094-756",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 11,
+              "Class I": 1,
+              "Class III": 2
+            },
+            "statuses": {
+              "Terminated": 11,
+              "Ongoing": 3
+            }
+          },
+          {
+            "drug": "hydrocodone_acetaminophen",
+            "structuredSearchTotal": 6,
+            "freeTextSearchTotal": 22,
+            "sampled": 22,
+            "sampledWithOpenfdaSection": 6,
+            "sampledWithNdcParsableFromDescription": 20,
+            "sampledCombinationProducts": 6,
+            "representativeProductNdc": "13107-213",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class I": 4,
+              "Class III": 7,
+              "Class II": 11
+            },
+            "statuses": {
+              "Terminated": 21,
+              "Ongoing": 1
+            }
+          },
+          {
+            "drug": "tamsulosin",
+            "structuredSearchTotal": 2,
+            "freeTextSearchTotal": 5,
+            "sampled": 5,
+            "sampledWithOpenfdaSection": 2,
+            "sampledWithNdcParsableFromDescription": 4,
+            "sampledCombinationProducts": 0,
+            "representativeProductNdc": "71610-910",
+            "sampledRecallsReferencingRepresentativeProduct": [],
+            "classifications": {
+              "Class II": 5
+            },
+            "statuses": {
+              "Terminated": 5
+            }
+          }
+        ]
+      },
+      "requests": [
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22atorvastatin%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:46.218Z",
+          "elapsedMs": 339
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22atorvastatin%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:46.854Z",
+          "elapsedMs": 284
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22amlodipine%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:47.368Z",
+          "elapsedMs": 160
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22amlodipine%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:48.205Z",
+          "elapsedMs": 486
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22levothyroxine%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:48.726Z",
+          "elapsedMs": 169
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22levothyroxine%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:49.344Z",
+          "elapsedMs": 268
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22lisinopril%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:49.969Z",
+          "elapsedMs": 273
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22lisinopril%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:50.518Z",
+          "elapsedMs": 199
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22gabapentin%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:51.098Z",
+          "elapsedMs": 228
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22gabapentin%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:51.640Z",
+          "elapsedMs": 191
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22losartan%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:52.212Z",
+          "elapsedMs": 221
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22losartan%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:52.815Z",
+          "elapsedMs": 253
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22metformin%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:53.338Z",
+          "elapsedMs": 170
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22metformin%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:53.941Z",
+          "elapsedMs": 252
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22metoprolol%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:54.463Z",
+          "elapsedMs": 169
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22metoprolol%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:55.043Z",
+          "elapsedMs": 229
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22omeprazole%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:55.569Z",
+          "elapsedMs": 174
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22omeprazole%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:56.091Z",
+          "elapsedMs": 172
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22rosuvastatin%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:56.609Z",
+          "elapsedMs": 167
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22rosuvastatin%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:57.140Z",
+          "elapsedMs": 180
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22pantoprazole%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:57.665Z",
+          "elapsedMs": 173
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22pantoprazole%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:58.208Z",
+          "elapsedMs": 193
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22furosemide%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:10:59.674Z",
+          "elapsedMs": 1116
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22furosemide%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:00.199Z",
+          "elapsedMs": 173
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22hydrocodone%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:00.722Z",
+          "elapsedMs": 172
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22hydrocodone%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:01.267Z",
+          "elapsedMs": 194
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.generic_name:%22tamsulosin%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:01.787Z",
+          "elapsedMs": 168
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=product_description:%22tamsulosin%22&limit=100",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:02.314Z",
+          "elapsedMs": 176
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:02.835Z",
+          "elapsedMs": 170
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=_missing_:openfda&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:03.363Z",
+          "elapsedMs": 178
+        }
+      ]
+    },
+    {
+      "id": "C5",
+      "title": "Lot-specific matching where source data permits",
+      "status": "WARN",
+      "summary": "Lot information exists only as free text in code_info; 77.1% of sampled records contain an explicit lot token. Lot matching is possible only as a user-confirmed comparison, never as an automatic non-match.",
+      "details": [
+        {
+          "drug": "atorvastatin",
+          "sampled": 68,
+          "codeInfoWithLotToken": 55,
+          "examples": [
+            {
+              "recall_number": "D-070-2013",
+              "code_info": "Lot #s: 2436144, 2436582, 2441567, 2441568, Exp 08/31/2014."
+            },
+            {
+              "recall_number": "D-0374-2023",
+              "code_info": "Batches: a)R2100283, R2100288, R2100289, Exp. Date 2/28/2023; R2200235, Exp. Date 1/31/2024; R2201037, R2200952, Exp. Date 6/30/2024; b) R2100291, R2100281, R21"
+            }
+          ]
+        },
+        {
+          "drug": "amlodipine",
+          "sampled": 98,
+          "codeInfoWithLotToken": 84,
+          "examples": [
+            {
+              "recall_number": "D-332-2014",
+              "code_info": "Product code: 715515; Lot Number: F0012, Exp 10/31/2013; F0013, Exp 02/28/2014; F0014, Exp 03/31/2014"
+            },
+            {
+              "recall_number": "D-0542-2025",
+              "code_info": "Lot GB01616, expiration 2/28/2027"
+            }
+          ]
+        },
+        {
+          "drug": "levothyroxine",
+          "sampled": 100,
+          "codeInfoWithLotToken": 88,
+          "examples": [
+            {
+              "recall_number": "D-1178-2018",
+              "code_info": "Lot #: 15617VP03, 15617VP01, 15617VP-02, Exp 7/31/2019;  15617VP06, 15617VP05, Exp 11/30/2019; 15617VP04, 15618004, 15618002, Exp 12/31/2019; 15618009, 15618008"
+            },
+            {
+              "recall_number": "D-0120-2025",
+              "code_info": "Lot #: a) 8177720, Exp. Date Jun 2025; b) 3200218, Exp. Date Jun 2025"
+            }
+          ]
+        },
+        {
+          "drug": "lisinopril",
+          "sampled": 41,
+          "codeInfoWithLotToken": 35,
+          "examples": [
+            {
+              "recall_number": "D-1036-2016",
+              "code_info": "Lot # FC1960; Exp.: 02/18"
+            },
+            {
+              "recall_number": "D-0114-2024",
+              "code_info": "Lot#: a) 8255-3012, Exp 08/31/2024; b) 8255-3012, Exp 08/31/2024"
+            }
+          ]
+        },
+        {
+          "drug": "gabapentin",
+          "sampled": 25,
+          "codeInfoWithLotToken": 23,
+          "examples": [
+            {
+              "recall_number": "D-0337-2015",
+              "code_info": "Lot #s: G01960A1, Exp 09/2015, G01967A1, Exp 10/2015"
+            },
+            {
+              "recall_number": "D-0354-2023",
+              "code_info": "Lot # G177092, Exp. 11/24"
+            }
+          ]
+        },
+        {
+          "drug": "losartan",
+          "sampled": 100,
+          "codeInfoWithLotToken": 77,
+          "examples": [
+            {
+              "recall_number": "D-1455-2019",
+              "code_info": "Arrow Malta (Teva) Bulk Product Lot #  1169752A, exp. date 01/2020, 1000 tablets/bottle  1169753A, exp. date 01/2020, 90 tablets/bottle    Golden State Medical "
+            },
+            {
+              "recall_number": "D-0833-2022",
+              "code_info": "Lot #  BLI2002A, exp. date 11/2022  BLI2004A, exp. date 11/2022  BLI2104B, exp. date 05/2023"
+            }
+          ]
+        },
+        {
+          "drug": "metformin",
+          "sampled": 91,
+          "codeInfoWithLotToken": 51,
+          "examples": [
+            {
+              "recall_number": "D-0435-2021",
+              "code_info": "MP0077"
+            },
+            {
+              "recall_number": "D-0325-2021",
+              "code_info": "Lot #JKU4639A, Exp 10/2022"
+            }
+          ]
+        },
+        {
+          "drug": "metoprolol_succinate",
+          "sampled": 43,
+          "codeInfoWithLotToken": 31,
+          "examples": [
+            {
+              "recall_number": "D-1300-2014",
+              "code_info": "Lot #: LN10686, LN10687, LN10688, LN10707, LN10708, Exp 02/15"
+            },
+            {
+              "recall_number": "D-0169-2023",
+              "code_info": "Lot #s: 21143094, 21143095, 21143119, 21143121, 21142389, Exp 03/31/2023."
+            }
+          ]
+        },
+        {
+          "drug": "omeprazole",
+          "sampled": 17,
+          "codeInfoWithLotToken": 9,
+          "examples": [
+            {
+              "recall_number": "D-504-2014",
+              "code_info": "OMEPRAZOLE/SODIUM BICARBONATE, Capsule, 20 mg/1110 mg has the following codes    Pedigree: AD70655_20, EXP: 5/29/2014;  Pedigree: AD73627_35, EXP: 5/30/2014."
+            },
+            {
+              "recall_number": "D-0525-2025",
+              "code_info": "Lot: C2403017, Exp 12/31/2026"
+            }
+          ]
+        },
+        {
+          "drug": "rosuvastatin",
+          "sampled": 13,
+          "codeInfoWithLotToken": 8,
+          "examples": [
+            {
+              "recall_number": "D-0520-2023",
+              "code_info": "Lot: A1723C, Exp 8/31/2025; Lot: A1922B, Exp 6/30/2024; Lot: D0622M and Lot: F2922I, Exp 7/31/2024; Lot: G3021L, Exp 1/31/2024; Lot:H2622P & Lot: J0722C, Exp 10"
+            },
+            {
+              "recall_number": "D-0406-2023",
+              "code_info": "Batches: a) P2006560, Exp. Date 11/30/2023; P2101562, Exp. Date 2/28/2024;  b) P2006561, Exp. Date 11/30/2023; P2006562, Exp. Date 11/30/2023; P2006587, Exp. Da"
+            }
+          ]
+        },
+        {
+          "drug": "pantoprazole",
+          "sampled": 27,
+          "codeInfoWithLotToken": 17,
+          "examples": [
+            {
+              "recall_number": "D-1074-2019",
+              "code_info": "Lot #: PA217060A, Exp 05/2020"
+            },
+            {
+              "recall_number": "D-1499-2016",
+              "code_info": "PSSB16011-A, Exp 01/18"
+            }
+          ]
+        },
+        {
+          "drug": "furosemide",
+          "sampled": 14,
+          "codeInfoWithLotToken": 10,
+          "examples": [
+            {
+              "recall_number": "D-314-2013",
+              "code_info": "Lot 20-564-DK Exp. 02/14"
+            },
+            {
+              "recall_number": "D-0405-2016",
+              "code_info": "all lots"
+            }
+          ]
+        },
+        {
+          "drug": "hydrocodone_acetaminophen",
+          "sampled": 22,
+          "codeInfoWithLotToken": 20,
+          "examples": [
+            {
+              "recall_number": "D-058-2013",
+              "code_info": "Lot #: 519406A, 521759A, Exp 04/14"
+            },
+            {
+              "recall_number": "D-0599-2018",
+              "code_info": "M16002A (02/2018);   M16246A (04/2018);   M16246B (04/2018);   M16434A (07/2018);   M16569A (10/2018);   M17015A (01/2019);   S700271 (04/2019);"
+            }
+          ]
+        },
+        {
+          "drug": "tamsulosin",
+          "sampled": 5,
+          "codeInfoWithLotToken": 4,
+          "examples": [
+            {
+              "recall_number": "D-1253-2015",
+              "code_info": "A) Lot #: LN10896, Expiry: 4/30/2015; Lot #: LN10901, Expiry: 4/30/2015; Lot #:LN10902, Expiry: 4/30/2015; Lot #: LN10903, Expiry: 4/30/2015; Lot #: LN11020, Ex"
+            },
+            {
+              "recall_number": "D-0069-2018",
+              "code_info": "Lot Numbers: a) 1089376A, 1089382A, 1095210M, 1117768M, 1117769A, Exp. 11/17; 1128452A, 1128453A, 1137658A, 1154207A, 1156087A, Exp. 03/18; b) 1089379A, 1091533"
+            }
+          ]
+        }
+      ],
+      "requests": []
+    },
+    {
+      "id": "C6",
+      "title": "Response schema validation",
+      "status": "PASS",
+      "summary": "125 responses validated against minimal schemas; 0 schema violations.",
+      "details": {
+        "validatedResponses": 125,
+        "violations": []
+      },
+      "requests": []
+    },
+    {
+      "id": "C7",
+      "title": "Rate-limit and service-error handling",
+      "status": "WARN",
+      "summary": "9 error scenarios exercised; 0 misclassified. HAZARD: openFDA answers a query on a nonexistent field with NOT_FOUND, so field-name bugs look like \"no recalls\". The app must run a known-positive control query per source (see TEST_PLAN RG-2). openFDA returns HTTP 500 (not 400) for malformed queries.",
+      "details": [
+        {
+          "case": "openFDA no matching records",
+          "expected": "NO_MATCH",
+          "observed": "NO_MATCH",
+          "httpStatus": 404
+        },
+        {
+          "case": "openFDA query on a nonexistent field (e.g., a typo in a field name)",
+          "expected": "Hazard probe: if this is NO_MATCH, a field-name bug is indistinguishable from \"no recalls\"",
+          "observed": "NO_MATCH",
+          "httpStatus": 404
+        },
+        {
+          "case": "openFDA malformed query syntax",
+          "expected": "SOURCE_UNAVAILABLE (never NO_MATCH)",
+          "observed": "SOURCE_UNAVAILABLE",
+          "httpStatus": 500
+        },
+        {
+          "case": "Client timeout (1 ms budget)",
+          "expected": "SOURCE_UNAVAILABLE/TIMEOUT",
+          "observed": "SOURCE_UNAVAILABLE/TIMEOUT"
+        },
+        {
+          "case": "DailyMed no matching SPL",
+          "expected": "NO_MATCH",
+          "observed": "NO_MATCH",
+          "httpStatus": 200
+        },
+        {
+          "case": "DailyMed unknown set ID",
+          "expected": "Recorded for documentation",
+          "observed": "OK",
+          "httpStatus": 200
+        },
+        {
+          "case": "RxNav unknown name",
+          "expected": "NO_MATCH",
+          "observed": "NO_MATCH",
+          "httpStatus": 200
+        },
+        {
+          "case": "RxNav ndcstatus for nonexistent NDC",
+          "expected": "Recorded for documentation",
+          "observed": "OK",
+          "ndcStatus": "ALIEN"
+        },
+        {
+          "case": "Rate-limit headers exposed to keyless clients",
+          "observed": {
+            "x-ratelimit-limit": null,
+            "x-ratelimit-remaining": null,
+            "retry-after": null
+          },
+          "note": "HTTP 429 is not provoked deliberately (it would consume the shared per-IP quota). 429 handling is covered by deterministic unit tests (tests/unit/http_classification.test.ts).",
+          "headerSampleUrl": null
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22zz-no-such-drug-zz%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:11:03.928Z",
+          "elapsedMs": 214
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?search=no_such_field_xyz:%22metformin%22&limit=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 404,
+          "retrievedAt": "2026-11-12T04:11:04.440Z",
+          "elapsedMs": 161
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:((&limit=1",
+          "outcome": "SOURCE_UNAVAILABLE",
+          "httpStatus": 500,
+          "retrievedAt": "2026-11-12T04:11:05.021Z",
+          "elapsedMs": 231,
+          "detail": "HTTP_5XX: HTTP 500"
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22lisinopril%22&limit=1",
+          "outcome": "SOURCE_UNAVAILABLE",
+          "httpStatus": null,
+          "retrievedAt": "2026-11-12T04:11:05.373Z",
+          "elapsedMs": 2,
+          "detail": "TIMEOUT: AbortError: This operation was aborted"
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=zznosuchdrugzz&pagesize=1",
+          "outcome": "NO_MATCH",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:06.080Z",
+          "elapsedMs": 356
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/00000000-0000-0000-0000-000000000000/ndcs.json",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:06.471Z",
+          "elapsedMs": 40
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=zznosuchdrugzz",
+          "outcome": "NO_MATCH",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:07.257Z",
+          "elapsedMs": 435
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/ndcstatus.json?ndc=00000000000",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:07.655Z",
+          "elapsedMs": 48
+        }
+      ]
+    },
+    {
+      "id": "C8",
+      "title": "Source freshness and retrieval timestamps",
+      "status": "PASS",
+      "summary": "Each source exposes a dataset-level freshness marker (openFDA meta.last_updated, DailyMed metadata.db_published_date, RxNav version). None exposes per-record last-modified for recalls; the app must store both the source marker and its own retrieval time.",
+      "details": {
+        "openFdaNdcLastUpdated": "2026-11-11",
+        "openFdaEnforcementLastUpdated": "2026-11-04",
+        "dailyMedDbPublished": "Nov 11, 2026 08:02:44PM EST",
+        "rxNormVersion": {
+          "version": "02-Nov-2026",
+          "apiVersion": "3.1.357"
+        },
+        "retrievedAt": [
+          {
+            "url": "https://api.fda.gov/drug/ndc.json?limit=1",
+            "retrievedAt": "2026-11-12T04:11:08.765Z"
+          },
+          {
+            "url": "https://api.fda.gov/drug/enforcement.json?limit=1",
+            "retrievedAt": "2026-11-12T04:11:10.382Z"
+          },
+          {
+            "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?pagesize=1",
+            "retrievedAt": "2026-11-12T04:11:11.126Z"
+          },
+          {
+            "url": "https://rxnav.nlm.nih.gov/REST/version.json",
+            "retrievedAt": "2026-11-12T04:11:11.522Z"
+          }
+        ]
+      },
+      "requests": [
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:08.765Z",
+          "elapsedMs": 237
+        },
+        {
+          "url": "https://api.fda.gov/drug/enforcement.json?limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:10.382Z",
+          "elapsedMs": 1267
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?pagesize=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:11.126Z",
+          "elapsedMs": 394
+        },
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/version.json",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:11.522Z",
+          "elapsedMs": 46
+        }
+      ]
+    },
+    {
+      "id": "C9",
+      "title": "Missing or ambiguous manufacturer / facility information",
+      "status": "WARN",
+      "summary": "20 SPL documents parsed: 15 list no MANUFACTURE establishment (2 have no establishment section at all), 1 list more than one MANUFACTURE establishment, 13 contain REPACK/RELABEL operations. Observed MANUFACTURE code is C43360 (Document A states C43215). 15/15 repackager source-NDC traversals resolved to an originating labeler via openFDA. Facility identity is frequently absent or multi-valued and must be shown as uncertain, never as verified.",
+      "details": {
+        "observedOperationCodes": {
+          "C73606:repack": 8,
+          "C43360:MANUFACTURE": 4,
+          "C84731:PACK": 3,
+          "C73606:REPACK": 5,
+          "C43360:manufacture": 2,
+          "C25391:analysis": 2,
+          "C84731:pack": 1,
+          "C84732:label": 1,
+          "C73607:relabel": 1,
+          "C73607:RELABEL": 4,
+          "C25391:ANALYSIS": 1,
+          "C84732:LABEL": 1
+        },
+        "spls": [
+          {
+            "drug": "atorvastatin",
+            "setId": "fa2d8d38-dbd0-43fd-e053-6294a90a4e94",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "NuCare Pharmaceuticals,Inc.",
+                "duns": "010632300",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "43598-832"
+            ],
+            "traversal": {
+              "sourceNdc": "43598-832",
+              "outcome": "OK",
+              "sourceLabeler": "Dr. Reddy's Laboratories Inc",
+              "sourceApplication": "ANDA214659"
+            }
+          },
+          {
+            "drug": "amlodipine",
+            "setId": "003dd1ec-16f8-4f96-b6a8-c4689d35892a",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "LUPIN LIMITED",
+                "duns": "862272739",
+                "operations": [
+                  "C43360:MANUFACTURE",
+                  "C84731:PACK"
+                ]
+              },
+              {
+                "name": "LUPIN LIMITED",
+                "duns": "677600414",
+                "operations": [
+                  "C43360:MANUFACTURE",
+                  "C84731:PACK"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 2,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [],
+            "traversal": null
+          },
+          {
+            "drug": "levothyroxine",
+            "setId": "a0ffe111-3574-4481-a732-b68a7d58ef71",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "Preferred Pharmaceuticals Inc.",
+                "duns": "791119022",
+                "operations": [
+                  "C73606:REPACK"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "68180-974"
+            ],
+            "traversal": {
+              "sourceNdc": "68180-974",
+              "outcome": "OK",
+              "sourceLabeler": "Lupin Pharmaceuticals, Inc.",
+              "sourceApplication": "ANDA209713"
+            }
+          },
+          {
+            "drug": "lisinopril",
+            "setId": "c6c55efa-36bd-4613-98ca-2eb589a31e53",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "CorePharma, LLC",
+                "duns": "031192276",
+                "operations": [
+                  "C43360:manufacture",
+                  "C25391:analysis",
+                  "C84731:pack",
+                  "C84732:label"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 1,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [],
+            "traversal": null
+          },
+          {
+            "drug": "gabapentin",
+            "setId": "235a6954-318a-9e3a-e063-6394a90a0e21",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "St. Mary's Medical Park Pharmacy",
+                "duns": "063050751",
+                "operations": [
+                  "C73607:relabel",
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "31722-148"
+            ],
+            "traversal": {
+              "sourceNdc": "31722-148",
+              "outcome": "OK",
+              "sourceLabeler": "Camber Pharmaceuticals, Inc.",
+              "sourceApplication": "ANDA214956"
+            }
+          },
+          {
+            "drug": "losartan",
+            "setId": "27e783ce-3353-448a-b0a3-c954dfd2e4c7",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "A-S Medication Solutions",
+                "duns": "830016429",
+                "operations": [
+                  "C73607:RELABEL",
+                  "C73606:REPACK"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "31722-702"
+            ],
+            "traversal": {
+              "sourceNdc": "31722-702",
+              "outcome": "OK",
+              "sourceLabeler": "Camber Pharmaceuticals, Inc.",
+              "sourceApplication": "ANDA203835"
+            }
+          },
+          {
+            "drug": "metformin",
+            "setId": "273d86b0-9d30-48c9-8918-c5e1ececa951",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "Aphena Pharma Solutions - Tennessee, LLC",
+                "duns": "128385585",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "60429-111",
+              "60429-112",
+              "60429-113"
+            ],
+            "traversal": {
+              "sourceNdc": "60429-111",
+              "outcome": "OK",
+              "sourceLabeler": "Golden State Medical Supply, Inc.",
+              "sourceApplication": "ANDA203769"
+            }
+          },
+          {
+            "drug": "metoprolol_succinate",
+            "setId": "e91e8ee2-4a54-4932-9d8b-5831121377a4",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "A-S Medication Solutions",
+                "duns": "830016429",
+                "operations": [
+                  "C73607:RELABEL",
+                  "C73606:REPACK"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "72516-031"
+            ],
+            "traversal": {
+              "sourceNdc": "72516-031",
+              "outcome": "OK",
+              "sourceLabeler": "Oryza Pharmaceuticals, Inc",
+              "sourceApplication": "ANDA207206"
+            }
+          },
+          {
+            "drug": "omeprazole",
+            "setId": "603d2d06-c5e8-4378-a422-8dca1a410af7",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "Dr. Reddy's Laboratories Limited - FTO III",
+                "duns": "918608162",
+                "operations": [
+                  "C25391:analysis",
+                  "C43360:manufacture"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 1,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [],
+            "traversal": null
+          },
+          {
+            "drug": "rosuvastatin",
+            "setId": "6f978191-775e-4745-9c07-99e5be888afe",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "MSN LABORATORIES  PRIVATE LIMITED",
+                "duns": "650786952",
+                "operations": [
+                  "C25391:ANALYSIS",
+                  "C43360:MANUFACTURE"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 1,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [],
+            "traversal": null
+          },
+          {
+            "drug": "pantoprazole",
+            "setId": "4fbec80c-b38d-122c-e054-00144ff88e88",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "NuCare Pharmaceuticals, Inc.",
+                "duns": "010632300",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "13668-429"
+            ],
+            "traversal": {
+              "sourceNdc": "13668-429",
+              "outcome": "OK",
+              "sourceLabeler": "Torrent Pharmaceuticals Limited",
+              "sourceApplication": "ANDA090074"
+            }
+          },
+          {
+            "drug": "furosemide",
+            "setId": "4a746634-379b-4847-a965-7607d2a71bed",
+            "via": "openFDA NDC representative product",
+            "establishments": [],
+            "noEstablishmentSection": true,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [
+              "0054-3294"
+            ],
+            "traversal": {
+              "sourceNdc": "0054-3294",
+              "outcome": "OK",
+              "sourceLabeler": "Hikma Pharmaceuticals USA Inc.",
+              "sourceApplication": "ANDA070434"
+            }
+          },
+          {
+            "drug": "hydrocodone_acetaminophen",
+            "setId": "392a846e-7325-462d-b19b-8afda44c5cb0",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "Aurolife Pharma LLC",
+                "duns": "829084461",
+                "operations": [
+                  "C84732:LABEL",
+                  "C43360:MANUFACTURE",
+                  "C84731:PACK"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 1,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [],
+            "traversal": null
+          },
+          {
+            "drug": "tamsulosin",
+            "setId": "35bbb655-19e2-00c2-e063-6394a90afbe3",
+            "via": "openFDA NDC representative product",
+            "establishments": [
+              {
+                "name": "Aphena Pharma Solutions - Tennessee, LLC",
+                "duns": "128385585",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "76282-744"
+            ],
+            "traversal": {
+              "sourceNdc": "76282-744",
+              "outcome": "OK",
+              "sourceLabeler": "EXELAN PHARMACEUTICALS, INC.",
+              "sourceApplication": "ANDA078801"
+            }
+          },
+          {
+            "drug": "lisinopril",
+            "setId": "bf59ff89-a9fa-4fe3-b167-a5d0cba9e438",
+            "via": "DailyMed search (title: LISINOPRIL TABLET [PD-RX PHARMACEUTICALS, INC.])",
+            "establishments": [
+              {
+                "name": "PD-Rx Pharmaceuticals, Inc.",
+                "duns": "156893695",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "43547-352"
+            ],
+            "traversal": {
+              "sourceNdc": "43547-352",
+              "outcome": "OK",
+              "sourceLabeler": "Solco healthcare U.S., LLC",
+              "sourceApplication": "ANDA076164"
+            }
+          },
+          {
+            "drug": "lisinopril",
+            "setId": "aa5d68e7-c2b9-41eb-ade4-2cd57edc1533",
+            "via": "DailyMed search (title: LISINOPRIL TABLET [REMEDYREPACK INC.])",
+            "establishments": [],
+            "noEstablishmentSection": true,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": false,
+            "equivalentSourceNdcs": [
+              "68001-334"
+            ],
+            "traversal": {
+              "sourceNdc": "68001-334",
+              "outcome": "OK",
+              "sourceLabeler": "BluePoint Laboratories",
+              "sourceApplication": "ANDA077321"
+            }
+          },
+          {
+            "drug": "atorvastatin",
+            "setId": "5d5977a5-98f2-a90d-e063-6394a90a5892",
+            "via": "DailyMed search (title: ATORVASTATIN CALCIUM TABLET, FILM COATED [NUCARE PHARMACEUTICALS, INC.])",
+            "establishments": [
+              {
+                "name": "NuCare Pharmaceuticals, Inc.",
+                "duns": "010632300",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "72603-284"
+            ],
+            "traversal": {
+              "sourceNdc": "72603-284",
+              "outcome": "OK",
+              "sourceLabeler": "NorthStar RxLLC",
+              "sourceApplication": "ANDA214344"
+            }
+          },
+          {
+            "drug": "atorvastatin",
+            "setId": "5ec50d7c-344d-bb7d-e063-6394a90a0679",
+            "via": "DailyMed search (title: ATORVASTATIN CALCIUM TABLET, FILM COATED [NUCARE PHARMACEUTICALS, INC.])",
+            "establishments": [
+              {
+                "name": "NuCare Pharmaceuticals, Inc.",
+                "duns": "010632300",
+                "operations": [
+                  "C73606:repack"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "72603-282"
+            ],
+            "traversal": {
+              "sourceNdc": "72603-282",
+              "outcome": "OK",
+              "sourceLabeler": "NorthStar RxLLC",
+              "sourceApplication": "ANDA214344"
+            }
+          },
+          {
+            "drug": "metformin",
+            "setId": "f2318509-9a49-4c99-a08b-22381f17aacd",
+            "via": "DailyMed search (title: METFORMIN HYDROCHLORIDE TABLET, EXTENDED RELEASE [BRYANT RANCH PREPACK])",
+            "establishments": [
+              {
+                "name": "Bryant Ranch Prepack",
+                "duns": "171714327",
+                "operations": [
+                  "C73606:REPACK",
+                  "C73607:RELABEL"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "67877-159"
+            ],
+            "traversal": {
+              "sourceNdc": "67877-159",
+              "outcome": "OK",
+              "sourceLabeler": "Ascend Laboratories, LLC",
+              "sourceApplication": "ANDA201991"
+            }
+          },
+          {
+            "drug": "metformin",
+            "setId": "fb296500-55cb-45ce-be0c-59aa2e3d4624",
+            "via": "DailyMed search (title: METFORMIN HYDROCHLORIDE TABLET, FILM COATED [BRYANT RANCH PREPACK])",
+            "establishments": [
+              {
+                "name": "Bryant Ranch Prepack",
+                "duns": "171714327",
+                "operations": [
+                  "C73606:REPACK",
+                  "C73607:RELABEL"
+                ]
+              }
+            ],
+            "noEstablishmentSection": false,
+            "manufactureEstablishments": 0,
+            "hasRepackOrRelabel": true,
+            "equivalentSourceNdcs": [
+              "59651-854"
+            ],
+            "traversal": {
+              "sourceNdc": "59651-854",
+              "outcome": "OK",
+              "sourceLabeler": "Aurobindo Pharma Limited",
+              "sourceApplication": "ANDA077095"
+            }
+          }
+        ],
+        "crossSourceNdcIndexing": [
+          {
+            "drug": "atorvastatin",
+            "packageNdc": "68071-2991-3",
+            "openFdaSplSetId": "fa2d8d38-dbd0-43fd-e053-6294a90a4e94",
+            "dailyMed": [
+              "fa2d8d38-dbd0-43fd-e053-6294a90a4e94"
+            ],
+            "consistent": true
+          },
+          {
+            "drug": "amlodipine",
+            "packageNdc": "68180-455-01",
+            "openFdaSplSetId": "003dd1ec-16f8-4f96-b6a8-c4689d35892a",
+            "dailyMed": [
+              "003dd1ec-16f8-4f96-b6a8-c4689d35892a"
+            ],
+            "consistent": true
+          },
+          {
+            "drug": "levothyroxine",
+            "packageNdc": "68788-8793-3",
+            "openFdaSplSetId": "a0ffe111-3574-4481-a732-b68a7d58ef71",
+            "dailyMed": [
+              "a0ffe111-3574-4481-a732-b68a7d58ef71"
+            ],
+            "consistent": true
+          },
+          {
+            "drug": "lisinopril",
+            "packageNdc": "23155-878-01",
+            "openFdaSplSetId": "c6c55efa-36bd-4613-98ca-2eb589a31e53",
+            "dailyMed": [
+              "c6c55efa-36bd-4613-98ca-2eb589a31e53"
+            ],
+            "consistent": true
+          },
+          {
+            "drug": "gabapentin",
+            "packageNdc": "60760-669-30",
+            "openFdaSplSetId": "235a6954-318a-9e3a-e063-6394a90a0e21",
+            "dailyMed": [
+              "235a6954-318a-9e3a-e063-6394a90a0e21"
+            ],
+            "consistent": true
+          }
+        ]
+      },
+      "requests": [
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=lisinopril&pagesize=25",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:11.936Z",
+          "elapsedMs": 63
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=atorvastatin&pagesize=25",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:12.353Z",
+          "elapsedMs": 66
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?drug_name=metformin&pagesize=25",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:12.770Z",
+          "elapsedMs": 67
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fa2d8d38-dbd0-43fd-e053-6294a90a4e94.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:13.265Z",
+          "elapsedMs": 143
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2243598-832%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:15.295Z",
+          "elapsedMs": 1677
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/003dd1ec-16f8-4f96-b6a8-c4689d35892a.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:15.771Z",
+          "elapsedMs": 125
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/a0ffe111-3574-4481-a732-b68a7d58ef71.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:16.187Z",
+          "elapsedMs": 63
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2268180-974%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:16.784Z",
+          "elapsedMs": 246
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/c6c55efa-36bd-4613-98ca-2eb589a31e53.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:17.240Z",
+          "elapsedMs": 105
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/235a6954-318a-9e3a-e063-6394a90a0e21.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:17.656Z",
+          "elapsedMs": 65
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2231722-148%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:18.724Z",
+          "elapsedMs": 717
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/27e783ce-3353-448a-b0a3-c954dfd2e4c7.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:19.182Z",
+          "elapsedMs": 107
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2231722-702%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:23.730Z",
+          "elapsedMs": 4196
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/273d86b0-9d30-48c9-8918-c5e1ececa951.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:24.521Z",
+          "elapsedMs": 441
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2260429-111%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:25.095Z",
+          "elapsedMs": 223
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/e91e8ee2-4a54-4932-9d8b-5831121377a4.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:25.540Z",
+          "elapsedMs": 94
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2272516-031%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:26.067Z",
+          "elapsedMs": 176
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/603d2d06-c5e8-4378-a422-8dca1a410af7.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:26.535Z",
+          "elapsedMs": 117
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/6f978191-775e-4745-9c07-99e5be888afe.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:26.961Z",
+          "elapsedMs": 75
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/4fbec80c-b38d-122c-e054-00144ff88e88.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:27.358Z",
+          "elapsedMs": 46
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2213668-429%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:27.876Z",
+          "elapsedMs": 167
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/4a746634-379b-4847-a965-7607d2a71bed.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:28.285Z",
+          "elapsedMs": 59
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%220054-3294%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:28.800Z",
+          "elapsedMs": 165
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/392a846e-7325-462d-b19b-8afda44c5cb0.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:29.266Z",
+          "elapsedMs": 116
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/35bbb655-19e2-00c2-e063-6394a90afbe3.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:29.680Z",
+          "elapsedMs": 63
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2276282-744%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:30.195Z",
+          "elapsedMs": 165
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/bf59ff89-a9fa-4fe3-b167-a5d0cba9e438.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:30.626Z",
+          "elapsedMs": 80
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2243547-352%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:31.198Z",
+          "elapsedMs": 222
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/aa5d68e7-c2b9-41eb-ade4-2cd57edc1533.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:31.642Z",
+          "elapsedMs": 94
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2268001-334%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:32.157Z",
+          "elapsedMs": 163
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/5d5977a5-98f2-a90d-e063-6394a90a5892.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:32.626Z",
+          "elapsedMs": 118
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2272603-284%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:33.144Z",
+          "elapsedMs": 166
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/5ec50d7c-344d-bb7d-e063-6394a90a0679.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:33.617Z",
+          "elapsedMs": 122
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2272603-282%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:34.134Z",
+          "elapsedMs": 166
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/f2318509-9a49-4c99-a08b-22381f17aacd.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:34.582Z",
+          "elapsedMs": 97
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2267877-159%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:35.101Z",
+          "elapsedMs": 167
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/fb296500-55cb-45ce-be0c-59aa2e3d4624.xml",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:35.547Z",
+          "elapsedMs": 96
+        },
+        {
+          "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc:%2259651-854%22&limit=1",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:36.062Z",
+          "elapsedMs": 164
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?ndc=68071-2991-3",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:36.500Z",
+          "elapsedMs": 87
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?ndc=68180-455-01",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:36.924Z",
+          "elapsedMs": 73
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?ndc=68788-8793-3",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:37.359Z",
+          "elapsedMs": 84
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?ndc=23155-878-01",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:37.783Z",
+          "elapsedMs": 73
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?ndc=60760-669-30",
+          "outcome": "OK",
+          "httpStatus": 200,
+          "retrievedAt": "2026-11-12T04:11:38.195Z",
+          "elapsedMs": 62
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "title": "Sufficiency of direct API calls without an application backend",
+      "status": "WARN",
+      "summary": "Direct, keyless HTTPS calls are sufficient for identification (NDC Directory, RxNav), labeling/establishment data (DailyMed SPL) and recall retrieval (openFDA enforcement) in MVP scope. Limitations that a phone-only design must absorb: free-text recall matching on device; per-IP keyless quotas (a phone-only app sends no shared key); no FDA inspection/483/import-alert data via these four APIs; and SPL XML parsing on device.",
+      "details": {
+        "checkStatuses": {
+          "C1": "PASS",
+          "C2": "PASS",
+          "C3": "PASS",
+          "C4": "WARN",
+          "C5": "WARN",
+          "C7": "WARN",
+          "C8": "PASS",
+          "C9": "WARN",
+          "C6": "PASS"
+        },
+        "requestsIssuedThisRun": 135,
+        "notTested": [
+          "FDA inspection classifications, Form 483s, warning letters and Import Alert 66-40 (Document A §2–3): not part of the four mandated APIs; deferred, see docs/API_FEASIBILITY.md.",
+          "HTTP 429 behavior under real quota exhaustion (not provoked to avoid exhausting the shared per-IP quota)."
+        ]
+      },
+      "requests": []
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 # Architecture — Rx Quality Check MVP v0.1
 
-Status: Task 2 implemented `models/`, `rules/`, `state/` and `engine/` (pure TypeScript library under
-`mobile/src/`). Interfaces for `services/`, `storage/` and `scanner/` remain specifications for Tasks 3–6.
+Status: Task 2 implemented `models/`, `rules/`, `state/`, `engine/` and `fsm/`. Task 3 added
+`services/` (live public-API clients), `storage/` (SQLite with migrations and repositories) and
+`app/` (composition root), together with the schema-2 catalog and policy (§11). Everything is still
+pure TypeScript under `mobile/src/`; the React Native shell arrives in Task 4.
 
 **Scope update (Task 2):** manufacturer provenance is removed from MVP v0.1. The app does not identify
 manufacturing facilities, map establishments, show inspection history, score plants or infer where a
@@ -48,8 +50,9 @@ reached directly over HTTPS with no credentials.
 | `fsm/` | Generic state-machine core (rules, gates, validation, run loop); no app knowledge | — | everything else |
 | `engine/` | Effect runner: executes effects with injected ports and the pure rules, returns events | `models/`, `rules/`, `state/` | concrete network, storage or OCR code (received as ports) |
 | `scanner/` | Camera capture, on-device OCR, barcode decode, field extraction to `RawExtraction` | `models/` | `services/` |
-| `services/` | API clients (openFDA, DailyMed, RxNav), outcome classification, retry/backoff, cache read-through | `models/`, `storage/` (cache repo only) | `state/`, React |
-| `storage/` | Encrypted SQLite, migrations, repositories, deletion | `models/` | `services/` |
+| `services/` | Transport (timeouts, cancellation, host allowlist, privacy guard, audit), outcome classification, clients for openFDA, RxNav and DailyMed, production `Ports` with cache read-through and identity enrichment | `models/`, `rules/` (pure helpers), `engine/` and `state/` (types only) | `storage/` implementations (it uses `SourceCache` and `AssessmentStore` interfaces), React |
+| `storage/` | SQL driver interface (op-sqlite/SQLCipher adapter for the app; Node SQLite for tests), key store, migrations, repositories, delete-all | `models/`, `rules/` (refill diff), `services/` and `state/` (types only) | network |
+| `app/` | Composition root `createRecallCheck`: configuration, clients, guard, ports, storage, existing workflow | everything in the library | — |
 | `screens/`, `components/` | Presentation; dispatch events; render view models; copy | `state/` (selectors), `models/` | `services/`, `storage/` directly |
 
 Task 2 moved `scripts/lib/ndc.ts` → `rules/ndc.ts`, `schemas.ts` → `models/openfda.ts`, the
@@ -337,7 +340,23 @@ Details in `docs/PRIVACY.md`.
 | Policy file invalid | Startup validation | Fail closed: treat all drugs as `UNSUPPORTED` until a valid policy is bundled |
 | App killed mid-flow | Reducer state persisted per transition (no images) | Resume at last stable state or restart scan |
 
-## 11. Future extension points
+## 11. Task 3 implementation notes
+
+- **Configuration.** The catalog and policy (schema 2) are validated at load time (`rules/catalog.ts`) and fail closed. Eligibility precedence is in `docs/EXCLUSION_POLICY_GUIDE.md` §3. Extending them: `docs/DRUG_CATALOG_GUIDE.md`. `RULESET_VERSION` is 0.3.0.
+- **Retrieval for a confirmed identity**, all through the existing `Ports`; the state machine and recall engine are unchanged:
+  - `planRecallQueries` gives the ingredient text query, the structured product-NDC query, one query per verified source product NDC, and the multi-field positive control.
+  - Every page of every query is fetched (`MAX_SKIP` 25,000).
+  - Pages are cached for 24 h; NDC Directory answers for 30 days. Only `OK` and `NO_MATCH` are cached, and cached answers keep their original retrieval time.
+  - The positive control is never served from the cache.
+- **Identity enrichment** (`Ports.enrichIdentity`): adds RxNav IN RxCUIs (exact name match only) and repackager source products. A source counts only when the repackager's own SPL declares it (`asEquivalentEntity`) *and* the NDC Directory confirms the same ingredients, strengths, form and release. Chains are followed to depth 3 with cycle detection. When a source cannot be established, `SOURCE_PRODUCT_NOT_ESTABLISHED` is added to the finding's limitations. Nothing is inferred from manufacturer names.
+- **Retries** stay in the state machine (3 attempts, 2/4 s; one automatic rate-limit retry). Clients make one attempt per call. Timeouts (20 s) and caller cancellation are classified as `TIMEOUT` and `CANCELLED`.
+- **Storage.** The schema is in `storage/migrations.ts` and supersedes §6's sketch:
+  - assessments are immutable rows stamped with the catalog, policy and rule-set versions;
+  - medications group fills by ingredient set, so refill changes are detected;
+  - the offline cached result is matched to the exact product.
+- **Command-line integration:** `npm run e2e` (recorded real responses), `npm run e2e:live`, `npm run e2e:record`.
+
+## 12. Future extension points
 
 - Additional drugs: add catalog entries plus tests; no code change if rules are generic.
 - Policy updates: new `exclusion_policy.json` version shipped in-app (no remote config in v0.1).
