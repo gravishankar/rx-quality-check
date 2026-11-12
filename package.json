@@ -14,7 +14,9 @@
     "test": "node --import tsx --test \"tests/unit/**/*.test.ts\" \"tests/integration/**/*.test.ts\"",
     "test:unit": "node --import tsx --test \"tests/unit/**/*.test.ts\"",
     "test:integration": "node --import tsx --test \"tests/integration/**/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "fixtures:task2": "tsx scripts/capture_task2_fixtures.ts",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-include='mobile/src/**' \"tests/unit/**/*.test.ts\" \"tests/integration/**/*.test.ts\""
   },
   "devDependencies": {
     "@types/node": "22.10.2",

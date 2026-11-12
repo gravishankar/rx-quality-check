@@ -1,0 +1,1221 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:09.953Z",
+  "endpoint": "enforcement",
+  "search": "product_description:\"amlodipine\"",
+  "limit": 50,
+  "skip": 50,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22amlodipine%22&limit=50&skip=50",
+  "purpose": "Pagination page 2 of 2"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 50,
+    "limit": 50,
+    "total": 98
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-66403-007",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate and Benazepril HCl Capsules, 5 mg/20 mg, packaged in a) 100-count bottles (NDC 0378-6897-01) and b) 500-count bottles (NDC 0378-6897-05), Rx only, Mylan Pharmaceuticals Inc., Morgantown, WV 26505 U.S.A.",
+    "code_info": "Lot #: a) 2003169, 2003170, 2003171, 2003172, 2003173, 3043493; b) 2003168, 2003169, 3043493",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "60,506 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-843-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "amLODIPine BESYLATE, Tablet, 5 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 00093716798.",
+    "code_info": "amLODIPine BESYLATE, Tablet, 5 mg has the following codes:   Pedigree: W002840, EXP: 6/7/2014.",
+    "recalling_firm": "Aidapak Services, LLC",
+    "reason_for_recall": "Labeling: Label Mixup: amLODIPine BESYLATE, Tablet, 5 mg may have potentially been mislabeled as the following drug:  CYANOCOBALAMIN, Tablet, 1000 mcg, NDC 00904421713, Pedigree: W002839, EXP: 6/7/2014.",
+    "report_date": "20140129",
+    "recall_initiation_date": "20130702",
+    "termination_date": "20140207",
+    "product_type": "Drugs",
+    "product_quantity": "90 Tablets",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1142-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan and Hydrochlorothiazide Tablets, USP, 5 mg/160 mg/12.5 mg,  30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-326-30",
+    "code_info": "Batch: BBY1E001,  BBY1E003,  BBY1C002,  BBY1E002,  BBY1D001",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "50,784 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1140-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets, USP, 5 mg/160 mg, 30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-207-30",
+    "code_info": "Batch: BV53D004,  BV53C006,  BV53D001,  BV53D002,  BV53D003,  BV53C004,  BV53C005",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "78144 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-66403-002",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate and Benazepril HCl Capsules, 2.5 mg/10 mg, 100-count bottles, Rx only, Mylan Pharmaceuticals Inc., Morgantown, WV 26505 U.S.A, NDC 0378-6895-01",
+    "code_info": "Lot #: 2003156, 2003157, 2003155, 3043491",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "4,722 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0304-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets 10 mg/160 mg, (a) 30-count bottles (NDC 0093-7961-56) & 90-count bottles (NDC 0093-7691-98), RX Only, Manufactured In Israel By: TEVA PHARMACEUTICAL IND. LTD. Jerusalem, 9777402, Israel, Manufactured For: TEVA PHARMACEUTICALS USA, INC. North Wales, PA 19454.",
+    "code_info": "NDC 0093-7691-56 & NDC 0093-7691-98  Lot # 24X012, 24X013",
+    "recalling_firm": "Teva Pharmaceuticals USA",
+    "reason_for_recall": "CGMP Deviations: FDA laboratory testing confirmed presence of an impurity, N-nitrosodimethylamine (NDEA) in product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181127",
+    "product_type": "Drugs",
+    "product_quantity": "39,617 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1376-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium Tablets, 5 mg/20 mg, Packaged in a) 30 Count Bottles (NDC: 43598-319-30) and b) 90 Count Bottles (NDC: 43598-319-90), Rx Only. Manufactured by Dr. Reddy's Laboratories Limited, Bachupally - 500 090 India.",
+    "code_info": "a) Lot #: C403577, Expiry: 10/2015; b) Lot #: C403577, Expiry: 10/2015.",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent Drug: Subpotent atorvastatin.",
+    "report_date": "20150902",
+    "recall_initiation_date": "20150813",
+    "termination_date": "20161215",
+    "product_type": "Drugs",
+    "product_quantity": "a) 14,640 and b) 624 Bottles",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0320-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets, USP  5/160 mg, 30-count bottles, Rx Only, Made in India, Manufactured for: Mylan Pharmaceuticals, Inc., Morgantown, WV 26505 U.S.A. NDC 0378-1721-93.",
+    "code_info": "Lot Numbers:3064084, 3069629, 3073148, 3073149,3076093, 3077772",
+    "recalling_firm": "Mylan Laboratories Limited, (Nashik FDF)",
+    "reason_for_recall": "GCMP Deviations: FDA analysis confirmed presence of trace amounts of an impurity, N-nitrosodiethylamine (NDEA) found in the API used to manufacture the product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181204",
+    "product_type": "Drugs",
+    "product_quantity": "141,995 HDPE bottles",
+    "openfda": {
+     "product_ndc": [
+      "0378-1721",
+      "0378-1722",
+      "0378-1723",
+      "0378-1724"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0363-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets USP 5 mg/320 mg, 30-count bottles, Rx Only, Manufactured for: Aurobindo Pharma USA, Inc., Dayton, NJ 08810. NDC 65862-738-30.",
+    "code_info": "Lot # VMSA17012-A, exp. date 11/2019  Lot # VMSA17013-A, exp. date 11/2019  Lot # VMSA17014-A, exp. date 11/2019  Lot # VMSA17015-A, exp. date 11/2019  Lot # VMSA17016-A, exp. date 11/2019  Lot # VMSA17017-A, exp. date 11/2019",
+    "recalling_firm": "Aurobindo Pharma USA Inc.",
+    "reason_for_recall": "CGMP Deviations: FDA lab confirmed presence an impurity, N-nitrosodimethylamine (NDEA) contained in the API used to manufacture the product above the interim acceptable daily intake level of 0.083 parts per million.",
+    "report_date": "20190123",
+    "recall_initiation_date": "20181231",
+    "product_type": "Drugs",
+    "product_quantity": "27,688 bottles",
+    "openfda": {
+     "product_ndc": [
+      "65862-737",
+      "65862-739",
+      "65862-738",
+      "65862-740"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0556-2026",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Olmesartan Medoxomil Tablets, 5mg/40mg, Rx Only, 30-count bottle, Manufactured by: Alkem Laboratories Ltd., India, Distributed by: Ascend Laboratories, LLC., Parsippany, NJ 07054, NDC 67877-501-30.",
+    "code_info": "Lot: 24123460, Expires: October 31, 2027.",
+    "recalling_firm": "Ascend Laboratories, LLC",
+    "reason_for_recall": "Failed Dissolution Specifications: Olmesartan Medoxomil content below specifications",
+    "report_date": "20260610",
+    "recall_initiation_date": "20260505",
+    "product_type": "Drugs",
+    "product_quantity": "15,696 x 30's bottles",
+    "openfda": {
+     "product_ndc": [
+      "67877-499",
+      "67877-500",
+      "67877-501",
+      "67877-502"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "OLMESARTAN MEDOXOMIL"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0397-2015",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "AMLODIPINE BESYLATE TABLETS USP, 10 mg*, 1000 count bottles (NDC 0603-2110-32), Rx only, Manufactured for:  QUALITEST PHARMACEUTICALS, HUNTSVILLE, AL 35811",
+    "code_info": "Lot T018H14A, Exp 08/16",
+    "recalling_firm": "Qualitest Pharmaceuticals",
+    "reason_for_recall": "Failed tablet specifications: One lot was found to contain oversized tablets.",
+    "report_date": "20150311",
+    "recall_initiation_date": "20150213",
+    "termination_date": "20160127",
+    "product_type": "Drugs",
+    "product_quantity": "2808 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-66403-008",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate and Benazepril HCl Capsules, 5 mg/40 mg, 100-count bottles, Rx only, Mylan Pharmaceuticals Inc., Morgantown, WV 26505 U.S.A.,  NDC 0378-6899-01",
+    "code_info": "Lot #: 2003184, 2003185, 2003186, 3043495",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "11,701 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0712-2026",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Olmesartan Medoxomil Tablets, 10 mg/20 mg, 30 Tablets per bottle, Rx Only, Manufactured by: Alkem Laboratories Ltd., INDIA; Distributed by: Ascend Laboratories, LLC., Parsnippany, NJ 07054.  NDC: 67877-500-30",
+    "code_info": "Lot 25121311, expiry 3/31/2028",
+    "recalling_firm": "Ascend Laboratories, LLC",
+    "reason_for_recall": "Failed Dissolution Specifications; Olmesartan Medoxomil content below specifications",
+    "report_date": "20260729",
+    "recall_initiation_date": "20260708",
+    "product_type": "Drugs",
+    "product_quantity": "6,192 bottles",
+    "openfda": {
+     "product_ndc": [
+      "67877-499",
+      "67877-500",
+      "67877-501",
+      "67877-502"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "OLMESARTAN MEDOXOMIL"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0509-2021",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Olmesartan Medoxomil Tablets 10 mg/20 mg 30 Tablets Rx Only NDC 33342-192-07 Manufactured for: Macleods Pharma USA, Inc. Plainsboro, NJ 08536 Manufactured by: Macleods Pharmaceuticals Ltd. Baddi, Himachal Pradesh, India",
+    "code_info": "BAD62005A",
+    "recalling_firm": "Cardinal Health Inc.",
+    "reason_for_recall": "CGMP Deviations: Intermittent exposure to temperature excursion during storage.",
+    "report_date": "20210602",
+    "recall_initiation_date": "20210315",
+    "termination_date": "20240617",
+    "product_type": "Drugs",
+    "product_quantity": "33 bottles",
+    "openfda": {
+     "product_ndc": [
+      "33342-190",
+      "33342-191",
+      "33342-192",
+      "33342-193"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "OLMESARTAN MEDOXOMIL"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1141-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan and Hydrochlorothiazide Tablets, USP, 10 mg/320 mg/25 mg, 30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-325-30",
+    "code_info": "Batch: BBX2D025,  BBX2D026,  BBX2E001,  BBX2E002,  BBX2E003,  BBX2E004,  BBX2E005,  BBX2D003,  BBX2D004,  BBX2D005,  BBX2D006,  BBX2D007,  BBX2D008,  BBX2D015,  BBX2D016,  BBX2D017,  BBX2D018,  BBX2D019,  BBX2D020,  BBX2D021,  BBX2D022,  BBX2D023,  BBX2D024,  BBX2D001,  BBX2D002,  BBX2D009,  BBX2D010,  BBX2D011,  BBX2D012,  BBX2D013,  BBX2D014,  BBX2C007",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "169,200 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-319-2013",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Walmart Amlodipine Besylate Tablets, USP 10 mg, Rx only, 30 tablets, Manufactured by: InvaGen Pharmaceuticals, Inc., Hauppauge, NY. Manufactured for: Camber Pharmaceuticals, Inc., Piscataway, NJ. Distributed by: Wal-Mart Stores, Inc., Bentonville, AR.  Packaged by: Legacy Pharmaceutical Packaging, LLC, Earth City, MO. NDC 68645-445-70.",
+    "code_info": "Lot # 130251, 130252, 130253 Exp date: 11/14",
+    "recalling_firm": "Legacy Pharmaceutical Packaging LLC",
+    "reason_for_recall": "Labeling: Label Error on Declared Strength-The recalled product has a misprint on the Amoldipine 10 mg label, 5 mg is listed in the USP description.  Tablet strength is 10 mg.",
+    "report_date": "20130522",
+    "recall_initiation_date": "20130422",
+    "termination_date": "20140213",
+    "product_type": "Drugs",
+    "product_quantity": "484,236 cartons",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0322-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets, USP 5/320 mg, 30-count bottles, Rx Only, Made in India, Manufactured for: Mylan Pharmaceuticals, Inc., Morgantown, WV 26505 U.S.A., NDC 0378-1723-93.",
+    "code_info": "Lot Numbers:  3064086, 3066061, 3066062,3073145,3073146,3073147, 3076091, 3077619, 3082432",
+    "recalling_firm": "Mylan Laboratories Limited, (Nashik FDF)",
+    "reason_for_recall": "GCMP Deviations: FDA analysis confirmed presence of trace amounts of an impurity, N-nitrosodiethylamine (NDEA) found in the API used to manufacture the product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181204",
+    "product_type": "Drugs",
+    "product_quantity": "109,314 HDPE bottles",
+    "openfda": {
+     "product_ndc": [
+      "0378-1721",
+      "0378-1722",
+      "0378-1723",
+      "0378-1724"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0308-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan, and Hydrochlorothiazide Tablets 10 mg/160 mg/12.5 mg, (a) 30-count bottles (NDC 0093-7810-56) & 90-count bottles (NDC 0093-7810-98), RX Only, Manufactured In Israel By: TEVA PHARMACEUTICAL IND. LTD. Jerusalem, 9777402, Israel, Manufactured For: TEVA PHARMACEUTICALS USA, INC. North Wales, PA 19454.",
+    "code_info": "NDC 0093-7810-56 & NDC 0093-7810-98  Lot # 20X006",
+    "recalling_firm": "Teva Pharmaceuticals USA",
+    "reason_for_recall": "CGMP Deviations: FDA laboratory testing confirmed presence of an impurity, N-nitrosodimethylamine (NDEA) in product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181127",
+    "product_type": "Drugs",
+    "product_quantity": "19,458 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0361-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets USP 5 mg/160 mg, 30-count bottles, Rx Only,  Manufactured for: Aurobindo Pharma USA, Inc., Dayton, NJ 08810. NDC 65862-737-30",
+    "code_info": "Lot # VESA17013-A, exp. 10/2019  Lot # VESA17014-A, exp. 10/2019  Lot # VESA18001-A, exp. 12/2019  Lot # VESA18002-A, exp. 12/2019",
+    "recalling_firm": "Aurobindo Pharma USA Inc.",
+    "reason_for_recall": "CGMP Deviations: FDA lab confirmed presence an impurity, N-nitrosodimethylamine (NDEA) contained in the API used to manufacture the product above the interim acceptable daily intake level of 0.083 parts per million.",
+    "report_date": "20190123",
+    "recall_initiation_date": "20181231",
+    "product_type": "Drugs",
+    "product_quantity": "18,408 bottles",
+    "openfda": {
+     "product_ndc": [
+      "65862-737",
+      "65862-739",
+      "65862-738",
+      "65862-740"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-66403-005",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate Tablets, USP, 5 mg, packaged in a) 90-count bottles (NDC 0378-5209-77) and b) 500-count bottles (NDC 0378-5209-05), Rx only, Mylan Pharmaceuticals Inc., Morgantown, WV 26505 U.S.A.",
+    "code_info": "Lot s: a) 3036490, 3036491, 3036492, 3039874; b) 3036493, 3036494, 3039872, 3039873, 3041476, 3041477, 3044555, 3044683",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "167,866 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1122-2019",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Telmisartan and Amlodipine Tablets 80 mg/5 mg, 30 tablets,  Rx Only, Manufactured for: AvKARE, Inc. Pulaski, TN 38478 --- NDC 42291-795-30",
+    "code_info": "Lots: 201916 Exp. 08/2019; 20092 Exp. 08/2019",
+    "recalling_firm": "AVKARE Inc.",
+    "reason_for_recall": "Failed Impurities/Degradation Specifications; 18 month long term stability study (manufacturer)",
+    "report_date": "20190417",
+    "recall_initiation_date": "20190403",
+    "termination_date": "20200507",
+    "product_type": "Drugs",
+    "product_quantity": "397 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1145-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium tablets, 10mg/40mg, 90-count bottle, Rx Only Manufactured by Dr. Reddy's Laboratories Limited Bachupally, 500 090 India, NDC 43598-315-90",
+    "code_info": "Lot # C309280",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent drug",
+    "report_date": "20150624",
+    "recall_initiation_date": "20150506",
+    "termination_date": "20160331",
+    "product_type": "Drugs",
+    "product_quantity": "",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0841-2020",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Caduet (amlodipine besylate/atorvastatin calcium) Tablets, 10 mg/20 mg*, 30-count bottle, Rx only, Distributed by: Pfizer Labs, Division of Pfizer Inc. NY, NY 10017, Made in Germany, NDC 0069-2180-30.",
+    "code_info": "Lot #: CY0937, Exp 12/2021",
+    "recalling_firm": "Pfizer Inc.",
+    "reason_for_recall": "Defective Container: products potentially could have been packaged in defective bottles, with a notched rim, that could cause inadequate foil sealing resulting in lack of moisture protection.",
+    "report_date": "20200219",
+    "recall_initiation_date": "20200205",
+    "termination_date": "20210308",
+    "product_type": "Drugs",
+    "product_quantity": "141 bottles",
+    "openfda": {
+     "product_ndc": [
+      "0069-6180",
+      "0069-2150",
+      "0069-2170",
+      "0069-2190",
+      "0069-2260",
+      "0069-2160",
+      "0069-2180",
+      "0069-2250",
+      "0069-2270",
+      "0069-6323",
+      "0069-6565",
+      "0069-6747",
+      "0069-7810",
+      "0069-7232",
+      "0069-7654",
+      "0069-7476"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND ATORVASTATIN"
+     ],
+     "brand_name": [
+      "CADUET"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0842-2020",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Caduet (amlodipine besylate/atorvastatin calcium) Tablets, 10 mg/10 mg*, 30-count bottle, Rx only, Distributed by: Pfizer Labs, Division of Pfizer Inc. NY, NY 10017, Made in Germany, NDC 0069-2160-30.",
+    "code_info": "Lot #: CY0963, Exp 07/2022",
+    "recalling_firm": "Pfizer Inc.",
+    "reason_for_recall": "Defective Container: products potentially could have been packaged in defective bottles, with a notched rim, that could cause inadequate foil sealing resulting in lack of moisture protection.",
+    "report_date": "20200219",
+    "recall_initiation_date": "20200205",
+    "termination_date": "20210308",
+    "product_type": "Drugs",
+    "product_quantity": "128 bottles",
+    "openfda": {
+     "product_ndc": [
+      "0069-6180",
+      "0069-2150",
+      "0069-2170",
+      "0069-2190",
+      "0069-2260",
+      "0069-2160",
+      "0069-2180",
+      "0069-2250",
+      "0069-2270",
+      "0069-6323",
+      "0069-6565",
+      "0069-6747",
+      "0069-7810",
+      "0069-7232",
+      "0069-7654",
+      "0069-7476"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND ATORVASTATIN"
+     ],
+     "brand_name": [
+      "CADUET"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-726-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "amLODIPine BESYLATE, Tablet, 10 mg, Rx only, Distributed by: AidaPak Service, LLC, NDC 68382012316",
+    "code_info": "amLODIPine BESYLATE, Tablet, 10 mg has the following code    Pedigree: AD62846_4, EXP: 5/24/2014.",
+    "recalling_firm": "Aidapak Services, LLC",
+    "reason_for_recall": "Labeling:Label Mixup; amLODIPine BESYLATE, Tablet, 10 mg may be potentially mislabeled as    FINASTERIDE, Tablet, 5 mg, NDC 16714052201, Pedigree: AD62846_1, EXP: 2/28/2014.",
+    "report_date": "20140122",
+    "recall_initiation_date": "20130702",
+    "termination_date": "20140207",
+    "product_type": "Drugs",
+    "product_quantity": "90 Tablets",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0309-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan, and Hydrochlorothiazide Tablets 10 mg/160 mg/25 mg,  (a) 30-count bottles (NDC 0093-7960-56) & 90-count bottles (NDC 0093-7690-98), RX Only, Manufactured In Israel By: TEVA PHARMACEUTICAL IND. LTD. Jerusalem, 9777402, Israel, Manufactured For: TEVA PHARMACEUTICALS USA, INC. North Wales, PA 19454.",
+    "code_info": "NDC 0093-7038-56 & NDC 0093-7038-98  Lot # 21X006, 21X007",
+    "recalling_firm": "Teva Pharmaceuticals USA",
+    "reason_for_recall": "CGMP Deviations: FDA laboratory testing confirmed presence of an impurity, N-nitrosodimethylamine (NDEA) in product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181127",
+    "product_type": "Drugs",
+    "product_quantity": "37,957 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0045-2027",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Olmesartan Medoxomil Tablets, 10mg/40mg, 30 Tablets, Rx only, Manufactured by: Alkem Laboratories Ltd., INDIA, Distributed by: Ascend Laboratories, LLC, Parsippany, NJ 07054, NDC 67877-502-30.",
+    "code_info": "Lot # 25120696, Exp Date: December 31, 2026.",
+    "recalling_firm": "Ascend Laboratories, LLC",
+    "reason_for_recall": "Out of specification due to dissolution.",
+    "report_date": "20261028",
+    "recall_initiation_date": "20261006",
+    "product_type": "Drugs",
+    "product_quantity": "11,424 bottles.",
+    "openfda": {
+     "product_ndc": [
+      "67877-499",
+      "67877-500",
+      "67877-501",
+      "67877-502"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND OLMESARTAN MEDOXOMIL"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "OLMESARTAN MEDOXOMIL"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1378-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium Tablets,10 mg/40 mg, Packaged in a) 30 Count Bottles (NDC: 43598-315-30) and b) 90 Count Bottles (NDC: 43598-315-90), Rx Only. Manufactured by Dr. Reddy's Laboratories Limited, Bachupally - 500 090 India.",
+    "code_info": "a) Lot #: C409650, Expiry: 05/2016; Lot #: C409652,Expiry: 05/2016. b) Lot #: C409652, Expiry: 05/2016",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent Drug: Subpotent atorvastatin.",
+    "report_date": "20150902",
+    "recall_initiation_date": "20150813",
+    "termination_date": "20161215",
+    "product_type": "Drugs",
+    "product_quantity": "a) 16,848 and b) 216 Bottles",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0307-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan, and Hydrochlorothiazide Tablets 5 mg/160 mg/12.5 mg,   (a) 30-count bottles (NDC 0093-7807-56) & 90-count bottles (NDC 0093-7807-98), RX Only, Manufactured In Israel By: TEVA PHARMACEUTICAL IND. LTD. Jerusalem, 9777402, Israel, Manufactured For: TEVA PHARMACEUTICALS USA, INC. North Wales, PA 19454.",
+    "code_info": "NDC 0093-7807-56 & 0093-7807-98  Lot # 18X010, 18X011",
+    "recalling_firm": "Teva Pharmaceuticals USA",
+    "reason_for_recall": "CGMP Deviations: FDA laboratory testing confirmed presence of an impurity, N-nitrosodimethylamine (NDEA) in product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181127",
+    "product_type": "Drugs",
+    "product_quantity": "41,572 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1504-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Tribenzor Tablets (olmesartan medoxomil/amlodipine/hydrochlorothiazide), 40 mg/5 mg*/25 mg 30 count bottles, Rx Only  Manufactured for: Daiichi Sankyo, Inc., Parsippany, NJ 07054 --- NDC 65597-116-30",
+    "code_info": "Lot #211836 Exp - 11/30/2016",
+    "recalling_firm": "Daiichi Sankyo Pharma Development",
+    "reason_for_recall": "Temperature Abuse; various products were not stored at Controlled Room Temperature as per USP guidelines during shipping",
+    "report_date": "20140806",
+    "recall_initiation_date": "20140712",
+    "termination_date": "20150316",
+    "product_type": "Drugs",
+    "product_quantity": "",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1255-2015",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate Tablets, 5 mg Tablets, Packaged as A) 90 Count Bottles (NDC: 64679-422-01) and B) 1000 Count Bottles (NDC: 64679-422-02), Rx Only.  Manufactured by: Wockhardt Limited, Mumbai, India. Distributed by: Wockhardt USA LLC 20 Waterview Blvd. Parsippany, NJ 07054 USA.",
+    "code_info": "A) Lot #: DM11421, Expiry: 5/31/2015; Lot #: DM12956, Expiry: 10/31/2015; Lot #: DM12957, Expiry: 10/31/2015; Lot #: DM12963, Expiry: 10/31/2015; Lot #: DM13242, Expiry: 11/30/2015; Lot #: DM13243, Expiry: 11/30/2015; Lot #: DM13251, Expiry: 11/30/2015; Lot #: DM13260, Expiry: 11/30/2015; Lot #: DN10138, Expiry: 12/31/2015.  B)  Lot #: DM11035, Expiry: 4/30/2015; Lot #: DM11088, Expiry: 4/30/2015; Lot #: DM11389, Expiry: 5/31/2015; Lot #: DM11393, Expiry: 5/31/2015; Lot #: DM11394, Expiry: 5/31/2015; Lot #: DM12632, Expiry: 9/30/2015; Lot #: DM12633, Expiry: 9/30/2015; Lot #: DM12650, Expiry: 9/30/2015;  Lot #: DM12651, Expiry: 9/30/2015; Lot #: DM12667, Expiry: 5/31/2015; Lot #: DM12964, Expiry: 10/31/2015; Lot #: DM13086, Expiry: 10/31/2015; Lot #: DM13155, Expiry: 10/31/2015; Lot #: DM13156, Expiry: 10/31/2015; Lot #: DM13157, Expiry: 10/31/2015; Lot #: DM13158, Expiry: 10/31/2015; Lot #: DM13184, Expiry: 10/31/2015; Lot #: DM13206, Expiry: 10/31/2015; Lot #: DM13207, Expiry: 10/31/2015; Lot #: DM13266, Expiry: 11/30/2015; Lot #: DM13267, Expiry: 11/30/2015; Lot #: DM13268, Expiry: 11/30/2015; Lot #: DM13283, Expiry: 11/30/2015; Lot #: DM13325, Expiry: 11/30/2015; Lot #: DN10058, Expiry: 12/31/2015; Lot #: DN10059; Expiry: 12/31/2015; Lot #: DN10060, Expiry: 12/31/2015; Lot #: DN10061, Expiry: 12/31/2015; Lot #: DN10062, Expiry: 12/31/2015; Lot #: DN10307, Expiry: 12/31/2015; Lot #: DN10308, Expiry: 12/31/2015; Lot #: DN10324, Expiry: 12/31/2015; Lot #: DN10346, Expiry: 12/31/2015; Lot #: DN10809, Expiry: 2/29/2016; Lot #: DN10810, Expiry: 2/29/2016; Lot #: DN10840, Expiry: 2/29/2016; Lot #: DN10877, Expiry: 2/29/2016; Lot #: DN10878, Expiry: 2/29/2016; Lot #: DN10904, Expiry: 2/29/2016; Lot #: DN10905, Expiry: 2/29/2016; Lot #: DN10921, Expiry: 2/29/2016; Lot #: DN10942, Expiry: 3/31/2016; Lot #: DN10943, Expiry: 3/31/2016; Lot #: DN10972, Expiry: 3/31/2016.",
+    "recalling_firm": "Wockhardt Usa Inc.",
+    "reason_for_recall": "CGMP Deviations: Firm did not adequately investigate customer complaints.",
+    "report_date": "20150729",
+    "recall_initiation_date": "20150422",
+    "termination_date": "20180509",
+    "product_type": "Drugs",
+    "product_quantity": "A) 146,959 Bottles, B) 73,445 Bottles.",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1139-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets, USP, 10 mg/160mg, 30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-206-30",
+    "code_info": "Batch: BV65D002,  BV65C002,  BV65C003,  BV65C004,  BV65D001",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "46272 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1146-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium tablets, 5mg/40mg packaged in a)30-count bottle (NDC 43598-316-30), b) 90-count bottle (NDC 43598-316-90), Rx Only,  Manufactured by Dr. Reddy's Laboratories Limited Bachupally, 500 090 India",
+    "code_info": "Lot # C402439",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent drug",
+    "report_date": "20150624",
+    "recall_initiation_date": "20150506",
+    "termination_date": "20160331",
+    "product_type": "Drugs",
+    "product_quantity": "",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1373-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium Tablets, 2.5 mg/10 mg, 30 Count Bottles, Rx Only. Manufactured by Dr. Reddy's Laboratories Limited, Bachupally - 500 090 India.  NDC: 43598-323-30.",
+    "code_info": "Lot #: C403575, Expiry: 10/2015",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent Drug: Subpotent atorvastatin.",
+    "report_date": "20150902",
+    "recall_initiation_date": "20150813",
+    "termination_date": "20161215",
+    "product_type": "Drugs",
+    "product_quantity": "1,056 Bottles",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0257-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets, USP 10 mg, Rx Only, 90 Tablets per bottle, Manufactured by: Cadila Healthcare Ltd. Ahmedabad, India, Distributed by: Zydus Pharmaceuticals USA Inc., Pennington, NJ 08534, NDC 68382-123-16",
+    "code_info": "Lot #: MP4344, Exp 04/2016",
+    "recalling_firm": "Zydus Pharmaceuticals USA Inc",
+    "reason_for_recall": "Discoloration: Brown spots were noted embedded in Amlodipine Besylate Tablets, 10 mg, Lot # MP4344.",
+    "report_date": "20141203",
+    "recall_initiation_date": "20141001",
+    "termination_date": "20160226",
+    "product_type": "Drugs",
+    "product_quantity": "15,144 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68382-121",
+      "68382-122",
+      "68382-123"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-329-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Exforge (amlodipine and valsartan Tablets) 5/320 mg, Rx only 7 tablets per bottle, Physician Sample - Not For Sale.  Manufactured by: Novartis Pharma Stein AG Stein, Switzerland.  Distributed by: Novartis Pharmaceuticals Corp. East Hanover, New Jersey 07936 - NDC # 0078-9490-07",
+    "code_info": "Product code: 710003; Lot Number: F0102, Exp 11/30/2013; F0115, F0116, Exp 01/31/2014; F0105, F0109, F0111, F0112, Exp 02/28/2014; F0121, F0122, Exp 05/31/2014; F0125A, F0125W1, Exp 07/31/2014; F0137, F0139, F0140, F0141, F0142, F0144; Exp 11/30/2014",
+    "recalling_firm": "Novartis Pharmaceuticals Corp.",
+    "reason_for_recall": "Chemical Contamination: Novartis Pharmaceuticals Corporation has recalled physician sample bottles of Diovan, Exforge, Exforge HCT,Lescol XL, Stalevo, Tekturna and Tekturna HCT Tablets due to contamination with Darocur 1173 a photocuring agent used in inks on shrink-wrap sleeves.",
+    "report_date": "20131218",
+    "recall_initiation_date": "20130808",
+    "termination_date": "20151221",
+    "product_type": "Drugs",
+    "product_quantity": "869,951 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1144-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan and Hydrochlorothiazide Tablets, USP, 10 mg/160 mg/25 mg, 30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-328-30",
+    "code_info": "Batch: BBX9D004,  BBX9E001,  BBX9D001,  BBX9D002,  BBX9D003",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "34320 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1468-2016",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate Tablets, USP, 10 mg*, packaged in a) 100-count (10 x 10) unit dose blisters per carton, NDC 51079-452-20; b) 300-count (10 x 30) unit dose blisters per carton, NDC 51079-452-56; and c) 25-count (25 x 1) Robot-Rx Ready Packages in a carton, NDC 51079-452-19; Rx only, Manufactured by: Mylan Pharmaceuticals Inc., Morgantown, WV  26505; Packaged and Distributed By: UDL Laboratories, Inc., Rockford, IL  61103.",
+    "code_info": "Lot #: a) 3039795, 3042896, Exp 04/14; b) 3039793, 3042892, Exp 04/14; c) 2120054, Exp 02/14; 2120090, Exp 05/14",
+    "recalling_firm": "Mylan Institutional, Inc. (d.b.a. UDL Laboratories)",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20160831",
+    "recall_initiation_date": "20130917",
+    "termination_date": "20180424",
+    "product_type": "Drugs",
+    "product_quantity": "a) 11,064 cartons; b) 2,052 cartons; c) 5,567 cartons",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1501-2014",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Azor Tablets (amlodipine and olmesartan medoxomil) 10 mg*/40 mg, 30 count bottles, Rx Only, Manufactured for: Daiichi Sankyo, Inc. Parsippany, NJ 07054  NDC 65597-113-30",
+    "code_info": "Lot #213655B Exp - 12/31/2017",
+    "recalling_firm": "Daiichi Sankyo Pharma Development",
+    "reason_for_recall": "Temperature Abuse; various products were not stored at Controlled Room Temperature as per USP guidelines during shipping",
+    "report_date": "20140806",
+    "recall_initiation_date": "20140712",
+    "termination_date": "20150316",
+    "product_type": "Drugs",
+    "product_quantity": "5 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1143-2018",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine, Valsartan and Hydrochlorothiazide Tablets, USP, 10 mg/160 mg/12.5 mg, 30 tablets per bottle, Rx Only, Manufactured by:  Torrent Pharmaceuticals LTD., Indrad-382 721, India. NDC: 13668-327-30",
+    "code_info": "Batch: BBY2E001,   BBY2D001,  BBY2D002",
+    "recalling_firm": "Torrent Pharma Inc.",
+    "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+    "report_date": "20180905",
+    "recall_initiation_date": "20180817",
+    "product_type": "Drugs",
+    "product_quantity": "22704 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1374-2015",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine besylate and Atorvastatin calcium Tablets, 2.5 mg/20 mg, 30 Count Bottles, Rx Only. Manufactured by Dr. Reddy's Laboratories Limited, Bachupally - 500 090 India. NDC: 43598-320-30.",
+    "code_info": "Lot #: C403574, Expiry: 10/2015",
+    "recalling_firm": "Dr. Reddy's Laboratories, Inc.",
+    "reason_for_recall": "Subpotent Drug: Subpotent atorvastatin.",
+    "report_date": "20150902",
+    "recall_initiation_date": "20150813",
+    "termination_date": "20161215",
+    "product_type": "Drugs",
+    "product_quantity": "576 Bottles",
+    "openfda": {
+     "product_ndc": [
+      "43598-313",
+      "43598-323",
+      "43598-320",
+      "43598-317",
+      "43598-322",
+      "43598-319",
+      "43598-316",
+      "43598-314",
+      "43598-321",
+      "43598-318",
+      "43598-315"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0323-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets, USP 10/320 mg, 30-count bottles, Rx Only, Made in India, Manufactured for: Mylan Pharmaceuticals, Inc., NDC 0378-1724-93.",
+    "code_info": "Lot Numbers:  3066064, 3069645, 3069646, 3073142, 3073143, 3073144, 3077617",
+    "recalling_firm": "Mylan Laboratories Limited, (Nashik FDF)",
+    "reason_for_recall": "GCMP Deviations: FDA analysis confirmed presence of trace amounts of an impurity, N-nitrosodiethylamine (NDEA) found in the API used to manufacture the product.",
+    "report_date": "20181219",
+    "recall_initiation_date": "20181204",
+    "product_type": "Drugs",
+    "product_quantity": "84,066 HDPE bottles",
+    "openfda": {
+     "product_ndc": [
+      "0378-1721",
+      "0378-1722",
+      "0378-1723",
+      "0378-1724"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1492-2016",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets USP, 2.5mg, 90-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202, Manufactured by: Lupin Limited Goa 403 722 INDIA, NDC 68180-750-09",
+    "code_info": "Lot #: G304799, Exp. 4/2016",
+    "recalling_firm": "Lupin Limited",
+    "reason_for_recall": "CGMP Deviations: finished products manufactured using active pharmaceutical ingredients whose intermediates failed specifications.",
+    "report_date": "20160914",
+    "recall_initiation_date": "20160219",
+    "termination_date": "20170403",
+    "product_type": "Drugs",
+    "product_quantity": "43,536 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68180-233",
+      "68180-750",
+      "68180-751",
+      "68180-752",
+      "68180-719",
+      "68180-720",
+      "68180-721",
+      "68180-455"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0362-2019",
+    "status": "Ongoing",
+    "classification": "Class II",
+    "product_description": "Amlodipine and Valsartan Tablets USP 10 mg/160 mg, 30-count bottles, Rx Only, Manufactured for: Aurobindo Pharma USA, Inc., Dayton, NJ 08810. NDC 65862-739-30.",
+    "code_info": "Lot # VFSA17008-A, exp. 10/2019  Lot # VFSA17010-A, exp. 10/2019  Lot # VFSA18002-A, exp. 01/2020  Lot# VFSA18003-A, exp. 01/2020  Lot # VFSA18007-A, exp. 03/2020  Lot # VFSA18008-A, exp. 03/2020  Lot # VKSA17008-A, exp. 05/2019  Lot # VFSA17009-A, exp. 10/2019  Lot # VKSA17014-A, exp. 10/2019  Lot # VKSA17015-A, exp. 10/2019  Lot # VKSA17016-A, exp. 10/2019  Lot # VKSA17017-A, exp. 10/2019  Lot # VKSA18002-A, exp. 01/2020  Lot # VKSA18004-A, exp. 01/2020",
+    "recalling_firm": "Aurobindo Pharma USA Inc.",
+    "reason_for_recall": "CGMP Deviations: FDA lab confirmed presence an impurity, N-nitrosodimethylamine (NDEA) contained in the API used to manufacture the product above the interim acceptable daily intake level of 0.083 parts per million.",
+    "report_date": "20190123",
+    "recall_initiation_date": "20181231",
+    "product_type": "Drugs",
+    "product_quantity": "60,417 bottles",
+    "openfda": {
+     "product_ndc": [
+      "65862-737",
+      "65862-739",
+      "65862-738",
+      "65862-740"
+     ],
+     "generic_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "brand_name": [
+      "AMLODIPINE AND VALSARTAN"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE",
+      "VALSARTAN"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-66403-001",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate Tablets, USP, 2.5 mg, packaged in a) 90-count bottles (NDC 0378-5208-77) and b) 500-count bottles (NDC 0378-5208-05), Rx only, Mylan Pharmaceuticals Inc., Morgantown, WV 26505 U.S.A.",
+    "code_info": "Lot #: a) 3037907, 3040106; b) 3037907, 3040106, 3044357",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "37,752 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1493-2016",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets USP, 10mg, 1000-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202, Manufactured by: Lupin Limited Goa 403 722 INDIA, NDC 68180-752-03",
+    "code_info": "Lot #: G304677, G304540, G304536,  G304537, G304535, G304541,  G304545, G304533, G304532, G304539, G304538, G304534,  Exp. 4/2016",
+    "recalling_firm": "Lupin Limited",
+    "reason_for_recall": "CGMP Deviations: finished products manufactured using active pharmaceutical ingredients whose intermediates failed specifications.",
+    "report_date": "20160914",
+    "recall_initiation_date": "20160219",
+    "termination_date": "20170403",
+    "product_type": "Drugs",
+    "product_quantity": "11,812 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68180-233",
+      "68180-750",
+      "68180-751",
+      "68180-752",
+      "68180-719",
+      "68180-720",
+      "68180-721",
+      "68180-455"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-66403-009",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate and Benazepril HCl Capsules, 10mg/20mg, in 100 count bottles (NDC# 0378-6898-01) and 500 count bottles (NDC# 0378-6898-05) labeled in part ***Mylan Pharmaceuticals Inc. Morgantown, WV 26505 U.S.A.***",
+    "code_info": "Lot #: a) 2003177, 2003178, 2003179, 2003180, 3043496; b) 2003176, 2003177, 3043496",
+    "recalling_firm": "Mylan Pharmaceuticals Inc.",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20131113",
+    "recall_initiation_date": "20130913",
+    "termination_date": "20150723",
+    "product_type": "Drugs",
+    "product_quantity": "42,174 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1466-2016",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Amlodipine Besylate Tablets, USP, 2.5 mg*, packaged in a)100-count (10 x 10) unit dose blisters per carton, NDC 51079-450-20 and b) 30-count tablets per dosage card in a carton, NDC 51079-450-63, Rx only, Manufactured by: Mylan Pharmaceuticals Inc., Morgantown, WV  26505; Packaged and Distributed By: UDL Laboratories, Inc., Rockford, IL  61103.",
+    "code_info": "Lot #: a) 3039792, Exp 04/14; 3037880, Exp 01/14; 3043938, Exp 07/14; b) 3036811, Exp 10/13; 3037514, Exp 01/14; 3039975, Exp 04/14; 3042583, Exp 07/14",
+    "recalling_firm": "Mylan Institutional, Inc. (d.b.a. UDL Laboratories)",
+    "reason_for_recall": "CGMP Deviations: Pharmaceuticals were produced and distributed with active ingredients not manufactured according to Good Manufacturing Practices.",
+    "report_date": "20160831",
+    "recall_initiation_date": "20130917",
+    "termination_date": "20180424",
+    "product_type": "Drugs",
+    "product_quantity": "a) 9,156 cartons; b) 521,310 cartons",
+    "openfda": {}
+   }
+  ]
+ }
+}

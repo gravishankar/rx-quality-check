@@ -1,0 +1,83 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:15.558Z",
+  "endpoint": "ndc",
+  "search": "product_ndc:\"67877-514\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc%3A%2267877-514%22&limit=100",
+  "purpose": "Atorvastatin 80 mg (Ascend); refill labeler change"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "67877-514",
+    "generic_name": "Atorvastatin Calcium",
+    "brand_name": "Atorvastatin Calcium",
+    "labeler_name": "Ascend Laboratories, LLC",
+    "dosage_form": "TABLET, FILM COATED",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA209288",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "ATORVASTATIN CALCIUM TRIHYDRATE",
+      "strength": "80 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "67877-514-05",
+      "description": "500 TABLET, FILM COATED in 1 BOTTLE (67877-514-05)"
+     },
+     {
+      "package_ndc": "67877-514-10",
+      "description": "1000 TABLET, FILM COATED in 1 BOTTLE (67877-514-10)"
+     },
+     {
+      "package_ndc": "67877-514-38",
+      "description": "10 BLISTER PACK in 1 CARTON (67877-514-38)  / 10 TABLET, FILM COATED in 1 BLISTER PACK (67877-514-33)"
+     },
+     {
+      "package_ndc": "67877-514-90",
+      "description": "90 TABLET, FILM COATED in 1 BOTTLE (67877-514-90)"
+     }
+    ],
+    "pharm_class": [
+     "HMG-CoA Reductase Inhibitor [EPC]",
+     "Hydroxymethylglutaryl-CoA Reductase Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "259255",
+      "617310",
+      "617311",
+      "617312"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

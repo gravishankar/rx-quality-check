@@ -1,0 +1,68 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:18.476Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"mycophenolic\" AND route:\"ORAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22mycophenolic%22+AND+route%3A%22ORAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Excluded ingredient under an alternate RxNorm name"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 35
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "60505-2966",
+    "generic_name": "Mycophenolic Acid",
+    "brand_name": "Mycophenolic Acid",
+    "labeler_name": "Apotex Corp",
+    "dosage_form": "TABLET, DELAYED RELEASE",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA091558",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "MYCOPHENOLATE SODIUM",
+      "strength": "360 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "60505-2966-7",
+      "description": "120 TABLET, DELAYED RELEASE in 1 BOTTLE (60505-2966-7)"
+     }
+    ],
+    "pharm_class": [
+     "Antimetabolite Immunosuppressant [EPC]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "485020",
+      "485023"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

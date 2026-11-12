@@ -1,0 +1,203 @@
+{
+ "capturedAt": "2026-11-12T02:48:21.733Z",
+ "fixtures": [
+  {
+   "name": "enf_pndc_62756-142",
+   "httpStatus": 200,
+   "total": 4,
+   "purpose": "Known recalled product (metformin ER 500 mg, Sun); four lot-specific recalls, complete result set"
+  },
+  {
+   "name": "enf_pndc_68180-455",
+   "httpStatus": 200,
+   "total": 3,
+   "purpose": "Multiple strengths under one label: structured product_ndc over-includes 2.5/5/10 mg (Lupin amlodipine)"
+  },
+  {
+   "name": "enf_pndc_16729-046",
+   "httpStatus": 200,
+   "total": 4,
+   "purpose": "Structured match for atorvastatin 40 mg returns an 80 mg recall (D-0374-2023)"
+  },
+  {
+   "name": "enf_pndc_16729-047",
+   "httpStatus": 200,
+   "total": 4,
+   "purpose": "Atorvastatin 80 mg (Accord) recall with batch list"
+  },
+  {
+   "name": "enf_pndc_31722-997",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Combination product recall (hydrocodone/acetaminophen 10/325 mg, Camber)"
+  },
+  {
+   "name": "enf_pndc_71610-910",
+   "httpStatus": 404,
+   "total": null,
+   "purpose": "Well-formed no-results answer (HTTP 404 NOT_FOUND) for a product without linked recalls"
+  },
+  {
+   "name": "enf_text_tamsulosin",
+   "httpStatus": 200,
+   "total": 5,
+   "purpose": "Complete ingredient text query (small total)"
+  },
+  {
+   "name": "enf_text_rosuvastatin",
+   "httpStatus": 200,
+   "total": 13,
+   "purpose": "Complete ingredient text query (small total)"
+  },
+  {
+   "name": "enf_text_metformin",
+   "httpStatus": 200,
+   "total": 91,
+   "purpose": "Complete ingredient text query; IR, ER and combination metformin records"
+  },
+  {
+   "name": "enf_text_hydrocodone_acetaminophen",
+   "httpStatus": 200,
+   "total": 16,
+   "purpose": "Complete text query for a combination product"
+  },
+  {
+   "name": "enf_text_amlodipine_p1",
+   "httpStatus": 200,
+   "total": 98,
+   "purpose": "Pagination page 1 of 2"
+  },
+  {
+   "name": "enf_text_amlodipine_p2",
+   "httpStatus": 200,
+   "total": 98,
+   "purpose": "Pagination page 2 of 2"
+  },
+  {
+   "name": "enf_control_D-0325-2021",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Positive-control query (RG-2)"
+  },
+  {
+   "name": "enf_control_fields",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Positive control exercising every field the recall queries use (RG-2)"
+  },
+  {
+   "name": "enf_control_fields_drifted",
+   "httpStatus": 404,
+   "total": null,
+   "purpose": "Positive control with one drifted field name: openFDA answers 404 NOT_FOUND"
+  },
+  {
+   "name": "enf_misspelled_field",
+   "httpStatus": 404,
+   "total": null,
+   "purpose": "Misspelled field: openFDA answers 404 NOT_FOUND, indistinguishable from no results"
+  },
+  {
+   "name": "enf_malformed_query",
+   "httpStatus": 500,
+   "total": null,
+   "purpose": "Malformed query: openFDA answers HTTP 500"
+  },
+  {
+   "name": "ndc_pkg_62756-142-02",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Directory confirmation of a real package NDC"
+  },
+  {
+   "name": "ndc_pkg_62756-0142-2",
+   "httpStatus": 404,
+   "total": null,
+   "purpose": "Directory answer for the non-existent 5-4-1 candidate of 62756014202"
+  },
+  {
+   "name": "ndc_prod_68180-721",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Amlodipine 10 mg (Lupin); used for OCR misread / strength cross-validation"
+  },
+  {
+   "name": "ndc_prod_16729-046",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Atorvastatin 40 mg (Accord)"
+  },
+  {
+   "name": "ndc_prod_16729-047",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Atorvastatin 80 mg (Accord)"
+  },
+  {
+   "name": "ndc_prod_67877-514",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Atorvastatin 80 mg (Ascend); refill labeler change"
+  },
+  {
+   "name": "ndc_prod_31722-997",
+   "httpStatus": 200,
+   "total": 1,
+   "purpose": "Hydrocodone/acetaminophen 10/325 mg (Camber)"
+  },
+  {
+   "name": "ndc_warfarin",
+   "httpStatus": 200,
+   "total": 148,
+   "purpose": "Excluded ingredient (anticoagulant)"
+  },
+  {
+   "name": "ndc_apixaban",
+   "httpStatus": 200,
+   "total": 18,
+   "purpose": "Excluded ingredient (anticoagulant)"
+  },
+  {
+   "name": "ndc_everolimus",
+   "httpStatus": 200,
+   "total": 85,
+   "purpose": "Indication-dependent exclusion (NEEDS_CLARIFICATION)"
+  },
+  {
+   "name": "ndc_mycophenolic_acid",
+   "httpStatus": 200,
+   "total": 35,
+   "purpose": "Excluded ingredient under an alternate RxNorm name"
+  },
+  {
+   "name": "ndc_tacrolimus_topical",
+   "httpStatus": 200,
+   "total": 9,
+   "purpose": "Excluded ingredient, non-oral route (administration rule pending)"
+  },
+  {
+   "name": "ndc_metoprolol_tartrate",
+   "httpStatus": 200,
+   "total": 206,
+   "purpose": "Unsupported salt (not in catalog)"
+  },
+  {
+   "name": "ndc_amlodipine_benazepril",
+   "httpStatus": 200,
+   "total": 41,
+   "purpose": "Combination containing a supported ingredient (UNSUPPORTED)"
+  },
+  {
+   "name": "ndc_omeprazole_otc",
+   "httpStatus": 200,
+   "total": 196,
+   "purpose": "OTC version of a supported ingredient (OD-3 pending)"
+  },
+  {
+   "name": "ndc_metformin_er_other",
+   "httpStatus": 200,
+   "total": 171,
+   "purpose": "Metformin extended-release product for IR/ER distinction"
+  }
+ ]
+}

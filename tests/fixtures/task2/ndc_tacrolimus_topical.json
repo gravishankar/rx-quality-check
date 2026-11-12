@@ -1,0 +1,76 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:19.046Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"tacrolimus\" AND route:\"TOPICAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22tacrolimus%22+AND+route%3A%22TOPICAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Excluded ingredient, non-oral route (administration rule pending)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 9
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "21922-011",
+    "generic_name": "Tacrolimus Ointment 0.1%",
+    "brand_name": "Tacrolimus",
+    "labeler_name": "Encube Ethicals, Inc.",
+    "dosage_form": "OINTMENT",
+    "route": [
+     "TOPICAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA212387",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "TACROLIMUS",
+      "strength": "1 mg/g"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "21922-011-05",
+      "description": "1 TUBE in 1 CARTON (21922-011-05)  / 30 g in 1 TUBE"
+     },
+     {
+      "package_ndc": "21922-011-07",
+      "description": "1 TUBE in 1 CARTON (21922-011-07)  / 60 g in 1 TUBE"
+     },
+     {
+      "package_ndc": "21922-011-09",
+      "description": "1 TUBE in 1 CARTON (21922-011-09)  / 100 g in 1 TUBE"
+     }
+    ],
+    "pharm_class": [
+     "Calcineurin Inhibitor Immunosuppressant [EPC]",
+     "Calcineurin Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "314266"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

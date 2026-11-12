@@ -8,32 +8,10 @@
  *   be reported as "no recall found".
  */
 
-export type SourceId = 'OPENFDA' | 'DAILYMED' | 'RXNAV';
+import { isRecord, type LookupOutcome, type ResponseMeta, type SourceId } from '../../mobile/src/models/lookup.ts';
 
-export type LookupOutcome<T> =
-  | { kind: 'OK'; data: T; meta: ResponseMeta }
-  | { kind: 'NO_MATCH'; meta: ResponseMeta }
-  | { kind: 'RATE_LIMITED'; retryAfterSeconds: number | null; meta: ResponseMeta }
-  | { kind: 'SOURCE_UNAVAILABLE'; reason: UnavailableReason; detail: string; meta: ResponseMeta };
-
-export type UnavailableReason =
-  | 'NETWORK_ERROR'
-  | 'TIMEOUT'
-  | 'HTTP_5XX'
-  | 'HTTP_UNEXPECTED_STATUS'
-  | 'INVALID_JSON'
-  | 'SCHEMA_VIOLATION';
-
-export interface ResponseMeta {
-  source: SourceId;
-  url: string;
-  httpStatus: number | null;
-  /** ISO-8601 timestamp of when this device received the response. */
-  retrievedAt: string;
-  elapsedMs: number;
-  /** Selected response headers useful for rate-limit / caching analysis. */
-  headers: Record<string, string>;
-}
+export type { LookupOutcome, ResponseMeta, SourceId, UnavailableReason } from '../../mobile/src/models/lookup.ts';
+export { isRecord } from '../../mobile/src/models/lookup.ts';
 
 export interface RawResponse {
   status: number;
@@ -212,10 +190,6 @@ export async function lookup<T>(
 function causeOf(err: Error): string {
   const c = (err as Error & { cause?: unknown }).cause;
   return c instanceof Error ? ` (cause: ${c.message})` : '';
-}
-
-export function isRecord(v: unknown): v is Record<string, unknown> {
-  return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

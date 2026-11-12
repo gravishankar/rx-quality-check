@@ -1,0 +1,77 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:16.129Z",
+  "endpoint": "ndc",
+  "search": "product_ndc:\"31722-997\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=product_ndc%3A%2231722-997%22&limit=100",
+  "purpose": "Hydrocodone/acetaminophen 10/325 mg (Camber)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "31722-997",
+    "generic_name": "Hydrocodone Bitartrate and Acetaminophen",
+    "brand_name": "Hydrocodone Bitartrate and Acetaminophen",
+    "labeler_name": "Camber Pharmaceuticals, Inc.",
+    "dosage_form": "TABLET",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA211487",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "HYDROCODONE BITARTRATE",
+      "strength": "10 mg/1"
+     },
+     {
+      "name": "ACETAMINOPHEN",
+      "strength": "325 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "31722-997-01",
+      "description": "100 TABLET in 1 BOTTLE (31722-997-01)"
+     },
+     {
+      "package_ndc": "31722-997-05",
+      "description": "500 TABLET in 1 BOTTLE (31722-997-05)"
+     }
+    ],
+    "pharm_class": [
+     "Opioid Agonist [EPC]",
+     "Opioid Agonists [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "856999",
+      "857002"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,81 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:20.759Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"omeprazole\" AND product_type:\"HUMAN OTC DRUG\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22omeprazole%22+AND+product_type%3A%22HUMAN+OTC+DRUG%22+AND+finished%3Atrue&limit=1",
+  "purpose": "OTC version of a supported ingredient (OD-3 pending)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 196
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "70000-0521",
+    "generic_name": "Omeprazole",
+    "brand_name": "Acid Reducer",
+    "labeler_name": "Cardinal Health",
+    "dosage_form": "TABLET, DELAYED RELEASE",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN OTC DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA206877",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "OMEPRAZOLE MAGNESIUM",
+      "strength": "20 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "70000-0521-1",
+      "description": "1 BOTTLE in 1 CARTON (70000-0521-1)  / 14 TABLET, DELAYED RELEASE in 1 BOTTLE"
+     },
+     {
+      "package_ndc": "70000-0521-2",
+      "description": "1 BLISTER PACK in 1 CARTON (70000-0521-2)  / 14 TABLET, DELAYED RELEASE in 1 BLISTER PACK"
+     },
+     {
+      "package_ndc": "70000-0521-3",
+      "description": "2 BOTTLE in 1 CARTON (70000-0521-3)  / 14 TABLET, DELAYED RELEASE in 1 BOTTLE"
+     },
+     {
+      "package_ndc": "70000-0521-4",
+      "description": "3 BOTTLE in 1 CARTON (70000-0521-4)  / 14 TABLET, DELAYED RELEASE in 1 BOTTLE"
+     }
+    ],
+    "pharm_class": [
+     "Cytochrome P450 2C19 Inhibitors [MoA]",
+     "Proton Pump Inhibitor [EPC]",
+     "Proton Pump Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "402014"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

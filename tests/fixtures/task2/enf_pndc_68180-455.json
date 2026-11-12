@@ -1,0 +1,144 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:03.803Z",
+  "endpoint": "enforcement",
+  "search": "openfda.product_ndc:\"68180-455\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.product_ndc%3A%2268180-455%22&limit=100",
+  "purpose": "Multiple strengths under one label: structured product_ndc over-includes 2.5/5/10 mg (Lupin amlodipine)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 3
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0899-2023",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets, USP 10 mg, 1000-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202 U.S, Manufactured by: Lupin Limited, Aurangabad 431 210 India, NDC 68180-721-03",
+    "code_info": "Lot #: A102887, Exp. 6/2023",
+    "recalling_firm": "Lupin Pharmaceuticals Inc.",
+    "reason_for_recall": "Subpotent Drug: Out-of-Specification test results observed in assay test at 21-month long term stability study.",
+    "report_date": "20230719",
+    "recall_initiation_date": "20230627",
+    "termination_date": "20240312",
+    "product_type": "Drugs",
+    "product_quantity": "3,096 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68180-233",
+      "68180-750",
+      "68180-751",
+      "68180-752",
+      "68180-719",
+      "68180-720",
+      "68180-721",
+      "68180-455"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1492-2016",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets USP, 2.5mg, 90-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202, Manufactured by: Lupin Limited Goa 403 722 INDIA, NDC 68180-750-09",
+    "code_info": "Lot #: G304799, Exp. 4/2016",
+    "recalling_firm": "Lupin Limited",
+    "reason_for_recall": "CGMP Deviations: finished products manufactured using active pharmaceutical ingredients whose intermediates failed specifications.",
+    "report_date": "20160914",
+    "recall_initiation_date": "20160219",
+    "termination_date": "20170403",
+    "product_type": "Drugs",
+    "product_quantity": "43,536 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68180-233",
+      "68180-750",
+      "68180-751",
+      "68180-752",
+      "68180-719",
+      "68180-720",
+      "68180-721",
+      "68180-455"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-1493-2016",
+    "status": "Terminated",
+    "classification": "Class III",
+    "product_description": "Amlodipine Besylate Tablets USP, 10mg, 1000-count bottles, Rx only, Manufactured for: Lupin Pharmaceuticals, Inc. Baltimore, Maryland 21202, Manufactured by: Lupin Limited Goa 403 722 INDIA, NDC 68180-752-03",
+    "code_info": "Lot #: G304677, G304540, G304536,  G304537, G304535, G304541,  G304545, G304533, G304532, G304539, G304538, G304534,  Exp. 4/2016",
+    "recalling_firm": "Lupin Limited",
+    "reason_for_recall": "CGMP Deviations: finished products manufactured using active pharmaceutical ingredients whose intermediates failed specifications.",
+    "report_date": "20160914",
+    "recall_initiation_date": "20160219",
+    "termination_date": "20170403",
+    "product_type": "Drugs",
+    "product_quantity": "11,812 bottles",
+    "openfda": {
+     "product_ndc": [
+      "68180-233",
+      "68180-750",
+      "68180-751",
+      "68180-752",
+      "68180-719",
+      "68180-720",
+      "68180-721",
+      "68180-455"
+     ],
+     "generic_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "brand_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "substance_name": [
+      "AMLODIPINE BESYLATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

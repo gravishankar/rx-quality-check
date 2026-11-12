@@ -1,0 +1,25 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:11.863Z",
+  "endpoint": "enforcement",
+  "search": "product_description:\"metformin\" AND (",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22metformin%22+AND+%28&limit=100",
+  "purpose": "Malformed query: openFDA answers HTTP 500"
+ },
+ "http": {
+  "status": 500,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "error": {
+   "code": "SERVER_ERROR",
+   "message": "Check your request and try again",
+   "details": "[parse_exception] parse_exception: Encountered \" <AND> \"AND \"\" at line 1, column 38.\nWas expecting one of:\n    <NOT> ...\n    \"+\" ...\n    \"-\" ...\n    <BAREOPER> ...\n    \"(\" ...\n    \"*\" ...\n    <QUOTED> ...\n    <TERM> ...\n    <PREFIXTERM> ...\n    <WILDTERM> ...\n    <REGEXPTERM> ...\n    \"[\" ...\n    \"{\" ...\n    <NUMBER> ...\n    <TERM> ...\n    "
+  }
+ }
+}

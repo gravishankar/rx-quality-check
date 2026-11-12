@@ -1,0 +1,80 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:17.852Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"everolimus\" AND route:\"ORAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22everolimus%22+AND+route%3A%22ORAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Indication-dependent exclusion (NEEDS_CLARIFICATION)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 85
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "63850-0064",
+    "generic_name": "Everolimus",
+    "brand_name": "Everolimus",
+    "labeler_name": "Natco Pharma Limited",
+    "dosage_form": "TABLET",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA205432",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "EVEROLIMUS",
+      "strength": ".75 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "63850-0064-2",
+      "description": "6 BLISTER PACK in 1 CARTON (63850-0064-2)  / 10 TABLET in 1 BLISTER PACK"
+     },
+     {
+      "package_ndc": "63850-0064-6",
+      "description": "60 TABLET in 1 BOTTLE (63850-0064-6)"
+     }
+    ],
+    "pharm_class": [
+     "Cytochrome P450 2D6 Inhibitors [MoA]",
+     "Cytochrome P450 3A4 Inhibitors [MoA]",
+     "Decreased Immunologic Activity [PE]",
+     "Kinase Inhibitor [EPC]",
+     "Protein Kinase Inhibitors [MoA]",
+     "mTOR Inhibitor Immunosuppressant [EPC]",
+     "mTOR Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "977427",
+      "977434",
+      "977438",
+      "2056895"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

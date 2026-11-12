@@ -1,0 +1,137 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:06.772Z",
+  "endpoint": "enforcement",
+  "search": "product_description:\"tamsulosin\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22tamsulosin%22&limit=100",
+  "purpose": "Complete ingredient text query (small total)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 5
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-1253-2015",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Tamsulosin Hydrochloride Capsules, USP*, 0.4 mg Capsules, Packaged in A) 100 Count Bottles (NDC: 64679-516-02) and B) 500 Count Bottles (NDC: 64679-516-03), Rx Only. Manufactured by: Wockhardt Limited, Mumbai, India. Distributed by: Wockhardt USA LLC 20 Waterview Blvd. Parsippany, NJ 07054 USA.",
+    "code_info": "A) Lot #: LN10896, Expiry: 4/30/2015; Lot #: LN10901, Expiry: 4/30/2015; Lot #:LN10902, Expiry: 4/30/2015; Lot #: LN10903, Expiry: 4/30/2015; Lot #: LN11020, Expiry: 5/31/2015; Lot #:  LN11021, Expiry: 5/31/2015; Lot #: LN11055, Expiry: 5/31/2015; Lot #: LN11056, Expiry: 5/31/2015; Lot #: LN11149, Expiry: 5/31/2015, Lot #: LN11150, Expiry: 5/31/2015; Lot #: LN11267, Expiry: 6/30/2015; Lot #: LN11357, Expiry: 7/31/2015; Lot #: LN11387, Expiry: 8/31/2015; Lot #: LN11421, Expiry: 9/30/2015.        B) Lot #: LN10808, Expiry: 4/30/2015; Lot #: LN11083, Expiry: 5/31/2015; Lot #: LN11084, Expiry: 5/31/2015; Lot #: LN11085, Expiry: 5/31/2015; Lot #: LN11089, Expiry: 5/31/2015; Lot #: LN11109, Expiry: 5/31/2015; Lot #: LN11110, Expiry: 5/31/2015, Lot #: LN11120, Expiry: 5/31/2015; Lot #: LN11121, Expiry: 5/31/2015; Lot #: LN11186, Expiry: 5/31/2015; Lot #: LN11187, Expiry: 6/30/2015; Lot #: LN11188, Expiry: 6/30/2015; Lot #: LN11206, Expiry: 6/30/2015; Lot #: LN11226, Expiry: 6/30/2015; Lot #: LN11227, Expiry: 6/30/2015; Lot #: LN11233, Expiry: 6/30/2015; Lot #: LN11251, Expiry: 6/30/2015; Lot #: LN11257, Expiry: 6/30/2015; Lot #: LN11262, Expiry: 7/31/2015; Lot #: LN11263, Expiry:7/31/2015;  Lot #: LN11274, Expiry: 7/31/2015; Lot#: LN11288, Expiry: 7/31/2015; Lot #: LN11370; Expiry: 8/31/2015; Lot #: LN11371, Expiry: 8/31/2015; Lot #: LN11378, Expiry: 8/31/2015; Lot #: LN11384, Expiry: 8/31/2015; Lot #: LN11400, Expiry: 9/30/2015; Lot #: LN11402, Expiry: 9/30/2015; Lot #: LN11406, Expiry: 9/30/2015; Lot #: LN11412, Expiry: 9/30/2015; Lot #: LN11416, Expiry: 9/30/2015; Lot #: LN11428, Expiry: 9/30/2015.",
+    "recalling_firm": "Wockhardt Usa Inc.",
+    "reason_for_recall": "CGMP Deviations: Firm did not adequately investigate customer complaints.",
+    "report_date": "20150729",
+    "recall_initiation_date": "20150422",
+    "termination_date": "20180509",
+    "product_type": "Drugs",
+    "product_quantity": "407,958 Bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-0069-2018",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Dutasteride and Tamsulosin HCl Capsules, 0.5 mg/ 0.4 mg, packaged in a) 30-count bottle (NDC 0591-3771-30), b) 90-count bottle (NDC 0591-3771-19), Rx only, Manufactured by: Actavis Laboratories FL, Inc. Fort Lauderdale, FL 33314 USA; Distributed by: Actavis Pharma, Inc. Parsippany, NJ 07054 USA.",
+    "code_info": "Lot Numbers: a) 1089376A, 1089382A, 1095210M, 1117768M, 1117769A, Exp. 11/17; 1128452A, 1128453A, 1137658A, 1154207A, 1156087A, Exp. 03/18; b) 1089379A, 1091533M, 1125206A, Exp. 11/17; 1128456A, 1147665A,  1154208A,  1156088A, Exp. 03/18.",
+    "recalling_firm": "Teva Pharmaceuticals USA",
+    "reason_for_recall": "Failed dissolution specifications; all lots within expiry are being recalled due to out of specification dissolution results.",
+    "report_date": "20171108",
+    "recall_initiation_date": "20171025",
+    "termination_date": "20180502",
+    "product_type": "Drugs",
+    "product_quantity": "140,993 bottles",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1844-2019",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Tamsulosin Hydrochloride Capsules, USP 0.4 mg Rx only   a) 100 count (NDC 33342-159-11), b) 500 count (NDC 33342-159-15) and c) 1000 count (NDC 33342-159-44) bottles, Manufactured : Macleods Pharma USA, Inc Plainsboro, NJ Manufactured by: Macleods Pharmaceuticals Ltd Baddi, Himchal Pradesh, INDIA",
+    "code_info": "a) BTP803A, exp 08/2020;  b) BTP802A, exp 07/2020, BTP901A, exp 12/2020;  c) BTP802B, exp 07/2020",
+    "recalling_firm": "Macleods Pharma Usa Inc",
+    "reason_for_recall": "Failed Dissolution Specifications",
+    "report_date": "20190821",
+    "recall_initiation_date": "20190717",
+    "termination_date": "20210209",
+    "product_type": "Drugs",
+    "product_quantity": "a) 5448 bottles b) 972 bottles c) 158 bottles",
+    "openfda": {
+     "product_ndc": [
+      "33342-159"
+     ],
+     "generic_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-914-2015",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Tamsulosin Base active pharmaceutical ingredient packaged in varying grams or kg in bags or drums, Attix Pharmaceuticals, 184 Front Street East, Unit 801, Toronto, Ontario M5A 4N3, Canada",
+    "code_info": "All lots repackaged and distributed between 01/05/12 to 02/12/15",
+    "recalling_firm": "Attix Pharmaceuticals",
+    "reason_for_recall": "Penicillin Cross Contamination: All lots of all products repackaged and distributed between 01/05/12 and 02/12/15 are being recalled because they were repackaged in a facility with penicillin products without adequate separation which could introduce the potential for cross contamination with penicillin.",
+    "report_date": "20150429",
+    "recall_initiation_date": "20141114",
+    "termination_date": "20151007",
+    "product_type": "Drugs",
+    "product_quantity": "50 grams",
+    "openfda": {}
+   },
+   {
+    "recall_number": "D-1066-2019",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Tamsulosin Hydrochloride Capsules, USP, 0.4 mg, 500-count bottles, Rx Only, Manufactured by: Alkem Laboratories Ltd., Mumbai - 400 013, INDIA; Distributed by Ascend Laboratories, LLC, Parsippany, NJ  07054, NDC 67877-450-05.",
+    "code_info": "Lot #: 8144652, Exp Jul 2020",
+    "recalling_firm": "Ascend Laboratories LLC",
+    "reason_for_recall": "Failed Dissolution Specifications: High Out-of-Specification dissolution results were observed during stability testing.",
+    "report_date": "20190313",
+    "recall_initiation_date": "20190222",
+    "termination_date": "20200318",
+    "product_type": "Drugs",
+    "product_quantity": "3,072 bottles",
+    "openfda": {
+     "product_ndc": [
+      "67877-450"
+     ],
+     "generic_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "brand_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "substance_name": [
+      "TAMSULOSIN HYDROCHLORIDE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

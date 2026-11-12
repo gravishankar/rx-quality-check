@@ -1,0 +1,91 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:21.332Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"metformin\" AND dosage_form:\"TABLET, EXTENDED RELEASE\" AND finished:true AND product_type:\"HUMAN PRESCRIPTION DRUG\"",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22metformin%22+AND+dosage_form%3A%22TABLET%2C+EXTENDED+RELEASE%22+AND+finished%3Atrue+AND+product_type%3A%22HUMAN+PRESCRIPTION+DRUG%22&limit=1",
+  "purpose": "Metformin extended-release product for IR/ER distinction"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 171
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "0597-0385",
+    "generic_name": "empagliflozin, linagliptin, metformin hydrochloride",
+    "brand_name": "Trijardy XR",
+    "labeler_name": "Boehringer Ingelheim Pharmaceuticals, Inc.",
+    "dosage_form": "TABLET, EXTENDED RELEASE",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "NDA",
+    "application_number": "NDA212614",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "EMPAGLIFLOZIN",
+      "strength": "12.5 mg/1"
+     },
+     {
+      "name": "LINAGLIPTIN",
+      "strength": "2.5 mg/1"
+     },
+     {
+      "name": "METFORMIN HYDROCHLORIDE",
+      "strength": "1000 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "0597-0385-77",
+      "description": "60 TABLET, EXTENDED RELEASE in 1 BOTTLE (0597-0385-77)"
+     },
+     {
+      "package_ndc": "0597-0385-86",
+      "description": "180 TABLET, EXTENDED RELEASE in 1 BOTTLE (0597-0385-86)"
+     }
+    ],
+    "pharm_class": [
+     "Biguanide [EPC]",
+     "Biguanides [CS]",
+     "Dipeptidyl Peptidase 4 Inhibitor [EPC]",
+     "Dipeptidyl Peptidase 4 Inhibitors [MoA]",
+     "Sodium-Glucose Cotransporter 2 Inhibitor [EPC]",
+     "Sodium-Glucose Transporter 2 Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "2359279",
+      "2359285",
+      "2359288",
+      "2359290",
+      "2359351",
+      "2359353",
+      "2359356",
+      "2359358"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

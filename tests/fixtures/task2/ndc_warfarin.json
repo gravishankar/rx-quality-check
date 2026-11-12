@@ -1,0 +1,65 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:16.703Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"warfarin\" AND route:\"ORAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22warfarin%22+AND+route%3A%22ORAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Excluded ingredient (anticoagulant)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 148
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "67046-2072",
+    "generic_name": "Warfarin",
+    "brand_name": "Warfarin Sodium",
+    "labeler_name": "Coupler LLC",
+    "dosage_form": "TABLET",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA202202",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "WARFARIN SODIUM",
+      "strength": "1 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "67046-2072-3",
+      "description": "30 TABLET in 1 BLISTER PACK (67046-2072-3)"
+     }
+    ],
+    "pharm_class": [
+     "Vitamin K Antagonist [EPC]",
+     "Vitamin K Inhibitors [MoA]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "855288"
+     ]
+    }
+   }
+  ]
+ }
+}

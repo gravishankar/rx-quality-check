@@ -1,0 +1,76 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:19.614Z",
+  "endpoint": "ndc",
+  "search": "generic_name:\"metoprolol tartrate\" AND route:\"ORAL\" AND finished:true",
+  "limit": 1,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=generic_name%3A%22metoprolol+tartrate%22+AND+route%3A%22ORAL%22+AND+finished%3Atrue&limit=1",
+  "purpose": "Unsupported salt (not in catalog)"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 1,
+    "total": 206
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "27241-301",
+    "generic_name": "metoprolol tartrate and hydrochlorothiazide",
+    "brand_name": "METOPROLOL TARTRATE AND HYDROCHLOROTHIAZIDE",
+    "labeler_name": "Ajanta Pharma USA Inc.",
+    "dosage_form": "TABLET",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA215789",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "METOPROLOL TARTRATE",
+      "strength": "50 mg/1"
+     },
+     {
+      "name": "HYDROCHLOROTHIAZIDE",
+      "strength": "25 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "27241-301-01",
+      "description": "100 TABLET in 1 BOTTLE (27241-301-01)"
+     }
+    ],
+    "pharm_class": [
+     "Adrenergic beta-Antagonists [MoA]",
+     "Increased Diuresis [PE]",
+     "Thiazide Diuretic [EPC]",
+     "Thiazides [CS]",
+     "beta-Adrenergic Blocker [EPC]"
+    ],
+    "openfda": {
+     "rxcui": [
+      "866479",
+      "866482"
+     ],
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}

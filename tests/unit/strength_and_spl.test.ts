@@ -28,10 +28,14 @@ test('different strengths are never equal', () => {
   assert.equal(sameStrength(a, b), false);
 });
 
-test('mg and mcg are not silently equated', () => {
-  const a = normalizeStrength('75 ug/1') ?? normalizeStrength('75 mcg/1')!;
+// Task 2 (R-ID-4): mcg is converted to mg exactly, so a label printing "75 MCG" matches FDA's
+// ".075 mg/1". A value printed with the wrong unit ("75 mg") is never equated (OCR-5).
+test('mcg converts exactly to mg; a wrong unit is never equated', () => {
+  const mcg = normalizeStrength('75 mcg/1')!;
   const [b] = rxNavStrengths('levothyroxine sodium 0.075 MG Oral Tablet');
-  assert.equal(sameStrength(a, b!), false);
+  assert.equal(sameStrength(mcg, b!), true);
+  const wrongUnit = normalizeStrength('75 mg/1')!;
+  assert.equal(sameStrength(wrongUnit, b!), false);
 });
 
 test('unparseable strength returns null rather than a guess', () => {

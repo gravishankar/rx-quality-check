@@ -1,0 +1,166 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:05.047Z",
+  "endpoint": "enforcement",
+  "search": "openfda.product_ndc:\"16729-047\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/enforcement.json?search=openfda.product_ndc%3A%2216729-047%22&limit=100",
+  "purpose": "Atorvastatin 80 mg (Accord) recall with batch list"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-04",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 4
+   }
+  },
+  "results": [
+   {
+    "recall_number": "D-0374-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Atorvastatin Calcium Tablets USP 80 mg* Rx Only, Packaged as a) 90 Tablets NDC 16729-047-15 UPC 3 16729 04715 9; b) 500 Tablets NDC 16729-047-16 UPC 3 16729 04716 6; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703 Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213, INDIA",
+    "code_info": "Batches: a)R2100283, R2100288, R2100289, Exp. Date 2/28/2023; R2200235, Exp. Date 1/31/2024; R2201037, R2200952, Exp. Date 6/30/2024; b) R2100291, R2100281, R2100282, R2100292, R2100293, R2100294, R2100290, R2100306, R2100348, R2100349, R2100347, R2100350, R2100356, R2100355, Exp. Date 2/28/2023; R2100461, R2100463, R2100464, Exp. Date 3/31/2023; R2101214, R2101215, R2101216, Exp. Date 9/30/2023; R2101572, R2101573, R2101577, R2101578, R2101585, R2101579, R2101584, R2101587, R2101597, Exp. Date 11/30/2023; R2200801, Exp. Date 6/30/2024;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "72,376 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-044",
+      "16729-045",
+      "16729-046",
+      "16729-047"
+     ],
+     "generic_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0373-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Atorvastatin Calcium Tablets USP 40 mg* Rx Only, Packaged as a) 90 Tablets NDC 16729-046-15 UPC 3 16729 04615 2; b) 1,000 Tablets NDC 16729-046-17 UPC 3 16729 04617 6,  Manufactured for: Accord Healthcare, Inc., Durham, NC 27703 Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213, INDIA",
+    "code_info": "Batches: a)R2100552, R2100553, Exp. Date 4/30/2023; R2200253, Exp. Date 2/29/2024; R2200627, Exp. Date 4/30/2024; R2201113, Exp. Date 6/30/2024; R2201184, Exp. Date 8/31/2024; R2201366, Exp. Date 9/30/2024;  b) R2200280, Exp. Date 2/29/2024; R2200385, R2200386, R2200491, R2200490, R2200494, R2200496, R2200495, Exp. Date 3/31/2024; R2200510, R2200520, R2200521, R2200517, R2200511, R2200632, R2200631, R2200637, R2200635, R2200648, R2200638, R2200639, R2200647, Exp. Date 4/30/2024; R2200727, Exp. Date 5/31/2024;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "147,736 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-044",
+      "16729-045",
+      "16729-046",
+      "16729-047"
+     ],
+     "generic_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0371-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Atorvastatin Calcium Tablets USP, 10 mg* Rx Only, Packaged as  a) 90 Tablets NDC 16729-044-15 UPC 3 16729 04415 8; b) 1,000 Tablets NDC 16729-044-17 UPC 3 16729 04417 2; Manufactured for: Accord Healthcare, Inc., Durham, NC 27703, Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213, INDIA.",
+    "code_info": "Batches: a)R2100455, Exp. Date 3/31/2023; R2200274, Exp. Date 1/31/2024; R2200700, Exp. Date 5/31/2024;  b) R2101342, R2101343, R2101476, Exp. Date 9/30/2023; R2101364, R2101365, R2101366, R2101367, Exp. Date 10/31/2023; R2101612, R2101613, R2101614, Exp. Date 11/30/2023; R2200222, R2200221, R2200223, Exp. Date 1/31/2024; R2200795, R2200713, R2200701, R2200711, R2200712, R2200756, R2200757, R2200754, R2200755, Exp. Date 5/31/2024; R2200945, R2200943, Exp. Date 6/30/2024;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "256,106 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-044",
+      "16729-045",
+      "16729-046",
+      "16729-047"
+     ],
+     "generic_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   },
+   {
+    "recall_number": "D-0372-2023",
+    "status": "Terminated",
+    "classification": "Class II",
+    "product_description": "Atorvastatin Calcium Tablets USP 20 mg* Rx Only, Packaged as  a) 90 Tablets NDC 16729-045-15 UPC 3 16729 04515 5; b) 1,000 Tablets NDC 16729-045-17 UPC 3 16729 04517 9, Manufactured for: Accord Healthcare, Inc., Durham, NC 27703 Manufactured by: Intas Pharmaceuticals Limited, Pharmez, Ahmedabad-382 213, INDIA",
+    "code_info": "Batches: a)R2100305, Exp. Date 2/28/2023; R2200227, Exp. Date 1/31/2024; R2200797, Exp. Date 6/30/2024;  b) R2101423, R2101438, R2101447, R2101446, Exp. Date 10/31/2023; R2200040, R2200041, R2200052, R2200043, R2200044, R2200051, R2200060, R2200061, R2200062, R2200077, R2200078, Exp. Date 12/31/2023; R2200228, R2200480, Exp. Date 1/31/2024; R2200266, R2200267, R2200265, R2200268, Exp. Date 2/29/2024; R2200370, Exp. Date 3/31/2024; R2201038, Exp. Date 6/30/2024;",
+    "recalling_firm": "Accord Healthcare, Inc.",
+    "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+    "report_date": "20230308",
+    "recall_initiation_date": "20230207",
+    "termination_date": "20240422",
+    "product_type": "Drugs",
+    "product_quantity": "241,585 bottles",
+    "openfda": {
+     "product_ndc": [
+      "16729-044",
+      "16729-045",
+      "16729-046",
+      "16729-047"
+     ],
+     "generic_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "brand_name": [
+      "ATORVASTATIN CALCIUM"
+     ],
+     "substance_name": [
+      "ATORVASTATIN CALCIUM TRIHYDRATE"
+     ],
+     "route": [
+      "ORAL"
+     ]
+    }
+   }
+  ]
+ }
+}

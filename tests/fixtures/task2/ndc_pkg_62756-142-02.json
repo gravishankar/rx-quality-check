@@ -1,0 +1,69 @@
+{
+ "_fixture": {
+  "source": "live public openFDA response; records reduced to fields the app reads; no patient data",
+  "capturedAt": "2026-11-12T02:48:12.431Z",
+  "endpoint": "ndc",
+  "search": "packaging.package_ndc:\"62756-142-02\"",
+  "limit": 100,
+  "skip": 0,
+  "url": "https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc%3A%2262756-142-02%22&limit=100",
+  "purpose": "Directory confirmation of a real package NDC"
+ },
+ "http": {
+  "status": 200,
+  "headers": {
+   "content-type": "application/json; charset=utf-8"
+  }
+ },
+ "body": {
+  "meta": {
+   "last_updated": "2026-11-11",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "product_ndc": "62756-142",
+    "generic_name": "METFORMIN HYDROCHLORIDE",
+    "brand_name": "METFORMIN HYDROCHLORIDE",
+    "labeler_name": "Sun Pharmaceutical Industries, Inc.",
+    "dosage_form": "TABLET, EXTENDED RELEASE",
+    "route": [
+     "ORAL"
+    ],
+    "product_type": "HUMAN PRESCRIPTION DRUG",
+    "marketing_category": "ANDA",
+    "application_number": "ANDA077336",
+    "finished": true,
+    "active_ingredients": [
+     {
+      "name": "METFORMIN HYDROCHLORIDE",
+      "strength": "500 mg/1"
+     }
+    ],
+    "packaging": [
+     {
+      "package_ndc": "62756-142-01",
+      "description": "100 TABLET, EXTENDED RELEASE in 1 BOTTLE (62756-142-01)"
+     },
+     {
+      "package_ndc": "62756-142-02",
+      "description": "500 TABLET, EXTENDED RELEASE in 1 BOTTLE (62756-142-02)"
+     }
+    ],
+    "pharm_class": [
+     "Biguanide [EPC]",
+     "Biguanides [CS]"
+    ],
+    "openfda": {
+     "is_original_packager": [
+      true
+     ]
+    }
+   }
+  ]
+ }
+}
