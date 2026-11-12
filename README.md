@@ -28,7 +28,7 @@ are excluded by policy (`docs/EXCLUSIONS.md`).
 
 ```
 CLAUDE.md, AGENTS.md     Agent and contributor rules
-docs/                    PRD, architecture, data sources, privacy, exclusions, test & implementation plans
+docs/                    PRD, architecture, state machine guide, data sources, privacy, exclusions, test & implementation plans
 docs/references/         Reference documents A and B (unmodified) + adoption register
 docs/feasibility/        Machine-readable results of the latest API feasibility run
 mobile/src/              Core library: models/, rules/ (identity, exclusion, recall evidence), state/ (workflow

@@ -171,8 +171,12 @@ Live harness: 5 PASS / 5 WARN / 0 FAIL / 0 BLOCKED (see `docs/API_FEASIBILITY.md
 
 ## 8. Task 2 results
 
-`npm test`: **214 tests, 214 pass, 0 fail, 0 skipped** (12 files: 5 from Task 1, 7 new). `npm run typecheck`: clean.
-`npm run test:coverage` on `mobile/src`: **97.1% lines, 84.9% branches, 96.7% functions**.
+`npm test`: **234 tests, 234 pass, 0 fail, 0 skipped** (14 files: 5 from Task 1, 9 new). `npm run typecheck`: clean.
+`npm run test:coverage` on `mobile/src`: **97.7% lines, 83.7% branches, 97.2% functions**.
+
+State-machine refinement: `tests/unit/state_machine.test.ts` builds post-confirmation test states
+with the exclusion decision and confirmation the real flow records (now required by the safety
+gates); its assertions are unchanged. The layering test now includes the `fsm/` layer.
 
 | File | Tests | Scope |
 |---|---|---|
@@ -183,6 +187,8 @@ Live harness: 5 PASS / 5 WARN / 0 FAIL / 0 BLOCKED (see `docs/API_FEASIBILITY.md
 | `tests/unit/architecture_boundaries.test.ts` | 6 | Module layering, no I/O in pure layers, no telemetry/LLM, no provenance code, fixture provenance |
 | `tests/integration/recall_engine.test.ts` | 31 | RC-1…5, lot-specific recalls, multi-strength labels, combinations, RP-4, RG-1, RG-2, pagination, determinism, refills |
 | `tests/integration/workflow.test.ts` | 12 | End-to-end runner with fixture ports, request audit (PV-1, library level), RG-3, retries, offline, ambiguity |
+| `tests/integration/workflow_variants.test.ts` | 14 | Alternative workflow (no retries, save-first), optional patient-attestation state, six bypass attempts vetoed by the safety gates |
+| `tests/unit/fsm_core.test.ts` | 6 | Generic core reused by a non-Rx document-approval machine: rules, guards, gates, validation, graph queries, run loop |
 
 Fixtures: 33 real openFDA responses in `tests/fixtures/task2/` (records reduced to the fields the app
 reads; captured 2026-11-12; `INDEX.json`). Task 1 test change: `strength_and_spl.test.ts` previously asserted "75 mcg ≠ 0.075 mg"; it now asserts exact unit conversion and that a wrong unit ("75 mg") still mismatches (R-ID-4). Synthetic inputs are limited to labeled format-only cases:

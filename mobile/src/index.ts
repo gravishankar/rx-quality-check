@@ -21,5 +21,6 @@ export * from './rules/recallEvidence.ts';
 export * from './rules/refill.ts';
 export * from './rules/explanation.ts';
 export * from './rules/version.ts';
+export * from './fsm/core.ts';
 export * from './state/machine.ts';
 export * from './engine/runner.ts';

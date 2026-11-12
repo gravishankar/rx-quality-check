@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import {
   BACKOFF_MS,
   emptyContext,
+  exclusionKeyOf,
   initialState,
   reduce,
   type Effect,
@@ -46,9 +47,28 @@ const PARTIAL: RecallEvidenceBundle = {
 };
 const FINDING = { finding: 'POTENTIAL_MATCH' } as unknown as RecallFinding;
 
+// States after CHECK_EXCLUSION carry the decision for this identity; states after CONFIRM also carry
+// the user's confirmation and the retrieved evidence — exactly what the real flow records, and what
+// the mandatory safety gates require (RX_SAFETY_GATES).
+const KEY = exclusionKeyOf(ID);
+const DECIDED: Partial<WorkflowContext> = { exclusion: ELIGIBLE, exclusionKey: KEY };
+const CONFIRMED: Partial<WorkflowContext> = {
+  ...DECIDED,
+  requiredConfirmations: ['identity'],
+  confirmation: { fields: ['identity'], exclusionKey: KEY },
+  bundle: BUNDLE,
+};
+const AFTER_CONFIRM = new Set<StateName>(['FETCH_EVIDENCE', 'RETRY', 'RATE_LIMITED', 'SOURCE_UNAVAILABLE', 'OFFLINE_CACHED_RESULT', 'EVALUATE', 'EXPLAIN', 'SAVE', 'SAVED']);
 const at = (name: StateName, over: Partial<WorkflowContext> = {}): WorkflowState => ({
   name,
-  ctx: { ...emptyContext(), extraction: X, identity: ID, ...over },
+  ctx: {
+    ...emptyContext(),
+    extraction: X,
+    identity: ID,
+    ...(name === 'CONFIRM' ? DECIDED : {}),
+    ...(AFTER_CONFIRM.has(name) ? CONFIRMED : {}),
+    ...over,
+  },
 });
 const types = (effects: Effect[]) => effects.map((e) => e.type);
 

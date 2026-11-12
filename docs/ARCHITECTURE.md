@@ -45,6 +45,7 @@ reached directly over HTTPS with no credentials.
 | `models/` | Shared types: identifiers, identity, evidence, result states | — | anything with I/O |
 | `rules/` | NDC normalization, cross-validation, exclusion policy evaluation, recall relevance, lot comparison, refill diff, explanation selection | `models/`, `data/` (read-only JSON) | `services/`, `storage/`, `scanner/`, React |
 | `state/` | Workflow state machine: states, events, transitions, effect descriptors | `models/` | `rules/`, `services/`, `storage/`, `scanner/`, React |
+| `fsm/` | Generic state-machine core (rules, gates, validation, run loop); no app knowledge | — | everything else |
 | `engine/` | Effect runner: executes effects with injected ports and the pure rules, returns events | `models/`, `rules/`, `state/` | concrete network, storage or OCR code (received as ports) |
 | `scanner/` | Camera capture, on-device OCR, barcode decode, field extraction to `RawExtraction` | `models/` | `services/` |
 | `services/` | API clients (openFDA, DailyMed, RxNav), outcome classification, retry/backoff, cache read-through | `models/`, `storage/` (cache repo only) | `state/`, React |
@@ -119,8 +120,9 @@ Implemented in `mobile/src/state/machine.ts`; every row has a table-driven test 
 | `EXCLUDED` / `UNSUPPORTED` / `NEEDS_CLARIFICATION` | `EDIT_REQUESTED` | `USER_CORRECTION` |
 | result, terminal and waiting states | `DONE` / `RESTART` | `SCAN` |
 
-Rules for the machine:
-- Pure reducer `(state, event) → { state, effects[], ignored }`. Effects are descriptors (`RUN_EXTRACTION`, `RESOLVE_IDENTITY`, `CHECK_EXCLUSION`, `FETCH_RECALL_EVIDENCE`, `EVALUATE_EVIDENCE`, `PERSIST_ASSESSMENT`, `LOAD_CACHED_RESULT`, `SCHEDULE_RETRY`) executed by the effect runner (`mobile/src/engine/runner.ts`), which calls the pure rules and injected I/O ports and returns events. The reducer imports only `models/`.
+Rules for the machine (how to change them: `docs/STATE_MACHINE_GUIDE.md`):
+- Transitions are the ordered, declarative rule table `RX_RULES` (first match wins), run by the generic core `fsm/core.ts`. Six mandatory safety gates (`RX_SAFETY_GATES`) check every transition of every workflow variant: an exclusion decision and a user confirmation for the current identity must exist before any recall fetch, evaluation or save; both may only come from their own events; a finding may only come from evaluating the retrieved evidence; non-eligible decisions cannot continue. Variants are built with `createRxWorkflow`.
+- Pure reducer `(state, event) → { state, effects[], ignored, ruleId, rejectedBy }`. Effects are descriptors (`RUN_EXTRACTION`, `RESOLVE_IDENTITY`, `CHECK_EXCLUSION`, `FETCH_RECALL_EVIDENCE`, `EVALUATE_EVIDENCE`, `PERSIST_ASSESSMENT`, `LOAD_CACHED_RESULT`, `SCHEDULE_RETRY`) executed by the effect runner (`mobile/src/engine/runner.ts`), which calls the pure rules and injected I/O ports and returns events. The reducer imports only `models/`.
 - Every transition is total: unknown events leave the state unchanged and return `ignored: true`.
 - Retry budget: 3 attempts per effect, backoff 2 s / 4 s (the runner may add jitter). `RATE_LIMITED` honors `Retry-After` (default 60 s) and retries automatically at most once. A `RETRY_DUE` with no outstanding retry (late timer) is ignored.
 - Evidence already retrieved when retries run out is still evaluated, so a recall found by one query is never hidden by another query's failure; the finding then carries `SOME_QUERIES_INCOMPLETE`.

@@ -7,7 +7,10 @@
  * (candidate package NDCs, and recall queries built from ingredient names and product NDCs). Lots,
  * label text and images never reach a network port.
  */
-import type { EnforcementPage, QueryResult, RecallEvidenceBundle, RecallQuery } from '../models/evidence.ts';
+import type { EnforcementPage, QueryResult, RecallEvidenceBundle, RecallFinding, RecallQuery, RecallQueryPlan } from '../models/evidence.ts';
+import type { Explanation } from '../models/explanation.ts';
+import type { ExclusionDecision } from '../models/policy.ts';
+import { runUntilIdle, type FsmState, type Machine, type RunTraceEntry } from '../fsm/core.ts';
 import type { LabelExtraction, MedicationIdentity } from '../models/identity.ts';
 import type { DataLoadResult, DrugCatalog, ExclusionPolicy } from '../models/policy.ts';
 import { evaluateExclusion } from '../rules/exclusion.ts';
@@ -25,10 +28,11 @@ import { parseNdcInput, type NdcCandidate } from '../rules/ndc.ts';
 import { evaluateRecallEvidence, planRecallQueries } from '../rules/recallEvidence.ts';
 import {
   initialState,
-  reduce,
+  rxWorkflow,
   type CachedResult,
   type Capture,
   type Effect,
+  type RxMachine,
   type WorkflowEvent,
   type WorkflowState,
 } from '../state/machine.ts';
@@ -54,6 +58,20 @@ export interface RulesConfig {
   catalog: DataLoadResult<DrugCatalog>;
   policy: DataLoadResult<ExclusionPolicy>;
 }
+
+/**
+ * The domain rules the runner calls. Orchestration (state machine + runner) depends only on this
+ * interface, not on the recall evidence engine's modules, so either side can change independently
+ * and tests or other products can substitute their own rules.
+ */
+export interface RxRules {
+  evaluateExclusion(identity: MedicationIdentity, policy: RulesConfig['policy'], catalog: RulesConfig['catalog']): ExclusionDecision;
+  planRecallQueries(identity: MedicationIdentity): RecallQueryPlan;
+  evaluateRecallEvidence(identity: MedicationIdentity, bundle: RecallEvidenceBundle): RecallFinding;
+  selectExplanation(identity: MedicationIdentity, finding: RecallFinding): Explanation;
+}
+
+export const DEFAULT_RX_RULES: RxRules = { evaluateExclusion, planRecallQueries, evaluateRecallEvidence, selectExplanation };
 
 function printedFrom(x: LabelExtraction): PrintedFields {
   return { drugName: x.drugName?.value ?? null, strength: x.strength?.value ?? null, doseForm: x.doseForm?.value ?? null };
@@ -152,8 +170,8 @@ async function fetchQuery(q: RecallQuery, ports: Ports): Promise<QueryResult> {
   return { queryId: q.id, pages };
 }
 
-async function fetchEvidence(identity: MedicationIdentity, ports: Ports): Promise<WorkflowEvent> {
-  const plan = planRecallQueries(identity);
+async function fetchEvidence(identity: MedicationIdentity, ports: Ports, rules: RxRules): Promise<WorkflowEvent> {
+  const plan = rules.planRecallQueries(identity);
   const results: QueryResult[] = [];
   for (const q of [...plan.queries, plan.positiveControl.query]) results.push(await fetchQuery(q, ports));
   const bundle: RecallEvidenceBundle = { plan, results, evaluatedAt: ports.now() };
@@ -166,7 +184,7 @@ async function fetchEvidence(identity: MedicationIdentity, ports: Ports): Promis
 }
 
 /** Execute one effect and return the resulting event(s). */
-export async function runEffect(effect: Effect, ports: Ports, cfg: RulesConfig): Promise<WorkflowEvent[]> {
+export async function runEffect(effect: Effect, ports: Ports, cfg: RulesConfig, rules: RxRules = DEFAULT_RX_RULES): Promise<WorkflowEvent[]> {
   switch (effect.type) {
     case 'RUN_EXTRACTION': {
       const x = effect.capture.kind === 'MANUAL' ? effect.capture.extraction : await ports.extract(effect.capture);
@@ -175,15 +193,15 @@ export async function runEffect(effect: Effect, ports: Ports, cfg: RulesConfig):
     case 'RESOLVE_IDENTITY':
       return [await resolveIdentity(effect.extraction, effect.discardNdc, ports, cfg)];
     case 'CHECK_EXCLUSION': {
-      const decision = evaluateExclusion(effect.identity, cfg.policy, cfg.catalog);
+      const decision = rules.evaluateExclusion(effect.identity, cfg.policy, cfg.catalog);
       const req = decision.decision === 'ELIGIBLE' ? requiredConfirmations(effect.identity, effect.extraction, effect.ndcDiscarded) : [];
       return [{ type: 'EXCLUSION_DECIDED', decision, requiredConfirmations: req }];
     }
     case 'FETCH_RECALL_EVIDENCE':
-      return [await fetchEvidence(effect.identity, ports)];
+      return [await fetchEvidence(effect.identity, ports, rules)];
     case 'EVALUATE_EVIDENCE': {
-      const finding = evaluateRecallEvidence(effect.identity, effect.bundle);
-      return [{ type: 'ASSESSED', finding, explanation: selectExplanation(effect.identity, finding) }];
+      const finding = rules.evaluateRecallEvidence(effect.identity, effect.bundle);
+      return [{ type: 'ASSESSED', finding, explanation: rules.selectExplanation(effect.identity, finding) }];
     }
     case 'PERSIST_ASSESSMENT':
       try {
@@ -206,39 +224,40 @@ export async function runEffect(effect: Effect, ports: Ports, cfg: RulesConfig):
   }
 }
 
-export interface TraceEntry {
-  from: string;
-  event: WorkflowEvent['type'];
-  to: string;
-  effects: Effect['type'][];
-  ignored: boolean;
-}
+export type TraceEntry = RunTraceEntry;
 
 /**
  * Apply an event and run resulting effects until the machine waits for the user (no pending
- * effects). Returns the final state and the transition trace.
+ * effects). Returns the final state and the transition trace. `machine` defaults to the standard
+ * workflow; pass a variant built with `createRxWorkflow` to run it with the same effects.
+ * A transition vetoed by a safety gate stops the run (see `trace[].rejectedBy`).
  */
 export async function dispatch(
   state: WorkflowState,
   event: WorkflowEvent,
   ports: Ports,
   cfg: RulesConfig,
-  opts: { maxSteps?: number } = {},
+  opts: { maxSteps?: number; machine?: RxMachine; rules?: RxRules } = {},
 ): Promise<{ state: WorkflowState; trace: TraceEntry[] }> {
-  const trace: TraceEntry[] = [];
-  const queue: WorkflowEvent[] = [event];
-  let s = state;
-  let steps = 0;
-  const max = opts.maxSteps ?? 100;
-  while (queue.length > 0) {
-    if (++steps > max) throw new Error('workflow did not settle');
-    const e = queue.shift() as WorkflowEvent;
-    const t = reduce(s, e);
-    trace.push({ from: s.name, event: e.type, to: t.state.name, effects: t.effects.map((x) => x.type), ignored: t.ignored });
-    s = t.state;
-    for (const eff of t.effects) queue.push(...(await runEffect(eff, ports, cfg)));
-  }
-  return { state: s, trace };
+  const machine = opts.machine ?? rxWorkflow;
+  const rules = opts.rules ?? DEFAULT_RX_RULES;
+  const r = await runUntilIdle(machine, state, event, (eff) => runEffect(eff, ports, cfg, rules), { maxSteps: opts.maxSteps ?? 100 });
+  return { state: r.state as WorkflowState, trace: r.trace };
+}
+
+/** Like `dispatch`, for workflow variants with extra states and events. */
+export async function dispatchVariant<S extends string, E extends { type: string }>(
+  machine: Machine<S, WorkflowState['ctx'], E, Effect>,
+  state: FsmState<S, WorkflowState['ctx']>,
+  event: E,
+  ports: Ports,
+  cfg: RulesConfig,
+  opts: { maxSteps?: number; rules?: RxRules } = {},
+): Promise<{ state: FsmState<S, WorkflowState['ctx']>; trace: TraceEntry[] }> {
+  const rules = opts.rules ?? DEFAULT_RX_RULES;
+  return runUntilIdle(machine, state, event, async (eff) => (await runEffect(eff, ports, cfg, rules)) as unknown as E[], {
+    maxSteps: opts.maxSteps ?? 100,
+  });
 }
 
 export { initialState };

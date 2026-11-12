@@ -34,13 +34,14 @@ test('library modules import only relative paths inside mobile/src (no Node, RN,
   }
 });
 
-test('layering: models → nothing; state → models; rules → models/rules; engine → anything in the library', () => {
+test('layering: fsm → nothing; models → nothing; state → models/fsm; rules → models/rules; engine → anything in the library', () => {
   for (const s of sources) {
     const layer = s.path.split('/')[0];
     for (const imp of importsOf(s.text)) {
       const target = relative(SRC, join(SRC, s.path, '..', imp)).split('/')[0];
+      if (layer === 'fsm') assert.equal(target, 'fsm', `${s.path} → ${imp} (the generic core must stay app-independent)`);
       if (layer === 'models') assert.equal(target, 'models', `${s.path} → ${imp}`);
-      if (layer === 'state') assert.equal(target, 'models', `${s.path} → ${imp}`);
+      if (layer === 'state') assert.ok(target === 'models' || target === 'fsm', `${s.path} → ${imp}`);
       if (layer === 'rules') assert.ok(target === 'models' || target === 'rules', `${s.path} → ${imp}`);
     }
   }
@@ -48,7 +49,7 @@ test('layering: models → nothing; state → models; rules → models/rules; en
 
 test('no I/O, timers, randomness or global clock in models/, rules/ or state/', () => {
   const banned = [/\bfetch\s*\(/, /XMLHttpRequest/, /WebSocket/, /\bprocess\./, /\brequire\s*\(/, /setTimeout|setInterval/, /Math\.random/, /Date\.now|new Date\(/, /localStorage|AsyncStorage|sqlite/i, /console\./];
-  for (const s of sources.filter((x) => /^(models|rules|state)\//.test(x.path))) {
+  for (const s of sources.filter((x) => /^(models|rules|state|fsm)\//.test(x.path))) {
     for (const b of banned) assert.ok(!b.test(s.text), `${s.path} matches ${b}`);
   }
 });
