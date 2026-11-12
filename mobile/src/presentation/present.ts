@@ -21,7 +21,29 @@ export const FRESHNESS = {
   maxDatasetAgeDays: 45,
 } as const;
 
-export type EvidenceLevel = 'VERIFIED_SOURCE' | 'USER_CONFIRMED' | 'USER_ENTERED' | 'INFERRED' | 'CONFLICTING' | 'UNVERIFIED' | 'UNAVAILABLE';
+export type EvidenceLevel = 'VERIFIED_SOURCE' | 'USER_CONFIRMED' | 'SCANNED' | 'USER_ENTERED' | 'INFERRED' | 'CONFLICTING' | 'UNVERIFIED' | 'UNAVAILABLE';
+
+/** Confirmation-screen groups (Task 4C): what FDA records confirm, what was read or typed, what needs the user. */
+export type FieldClass = 'VERIFIED' | 'READ_OR_ENTERED' | 'NEEDS_INPUT';
+export function fieldClass(e: EvidenceLevel): FieldClass {
+  switch (e) {
+    case 'VERIFIED_SOURCE':
+      return 'VERIFIED';
+    case 'USER_CONFIRMED':
+    case 'SCANNED':
+    case 'USER_ENTERED':
+    case 'INFERRED':
+      return 'READ_OR_ENTERED';
+    case 'CONFLICTING':
+    case 'UNVERIFIED':
+    case 'UNAVAILABLE':
+      return 'NEEDS_INPUT';
+    default: {
+      const never: never = e;
+      return never;
+    }
+  }
+}
 
 export interface FieldView {
   key: 'product' | 'ingredients' | 'form' | 'release' | 'labeler' | 'lot' | 'source';
@@ -88,7 +110,9 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
   });
   const product = identity.level === 'PRODUCT';
   // Facts from an FDA NDC Directory listing are VERIFIED_SOURCE; on the name-only path they are the user's entries.
-  const factLevel: EvidenceLevel = product ? 'VERIFIED_SOURCE' : 'USER_ENTERED';
+  // Values read by the camera are SCANNED ("read from your label"), never presented as typed or verified.
+  const scanned = (v: { origin: string } | null | undefined) => v !== null && v !== undefined && (v.origin === 'OCR' || v.origin === 'BARCODE');
+  const factLevel: EvidenceLevel = product ? 'VERIFIED_SOURCE' : scanned(extraction?.drugName) ? 'SCANNED' : 'USER_ENTERED';
   const conflicts = identity.sourceConflicts ?? [];
   const out: FieldView[] = [];
   out.push(
@@ -103,7 +127,7 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
   out.push(
     identity.release === 'UNSPECIFIED'
       ? f('release', COPY.fields.release, COPY.fields.releaseValues.UNSPECIFIED, 'UNAVAILABLE')
-      : f('release', COPY.fields.release, COPY.fields.releaseValues[identity.release], product ? 'VERIFIED_SOURCE' : userGaveRelease ? 'USER_CONFIRMED' : 'USER_ENTERED'),
+      : f('release', COPY.fields.release, COPY.fields.releaseValues[identity.release], product ? 'VERIFIED_SOURCE' : userGaveRelease ? 'USER_CONFIRMED' : factLevel),
   );
   out.push(
     product && identity.labelerName
@@ -115,7 +139,7 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
     identity.lot
       ? f('lot', COPY.fields.lot, identity.lot, 'USER_CONFIRMED', COPY.fields.lotNote)
       : typedLot
-        ? f('lot', COPY.fields.lot, typedLot, 'USER_ENTERED', COPY.fields.lotUnconfirmedNote)
+        ? f('lot', COPY.fields.lot, typedLot, scanned(extraction?.lot) ? 'SCANNED' : 'USER_ENTERED', COPY.fields.lotUnconfirmedNote)
         : f('lot', COPY.fields.lot, 'Not entered', 'UNAVAILABLE'),
   );
   switch (identity.sourceProductStatus) {

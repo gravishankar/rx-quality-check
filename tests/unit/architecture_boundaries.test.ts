@@ -53,13 +53,15 @@ test('layering: fsm → nothing; models → nothing; state → models/fsm; rules
       if (layer === 'rules') assert.ok(target === 'models' || target === 'rules', `${s.path} → ${imp}`);
       if (layer === 'services') assert.ok(['models', 'rules', 'services', 'engine', 'state'].includes(target ?? ''), `${s.path} → ${imp}`);
       if (layer === 'storage') assert.ok(['models', 'rules', 'storage', 'services', 'state'].includes(target ?? ''), `${s.path} → ${imp}`);
+      // Task 4C: the scanner reads text and barcodes only; it never touches network, storage or state.
+      if (layer === 'scanner') assert.ok(['models', 'rules', 'scanner'].includes(target ?? ''), `${s.path} → ${imp}`);
     }
   }
 });
 
 test('no I/O, timers, randomness or global clock in models/, rules/ or state/', () => {
   const banned = [/\bfetch\s*\(/, /XMLHttpRequest/, /WebSocket/, /\bprocess\./, /\brequire\s*\(/, /setTimeout|setInterval/, /Math\.random/, /Date\.now|new Date\(/, /localStorage|AsyncStorage|sqlite/i, /console\./];
-  for (const s of sources.filter((x) => /^(models|rules|state|fsm)\//.test(x.path))) {
+  for (const s of sources.filter((x) => /^(models|rules|state|fsm|scanner)\//.test(x.path))) {
     for (const b of banned) assert.ok(!b.test(s.text), `${s.path} matches ${b}`);
   }
 });

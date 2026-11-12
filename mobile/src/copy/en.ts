@@ -85,6 +85,7 @@ export const COPY = {
   evidence: {
     VERIFIED_SOURCE: 'From FDA records',
     USER_CONFIRMED: 'Entered and confirmed by you',
+    SCANNED: 'Read from your label, not checked against FDA records',
     USER_ENTERED: 'Entered by you, not checked against FDA records',
     INFERRED: 'Matched by name only',
     CONFLICTING: 'FDA records disagree',
