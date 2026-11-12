@@ -83,6 +83,8 @@ export const COPY = {
       NEEDS_INPUT: 'Needs your input',
     },
     details: 'Scan details (development)',
+    technical: 'Technical detail (development)',
+    nothingChecked: 'Nothing was checked',
   },
 
   entry: {
@@ -229,6 +231,7 @@ export const COPY = {
   },
 
   notAssessed: {
+    cardLabel: 'No recall check was done',
     EXCLUDED: {
       headline: 'We don’t check this medication.',
       body: 'This is a policy choice, not a finding about the medication. No recall check was done.',

@@ -7,7 +7,7 @@ export function Problem({ headline, body, onRetry, onDone }: { headline: string;
   return (
     <>
       <H1>{headline}</H1>
-      <Card tone="NEUTRAL">
+      <Card tone="NEUTRAL" label={COPY.scan.nothingChecked}>
         <P>{body}</P>
       </Card>
       <P>{COPY.disclaimer.standing}</P>

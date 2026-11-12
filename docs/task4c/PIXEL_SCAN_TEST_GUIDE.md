@@ -1,4 +1,10 @@
-# Pixel Scan Test Guide — development build 0.1.3 (build 4)
+# Pixel Scan Test Guide — development build 0.1.4 (build 5)
+
+> **Device result for build 4 (owner's Pixel, 2026-11-12):** every scan ended with "We couldn't read
+> your label — The photo could not be read." Cause: the barcode library's `read()` was called with a
+> null crop rectangle, which its Kotlin API rejects, so every analysis threw. Fixed in build 5; text and
+> barcodes now fail independently, and development builds show a "Technical detail" line on this
+> screen. Please use build 5.
 
 Owner-only. Goal: photograph a label on your Pixel, confirm what was read, and reach the recall-check
 result **without typing the NDC**. Record what actually happens; nothing in this guide has been run
@@ -6,23 +12,26 @@ on a phone yet.
 
 ## 1. Install
 
-Use the attached **`medluma-dev-v0.1.3-b4-arm64-v8a.apk`** (38.9 MB). Universal fallback:
-`medluma-dev-v0.1.3-b4-universal.apk` (76.7 MB). Full steps (download, checksum, install, Play Protect
+Use the attached **`medluma-dev-v0.1.4-b5-arm64-v8a.apk`** (38.9 MB). Universal fallback:
+`medluma-dev-v0.1.4-b5-universal.apk` (76.7 MB). Full steps (download, checksum, install, Play Protect
 prompt): `docs/INSTALL_ON_ANDROID.md`.
 
 | File | SHA-256 |
 |---|---|
-| medluma-dev-v0.1.3-b4-arm64-v8a.apk | `629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958` |
-| medluma-dev-v0.1.3-b4-universal.apk | `a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f` |
+| medluma-dev-v0.1.4-b5-arm64-v8a.apk | `9972d0368bae90832c23048ef897818a96d78d6bb37a319ea886bb133b49835f` |
+| medluma-dev-v0.1.4-b5-universal.apk | `b827210c0415b4cefaffb1e77a63cefb324b4c2a709257bb9f3e7b4591a4fdf8` |
 
 On the Mac:
 
 ```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.3-b4-arm64-v8a.apk
+shasum -a 256 ~/Downloads/medluma-dev-v0.1.4-b5-arm64-v8a.apk
 ```
 
-It installs over builds 1–3. Open **MedLuma (DEV)** → *About and privacy* should show
-**version 0.1.3 (build 4)**.
+It installs over builds 1–4. Open **MedLuma (DEV)** → *About and privacy* should show
+**version 0.1.4 (build 5)**.
+
+If a scan still fails, the error screen now shows a grey **Technical detail (development)** line —
+please send a screenshot of it (test labels only); it contains no label content.
 
 ## 2. Test labels
 

@@ -171,3 +171,13 @@ test('scanner dependencies (Task 4C): no ML Kit or analytics; ONNX Runtime pinne
   assert.doesNotMatch(mod, /java\.net|HttpURLConnection|okhttp|Log\.(d|i|v|w|e)\(/, 'scanner module: no network, no logging');
   assert.match(mod, /deleteQuietly\(f\)/);
 });
+
+test('scanner native module (Pixel defect, build 4): barcode read gets a non-null crop rectangle; text and barcodes fail independently', () => {
+  const mod = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'java', 'org', 'rxrecallcheck', 'app', 'scanner', 'RxScannerModule.java'), 'utf8');
+  // zxingcpp.BarcodeReader.read(Bitmap, Rect, int) is Kotlin with a non-null Rect: null threw on every scan.
+  assert.doesNotMatch(mod, /\.read\(\s*bmp\s*,\s*null/);
+  assert.match(mod, /\.read\(bmp, new Rect\(0, 0, img\.width, img\.height\), 0\)/);
+  assert.match(mod, /TEXT_FAILED/);
+  assert.match(mod, /BARCODE_FAILED/);
+  assert.match(mod, /p\.reject\("SCAN_FAILED", describe\(e\)\)/, 'failures carry a technical description for development diagnostics');
+});

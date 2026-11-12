@@ -13,6 +13,8 @@ export interface ScanOutput {
   /** Diagnostics only (never sent anywhere). */
   timings?: { ocrMs: number; barcodeMs: number; totalMs: number };
   image?: { width: number; height: number };
+  /** Partial failures inside the native scanner (development diagnostics; no label content). */
+  warnings?: string[];
 }
 
 export type ScanProblem = 'NOTHING_READ' | 'NO_DRUG_FIELDS' | 'BARCODE_TEXT_NDC_DIFFER';

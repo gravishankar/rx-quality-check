@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -127,31 +128,51 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
                 p.reject("UNREADABLE", "The photo could not be read.");
                 return;
             }
+            // Text and barcodes are read independently: a failure in one never discards the other.
+            WritableArray warnings = Arguments.createArray();
             long tOcr0 = System.nanoTime();
-            PpOcr.Result r = engine().recognize(img);
-            long tOcr1 = System.nanoTime();
             WritableArray lines = Arguments.createArray();
-            for (PpOcr.Line l : r.lines) {
-                WritableMap m = Arguments.createMap();
-                m.putString("text", l.text);
-                m.putDouble("score", l.score);
-                lines.pushMap(m);
+            int lineCount = 0;
+            try {
+                PpOcr.Result r = engine().recognize(img);
+                for (PpOcr.Line l : r.lines) {
+                    WritableMap m = Arguments.createMap();
+                    m.putString("text", l.text);
+                    m.putDouble("score", l.score);
+                    lines.pushMap(m);
+                    lineCount++;
+                }
+            } catch (Throwable e) {
+                warnings.pushString("TEXT_FAILED: " + describe(e));
             }
+            long tOcr1 = System.nanoTime();
             WritableArray codes = Arguments.createArray();
-            Bitmap bmp = Bitmap.createBitmap(img.argb, img.width, img.height, Bitmap.Config.ARGB_8888);
-            BarcodeReader.Options opts = new BarcodeReader.Options();
-            opts.setFormats(EnumSet.of(BarcodeReader.Format.UPC_A, BarcodeReader.Format.EAN_13, BarcodeReader.Format.CODE_128, BarcodeReader.Format.DATA_MATRIX));
-            opts.setTryHarder(true);
-            opts.setTryRotate(true);
-            opts.setTryDownscale(true);
-            List<BarcodeReader.Result> found = new BarcodeReader(opts).read(bmp, null, 0);
-            bmp.recycle();
-            for (BarcodeReader.Result b : found) {
-                WritableMap m = Arguments.createMap();
-                m.putString("format", b.getFormat().name());
-                m.putString("text", b.getText());
-                m.putString("symbology", b.getSymbologyIdentifier());
-                codes.pushMap(m);
+            int codeCount = 0;
+            try {
+                Bitmap bmp = Bitmap.createBitmap(img.argb, img.width, img.height, Bitmap.Config.ARGB_8888);
+                BarcodeReader.Options opts = new BarcodeReader.Options();
+                opts.setFormats(EnumSet.of(BarcodeReader.Format.UPC_A, BarcodeReader.Format.EAN_13, BarcodeReader.Format.CODE_128, BarcodeReader.Format.DATA_MATRIX));
+                opts.setTryHarder(true);
+                opts.setTryRotate(true);
+                opts.setTryDownscale(true);
+                // The Kotlin API requires a non-null crop rectangle (a null one throws): use the whole image.
+                List<BarcodeReader.Result> found = new BarcodeReader(opts).read(bmp, new Rect(0, 0, img.width, img.height), 0);
+                bmp.recycle();
+                for (BarcodeReader.Result b : found) {
+                    if (b.getText() == null) continue;
+                    WritableMap m = Arguments.createMap();
+                    m.putString("format", b.getFormat().name());
+                    m.putString("text", b.getText());
+                    m.putString("symbology", b.getSymbologyIdentifier());
+                    codes.pushMap(m);
+                    codeCount++;
+                }
+            } catch (Throwable e) {
+                warnings.pushString("BARCODE_FAILED: " + describe(e));
+            }
+            if (lineCount == 0 && codeCount == 0 && warnings.size() > 0) {
+                p.reject("SCAN_FAILED", warnings.getString(0));
+                return;
             }
             long t1 = System.nanoTime();
             WritableMap out = Arguments.createMap();
@@ -167,12 +188,25 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             size.putInt("width", img.width);
             size.putInt("height", img.height);
             out.putMap("image", size);
+            out.putArray("warnings", warnings);
             p.resolve(out);
         } catch (Throwable e) {
-            p.reject("SCAN_FAILED", "The label could not be read.");
+            p.reject("SCAN_FAILED", describe(e));
         } finally {
             deleteQuietly(f);
         }
+    }
+
+    /**
+     * Technical description of a failure for development diagnostics: exception type, message and
+     * the first stack frame. Contains no label content (the engines' messages do not echo input text).
+     */
+    private static String describe(Throwable e) {
+        StackTraceElement[] st = e.getStackTrace();
+        String where = st.length > 0 ? " at " + st[0].getClassName() + "." + st[0].getMethodName() + ":" + st[0].getLineNumber() : "";
+        String msg = e.getMessage() == null ? "" : e.getMessage();
+        if (msg.length() > 160) msg = msg.substring(0, 160);
+        return e.getClass().getSimpleName() + (msg.isEmpty() ? "" : ": " + msg) + where;
     }
 
     private synchronized PpOcr engine() throws Exception {

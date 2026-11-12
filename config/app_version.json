@@ -1,7 +1,7 @@
 {
   "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.3",
-  "build_number": 4,
+  "version": "0.1.4",
+  "build_number": 5,
   "history": [
     {
       "build_number": 1,
@@ -38,8 +38,18 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f",
-      "note": "Scanner-first development build (versionName 0.1.3-dev, versionCode 4): on-device OCR (PaddleOCR PP-OCRv3 / ONNX Runtime 1.28.0, no telemetry) and barcodes (ZXing-cpp). ARM64 38.9 MB, universal 76.7 MB.",
+      "note": "Scanner-first development build (versionName 0.1.3-dev, versionCode 4): on-device OCR (PaddleOCR PP-OCRv3 / ONNX Runtime 1.28.0, no telemetry) and barcodes (ZXing-cpp). ARM64 38.9 MB, universal 76.7 MB. DEVICE RESULT (owner, Pixel, 2026-11-12): every scan failed with \"The photo could not be read\" — fixed in build 5.",
       "apk_sha256_arm64": "629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958"
+    },
+    {
+      "build_number": 5,
+      "version": "0.1.4",
+      "task": "4C (fix)",
+      "commit": "task-4c/scanner",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "b827210c0415b4cefaffb1e77a63cefb324b4c2a709257bb9f3e7b4591a4fdf8",
+      "note": "Fixes the Pixel scan failure of build 4 (ZXing-cpp read() called with a null crop rectangle threw on every scan); text and barcodes now fail independently; development builds show the technical cause.",
+      "apk_sha256_arm64": "9972d0368bae90832c23048ef897818a96d78d6bb37a319ea886bb133b49835f"
     }
   ]
 }

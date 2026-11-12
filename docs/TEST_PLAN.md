@@ -306,3 +306,12 @@ Physical device: **not tested** (no device or emulator; no `/dev/kvm`). Plan: `d
 | `npm run android:dev` | build 4: ARM64 38.9 MB, universal 76.7 MB; privacy gate passed (INTERNET only; no telemetry classes/components) |
 
 **Physical device:** not tested (no device/emulator available). Pixel test: `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.
+
+**Physical device — first result (owner's Pixel, build 4, 2026-11-12):** every scan → "We couldn't read
+your label / The photo could not be read." Root cause found in code: `zxingcpp.BarcodeReader.read(Bitmap,
+Rect, int)` is Kotlin with a non-null `Rect`; the module passed `null`, so every analysis threw a
+NullPointerException (confirmed from the library bytecode). Fixed in build 5 (0.1.4): full-image crop
+rectangle; text and barcode reading isolated; development builds show the technical cause. Regression
+tests: architecture (static) and UI (failure/partial-failure display). Build 5 not yet re-tested on the
+device.
+

@@ -200,3 +200,24 @@ test('type instead from the scan screen shows the manual form', async () => {
   await press(r, COPY.scan.typeInstead);
   expect(allText(r)).toContain(COPY.entry.submit);
 });
+
+test('native failure (as seen on the Pixel, build 4): development build shows the technical cause; card says nothing was checked', async () => {
+  const err = Object.assign(new Error("NullPointerException: Parameter specified as non-null is null: method zxingcpp.BarcodeReader.read, parameter cropRect at zxingcpp.BarcodeReader.read:0"), { code: 'SCAN_FAILED' });
+  const r = await start(platform([err]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.failed);
+  expect(t).toContain(COPY.scan.nothingChecked);
+  expect(t).not.toMatch(/^RESULT$/m);
+  expect(t).toContain(`${COPY.scan.technical}: SCAN_FAILED: NullPointerException`);
+});
+
+test('partial native failure (barcodes failed, text read): the scan still proceeds with the text', async () => {
+  const out = { ...label('01_'), barcodes: [], warnings: ['BARCODE_FAILED: SomeError'] };
+  const r = await start(platform([out]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.confirm.title);
+  expect(t).toContain('62756-142-02');
+  expect(t).toContain('BARCODE_FAILED');
+});

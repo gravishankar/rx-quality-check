@@ -51,7 +51,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   // Task 4C: scanning is the primary path where a scanner exists; typing is the fallback.
   const canScan = platform.scanner !== undefined;
   const [mode, setMode] = useState<'scan' | 'type'>(canScan ? 'scan' : 'type');
-  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; reason?: string; notice?: string }>({ phase: 'idle' });
+  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; reason?: string; notice?: string; detail?: string }>({ phase: 'idle' });
   const [scanInfo, setScanInfo] = useState<ScanInfo | null>(null);
   const session = useRecallSession(platform, db?.repos ?? null);
 
@@ -109,7 +109,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       const r = readScan(out, VOCABULARY);
       setEntry(entryFromExtraction(r.extraction));
       if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
-        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields });
+        const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
+        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
         return;
       }
       const t = out.timings;
@@ -118,13 +119,16 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
         notes: r.problems.includes('BARCODE_TEXT_NDC_DIFFER') ? [COPY.scan.barcodeTextDiffer] : [],
         details:
           PROFILE.kind === 'development' && t
-            ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}`
+            ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}`
             : null,
       });
       setScanPhase({ phase: 'idle' });
       await session.startExtraction(r.extraction);
-    } catch {
-      setScanPhase({ phase: 'problem', reason: COPY.scan.failed });
+    } catch (e) {
+      // Development builds show the technical cause (exception type and location; no label content).
+      const err = e as { code?: string; message?: string };
+      const detail = PROFILE.kind === 'development' ? `${err.code ?? 'ERROR'}: ${err.message ?? String(e)}` : undefined;
+      setScanPhase({ phase: 'problem', reason: COPY.scan.failed, ...(detail ? { detail } : {}) });
     }
   }, [platform, session]);
   const typeInstead = useCallback(() => {
@@ -180,7 +184,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     return wrap(banner, <Working text={text} />);
   }
   if (scanPhase.phase === 'reading') return wrap(banner, <Working text={COPY.scan.reading} />);
-  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} onRescan={() => void scan()} onType={typeInstead} />);
+  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} onRescan={() => void scan()} onType={typeInstead} />);
   if (session.state.name === 'SCAN') {
     if (mode === 'scan' && canScan) return wrap(banner, <><ScanHome busy={session.busy} notice={scanPhase.notice ?? null} onScan={() => void scan()} onType={typeInstead} />{nav}</>);
     return wrap(banner, <><Entry busy={session.busy} notice={canScan ? null : COPY.scan.unavailable} value={entry} onChange={setEntry} onSubmit={(e) => { setScanInfo(null); void session.start(e); }} />{nav}</>);
