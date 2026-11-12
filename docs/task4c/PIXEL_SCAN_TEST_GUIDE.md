@@ -1,4 +1,8 @@
-# Pixel Scan Test Guide — development build 0.1.5 (build 6)
+# Pixel Scan Test Guide — development build 0.1.6 (build 7)
+
+> **Device result for build 6 (owner's Pixel, 2026-11-12):** a label was scanned and the recall check
+> completed (no matching recall), but the result listed every FDA record checked in full. **Build 7**
+> keeps the scanner unchanged and redesigns the result screen to put a summary first (section 4a below).
 
 > **Device result for build 4 (owner's Pixel, 2026-11-12):** every scan ended with "We couldn't read
 > your label — The photo could not be read." Cause: the barcode library's `read()` was called with a
@@ -31,23 +35,23 @@ on a phone yet.
 
 ## 1. Install
 
-Use the attached **`medluma-dev-v0.1.5-b6-arm64-v8a.apk`** (41.4 MB). Universal fallback:
-`medluma-dev-v0.1.5-b6-universal.apk` (79.3 MB). Full steps (download, checksum, install, Play Protect
+Use the attached **`medluma-dev-v0.1.6-b7-arm64-v8a.apk`** (41.4 MB). Universal fallback:
+`medluma-dev-v0.1.6-b7-universal.apk` (79.3 MB). Full steps (download, checksum, install, Play Protect
 prompt): `docs/INSTALL_ON_ANDROID.md`.
 
 | File | SHA-256 |
 |---|---|
-| medluma-dev-v0.1.5-b6-arm64-v8a.apk | `4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6` |
-| medluma-dev-v0.1.5-b6-universal.apk | `bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f` |
+| medluma-dev-v0.1.6-b7-arm64-v8a.apk | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` |
+| medluma-dev-v0.1.6-b7-universal.apk | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` |
 
 On the Mac:
 
 ```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.5-b6-arm64-v8a.apk
+shasum -a 256 ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
 ```
 
-It installs over builds 1–5. Open **MedLuma (DEV)** → *About and privacy* should show
-**version 0.1.5 (build 6)**.
+It installs over builds 1–6. Open **MedLuma (DEV)** → *About and privacy* should show
+**version 0.1.6 (build 7)**.
 
 If a scan still fails, the error screen now shows a grey **Technical detail (development)** line —
 please send a screenshot of it (test labels only); it contains no label content.
@@ -102,6 +106,24 @@ on-phone timing — please write it down.
 | C9 | Real vial of your own (optional) | Note which details were read (no screenshot needed); if "couldn't read", note the *Technical detail* line — it contains only counts |
 | C7 | Back button on any result | Returns to the Scan screen |
 | C8 | *Type the details instead* | Manual form still works (fallback) |
+
+## 4a. Result screen (build 7)
+
+Use S1 (possible match), S2 (no match) and S6 (recall match found) from the test sheet, or the typed
+test medications in `docs/FUNCTIONAL_TEST_PLAN.md` (D1, D2, D4).
+
+| # | Check | Expected |
+|---|---|---|
+| R1 | Top of any result | Label, headline, then one sentence "We checked N FDA recall records for …: …" counting each group |
+| R2 | Directly below the result box | **Important limits of this result** with the limits and the standing disclaimer |
+| R3 | S6 / D1 (recall match found) | **Recalls that match your product** shows D-0325-2021 as a card: recall started, recalling firm, reason, FDA class in plain words, status in plain words, closing date, recall number, *Official FDA record* |
+| R4 | S1 / D2 (possible match) | **Recalls that might match**: three cards, then "Show N more records that might match" opens the rest in the same section; "You did not enter a lot number" in the result box |
+| R5 | S2 / D4 (no match) | Label **No matching recall found in the FDA records checked**; the words "active recall" appear nowhere |
+| R6 | **Records for a different product** | Counts by reason that add up to the number in the summary; no records listed until *Show these N records*; each opened card starts with "Why it does not apply…" |
+| R7 | *More about this record* on any card | Product text and lot codes as published by FDA |
+| R8 | Status note | Each record section starts with "…A completed or terminated recall does not mean the product is safe…" |
+| R9 | Airplane mode, then a check | "We couldn't reach FDA's data. Nothing was checked." — no summary, no counts |
+| R10 | Largest font size | All of the above readable; buttons reachable by scrolling |
 
 ## 5. Record results
 

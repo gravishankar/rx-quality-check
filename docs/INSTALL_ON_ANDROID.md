@@ -11,8 +11,9 @@ build installs over a lower one.
 
 | Build | Version shown in the app | File | Size | SHA-256 | Status |
 |---|---|---|---|---|---|
-| **6 (current, scanner fix 2)** | 0.1.5-dev (build 6) | `medluma-dev-v0.1.5-b6-arm64-v8a.apk` — **use this one first** | 41.4 MB | `4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6` | Recommended; test with `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md` |
-| 6 | 0.1.5-dev (build 6) | `medluma-dev-v0.1.5-b6-universal.apk` | 79.3 MB | `bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f` | Fallback |
+| **7 (current, result summary)** | 0.1.6-dev (build 7) | `medluma-dev-v0.1.6-b7-arm64-v8a.apk` — **use this one first** | 41.4 MB | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` | Recommended; test with `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md` |
+| 7 | 0.1.6-dev (build 7) | `medluma-dev-v0.1.6-b7-universal.apk` | 79.3 MB | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` | Fallback |
+| 6 | 0.1.5-dev (build 6) | `medluma-dev-v0.1.5-b6-arm64-v8a.apk` | 41.4 MB | `4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6` | Superseded (scanning worked on the Pixel; long result list) |
 | 5 | 0.1.4-dev (build 5) | `medluma-dev-v0.1.4-b5-arm64-v8a.apk` | 38.9 MB | `9972d0368bae90832c23048ef897818a96d78d6bb37a319ea886bb133b49835f` | Superseded (text reading returned nothing on the Pixel) |
 | 4 | 0.1.3-dev (build 4) | `medluma-dev-v0.1.3-b4-arm64-v8a.apk` | 38.9 MB | `629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958` | Superseded (every scan failed on the Pixel) |
 | 3 | 0.1.2-dev (build 3) | `medluma-dev-v0.1.2-b3-arm64-v8a.apk` | 15.2 MB | `31023c94b47ac50326411c5462a9838ab5b3ead5845d0f06ac00cc618d2cbb7e` | Superseded (no scanner) |
@@ -26,7 +27,7 @@ older 32-bit phones too; it is larger but otherwise identical.
 ## Option A — easiest: download directly on the phone
 
 1. On the phone, open the **Claude app** (or claude.ai in Chrome) and open this conversation.
-2. Tap the file card **`medluma-dev-v0.1.5-b6-arm64-v8a.apk`** and download it.
+2. Tap the file card **`medluma-dev-v0.1.6-b7-arm64-v8a.apk`** and download it.
 3. Continue at **"Install"** below.
 
 Checking the checksum on the phone needs an extra app, so if you want to verify it, use Option B.
@@ -41,7 +42,7 @@ your **Downloads** folder.
 Open **Terminal** (Applications → Utilities → Terminal) and run:
 
 ```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.5-b6-arm64-v8a.apk
+shasum -a 256 ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
 ```
 
 The long code printed must be exactly the SHA-256 in the table above. If it is different, delete the
@@ -71,7 +72,7 @@ file and download it again; do not install a file whose checksum does not match.
   4. Install directly (skip the "Install" section below):
 
      ```bash
-     adb install -r ~/Downloads/medluma-dev-v0.1.5-b6-arm64-v8a.apk
+     adb install -r ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
      ```
 
      `Success` means it is installed.
@@ -99,7 +100,7 @@ first, then install again.
 2. A purple banner says **DEVELOPMENT BUILD — evaluation prototype…** on every screen.
 3. Read "Before you start" and tap **I understand** (it appears at every launch in this build, because
    the development build saves nothing).
-4. Tap **About and privacy**: it should say **version 0.1.5 (build 6)**. If it does not show a build
+4. Tap **About and privacy**: it should say **version 0.1.6 (build 7)**. If it does not show a build
    number, you are running an older build.
 
 Then follow the test plan: `docs/FUNCTIONAL_TEST_PLAN.md` (use only the test medications listed there,

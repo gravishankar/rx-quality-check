@@ -61,9 +61,40 @@ export type Tone = 'ALERT' | 'CAUTION' | 'NEUTRAL';
 export interface RecordView {
   recallNumber: string;
   group: 'matches' | 'possible' | 'notApplicable' | 'unreadable';
+  /** Plain-language key details, shown on the record card. */
   lines: { label: string; value: string }[];
+  /** Longer published text (product description, lot codes), shown when the card is expanded. */
+  more: { label: string; value: string }[];
   lotNote: string | null;
   officialRecordUrl: string;
+  /** Only for records conclusively excluded by the engine (NOT_APPLICABLE). */
+  excluded: { primary: ExclusionReason; primaryText: string; others: string[] } | null;
+}
+
+/**
+ * Primary exclusion reasons in the fixed order used for counting (Task 4C build 7). A record that
+ * differs in several ways is counted once, under the first of its differences in this order, so the
+ * counts never overlap and always add up to the number of excluded records.
+ */
+export const EXCLUSION_ORDER = [
+  'COMBINATION_PRODUCT',
+  'DIFFERENT_SALT',
+  'NON_ORAL_OR_NOT_FINISHED_PRODUCT',
+  'DOSE_FORM_DIFFERS',
+  'RELEASE_DIFFERS',
+  'STRENGTH_DIFFERS',
+  'TEXT_NDC_NAMES_OTHER_PRODUCTS',
+  'STRUCTURED_NDC_EXCLUDES_PRODUCT',
+  'OTHER',
+] as const;
+export type ExclusionReason = (typeof EXCLUSION_ORDER)[number];
+
+export interface ExclusionSummary {
+  total: number;
+  /** Non-overlapping counts by primary reason, in EXCLUSION_ORDER; zero counts omitted. Sum = total. */
+  reasons: { reason: ExclusionReason; text: string; count: number }[];
+  /** Records with more than one difference (each still counted once). */
+  multipleDifferences: number;
 }
 
 export interface ResultView {
@@ -75,6 +106,9 @@ export interface ResultView {
   qualifiers: string[];
   nextSteps: string[];
   records: RecordView[];
+  /** One sentence counting every record the search returned, by group. */
+  summary: string;
+  exclusions: ExclusionSummary;
   sources: string[];
   limitations: string[];
   disclaimer: string;
@@ -218,20 +252,75 @@ function lotNote(r: RecordAssessment): string | null {
   }
 }
 
+/** openFDA dates are YYYYMMDD; shown as ISO dates (unambiguous in every locale). */
+export function recordDate(d: string | null): string | null {
+  if (d === null || !/^\d{8}$/.test(d)) return d && d.trim() !== '' ? d : null;
+  return `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
+}
+
+/** Differences the engine recorded for an excluded record, in counting order. */
+export function exclusionReasons(r: RecordAssessment): ExclusionReason[] {
+  const found = EXCLUSION_ORDER.filter((x) => x !== 'OTHER' && r.reasons.includes(x as RecordAssessment['reasons'][number]));
+  return found.length > 0 ? found : ['OTHER'];
+}
+
 function recordView(r: RecordAssessment, group: RecordView['group']): RecordView {
   const p = r.published;
   const R = COPY.result.record;
-  const lines = p
-    ? [
-        { label: R.recallNumber, value: r.recallNumber },
-        { label: R.classification, value: `${p.classification}${R.classExplanation[p.classification] ? ` — ${R.classExplanation[p.classification]}` : ''}` },
-        { label: R.status, value: `${p.status}. ${R.statusNote}` },
-        { label: R.reportDate, value: p.reportDate },
-        { label: R.firm, value: p.recallingFirm },
-        { label: R.reason, value: p.reasonForRecall },
-      ]
-    : [{ label: R.recallNumber, value: r.recallNumber }];
-  return { recallNumber: r.recallNumber, group, lines, lotNote: group === 'notApplicable' ? null : lotNote(r), officialRecordUrl: officialRecordUrl(r.recallNumber) };
+  const X = COPY.result.excluded.reasons;
+  let lines: RecordView['lines'] = [{ label: R.recallNumber, value: r.recallNumber }];
+  let more: RecordView['more'] = [];
+  if (p) {
+    const statusText = R.statusExplanation[p.status] ?? p.status;
+    const closed = recordDate(p.terminationDate);
+    lines = [
+      { label: R.recallStarted, value: recordDate(p.recallInitiationDate) ?? R.notStated },
+      { label: R.firm, value: p.recallingFirm },
+      { label: R.reason, value: p.reasonForRecall },
+      { label: R.classification, value: R.classExplanation[p.classification] ?? p.classification },
+      // The status note ("a completed or terminated recall does not mean the product is safe") is
+      // shown once at the top of every record section (Result screen).
+      { label: R.status, value: statusText },
+      ...(closed ? [{ label: R.closedOn, value: closed }] : []),
+      { label: R.recallNumber, value: r.recallNumber },
+    ];
+    more = [
+      { label: R.fdaReportDate, value: recordDate(p.reportDate) ?? R.notStated },
+      { label: R.product, value: p.productDescription },
+      { label: R.lots, value: p.codeInfo.trim() === '' ? R.notStated : p.codeInfo },
+    ];
+  }
+  let excluded: RecordView['excluded'] = null;
+  if (group === 'notApplicable') {
+    const all = exclusionReasons(r);
+    const primary = all[0] as ExclusionReason;
+    excluded = { primary, primaryText: X[primary] ?? X.OTHER!, others: all.slice(1).map((x) => X[x] ?? X.OTHER!) };
+  }
+  return { recallNumber: r.recallNumber, group, lines, more, lotNote: group === 'notApplicable' ? null : lotNote(r), officialRecordUrl: officialRecordUrl(r.recallNumber), excluded };
+}
+
+function summarizeExclusions(records: RecordView[]): ExclusionSummary {
+  const ex = records.filter((r) => r.excluded !== null);
+  const reasons = EXCLUSION_ORDER.map((reason) => ({
+    reason,
+    text: COPY.result.excluded.reasons[reason] ?? reason,
+    count: ex.filter((r) => r.excluded?.primary === reason).length,
+  })).filter((x) => x.count > 0);
+  return { total: ex.length, reasons, multipleDifferences: ex.filter((r) => (r.excluded?.others.length ?? 0) > 0).length };
+}
+
+function summarySentence(identity: MedicationIdentity, records: RecordView[]): string {
+  const S = COPY.result.summary;
+  const drug = identity.ingredients.map((i) => i.name).join(' and ') || 'this medication';
+  if (records.length === 0) return S.none(drug);
+  const n = (g: RecordView['group']) => records.filter((r) => r.group === g).length;
+  const parts = [
+    n('matches') > 0 ? S.matches(n('matches')) : null,
+    n('possible') > 0 ? S.possible(n('possible')) : null,
+    n('unreadable') > 0 ? S.unreadable(n('unreadable')) : null,
+    n('notApplicable') > 0 ? S.excluded(n('notApplicable')) : null,
+  ].filter((x): x is string => x !== null);
+  return `${S.intro(records.length, drug)} ${parts.join('; ')}.`;
 }
 
 const LIMITATION_TEXT: Partial<Record<RecallFinding['limitations'][number], string>> = {
@@ -343,6 +432,8 @@ export function presentResult(input: PresentInput): ResultView {
     qualifiers: [...new Set(qualifiers)],
     nextSteps,
     records,
+    summary: summarySentence(identity, records),
+    exclusions: summarizeExclusions(records),
     sources,
     limitations,
     disclaimer: COPY.disclaimer.standing,

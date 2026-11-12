@@ -188,7 +188,7 @@ test('confirmed recall: product from FDA records, each item confirmed, lot liste
   expect(t).toContain(COPY.result.nextSteps.doNotChange);
   expect(t).toMatch(/Retrieved on this phone: /);
   expect(t).toMatch(/FDA recall data last updated: 2026-11-04/);
-  expect(t).toContain(COPY.result.limitationsTitle);
+  expect(t).toContain(COPY.result.limitsTitle);
   expect(t).toContain(COPY.disclaimer.standing);
   assertNoProhibited(t);
   expect(p.requests.every((u) => !u.includes('JKU4639A'))).toBe(true);
@@ -219,7 +219,7 @@ test('no match found: dated, qualified headline; never "safe"; distinct label fr
   expect(t).toMatch(/No matching recall was identified in the sources successfully checked as of .+\. This does not establish that the medication is free from recalls/);
   expect(t).toContain(COPY.result.categoryLabel.NO_MATCH);
   expect(t).not.toContain(COPY.result.categoryLabel.UNABLE);
-  expect(t).toContain(COPY.result.groups.notApplicable);
+  expect(t).toContain(COPY.result.excluded.title);
   assertNoProhibited(t);
 });
 
@@ -363,3 +363,108 @@ test('Delete all data clears typed values and shows the first-launch notice agai
   expect(name.props.value).toBe('');
   spy.mockRestore();
 });
+
+// ------------------------------------------------------------------ Task 4C build 7: summary-first result
+
+const before = (t: string, a: string, b: string) => {
+  const i = t.indexOf(a);
+  const j = t.indexOf(b);
+  expect(i).toBeGreaterThanOrEqual(0);
+  expect(j).toBeGreaterThan(i);
+};
+const countOf = (t: string, s: string) => t.split(s).length - 1;
+
+test('build 7, confirmed: summary first, limits directly below, matching recall prominent; excluded records collapsed until asked', async () => {
+  const { r } = await start();
+  await accept(r);
+  await enter(r, { ...SUN, lot: 'JKU4639A' });
+  await toggleAll(r);
+  await press(r, COPY.confirm.confirmAll);
+  let t = allText(r);
+  expect(t).toMatch(/We checked \d+ FDA recall records for metformin: 1 matches your product; \d+ might match; \d+ were for a different product\./);
+  before(t, COPY.result.categoryLabel.CONFIRMED, COPY.result.limitsTitle);
+  before(t, COPY.result.limitsTitle, COPY.disclaimer.standing);
+  before(t, COPY.disclaimer.standing, COPY.result.groups.matches);
+  before(t, COPY.result.groups.matches, COPY.result.groups.possible);
+  before(t, COPY.result.groups.possible, COPY.result.excluded.title);
+  before(t, COPY.result.excluded.title, COPY.result.sources.title);
+  // The matching record shows plain-language details on the card.
+  for (const l of [COPY.result.record.recallStarted, COPY.result.record.firm, COPY.result.record.reason, COPY.result.record.classification, COPY.result.record.status, COPY.result.record.recallNumber]) expect(t).toContain(l);
+  expect(t).toContain('D-0325-2021');
+  // The status note sits at the top of each record section shown (matches, might match).
+  expect(countOf(t, COPY.result.record.statusNote)).toBe(2);
+  // Excluded records: counted by reason, not listed.
+  const why = COPY.result.record.whyExcluded;
+  expect(countOf(t, why)).toBe(0);
+  const m = /(\d+) were for a different product/.exec(t)!;
+  const n = Number(m[1]);
+  const counts = [...t.matchAll(/^• (.+): (\d+)$/gm)].filter((x) => Object.values(COPY.result.excluded.reasons).includes(x[1]!));
+  expect(counts.reduce((a, x) => a + Number(x[2]), 0)).toBe(n);
+  await press(r, COPY.result.excluded.show(n));
+  t = allText(r);
+  expect(countOf(t, why)).toBe(n);
+  expect(countOf(t, COPY.result.record.statusNote)).toBe(3);
+  await press(r, COPY.result.excluded.hide);
+  expect(countOf(allText(r), why)).toBe(0);
+  assertNoProhibited(t);
+});
+
+test('build 7, possible match without a lot: possible records shown (first three, the rest one tap away), lot qualifier on top', async () => {
+  const { r } = await start();
+  await accept(r);
+  await enter(r, SUN);
+  await toggleAll(r);
+  await press(r, COPY.confirm.confirmAll);
+  let t = allText(r);
+  expect(t).toContain(COPY.result.categoryLabel.POTENTIAL);
+  before(t, COPY.result.qualifiers.lotNotProvided, COPY.result.limitsTitle);
+  const n = Number(/(\d+) might match/.exec(t)![1]);
+  expect(n).toBeGreaterThan(0);
+  const shown = () => countOf(allText(r), COPY.result.record.lotUnknown) + countOf(allText(r), COPY.result.record.allLots);
+  if (n > 3) {
+    expect(t).toContain(COPY.result.showMorePossible(n - 3));
+    await press(r, COPY.result.showMorePossible(n - 3));
+    t = allText(r);
+    expect(t).not.toContain(COPY.result.showMorePossible(n - 3));
+  }
+  expect(shown()).toBeGreaterThan(0);
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+});
+
+test('build 7, no match: required wording, never "active"; record details open per record', async () => {
+  const { r, p } = await start();
+  await accept(r);
+  await enter(r, { ndc: '82009-018-10', name: 'ROSUVASTATIN CALCIUM', strength: '10 MG', form: 'TABLET' });
+  await toggleAll(r);
+  await press(r, COPY.confirm.confirmAll);
+  let t = allText(r);
+  expect(t).toContain('No matching recall found in the FDA records checked');
+  expect(t).not.toMatch(/\bactive\b/i);
+  expect(t).not.toContain(COPY.result.groups.matches);
+  expect(t).not.toContain(COPY.result.groups.possible);
+  before(t, COPY.result.limitsTitle, COPY.result.excluded.title);
+  const n = Number(/(\d+) were for a different product/.exec(t)![1]);
+  await press(r, COPY.result.excluded.show(n));
+  await press(r, COPY.result.record.moreDetails, 'first');
+  t = allText(r);
+  expect(t).toContain(COPY.result.record.lots);
+  expect(t).toContain(COPY.result.record.product);
+  await press(r, COPY.result.record.officialRecord, 'first');
+  expect(p.opened[0]).toMatch(/^https:\/\/api\.fda\.gov\/drug\/enforcement\.json\?search=recall_number:%22/);
+  assertNoProhibited(t);
+});
+
+test('build 7, offline: a failed lookup never shows a summary or a no-match', async () => {
+  const p = platform();
+  const { r } = await start(p);
+  await accept(r);
+  await enter(r, { ndc: '82009-018-10', name: 'ROSUVASTATIN CALCIUM', strength: '10 MG', form: 'TABLET' });
+  await toggleAll(r);
+  p.offline = true;
+  await press(r, COPY.confirm.confirmAll);
+  await waitFor(r, (x) => x.includes(COPY.errors.sourceUnavailable.headline));
+  const t = allText(r);
+  expect(t).not.toMatch(/We checked \d+ FDA recall record/);
+  expect(t).not.toContain(COPY.result.categoryLabel.NO_MATCH);
+  expect(t).not.toContain(COPY.result.excluded.title);
+}, 60_000);

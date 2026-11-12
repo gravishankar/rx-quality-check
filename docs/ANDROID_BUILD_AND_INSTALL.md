@@ -160,6 +160,8 @@ verified on a device.
 | Task 4C build 5, universal | same | MedLuma (DEV) | `b827210c0415b4cefaffb1e77a63cefb324b4c2a709257bb9f3e7b4591a4fdf8` | Sent; archived |
 | Task 4C build 6, ARM64 (0.1.5-dev, OCR dictionary fix, PP-OCRv4) | same | MedLuma (DEV) | `4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6` | Sent; archived |
 | Task 4C build 6, universal | same | MedLuma (DEV) | `bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f` | Sent; archived |
+| Task 4C build 7, ARM64 (0.1.6-dev, summary-first result) | same | MedLuma (DEV) | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` | Sent; archived |
+| Task 4C build 7, universal | same | MedLuma (DEV) | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` | Sent; archived |
 
 Both are signed with the same development certificate (SHA-256
 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7`, DN still names the earlier

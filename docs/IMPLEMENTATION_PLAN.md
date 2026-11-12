@@ -84,8 +84,11 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Deliverables | OCR/barcode bake-off on reproducible synthetic labels (`scripts/scanner_lab/`, `docs/task4c/OCR_EVALUATION.md`); app OCR core in pure Java (PaddleOCR PP-OCRv3 on ONNX Runtime 1.28.0); ZXing-cpp barcodes; Android native module (photo via the phone's camera app into a private file, deleted after reading; no CAMERA permission); pure TypeScript field extraction (`mobile/src/scanner/`); scan-first home, three-group confirmation (matched in FDA records / read from your label / needs your input), rescan and correction fallback; build privacy gate; development APK build 4 (0.1.3); `PIXEL_SCAN_TEST_GUIDE.md` with a synthetic test-label sheet; PRD traceability (`docs/task4c/PRD_TRACEABILITY.md`) |
 | Decisions | OD-25 deferred; OD-26 closed (PRD provided); OD-27: open-source, no-telemetry engines used, ML Kit decision pending Pixel results; OD-28 approved (privacy drafts updated; no CAMERA permission needed); OD-29 approved |
 | Unchanged | Recall engine, safety gates, evidence classification, presentation downgrade rules, data, policy |
-| Not done | Physical Pixel test (owner); iOS scanner (Apple Vision/ONNX Runtime iOS later) |
-| Status | **Complete — awaiting device test and review** (branch `task-4c/scanner`) |
+| Device fixes | Build 5: barcode reader null crop rectangle (build 4 failed every scan). Build 6: OCR dictionary read from the model file (build 5 read no text), PaddleOCR PP-OCRv4, 3200-px recognition source, extractor fixes |
+| Build 7 (approved 2026-11-12) | Summary-first result screen (`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §3a): counts by group, limits directly below the result, prominent match/possible/unreadable cards, excluded records counted by a fixed primary reason and listed on request, plain-language record details. Categories and matching logic unchanged |
+| Device results | Build 4: every scan failed. Build 5: no text read. Build 6: label scanned, recall check completed (no matching recall). Build 7: not yet tested |
+| Not done | iOS scanner (Apple Vision/ONNX Runtime iOS later) |
+| Status | **Build 7 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`). Task 4D not started |
 
 ## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
 

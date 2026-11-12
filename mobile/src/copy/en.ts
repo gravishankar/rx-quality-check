@@ -151,7 +151,7 @@ export const COPY = {
     categoryLabel: {
       CONFIRMED: 'Recall match found',
       POTENTIAL: 'Possible recall match',
-      NO_MATCH: 'No match in the records checked',
+      NO_MATCH: 'No matching recall found in the FDA records checked',
       UNABLE: 'Could not determine',
     },
     CONFIRMED: {
@@ -211,12 +211,60 @@ export const COPY = {
         'Not Yet Classified': 'FDA has not yet classified this recall.',
       } as Record<string, string>,
       fdaRecallPages: 'FDA Enforcement Reports (official recall listings)',
-      statusNote: 'Status is as published by FDA. "Terminated" means FDA considers the recall completed; it does not describe your supply.',
+      statusNote: 'Status is as published by FDA. A completed or terminated recall does not mean the product is safe, and the status does not describe your supply.',
+      // Task 4C build 7: plain-language record details.
+      recallStarted: 'Recall started',
+      fdaReportDate: 'FDA report date',
+      closedOn: 'FDA closed the recall on',
+      product: 'Product (as published)',
+      lots: 'Lots and codes (as published)',
+      moreDetails: 'More about this record',
+      lessDetails: 'Show less',
+      notStated: 'Not stated in the record',
+      statusExplanation: {
+        Ongoing: 'Ongoing: the recall is still in progress.',
+        Completed: 'Completed: the recalling firm reports that its recall actions are finished.',
+        Terminated: 'Terminated: FDA has closed this recall.',
+        Pending: 'Pending: FDA has not finished reviewing this recall.',
+      } as Record<string, string>,
+      whyExcluded: 'Why it does not apply to the product you confirmed',
+      alsoDiffers: 'Also differs',
+    },
+    /** One-sentence summary of every record the search returned (counts only; build 7). */
+    summary: {
+      none: (drug: string) => `FDA's recall search returned no recall records for ${drug}.`,
+      intro: (n: number, drug: string) => `We checked ${n} FDA recall record${n === 1 ? '' : 's'} for ${drug}:`,
+      matches: (n: number) => `${n} ${n === 1 ? 'matches' : 'match'} your product`,
+      possible: (n: number) => `${n} might match`,
+      unreadable: (n: number) => `${n} could not be read`,
+      excluded: (n: number) => `${n} ${n === 1 ? 'was' : 'were'} for a different product`,
+    },
+    limitsTitle: 'Important limits of this result',
+    showMorePossible: (n: number) => `Show ${n} more record${n === 1 ? '' : 's'} that might match`,
+    excluded: {
+      title: 'Records for a different product',
+      intro: (n: number) =>
+        `${n} record${n === 1 ? '' : 's'} named a different product, so ${n === 1 ? 'it does' : 'they do'} not apply to the product you confirmed. Each record is counted once:`,
+      overlap: (n: number) =>
+        `${n} of ${n === 1 ? 'this record' : 'these records'} differed in more than one way; each is counted under the first difference in this list.`,
+      show: (n: number) => `Show ${n === 1 ? 'this record' : `these ${n} records`}`,
+      hide: 'Hide these records',
+      // Primary reasons, in the fixed order used for counting (first difference wins).
+      reasons: {
+        COMBINATION_PRODUCT: 'A combination product (contains another medicine as well)',
+        DIFFERENT_SALT: 'A different form of the ingredient (a different salt)',
+        NON_ORAL_OR_NOT_FINISHED_PRODUCT: 'Not a medicine taken by mouth, or not a finished product',
+        DOSE_FORM_DIFFERS: 'A different dosage form',
+        RELEASE_DIFFERS: 'A different release type (for example, extended-release)',
+        STRENGTH_DIFFERS: 'A different strength',
+        TEXT_NDC_NAMES_OTHER_PRODUCTS: 'Lists other product codes (NDCs), not yours',
+        STRUCTURED_NDC_EXCLUDES_PRODUCT: "FDA's product codes for the recall belong to other companies",
+        OTHER: 'Another difference recorded by the app',
+      } as Record<string, string>,
     },
     groups: {
       matches: 'Recalls that match your product',
       possible: 'Recalls that might match',
-      notApplicable: 'Other recall records we checked',
       unreadable: 'Records we could not read',
     },
     sources: {
@@ -228,7 +276,6 @@ export const COPY = {
       refresh: 'This result is not updated automatically.',
       perMedication: 'We searched for this medication only. Other medications were not checked.',
     },
-    limitationsTitle: 'What we could not determine',
   },
 
   notAssessed: {
@@ -295,7 +342,8 @@ export const COPY = {
  * Reviewed sentences that mention safety only to deny it. They are the only places where the word
  * "safe" may appear in patient-facing text.
  */
-export const REVIEWED_NEGATED_STATEMENTS: readonly string[] = [COPY.disclaimer.standing, COPY.disclaimer.exclusionNotSafety];
+// Build 7: the recall-status note says a completed or terminated recall does not mean the product is safe.
+export const REVIEWED_NEGATED_STATEMENTS: readonly string[] = [COPY.disclaimer.standing, COPY.disclaimer.exclusionNotSafety, COPY.result.record.statusNote];
 
 /** Every string in COPY (for wording tests). Functions are sampled with a placeholder. */
 export function allCopyStrings(): string[] {

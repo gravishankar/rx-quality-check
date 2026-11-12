@@ -63,7 +63,29 @@ or an unresolved/possible result, never to a chosen value.
 | `UNRESOLVED` | UNABLE (tone NEUTRAL) | — | — |
 
 Each category has its own label on the result (Task 4A.2): "Recall match found", "Possible recall
-match", "No match in the records checked", "Could not determine" (`COPY.result.categoryLabel`).
+match", "No matching recall found in the FDA records checked" (wording since build 7; previously "No
+match in the records checked"), "Could not determine" (`COPY.result.categoryLabel`). The app never says
+"no active recalls": the search does not establish whether a recall is active.
+
+### 3a. Summary-first result (Task 4C build 7)
+
+- The categories and all matching logic are unchanged; the summary is computed from the records the
+  engine already classified (`presentResult` → `summary`, `exclusions`).
+- Order on screen: result card (label, headline, a one-sentence count of every record by group,
+  qualifiers) → **limits and the standing disclaimer directly below** → next steps → records.
+- Records that match, might match or could not be read are always shown as their own cards in their
+  own sections, never mixed with unrelated records (the "might match" section shows three and the rest
+  one tap away in the same section).
+- Only records the engine classified `NOT_APPLICABLE` (conclusive evidence of a different product) are
+  collapsed. They are counted once each under a **primary reason** chosen by a fixed order
+  (`EXCLUSION_ORDER`: combination product, different salt, not oral / not finished, dosage form,
+  release type, strength, other NDCs named, FDA product codes of other companies, other). Counts add
+  up to the number of excluded records; records with several differences are reported as such.
+- Each record card: recall start date, recalling firm, reason, FDA class in plain words, status in
+  plain words, closing date if any, recall number, official FDA record link; product text and lot codes
+  under "More about this record". Each record section starts with the note that a completed or
+  terminated recall does not mean the product is safe.
+- No AI-generated text; all wording is in `mobile/src/copy/en.ts`.
 
 Downgrades never go toward reassurance. There is no "success" tone, no green, no check mark and no
 celebratory icon anywhere in the app (`mobile/app/ui/kit.tsx`). Each tone is also stated in words.
@@ -100,6 +122,7 @@ user to their pharmacist or healthcare professional and to the official FDA reco
 
 | Claim | Tests (file → test name, abbreviated) |
 |---|---|
+| Summary-first result (§3a) | `result_summary` (confirmed, potential/missing lot, no match, no records, unresolved, offline, overlapping exclusions, exhaustive counts, status wording); `flows` → *build 7, …* (order on screen, collapse/expand, offline) |
 | C1, C2, C4 | `claims_and_copy` → *directory-confirmed identity…*, *name-only identity…* ; `app_screens` → *confirmation: each item must be ticked* |
 | C5 | `claims_and_copy` → *misleading manufacturer attribution* |
 | C6 | `claims_and_copy` → *unknown repackager source (OD-17)*; Task 3 `workflow`/`e2e` repackaged-product scenario |
