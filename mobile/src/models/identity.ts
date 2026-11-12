@@ -48,6 +48,11 @@ export interface LabelExtraction {
   lot: FieldValue<string> | null;
   expiry: FieldValue<string> | null;
   containerType: ContainerType;
+  /**
+   * Other text read from the label that is NOT used for identity (patient name, Rx number, pharmacy,
+   * prescriber, directions). Never sent anywhere; used only to arm the request privacy guard.
+   */
+  privateText?: string[];
 }
 
 export interface IdentityIngredient {
@@ -58,6 +63,8 @@ export interface IdentityIngredient {
   /** RxNorm ingredient RxCUI when known (from RxNav); null otherwise. */
   rxcui: string | null;
   strength: Strength | null;
+  /** Other names for this ingredient in label and recall text (from the catalog), lower case. */
+  aliases?: string[];
 }
 
 /** A product as published in the FDA NDC Directory, reduced to identity fields. */
@@ -75,6 +82,10 @@ export interface DirectoryProduct {
   productType: string;
   pharmClassEpc: string[];
   finished: boolean | null;
+  /** openFDA `openfda.is_original_packager` (false for repackagers/relabelers); null when absent. */
+  isOriginalPackager?: boolean | null;
+  /** SPL set id from openFDA, used to find repackager source products in DailyMed. */
+  splSetId?: string | null;
   /**
    * Internal inconsistencies in the published record, e.g. generic_name "Metoprolol Succinate" with
    * active ingredient "METOPROLOL TARTRATE" (observed in openFDA, product 50090-6448). Conflicting
@@ -107,6 +118,16 @@ export interface MedicationIdentity {
    * later task). Recalls naming these are surfaced as potential matches (RP-4).
    */
   relatedSourceProductNdcs: string[];
+  /**
+   * Whether the repackager → source-product relationship was checked (Task 3):
+   * NOT_APPLICABLE (original packager), VERIFIED (source NDCs confirmed in the NDC Directory),
+   * NOT_ESTABLISHED (repackaged, source unknown or unverifiable), UNAVAILABLE (lookup failed),
+   * NOT_CHECKED (default). Only VERIFIED sources are listed above; nothing is inferred from names.
+   */
+  /** Carried from the NDC Directory record for source-product resolution. */
+  isOriginalPackager?: boolean | null;
+  splSetId?: string | null;
+  sourceProductStatus?: 'NOT_APPLICABLE' | 'VERIFIED' | 'NOT_ESTABLISHED' | 'UNAVAILABLE' | 'NOT_CHECKED';
   /** User-confirmed lot, if any. Never transmitted. */
   lot: string | null;
 }

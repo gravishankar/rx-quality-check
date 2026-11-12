@@ -19,8 +19,10 @@ import {
   confirmNdcCandidates,
   crossValidate,
   fieldsNeedingConfirmation,
+  aliasMap,
   identityFromPrintedFields,
   identityFromProduct,
+  withCatalogAliases,
   type NdcDirectoryOutcome,
   type PrintedFields,
 } from '../rules/identity.ts';
@@ -49,6 +51,12 @@ export interface Ports {
   fetchRecallPage(query: RecallQuery, skip: number): Promise<EnforcementPage>;
   loadCachedResult(identity: MedicationIdentity | null): Promise<CachedResult | null>;
   persist(identity: MedicationIdentity, finding: NonNullable<WorkflowState['ctx']['finding']>): Promise<void>;
+  /**
+   * Optional identity enrichment after resolution (Task 3: RxNav ingredient RxCUIs and verified
+   * repackager source products). Must never throw; on failure it returns the identity unchanged with
+   * `sourceProductStatus` recording what could not be established.
+   */
+  enrichIdentity?(identity: MedicationIdentity): Promise<MedicationIdentity>;
   /** Waits for a scheduled retry. Tests resolve immediately. */
   sleep(ms: number): Promise<void>;
   now(): string;
@@ -77,11 +85,26 @@ function printedFrom(x: LabelExtraction): PrintedFields {
   return { drugName: x.drugName?.value ?? null, strength: x.strength?.value ?? null, doseForm: x.doseForm?.value ?? null };
 }
 
+/** Ingredient names the printed-name path can recognize: catalog ingredients and policy rules (data-driven). */
 function lexicon(cfg: RulesConfig): string[] {
   const names = new Set<string>();
-  if (cfg.catalog.ok) for (const d of cfg.catalog.value.drugs) for (const i of d.ingredients) names.add(i.name);
-  if (cfg.policy.ok) for (const e of cfg.policy.value.entries) names.add(e.ingredient);
+  if (cfg.catalog.ok) for (const i of cfg.catalog.value.ingredients) names.add(i.name);
+  if (cfg.policy.ok) for (const r of cfg.policy.value.ingredientRules) names.add(r.ingredient);
   return [...names];
+}
+
+function catalogAliases(cfg: RulesConfig): Record<string, string> {
+  return cfg.catalog.ok ? aliasMap(cfg.catalog.value.ingredients) : {};
+}
+
+function enrich(identity: MedicationIdentity, cfg: RulesConfig): MedicationIdentity {
+  return cfg.catalog.ok ? withCatalogAliases(identity, cfg.catalog.value.ingredients) : identity;
+}
+
+/** Catalog aliases, then the optional enrichment port (RxNav ingredient RxCUIs, verified repackager sources). */
+async function finish(identity: MedicationIdentity, ports: Ports, cfg: RulesConfig): Promise<MedicationIdentity> {
+  const withAliases = enrich(identity, cfg);
+  return ports.enrichIdentity ? ports.enrichIdentity(withAliases) : withAliases;
 }
 
 function hasUsableField(x: LabelExtraction): boolean {
@@ -119,22 +142,22 @@ async function resolveIdentity(x: LabelExtraction, discardNdc: boolean, ports: P
       case 'RESOLVED': {
         const cv = crossValidate(printed, conf.product);
         if (cv.status === 'MISMATCH') return { type: 'CROSS_VALIDATION_FAILED', detail: cv.mismatches.join(',') };
-        return { type: 'IDENTITY_RESOLVED', identity: identityFromProduct(conf.product, conf.packageNdc, null) };
+        return { type: 'IDENTITY_RESOLVED', identity: await finish(identityFromProduct(conf.product, conf.packageNdc, null), ports, cfg) };
       }
       case 'AMBIGUOUS': {
         const consistent = conf.options.filter((o) => crossValidate(printed, o.product).status !== 'MISMATCH');
         if (consistent.length === 0) return { type: 'CROSS_VALIDATION_FAILED', detail: 'no candidate matches the printed label' };
         if (consistent.length === 1) {
           const o = consistent[0] as (typeof consistent)[number];
-          return { type: 'IDENTITY_RESOLVED', identity: identityFromProduct(o.product, o.packageNdc, null) };
+          return { type: 'IDENTITY_RESOLVED', identity: await finish(identityFromProduct(o.product, o.packageNdc, null), ports, cfg) };
         }
-        return { type: 'IDENTITY_AMBIGUOUS', options: consistent.map((o) => identityFromProduct(o.product, o.packageNdc, null)) };
+        return { type: 'IDENTITY_AMBIGUOUS', options: await Promise.all(consistent.map((o) => finish(identityFromProduct(o.product, o.packageNdc, null), ports, cfg))) };
       }
     }
   }
-  const r = identityFromPrintedFields(printed, lexicon(cfg), null);
+  const r = identityFromPrintedFields(printed, lexicon(cfg), null, catalogAliases(cfg));
   if (!r.ok) return { type: 'IDENTITY_INCOMPLETE', missing: r.missing };
-  return { type: 'IDENTITY_PARTIAL', identity: r.identity };
+  return { type: 'IDENTITY_PARTIAL', identity: await finish(r.identity, ports, cfg) };
 }
 
 function requiredConfirmations(identity: MedicationIdentity, x: LabelExtraction | null, ndcDiscarded: boolean): string[] {

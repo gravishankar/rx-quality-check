@@ -20,7 +20,11 @@ export type UnavailableReason =
   | 'HTTP_5XX'
   | 'HTTP_UNEXPECTED_STATUS'
   | 'INVALID_JSON'
-  | 'SCHEMA_VIOLATION';
+  | 'SCHEMA_VIOLATION'
+  /** Request refused locally by the privacy guard or host allowlist (never sent). */
+  | 'REQUEST_BLOCKED'
+  /** Cancelled by the caller (e.g. the user left the screen). */
+  | 'CANCELLED';
 
 export interface ResponseMeta {
   source: SourceId;

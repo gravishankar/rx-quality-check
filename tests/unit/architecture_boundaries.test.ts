@@ -24,9 +24,17 @@ function files(dir: string): string[] {
 const sources = files(SRC).map((p) => ({ path: relative(SRC, p), text: readFileSync(p, 'utf8') }));
 const importsOf = (text: string) => [...text.matchAll(/^\s*(?:import|export)[^'";]*?from\s+['"]([^'"]+)['"]/gm)].map((m) => m[1] as string);
 
+// The Node-only SQLite driver (tests and command-line integration) is the one module allowed to
+// import Node built-ins; nothing in the app imports it.
+const NODE_ONLY = 'storage/drivers/nodeSqlite.ts';
+
+test('the Node-only SQLite driver is imported by no library module', () => {
+  for (const s of sources) for (const imp of importsOf(s.text)) assert.ok(!imp.endsWith('nodeSqlite.ts'), `${s.path} imports the Node-only driver`);
+});
+
 test('library modules import only relative paths inside mobile/src (no Node, RN, network or storage packages)', () => {
   assert.ok(sources.length >= 15);
-  for (const s of sources) {
+  for (const s of sources.filter((x) => x.path !== NODE_ONLY)) {
     for (const imp of importsOf(s.text)) {
       assert.ok(imp.startsWith('./') || imp.startsWith('../'), `${s.path} imports package "${imp}"`);
       assert.ok(!relative(SRC, join(SRC, s.path, '..', imp)).startsWith('..'), `${s.path} imports outside mobile/src: ${imp}`);
@@ -43,6 +51,8 @@ test('layering: fsm → nothing; models → nothing; state → models/fsm; rules
       if (layer === 'models') assert.equal(target, 'models', `${s.path} → ${imp}`);
       if (layer === 'state') assert.ok(target === 'models' || target === 'fsm', `${s.path} → ${imp}`);
       if (layer === 'rules') assert.ok(target === 'models' || target === 'rules', `${s.path} → ${imp}`);
+      if (layer === 'services') assert.ok(['models', 'rules', 'services', 'engine', 'state'].includes(target ?? ''), `${s.path} → ${imp}`);
+      if (layer === 'storage') assert.ok(['models', 'rules', 'storage', 'services', 'state'].includes(target ?? ''), `${s.path} → ${imp}`);
     }
   }
 });
@@ -54,14 +64,23 @@ test('no I/O, timers, randomness or global clock in models/, rules/ or state/', 
   }
 });
 
+test('no network call outside services/ (and there only through the injected fetch)', () => {
+  for (const s of sources) {
+    if (/\bfetch\s*\(/.test(s.text)) assert.ok(s.path === 'services/transport.ts', `${s.path} calls fetch`);
+    assert.doesNotMatch(s.text, /XMLHttpRequest|WebSocket/, s.path);
+  }
+});
+
 test('no backend, telemetry, analytics or language-model references in the library', () => {
   const banned = /firebase|supabase|sentry|amplitude|mixpanel|segment\.io|analytics\(|openai|anthropic|llm|gpt-|telemetry\(/i;
   for (const s of sources) assert.ok(!banned.test(s.text), s.path);
 });
 
 test('no manufacturing-provenance logic in the library (removed from MVP scope)', () => {
-  const banned = /establishment|C43360|MANUFACTURE\b|facility[A-Z_a-z]*\s*[:=(]|inspection|FEI\b|DUNS/;
-  for (const s of sources) assert.ok(!banned.test(s.text), s.path);
+  // Code only: comments may (and do) state that such data is NOT read.
+  const banned = /establishment|C43360|MANUFACTURE\b|facility[A-Z_a-z]*\s*[:=(]|inspection|FEI\b|DUNS/i;
+  const code = (t: string) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+  for (const s of sources) assert.ok(!banned.test(code(s.text)), s.path);
 });
 
 test('every task-2 fixture records its live source, query URL and capture time; INDEX lists them all', () => {

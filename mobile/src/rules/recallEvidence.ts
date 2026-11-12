@@ -233,6 +233,11 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
   if (!queriesComplete) limitations.push('SOME_QUERIES_INCOMPLETE');
   if (!controlPassed) limitations.push('POSITIVE_CONTROL_NOT_PASSED');
   if (unresolved.length > 0) limitations.push('SOME_RECORDS_UNPARSEABLE');
+  // A repackaged product whose source could not be verified: recalls naming the original product's
+  // NDC cannot be matched, so a negative result is weaker than usual.
+  if (identity.sourceProductStatus === 'NOT_ESTABLISHED' || identity.sourceProductStatus === 'UNAVAILABLE') {
+    limitations.push('SOURCE_PRODUCT_NOT_ESTABLISHED');
+  }
 
   const queries = [...readouts.map((r) => r.coverage), control.coverage];
   const dates = queries.map((q) => q.datasetLastUpdated).filter((d): d is string => d !== null).sort();

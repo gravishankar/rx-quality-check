@@ -53,6 +53,8 @@ export function directoryProductFrom(rec: OpenFdaNdcProduct): DirectoryProduct {
     productType: (rec as { product_type?: string }).product_type ?? '',
     pharmClassEpc: (rec.pharm_class ?? []).filter((p) => p.endsWith('[EPC]')),
     finished: rec.finished ?? null,
+    isOriginalPackager: firstOf<boolean>(rec.openfda?.is_original_packager),
+    splSetId: firstOf<string>(rec.openfda?.spl_set_id),
     sourceConflicts,
   };
 }
@@ -241,8 +243,15 @@ export function identityFromProduct(product: DirectoryProduct, packageNdc: strin
     productType: product.productType || null,
     pharmClassEpc: [...product.pharmClassEpc],
     relatedSourceProductNdcs: [],
+    isOriginalPackager: product.isOriginalPackager ?? null,
+    splSetId: product.splSetId ?? null,
+    sourceProductStatus: 'NOT_CHECKED',
     lot,
   };
+}
+
+function firstOf<T>(v: unknown): T | null {
+  return Array.isArray(v) && v.length > 0 ? (v[0] as T) : null;
 }
 
 export type ClinicalIdentityResult =
@@ -258,10 +267,12 @@ export function identityFromPrintedFields(
   printed: PrintedFields,
   knownIngredientNames: readonly string[],
   lot: string | null,
+  /** Alias → ingredient-name map from the catalog (e.g. "apap" → "acetaminophen"). */
+  aliases: Readonly<Record<string, string>> = {},
 ): ClinicalIdentityResult {
   const missing: ('drugName' | 'strength' | 'doseForm')[] = [];
   const name = printed.drugName ?? '';
-  const reading = readIngredientsFromText(name, knownIngredientNames);
+  const reading = readIngredientsFromText(name, knownIngredientNames, aliases);
   if (reading.found.length === 0) missing.push('drugName');
   const strengths = printed.strength !== null ? parsePrintedStrength(printed.strength) : parsePrintedStrength(name);
   const all = [printed.drugName, printed.strength, printed.doseForm].filter(Boolean).join(' ');
@@ -317,4 +328,25 @@ function orderByAppearance(text: string, names: string[]): string[] {
  */
 export function releaseNeedsConfirmation(identity: MedicationIdentity): boolean {
   return identity.release === 'UNSPECIFIED';
+}
+
+/**
+ * Attach catalog aliases to an identity's ingredients so label and recall text that uses an alias
+ * (e.g. "APAP") is read as that ingredient. Data-driven: adding an alias needs no code change.
+ */
+export function withCatalogAliases(identity: MedicationIdentity, ingredients: readonly { name: string; aliases: string[] }[]): MedicationIdentity {
+  return {
+    ...identity,
+    ingredients: identity.ingredients.map((i) => {
+      const def = ingredients.find((d) => d.name === i.name);
+      return def && def.aliases.length > 0 ? { ...i, aliases: [...def.aliases] } : i;
+    }),
+  };
+}
+
+/** Alias → ingredient-name map for every catalog ingredient. */
+export function aliasMap(ingredients: readonly { name: string; aliases: string[] }[]): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const d of ingredients) for (const a of d.aliases) out[a] = d.name;
+  return out;
 }

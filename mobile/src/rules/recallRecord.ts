@@ -92,8 +92,10 @@ export function compareAttributes(identity: MedicationIdentity, description: str
   const names = identity.ingredients.map((i) => i.name);
 
   // Ingredient set and salt.
-  let ing = readIngredientsFromText(seg, names);
-  if (ing.found.length === 0) ing = readIngredientsFromText(description, names);
+  const aliases: Record<string, string> = {};
+  for (const i of identity.ingredients) for (const a of i.aliases ?? []) aliases[a.toLowerCase()] = i.name;
+  let ing = readIngredientsFromText(seg, names, aliases);
+  if (ing.found.length === 0) ing = readIngredientsFromText(description, names, aliases);
   if (ing.partners.length > 0) differences.push('COMBINATION_PRODUCT');
   if (ing.found.length === 0 || ing.missing.length > 0) unknowns.push('INGREDIENT_NOT_IN_TEXT');
   for (const i of identity.ingredients) {

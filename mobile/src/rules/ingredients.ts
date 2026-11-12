@@ -132,9 +132,14 @@ export interface TextIngredientReading {
  * Read which of the identity's ingredients a recall/label text names, and whether it joins them
  * to any other ingredient.
  */
-export function readIngredientsFromText(text: string, identityIngredientNames: readonly string[]): TextIngredientReading {
+export function readIngredientsFromText(
+  text: string,
+  identityIngredientNames: readonly string[],
+  /** Extra alias → ingredient-name mappings (from the catalog), lower case. */
+  aliases: Readonly<Record<string, string>> = {},
+): TextIngredientReading {
   const targets = new Set(identityIngredientNames.map((n) => n.toLowerCase()));
-  const synonymOf = (w: string): string => NAME_SYNONYMS[w] ?? w;
+  const synonymOf = (w: string): string => aliases[w] ?? NAME_SYNONYMS[w] ?? w;
   const toks = tokenize(text);
   const found = new Set<string>();
   const partners = new Set<string>();

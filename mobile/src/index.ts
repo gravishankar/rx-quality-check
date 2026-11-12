@@ -24,3 +24,18 @@ export * from './rules/version.ts';
 export * from './fsm/core.ts';
 export * from './state/machine.ts';
 export * from './engine/runner.ts';
+// Task 3: services, storage (the Node-only test driver is deliberately not exported) and app wiring.
+export * from './services/classify.ts';
+export * from './services/transport.ts';
+export * from './services/request.ts';
+export { OPENFDA_BASE, OPENFDA_MAX_LIMIT, OPENFDA_MAX_SKIP, createOpenFdaClient, enforcementUrl, ndcUrl, type OpenFdaClient } from './services/openfda.ts';
+export * from './services/rxnav.ts';
+export * from './services/dailymed.ts';
+export * from './services/xml.ts';
+export * from './services/ports.ts';
+export * from './storage/driver.ts';
+export * from './storage/keys.ts';
+export * from './storage/migrations.ts';
+export * from './storage/repositories.ts';
+export * from './storage/drivers/opSqlite.ts';
+export * from './app/recallCheck.ts';

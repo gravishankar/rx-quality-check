@@ -161,7 +161,8 @@ export type Limitation =
   | 'LOT_NOT_PROVIDED'
   | 'SOME_QUERIES_INCOMPLETE'
   | 'POSITIVE_CONTROL_NOT_PASSED'
-  | 'SOME_RECORDS_UNPARSEABLE';
+  | 'SOME_RECORDS_UNPARSEABLE'
+  | 'SOURCE_PRODUCT_NOT_ESTABLISHED';
 
 export interface RecallFinding {
   finding: FindingClass;
