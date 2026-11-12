@@ -16,10 +16,18 @@
     "test:integration": "node --import tsx --test \"tests/integration/**/*.test.ts\"",
     "typecheck": "tsc --noEmit",
     "fixtures:task2": "tsx scripts/capture_task2_fixtures.ts",
-    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-include='mobile/src/**' \"tests/unit/**/*.test.ts\" \"tests/integration/**/*.test.ts\""
+    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-include='mobile/src/**' \"tests/unit/**/*.test.ts\" \"tests/integration/**/*.test.ts\"",
+    "catalog:validate": "tsx scripts/config_validate.ts --catalog",
+    "policy:validate": "tsx scripts/config_validate.ts --policy",
+    "config:validate": "tsx scripts/config_validate.ts",
+    "config:test": "tsx scripts/config_validate.ts --test",
+    "e2e": "tsx scripts/e2e_cli.ts",
+    "e2e:live": "tsx scripts/e2e_cli.ts --live",
+    "e2e:record": "tsx scripts/e2e_cli.ts --record"
   },
   "devDependencies": {
     "@types/node": "22.10.2",
+    "ajv": "8.20.0",
     "tsx": "4.19.2",
     "typescript": "5.6.3"
   }

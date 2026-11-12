@@ -1,0 +1,33 @@
+{
+  "description": "Precedence regression cases checked by `npm run config:test` with the production evaluateExclusion. Identities are SYNTHETIC (format-only): ingredient names, RxCUIs and routes as the identity rules would produce them; no real product is implied. Expected values are DECISION:REASON, or DECISION:* for any reason, or ELIGIBLE:<catalog drug id>.",
+  "cases": [
+    { "name": "listed anticoagulant (oral) is excluded", "expect": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+      "input": { "ingredients": [{ "name": "warfarin", "salt": "sodium", "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": ["Vitamin K Antagonist [EPC]"], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "exclusion overrides catalog inclusion in a combination", "expect": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+      "input": { "ingredients": [{ "name": "warfarin", "salt": null, "rxcui": "11289" }, { "name": "metformin", "salt": null, "rxcui": "6809" }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "listed ingredient with a non-oral route waits for the administration decision (OD-1)", "expect": "UNSUPPORTED:ADMINISTRATION_RULE_PENDING",
+      "input": { "ingredients": [{ "name": "tacrolimus", "salt": null, "rxcui": null }], "routes": ["TOPICAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "OTHER", "release": "UNSPECIFIED" } },
+    { "name": "indication-dependent entry needs clarification", "expect": "NEEDS_CLARIFICATION:POLICY_INDICATION_DEPENDENT",
+      "input": { "ingredients": [{ "name": "everolimus", "salt": null, "rxcui": "141704" }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "mycophenolic acid matches the mycophenolate rule by RxNorm name", "expect": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+      "input": { "ingredients": [{ "name": "mycophenolic acid", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "DR" } },
+    { "name": "OTC version of a supported ingredient is excluded", "expect": "EXCLUDED:PRODUCT_TYPE_EXCLUDED",
+      "input": { "ingredients": [{ "name": "omeprazole", "salt": "magnesium", "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN OTC DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "DR" } },
+    { "name": "unlisted ingredient with an anticoagulant class signal is not silently excluded", "expect": "NEEDS_CLARIFICATION:POLICY_CLASS_MATCH_UNLISTED",
+      "input": { "ingredients": [{ "name": "syntheticoxaban", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": ["Factor Xa Inhibitor [EPC]"], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "metoprolol tartrate is outside the succinate-only scope", "expect": "UNSUPPORTED:SALT_NOT_IN_SCOPE",
+      "input": { "ingredients": [{ "name": "metoprolol", "salt": "tartrate", "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "metoprolol with an unknown salt needs clarification", "expect": "NEEDS_CLARIFICATION:SALT_UNKNOWN",
+      "input": { "ingredients": [{ "name": "metoprolol", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": null, "pharmClassEpc": [], "doseForm": "TABLET", "release": "ER" } },
+    { "name": "gabapentin enacarbil (a gabapentin precise ingredient) is denied", "expect": "UNSUPPORTED:PRECISE_INGREDIENT_NOT_IN_SCOPE",
+      "input": { "ingredients": [{ "name": "gabapentin enacarbil", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "ER" } },
+    { "name": "combination with a supported ingredient is not the single-ingredient drug", "expect": "UNSUPPORTED:COMBINATION_NOT_IN_CATALOG",
+      "input": { "ingredients": [{ "name": "amlodipine", "salt": "besylate", "rxcui": null }, { "name": "benazepril", "salt": "hydrochloride", "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "CAPSULE", "release": "IR" } },
+    { "name": "explicit combination entry is eligible (alias apap)", "expect": "ELIGIBLE:hydrocodone_acetaminophen",
+      "input": { "ingredients": [{ "name": "hydrocodone", "salt": "bitartrate", "rxcui": null }, { "name": "apap", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "IR" } },
+    { "name": "a liquid with no stated route is not assumed oral", "expect": "NEEDS_CLARIFICATION:ROUTE_UNKNOWN",
+      "input": { "ingredients": [{ "name": "furosemide", "salt": null, "rxcui": null }], "routes": [], "productType": null, "pharmClassEpc": [], "doseForm": "SOLUTION", "release": "IR" } },
+    { "name": "a non-catalog drug is unsupported, not excluded", "expect": "UNSUPPORTED:NOT_IN_CATALOG",
+      "input": { "ingredients": [{ "name": "syntheticamine", "salt": null, "rxcui": null }], "routes": ["ORAL"], "productType": "HUMAN PRESCRIPTION DRUG", "pharmClassEpc": [], "doseForm": "TABLET", "release": "IR" } }
+  ]
+}

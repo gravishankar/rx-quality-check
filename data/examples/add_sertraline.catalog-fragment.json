@@ -1,0 +1,27 @@
+{
+  "description": "WORKED EXAMPLE (not shipped): the exact JSON to add sertraline as a 15th supported drug. Copy the ingredient into data/drug_catalog.json `ingredients`, the drug into `drugs`, bump `catalog_version`, add a change_log entry, then run `npm run config:test`. Identifiers verified on RxNav 2026-11-12 (RxNorm 02-Nov-2026): IN 36437 'sertraline', PIN 155137 'sertraline hydrochloride'. Adding this requires no change to the state machine, the recall engine or any screen. Test: tests/integration/config_extensibility.test.ts.",
+  "ingredients": [
+    {
+      "id": "sertraline",
+      "name": "sertraline",
+      "rxcui": "36437",
+      "tty": "IN",
+      "aliases": [],
+      "precise_ingredients": [{ "rxcui": "155137", "name": "sertraline hydrochloride" }],
+      "provenance": { "source": "RxNav /REST/rxcui/36437/properties.json and /related.json?tty=PIN", "verified_on": "2026-11-12" }
+    }
+  ],
+  "drugs": [
+    {
+      "id": "sertraline",
+      "display_name": "Sertraline",
+      "status": "ACTIVE",
+      "ingredients": ["sertraline"],
+      "aliases": [],
+      "rx_scope": "PRESCRIPTION_ONLY",
+      "restrictions": { "dose_forms": ["TABLET"], "precise_ingredients": { "sertraline": { "allow": ["155137"] } } },
+      "provenance": { "source": "Worked example for docs/DRUG_CATALOG_GUIDE.md; RxNav 02-Nov-2026", "verified_on": "2026-11-12" }
+    }
+  ],
+  "change_log_entry": { "date": "2026-11-12", "version": "0.3.0", "change": "Add sertraline (oral tablets, hydrochloride salt).", "source": "RxNav 02-Nov-2026" }
+}

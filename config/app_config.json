@@ -1,0 +1,5 @@
+{
+  "$comment": "Build-time app configuration. displayName is the patient-facing name; the repository and package names are unchanged. accept_unapproved_config must be false in release builds (RG-8, Task 6).",
+  "display_name": "Rx Recall Check",
+  "accept_unapproved_config": true
+}

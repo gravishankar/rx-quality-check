@@ -95,10 +95,11 @@ export function productIdentity(rec: OpenFdaNdcProduct, packageNdc: string | nul
   return identityFromProduct(directoryProductFrom(rec), packageNdc, lot);
 }
 
+/** Bundled configuration. The shipped files are drafts pending approval (OD-2), so tests opt in. */
 export function rulesConfig(): RulesConfig {
   return {
-    catalog: parseCatalog(JSON.parse(readFileSync(join(ROOT, 'data', 'drug_catalog.json'), 'utf8'))),
-    policy: parsePolicy(JSON.parse(readFileSync(join(ROOT, 'data', 'exclusion_policy.json'), 'utf8'))),
+    catalog: parseCatalog(JSON.parse(readFileSync(join(ROOT, 'data', 'drug_catalog.json'), 'utf8')), { allowUnapproved: true }),
+    policy: parsePolicy(JSON.parse(readFileSync(join(ROOT, 'data', 'exclusion_policy.json'), 'utf8')), { allowUnapproved: true }),
   };
 }
 

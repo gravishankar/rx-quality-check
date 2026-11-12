@@ -18,7 +18,7 @@ const fromNdc = (name: string) => productIdentity(firstNdcRecord(name), null);
 
 test('bundled catalog and policy parse', () => {
   assert.ok(cfg.catalog.ok && cfg.catalog.value.drugs.length === 14);
-  assert.ok(cfg.policy.ok && cfg.policy.value.entries.length === 11);
+  assert.ok(cfg.policy.ok && cfg.policy.value.ingredientRules.length === 11);
 });
 
 test('13 of 14 supported representative products are ELIGIBLE (real NDC Directory records)', () => {
@@ -50,7 +50,9 @@ test('EX-2: warfarin and apixaban (oral) → EXCLUDED with class rationale and p
     assert.equal(d.decision, 'EXCLUDED', f);
     if (d.decision === 'EXCLUDED') {
       assert.equal(d.classId, 'ANTICOAGULANT');
-      assert.equal(d.policyVersion, '0.1.0-draft');
+      assert.equal(d.policyVersion, '0.2.0-draft');
+      assert.match(d.ruleId ?? '', /^EXCL-/);
+      assert.ok((d.explanation ?? '').length > 0, 'human-readable explanation from the policy');
       assert.ok(d.rationale.length > 0);
     }
   }
@@ -63,8 +65,8 @@ test('EX-2: mycophenolic acid (published as "MYCOPHENOLATE SODIUM") → EXCLUDED
 
 test('EX-2: every policy entry name is EXCLUDED or NEEDS_CLARIFICATION from a printed label alone', () => {
   if (!cfg.policy.ok) throw new Error('policy');
-  const lex = cfg.policy.value.entries.map((e) => e.ingredient);
-  for (const e of cfg.policy.value.entries) {
+  const lex = cfg.policy.value.ingredientRules.map((e) => e.ingredient);
+  for (const e of cfg.policy.value.ingredientRules) {
     const r = identityFromPrintedFields({ drugName: e.ingredient.toUpperCase(), strength: '1 MG', doseForm: 'TABLET' }, lex, null);
     assert.ok(r.ok, e.ingredient);
     if (r.ok) assert.equal(decide(r.identity).decision, e.decision, e.ingredient);
@@ -123,10 +125,14 @@ test('EX-7: metoprolol tartrate (single ingredient) → UNSUPPORTED / SALT_NOT_I
   if (s.ok) assert.equal(decide(s.identity).decision, 'ELIGIBLE');
 });
 
-test('OD-3: OTC omeprazole → UNSUPPORTED / OTC_PENDING_DECISION', () => {
+test('OTC products are EXCLUDED by policy rule OTC-MVP (product owner decision, Task 3; closes OD-3)', () => {
+  // Task 2 returned UNSUPPORTED / OTC_PENDING_DECISION while OD-3 was open.
   const d = decide(fromNdc('ndc_omeprazole_otc'));
-  assert.equal(d.decision, 'UNSUPPORTED');
-  if (d.decision === 'UNSUPPORTED') assert.equal(d.reason, 'OTC_PENDING_DECISION');
+  assert.equal(d.decision, 'EXCLUDED');
+  if (d.decision === 'EXCLUDED') {
+    assert.equal(d.reason, 'PRODUCT_TYPE_EXCLUDED');
+    assert.equal(d.ruleId, 'OTC-MVP');
+  }
 });
 
 test('a liquid with no stated route is not assumed oral', () => {
