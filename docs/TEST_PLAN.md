@@ -230,3 +230,32 @@ Recorded fixtures: `tests/fixtures/task3/cassette.json` holds 34 real responses 
 - backup exclusion in the merged manifest;
 - network behavior from mobile networks;
 - the OS key store under Keystore reset.
+
+## 10. Task 4A results (2026-11-12)
+
+| Command / check | Result |
+|---|---|
+| `npm run typecheck` | clean |
+| `npm run mobile:typecheck` (React Native screens, `mobile/tsconfig.json`) | clean |
+| `npm test` | **380 tests, 380 pass, 0 fail, 0 skipped** (Task 3: 323, all still passing) |
+| `npm run test:coverage` (`mobile/src`) | 98.5% lines, 85.9% branches, 96.9% functions (`presentation/present.ts` 98.2% lines; `app/screens.ts` 100% lines) |
+| `npm run config:test` | 0 errors; precedence self-test 51/51 |
+| `npm run e2e` (recorded) | 13/13 scenarios |
+| `npm run release:gate` | **14 blockers** (exit 1) — pilot build refused, as intended |
+| Metro production bundle (Android) | builds; no Node-only module in the bundle |
+| `npm run android:dev` | **built**: `app-dev-release.apk`, 63.5 MB, `org.rxrecallcheck.app.dev`, versionName `0.1.0-dev`, versionCode 1, label "Rx Recall Check (DEV)", minSdk 24, targetSdk 36, ABIs arm64-v8a / armeabi-v7a / x86_64 |
+| APK inspection (`aapt2`, `apksigner`, `unzip`) | permissions: `INTERNET` only (+ the app's own non-exported receiver permission; keychain's biometric permissions removed); not debuggable; `allowBackup=false`, data-extraction rules, cleartext off; JS bundled as Hermes bytecode (no Metro needed); `libop-sqlite.so` and `libcrypto.so` (SQLCipher/OpenSSL) present for each ABI; APK Signature Scheme v2 with the locally generated development key |
+
+New tests in Task 4A:
+- `tests/unit/claims_and_copy.test.ts` (27): four categories with supporting evidence; negative tests (incomplete coverage, failed control, unreadable/possible records, missing dataset date, stale result, stale dataset, network failure, incomplete pagination, missing records, confirmed without evidence, unknown repackager source, user-entered identity); 2,000-case property test; not-assessed never "passed"; evidence labels (verified vs user-entered, conflicting records, labeler terminology); prohibited wording in copy, screens, presented results and legal drafts; legal bundle freshness; consent versions; build profiles; release gate.
+- `tests/integration/app_screens.test.ts` (16): screen model for every e2e scenario; OD-19 (no RxNav/DailyMed request when excluded, unsupported or configuration-blocked); confirmation requires each item; lot never transmitted.
+- `tests/unit/screen_models.test.ts` (8), `tests/unit/encryption_self_test.test.ts` (3, SYNTHETIC fakes of op-sqlite), and 3 new architecture tests (native modules only in the platform adapter, dependency allowlist, manifest permissions/backup/cleartext).
+
+Changed earlier behavior (approved OD-19): excluded, unsupported and invalid-policy scenarios now make
+1 request (NDC Directory) instead of also calling RxNav/DailyMed; their e2e checks are unchanged.
+
+**Not verified (no physical device or emulator in the build environment; `/dev/kvm` absent):** the
+APK has not been installed or launched. Pending: `docs/ANDROID_DEVICE_TEST_PLAN.md` (all items),
+on-device encryption self-test and file inspection (PV-4), TalkBack and font scaling, backup
+exclusion on a device, network capture. Tests prove code behavior only; they are not clinical or
+legal validation.
