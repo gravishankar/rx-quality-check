@@ -68,7 +68,21 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Not done | Physical-device testing (no device in the build environment) |
 | Status | **Complete — awaiting review** (branch `task-4a2/functional-validation`) |
 
-## Task 4B — Pilot hardening (next, not started)
+## Task 4B — Provenance, regulatory evidence and scanner proposal (research only)
+
+| | |
+|---|---|
+| Deliverables | `docs/task4b/` — traceability matrix, evidence-source feasibility (re-verified live where reachable), provenance graph architecture, screen designs, scanner technical design and library comparison, validation scenarios, risk and privacy assessment, go/no-go per capability, scanner-first Task 4C proposal |
+| Product direction | Provenance and regulatory-evidence transparency is the long-term objective; no scores, rankings or verdicts; unfavorable first-party facts shown with scope, date and limits |
+| Not done | No code, APK or merge. The Drug Quality Score App PRD (Oct 22, 2026) was not available (OD-26) |
+| Status | **Proposal — awaiting approval** (branch `task-4b/provenance-proposal`) |
+
+## Task 4C — Scanner-first (proposed, not approved)
+
+See `docs/task4b/README.md` ("Recommended Task 4C"). Earlier candidate items for "pilot hardening"
+(encrypted history after PV-4, app-switcher privacy, dark theme) move to later tasks.
+
+## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
 
 Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
 PV-4 passes; app-switcher privacy (FLAG_SECURE / iOS snapshot) decision; TalkBack/large-font fixes
@@ -138,3 +152,8 @@ No iOS IPA is built in Task 4A.
 | OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |
 | OD-23 | **Implemented in 4A.2** (presentation only): the confirmation screen shows "NDC not found". Original question — when an entered NDC is not in FDA's NDC Directory, the app sets it aside and continues with the typed name/strength/form (the product field shows "Could not be determined"). Add an explicit "This NDC was not found in FDA's directory" message on the confirmation screen? (Found while writing the device runbook; behavior is conservative, so not changed in 4A.1.) | Product owner | Task 4B |
 | OD-24 | **Deferred (4A.2): naming belongs to the owner's partner; "MedLuma" is a temporary development placeholder only.** Product name: "MedLuma" has an identical existing healthcare-software use (docs/BRAND_CLEARANCE.md). Commission counsel clearance, choose another name, or keep it as an internal code name? Application IDs stay `org.rxrecallcheck.app` until decided. | Product owner + counsel | Before any public use |
+| OD-25 | Allow a build-time regulatory-evidence snapshot (FDA public downloads → reviewed, versioned data shipped in the app; no server) for inspections and compliance actions | Product owner (+ counsel) | Before Task 4E |
+| OD-26 | Provide the Drug Quality Score App PRD (Oct 22, 2026) for the traceability matrix and the seven scenarios | Product owner | Any time |
+| OD-27 | Scanner OCR/barcode engine: allow Google ML Kit (may send usage metrics to Google) or require open-source, no-telemetry engines | Product owner | After the 4C.1 spike |
+| OD-28 | Add the CAMERA permission and update privacy policy/claims for scanning | Product owner + counsel | Before 4C.2 ships |
+| OD-29 | Show facility-level evidence for all candidate facilities equally, and company-level evidence separately | Product owner | Before Task 4E |
