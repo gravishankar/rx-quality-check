@@ -23,7 +23,9 @@
     "config:test": "tsx scripts/config_validate.ts --test",
     "e2e": "tsx scripts/e2e_cli.ts",
     "e2e:live": "tsx scripts/e2e_cli.ts --live",
-    "e2e:record": "tsx scripts/e2e_cli.ts --record"
+    "e2e:record": "tsx scripts/e2e_cli.ts --record",
+    "legal:bundle": "tsx scripts/bundle_legal_docs.ts",
+    "release:gate": "tsx scripts/release_gate.ts"
   },
   "devDependencies": {
     "@types/node": "22.10.2",

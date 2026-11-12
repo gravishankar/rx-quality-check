@@ -1,0 +1,5 @@
+{
+  "$comment": "Written by the build scripts (npm run android:dev / android:pilot). Committed value: development. A pilot profile is only written after `npm run release:gate` passes.",
+  "profile": "development",
+  "encryption_verified_on_device": false
+}

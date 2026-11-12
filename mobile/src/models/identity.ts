@@ -124,6 +124,8 @@ export interface MedicationIdentity {
    * NOT_ESTABLISHED (repackaged, source unknown or unverifiable), UNAVAILABLE (lookup failed),
    * NOT_CHECKED (default). Only VERIFIED sources are listed above; nothing is inferred from names.
    */
+  /** Internal inconsistencies found in the FDA record (see DirectoryProduct.sourceConflicts). */
+  sourceConflicts?: string[];
   /** Carried from the NDC Directory record for source-product resolution. */
   isOriginalPackager?: boolean | null;
   splSetId?: string | null;

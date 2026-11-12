@@ -130,7 +130,8 @@ export type WorkflowEvent =
   | { type: 'CANDIDATE_CHOSEN'; index: number }
   | { type: 'EDIT_REQUESTED' }
   | { type: 'FIELDS_UPDATED'; extraction: LabelExtraction }
-  | { type: 'EXCLUSION_DECIDED'; decision: ExclusionDecision; requiredConfirmations: string[] }
+  /** `identity`: the identity the decision was made for, when enrichment changed it (Task 4A, OD-19). */
+  | { type: 'EXCLUSION_DECIDED'; decision: ExclusionDecision; requiredConfirmations: string[]; identity?: MedicationIdentity }
   /**
    * The user reviewed the identity. `lot` is the lot the user confirmed (or null). `release` is
    * required when the identity's release mechanism was not printed (field 'release').
@@ -308,6 +309,11 @@ export function exclusionKeyOf(identity: MedicationIdentity): string {
   });
 }
 
+function sameProduct(a: MedicationIdentity, b: MedicationIdentity): boolean {
+  const names = (i: MedicationIdentity) => i.ingredients.map((x) => x.name).sort().join('+');
+  return a.level === b.level && a.productNdc === b.productNdc && a.packageNdc === b.packageNdc && names(a) === names(b);
+}
+
 export interface ConfirmationResult {
   /** True when every required field (and an unprinted release) was confirmed. */
   complete: boolean;
@@ -458,8 +464,11 @@ export const RX_RULES: readonly R[] = [
     from: ['CHECK_EXCLUSION'], on: ['EXCLUSION_DECIDED'], to: ['EXCLUDED', 'UNSUPPORTED', 'NEEDS_CLARIFICATION', 'CONFIRM'],
     apply: (s, e) => {
       if (e.type !== 'EXCLUSION_DECIDED') return null;
-      const exclusionKey = s.ctx.identity ? exclusionKeyOf(s.ctx.identity) : null;
-      const ctx = { ...s.ctx, exclusion: e.decision, exclusionKey };
+      // An enriched identity (RxCUIs, verified source products) replaces the current one only if it
+      // describes the same product and ingredient set; the decision is then bound to it.
+      const identity = e.identity && s.ctx.identity && sameProduct(e.identity, s.ctx.identity) ? e.identity : s.ctx.identity;
+      const exclusionKey = identity ? exclusionKeyOf(identity) : null;
+      const ctx = { ...s.ctx, identity, exclusion: e.decision, exclusionKey };
       switch (e.decision.decision) {
         case 'EXCLUDED':
         case 'UNSUPPORTED':

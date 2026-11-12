@@ -243,6 +243,7 @@ export function identityFromProduct(product: DirectoryProduct, packageNdc: strin
     productType: product.productType || null,
     pharmClassEpc: [...product.pharmClassEpc],
     relatedSourceProductNdcs: [],
+    sourceConflicts: [...(product.sourceConflicts ?? [])],
     isOriginalPackager: product.isOriginalPackager ?? null,
     splSetId: product.splSetId ?? null,
     sourceProductStatus: 'NOT_CHECKED',

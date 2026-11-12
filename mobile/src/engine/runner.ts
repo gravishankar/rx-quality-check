@@ -101,10 +101,13 @@ function enrich(identity: MedicationIdentity, cfg: RulesConfig): MedicationIdent
   return cfg.catalog.ok ? withCatalogAliases(identity, cfg.catalog.value.ingredients) : identity;
 }
 
-/** Catalog aliases, then the optional enrichment port (RxNav ingredient RxCUIs, verified repackager sources). */
-async function finish(identity: MedicationIdentity, ports: Ports, cfg: RulesConfig): Promise<MedicationIdentity> {
-  const withAliases = enrich(identity, cfg);
-  return ports.enrichIdentity ? ports.enrichIdentity(withAliases) : withAliases;
+/**
+ * Local completion of a resolved identity: catalog aliases only. External enrichment (RxNav,
+ * DailyMed) happens in CHECK_EXCLUSION, and only after the locally determinable exclusion
+ * decision is ELIGIBLE (OD-19, ADR-0001).
+ */
+async function finish(identity: MedicationIdentity, _ports: Ports, cfg: RulesConfig): Promise<MedicationIdentity> {
+  return enrich(identity, cfg);
 }
 
 function hasUsableField(x: LabelExtraction): boolean {
@@ -216,9 +219,19 @@ export async function runEffect(effect: Effect, ports: Ports, cfg: RulesConfig, 
     case 'RESOLVE_IDENTITY':
       return [await resolveIdentity(effect.extraction, effect.discardNdc, ports, cfg)];
     case 'CHECK_EXCLUSION': {
-      const decision = rules.evaluateExclusion(effect.identity, cfg.policy, cfg.catalog);
-      const req = decision.decision === 'ELIGIBLE' ? requiredConfirmations(effect.identity, effect.extraction, effect.ndcDiscarded) : [];
-      return [{ type: 'EXCLUSION_DECIDED', decision, requiredConfirmations: req }];
+      // OD-19: decide on locally available data first. Excluded, unsupported and needs-clarification
+      // products cause no RxNav or DailyMed request.
+      const local = rules.evaluateExclusion(effect.identity, cfg.policy, cfg.catalog);
+      if (local.decision !== 'ELIGIBLE' || !ports.enrichIdentity) {
+        const req = local.decision === 'ELIGIBLE' ? requiredConfirmations(effect.identity, effect.extraction, effect.ndcDiscarded) : [];
+        return [{ type: 'EXCLUSION_DECIDED', decision: local, requiredConfirmations: req }];
+      }
+      // Eligible: enrich (RxNav ingredient RxCUIs, verified repackager sources) and decide again on
+      // the enriched identity, which may only make the decision stricter or more precise.
+      const enriched = await ports.enrichIdentity(effect.identity);
+      const decision = rules.evaluateExclusion(enriched, cfg.policy, cfg.catalog);
+      const req = decision.decision === 'ELIGIBLE' ? requiredConfirmations(enriched, effect.extraction, effect.ndcDiscarded) : [];
+      return [{ type: 'EXCLUSION_DECIDED', decision, requiredConfirmations: req, identity: enriched }];
     }
     case 'FETCH_RECALL_EVIDENCE':
       return [await fetchEvidence(effect.identity, ports, rules)];

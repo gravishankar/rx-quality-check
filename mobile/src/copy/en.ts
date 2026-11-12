@@ -1,0 +1,247 @@
+/**
+ * All patient-facing text (English, United States). Single reviewed location (CLAUDE.md §4).
+ *
+ * Rules (docs/EVIDENCE_AND_CLAIMS_POLICY.md):
+ *  - Never claim or imply that a medication is safe, recall-free, verified or approved.
+ *  - Never give treatment instructions (stop, continue, switch). Refer to the pharmacist or
+ *    healthcare professional and to the official recall notice.
+ *  - Say "labeler (as listed by FDA)", never "manufacturer", for the company named in an NDC listing.
+ *  - Keep sentences short (target reading level ≤ grade 8).
+ *
+ * `tests/unit/claims_and_copy.test.ts` scans this file and every screen for prohibited wording.
+ * Sentences that must mention "safe" in a negated form are listed in REVIEWED_NEGATED_STATEMENTS
+ * and are the only exceptions.
+ */
+
+export const COPY = {
+  app: {
+    pilotBanner: 'Evaluation prototype. Not clinically validated. Do not use as the only basis for medication decisions.',
+    devBanner: 'DEVELOPMENT BUILD — for owner testing only. Saved history is turned off.',
+  },
+
+  disclaimer: {
+    standing:
+      'Not finding a recall does not mean a medication is safe or free of quality problems. FDA data can be incomplete or delayed. Do not stop, change or replace a prescribed medication because of this app. Talk to your pharmacist or prescriber.',
+    exclusionNotSafety: 'Not checking some medications does not mean other medications are safe.',
+    noTreatmentAdvice: 'This app does not give medical advice. It cannot tell you whether to take, stop or change a medication.',
+    notMonitoring: 'This app checks only when you ask. It does not watch for new recalls or send alerts.',
+  },
+
+  firstLaunch: {
+    title: 'Before you start',
+    points: [
+      'Rx Recall Check looks up public FDA recall records for a medication you enter.',
+      'It can tell you when a recall record appears to match, might match, or when no match was found in the records it could check.',
+      'It cannot tell you whether a medication is right for you. Only your pharmacist or prescriber can.',
+      'Your medication details stay on this phone. Only public drug codes are sent to FDA and the National Library of Medicine.',
+      'This app checks only when you ask. It does not send alerts about new recalls.',
+    ],
+    readTerms: 'Read the Terms of Use',
+    readPrivacy: 'Read the Privacy Policy',
+    readMedical: 'Read the Medical Disclaimer',
+    acknowledge: 'I understand',
+    acknowledgementNote: 'We record the version of these documents you saw, on this phone only.',
+  },
+
+  entry: {
+    title: 'Check a medication',
+    ndcLabel: 'NDC from the label (if shown)',
+    ndcHelp: 'Example: 62756-142-02. Leave blank if your label has no NDC.',
+    nameLabel: 'Drug name as printed',
+    strengthLabel: 'Strength as printed',
+    formLabel: 'Form (tablet, capsule, solution)',
+    lotLabel: 'Lot number (optional)',
+    lotHelp: 'Only on original packaging. Lot numbers are never sent anywhere.',
+    submit: 'Find this medication',
+    noCamera: 'Scanning a label is not available in this version. Please type the details.',
+  },
+
+  confirm: {
+    title: 'Is this your medication?',
+    intro: 'Please check each detail. We show where each one came from.',
+    confirmAll: 'Yes, these details match my label',
+    edit: 'Change details',
+    releaseQuestion: 'Does the label say ER, XR, XL, SR, DR or EC (extended or delayed release)?',
+    releaseIR: 'No (regular release)',
+    releaseER: 'Yes, extended release (ER, XR, XL, SR)',
+    releaseDR: 'Yes, delayed release (DR, EC)',
+    lotConfirm: 'I checked the lot number against my package',
+  },
+
+  evidence: {
+    VERIFIED_SOURCE: 'From FDA records',
+    USER_CONFIRMED: 'Entered and confirmed by you',
+    USER_ENTERED: 'Entered by you, not checked against FDA records',
+    INFERRED: 'Matched by name only',
+    CONFLICTING: 'FDA records disagree',
+    UNVERIFIED: 'Not checked',
+    UNAVAILABLE: 'Could not be determined',
+  },
+
+  fields: {
+    product: 'Product (NDC)',
+    ingredients: 'Ingredient and strength',
+    form: 'Form',
+    release: 'Release type',
+    labeler: 'Labeler (as listed by FDA)',
+    lot: 'Lot number',
+    source: 'Repackaged from',
+    ndcListingNote: 'Listed in the FDA NDC Directory. A listing is not FDA approval of this product.',
+    labelerNote: 'The labeler is the company named in the FDA listing. It may not be the company that made the medication.',
+    lotNote: 'Your lot number is compared with the text of recall notices only. It is not checked by FDA.',
+    sourceVerified: 'Declared in the repackager’s FDA labeling and found in the FDA NDC Directory.',
+    sourceUnknown: 'We could not confirm which product this was repackaged from.',
+    sourceNotChecked: 'Not checked.',
+    conflict: 'FDA records give different information for this product. We did not choose one.',
+    releaseValues: { IR: 'Regular release', ER: 'Extended release', DR: 'Delayed release', UNSPECIFIED: 'Not known' },
+  },
+
+  result: {
+    CONFIRMED: {
+      headline: 'Available recall information matches the medication details you provided.',
+      tone: 'This means a recall record names your product and its conditions appear to apply.',
+    },
+    POTENTIAL: {
+      headline: 'This medication may be affected by a reported recall. More information is needed to determine whether your specific supply is included.',
+    },
+    NO_MATCH: {
+      headline: (asOf: string) =>
+        `No matching recall was identified in the sources successfully checked as of ${asOf}. This does not establish that the medication is free from recalls or other quality problems.`,
+    },
+    UNABLE: {
+      headline: 'We could not reliably determine whether this medication is affected by a recall.',
+    },
+    qualifiers: {
+      productNotIdentified: 'We could not identify your exact product, so we checked by ingredient, strength and form only.',
+      sourceNotEstablished:
+        'This product appears to be repackaged, and we could not confirm the original product. Recalls listed under the original product may not have been found.',
+      sourceUnavailable: 'We could not check whether this product was repackaged from another product.',
+      lotNotProvided: 'Some recalls apply only to certain lot numbers. You did not enter a lot number.',
+      userEnteredIdentity: 'The medication details were entered by you and were not matched to an FDA product listing.',
+    },
+    downgrade: {
+      staleResult: (asOf: string) => `This result is from ${asOf}. It is too old to rely on. Please check again.`,
+      staleSource: (date: string) => `FDA’s recall data was last updated on ${date}, which is older than we accept. Please check again later.`,
+      incomplete: 'Some FDA records could not be retrieved or read completely.',
+      controlFailed: 'Our check that FDA’s recall search is working did not pass.',
+      inconsistent: 'The result did not meet our evidence rules, so we are not showing it. This has been flagged for review.',
+      unreadable: 'Some recall records could not be read.',
+    },
+    nextSteps: {
+      contactProfessional: 'Contact your pharmacist or healthcare professional about this result.',
+      readNotice: 'Read the official recall record for details and any instructions.',
+      doNotChange: 'Do not stop, change or replace a prescribed medication because of this app alone.',
+      checkAgain: 'Check again',
+    },
+    record: {
+      recallNumber: 'Recall number',
+      classification: 'FDA classification',
+      status: 'Status',
+      reportDate: 'Report date',
+      firm: 'Recalling firm (as published)',
+      reason: 'Reason (as published)',
+      lotListed: 'Your lot number appears in this recall’s list of lots.',
+      lotPossiblyListed: 'A similar lot number appears in this recall. Ask your pharmacist to check.',
+      lotNotFound: 'Your lot number was not found in the listed lots. That does not mean your supply is unaffected.',
+      lotUnknown: 'This recall lists specific lots. Without your lot number we cannot tell if yours is included.',
+      allLots: 'This recall covers all lots.',
+      officialRecord: 'Official FDA record',
+      // Plain-language versions of 21 CFR 7.3(m) (https://www.ecfr.gov/current/title-21/chapter-I/subchapter-A/part-7/subpart-A/section-7.3).
+      classExplanation: {
+        'Class I': 'FDA Class I: there is a reasonable chance that using the product will cause serious health problems or death.',
+        'Class II': 'FDA Class II: using the product may cause temporary or medically reversible health problems, or the chance of serious health problems is remote.',
+        'Class III': 'FDA Class III: using the product is not likely to cause health problems.',
+        'Not Yet Classified': 'FDA has not yet classified this recall.',
+      } as Record<string, string>,
+      fdaRecallPages: 'FDA Enforcement Reports (official recall listings)',
+      statusNote: 'Status is as published by FDA. "Terminated" means FDA considers the recall completed; it does not describe your supply.',
+    },
+    groups: {
+      matches: 'Recalls that match your product',
+      possible: 'Recalls that might match',
+      notApplicable: 'Other recall records we checked',
+      unreadable: 'Records we could not read',
+    },
+    sources: {
+      title: 'What we checked',
+      retrieved: (at: string) => `Retrieved on this phone: ${at}`,
+      datasetUpdated: (d: string) => `FDA recall data last updated: ${d}`,
+      queries: (n: number, complete: number) => `${complete} of ${n} searches completed fully`,
+      control: (passed: boolean) => (passed ? 'Search check passed' : 'Search check did not pass'),
+      refresh: 'This result is not updated automatically.',
+      perMedication: 'We searched for this medication only. Other medications were not checked.',
+    },
+    limitationsTitle: 'What we could not determine',
+  },
+
+  notAssessed: {
+    EXCLUDED: {
+      headline: 'We don’t check this medication.',
+      body: 'This is a policy choice, not a finding about the medication. No recall check was done.',
+    },
+    UNSUPPORTED: {
+      headline: 'This medication or form is not covered by this version of the app.',
+      body: 'No recall check was done.',
+    },
+    NEEDS_CLARIFICATION: {
+      headline: 'We need more information before we can continue.',
+      body: 'We could not tell whether this medication is covered. No recall check was done.',
+    },
+    configBlocked: {
+      headline: 'Recall checks are turned off in this build.',
+      body: 'The app’s drug list or policy has not been approved for this build, so no recall check can be done.',
+    },
+  },
+
+  errors: {
+    sourceUnavailable: { headline: 'We couldn’t reach FDA’s data.', body: 'Nothing was checked. Please try again later.' },
+    rateLimited: { headline: 'FDA’s service asked us to wait.', body: 'Nothing was checked. Please try again in a few minutes.' },
+    offline: (asOf: string) => `You are seeing a saved result from ${asOf}. It was not updated.`,
+    notFound: 'We could not find this NDC in FDA’s directory. Please check the number, or leave it blank.',
+    missing: 'Please enter the drug name, strength and form.',
+    ambiguous: 'This number matches more than one product. Please choose yours.',
+    generic: 'Something went wrong. Nothing was checked.',
+    retry: 'Try again',
+  },
+
+  history: {
+    title: 'Saved checks',
+    empty: 'No saved checks.',
+    disabled: 'Saving is turned off in this build because storage encryption has not been verified on a device.',
+    madeUnder: (v: string) => `Checked with drug list and policy version ${v}`,
+    outdated: 'Made with an older drug list or policy. Check again for a current result.',
+    deleteOne: 'Delete',
+  },
+
+  about: {
+    title: 'About and privacy',
+    version: (v: string, profile: string) => `Version ${v} (${profile})`,
+    deleteAll: 'Delete all data on this phone',
+    deleteAllConfirm: 'Delete all saved medications and results from this phone? This cannot be undone.',
+    deleted: 'All data on this phone was deleted.',
+    sources: 'Data sources and limitations',
+    documents: 'Legal documents',
+    draftNotice: 'These documents are drafts pending legal review.',
+    attribution:
+      'Data from the U.S. Food and Drug Administration (openFDA) and the National Library of Medicine (RxNorm, DailyMed). Neither FDA nor NLM endorses this app.',
+  },
+} as const;
+
+/**
+ * Reviewed sentences that mention safety only to deny it. They are the only places where the word
+ * "safe" may appear in patient-facing text.
+ */
+export const REVIEWED_NEGATED_STATEMENTS: readonly string[] = [COPY.disclaimer.standing, COPY.disclaimer.exclusionNotSafety];
+
+/** Every string in COPY (for wording tests). Functions are sampled with a placeholder. */
+export function allCopyStrings(): string[] {
+  const out: string[] = [];
+  const walk = (v: unknown) => {
+    if (typeof v === 'string') out.push(v);
+    else if (typeof v === 'function') out.push(String((v as (...a: unknown[]) => unknown)('[x]', '[x]')));
+    else if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+  };
+  walk(COPY);
+  return out;
+}
