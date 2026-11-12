@@ -157,12 +157,14 @@ NODE_USE_ENV_PROXY=1 npm run feasibility
 | **RG-1** | A known recall must never be classified as a confirmed non-match because of a parsing or lookup failure. Injecting each failure (network, timeout, 5xx, 429, truncated JSON, missing field, schema change, incomplete pagination, query not run) yields `CONFIRMED_MATCH`/`POTENTIAL_MATCH` (when another query still found the recall) or `UNRESOLVED` — never `NO_MATCH_FOUND`. Rule level: Done (`recall_engine.test.ts`). |
 | **RG-2** | Positive control: each session's recall queries include `recall_number:"D-0325-2021" AND product_description:"metformin" AND openfda.product_ndc:"62756-142"`, which exercises every field the plan uses (a drifted field returns 404 `NOT_FOUND`, verified live). If it does not return the record, or the parser cannot read its NDC, `NO_MATCH_FOUND` is blocked. Rule level: Done; client: Task 3. |
 | **RG-3** | Excluded drugs never trigger a recall request (effect audit). Done at library level (`state_machine.test.ts` property, `workflow.test.ts` audit). |
-| **RG-4** | No patient-facing string contains prohibited claims ("safe", "clean", "verified", "no issues", scores or grades); enforced by a copy lint plus review. |
-| **RG-5** | Every result view shows sources, dataset dates, retrieval time and the standing disclaimer. |
+| **RG-4** | No patient-facing string contains prohibited claims ("safe", "clean", "verified", "no issues", scores or grades); enforced by a copy lint plus review. Automated in Task 4A (`claims_and_copy.test.ts`: copy, screens, presented results, legal drafts); pharmacist review pending. |
+| **RG-5** | Every result view shows sources, dataset dates, retrieval time and the standing disclaimer. Automated at view-model level in Task 4A; on-screen check in the device test plan. |
 | **RG-6** | Privacy tests PV-1…PV-6 pass. |
 | **RG-7** | Strength, dose form and IR/ER/DR are preserved end to end (identity → storage → refill diff). |
 | **RG-8** | Exclusion policy is approved, versioned and within its six-month review window. |
 | **RG-9** | `npm test`, typecheck and Android lint pass with zero failures; no skipped tests. |
+| **RG-10** (Task 4A) | Uncertainty never becomes reassurance: NO_MATCH shown only with complete, fresh, controlled evidence; CONFIRMED only with product identity and a confirmed listed lot (negative + property tests). |
+| **RG-11** (Task 4A) | `npm run release:gate` reports no blockers (approvals, legal documents, six sign-offs, device encryption). |
 
 ## 7. Task 1 results
 

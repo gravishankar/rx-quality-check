@@ -5,6 +5,14 @@ observed by `scripts/check_api_feasibility.ts` on **2026-11-12** (report:
 `docs/feasibility/latest-run.json`; fixtures: `tests/fixtures/api/`, `tests/fixtures/spl/`).
 "Documented" means stated by the provider and **not** verified by the harness.
 
+**Task 4A.** Attribution ("Data from the U.S. Food and Drug Administration (openFDA) and the National
+Library of Medicine (RxNorm, DailyMed). Neither FDA nor NLM endorses this app.") is shown in About;
+terms and licenses are listed in `docs/legal/DATA_SOURCES_AND_LIMITATIONS.md`. Lookup order (OD-19):
+NDC Directory → local exclusion policy → RxNav/DailyMed only for eligible medications → recall
+queries only after the user confirms identity. Each result shows openFDA `meta.last_updated` and the
+device retrieval time; a no-match is not shown when the result is older than 24 hours or FDA's
+dataset is older than 45 days.
+
 ## 1. openFDA — NDC Directory
 
 | Item | Detail |

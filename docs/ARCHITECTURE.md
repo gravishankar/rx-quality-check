@@ -2,8 +2,9 @@
 
 Status: Task 2 implemented `models/`, `rules/`, `state/`, `engine/` and `fsm/`. Task 3 added
 `services/` (live public-API clients), `storage/` (SQLite with migrations and repositories) and
-`app/` (composition root), together with the schema-2 catalog and policy (§11). Everything is still
-pure TypeScript under `mobile/src/`; the React Native shell arrives in Task 4.
+`app/` (composition root), together with the schema-2 catalog and policy (§11). Task 4A added the
+React Native shell (Android and iOS projects), the presentation layer, the copy file, legal documents,
+build profiles and the release gate (§13). Shared logic remains pure TypeScript under `mobile/src/`.
 
 **Scope update (Task 2):** manufacturer provenance is removed from MVP v0.1. The app does not identify
 manufacturing facilities, map establishments, show inspection history, score plants or infer where a
@@ -53,7 +54,12 @@ reached directly over HTTPS with no credentials.
 | `services/` | Transport (timeouts, cancellation, host allowlist, privacy guard, audit), outcome classification, clients for openFDA, RxNav and DailyMed, production `Ports` with cache read-through and identity enrichment | `models/`, `rules/` (pure helpers), `engine/` and `state/` (types only) | `storage/` implementations (it uses `SourceCache` and `AssessmentStore` interfaces), React |
 | `storage/` | SQL driver interface (op-sqlite/SQLCipher adapter for the app; Node SQLite for tests), key store, migrations, repositories, delete-all | `models/`, `rules/` (refill diff), `services/` and `state/` (types only) | network |
 | `app/` | Composition root `createRecallCheck`: configuration, clients, guard, ports, storage, existing workflow | everything in the library | — |
-| `screens/`, `components/` | Presentation; dispatch events; render view models; copy | `state/` (selectors), `models/` | `services/`, `storage/` directly |
+| `presentation/` | Maps internal findings to what a patient may be shown; may only weaken a classification (`docs/EVIDENCE_AND_CLAIMS_POLICY.md`) | `models/`, `copy/` | network, storage, React |
+| `copy/` | All patient-facing text (single reviewed file) | — | everything else |
+| `legal/` | Bundled legal documents (generated from `docs/legal/`) and acknowledgement versions | — | network |
+| `app/screens.ts` | Pure screen models from workflow state (shared by Android and iOS) | `presentation/`, `copy/`, `state/` (types) | React, native modules |
+| `mobile/app/` (outside `src/`) | React Native screens and UI kit; render screen models; send events | `mobile/src/**` | native modules except in `mobile/app/platform/native.ts` |
+| `mobile/app/platform/` | Platform-neutral `PlatformServices` interface + its React Native implementation (op-sqlite/SQLCipher, keychain, fetch, Linking) | native libraries (cross-platform) | — |
 
 Task 2 moved `scripts/lib/ndc.ts` → `rules/ndc.ts`, `schemas.ts` → `models/openfda.ts`, the
 strength helpers → `rules/strength.ts` and the `LookupOutcome` types → `models/lookup.ts`; the old
@@ -362,5 +368,49 @@ Details in `docs/PRIVACY.md`.
 - Policy updates: new `exclusion_policy.json` version shipped in-app (no remote config in v0.1).
 - Manufacturer provenance (facilities, establishments, inspections) is out of MVP scope; any return requires a new product decision and an official keyless API.
 - Pill-imprint narrowing via RxNav `ndcproperties` (Doc A A-13/A-14).
-- iOS build; background re-check with local notifications (requires battery and privacy decisions).
+- iOS build (`docs/IOS_BUILD.md`, roadmap in `docs/IMPLEMENTATION_PLAN.md`); background re-check with local notifications (requires battery and privacy decisions).
 - Optional user-provided openFDA API key stored in Keystore (raises quotas; never shipped by us).
+
+## 13. Task 4A: app shell, presentation and release controls
+
+```
+mobile/
+  index.js, App.tsx           entry (polyfills CSPRNG, registers the app)
+  app/                        React Native screens + UI kit (Android and iOS)
+    platform/types.ts         PlatformServices — platform-neutral interface
+    platform/native.ts        the only file importing native modules
+  src/                        shared TypeScript (unchanged boundaries, tested by npm test)
+  android/                    Android project: flavors dev/pilot, backup exclusion, HTTPS-only config
+  ios/                        iOS project (not built yet; docs/IOS_BUILD.md)
+  config/build_profile.json   development | pilot (written by build scripts)
+```
+
+- **Flow.** Screen → `useRecallSession` → `createRecallCheck` (unchanged) → state machine + safety
+  gates + recall engine → `screenFor(state)` → `presentResult` / `presentNotAssessed` → screen.
+  Screens never read a finding directly.
+- **Presentation rules.** `presentResult` shows NO_MATCH only with complete coverage, a passed
+  control, completed queries, no possible/confirmed/unreadable records, a result ≤ 24 h old and FDA
+  data ≤ 45 days old; CONFIRMED only with product-level identity and a user-confirmed listed lot (or
+  all-lots recall). Otherwise it downgrades (CONFIRMED → POTENTIAL, NO_MATCH → UNABLE) and flags
+  inconsistencies.
+- **Build profiles (OD-18).** `development`: draft configuration allowed, history off, DEV label and
+  app ID suffix. `pilot`: approved configuration only (otherwise every check is CONFIG_BLOCKED),
+  history only when encryption was verified on a device. Gradle refuses a flavor/profile mismatch;
+  `scripts/android_build.sh pilot` runs `release:gate` first.
+- **Exclusion before enrichment (OD-19).** `engine/runner.ts` evaluates the local policy first and
+  calls RxNav/DailyMed only for eligible medications.
+- **Storage on the phone.** Only when `persistHistory` is true: op-sqlite (SQLCipher) with a 256-bit
+  random key in the OS key store (`AFTER_FIRST_UNLOCK_THIS_DEVICE_ONLY`). Development builds write
+  nothing. `storage/encryptionSelfTest.ts` verifies SQLCipher on a device (PV-4).
+- **Dependencies and network behavior.**
+
+| Library | Version | Platforms | Network behavior |
+|---|---|---|---|
+| react-native | 0.88.1 | Android, iOS | fetch used only via the guarded transport |
+| @op-engineering/op-sqlite | 19.0.5 (SQLCipher) | Android, iOS | none (local database); build pulls OpenSSL from Maven / CocoaPods |
+| react-native-keychain | 11.0.0 | Android (Keystore), iOS (Keychain) | none |
+| react-native-get-random-values | 2.0.0 | Android, iOS | none |
+| react-native-safe-area-context | 5.11.1 | Android, iOS | none |
+
+- **Cross-platform.** Nothing in `mobile/src/` or the screens is platform-specific; enforced by
+  `tests/unit/architecture_boundaries.test.ts`. iOS open items: `docs/IOS_BUILD.md`.

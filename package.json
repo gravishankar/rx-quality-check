@@ -25,7 +25,10 @@
     "e2e:live": "tsx scripts/e2e_cli.ts --live",
     "e2e:record": "tsx scripts/e2e_cli.ts --record",
     "legal:bundle": "tsx scripts/bundle_legal_docs.ts",
-    "release:gate": "tsx scripts/release_gate.ts"
+    "release:gate": "tsx scripts/release_gate.ts",
+    "android:dev": "bash scripts/android_build.sh dev",
+    "android:pilot": "bash scripts/android_build.sh pilot",
+    "mobile:typecheck": "cd mobile && npx tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "22.10.2",

@@ -6,10 +6,12 @@ A privacy-first, phone-only Android app (React Native + TypeScript) that helps p
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 3 of 6 (live FDA integration, local database, extensible catalog and policy) —
-> awaiting approval. The library in `mobile/src/` is pure TypeScript: workflow engine, rules, API
-> clients and storage behind injected interfaces. There is no user interface yet (Task 4). See
-> `docs/IMPLEMENTATION_PLAN.md`.
+> **Status:** Task 4A (Android pilot: evidence safety, legal and regulatory readiness) — awaiting
+> review. A React Native app (Android first, iOS-ready) runs the Task 3 engine. Only a **development
+> APK** exists, for the owner's testing; a pilot build is blocked by `npm run release:gate`
+> (approvals, legal/clinical/regulatory sign-offs and on-device encryption verification are
+> missing). This is an evaluation prototype: not clinically validated, not reviewed by counsel, not
+> FDA-cleared. See `docs/IMPLEMENTATION_PLAN.md` and `docs/RELEASE_READINESS_CHECKLIST.md`.
 >
 > Manufacturer provenance (facilities, establishments, inspections) is out of scope for MVP v0.1.
 
@@ -34,12 +36,37 @@ CLAUDE.md, AGENTS.md     Agent and contributor rules
 docs/                    PRD, architecture, state machine guide, data sources, privacy, exclusions, test & implementation plans
 docs/references/         Reference documents A and B (unmodified) + adoption register
 docs/feasibility/        Machine-readable results of the latest API feasibility run
-mobile/src/              Core library: models/, rules/ (identity, exclusion, recall evidence), state/ (workflow
-                         state machine), engine/ (effect runner with injected I/O ports)
+mobile/src/              Shared TypeScript (Android + iOS): models/, rules/, state/, fsm/, engine/, services/,
+                         storage/, presentation/ (evidence-limited wording), copy/, legal/, app/
+mobile/app/              React Native screens; native modules only in app/platform/native.ts
+mobile/android/, ios/    Native projects (Android: dev/pilot flavors; iOS: not built yet)
+docs/legal/              DRAFT legal documents (legal review required)
 data/                    Versioned config: drug catalog, exclusion policy (+ schemas/, examples/), aliases
 config/                  App configuration (patient-facing display name)
 tests/                   Deterministic unit/integration tests and real-response fixtures
 scripts/                 API feasibility harness, Task 2 fixture capture, re-export shims
+```
+
+## Key documents (Task 4A)
+
+- `docs/EVIDENCE_AND_CLAIMS_POLICY.md` — what the app may say, the evidence each statement needs, and the tests enforcing it
+- `docs/LEGAL_REGULATORY_REVIEW.md` — issues list for counsel (no compliance conclusions)
+- `docs/adr/0001-task4a-evidence-and-pilot-decisions.md` — OD-2, OD-4, OD-17, OD-18, OD-19
+- `docs/ANDROID_BUILD_AND_INSTALL.md`, `docs/ANDROID_DEVICE_TEST_PLAN.md`, `docs/IOS_BUILD.md`
+- `docs/RELEASE_READINESS_CHECKLIST.md`
+
+## Android app
+
+```bash
+(cd mobile && npm ci)
+```
+
+```bash
+ANDROID_HOME=$HOME/android-sdk npm run android:dev
+```
+
+```bash
+npm run release:gate
 ```
 
 ## Commands

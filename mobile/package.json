@@ -1,0 +1,40 @@
+{
+  "name": "rx-recall-check-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "React Native app (Android first, iOS supported) for Rx Recall Check. Shared logic lives in src/; screens in app/.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "react-native start",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "bundle:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output build/index.android.bundle --assets-dest build/res",
+    "bundle:ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output build/main.jsbundle --assets-dest build/ios-assets"
+  },
+  "dependencies": {
+    "@op-engineering/op-sqlite": "19.0.5",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-get-random-values": "2.0.0",
+    "react-native-keychain": "11.0.0",
+    "react-native-safe-area-context": "5.11.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.29.13",
+    "@babel/preset-env": "7.29.14",
+    "@babel/runtime": "7.29.14",
+    "@react-native-community/cli": "20.2.0",
+    "@react-native-community/cli-platform-android": "20.2.0",
+    "@react-native-community/cli-platform-ios": "20.2.0",
+    "@react-native/babel-preset": "0.88.1",
+    "@react-native/metro-config": "0.88.1",
+    "@react-native/typescript-config": "0.88.1",
+    "@types/react": "19.2.18",
+    "typescript": "5.9.3"
+  },
+  "op-sqlite": {
+    "sqlcipher": true
+  },
+  "engines": {
+    "node": ">= 22.11.0"
+  }
+}

@@ -4,7 +4,7 @@ Patient-facing name: **Rx Recall Check** (configurable in `config/app_config.jso
 
 | Field | Value |
 |---|---|
-| Status | Draft for approval (Task 1); scope updated in Task 2 (manufacturer provenance removed) |
+| Status | Draft for approval (Task 1); scope updated in Task 2 (manufacturer provenance removed); patient-facing wording and claims governed by `docs/EVIDENCE_AND_CLAIMS_POLICY.md` (Task 4A) |
 | Platform | Android phone first (React Native + TypeScript) |
 | Purpose of MVP | Assess patient interest, usability and the usefulness of public regulatory data |
 
@@ -117,6 +117,21 @@ Every result screen shows:
 
 Prohibited: any "safe", "clean", "verified", "green" or score/grade presentation; ranking labelers or
 facilities; NTI "switching" warnings (Doc A A-11).
+
+**Task 4A wording (supersedes earlier draft wording where they differ).** Results are shown in four
+categories, each only when the evidence supports it, otherwise downgraded toward uncertainty
+(`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §2–§3):
+
+| Category | Headline |
+|---|---|
+| Confirmed | "Available recall information matches the medication details you provided." |
+| Potential | "This medication may be affected by a reported recall. More information is needed to determine whether your specific supply is included." |
+| No match | "No matching recall was identified in the sources successfully checked as of <date>. This does not establish that the medication is free from recalls or other quality problems." |
+| Unable | "We could not reliably determine whether this medication is affected by a recall." |
+
+Every result also states: "Do not stop, change or replace a prescribed medication because of this app
+alone." The app checks one medication at a time, on request; it does not monitor or notify (OD-4).
+Pilot builds are labeled "Evaluation prototype. Not clinically validated."
 
 ## 7. Result categories (evidence, not safety)
 

@@ -37,14 +37,34 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Tests | 323 pass (`npm test`); e2e 13/13 recorded and live; `config:test` 51/51; feasibility re-run 5 PASS / 5 WARN / 0 FAIL |
 | Status | **Complete — awaiting approval** (branch `task-3/live-integration`) |
 
-## Task 4 — Patient-facing mobile interface
+## Task 4A — Android pilot: evidence safety, legal and regulatory readiness
 
 | | |
 |---|---|
-| Deliverables | React Native Android app scaffold under `mobile/`; screens: Home/medication list, Scan entry (manual entry first), Confirm identity, Result (grouped evidence, uncertainty, sources/dates, disclaimer), Excluded/Unsupported/Needs-clarification, Medication detail and history, Settings (delete data, about data sources, policy version); centralized copy; accessibility (TalkBack, dynamic type, contrast) |
-| Dependencies | Tasks 2–3 |
-| Acceptance | All result states render with distinct copy; RG-4 copy lint passes; RG-5 satisfied on every result; manual-entry flow works end to end on emulator against live APIs; accessibility checks pass |
-| Tests | Component tests per state; EX-8; snapshot of copy; E2E manual-entry happy path and each alternative state |
+| Deliverables | React Native 0.88.1 app in `mobile/` (Android + iOS projects; shared TypeScript in `mobile/src/`, screens in `mobile/app/`, native code only behind `mobile/app/platform/`); presentation layer that never shows more than the evidence (`presentation/present.ts`) and one copy file (`copy/en.ts`); screens: entry, product choice, confirmation with evidence labels, result with sources/limitations, not-assessed, errors, history (disabled without verified encryption), about/legal/privacy/delete-all, first-launch notice; build profiles (development/pilot) with product flavors; release gate; encryption self-test; draft legal documents; `EVIDENCE_AND_CLAIMS_POLICY.md`, `LEGAL_REGULATORY_REVIEW.md`, ADR-0001, Android build/install, device test plan, iOS build doc, release-readiness checklist |
+| Decisions | OD-2, OD-4, OD-17, OD-18, OD-19 decided by the product owner (ADR-0001) |
+| Acceptance | All Task 3 tests still pass; uncertainty can never be presented as reassurance (negative and property tests); prohibited wording absent from copy, screens and legal drafts; excluded/unsupported/blocked never presented as passed; no RxNav/DailyMed request for locally excluded medications; development APK builds without Metro; pilot build impossible while the release gate has blockers |
+| Tests | See TEST_PLAN §10 and `EVIDENCE_AND_CLAIMS_POLICY.md` §6 |
+| Not done (blocked) | Physical-device testing (no device in the build environment); on-device encryption verification (PV-4); pilot APK (14 release-gate blockers); legal, regulatory and clinical reviews (external) |
+| Status | **Complete — awaiting review** (branch `task-4a/android-pilot`) |
+
+## Task 4B — Pilot hardening (next, not started)
+
+Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
+PV-4 passes; app-switcher privacy (FLAG_SECURE / iOS snapshot) decision; TalkBack/large-font fixes
+from device testing; OD-8, OD-13, OD-14, OD-15, OD-16 product decisions reflected in copy.
+
+## iOS track (roadmap)
+
+| Step | Content | Depends on |
+|---|---|---|
+| iOS-1 | Close architectural items B-iOS-1 (exclude database from iCloud backup), B-iOS-2 (Dev/Pilot schemes reading `build_profile.json`), B-iOS-3 (no local networking in release) — `docs/IOS_BUILD.md` | Task 4A |
+| iOS-2 | Build and run on the owner's iPhone from Xcode on a MacBook Pro; run the device test plan and the encryption self-test on iOS | iOS-1 |
+| iOS-3 | Apple Developer Program enrollment (organization), bundle ID registration, signing in the owner's Apple account | Legal entity |
+| iOS-4 | TestFlight internal testing; then external testing after Beta App Review | Release gate passes |
+| iOS-5 | App Store submission: App Privacy label, review guidelines 1.4.1 / 5.1.3, regulatory documentation if requested | Legal/regulatory sign-off |
+
+No iOS IPA is built in Task 4A.
 
 ## Task 5 — Camera, OCR and refill comparison
 
@@ -75,9 +95,9 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | ID | Decision needed | Owner | Needed by |
 |---|---|---|---|
 | OD-1 | Administration-based exclusion rule (injectable / hospital-administered) | Product owner | Before release (Task 6); interim behavior defined |
-| OD-2 | Approve exclusion policy (now `0.2.0-draft`). **Partly decided (Task 3):** azathioprine and mycophenolate are excluded by ingredient regardless of indication; listed anticoagulants and transplant immunosuppressants are excluded. Formal approval (status `APPROVED`, effective date) is still needed; release builds refuse unapproved files. | Product owner | Before release |
+| OD-2 | **Decided (Task 4A, ADR-0001):** keep the draft; mark `APPROVED` only after review of the exact contents and version (not a legal/clinical approval); pilot builds refuse unapproved files. Remaining action: the review itself. Earlier note — approve exclusion policy (now `0.2.0-draft`). **Partly decided (Task 3):** azathioprine and mycophenolate are excluded by ingredient regardless of indication; listed anticoagulants and transplant immunosuppressants are excluded. Formal approval (status `APPROVED`, effective date) is still needed; release builds refuse unapproved files. | Product owner | Before release |
 | OD-3 | ~~Include OTC versions of supported ingredients?~~ **Closed (Task 3):** OTC products are excluded from MVP v0.1 (policy rule `OTC-MVP`). | Product owner | — |
-| OD-4 | Recall refresh strategy: per-medication vs all-14 refresh (privacy vs bandwidth); recommendation: all-14 | Product owner + architect | Task 3 |
+| OD-4 | ~~Recall refresh strategy~~ **Decided (Task 4A, ADR-0001):** per-medication lookup on request; no monitoring or notifications implied; every result shows retrieval date, coverage and refresh status. | Product owner | — |
 | OD-5 | OCR/barcode engine, subject to offline/no-telemetry verification | Architect | Task 5 |
 | OD-6 | ~~Encrypted SQLite library and key wrapping~~ **Decided (Task 3):** `@op-engineering/op-sqlite` 19.0.5 with SQLCipher; key in `react-native-keychain` 11.0.0 (Android Keystore). Adapters written and tested with fakes; **device verification pending (Task 6)**. | Architect | Task 6 (verify) |
 | OD-7 | ~~Show SPL establishment/facility list to patients?~~ **Closed (Task 2):** manufacturer provenance removed from MVP v0.1; nothing about facilities is shown. | Product owner | — |
@@ -90,6 +110,9 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | OD-14 | When several directory-confirmed NDC candidates exist and exactly one agrees with the printed name/strength/form, the engine uses it (still shown in CONFIRM). Approve, or always show `AMBIGUOUS_IDENTITY`? | Product owner | Task 4 |
 | OD-15 | Lot comparison treats hyphen-only differences and partial codes (`J0668398` vs `J0668398-121422`) as `LOT_POSSIBLY_LISTED` → potential match, never confirmed. Confirm this policy. | Product owner | Task 4 |
 | OD-16 | Records whose NDC list cannot be read and whose strength is not stated (e.g. bulk tablets, `NDC 53746-0178-BULK`) are shown as potential matches for every same-ingredient product with a compatible release. Accept the extra "might match" items, or collapse them by default? | Product owner | Task 4 |
-| OD-17 | openFDA omits `is_original_packager` for some products (e.g. 68094-756). The app then reads the product's own SPL: a declared and verified source is used; if none is declared, the status is `NOT_ESTABLISHED`, which adds the limitation `SOURCE_PRODUCT_NOT_ESTABLISHED`. Accept this conservative default? | Product owner | Task 4 |
-| OD-18 | Development builds accept draft configuration (`config/app_config.json` `accept_unapproved_config: true`); release builds must not. Confirm the build-flag approach for Task 6. | Architect | Task 6 |
-| OD-19 | Identity enrichment calls RxNav and DailyMed before the exclusion check, so an excluded drug's public identifiers are still looked up there (no recall request is sent). Move enrichment after an ELIGIBLE decision to reduce queries? | Architect | Task 4 |
+| OD-17 | **Decided (Task 4A, ADR-0001):** accept conservative uncertainty; no inference; no unqualified no-match when missing source information could affect coverage; never identify plant/manufacturer/source NDC without evidence. Background — openFDA omits `is_original_packager` for some products (e.g. 68094-756). The app then reads the product's own SPL: a declared and verified source is used; if none is declared, the status is `NOT_ESTABLISHED`, which adds the limitation `SOURCE_PRODUCT_NOT_ESTABLISHED`. Accept this conservative default? | Product owner | Task 4 |
+| OD-18 | **Decided (Task 4A, ADR-0001):** drafts only in explicitly labeled development builds (`.dev` app ID, DEV name and banner), never in pilot/release APKs; enforced by build profile + Gradle check + release gate. Background — development builds accept draft configuration (`config/app_config.json` `accept_unapproved_config: true`); release builds must not. Confirm the build-flag approach for Task 6. | Architect | Task 6 |
+| OD-19 | **Decided and implemented (Task 4A, ADR-0001):** local exclusions run before optional RxNav/DailyMed lookups; identifiers per service documented. Background — identity enrichment called RxNav and DailyMed before the exclusion check, so an excluded drug's public identifiers are still looked up there (no recall request is sent). Move enrichment after an ELIGIBLE decision to reduce queries? | Architect | Task 4 |
+| OD-20 | Application ID `org.rxrecallcheck.app` is a placeholder (no domain owned). Confirm before any distribution; it cannot change afterwards. | Product owner | Before pilot |
+| OD-21 | Should the app hide its content in the Android recents screen / iOS app switcher (FLAG_SECURE)? It protects privacy but blocks tester screenshots. | Product owner | Task 4B |
+| OD-22 | Development builds show the first-launch notice at every launch because nothing is persisted. Acceptable until encrypted persistence is verified? | Product owner | Task 4B |

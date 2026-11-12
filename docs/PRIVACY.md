@@ -33,8 +33,14 @@ Requests use a generic `User-Agent`, no cookies, no custom tracking headers.
 **What the API operators can still see.** FDA (openFDA) and NLM (RxNav, DailyMed), and their
 infrastructure providers, see the device's public IP address and the drug identifiers queried. In
 Task 3, recall lookups are made per scanned medication, so the operators can infer which drugs are
-looked up from an IP address. The mitigation proposed in OD-4 is still open: refresh recall data for
-all catalog drugs together. Identity lookups (NDC → product) unavoidably reveal the scanned product.
+looked up from an IP address. **OD-4 decided (Task 4A, ADR-0001): per-medication lookup is kept** and
+disclosed in the Privacy Policy draft; no monitoring or batch refresh. Identity lookups (NDC →
+product) unavoidably reveal the checked product.
+
+**Order of lookups (OD-19, Task 4A).** The NDC Directory is queried first (product identity). The
+local exclusion policy is then applied; RxNav and DailyMed are queried **only** for medications the
+policy found eligible. Excluded, unsupported and configuration-blocked medications cause no RxNav,
+DailyMed or recall request (tested in `tests/integration/app_screens.test.ts`).
 
 ## 3. Local data retention and deletion
 
@@ -56,14 +62,16 @@ all catalog drugs together. Identity lookups (NDC → product) unavoidably revea
   - Key storage: `react-native-keychain` 11.0.0, which encrypts stored secrets with an Android Keystore key.
 - **Key:** 256 bits from a CSPRNG (`crypto.getRandomValues`), generated on first use (`storage/keys.ts`). It is stored with `AccessibleAfterFirstUnlockThisDeviceOnly`, so it never migrates to another device or a backup.
 - **What remains in app files:** the encrypted database file only. Configuration JSON is bundled and public.
-- **Status: not verified on a device.** Both native libraries are installed with the app in Task 4. The adapters (`storage/drivers/opSqlite.ts`, `storage/keys.ts`) are written against their documented APIs and tested only with fakes. Tests and the command-line integration use Node's built-in SQLite, **unencrypted**, which is never bundled into the app. Encryption at rest must be verified on a physical Android device by inspecting the database file (PV-4, Task 6).
+- **Status: not verified on a device.** Both native libraries are installed in the app since Task 4A (`mobile/package.json`) and linked into the development APK. The adapters (`storage/drivers/opSqlite.ts`, `storage/keys.ts`) are written against their documented APIs and tested only with fakes. Tests and the command-line integration use Node's built-in SQLite, **unencrypted**, which is never bundled into the app. Encryption at rest must be verified on a physical Android device by inspecting the database file (PV-4). Task 4A adds an on-device self-test (About screen of the development build, `storage/encryptionSelfTest.ts`) and the device steps in `docs/ANDROID_DEVICE_TEST_PLAN.md` §3.
+- **Consequence (Task 4A rule):** no build persists medication history until encryption is verified on a device. Development builds keep everything in memory only; pilot builds enable history only when `encryption_verified_on_device` is set after PV-4 passes.
 - The key is never logged, exported or backed up. Losing it (e.g., after Keystore reset) means local data is unrecoverable; the app then offers a clean reset.
 - Optional app lock (device biometric/PIN) is a candidate for Task 6; not required for v0.1.
 - Release builds: R8/ProGuard on, debuggable off, no WebView remote debugging, cleartext traffic disabled (`usesCleartextTraffic=false`, network security config allowing only HTTPS).
 
 ## 5. Backup behavior
 
-- (To be set in the Android manifest when the app is scaffolded in Task 4; verified in Task 6.) `android:allowBackup="false"` and data-extraction rules excluding the database, shared preferences and caches from both cloud backup and device-to-device transfer.
+- Set in Task 4A (`mobile/android/app/src/main/AndroidManifest.xml`): `android:allowBackup="false"`, `android:fullBackupContent="false"` and `res/xml/data_extraction_rules.xml` excluding all domains from cloud backup and device-to-device transfer. HTTPS only (`network_security_config.xml`, system CAs only). Verification on a device: `docs/ANDROID_DEVICE_TEST_PLAN.md` D-32.
+- iOS: op-sqlite stores databases under `Library/`, which iCloud backs up by default; excluding the file is an open iOS item (B-iOS-1, `docs/IOS_BUILD.md`).
 - Consequence (to tell users): saved medications do not move to a new phone in v0.1.
 
 ## 6. Network privacy limitations (disclosed to users)
@@ -72,6 +80,8 @@ all catalog drugs together. Identity lookups (NDC → product) unavoidably revea
 - Network observers (Wi-Fi operator, ISP) can see that the app contacts `api.fda.gov`, `dailymed.nlm.nih.gov` and `rxnav.nlm.nih.gov` (TLS server name) but not the query contents.
 - No certificate pinning in v0.1 (public government endpoints may rotate certificates; pinning risks outages). Standard Android certificate validation applies; user-installed CAs are not trusted in release builds.
 - Shared or carrier IPs may cause rate limiting that the app cannot control.
+
+Permissions: the Android app declares only `INTERNET` (test in `architecture_boundaries.test.ts`); the advertising-ID permission is explicitly removed. Text fields disable autofill and autocorrect so medication details are not added to keyboard dictionaries.
 
 ## 7. No third-party telemetry
 

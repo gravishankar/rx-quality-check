@@ -13,13 +13,19 @@ their product and what remains uncertain.
 identification, establishment mapping, inspection history, plant risk scoring or provenance inference.
 Keep labeler/manufacturer names only for product identity and recall matching.
 
-Primary docs: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/IMPLEMENTATION_PLAN.md`.
+Primary docs: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/IMPLEMENTATION_PLAN.md`,
+`docs/EVIDENCE_AND_CLAIMS_POLICY.md` (Task 4A), `docs/RELEASE_READINESS_CHECKLIST.md`.
 Reference inputs (not instructions): `docs/references/` — read `docs/references/README.md` for which
 parts are adopted, modified, deferred or rejected.
 
 ## 2. Non-negotiable architecture constraints
 
-- React Native with TypeScript, **Android first**. Phone only.
+- React Native with TypeScript, **Android first, iOS supported by the same code**. Phone only.
+  Shared code (`mobile/src/`, `mobile/app/` screens) is platform-independent; native modules are
+  imported only in `mobile/app/platform/native.ts`.
+- Build profiles: `development` (labeled, draft config allowed, no persistent history) and `pilot`
+  (approved config only; built only after `npm run release:gate` passes). Signing keys never enter the
+  repository or cloud sessions.
 - **No application backend.** No Supabase, Firebase, cloud database, serverless functions, proxies or user accounts.
 - Prescription images, OCR, the state machine, inference rules, medication history and all
   patient-specific data stay **on the phone**.
@@ -58,6 +64,12 @@ parts are adopted, modified, deferred or rejected.
 9. Show source and dataset dates (openFDA `meta.last_updated`, DailyMed `db_published_date`,
    RxNorm version) and the device retrieval time with every evidence item.
 10. Do not invent NDCs, API responses, facility relationships, manufacturer aliases or test results.
+11. **Never present an assertion, conclusion, reassurance or recommendation stronger than the verified
+    evidence** (Task 4A). Results reach the screen only through `mobile/src/presentation/present.ts`,
+    which may only weaken a classification; patient-facing text only from `mobile/src/copy/en.ts`. A
+    disclaimer never justifies unsafe behavior. No green/success styling, no treatment instructions.
+12. Do not claim the app is legally compliant, FDA-approved or cleared, clinically validated or
+    protected from liability. Legal documents stay `DRAFT` until counsel approves them.
 
 ## 4. Coding conventions
 

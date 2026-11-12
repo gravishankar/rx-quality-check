@@ -1,0 +1,201 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+/**
+ * This is the configuration block to customize your React Native Android app.
+ * By default you don't need to apply any configuration, just uncomment the lines you need.
+ */
+react {
+    /* Folders */
+    //   The root of your project, i.e. where "package.json" lives. Default is '../..'
+    // root = file("../../")
+    //   The folder where the react-native NPM package is. Default is ../../node_modules/react-native
+    // reactNativeDir = file("../../node_modules/react-native")
+    //   The folder where the react-native Codegen package is. Default is ../../node_modules/@react-native/codegen
+    // codegenDir = file("../../node_modules/@react-native/codegen")
+    //   The cli.js file which is the React Native CLI entrypoint. Default is ../../node_modules/react-native/cli.js
+    // cliFile = file("../../node_modules/react-native/cli.js")
+
+    /* Variants */
+    //   The list of variants to that are debuggable. For those we're going to
+    //   skip the bundling of the JS bundle and the assets. Default is "debug", "debugOptimized".
+    //   If you add flavors like lite, prod, etc. you'll have to list your debuggableVariants.
+    // Every variant bundles its JavaScript into the APK: the app never needs a Metro server.
+    debuggableVariants = []
+
+    /* Bundling */
+    //   A list containing the node command and its flags. Default is just 'node'.
+    // nodeExecutableAndArgs = ["node"]
+    //
+    //   The command to run when bundling. By default is 'bundle'
+    // bundleCommand = "ram-bundle"
+    //
+    //   The path to the CLI configuration file. Default is empty.
+    // bundleConfig = file(../rn-cli.config.js)
+    //
+    //   The name of the generated asset file containing your JS bundle
+    // bundleAssetName = "MyApplication.android.bundle"
+    //
+    //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
+    // entryFile = file("../js/MyApplication.android.js")
+    //
+    //   A list of extra flags to pass to the 'bundle' commands.
+    //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
+    // extraPackagerArgs = []
+
+    /* Hermes Commands */
+    //   The hermes compiler command to run. By default it is 'hermesc'
+    // hermesCommand = "$rootDir/my-custom-hermesc/bin/hermesc"
+    //
+    //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
+    // hermesFlags = ["-O", "-output-source-map"]
+
+    /* Autolinking */
+    autolinkLibrariesWithApp()
+}
+
+/**
+ * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
+ */
+def enableProguardInReleaseBuilds = false
+
+/**
+ * The preferred build flavor of JavaScriptCore (JSC)
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = io.github.react-native-community:jsc-android-intl:2026004.+`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US. Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
+
+import groovy.json.JsonSlurper
+
+/**
+ * Rx Recall Check build variants (docs/ANDROID_BUILD_AND_INSTALL.md):
+ *   devRelease   — development APK: standalone, labeled "Rx Recall Check (DEV)", application ID
+ *                  org.rxrecallcheck.app.dev, signed with a locally generated development key.
+ *   pilotRelease — evaluation (pilot) APK: built only after `npm run release:gate` passes, signed with
+ *                  a pilot key whose properties file lives OUTSIDE the repository and this environment.
+ * No keystore or password is ever stored in the repository.
+ */
+def profileJson = new JsonSlurper().parse(file("../../config/build_profile.json"))
+def signingDir = new File(System.getProperty("user.home"), ".rx-recall-check")
+def loadProps = { File f ->
+    def props = new Properties()
+    if (f.exists()) f.withInputStream { props.load(it) }
+    props
+}
+def devSigning = loadProps(new File(signingDir, "dev-signing.properties"))
+def pilotSigningFile = project.hasProperty("rxrcPilotSigning") ? new File(project.property("rxrcPilotSigning")) : new File(signingDir, "pilot-signing.properties")
+def pilotSigning = loadProps(pilotSigningFile)
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace "org.rxrecallcheck.app"
+    defaultConfig {
+        applicationId "org.rxrecallcheck.app"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    flavorDimensions = ["profile"]
+    productFlavors {
+        dev {
+            dimension "profile"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Rx Recall Check (DEV)"
+        }
+        pilot {
+            dimension "profile"
+            resValue "string", "app_name", "Rx Recall Check"
+        }
+    }
+
+    signingConfigs {
+        dev {
+            if (devSigning.getProperty("storeFile")) {
+                storeFile file(devSigning.getProperty("storeFile"))
+                storePassword devSigning.getProperty("storePassword")
+                keyAlias devSigning.getProperty("keyAlias")
+                keyPassword devSigning.getProperty("keyPassword")
+            }
+        }
+        pilot {
+            if (pilotSigning.getProperty("storeFile")) {
+                storeFile file(pilotSigning.getProperty("storeFile"))
+                storePassword pilotSigning.getProperty("storePassword")
+                keyAlias pilotSigning.getProperty("keyAlias")
+                keyPassword pilotSigning.getProperty("keyPassword")
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Debug variants exist for local development with Metro only; they are never distributed.
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    productFlavors.dev.signingConfig signingConfigs.dev
+    productFlavors.pilot.signingConfig signingConfigs.pilot
+
+    packagingOptions {
+        jniLibs { useLegacyPackaging false }
+    }
+}
+
+// The bundled JavaScript reads mobile/config/build_profile.json. Refuse to build a variant whose
+// flavor does not match it, and refuse unsigned or gate-less pilot builds. Checked against the
+// tasks requested on the command line, before anything is built.
+def requested = gradle.startParameter.taskNames.join(" ").toLowerCase()
+gradle.startParameter.taskNames.each { t ->
+    def n = t.tokenize(":").last()
+    if (n in ["assemble", "assembleRelease", "assembleDebug", "build", "bundle", "bundleRelease", "bundleDebug"]) {
+        throw new GradleException("Task '${t}' would build both the dev and the pilot flavor. Name the variant (e.g. assembleDevRelease) or use the npm build scripts.")
+    }
+}
+if (requested.contains("pilot")) {
+    if (profileJson.profile != "pilot") {
+        throw new GradleException("build_profile.json says '${profileJson.profile}' but a pilot variant was requested. Use `npm run android:pilot`.")
+    }
+    if (!pilotSigning.getProperty("storeFile")) {
+        throw new GradleException("Pilot signing properties not found at ${pilotSigningFile}. The pilot key must be kept outside the repository and this environment.")
+    }
+    if (!new File(rootDir, "../build/release-gate-passed").exists()) {
+        throw new GradleException("Release gate has not passed. Run `npm run release:gate` (docs/RELEASE_READINESS_CHECKLIST.md).")
+    }
+}
+if (requested.contains("dev")) {
+    if (profileJson.profile != "development") {
+        throw new GradleException("build_profile.json says '${profileJson.profile}' but a development variant was requested. Use `npm run android:dev`.")
+    }
+    if (requested.contains("release") && !devSigning.getProperty("storeFile")) {
+        throw new GradleException("Development signing key missing. Run scripts/android_build.sh dev, which generates one outside the repository.")
+    }
+}
+
+dependencies {
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation("com.facebook.react:react-android")
+
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+}

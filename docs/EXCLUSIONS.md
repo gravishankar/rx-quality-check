@@ -9,6 +9,17 @@
 | Last reviewed | 2026-11-12 |
 | Next review due | 2027-05-12 (six months) |
 
+## Task 4A decisions (ADR-0001)
+
+- **OD-2:** the policy stays a draft until a named reviewer reviews this exact version; marking it
+  `APPROVED` is a product/engineering approval, not a legal or clinical one. Pilot builds refuse
+  the unapproved file: every check then shows "Recall checks are turned off in this build".
+- **OD-19:** exclusions that can be decided locally are applied before any RxNav or DailyMed request.
+- **Presentation:** an excluded medication is shown as "We don't check this medication. This is a
+  policy choice, not a finding about the medication. No recall check was done.", with "Not checking
+  some medications does not mean other medications are safe." It is never presented as having passed
+  a check (neutral tone, no recall wording).
+
 ## Task 3 decisions
 
 - Azathioprine and mycophenolate are excluded **by ingredient, regardless of indication** (product owner, 2026-11-12). This resolves the §4 review flag.

@@ -96,3 +96,46 @@ test('every task-2 fixture records its live source, query URL and capture time; 
     assert.equal(typeof f.http.status, 'number', n);
   }
 });
+
+// ---------------------------------------------------------------- React Native app (Task 4A, cross-platform)
+
+const APP = join(ROOT, 'mobile', 'app');
+const appFiles = (dir: string): string[] =>
+  readdirSync(dir).flatMap((f) => {
+    const p = join(dir, f);
+    return statSync(p).isDirectory() ? appFiles(p) : /\.tsx?$/.test(p) ? [p] : [];
+  });
+
+test('mobile/app: native modules are imported only by the platform adapter; screens use the platform-neutral interface', () => {
+  const NATIVE = /^(@op-engineering\/op-sqlite|react-native-keychain|react-native-get-random-values)$/;
+  const files = appFiles(APP).map((p) => ({ path: relative(APP, p), text: readFileSync(p, 'utf8') }));
+  assert.ok(files.length >= 10);
+  for (const f of files) {
+    for (const imp of importsOf(f.text)) {
+      if (NATIVE.test(imp)) assert.equal(f.path, join('platform', 'native.ts'), `${f.path} imports native module ${imp}`);
+      // Shared code is reached through mobile/src only; no Node built-ins or the Node-only driver.
+      assert.ok(!imp.startsWith('node:') && !imp.endsWith('nodeSqlite.ts'), `${f.path} → ${imp}`);
+      // No Android-only or iOS-only JavaScript APIs in screens.
+      assert.doesNotMatch(imp, /ToastAndroid|ActionSheetIOS|PermissionsAndroid/, f.path);
+    }
+    assert.doesNotMatch(f.text, /ToastAndroid|ActionSheetIOS|PermissionsAndroid|BackHandler\.exitApp/, f.path);
+    assert.doesNotMatch(f.text, /firebase|sentry|amplitude|mixpanel|analytics|crashlytics|admob/i, f.path);
+  }
+});
+
+test('mobile/package.json: no analytics, crash-reporting, advertising or backend dependency', () => {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'mobile', 'package.json'), 'utf8')) as { dependencies: Record<string, string>; devDependencies: Record<string, string> };
+  const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+  for (const d of deps) assert.doesNotMatch(d, /firebase|sentry|bugsnag|amplitude|mixpanel|segment|analytics|crashlytics|admob|ads|supabase|onesignal|appcenter/i, d);
+  assert.deepEqual(Object.keys(pkg.dependencies).sort(), ['@op-engineering/op-sqlite', 'react', 'react-native', 'react-native-get-random-values', 'react-native-keychain', 'react-native-safe-area-context']);
+  for (const v of Object.values(pkg.dependencies)) assert.match(v, /^\d+\.\d+\.\d+$/, 'exact versions only');
+});
+
+test('Android manifest: only the INTERNET permission, backup disabled, cleartext disabled', () => {
+  const m = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'AndroidManifest.xml'), 'utf8');
+  const perms = [...m.matchAll(/<uses-permission android:name="([^"]+)"(?![^>]*tools:node="remove")/g)].map((x) => x[1]);
+  assert.deepEqual(perms, ['android.permission.INTERNET']);
+  assert.match(m, /android:allowBackup="false"/);
+  assert.match(m, /android:dataExtractionRules="@xml\/data_extraction_rules"/);
+  assert.match(m, /android:usesCleartextTraffic="false"/);
+});
