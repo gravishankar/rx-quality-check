@@ -3,7 +3,16 @@
 Proposal for review (2026-11-13). Nothing here is merged into `main` or shipped in a build. The app's
 drug list stays at the current 14 drugs until we approve a stage.
 
-## 1. What we are asked to approve
+## Decisions (2026-11-13)
+
+- **F1 approved as a bounded correction.** No catalog activation and no distribution yet.
+- **Staged expansion approved in principle; Stage 1 on hold** until the shared correctness findings
+  (`docs/CORRECTNESS_FINDINGS.md`) are resolved.
+- **F2 scheduled after the shared correctness fixes.**
+- **F3:** dextroamphetamine/amphetamine stays inactive until its mixed-salt handling is independently
+  validated.
+
+## 1. What we were asked to approve
 
 1. **App fix F1** (salt words in the recall search), with the results below.
 2. **The staged activation plan** (section 6), starting with Stage 1 (68 drugs).
@@ -69,8 +78,9 @@ replayed by `tests/integration/f1_salt_search.test.ts`.
 
 What this shows:
 
-- **No false negatives introduced:** no record found before F1 is lost (last column), and no
-  product moves toward a no-match.
+- **No regressions observed in the tested cases:** in these 18 cases no record found before F1 is lost
+  (last column) and no product moves toward a no-match. This is evidence from the cases tested, not
+  proof that F1 can never cause a false negative.
 - **Five false no-matches fixed:** citalopram, doxycycline hyclate, hydroxyzine (hydrochloride and
   pamoate) and clindamycin palmitate went from "No match" to "Possible match" because relevant recall
   records are now found.
