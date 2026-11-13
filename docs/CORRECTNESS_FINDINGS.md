@@ -15,14 +15,14 @@ device behavior not verifiable here · **M** missing or future feature.
 
 | # | Finding | Priority | Kind | Disposition |
 |---|---|---|---|---|
-| 1 | Ingredient strengths lose their association with names | P1 | D | Reopened in review round 2 (R2-1) and fixed; pending re-review |
+| 1 | Ingredient strengths lose their association with names | P1 | D | Reopened in review round 2 (R2-1); fix passed re-review for the reproduced cases |
 | 2 | Recall query omits aliases; pagination ≠ search coverage | P1 | D | Fixed (C2a–b) |
-| 3 | Incomplete repackager-source resolution | P1 | D/T | Reopened in review round 2 (R2-2, R2-3) and fixed; pending re-review |
+| 3 | Incomplete repackager-source resolution | P1 | D/T | Reopened in review round 2 (R2-2, R2-3); fixes passed re-review for the reproduced cases |
 | 4 | Malformed freshness dates fail open | P1 | D | Fixed (C4) |
 | 5 | Offline matching ignores lot and package | P2 | D | Fixed |
 | 6 | History pairs latest assessment with oldest fill | P2 | D | Fixed |
-| 7 | Delete-all leaves stale storage in the session | P2 | D | Reopened in review round 2 (R2-4) and fixed; device check remains |
-| 8 | Scanner image retention, external camera | P2 | T/V | Reopened in review round 2 (R2-5) and fixed; device check remains |
+| 7 | Delete-all leaves stale storage in the session | P2 | D | Reopened in review round 2 (R2-4); fix passed re-review for the reproduced cases; device check remains |
+| 8 | Scanner image retention, external camera | P2 | T/V | Reopened in rounds 2 (R2-5) and 3 (R3-1, R3-2) and fixed; device check remains |
 | 9 | Encryption and native privacy need device evidence | P2 | V | Code-checkable parts pinned; rest deferred (device gate) |
 | 10 | Lot confirmation: UI and engine disagree | P3 | D | Fixed |
 | 11 | Release mechanism forces a guess | P3 | T | Fixed (no guess, no check); OD-34 decision |
@@ -193,12 +193,22 @@ with a failing regression test before its fix, one commit per issue.
 | R2-1 | 1 | Recall strengths paired by each name's *first appearance anywhere* in the notice. A title in one order followed by a strength block in the other ("Amlodipine and Atorvastatin Tablets (Atorvastatin/Amlodipine 20 mg/10 mg)") was falsely ruled out; the same block with swapped values was not caught | Yes (SYNTHETIC text, real ingredients and strengths) | `r2_local_strength_association.test.ts` (6) | Each expression is paired with the shortest run just before it (after the previous expression) that names every ingredient once. When no such run exists the pairing is not established: equal values are kept with `STRENGTH_ASSOCIATION_UNCLEAR` (never "same"); only values that cannot match under any pairing are a difference. No classification changed on the 287 recorded cases | `9266fd5` |
 | R2-2 | 3 | A declared source that the NDC Directory did not list under its NDC, or listed with another formulation, was skipped silently, so one verified branch still made the chain `VERIFIED` | Yes (real furosemide chain, SYNTHETIC extra branch) | `c3_source_chain.test.ts` R2-2 (2) | A rejected branch marks the chain incomplete: `PARTIAL` with another verified branch, otherwise not established; never used for matching | `0cd5d24` |
 | R2-3 | 3 | Source formulation check compared names and strengths but not salts | Yes | `c3_source_chain.test.ts` R2-3 (2) | Salts must be equal; an unknown salt on either side cannot be verified | `a602869` (tests in `0cd5d24`) |
-| R2-4 | 7 | Delete-all dropped its database handle before destroy ran; after a failed destroy a retry skipped destruction, deleted only the key and reported success while the database stayed on disk | Yes, with a **file-backed** SQLite database persisting across opens | `r2_delete_retry.test.ts` (3): failed destroy then retry (a fresh process reopening the file sees no data); key failure after destroy; old handles refused | The database stays the deletion target until destroy succeeds, and the key until its deletion succeeds; a retry finishes what is left and never destroys twice | `cb0836b` |
+| R2-4 | 7 | Delete-all dropped its database handle before destroy ran; after a failed destroy a retry skipped destruction, deleted only the key and reported success while the database stayed on disk | Yes, with a **file-backed** SQLite database persisting across opens | `r2_delete_retry.test.ts` (3): failed destroy then retry (a new connection in the same process reopening the file sees no data; an app restart is not exercised — device check. Commit message `cb0836b` overstated this as a "fresh process"); key failure after destroy; old handles refused | The database stays the deletion target until destroy succeeds, and the key until its deletion succeeds; a retry finishes what is left and never destroys twice | `cb0836b` |
 | R2-5 | 8 | The native scanner computed whether the photo was deleted, but every caller ignored it (cancel, success, unreadable, errors, launch failure, startup leftovers) | Yes (screen tests with SYNTHETIC native results; source check) | jest `scan.test.tsx` R2-5 (5); `p_scanner_privacy.test.ts` R2-5 | Every path reports `photoDeleted`; the patient is told on every path when a photo could not be removed; leftovers retried at each scan start, never while a scan is pending (avoids deleting a new scan's file) | `fbcefc7` |
 
 Limits that remain: pairing that cannot be established keeps the record as a possible match (more
 pharmacist questions, by design); whether a phone's camera app or file system actually lets the photo be
 removed is a device check.
+
+## 3b. Independent review, round 3 (of head `e1dc7e9`)
+
+R2-1 to R2-4 passed re-review for the reproduced cases. R2-5 was partially unresolved:
+
+| ID | Issue | Reproduced | Regression test | Fix | Commit |
+|---|---|---|---|---|---|
+| R3-1 | The cleanup warning was attached only to the confirmation, scan-problem and cancel screens; a scan of "WARFARIN 5 MG TABLETS" with `photoDeleted: false` reached the excluded screen with no warning | Yes, on five routes: excluded, unsupported, missing information, ambiguous product, source error | jest `scan.test.tsx` R3 (6): each route (SYNTHETIC scanner output; ambiguous uses SYNTHETIC copies of the real Sun record and a SYNTHETIC UPC-A), and the warning persisting across screens until a later clean scan | Cleanup status is app state set from every scanner report and shown on every screen; an error that does not report the photo never clears it | `2ac68bf` |
+| R3-2 | The native outer error path and the camera-launch-failure paths reported cleanup from the current photo alone, ignoring an outstanding leftover | Yes (source-level check of every report site) | `p_scanner_privacy.test.ts` R3 | Every report requires the current photo removed and no leftover remaining | `381637f` |
+| R3-3 | The R2-4 test comment and register claimed a "fresh process" reopened the database; it is a new connection in the same process | — | test title and comment corrected | Wording; an app restart remains a device check | this commit |
 
 ## 4. Architecture and future work
 
@@ -247,13 +257,13 @@ Android networking honors `credentials: 'omit'` and `redirect: 'error'` (its sha
 store cookies); app-switcher thumbnail (OD-21); uninstall/reinstall; photo cache after a killed process;
 camera-app copies of the photo.
 
-## 6. Verification (head after review round 2)
+## 6. Verification (head after review round 3)
 
 | Command | Result |
 |---|---|
-| `npm test` | 557 tests, 557 pass, 0 fail, 0 skipped |
+| `npm test` | 558 tests, 558 pass, 0 fail, 0 skipped |
 | `npm run typecheck`, `npm run mobile:typecheck` | pass |
-| `npm run mobile:test` (jest) | 48 tests in 3 suites, all pass |
+| `npm run mobile:test` (jest) | 54 tests in 3 suites, all pass |
 | `npm run e2e` (recorded) | 13 scenarios pass |
 | `npm run config:validate` | OK |
 | Gradle `:app:compileDevReleaseJavaWithJavac` (offline) | pass. Debug flavor not compiled (artifacts not cached offline); no device run |

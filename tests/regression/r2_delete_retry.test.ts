@@ -62,7 +62,7 @@ const saveOne = async (s: StorageState) => {
   await r.store(V, () => ({ displayName: 'Metformin ER', catalogDrugId: 'metformin_er' })).save(id(), finding());
 };
 
-test('R2-4 reproduced: destroy fails once → retry destroys the same database (persistent file), then storage is fresh', async () => {
+test('R2-4 reproduced: destroy fails once → retry destroys the same database (persistent file), then storage is fresh (also through a new connection in the same process)', async () => {
   const f = fileDb();
   try {
     const k = keys();
@@ -76,7 +76,8 @@ test('R2-4 reproduced: destroy fails once → retry destroys the same database (
     assert.equal(f.calls(), 2, 'the retry destroys the database again — the target was kept');
     assert.equal(k.deleted, 1);
     assert.equal((await ready(retried).repos.medications.list()).length, 0, 'nothing from before survives');
-    // A completely new process opening the same file sees no data either.
+    // A new connection in the same process, opening the same file, sees no data either. (A separate
+    // process, i.e. an app restart, is not exercised here; it is part of the device checks.)
     const again = createStorageLifecycle({ enabled: true, open: f.open, keyStore: keys(), deps });
     assert.equal((await ready(await again.start()).repos.medications.list()).length, 0);
   } finally {
