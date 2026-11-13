@@ -135,6 +135,13 @@ products), and the change summary is reviewed before release. `download.open.fda
 26.9 MB) is blocked in the current build environment; either allow that host for builds or page through
 `api.fda.gov` (search_after paging).
 
+**Proposed reviewed tier (2026-11-13).** `data/proposals/EXTENDED_DRUG_LIST.md` and
+`data/proposals/drug_catalog_0.3.0-proposed.json`: the CMS Part D 2023 top 200 by total claims, same
+method as the original 15, verified on RxNav and openFDA and checked with the app's own code
+(`scripts/catalog/`). 130 drugs to add active (coverage of all Part D claims 29.1% → 74.5%); 17 added
+switched off: 14 until **app fix F1** (salt words in the recall-search name), 2 for route review, 1
+pending OD-32. Needs team approval (OD-2) before it replaces `data/drug_catalog.json`.
+
 **Safeguards before release.**
 
 1. OD-32 decided: whether the exclusion criteria widen (for example, narrow-therapeutic-index drugs such

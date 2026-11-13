@@ -46,6 +46,11 @@ words bisulfate, oxalate, hydrobromide, hyclate, mononitrate, propanediol, dihyd
 phosphate, gluconate, palmitate, tromethamine, saccharate and aspartate, so the recall search uses the
 plain ingredient name. Then re-run step 4 and switch those drugs on.
 
+**Worth a second look before approving:** methotrexate (an immunosuppressant used outside
+transplant, so the transplant criterion does not cover it); sacubitril/valsartan (0 recall records
+found, plausible for a brand-only product); timolol and estradiol (most of their claims are eye drops
+or patches, which the app does not cover).
+
 ## The list
 
 Columns: CMS rank; CMS generic name(s); 2023 claims; RxNorm ingredient(s) with RxCUI; decision;
