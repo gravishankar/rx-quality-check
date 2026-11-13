@@ -6,7 +6,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { splitIngredientName as after } from '../../mobile/src/rules/ingredients.ts';
-import { splitIngredientName as before } from '../../build/f1/ingredients_before.ts';
+import { splitIngredientName as before } from '../../tests/fixtures/f1/ingredients_before_f1.ts';
 
 const get = async (tty: string) =>
   ((await (await fetch(`https://rxnav.nlm.nih.gov/REST/allconcepts.json?tty=${tty}`)).json()) as { minConceptGroup: { minConcept: { rxcui: string; name: string }[] } }).minConceptGroup.minConcept;
