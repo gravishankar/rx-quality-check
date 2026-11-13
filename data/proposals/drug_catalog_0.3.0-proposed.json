@@ -3388,7 +3388,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Clopidogrel Bisulfate; 13,031,458 claims. FDA oral prescription products found: 68 (tablet, film coated (51), tablet (17)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'clopidogrel bisulfate' and finds 1 FDA recall records; the ingredient name 'clopidogrel' finds 7."
+      "notes": "CMS Part D 2023 generic name(s): Clopidogrel Bisulfate; 13,031,458 claims. FDA oral prescription products found: 68 (tablet, film coated (51), tablet (17)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 7 records; before F1 1). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "tramadol",
@@ -3473,7 +3473,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Escitalopram Oxalate; 11,831,986 claims. FDA oral prescription products found: 155 (tablet, film coated (136), tablet (11), solution (7), capsule (1)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'escitalopram oxalate' and finds 0 FDA recall records; the ingredient name 'escitalopram' finds 2."
+      "notes": "CMS Part D 2023 generic name(s): Escitalopram Oxalate; 11,831,986 claims. FDA oral prescription products found: 155 (tablet, film coated (136), tablet (11), solution (7), capsule (1)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 2 records; before F1 0). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "alprazolam",
@@ -3933,7 +3933,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Citalopram Hydrobromide; 6,899,092 claims. FDA oral prescription products found: 116 (tablet, film coated (71), tablet (37), solution (6), capsule (2)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'citalopram hydrobromide' and finds 1 FDA recall records; the ingredient name 'citalopram' finds 8."
+      "notes": "CMS Part D 2023 generic name(s): Citalopram Hydrobromide; 6,899,092 claims. FDA oral prescription products found: 116 (tablet, film coated (71), tablet (37), solution (6), capsule (2)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 8 records; before F1 1). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "finasteride",
@@ -4087,7 +4087,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Doxycycline Hyclate, Doxycycline Monohydrate; 7,687,929 claims. FDA oral prescription products found: 624 (capsule (164), tablet, film coated (65), tablet (44), tablet, delayed release (20)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'doxycycline hyclate' and finds 17 FDA recall records; the ingredient name 'doxycycline' finds 30."
+      "notes": "CMS Part D 2023 generic name(s): Doxycycline Hyclate, Doxycycline Monohydrate; 7,687,929 claims. FDA oral prescription products found: 624 (capsule (164), tablet, film coated (65), tablet (44), tablet, delayed release (20)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 30 records; before F1 17). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "hydralazine",
@@ -4284,7 +4284,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "RxNorm models isosorbide mononitrate as a salt (PIN 28004) of the ingredient isosorbide; scope is limited to it. Isosorbide dinitrate is a different ingredient (IN 6058) and is not in this list. CMS Part D 2023 generic name(s): Isosorbide Mononitrate; 4,807,944 claims. FDA oral prescription products found: 62 (tablet, extended release (48), tablet (14)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'isosorbide mononitrate' and finds 3 FDA recall records; the ingredient name 'isosorbide' finds 11."
+      "notes": "RxNorm models isosorbide mononitrate as a salt (PIN 28004) of the ingredient isosorbide; scope is limited to it. Isosorbide dinitrate is a different ingredient (IN 6058) and is not in this list. CMS Part D 2023 generic name(s): Isosorbide Mononitrate; 4,807,944 claims. FDA oral prescription products found: 62 (tablet, extended release (48), tablet (14)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 11 records; before F1 3). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "glimepiride",
@@ -4353,7 +4353,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Dapagliflozin Propanediol; 4,296,969 claims. FDA oral prescription products found: 50 (tablet, film coated (35), tablet (15)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'dapagliflozin propanediol' and finds 0 FDA recall records; the ingredient name 'dapagliflozin' finds 1."
+      "notes": "CMS Part D 2023 generic name(s): Dapagliflozin Propanediol; 4,296,969 claims. FDA oral prescription products found: 50 (tablet, film coated (35), tablet (15)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 1 records; before F1 0). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "estradiol",
@@ -4387,7 +4387,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Hydroxyzine Hcl, Hydroxyzine Pamoate; 5,779,729 claims. FDA oral prescription products found: 548 (tablet, film coated (116), capsule (82), tablet (62), solution (10)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'hydroxyzine dihydrochloride' and finds 0 FDA recall records; the ingredient name 'hydroxyzine' finds 24."
+      "notes": "CMS Part D 2023 generic name(s): Hydroxyzine Hcl, Hydroxyzine Pamoate; 5,779,729 claims. FDA oral prescription products found: 548 (tablet, film coated (116), capsule (82), tablet (62), solution (10)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 24 records; before F1 0). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "lamotrigine",
@@ -4438,7 +4438,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Sitagliptin Phosphate; 4,027,265 claims. FDA oral prescription products found: 36 (tablet, film coated (23), tablet (12), solution (1)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'sitagliptin phosphate' and finds 1 FDA recall records; the ingredient name 'sitagliptin' finds 2."
+      "notes": "CMS Part D 2023 generic name(s): Sitagliptin Phosphate; 4,027,265 claims. FDA oral prescription products found: 36 (tablet, film coated (23), tablet (12), solution (1)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 2 records; before F1 1). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "valsartan",
@@ -5122,7 +5122,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Chlorhexidine Gluconate; 2,443,173 claims. FDA oral prescription products found: 35 (rinse (25), liquid (7), solution (3)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'chlorhexidine gluconate' and finds 83 FDA recall records; the ingredient name 'chlorhexidine' finds 86."
+      "notes": "CMS Part D 2023 generic name(s): Chlorhexidine Gluconate; 2,443,173 claims. FDA oral prescription products found: 35 (rinse (25), liquid (7), solution (3)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 86 records; before F1 83). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "hydroxychloroquine",
@@ -5258,7 +5258,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Clindamycin Hcl; 2,222,276 claims. FDA oral prescription products found: 103 (capsule (93), granule, for solution (6), solution (2), capsule, gelatin coated (1)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'clindamycin palmitate' and finds 2 FDA recall records; the ingredient name 'clindamycin' finds 50."
+      "notes": "CMS Part D 2023 generic name(s): Clindamycin Hcl; 2,222,276 claims. FDA oral prescription products found: 103 (capsule (93), granule, for solution (6), solution (2), capsule, gelatin coated (1)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 50 records; before F1 2). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "benazepril",
@@ -5327,7 +5327,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Dextroamphetamine/Amphetamine; 2,137,883 claims. FDA oral prescription products found: 218 (tablet (113), capsule, extended release (99), capsule (6)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'amphetamine' + 'amphetamine aspartate' + 'dextroamphetamine' + 'dextroamphetamine saccharate' and finds 35 FDA recall records; the ingredient name 'amphetamine' + 'dextroamphetamine' finds 37."
+      "notes": "CMS Part D 2023 generic name(s): Dextroamphetamine/Amphetamine; 2,137,883 claims. FDA oral prescription products found: 218 (tablet (113), capsule, extended release (99), capsule (6)). INACTIVE: Recall-search gap remains after F1: mixed-salt product (amphetamine + amphetamine aspartate + dextroamphetamine + dextroamphetamine saccharate) finds 35 records vs 37 by ingredient name; needs follow-up F3 (merge salts of the same ingredient in one product)."
     },
     {
       "id": "metronidazole",
@@ -5361,7 +5361,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Levocetirizine Dihydrochloride; 2,092,693 claims. FDA oral prescription products found: 45 (tablet (25), tablet, film coated (13), solution (6), tablet, coated (1)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'levocetirizine dihydrochloride' and finds 3 FDA recall records; the ingredient name 'levocetirizine' finds 4."
+      "notes": "CMS Part D 2023 generic name(s): Levocetirizine Dihydrochloride; 2,092,693 claims. FDA oral prescription products found: 45 (tablet (25), tablet, film coated (13), solution (6), tablet, coated (1)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 4 records; before F1 3). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "enalapril",
@@ -5514,7 +5514,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Pramipexole Di-Hcl; 1,741,633 claims. FDA oral prescription products found: 137 (tablet (94), tablet, extended release (43)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'pramipexole dihydrochloride' and finds 17 FDA recall records; the ingredient name 'pramipexole' finds 23."
+      "notes": "CMS Part D 2023 generic name(s): Pramipexole Di-Hcl; 1,741,633 claims. FDA oral prescription products found: 137 (tablet (94), tablet, extended release (43)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 23 records; before F1 17). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "digoxin",
@@ -5635,7 +5635,7 @@
         "source": "CMS Medicare Part D Prescribers - by Geography and Drug, 2023, National (MUP_DPR_RY25_P04_V10_DY23_Geo.csv, SHA-256 876ff262...f4f8): top 200 generic names by total claims; RxNav (exact name, IN and PIN); openFDA NDC Directory (oral, human prescription)",
         "verified_on": "2026-11-13"
       },
-      "notes": "CMS Part D 2023 generic name(s): Ketorolac Tromethamine; 1,551,666 claims. FDA oral prescription products found: 55 (tablet, film coated (53), tablet (2)). INACTIVE: Needs app fix F1 (salt words): the app's recall search uses 'ketorolac tromethamine' and finds 33 FDA recall records; the ingredient name 'ketorolac' finds 58."
+      "notes": "CMS Part D 2023 generic name(s): Ketorolac Tromethamine; 1,551,666 claims. FDA oral prescription products found: 55 (tablet, film coated (53), tablet (2)). INACTIVE: Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 58 records; before F1 33). Held inactive until F1 is approved, then Stage 4."
     },
     {
       "id": "ergocalciferol",

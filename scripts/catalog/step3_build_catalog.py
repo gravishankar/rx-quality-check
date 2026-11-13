@@ -43,13 +43,23 @@ def main(step2, aliases_path, out_catalog, out_review):
     d = json.loads(Path(step2).read_text())
     # From step 4: drugs whose recall search, as the app builds it today, finds fewer records than
     # the plain ingredient name (the app keeps an unrecognised salt word in the search name).
-    gaps_file = Path(out_review).parent / "name_gaps.json"
+    # Recall-search gaps found before app fix F1, and the same comparison after F1 (step 4b re-run).
+    before_file = Path(out_review).parent / "name_gaps_before_f1.json"
+    after_file = Path(out_review).parent / "name_gaps.json"
     search_gaps = {}
-    if gaps_file.exists():
-        for rank, cms, app_names, ing_names, app_n, ing_n in json.loads(gaps_file.read_text()):
-            if isinstance(app_n, int) and isinstance(ing_n, int) and app_n < ing_n:
-                search_gaps[cms] = (f"Needs app fix F1 (salt words): the app's recall search uses {' + '.join(repr(n) for n in app_names)} "
-                                    f"and finds {app_n} FDA recall records; the ingredient name {' + '.join(repr(n) for n in ing_names)} finds {ing_n}")
+    if before_file.exists():
+        after = {g[1]: g for g in json.loads(after_file.read_text())} if after_file.exists() else {}
+        for rank, cms, app_names, ing_names, app_n, ing_n in json.loads(before_file.read_text()):
+            if not (isinstance(app_n, int) and isinstance(ing_n, int) and app_n < ing_n):
+                continue
+            now = after.get(cms)
+            if now is None or (isinstance(now[4], int) and isinstance(now[5], int) and now[4] >= now[5]):
+                found = now[4] if now else ing_n
+                search_gaps[cms] = (f"Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds {found} records; before F1 {app_n}). "
+                                    "Held inactive until F1 is approved, then Stage 4")
+            else:
+                search_gaps[cms] = (f"Recall-search gap remains after F1: mixed-salt product ({' + '.join(now[2])}) finds {now[4]} records vs {now[5]} by ingredient name; "
+                                    "needs follow-up F3 (merge salts of the same ingredient in one product)")
     aliases = json.loads(Path(aliases_path).read_text()) if Path(aliases_path).exists() else {}
     cat = json.loads((ROOT / "data" / "drug_catalog.json").read_text())
     pol = json.loads((ROOT / "data" / "exclusion_policy.json").read_text())

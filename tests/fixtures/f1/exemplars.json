@@ -1,0 +1,1118 @@
+{
+ "clopidogrel bisulfate tablet": {
+  "product_ndc": "60505-0253",
+  "generic_name": "clopidogrel bisulfate",
+  "labeler_name": "Apotex Corp.",
+  "brand_name": "Clopidogrel",
+  "active_ingredients": [
+   {
+    "name": "CLOPIDOGREL BISULFATE",
+    "strength": "75 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "60505-0253-2",
+    "description": "90 TABLET, FILM COATED in 1 BOTTLE (60505-0253-2)",
+    "marketing_start_date": "20120517",
+    "sample": false
+   },
+   {
+    "package_ndc": "60505-0253-3",
+    "description": "1000 TABLET, FILM COATED in 1 BOTTLE (60505-0253-3)",
+    "marketing_start_date": "20120517",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Apotex Corp."
+   ],
+   "rxcui": [
+    "309362",
+    "749196"
+   ],
+   "spl_set_id": [
+    "edae8df1-caf9-ff72-1304-5ae8b355f8e7"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "08I79HTP27"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "5860dc47-c4da-20b6-32da-6aa74c3fa1dc",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20120517",
+  "product_id": "60505-0253_5860dc47-c4da-20b6-32da-6aa74c3fa1dc",
+  "application_number": "ANDA076274",
+  "brand_name_base": "Clopidogrel",
+  "pharm_class": [
+   "Cytochrome P450 2C8 Inhibitors [MoA]",
+   "Decreased Platelet Aggregation [PE]",
+   "P2Y12 Platelet Inhibitor [EPC]",
+   "P2Y12 Receptor Antagonists [MoA]"
+  ]
+ },
+ "escitalopram oxalate tablet": {
+  "product_ndc": "68788-4171",
+  "generic_name": "escitalopram",
+  "labeler_name": "Preferred Pharmaceuticals Inc.",
+  "brand_name": "escitalopram",
+  "active_ingredients": [
+   {
+    "name": "ESCITALOPRAM OXALATE",
+    "strength": "20 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "68788-4171-1",
+    "description": "100 TABLET, FILM COATED in 1 BOTTLE (68788-4171-1)",
+    "marketing_start_date": "20260724",
+    "sample": false
+   },
+   {
+    "package_ndc": "68788-4171-3",
+    "description": "30 TABLET, FILM COATED in 1 BOTTLE (68788-4171-3)",
+    "marketing_start_date": "20260724",
+    "sample": false
+   },
+   {
+    "package_ndc": "68788-4171-6",
+    "description": "60 TABLET, FILM COATED in 1 BOTTLE (68788-4171-6)",
+    "marketing_start_date": "20260724",
+    "sample": false
+   },
+   {
+    "package_ndc": "68788-4171-8",
+    "description": "28 TABLET, FILM COATED in 1 BOTTLE (68788-4171-8)",
+    "marketing_start_date": "20260724",
+    "sample": false
+   },
+   {
+    "package_ndc": "68788-4171-9",
+    "description": "90 TABLET, FILM COATED in 1 BOTTLE (68788-4171-9)",
+    "marketing_start_date": "20260724",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Preferred Pharmaceuticals Inc."
+   ],
+   "rxcui": [
+    "351250"
+   ],
+   "spl_set_id": [
+    "9ddd1f24-3ebd-4307-bb23-6acd742cd140"
+   ],
+   "unii": [
+    "5U85DBW7LO"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "9ddd1f24-3ebd-4307-bb23-6acd742cd140",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20260724",
+  "product_id": "68788-4171_9ddd1f24-3ebd-4307-bb23-6acd742cd140",
+  "application_number": "ANDA090939",
+  "brand_name_base": "escitalopram",
+  "pharm_class": [
+   "Serotonin Reuptake Inhibitor [EPC]",
+   "Serotonin Uptake Inhibitors [MoA]"
+  ]
+ },
+ "citalopram hydrobromide tablet": {
+  "product_ndc": "0378-6231",
+  "generic_name": "citalopram",
+  "labeler_name": "Mylan Pharmaceuticals Inc.",
+  "brand_name": "Citalopram",
+  "active_ingredients": [
+   {
+    "name": "CITALOPRAM HYDROBROMIDE",
+    "strength": "10 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "0378-6231-01",
+    "description": "100 TABLET, FILM COATED in 1 BOTTLE, PLASTIC (0378-6231-01)",
+    "marketing_start_date": "20080728",
+    "sample": false
+   },
+   {
+    "package_ndc": "0378-6231-05",
+    "description": "500 TABLET, FILM COATED in 1 BOTTLE, PLASTIC (0378-6231-05)",
+    "marketing_start_date": "20080728",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Mylan Pharmaceuticals Inc."
+   ],
+   "rxcui": [
+    "200371",
+    "283672",
+    "309314"
+   ],
+   "spl_set_id": [
+    "825c0c49-5fbf-6d8b-cb8c-94ebf0eda043"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "upc": [
+    "0303786232017",
+    "0303786231010",
+    "0303786233014"
+   ],
+   "unii": [
+    "I1E9D14F36"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "55e0b75b-3772-4f5b-a162-1f70719daf3d",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20080728",
+  "product_id": "0378-6231_55e0b75b-3772-4f5b-a162-1f70719daf3d",
+  "application_number": "ANDA077042",
+  "brand_name_base": "Citalopram",
+  "pharm_class": [
+   "Serotonin Reuptake Inhibitor [EPC]",
+   "Serotonin Uptake Inhibitors [MoA]"
+  ]
+ },
+ "doxycycline hyclate capsule": {
+  "product_ndc": "85534-0048",
+  "generic_name": "doxycycline hyclate",
+  "labeler_name": "HAWAII REPACK, INC",
+  "brand_name": "doxycycline hyclate",
+  "active_ingredients": [
+   {
+    "name": "DOXYCYCLINE HYCLATE",
+    "strength": "100 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "85534-0048-0",
+    "description": "10 CAPSULE in 1 BOTTLE (85534-0048-0)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-1",
+    "description": "14 CAPSULE in 1 BOTTLE (85534-0048-1)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-2",
+    "description": "20 CAPSULE in 1 BOTTLE (85534-0048-2)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-3",
+    "description": "28 CAPSULE in 1 BOTTLE (85534-0048-3)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-4",
+    "description": "30 CAPSULE in 1 BOTTLE (85534-0048-4)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-5",
+    "description": "60 CAPSULE in 1 BOTTLE (85534-0048-5)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-6",
+    "description": "90 CAPSULE in 1 BOTTLE (85534-0048-6)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   },
+   {
+    "package_ndc": "85534-0048-7",
+    "description": "120 CAPSULE in 1 BOTTLE (85534-0048-7)",
+    "marketing_start_date": "20260709",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "HAWAII REPACK, INC"
+   ],
+   "rxcui": [
+    "1649988"
+   ],
+   "spl_set_id": [
+    "88c429a1-351d-432e-b69b-d7a0afca482a"
+   ],
+   "unii": [
+    "19XTS3T51U"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "CAPSULE",
+  "spl_id": "5b062e6b-89a6-296d-e063-6294a90a3aff",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "19840911",
+  "product_id": "85534-0048_5b062e6b-89a6-296d-e063-6294a90a3aff",
+  "application_number": "ANDA062500",
+  "brand_name_base": "doxycycline hyclate",
+  "pharm_class": [
+   "Tetracycline-class Drug [EPC]",
+   "Tetracyclines [CS]"
+  ]
+ },
+ "doxycycline monohydrate capsule": {
+  "product_ndc": "72189-358",
+  "generic_name": "Doxycycline Monohydrate",
+  "labeler_name": "Direct_Rx",
+  "brand_name": "Doxycycline Monohydrate",
+  "active_ingredients": [
+   {
+    "name": "DOXYCYCLINE",
+    "strength": "100 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "72189-358-20",
+    "description": "20 CAPSULE in 1 BOTTLE (72189-358-20)",
+    "marketing_start_date": "20220526",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20261231",
+  "openfda": {
+   "manufacturer_name": [
+    "Direct_Rx"
+   ],
+   "rxcui": [
+    "1649990"
+   ],
+   "spl_set_id": [
+    "dfef600c-bceb-fbc9-e053-2a95a90ae6c0"
+   ],
+   "nui": [
+    "N0000175882",
+    "N0000007948"
+   ],
+   "pharm_class_epc": [
+    "Tetracycline-class Drug [EPC]"
+   ],
+   "pharm_class_cs": [
+    "Tetracyclines [Chemical/Ingredient]"
+   ],
+   "unii": [
+    "N12000U13O"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "CAPSULE",
+  "spl_id": "2c4c8dd5-f079-0339-e063-6394a90afedb",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20220526",
+  "product_id": "72189-358_2c4c8dd5-f079-0339-e063-6394a90afedb",
+  "application_number": "ANDA065053",
+  "brand_name_base": "Doxycycline Monohydrate",
+  "pharm_class": [
+   "Tetracycline-class Drug [EPC]",
+   "Tetracyclines [CS]"
+  ]
+ },
+ "isosorbide mononitrate ER tablet": {
+  "product_ndc": "68071-4290",
+  "generic_name": "Isosorbide Mononitrate",
+  "labeler_name": "NuCare Pharmaceuticals,Inc.",
+  "brand_name": "Isosorbide Mononitrate",
+  "active_ingredients": [
+   {
+    "name": "ISOSORBIDE MONONITRATE",
+    "strength": "30 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "68071-4290-3",
+    "description": "30 TABLET, EXTENDED RELEASE in 1 BOTTLE (68071-4290-3)",
+    "marketing_start_date": "20180219",
+    "sample": false
+   },
+   {
+    "package_ndc": "68071-4290-6",
+    "description": "60 TABLET, EXTENDED RELEASE in 1 BOTTLE (68071-4290-6)",
+    "marketing_start_date": "20180219",
+    "sample": false
+   },
+   {
+    "package_ndc": "68071-4290-9",
+    "description": "90 TABLET, EXTENDED RELEASE in 1 BOTTLE (68071-4290-9)",
+    "marketing_start_date": "20180219",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "NuCare Pharmaceuticals,Inc."
+   ],
+   "rxcui": [
+    "317110"
+   ],
+   "spl_set_id": [
+    "65935a15-a023-1941-e053-2991aa0a5eb4"
+   ],
+   "upc": [
+    "0368071429091"
+   ],
+   "nui": [
+    "N0000175415",
+    "M0014874",
+    "N0000009909"
+   ],
+   "pharm_class_epc": [
+    "Nitrate Vasodilator [EPC]"
+   ],
+   "pharm_class_cs": [
+    "Nitrates [CS]"
+   ],
+   "pharm_class_pe": [
+    "Vasodilation [PE]"
+   ],
+   "unii": [
+    "LX1OH63030"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, EXTENDED RELEASE",
+  "spl_id": "1a3dc619-6b11-21b4-e063-6294a90acb1e",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20170105",
+  "product_id": "68071-4290_1a3dc619-6b11-21b4-e063-6294a90acb1e",
+  "application_number": "ANDA075522",
+  "brand_name_base": "Isosorbide Mononitrate",
+  "pharm_class": [
+   "Nitrate Vasodilator [EPC]",
+   "Nitrates [CS]",
+   "Vasodilation [PE]"
+  ]
+ },
+ "dapagliflozin tablet": {
+  "product_ndc": "69097-388",
+  "generic_name": "DAPAGLIFLOZIN",
+  "labeler_name": "Cipla USA Inc.",
+  "brand_name": "DAPAGLIFLOZIN",
+  "active_ingredients": [
+   {
+    "name": "DAPAGLIFLOZIN PROPANEDIOL",
+    "strength": "5 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "69097-388-02",
+    "description": "30 TABLET, FILM COATED in 1 BOTTLE, PLASTIC (69097-388-02)",
+    "marketing_start_date": "20260406",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Cipla USA Inc."
+   ],
+   "rxcui": [
+    "1488569",
+    "1488574"
+   ],
+   "spl_set_id": [
+    "a2f86c0a-ce78-4d06-b5d8-ed457c8e3614"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "887K2391VH"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "a425ceed-bb59-48bb-be43-cf47dbe21fef",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20260406",
+  "product_id": "69097-388_a425ceed-bb59-48bb-be43-cf47dbe21fef",
+  "application_number": "ANDA211535",
+  "brand_name_base": "DAPAGLIFLOZIN",
+  "pharm_class": [
+   "Sodium-Glucose Cotransporter 2 Inhibitor [EPC]",
+   "Sodium-Glucose Transporter 2 Inhibitors [MoA]"
+  ]
+ },
+ "hydroxyzine hydrochloride tablet": {
+  "product_ndc": "80425-0394",
+  "generic_name": "hydroxyzine hydrochloride",
+  "labeler_name": "Advanced Rx of Tennessee, LLC",
+  "brand_name": "HYDROXYZINE HYDROCHLORIDE",
+  "active_ingredients": [
+   {
+    "name": "HYDROXYZINE DIHYDROCHLORIDE",
+    "strength": "50 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "80425-0394-1",
+    "description": "30 TABLET, FILM COATED in 1 BOTTLE (80425-0394-1)",
+    "marketing_start_date": "20240524",
+    "sample": false
+   },
+   {
+    "package_ndc": "80425-0394-2",
+    "description": "60 TABLET, FILM COATED in 1 BOTTLE (80425-0394-2)",
+    "marketing_start_date": "20240524",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20261231",
+  "openfda": {
+   "manufacturer_name": [
+    "Advanced Rx of Tennessee, LLC"
+   ],
+   "rxcui": [
+    "995281"
+   ],
+   "spl_set_id": [
+    "19b08f92-da63-021f-e063-6394a90a16e2"
+   ],
+   "unii": [
+    "76755771U3"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "19b094e5-8afa-94c1-e063-6294a90a297f",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20240524",
+  "product_id": "80425-0394_19b094e5-8afa-94c1-e063-6294a90a297f",
+  "application_number": "ANDA217652",
+  "brand_name_base": "HYDROXYZINE HYDROCHLORIDE",
+  "pharm_class": [
+   "Antihistamine [EPC]",
+   "Histamine Receptor Antagonists [MoA]"
+  ]
+ },
+ "hydroxyzine pamoate capsule": {
+  "product_ndc": "43063-172",
+  "generic_name": "hydroxyzine pamoate",
+  "labeler_name": "PD-Rx Pharmaceuticals, Inc.",
+  "brand_name": "hydroxyzine pamoate",
+  "active_ingredients": [
+   {
+    "name": "HYDROXYZINE PAMOATE",
+    "strength": "25 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "43063-172-04",
+    "description": "4 CAPSULE in 1 BOTTLE, PLASTIC (43063-172-04)",
+    "marketing_start_date": "20140628",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "PD-Rx Pharmaceuticals, Inc."
+   ],
+   "spl_set_id": [
+    "53153595-41b9-4b2d-8b7d-0ffd29fdd1d8"
+   ],
+   "unii": [
+    "M20215MUFR"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "CAPSULE",
+  "spl_id": "5fa0fb83-5b06-b5a4-e063-6294a90af6cb",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "19811214",
+  "product_id": "43063-172_5fa0fb83-5b06-b5a4-e063-6294a90af6cb",
+  "application_number": "ANDA087479",
+  "brand_name_base": "hydroxyzine pamoate",
+  "pharm_class": [
+   "Antihistamine [EPC]",
+   "Histamine Receptor Antagonists [MoA]"
+  ]
+ },
+ "sitagliptin tablet": {
+  "product_ndc": "0781-5766",
+  "generic_name": "Sitagliptin Phosphate",
+  "labeler_name": "Sandoz Inc",
+  "brand_name": "Sitagliptin Phosphate",
+  "active_ingredients": [
+   {
+    "name": "SITAGLIPTIN PHOSPHATE",
+    "strength": "25 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "0781-5766-31",
+    "description": "30 TABLET, FILM COATED in 1 BOTTLE (0781-5766-31)",
+    "marketing_start_date": "20260114",
+    "sample": false
+   },
+   {
+    "package_ndc": "0781-5766-92",
+    "description": "90 TABLET, FILM COATED in 1 BOTTLE (0781-5766-92)",
+    "marketing_start_date": "20260114",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Sandoz Inc"
+   ],
+   "rxcui": [
+    "2709603",
+    "2709608",
+    "2709612"
+   ],
+   "spl_set_id": [
+    "cebc8388-c9db-4e27-8d6b-0d9bdc9d766d"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "TS63EW8X6F"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "dd07ef38-4a9b-46f4-90ed-dd520cc1d75e",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20260114",
+  "product_id": "0781-5766_dd07ef38-4a9b-46f4-90ed-dd520cc1d75e",
+  "application_number": "ANDA202387",
+  "brand_name_base": "Sitagliptin Phosphate",
+  "pharm_class": [
+   "Dipeptidyl Peptidase 4 Inhibitor [EPC]",
+   "Dipeptidyl Peptidase 4 Inhibitors [MoA]"
+  ]
+ },
+ "chlorhexidine gluconate oral rinse": {
+  "product_ndc": "59883-175",
+  "generic_name": "Chlorhexidine Gluconate",
+  "labeler_name": "Den-mat Holdings, Llc",
+  "brand_name": "Chlorhexidine Gluconate",
+  "active_ingredients": [
+   {
+    "name": "CHLORHEXIDINE GLUCONATE",
+    "strength": "1.2 mg/mL"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "59883-175-16",
+    "description": "473 mL in 1 BOTTLE, PLASTIC (59883-175-16)",
+    "marketing_start_date": "20090618",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20261231",
+  "openfda": {
+   "manufacturer_name": [
+    "Den-mat Holdings, Llc"
+   ],
+   "rxcui": [
+    "834127"
+   ],
+   "spl_set_id": [
+    "a2d2d555-89a5-42d7-81d5-50fd7e741f83"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "MOR84MUD8E"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "RINSE",
+  "spl_id": "7a8e1379-7dd2-4d3f-9c06-240ceffc64d6",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20090618",
+  "product_id": "59883-175_7a8e1379-7dd2-4d3f-9c06-240ceffc64d6",
+  "application_number": "ANDA077789",
+  "brand_name_base": "Chlorhexidine Gluconate",
+  "pharm_class": [
+   "Decreased Cell Wall Integrity [PE]"
+  ]
+ },
+ "clindamycin palmitate oral solution": {
+  "product_ndc": "53746-468",
+  "generic_name": "Clindamycin Palmitate Hydrochloride",
+  "labeler_name": "Amneal Pharmaceuticals of New York LLC",
+  "brand_name": "Clindamycin Palmitate Hydrochloride (Pediatric)",
+  "brand_name_suffix": "(Pediatric)",
+  "active_ingredients": [
+   {
+    "name": "CLINDAMYCIN PALMITATE HYDROCHLORIDE",
+    "strength": "75 mg/5mL"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "53746-468-19",
+    "description": "1 BOTTLE in 1 CARTON (53746-468-19)  / 100 mL in 1 BOTTLE",
+    "marketing_start_date": "20240401",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Amneal Pharmaceuticals of New York LLC"
+   ],
+   "rxcui": [
+    "562266"
+   ],
+   "spl_set_id": [
+    "faf67eb8-1fd7-4b2c-a55b-24ba664c0dce"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "VN9A8JM7M7"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "POWDER, FOR SOLUTION",
+  "spl_id": "bacc9e9f-6a9f-4a68-b2ec-131ed86205ec",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20240401",
+  "product_id": "53746-468_bacc9e9f-6a9f-4a68-b2ec-131ed86205ec",
+  "application_number": "ANDA203513",
+  "brand_name_base": "Clindamycin Palmitate Hydrochloride",
+  "pharm_class": [
+   "Decreased Sebaceous Gland Activity [PE]",
+   "Lincosamide Antibacterial [EPC]",
+   "Lincosamides [CS]",
+   "Neuromuscular Blockade [PE]"
+  ]
+ },
+ "clindamycin hydrochloride capsule": {
+  "product_ndc": "50090-7659",
+  "generic_name": "Clindamycin Hydrochloride",
+  "labeler_name": "A-S Medication Solutions",
+  "brand_name": "Clindamycin Hydrochloride",
+  "active_ingredients": [
+   {
+    "name": "CLINDAMYCIN HYDROCHLORIDE",
+    "strength": "300 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "50090-7659-0",
+    "description": "28 CAPSULE in 1 BOTTLE (50090-7659-0)",
+    "marketing_start_date": "20250922",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20261231",
+  "openfda": {
+   "manufacturer_name": [
+    "A-S Medication Solutions"
+   ],
+   "rxcui": [
+    "284215"
+   ],
+   "spl_set_id": [
+    "9fe68a5a-487b-4119-9ee7-603948d732e4"
+   ],
+   "unii": [
+    "T20OQ1YN1W"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "CAPSULE",
+  "spl_id": "4977679f-c38e-4a67-928f-c6c856133fb4",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20090826",
+  "product_id": "50090-7659_4977679f-c38e-4a67-928f-c6c856133fb4",
+  "application_number": "ANDA065442",
+  "brand_name_base": "Clindamycin Hydrochloride",
+  "pharm_class": [
+   "Decreased Sebaceous Gland Activity [PE]",
+   "Lincosamide Antibacterial [EPC]",
+   "Lincosamides [CS]",
+   "Neuromuscular Blockade [PE]"
+  ]
+ },
+ "levocetirizine tablet": {
+  "product_ndc": "82804-232",
+  "generic_name": "Levocetirizine Dihydrochloride",
+  "labeler_name": "Proficient Rx LP",
+  "brand_name": "Levocetirizine Dihydrochloride",
+  "active_ingredients": [
+   {
+    "name": "LEVOCETIRIZINE DIHYDROCHLORIDE",
+    "strength": "5 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "82804-232-30",
+    "description": "30 TABLET, FILM COATED in 1 BOTTLE (82804-232-30)",
+    "marketing_start_date": "20250730",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Proficient Rx LP"
+   ],
+   "rxcui": [
+    "855172"
+   ],
+   "spl_set_id": [
+    "9f83891c-2466-4972-b0f4-b92cc7337be3"
+   ],
+   "upc": [
+    "0382804232307"
+   ],
+   "unii": [
+    "SOD6A38AGA"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "9f83891c-2466-4972-b0f4-b92cc7337be3",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20110906",
+  "product_id": "82804-232_9f83891c-2466-4972-b0f4-b92cc7337be3",
+  "application_number": "ANDA090199",
+  "brand_name_base": "Levocetirizine Dihydrochloride",
+  "pharm_class": [
+   "Histamine H1 Receptor Antagonists [MoA]",
+   "Histamine-1 Receptor Antagonist [EPC]"
+  ]
+ },
+ "pramipexole tablet": {
+  "product_ndc": "29300-211",
+  "generic_name": "pramipexole dihydrochloride",
+  "labeler_name": "Unichem Pharmaceuticals (USA), Inc.",
+  "brand_name": "pramipexole dihydrochloride",
+  "active_ingredients": [
+   {
+    "name": "PRAMIPEXOLE DIHYDROCHLORIDE",
+    "strength": "1.5 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "29300-211-10",
+    "description": "1000 TABLET in 1 BOTTLE, PLASTIC (29300-211-10)",
+    "marketing_start_date": "20190301",
+    "sample": false
+   },
+   {
+    "package_ndc": "29300-211-19",
+    "description": "90 TABLET in 1 BOTTLE, PLASTIC (29300-211-19)",
+    "marketing_start_date": "20190301",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Unichem Pharmaceuticals (USA), Inc."
+   ],
+   "rxcui": [
+    "858625",
+    "859033",
+    "859040",
+    "859044",
+    "859048",
+    "859052"
+   ],
+   "spl_set_id": [
+    "b978aa75-c62d-444b-9ec6-6c0d21a66688"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "unii": [
+    "3D867NP06J"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET",
+  "spl_id": "2ab8bb44-e4ba-4ae0-8ce9-0e9153de59f3",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20190301",
+  "product_id": "29300-211_2ab8bb44-e4ba-4ae0-8ce9-0e9153de59f3",
+  "application_number": "ANDA207011",
+  "brand_name_base": "pramipexole dihydrochloride",
+  "pharm_class": [
+   "Dopamine Agonists [MoA]",
+   "Nonergot Dopamine Agonist [EPC]"
+  ]
+ },
+ "ketorolac tromethamine tablet": {
+  "product_ndc": "0904-7303",
+  "marketing_end_date": "20261130",
+  "generic_name": "ketorolac tromethamine",
+  "labeler_name": "Major Pharmaceuticals",
+  "brand_name": "Ketorolac Tromethamine",
+  "active_ingredients": [
+   {
+    "name": "KETOROLAC TROMETHAMINE",
+    "strength": "10 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "0904-7303-04",
+    "description": "30 BLISTER PACK in 1 CARTON (0904-7303-04)  / 1 TABLET, FILM COATED in 1 BLISTER PACK",
+    "marketing_start_date": "20240830",
+    "marketing_end_date": "20261130",
+    "sample": false
+   }
+  ],
+  "openfda": {
+   "manufacturer_name": [
+    "Major Pharmaceuticals"
+   ],
+   "rxcui": [
+    "834022"
+   ],
+   "spl_set_id": [
+    "48245718-a2df-4938-8d06-3b8abf34181e"
+   ],
+   "unii": [
+    "4EVE5946BQ"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "c3e25550-bc2b-4c8f-96bb-61c3e2e28608",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20240830",
+  "product_id": "0904-7303_c3e25550-bc2b-4c8f-96bb-61c3e2e28608",
+  "application_number": "ANDA215788",
+  "brand_name_base": "Ketorolac Tromethamine",
+  "pharm_class": [
+   "Anti-Inflammatory Agents",
+   "Non-Steroidal [CS]",
+   "Cyclooxygenase Inhibitor [EPC]",
+   "Cyclooxygenase Inhibitors [MoA]",
+   "Nonsteroidal Anti-inflammatory Drug [EPC]"
+  ]
+ },
+ "CONTROL metformin ER tablet (current drug)": {
+  "product_ndc": "62756-142",
+  "generic_name": "METFORMIN HYDROCHLORIDE",
+  "labeler_name": "Sun Pharmaceutical Industries, Inc.",
+  "brand_name": "METFORMIN HYDROCHLORIDE",
+  "active_ingredients": [
+   {
+    "name": "METFORMIN HYDROCHLORIDE",
+    "strength": "500 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "62756-142-01",
+    "description": "100 TABLET, EXTENDED RELEASE in 1 BOTTLE (62756-142-01)",
+    "marketing_start_date": "20060209",
+    "sample": false
+   },
+   {
+    "package_ndc": "62756-142-02",
+    "description": "500 TABLET, EXTENDED RELEASE in 1 BOTTLE (62756-142-02)",
+    "marketing_start_date": "20060209",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Sun Pharmaceutical Industries, Inc."
+   ],
+   "spl_set_id": [
+    "41a8bb80-7b0b-476c-8134-5d161c3239c8"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "upc": [
+    "0362756142015",
+    "0362756143012"
+   ],
+   "unii": [
+    "786Z46389E"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, EXTENDED RELEASE",
+  "spl_id": "5513972d-0ee6-c934-e063-6394a90a2f52",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20060209",
+  "product_id": "62756-142_5513972d-0ee6-c934-e063-6394a90a2f52",
+  "application_number": "ANDA077336",
+  "brand_name_base": "METFORMIN HYDROCHLORIDE",
+  "pharm_class": [
+   "Biguanide [EPC]",
+   "Biguanides [CS]"
+  ]
+ },
+ "CONTROL potassium chloride ER tablet": {
+  "product_ndc": "60687-756",
+  "marketing_end_date": "20261231",
+  "generic_name": "Potassium Chloride",
+  "labeler_name": "American Health Packaging",
+  "brand_name": "Potassium Chloride",
+  "active_ingredients": [
+   {
+    "name": "POTASSIUM CHLORIDE",
+    "strength": "20 meq/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "60687-756-09",
+    "description": "80 BLISTER PACK in 1 CARTON (60687-756-09)  / 1 TABLET, EXTENDED RELEASE in 1 BLISTER PACK (60687-756-11)",
+    "marketing_start_date": "20240126",
+    "marketing_end_date": "20261231",
+    "sample": false
+   }
+  ],
+  "openfda": {
+   "manufacturer_name": [
+    "American Health Packaging"
+   ],
+   "rxcui": [
+    "1801294"
+   ],
+   "spl_set_id": [
+    "b165ad93-1dc1-4863-9f0b-d7b97c42c94c"
+   ],
+   "unii": [
+    "660YQ98I10"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, EXTENDED RELEASE",
+  "spl_id": "384206f5-75c5-9bd2-e063-6294a90a5038",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20240126",
+  "product_id": "60687-756_384206f5-75c5-9bd2-e063-6294a90a5038",
+  "application_number": "ANDA075604",
+  "brand_name_base": "Potassium Chloride",
+  "pharm_class": [
+   "Increased Large Intestinal Motility [PE]",
+   "Inhibition Large Intestine Fluid/Electrolyte Absorption [PE]",
+   "Osmotic Activity [MoA]",
+   "Osmotic Laxative [EPC]",
+   "Potassium Compounds [CS]",
+   "Potassium Salt [EPC]"
+  ]
+ }
+}

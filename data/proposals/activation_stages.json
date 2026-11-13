@@ -1,0 +1,1478 @@
+[
+ {
+  "stage": 3,
+  "rank": 16,
+  "drug_id": "albuterol",
+  "claims": 19688815,
+  "oral_share": 0.206,
+  "reasons": [
+   "most FDA prescription products are not oral-only (21% oral)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 17,
+  "drug_id": "hydrochlorothiazide",
+  "claims": 18347405,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 18,
+  "drug_id": "trazodone",
+  "claims": 17032783,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 19,
+  "drug_id": "metoprolol_tartrate",
+  "claims": 16235425,
+  "oral_share": 0.956,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)",
+   "14 FDA products get a cautious answer (needs clarification / not covered)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 20,
+  "drug_id": "simvastatin",
+  "claims": 15947590,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 21,
+  "drug_id": "potassium_chloride",
+  "claims": 15382335,
+  "oral_share": 0.916,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 22,
+  "drug_id": "sertraline",
+  "claims": 15258687,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 23,
+  "drug_id": "carvedilol",
+  "claims": 15175020,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 24,
+  "drug_id": "prednisone",
+  "claims": 14985485,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types DR/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 26,
+  "drug_id": "clopidogrel",
+  "claims": 13031458,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 7 records; before F1 1). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 27,
+  "drug_id": "tramadol",
+  "claims": 12883350,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 28,
+  "drug_id": "famotidine",
+  "claims": 12743061,
+  "oral_share": 0.907,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 29,
+  "drug_id": "duloxetine",
+  "claims": 12231525,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 30,
+  "drug_id": "montelukast",
+  "claims": 11943280,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 31,
+  "drug_id": "escitalopram",
+  "claims": 11831986,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 2 records; before F1 0). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 32,
+  "drug_id": "alprazolam",
+  "claims": 11674615,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 33,
+  "drug_id": "meloxicam",
+  "claims": 11301668,
+  "oral_share": 0.987,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 35,
+  "drug_id": "pravastatin",
+  "claims": 9605809,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 36,
+  "drug_id": "quetiapine",
+  "claims": 9472557,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 37,
+  "drug_id": "allopurinol",
+  "claims": 9282458,
+  "oral_share": 0.977,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 38,
+  "drug_id": "bupropion",
+  "claims": 9078063,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 39,
+  "drug_id": "amoxicillin",
+  "claims": 9023192,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 40,
+  "drug_id": "oxycodone",
+  "claims": 8924419,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CII)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 42,
+  "drug_id": "clonazepam",
+  "claims": 8855573,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 43,
+  "drug_id": "oxycodone_acetaminophen",
+  "claims": 8671673,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CII)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 44,
+  "drug_id": "diclofenac",
+  "claims": 8631549,
+  "oral_share": 0.603,
+  "reasons": [
+   "release types DR/ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 45,
+  "drug_id": "azithromycin",
+  "claims": 8261233,
+  "oral_share": 0.926,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 46,
+  "drug_id": "alendronate",
+  "claims": 8211446,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 47,
+  "drug_id": "empagliflozin",
+  "claims": 8149965,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 48,
+  "drug_id": "lorazepam",
+  "claims": 8088872,
+  "oral_share": 0.87,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 49,
+  "drug_id": "semaglutide",
+  "claims": 8000462,
+  "oral_share": 0.385,
+  "reasons": [
+   "most FDA prescription products are not oral-only (38% oral)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 50,
+  "drug_id": "spironolactone",
+  "claims": 7954357,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 51,
+  "drug_id": "mirtazapine",
+  "claims": 7837419,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 52,
+  "drug_id": "zolpidem",
+  "claims": 7771210,
+  "oral_share": 0.972,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 53,
+  "drug_id": "glipizide",
+  "claims": 7751298,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 54,
+  "drug_id": "donepezil",
+  "claims": 7655818,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 55,
+  "drug_id": "ibuprofen",
+  "claims": 7216984,
+  "oral_share": 0.985,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 56,
+  "drug_id": "fluoxetine",
+  "claims": 7198477,
+  "oral_share": 0.996,
+  "reasons": [
+   "release types DR/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 57,
+  "drug_id": "cephalexin",
+  "claims": 7109186,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 58,
+  "drug_id": "buspirone",
+  "claims": 7108008,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 59,
+  "drug_id": "ezetimibe",
+  "claims": 6992500,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 60,
+  "drug_id": "citalopram",
+  "claims": 6899092,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 8 records; before F1 1). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 61,
+  "drug_id": "finasteride",
+  "claims": 6891435,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 62,
+  "drug_id": "cyclobenzaprine",
+  "claims": 6853578,
+  "oral_share": 0.996,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 63,
+  "drug_id": "amoxicillin_clavulanate",
+  "claims": 6834726,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product",
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 64,
+  "drug_id": "pregabalin",
+  "claims": 6778280,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 65,
+  "drug_id": "atenolol",
+  "claims": 6713810,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 67,
+  "drug_id": "tizanidine",
+  "claims": 6510163,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 68,
+  "drug_id": "diltiazem",
+  "claims": 6393852,
+  "oral_share": 0.936,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 71,
+  "drug_id": "venlafaxine",
+  "claims": 5976979,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 72,
+  "drug_id": "doxycycline",
+  "claims": 7687929,
+  "oral_share": 0.926,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 30 records; before F1 17). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 73,
+  "drug_id": "hydralazine",
+  "claims": 5806142,
+  "oral_share": 0.833,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 74,
+  "drug_id": "lisinopril_hydrochlorothiazide",
+  "claims": 5771925,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 76,
+  "drug_id": "memantine",
+  "claims": 5684839,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 78,
+  "drug_id": "oxybutynin",
+  "claims": 5408933,
+  "oral_share": 0.991,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 79,
+  "drug_id": "methylprednisolone",
+  "claims": 5401458,
+  "oral_share": 0.368,
+  "reasons": [
+   "most FDA prescription products are not oral-only (37% oral)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 81,
+  "drug_id": "losartan_hydrochlorothiazide",
+  "claims": 5191911,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 82,
+  "drug_id": "valproate",
+  "claims": 5009951,
+  "oral_share": 0.977,
+  "reasons": [
+   "release types DR/ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 84,
+  "drug_id": "celecoxib",
+  "claims": 4988964,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 85,
+  "drug_id": "baclofen",
+  "claims": 4969215,
+  "oral_share": 0.911,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 86,
+  "drug_id": "ciprofloxacin",
+  "claims": 4829389,
+  "oral_share": 0.842,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 87,
+  "drug_id": "isosorbide_mononitrate",
+  "claims": 4807944,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 11 records; before F1 3). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 88,
+  "drug_id": "glimepiride",
+  "claims": 4697311,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 89,
+  "drug_id": "levetiracetam",
+  "claims": 4657288,
+  "oral_share": 0.778,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 91,
+  "drug_id": "sulfamethoxazole_trimethoprim",
+  "claims": 4603185,
+  "oral_share": 0.914,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 93,
+  "drug_id": "dapagliflozin",
+  "claims": 4296969,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 1 records; before F1 0). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 94,
+  "drug_id": "estradiol",
+  "claims": 4286117,
+  "oral_share": 0.263,
+  "reasons": [
+   "most FDA prescription products are not oral-only (26% oral)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 95,
+  "drug_id": "hydroxyzine",
+  "claims": 5779729,
+  "oral_share": 0.979,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 24 records; before F1 0). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 96,
+  "drug_id": "lamotrigine",
+  "claims": 4214448,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 98,
+  "drug_id": "ondansetron",
+  "claims": 8065764,
+  "oral_share": 0.808,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 99,
+  "drug_id": "sitagliptin",
+  "claims": 4027265,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 2 records; before F1 1). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 100,
+  "drug_id": "valsartan",
+  "claims": 3968024,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 101,
+  "drug_id": "aripiprazole",
+  "claims": 3915571,
+  "oral_share": 0.993,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 103,
+  "drug_id": "propranolol",
+  "claims": 3835234,
+  "oral_share": 0.968,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 104,
+  "drug_id": "risperidone",
+  "claims": 3820299,
+  "oral_share": 0.96,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 105,
+  "drug_id": "olanzapine",
+  "claims": 3813076,
+  "oral_share": 0.936,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 106,
+  "drug_id": "nitrofurantoin",
+  "claims": 3776730,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 107,
+  "drug_id": "nystatin",
+  "claims": 3687948,
+  "oral_share": 0.308,
+  "reasons": [
+   "most FDA prescription products are not oral-only (31% oral)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 108,
+  "drug_id": "ketoconazole",
+  "claims": 3658054,
+  "oral_share": 0.224,
+  "reasons": [
+   "most FDA prescription products are not oral-only (22% oral)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 109,
+  "drug_id": "mirabegron",
+  "claims": 3650058,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 110,
+  "drug_id": "amitriptyline",
+  "claims": 3642822,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 111,
+  "drug_id": "carbidopa_levodopa",
+  "claims": 3547852,
+  "oral_share": 0.99,
+  "reasons": [
+   "combination product",
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 112,
+  "drug_id": "clonidine",
+  "claims": 3543472,
+  "oral_share": 0.84,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 113,
+  "drug_id": "nifedipine",
+  "claims": 3539567,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 114,
+  "drug_id": "prednisolone",
+  "claims": 3534278,
+  "oral_share": 0.684,
+  "reasons": [
+   "mostly liquids"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 115,
+  "drug_id": "fluconazole",
+  "claims": 3508060,
+  "oral_share": 0.933,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 116,
+  "drug_id": "paroxetine",
+  "claims": 3497303,
+  "oral_share": 0.994,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 118,
+  "drug_id": "ropinirole",
+  "claims": 3299998,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 119,
+  "drug_id": "topiramate",
+  "claims": 3204833,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 120,
+  "drug_id": "sacubitril_valsartan",
+  "claims": 3198752,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 121,
+  "drug_id": "pioglitazone",
+  "claims": 3073371,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 122,
+  "drug_id": "olmesartan",
+  "claims": 3003478,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 125,
+  "drug_id": "diazepam",
+  "claims": 2955220,
+  "oral_share": 0.682,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 126,
+  "drug_id": "valacyclovir",
+  "claims": 2953135,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 127,
+  "drug_id": "naproxen",
+  "claims": 2913656,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types DR/ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 128,
+  "drug_id": "amiodarone",
+  "claims": 2884995,
+  "oral_share": 0.597,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 129,
+  "drug_id": "triamterene_hydrochlorothiazide",
+  "claims": 2882734,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 130,
+  "drug_id": "chlorthalidone",
+  "claims": 2827233,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 131,
+  "drug_id": "esomeprazole",
+  "claims": 2823488,
+  "oral_share": 0.969,
+  "reasons": [
+   "release types DR/ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 133,
+  "drug_id": "meclizine",
+  "claims": 2782004,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 134,
+  "drug_id": "timolol",
+  "claims": 2765364,
+  "oral_share": 0.052,
+  "reasons": [
+   "most FDA prescription products are not oral-only (5% oral)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 135,
+  "drug_id": "torsemide",
+  "claims": 2739184,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 136,
+  "drug_id": "lovastatin",
+  "claims": 2738534,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 137,
+  "drug_id": "hydrocortisone",
+  "claims": 2713231,
+  "oral_share": 0.273,
+  "reasons": [
+   "most FDA prescription products are not oral-only (27% oral)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 138,
+  "drug_id": "morphine",
+  "claims": 2687564,
+  "oral_share": 0.753,
+  "reasons": [
+   "controlled substance (CII)"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 142,
+  "drug_id": "acetaminophen_codeine",
+  "claims": 2524047,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CII, CIII, CV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 143,
+  "drug_id": "methocarbamol",
+  "claims": 2513195,
+  "oral_share": 0.935,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 144,
+  "drug_id": "nitroglycerin",
+  "claims": 2495243,
+  "oral_share": 0.117,
+  "reasons": [
+   "most FDA prescription products are not oral-only (12% oral)",
+   "mostly a dose form the app reads as 'other' (e.g. tongue spray)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 145,
+  "drug_id": "levofloxacin",
+  "claims": 2446240,
+  "oral_share": 0.782,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 146,
+  "drug_id": "irbesartan",
+  "claims": 2443364,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 147,
+  "drug_id": "chlorhexidine",
+  "claims": 2443173,
+  "oral_share": 0.648,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 86 records; before F1 83). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 148,
+  "drug_id": "hydroxychloroquine",
+  "claims": 2375157,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 149,
+  "drug_id": "temazepam",
+  "claims": 2364315,
+  "oral_share": 1.0,
+  "reasons": [
+   "controlled substance (CIV)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 150,
+  "drug_id": "dicyclomine",
+  "claims": 2337339,
+  "oral_share": 0.938,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 3,
+  "rank": 152,
+  "drug_id": "methotrexate",
+  "claims": 2323208,
+  "oral_share": 0.462,
+  "reasons": [
+   "immunosuppressant used outside transplant; not covered by the transplant criterion (team review)",
+   "most FDA prescription products are not oral-only (46% oral)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 153,
+  "drug_id": "tiotropium",
+  "claims": 2298858,
+  "oral_share": 0.0,
+  "reasons": [
+   "Needs review: FDA lists route ORAL + RESPIRATORY (INHALATION) for the example product"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 154,
+  "drug_id": "linaclotide",
+  "claims": 2261914,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 156,
+  "drug_id": "sucralfate",
+  "claims": 2223838,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 157,
+  "drug_id": "clindamycin",
+  "claims": 2222276,
+  "oral_share": 0.49,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 50 records; before F1 2). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 158,
+  "drug_id": "benazepril",
+  "claims": 2209363,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 159,
+  "drug_id": "bumetanide",
+  "claims": 2191740,
+  "oral_share": 0.748,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 160,
+  "drug_id": "doxazosin",
+  "claims": 2182347,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 161,
+  "drug_id": "dextroamphetamine_amphetamine",
+  "claims": 2137883,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap remains after F1: mixed-salt product (amphetamine + amphetamine aspartate + dextroamphetamine + dextroamphetamine saccharate) finds 35 records vs 37 by ingredient name; needs follow-up F3 (merge salts of the same ingredient in one product)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 163,
+  "drug_id": "metronidazole",
+  "claims": 2106632,
+  "oral_share": 0.688,
+  "reasons": [
+   "release types ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 164,
+  "drug_id": "levocetirizine",
+  "claims": 2092693,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 4 records; before F1 3). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 166,
+  "drug_id": "enalapril",
+  "claims": 2056056,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 168,
+  "drug_id": "cefdinir",
+  "claims": 2008033,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 170,
+  "drug_id": "benztropine",
+  "claims": 1990446,
+  "oral_share": 0.911,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 171,
+  "drug_id": "icosapent_ethyl",
+  "claims": 1983920,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 172,
+  "drug_id": "fenofibrate",
+  "claims": 3816055,
+  "oral_share": 1.0,
+  "reasons": [
+   "release types DR/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 174,
+  "drug_id": "lactulose",
+  "claims": 1913784,
+  "oral_share": 0.757,
+  "reasons": [
+   "mostly liquids",
+   "8 FDA products get a cautious answer (needs clarification / not covered)"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 175,
+  "drug_id": "acyclovir",
+  "claims": 1899052,
+  "oral_share": 0.765,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 178,
+  "drug_id": "sumatriptan",
+  "claims": 1795531,
+  "oral_share": 0.627,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 181,
+  "drug_id": "pramipexole",
+  "claims": 1741633,
+  "oral_share": 1.0,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 23 records; before F1 17). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 183,
+  "drug_id": "digoxin",
+  "claims": 1676083,
+  "oral_share": 0.797,
+  "reasons": [
+   "Pending OD-32 (narrow-therapeutic-index criterion)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 184,
+  "drug_id": "amlodipine_benazepril",
+  "claims": 1666390,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 186,
+  "drug_id": "verapamil",
+  "claims": 1656910,
+  "oral_share": 0.622,
+  "reasons": [
+   "release types DR/ER/IR (app asks when the label does not say)"
+  ]
+ },
+ {
+  "stage": 2,
+  "rank": 187,
+  "drug_id": "valsartan_hydrochlorothiazide",
+  "claims": 1621363,
+  "oral_share": 1.0,
+  "reasons": [
+   "combination product"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 188,
+  "drug_id": "anastrozole",
+  "claims": 1613420,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 189,
+  "drug_id": "ramipril",
+  "claims": 1584563,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 190,
+  "drug_id": "ketorolac",
+  "claims": 1551666,
+  "oral_share": 0.285,
+  "reasons": [
+   "Recall-search gap fixed by app fix F1 (verified 2026-11-13: the search now uses the ingredient name and finds 58 records; before F1 33). Held inactive until F1 is approved, then Stage 4"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 191,
+  "drug_id": "ergocalciferol",
+  "claims": 1550641,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 194,
+  "drug_id": "linagliptin",
+  "claims": 1495809,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 4,
+  "rank": 196,
+  "drug_id": "lidocaine",
+  "claims": 1458645,
+  "oral_share": 0.017,
+  "reasons": [
+   "Needs review: FDA lists route ORAL + TOPICAL for the example product"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 197,
+  "drug_id": "promethazine",
+  "claims": 1418152,
+  "oral_share": 0.695,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 198,
+  "drug_id": "dexamethasone",
+  "claims": 1412844,
+  "oral_share": 0.595,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ },
+ {
+  "stage": 1,
+  "rank": 200,
+  "drug_id": "colchicine",
+  "claims": 1380446,
+  "oral_share": 1.0,
+  "reasons": [
+   "single ingredient, oral tablets/capsules, one release type, every FDA product matched"
+  ]
+ }
+]

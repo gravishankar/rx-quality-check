@@ -142,6 +142,12 @@ method as the original 15, verified on RxNav and openFDA and checked with the ap
 switched off: 14 until **app fix F1** (salt words in the recall-search name), 2 for route review, 1
 pending OD-32. Needs team approval (OD-2) before it replaces `data/drug_catalog.json`.
 
+**F1 implemented (2026-11-13), awaiting approval:** `docs/F1_AND_STAGED_ACTIVATION.md`. Recall-search gap
+closed for 13 of 14 drugs on recorded FDA responses, no records lost, five false no-matches fixed,
+RxNorm-wide conflation check clean. Follow-ups: F2 (IV/infusion wording as non-oral), F3 (mixed-salt
+products). Proposed activation in four stages (68 / 40 / 22 / 17 drugs). OD-30: broad, reliable coverage
+(staged). OD-32: existing exclusion criteria retained until reviewed separately.
+
 **Safeguards before release.**
 
 1. OD-32 decided: whether the exclusion criteria widen (for example, narrow-therapeutic-index drugs such

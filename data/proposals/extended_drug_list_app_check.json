@@ -417,13 +417,13 @@
   "drug_id": "clopidogrel",
   "exemplar": "0093-7314",
   "identity_names": [
-   "clopidogrel bisulfate"
+   "clopidogrel"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"clopidogrel bisulfate\"",
-  "recall_records": 1
+  "recall_search": "product_description:\"clopidogrel\"",
+  "recall_records": 7
  },
  {
   "rank": 27,
@@ -502,13 +502,13 @@
   "drug_id": "escitalopram",
   "exemplar": "0615-8475",
   "identity_names": [
-   "escitalopram oxalate"
+   "escitalopram"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"escitalopram oxalate\"",
-  "recall_records": 0
+  "recall_search": "product_description:\"escitalopram\"",
+  "recall_records": 2
  },
  {
   "rank": 32,
@@ -962,13 +962,13 @@
   "drug_id": "citalopram",
   "exemplar": "0054-0062",
   "identity_names": [
-   "citalopram hydrobromide"
+   "citalopram"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"citalopram hydrobromide\"",
-  "recall_records": 1
+  "recall_search": "product_description:\"citalopram\"",
+  "recall_records": 8
  },
  {
   "rank": 61,
@@ -1134,13 +1134,13 @@
   "drug_id": "doxycycline",
   "exemplar": "0143-2112",
   "identity_names": [
-   "doxycycline hyclate"
+   "doxycycline"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"doxycycline hyclate\"",
-  "recall_records": 17
+  "recall_search": "product_description:\"doxycycline\"",
+  "recall_records": 30
  },
  {
   "rank": 73,
@@ -1340,13 +1340,13 @@
   "drug_id": "isosorbide_mononitrate",
   "exemplar": "0228-2620",
   "identity_names": [
-   "isosorbide mononitrate"
+   "isosorbide"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"isosorbide mononitrate\"",
-  "recall_records": 3
+  "recall_search": "product_description:\"isosorbide\"",
+  "recall_records": 11
  },
  {
   "rank": 88,
@@ -1409,13 +1409,13 @@
   "drug_id": "dapagliflozin",
   "exemplar": "69097-388",
   "identity_names": [
-   "dapagliflozin propanediol"
+   "dapagliflozin"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"dapagliflozin propanediol\"",
-  "recall_records": 0
+  "recall_search": "product_description:\"dapagliflozin\"",
+  "recall_records": 1
  },
  {
   "rank": 94,
@@ -1444,13 +1444,13 @@
   "drug_id": "hydroxyzine",
   "exemplar": "0093-5060",
   "identity_names": [
-   "hydroxyzine dihydrochloride"
+   "hydroxyzine"
   ],
-  "local": "UNSUPPORTED:NOT_IN_CATALOG",
+  "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"hydroxyzine dihydrochloride\"",
-  "recall_records": 0
+  "recall_search": "product_description:\"hydroxyzine\"",
+  "recall_records": 24
  },
  {
   "rank": 96,
@@ -1496,13 +1496,13 @@
   "drug_id": "sitagliptin",
   "exemplar": "0480-2607",
   "identity_names": [
-   "sitagliptin phosphate"
+   "sitagliptin"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"sitagliptin phosphate\"",
-  "recall_records": 1
+  "recall_search": "product_description:\"sitagliptin\"",
+  "recall_records": 2
  },
  {
   "rank": 100,
@@ -2096,12 +2096,12 @@
   "exemplar": "0121-0504",
   "identity_names": [
    "acetaminophen",
-   "codeine phosphate"
+   "codeine"
   ],
   "local": "ELIGIBLE",
   "enriched": "ELIGIBLE",
   "matched_drug": "acetaminophen_codeine (by RXCUI)",
-  "recall_search": "product_description:\"acetaminophen\" AND product_description:\"codeine phosphate\"",
+  "recall_search": "product_description:\"acetaminophen\" AND product_description:\"codeine\"",
   "recall_records": 9
  },
  {
@@ -2181,13 +2181,13 @@
   "drug_id": "chlorhexidine",
   "exemplar": "0116-0101",
   "identity_names": [
-   "chlorhexidine gluconate"
+   "chlorhexidine"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"chlorhexidine gluconate\"",
-  "recall_records": 83
+  "recall_search": "product_description:\"chlorhexidine\"",
+  "recall_records": 86
  },
  {
   "rank": 148,
@@ -2317,13 +2317,13 @@
   "drug_id": "clindamycin",
   "exemplar": "0009-0760",
   "identity_names": [
-   "clindamycin palmitate"
+   "clindamycin"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"clindamycin palmitate\"",
-  "recall_records": 2
+  "recall_search": "product_description:\"clindamycin\"",
+  "recall_records": 50
  },
  {
   "rank": 158,
@@ -2422,13 +2422,13 @@
   "drug_id": "levocetirizine",
   "exemplar": "0093-7701",
   "identity_names": [
-   "levocetirizine dihydrochloride"
+   "levocetirizine"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"levocetirizine dihydrochloride\"",
-  "recall_records": 3
+  "recall_search": "product_description:\"levocetirizine\"",
+  "recall_records": 4
  },
  {
   "rank": 166,
@@ -2593,13 +2593,13 @@
   "drug_id": "pramipexole",
   "exemplar": "0615-8551",
   "identity_names": [
-   "pramipexole dihydrochloride"
+   "pramipexole"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"pramipexole dihydrochloride\"",
-  "recall_records": 17
+  "recall_search": "product_description:\"pramipexole\"",
+  "recall_records": 23
  },
  {
   "rank": 183,
@@ -2714,13 +2714,13 @@
   "drug_id": "ketorolac",
   "exemplar": "0093-0314",
   "identity_names": [
-   "ketorolac tromethamine"
+   "ketorolac"
   ],
   "local": "UNSUPPORTED:DRUG_DISABLED",
   "enriched": "UNSUPPORTED:DRUG_DISABLED",
   "matched_drug": "",
-  "recall_search": "product_description:\"ketorolac tromethamine\"",
-  "recall_records": 33
+  "recall_search": "product_description:\"ketorolac\"",
+  "recall_records": 58
  },
  {
   "rank": 191,

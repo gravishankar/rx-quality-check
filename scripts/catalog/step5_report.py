@@ -11,6 +11,8 @@ def main(build, out):
     b, o = Path(build), Path(out)
     review = json.loads((b / "review.json").read_text())
     check = {tuple(x["cms"]): x for x in json.loads((b / "app_check.json").read_text())}
+    stages = {x["drug_id"]: x for x in json.loads((o / "activation_stages.json").read_text())} if (o / "activation_stages.json").exists() else {}
+    cov = {x["drug_id"]: x for x in json.loads((b / "coverage.json").read_text())} if (b / "coverage.json").exists() else {}
     s1 = json.loads((b / "step1.json").read_text()); src = s1["source"]; total = src["total_claims_all_drugs"]
     rows = []
     for r in review:
@@ -20,6 +22,8 @@ def main(build, out):
             "share_pct": round(100 * r["claims_2023"] / total, 2),
             "ingredients_rxcui": "; ".join(r.get("ingredients", [])) or "—",
             "decision": LABEL[r["decision"]], "catalog_drug_id": r.get("drug_id") or "—",
+            "stage": stages.get(r.get("drug_id"), {}).get("stage", "—") if r["decision"] != "EXISTING" else "now",
+            "oral_share_pct": round(100 * cov[r["drug_id"]]["oral_share"]) if r.get("drug_id") in cov else "—",
             "fda_oral_rx_products": r.get("oral_rx_products", "—"),
             "recall_records_app_search": c.get("recall_records", "—"),
             "example_ndc": r.get("exemplar_ndc") or "—",
@@ -67,15 +71,21 @@ team approves this list (OD-2) and decides OD-30 and OD-32. Verified 2026-11-13.
 | Excluded by policy | {n('EXCLUDED_BY_POLICY')} | {share('EXCLUDED_BY_POLICY'):.1f}% |
 | Out of scope (not oral, or not a drug) | {n('OUT_OF_SCOPE')} | {share('OUT_OF_SCOPE'):.1f}% |
 
-Coverage of all 2023 Part D claims: today {share('EXISTING'):.1f}%; with this list {share('EXISTING')+share('PROPOSED_ACTIVE'):.1f}%;
-after fix F1 and the pending decisions, up to {share('EXISTING')+share('PROPOSED_ACTIVE')+share('PROPOSED_INACTIVE'):.1f}%.
-Shares count all of a drug's claims, including forms the app does not cover (for example estradiol
-patches); the app checks oral prescription products only.
+Coverage of all 2023 Part D claims, as a range. The upper bound counts every claim of a covered
+generic name, including patches, inhalers and eye drops the app does not check; the oral-weighted
+estimate weights each drug's claims by the share of its FDA prescription products that are oral-only
+(a proxy: CMS data does not split claims by dosage form). Details: `docs/F1_AND_STAGED_ACTIVATION.md`.
 
-**App fix F1 (small, needed for {sum('fix F1' in r['reason'] for r in review)} drugs):** teach the label/record reader the salt
-words bisulfate, oxalate, hydrobromide, hyclate, mononitrate, propanediol, dihydrochloride,
-phosphate, gluconate, palmitate, tromethamine, saccharate and aspartate, so the recall search uses the
-plain ingredient name. Then re-run step 4 and switch those drugs on.
+| Scope | Upper bound | Oral-weighted estimate |
+|---|---|---|
+| Today (14 drugs) | 29.1% | 28.1% |
+| + 130 proposed active | 74.5% | 69.3% |
+| + 17 held | 79.2% | 73.5% |
+
+**App fix F1 (implemented 2026-11-13, awaiting approval):** the recall-search gap is closed for 13 of
+the 14 drugs it affected (verified on recorded FDA responses); they stay switched off until F1 is
+approved. Dextroamphetamine/amphetamine still needs follow-up F3 (mixed salts). Activation is
+proposed in four stages (`data/proposals/activation_stages.json`).
 
 **Worth a second look before approving:** methotrexate (an immunosuppressant used outside
 transplant, so the transplant criterion does not cover it); sacubitril/valsartan (0 recall records
@@ -91,10 +101,11 @@ The 200 CMS names make 196 rows: names that are the same ingredient are one row 
 "Ondansetron" and "Ondansetron Hcl"). Product and recall counts are per ingredient set across all
 salts, so metoprolol succinate and tartrate show the same counts.
 
-| # | CMS generic name | Claims 2023 | Ingredient (RxCUI) | Decision | Catalog ID | FDA oral Rx products | Recall records found | Example NDC | Reason |
-|---|---|---|---|---|---|---|---|---|---|"""]
+| # | CMS generic name | Claims 2023 | Ingredient (RxCUI) | Decision | Stage | Catalog ID | FDA oral Rx products | Oral-only share | Recall records found | Example NDC | Reason |
+|---|---|---|---|---|---|---|---|---|---|---|---|"""]
     for r in rows:
-        md.append(f"| {r['rank']} | {r['cms_generic_names']} | {r['claims_2023']:,} | {r['ingredients_rxcui']} | {r['decision']} | `{r['catalog_drug_id']}` | {r['fda_oral_rx_products']} | {r['recall_records_app_search']} | {r['example_ndc']} | {r['reason']} |")
+        osh = f"{r['oral_share_pct']}%" if r['oral_share_pct'] != "—" else "—"
+        md.append(f"| {r['rank']} | {r['cms_generic_names']} | {r['claims_2023']:,} | {r['ingredients_rxcui']} | {r['decision']} | {r['stage']} | `{r['catalog_drug_id']}` | {r['fda_oral_rx_products']} | {osh} | {r['recall_records_app_search']} | {r['example_ndc']} | {r['reason']} |")
     md.append("\nCSV of the same table: `data/proposals/extended_drug_list_review.csv`. Catalog in the app's format: `data/proposals/drug_catalog_0.3.0-proposed.json`.")
     (o / "EXTENDED_DRUG_LIST.md").write_text("\n".join(md) + "\n")
     print("wrote", o / "EXTENDED_DRUG_LIST.md", len(rows), "rows")

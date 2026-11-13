@@ -14,6 +14,7 @@ DOCS=(
   "docs/FUNCTIONAL_TEST_PLAN.md|Functional test plan"
   "data/proposals/EXTENDED_DRUG_LIST.md|Extended drug list|landscape"
   "docs/DATA_SCHEMAS.md|Data schemas"
+  "docs/F1_AND_STAGED_ACTIVATION.md|F1 and staged activation|landscape"
 )
 for entry in "${DOCS[@]}"; do
   IFS='|' read -r src title orient <<< "$entry"; name="$(basename "$src" .md)"
