@@ -136,7 +136,12 @@ export function compareAttributes(identity: MedicationIdentity, description: str
     if (comparable.length === 0) {
       unknowns.push('STRENGTH_NOT_STATED');
     } else if (!comparable.some((e) => sameStrengthFor(e.components, identity, ids, seg, aliases))) {
-      differences.push('STRENGTH_DIFFERS');
+      // Review item 1 (fallback): an expression with a different number of values than the product
+      // has ingredients proves a difference only if none of its values equals any of the product's
+      // strengths; otherwise the strength is only partly stated and the record is kept.
+      const partial = comparable.some((e) => e.components.length !== ids.length && e.components.some((c) => ids.some((s) => sameStrength(c, s))));
+      if (partial) unknowns.push('STRENGTH_PARTIALLY_STATED');
+      else differences.push('STRENGTH_DIFFERS');
     }
   }
 
