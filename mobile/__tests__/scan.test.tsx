@@ -242,3 +242,117 @@ test('real vial photo, drug line only ("AMLODIPINEMGTA"): name is prefilled, str
   expect(field(COPY.entry.strengthLabel)).toBe('');
   expect(t).not.toMatch(/No matching recall|Recall match found|Possible recall match/);
 });
+
+// ---------------------------------------------------------------------------------------------
+// Review items 10-11, explicit choices (no happy-path helper): every lot or release choice below is
+// made by name, and the unchosen alternative is checked to be off.
+// ---------------------------------------------------------------------------------------------
+const LOT_AND_RELEASE = new Set<string>([COPY.confirm.lotNotUsed, COPY.confirm.releaseUnknown, COPY.confirm.releaseIR, COPY.confirm.releaseER, COPY.confirm.releaseDR]);
+const switches = (r: ReactTestRenderer) => r.root.findAllByType(Switch);
+const sw = (r: ReactTestRenderer, label: string) => switches(r).find((s) => s.props.accessibilityLabel === label);
+const isLotUse = (l: unknown) => typeof l === 'string' && l.startsWith('Use lot ');
+/** Tick only the identity items (each "matches my label" statement); never a lot or release choice. */
+async function tickIdentityItems(r: ReactTestRenderer) {
+  for (const s of switches(r)) if (!LOT_AND_RELEASE.has(s.props.accessibilityLabel) && !isLotUse(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
+}
+const setSwitch = async (r: ReactTestRenderer, label: string, on: boolean) => {
+  const s = sw(r, label);
+  if (!s) throw new Error(`no switch "${label}":\n${allText(r)}`);
+  await act(async () => s.props.onValueChange(on));
+};
+const confirmEnabled = (r: ReactTestRenderer) => {
+  const b = r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button' && textOf(n).includes(COPY.confirm.confirmAll));
+  return b.length > 0 && !b[b.length - 1]!.props.disabled;
+};
+
+test('explicit: scanned lot, "continue without the lot" → check runs without it (possible match, never confirmed); the lot is never sent', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  expect(confirmEnabled(r)).toBe(false);
+  expect(allText(r)).toContain(COPY.confirm.needLotChoice);
+  await setSwitch(r, COPY.confirm.lotNotUsed, true);
+  expect(sw(r, COPY.confirm.lotUse('JKU4639A'))?.props.value).toBe(false);
+  expect(confirmEnabled(r)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  const t = allText(r);
+  expect(t).toContain(COPY.result.POTENTIAL.headline);
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+  expect(t).toContain(COPY.result.qualifiers.lotNotProvided);
+  expect(p.requests.join('\n')).not.toContain('JKU4639A');
+});
+
+test('explicit: lot choices are exclusive, and changing your mind is honoured (not used → use → confirmed match)', async () => {
+  const r = await start(platform([label('23_')]));
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  await setSwitch(r, COPY.confirm.lotNotUsed, true);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  expect(sw(r, COPY.confirm.lotNotUsed)?.props.value).toBe(false);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), false);
+  expect(confirmEnabled(r)).toBe(false); // un-choosing returns to "still needed"
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.confirm.confirmAll);
+  expect(allText(r)).toContain(COPY.result.CONFIRMED.headline);
+});
+
+test('explicit: correcting the lot through "Correct the details" uses only the corrected lot, and asks again', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.scan.correct);
+  const lotField = r.root.findAll((n) => n.type === TextInput && n.props.accessibilityLabel === COPY.entry.lotLabel)[0]!;
+  await act(async () => lotField.props.onChangeText('SYNTH999')); // SYNTHETIC corrected lot
+  await press(r, COPY.entry.submit);
+  const t = allText(r);
+  expect(t).toContain('SYNTH999');
+  expect(sw(r, COPY.confirm.lotUse('JKU4639A'))).toBeUndefined();
+  expect(sw(r, COPY.confirm.lotUse('SYNTH999'))?.props.value).toBe(false); // earlier choice not carried over
+  await tickIdentityItems(r);
+  await setSwitch(r, COPY.confirm.lotUse('SYNTH999'), true);
+  await press(r, COPY.confirm.confirmAll);
+  const after = allText(r);
+  expect(after).not.toContain(COPY.result.CONFIRMED.headline); // SYNTH999 is not a listed lot
+  expect(after).toContain(COPY.result.POTENTIAL.headline);
+  expect(p.requests.join('\n')).not.toMatch(/JKU4639A|SYNTH999/);
+});
+
+test('explicit: rescanning replaces the earlier label; an earlier lot choice never carries over', async () => {
+  const p = platform([label('23_'), label('01_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.scan.rescan);
+  const t = allText(r);
+  expect(p.scans).toBe(2);
+  expect(t).not.toContain('JKU4639A');
+  expect(switches(r).some((s) => isLotUse(s.props.accessibilityLabel))).toBe(false); // pharmacy label: no lot
+  await tickIdentityItems(r);
+  await press(r, COPY.confirm.confirmAll);
+  const after = allText(r);
+  expect(after).toContain(COPY.result.POTENTIAL.headline);
+  expect(after).toContain(COPY.result.qualifiers.lotNotProvided);
+});
+
+test('explicit: repeated confirmation — a press while something is missing does nothing; completing it runs exactly one check', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  const before = p.requests.filter((u) => u.includes('enforcement')).length;
+  const btn = () => r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button' && textOf(n).includes(COPY.confirm.confirmAll)).pop()!;
+  expect(btn().props.disabled).toBe(true);
+  expect(p.requests.filter((u) => u.includes('enforcement')).length).toBe(before);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  const b = btn();
+  await act(async () => {
+    b.props.onPress();
+    b.props.onPress(); // double tap
+  });
+  await flush();
+  expect(allText(r)).toContain(COPY.result.CONFIRMED.headline);
+  const controls = p.requests.filter((u) => u.includes('D-0325-2021') && u.includes('recall_number'));
+  expect(controls.length).toBe(1); // one positive control → one recall check
+});

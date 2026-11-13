@@ -52,7 +52,12 @@ export function useRecallSession(platform: PlatformServices, repos: Repositories
     return app.current;
   }, [platform, repos]);
 
+  // One engine run at a time: a double tap, or a press before the screen re-renders as busy, must
+  // not start a second check from the same state (found by the explicit repeated-confirmation test).
+  const inFlight = useRef(false);
   const run = useCallback(async (fn: () => Promise<{ state: WorkflowState }>) => {
+    if (inFlight.current) return;
+    inFlight.current = true;
     setBusy(true);
     setError(null);
     try {
@@ -61,6 +66,7 @@ export function useRecallSession(platform: PlatformServices, repos: Repositories
       // Unexpected failures never become a result: the screen shows "nothing was checked".
       setError(e instanceof Error ? e.name : 'Error');
     } finally {
+      inFlight.current = false;
       setBusy(false);
     }
   }, []);

@@ -502,3 +502,23 @@ test('item 11: "I can\'t tell" the release type shows where to look and to ask a
   expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(false);
   expect(p.requests.filter((u) => u.includes('enforcement')).length).toBe(before);
 });
+
+test('explicit: "I can\'t tell" blocks the check; after finding "ER" on the label the patient can choose it and the check runs', async () => {
+  const { r, p } = await start();
+  await accept(r);
+  await enter(r, { ndc: '', name: 'METFORMIN', strength: '500 MG', form: 'TABLET' });
+  const sw = (l: string) => r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === l)!;
+  for (const s of r.root.findAllByType(Switch)) if (![COPY.confirm.releaseIR, COPY.confirm.releaseER, COPY.confirm.releaseDR, COPY.confirm.releaseUnknown].includes(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
+  await act(async () => sw(COPY.confirm.releaseUnknown).props.onValueChange(true));
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(false);
+  expect(allText(r)).toContain(COPY.confirm.needRelease);
+  const before = p.requests.filter((u) => u.includes('enforcement')).length;
+  await act(async () => sw(COPY.confirm.releaseER).props.onValueChange(true));
+  expect(sw(COPY.confirm.releaseUnknown).props.value).toBe(false);
+  expect(allText(r)).not.toContain(COPY.confirm.releaseUnknownHelp[0]);
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  expect(p.requests.filter((u) => u.includes('enforcement')).length).toBeGreaterThan(before);
+  expect(allText(r)).toContain(COPY.result.limitsTitle); // a result screen, with its limits
+  expect(allText(r)).not.toContain(COPY.confirm.title);
+});
