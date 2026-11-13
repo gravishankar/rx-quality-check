@@ -20,7 +20,8 @@ import { compareRelease, formEvidenceFromText, productSegment } from './doseForm
 import { readIngredientsFromText } from './ingredients.ts';
 import { compareLot, parseLotScope } from './lot.ts';
 import { extractNdcsWithKeys, packageKey, productKeyOfProductNdc } from './ndc.ts';
-import { extractStrengthExpressions, sameStrengthSet } from './strength.ts';
+import { extractStrengthExpressions, sameStrength, sameStrengthSet } from './strength.ts';
+import { orderByAppearance } from './identity.ts';
 
 const REQUIRED_STRING_FIELDS = [
   'recall_number',
@@ -84,6 +85,21 @@ interface AttributeComparison {
   unknowns: RecordReason[];
 }
 
+/**
+ * C1: compare a strength expression ingredient by ingredient when the text names every identity
+ * ingredient (strength components follow the order the ingredients are written in); otherwise as a
+ * set, which never claims a difference it cannot see.
+ */
+function sameStrengthFor(components: readonly Strength[], identity: MedicationIdentity, ids: readonly Strength[], text: string, aliases: Readonly<Record<string, string>>): boolean {
+  const names = identity.ingredients.map((i) => i.name);
+  if (components.length !== ids.length || names.length < 2 || new Set(names).size !== names.length) return sameStrengthSet(components, ids);
+  const lower = text.toLowerCase();
+  const found = names.every((n) => lower.includes(n) || Object.entries(aliases).some(([a, v]) => v === n && lower.includes(a)));
+  if (!found) return sameStrengthSet(components, ids);
+  const ordered = orderByAppearance(text, names, aliases);
+  return ordered.every((n, k) => sameStrength(components[k] as Strength, ids[names.indexOf(n)] as Strength));
+}
+
 /** Compare identity attributes with what the record's text explicitly states. */
 export function compareAttributes(identity: MedicationIdentity, description: string): AttributeComparison {
   const differences: RecordReason[] = [];
@@ -119,7 +135,7 @@ export function compareAttributes(identity: MedicationIdentity, description: str
     );
     if (comparable.length === 0) {
       unknowns.push('STRENGTH_NOT_STATED');
-    } else if (!comparable.some((e) => sameStrengthSet(e.components, ids))) {
+    } else if (!comparable.some((e) => sameStrengthFor(e.components, identity, ids, seg, aliases))) {
       differences.push('STRENGTH_DIFFERS');
     }
   }

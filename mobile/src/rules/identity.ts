@@ -285,7 +285,7 @@ export function identityFromPrintedFields(
     return { ok: false, missing: [...new Set(missing)], detail: 'printed fields do not establish ingredient, strength and form' };
   }
   // Ingredient order in the strength follows printed order; pair them in the order found in text.
-  const ordered = orderByAppearance(name, ingredientNames);
+  const ordered = orderByAppearance(name, ingredientNames, aliases);
   const ingredients: IdentityIngredient[] = ordered.map((n, i) => ({
     name: n,
     salt: reading.salts[n] ?? null,
@@ -313,12 +313,18 @@ export function identityFromPrintedFields(
   };
 }
 
-function orderByAppearance(text: string, names: string[]): string[] {
+/**
+ * Order ingredients by where they appear in the printed text. An ingredient printed only as an
+ * abbreviation ("APAP") is found at the abbreviation's position (C1: otherwise strengths were paired
+ * with the wrong ingredient, e.g. "APAP/CODEINE 300-30MG" read as codeine 300 mg).
+ */
+export function orderByAppearance(text: string, names: string[], aliases: Readonly<Record<string, string>> = {}): string[] {
   const lower = text.toLowerCase();
-  const pos = (n: string) => {
-    const i = lower.indexOf(n);
-    return i < 0 ? Number.MAX_SAFE_INTEGER : i;
+  const at = (word: string) => {
+    const m = new RegExp(`(^|[^a-z])${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![a-z])`).exec(lower);
+    return m ? m.index + m[1]!.length : Number.MAX_SAFE_INTEGER;
   };
+  const pos = (n: string) => Math.min(at(n), ...Object.entries(aliases).filter(([, v]) => v === n).map(([a]) => at(a.toLowerCase())));
   return [...names].sort((a, b) => pos(a) - pos(b));
 }
 
