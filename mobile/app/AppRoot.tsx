@@ -7,7 +7,7 @@ import { BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { COPY } from '../src/copy/en.ts';
 import { confirmationEvent, entryFromExtraction, screenFor } from '../src/app/screens.ts';
-import { readScan } from '../src/scanner/readScan.ts';
+import { photoLeftBehind, readScan } from '../src/scanner/readScan.ts';
 import { vocabularyFromConfig } from '../src/scanner/vocabulary.ts';
 import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements, type ConsentStore } from '../src/legal/consent.ts';
 import { LEGAL_DOCUMENTS, type LegalDocumentId } from '../src/legal/documents.ts';
@@ -107,22 +107,25 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     setScanInfo(null);
     setScanPhase({ phase: 'reading' });
     try {
-      const out = await platform.scanner.scanLabel();
-      if (out === null) {
-        setScanPhase({ phase: 'idle', notice: COPY.scan.cancelled });
+      const res = await platform.scanner.scanLabel();
+      // Review round 2, issue 5: a photo the scanner could not remove is always reported.
+      const leftNotice = photoLeftBehind(res) ? COPY.scan.photoNotDeleted : null;
+      if (res === null || 'cancelled' in res) {
+        setScanPhase({ phase: 'idle', notice: leftNotice ? `${COPY.scan.cancelled} ${leftNotice}` : COPY.scan.cancelled });
         return;
       }
+      const out = res;
       const r = readScan(out, VOCABULARY);
       setEntry(entryFromExtraction(r.extraction));
       if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
         const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
-        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
+        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}), ...(leftNotice ? { notice: leftNotice } : {}) });
         return;
       }
       const t = out.timings;
       const codes = r.barcodes.filter((b) => b.kind === 'NDC_CODE').length;
       setScanInfo({
-        notes: r.problems.includes('BARCODE_TEXT_NDC_DIFFER') ? [COPY.scan.barcodeTextDiffer] : [],
+        notes: [...(r.problems.includes('BARCODE_TEXT_NDC_DIFFER') ? [COPY.scan.barcodeTextDiffer] : []), ...(leftNotice ? [leftNotice] : [])],
         details:
           PROFILE.kind === 'development' && t
             ? `${COPY.scan.details}: ${Math.round(t.totalMs)} ms (text ${Math.round(t.ocrMs)} ms, barcodes ${Math.round(t.barcodeMs)} ms); ${out.lines.length} text lines; ${out.barcodes.length} barcodes (${codes} drug codes); read: ${r.readFields.join(', ') || 'nothing'}${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}`
@@ -134,7 +137,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       // Development builds show the technical cause (exception type and location; no label content).
       const err = e as { code?: string; message?: string };
       const detail = PROFILE.kind === 'development' ? `${err.code ?? 'ERROR'}: ${err.message ?? String(e)}` : undefined;
-      setScanPhase({ phase: 'problem', reason: COPY.scan.failed, ...(detail ? { detail } : {}) });
+      setScanPhase({ phase: 'problem', reason: COPY.scan.failed, ...(detail ? { detail } : {}), ...(photoLeftBehind(e) ? { notice: COPY.scan.photoNotDeleted } : {}) });
     }
   }, [platform, session]);
   const typeInstead = useCallback(() => {
@@ -191,7 +194,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     return wrap(banner, <Working text={text} />);
   }
   if (scanPhase.phase === 'reading') return wrap(banner, <Working text={COPY.scan.reading} />);
-  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} onRescan={() => void scan()} onType={typeInstead} />);
+  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} notice={scanPhase.notice ?? null} onRescan={() => void scan()} onType={typeInstead} />);
   if (session.state.name === 'SCAN') {
     if (mode === 'scan' && canScan) return wrap(banner, <><ScanHome busy={session.busy} notice={scanPhase.notice ?? null} onScan={() => void scan()} onType={typeInstead} />{nav}</>);
     return wrap(banner, <><Entry busy={session.busy} notice={canScan ? null : COPY.scan.unavailable} value={entry} onChange={setEntry} onSubmit={(e) => { setScanInfo(null); void session.start(e); }} />{nav}</>);

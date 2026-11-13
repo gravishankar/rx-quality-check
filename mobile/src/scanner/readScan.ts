@@ -17,6 +17,25 @@ export interface ScanOutput {
   warnings?: string[];
   /** OCR counts (development diagnostics; no label content). */
   ocrStats?: { regions: number; droppedEmpty: number; droppedLowScore: number; dictionary: number };
+  /** False when the native scanner could not remove the label photo (review round 2, issue 5). */
+  photoDeleted?: boolean;
+}
+
+/** The patient cancelled the photo; `photoDeleted` false when its file could not be removed. */
+export interface ScanCancelled {
+  cancelled: true;
+  photoDeleted: boolean;
+}
+
+/**
+ * True when the native scanner reported that a label photo could not be removed: on a result, a
+ * cancellation, or an error's userInfo (review round 2, issue 5). Unknown shapes are not assumed
+ * removed only when they say so explicitly; absence of the field means the scanner did not report.
+ */
+export function photoLeftBehind(x: unknown): boolean {
+  if (typeof x !== 'object' || x === null) return false;
+  const o = x as { photoDeleted?: unknown; userInfo?: { photoDeleted?: unknown } | null };
+  return o.photoDeleted === false || o.userInfo?.photoDeleted === false;
 }
 
 export type ScanProblem = 'NOTHING_READ' | 'NO_DRUG_FIELDS' | 'BARCODE_TEXT_NDC_DIFFER';

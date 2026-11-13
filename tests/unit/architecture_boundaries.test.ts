@@ -179,7 +179,7 @@ test('scanner native module (Pixel defect, build 4): barcode read gets a non-nul
   assert.match(mod, /\.read\(bmp, new Rect\(0, 0, img\.width, img\.height\), 0\)/);
   assert.match(mod, /TEXT_FAILED/);
   assert.match(mod, /BARCODE_FAILED/);
-  assert.match(mod, /p\.reject\("SCAN_FAILED", describe\(e\)\)/, 'failures carry a technical description for development diagnostics');
+  assert.match(mod, /rejectWithPhoto\(p, "SCAN_FAILED", describe\(e\), deletePhoto\(f\)\)/, 'failures carry a technical description for development diagnostics, and the photo cleanup result');
 });
 
 test('scanner OCR dictionary (Pixel defect, build 5): read from the model file, size checked against the model', () => {

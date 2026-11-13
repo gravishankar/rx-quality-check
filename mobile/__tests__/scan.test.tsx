@@ -356,3 +356,47 @@ test('explicit: repeated confirmation — a press while something is missing doe
   const controls = p.requests.filter((u) => u.includes('D-0325-2021') && u.includes('recall_number'));
   expect(controls.length).toBe(1); // one positive control → one recall check
 });
+
+// ---------------------------------------------------------------------------------------------
+// Review round 2, issue 5: the native scanner reports when the label photo could not be removed
+// (SYNTHETIC native results below); every caller path must tell the patient.
+// ---------------------------------------------------------------------------------------------
+const notDeleted = (out: ScanOutput): ScanOutput => ({ ...out, photoDeleted: false });
+
+test('R2-5: photo not removed after a successful read → the patient is told, and the check continues', async () => {
+  const r = await start(platform([notDeleted(label('01_'))]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+  expect(t).toContain(COPY.confirm.title);
+});
+
+test('R2-5: photo not removed after a cancelled photo → told', async () => {
+  const r = await start(platform([{ cancelled: true, photoDeleted: false } as never]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.cancelled);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5: photo not removed when nothing could be read → told', async () => {
+  const r = await start(platform([notDeleted({ lines: [], barcodes: [] })]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5: photo not removed when the scanner fails → told', async () => {
+  const r = await start(platform([Object.assign(new Error('SYNTHETIC'), { code: 'SCAN_FAILED', userInfo: { photoDeleted: false } })]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.failed);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5 guard: a removed photo adds no notice', async () => {
+  const r = await start(platform([{ ...label('01_'), photoDeleted: true }]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).not.toContain('could not be removed');
+});

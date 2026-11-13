@@ -61,6 +61,8 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
     private Promise pending;
     private File pendingFile;
     private Uri pendingUri;
+    /** A photo from an earlier, interrupted scan that could not be removed (review round 2, issue 5). */
+    private boolean leftoverRemaining;
     private PpOcr ocr;
     private long initMs = -1;
 
@@ -79,14 +81,21 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
                 // The camera app's write access ends as soon as it returns (review item 8).
                 revokeGrant(activity, u);
                 if (resultCode != Activity.RESULT_OK) {
-                    deletePhoto(f);
-                    p.resolve(null); // cancelled: the app offers manual entry
+                    // Cancelled: the app offers manual entry. A photo that could not be removed is reported.
+                    if (deletePhoto(f) && !leftoverRemaining) {
+                        p.resolve(null);
+                    } else {
+                        WritableMap c = Arguments.createMap();
+                        c.putBoolean("cancelled", true);
+                        c.putBoolean("photoDeleted", false);
+                        p.resolve(c);
+                    }
                     return;
                 }
                 worker.execute(() -> analyze(f, p));
             }
         });
-        clearScanCache();
+        leftoverRemaining = !clearScanCache();
     }
 
     @Override
@@ -106,6 +115,8 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             promise.reject("BUSY", "A scan is already in progress.");
             return;
         }
+        // No scan is pending here, so leftovers from an interrupted scan can be retried safely.
+        leftoverRemaining = !clearScanCache();
         try {
             File dir = new File(getReactApplicationContext().getCacheDir(), "scans");
             if (!dir.exists() && !dir.mkdirs()) throw new IllegalStateException("cache");
@@ -123,11 +134,9 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             pendingUri = uri;
             activity.startActivityForResult(i, REQUEST);
         } catch (ActivityNotFoundException e) {
-            cleanUpFailedLaunch(activity);
-            promise.reject("NO_CAMERA_APP", "No camera app is available on this phone.");
+            rejectWithPhoto(promise, "NO_CAMERA_APP", "No camera app is available on this phone.", cleanUpFailedLaunch(activity));
         } catch (Exception e) {
-            cleanUpFailedLaunch(activity);
-            promise.reject("SCAN_FAILED", "The camera could not be opened.");
+            rejectWithPhoto(promise, "SCAN_FAILED", "The camera could not be opened.", cleanUpFailedLaunch(activity));
         }
     }
 
@@ -135,9 +144,10 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
         long t0 = System.nanoTime();
         try {
             RgbImage img = load(f);
-            deletePhoto(f); // the pixels are in memory now; the file is gone
+            // The pixels are in memory now; the file is removed and the outcome reported to the app.
+            final boolean gone = deletePhoto(f) && !leftoverRemaining;
             if (img == null) {
-                p.reject("UNREADABLE", "The photo could not be read.");
+                rejectWithPhoto(p, "UNREADABLE", "The photo could not be read.", gone);
                 return;
             }
             // Text and barcodes are read independently: a failure in one never discards the other.
@@ -189,7 +199,7 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
                 warnings.pushString("BARCODE_FAILED: " + describe(e));
             }
             if (lineCount == 0 && codeCount == 0 && warnings.size() > 0) {
-                p.reject("SCAN_FAILED", warnings.getString(0));
+                rejectWithPhoto(p, "SCAN_FAILED", warnings.getString(0), gone);
                 return;
             }
             long t1 = System.nanoTime();
@@ -208,12 +218,18 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             out.putMap("image", size);
             out.putArray("warnings", warnings);
             out.putMap("ocrStats", ocrStats);
+            out.putBoolean("photoDeleted", gone);
             p.resolve(out);
         } catch (Throwable e) {
-            p.reject("SCAN_FAILED", describe(e));
-        } finally {
-            deletePhoto(f);
+            rejectWithPhoto(p, "SCAN_FAILED", describe(e), deletePhoto(f));
         }
+    }
+
+    /** Reject, telling the app whether the label photo was removed (review round 2, issue 5). */
+    private static void rejectWithPhoto(Promise p, String code, String message, boolean photoDeleted) {
+        WritableMap info = Arguments.createMap();
+        info.putBoolean("photoDeleted", photoDeleted);
+        p.reject(code, message, info);
     }
 
     /**
@@ -291,21 +307,24 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
         return new RgbImage(w, h, px).downscale(MAX_SIDE);
     }
 
-    private void clearScanCache() {
+    /** Remove leftover photos; returns whether none remain. */
+    private boolean clearScanCache() {
         File dir = new File(getReactApplicationContext().getCacheDir(), "scans");
         File[] files = dir.listFiles();
-        if (files != null) for (File f : files) deletePhoto(f);
+        boolean ok = true;
+        if (files != null) for (File f : files) ok &= deletePhoto(f);
+        return ok;
     }
 
-    /** Launch failed: nothing was taken, but remove any file and grant that may exist. */
-    private void cleanUpFailedLaunch(Activity activity) {
+    /** Launch failed: nothing was taken, but remove any file and grant that may exist. Returns whether the photo file is gone. */
+    private boolean cleanUpFailedLaunch(Activity activity) {
         File f = pendingFile;
         Uri u = pendingUri;
         pending = null;
         pendingFile = null;
         pendingUri = null;
         revokeGrant(activity, u);
-        deletePhoto(f);
+        return deletePhoto(f);
     }
 
     private static void revokeGrant(Activity activity, Uri u) {
