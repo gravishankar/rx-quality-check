@@ -22,6 +22,8 @@ export type { Strength } from '../models/identity.ts';
 export interface StrengthExpression {
   components: Strength[];
   text: string;
+  /** Start of the expression in the text it was read from (review round 2: local pairing). */
+  index?: number;
 }
 
 const MASS_TO_MG: Record<string, number> = { MG: 1, MCG: 0.001, UG: 0.001, 'µG': 0.001, G: 1000, GM: 1000 };
@@ -159,7 +161,7 @@ export function extractStrengthExpressions(text: string): StrengthExpression[] {
       components.push({ value: round(value), unit: cu.unit, per });
     }
     if (bad) continue;
-    out.push({ components, text: whole.trim() });
+    out.push({ components, text: whole.trim(), index: (m.index ?? 0) + (whole.length - whole.trimStart().length) });
   }
   return out;
 }

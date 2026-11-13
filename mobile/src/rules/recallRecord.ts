@@ -20,9 +20,8 @@ import { compareRelease, formEvidenceFromText, productSegment } from './doseForm
 import { readIngredientsFromText } from './ingredients.ts';
 import { compareLot, parseLotScope } from './lot.ts';
 import { extractNdcsWithKeys, packageKey, productKeyOfProductNdc } from './ndc.ts';
-import { extractStrengthExpressions, sameStrength, sameStrengthSet } from './strength.ts';
+import { extractStrengthExpressions, sameStrength, sameStrengthSet, type StrengthExpression } from './strength.ts';
 import { sourceProductUncertain } from './sourceProduct.ts';
-import { orderByAppearance } from './identity.ts';
 
 const REQUIRED_STRING_FIELDS = [
   'recall_number',
@@ -86,19 +85,46 @@ interface AttributeComparison {
   unknowns: RecordReason[];
 }
 
+type Pairing = 'SAME' | 'DIFFERENT' | 'UNKNOWN';
+
 /**
- * C1: compare a strength expression ingredient by ingredient when the text names every identity
- * ingredient (strength components follow the order the ingredients are written in); otherwise as a
- * set, which never claims a difference it cannot see.
+ * Order of the ingredient names that belong to one strength expression (review round 2, issue 1):
+ * the shortest run of text just before the expression (after the previous expression) that names
+ * every ingredient, each exactly once. Null when no such run exists: the pairing is not established.
  */
-function sameStrengthFor(components: readonly Strength[], identity: MedicationIdentity, ids: readonly Strength[], text: string, aliases: Readonly<Record<string, string>>): boolean {
+function localOrder(text: string, from: number, to: number, names: readonly string[], aliases: Readonly<Record<string, string>>): string[] | null {
+  const lower = text.slice(from, to).toLowerCase();
+  const hits: { at: number; name: string }[] = [];
+  const terms: [string, string][] = [...names.map((n): [string, string] => [n, n]), ...Object.entries(aliases).filter(([, v]) => names.includes(v))];
+  for (const [term, name] of terms) {
+    const re = new RegExp(`(^|[^a-z])${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![a-z])`, 'g');
+    for (const m of lower.matchAll(re)) hits.push({ at: (m.index ?? 0) + (m[1]?.length ?? 0), name });
+  }
+  hits.sort((x, y) => x.at - y.at);
+  const seen = new Set<string>();
+  let start = hits.length;
+  for (let k = hits.length - 1; k >= 0 && seen.size < names.length; k--) {
+    seen.add((hits[k] as { name: string }).name);
+    start = k;
+  }
+  if (seen.size < names.length) return null;
+  const run = hits.slice(start).map((h) => h.name);
+  return new Set(run).size === run.length ? run : null;
+}
+
+/**
+ * Compare one strength expression with the product (C1, review round 2). A difference is claimed
+ * only when proven: the values differ as a multiset (no pairing can match), or the locally
+ * established pairing differs. Equal values with an unestablished pairing are UNKNOWN, never SAME.
+ */
+function strengthPairing(e: StrengthExpression, from: number, identity: MedicationIdentity, ids: readonly Strength[], text: string, aliases: Readonly<Record<string, string>>): Pairing {
   const names = identity.ingredients.map((i) => i.name);
-  if (components.length !== ids.length || names.length < 2 || new Set(names).size !== names.length) return sameStrengthSet(components, ids);
-  const lower = text.toLowerCase();
-  const found = names.every((n) => lower.includes(n) || Object.entries(aliases).some(([a, v]) => v === n && lower.includes(a)));
-  if (!found) return sameStrengthSet(components, ids);
-  const ordered = orderByAppearance(text, names, aliases);
-  return ordered.every((n, k) => sameStrength(components[k] as Strength, ids[names.indexOf(n)] as Strength));
+  if (!sameStrengthSet(e.components, ids)) return 'DIFFERENT';
+  if (names.length < 2) return 'SAME';
+  if (new Set(names).size !== names.length || e.index === undefined) return 'UNKNOWN';
+  const order = localOrder(text, from, e.index, names, aliases);
+  if (order === null) return 'UNKNOWN';
+  return order.every((n, k) => sameStrength(e.components[k] as Strength, ids[names.indexOf(n)] as Strength)) ? 'SAME' : 'DIFFERENT';
 }
 
 /** Compare identity attributes with what the record's text explicitly states. */
@@ -129,20 +155,37 @@ export function compareAttributes(identity: MedicationIdentity, description: str
     unknowns.push('STRENGTH_NOT_STATED');
   } else {
     const ids = idStrengths as Strength[];
+    let source = seg;
     let exprs = extractStrengthExpressions(seg);
-    if (exprs.length === 0) exprs = extractStrengthExpressions(description);
-    const comparable = exprs.filter((e) =>
+    if (exprs.length === 0) {
+      source = description;
+      exprs = extractStrengthExpressions(description);
+    }
+    // Each expression's local window starts where the previous expression ended.
+    const windows = exprs.map((e, k) => {
+      const prev = k > 0 ? exprs[k - 1] : undefined;
+      return prev && prev.index !== undefined ? prev.index + prev.text.length : 0;
+    });
+    const comparable = exprs.map((e, k) => ({ e, from: windows[k] as number })).filter(({ e }) =>
       e.components.every((c) => ids.some((s) => s.unit === c.unit && s.per === c.per)),
     );
     if (comparable.length === 0) {
       unknowns.push('STRENGTH_NOT_STATED');
-    } else if (!comparable.some((e) => sameStrengthFor(e.components, identity, ids, seg, aliases))) {
-      // Review item 1 (fallback): an expression with a different number of values than the product
-      // has ingredients proves a difference only if none of its values equals any of the product's
-      // strengths; otherwise the strength is only partly stated and the record is kept.
-      const partial = comparable.some((e) => e.components.length !== ids.length && e.components.some((c) => ids.some((s) => sameStrength(c, s))));
-      if (partial) unknowns.push('STRENGTH_PARTIALLY_STATED');
-      else differences.push('STRENGTH_DIFFERS');
+    } else {
+      const results = comparable.map(({ e, from }) =>
+        e.components.length !== ids.length
+          ? // Review item 1 (fallback): a different number of values than ingredients proves a
+            // difference only if none of its values equals any of the product's strengths.
+            e.components.some((c) => ids.some((s) => sameStrength(c, s)))
+            ? 'PARTIAL'
+            : 'DIFFERENT'
+          : strengthPairing(e, from, identity, ids, source, aliases),
+      );
+      if (!results.includes('SAME')) {
+        if (results.includes('UNKNOWN')) unknowns.push('STRENGTH_ASSOCIATION_UNCLEAR');
+        else if (results.includes('PARTIAL')) unknowns.push('STRENGTH_PARTIALLY_STATED');
+        else differences.push('STRENGTH_DIFFERS');
+      }
     }
   }
 
