@@ -2,7 +2,7 @@
  * Root component: a small state-based router (no navigation library). Screens render screen
  * models from src/app/screens.ts; every result passes through the presentation layer.
  */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { COPY } from '../src/copy/en.ts';
@@ -11,8 +11,7 @@ import { readScan } from '../src/scanner/readScan.ts';
 import { vocabularyFromConfig } from '../src/scanner/vocabulary.ts';
 import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements, type ConsentStore } from '../src/legal/consent.ts';
 import { LEGAL_DOCUMENTS, type LegalDocumentId } from '../src/legal/documents.ts';
-import { deleteAllData, openStorage, type Repositories } from '../src/storage/repositories.ts';
-import type { SqlDriver } from '../src/storage/driver.ts';
+import { createStorageLifecycle, type StorageState } from '../src/storage/lifecycle.ts';
 import { CATALOG_JSON, POLICY_JSON, PROFILE } from './config.ts';
 import type { PlatformServices } from './platform/types.ts';
 import { useRecallSession } from './useRecallSession.ts';
@@ -44,7 +43,19 @@ type Route = { name: 'check' } | { name: 'history' } | { name: 'about' } | { nam
 const defaultConsent = memoryConsentStore();
 
 export function AppRoot({ platform, consent = defaultConsent }: { platform: PlatformServices; consent?: ConsentStore }) {
-  const [db, setDb] = useState<{ driver: SqlDriver; repos: Repositories } | null>(null);
+  // Review item 7: one lifecycle owns the database (open, delete, recreate, failures).
+  const storage = useMemo(
+    () =>
+      createStorageLifecycle({
+        enabled: PROFILE.persistHistory,
+        open: () => platform.openEncryptedDatabase(),
+        keyStore: platform.keyStore,
+        deps: { now: () => new Date().toISOString(), newId: () => [...platform.randomBytes(16)].map((b) => b.toString(16).padStart(2, '0')).join('') },
+      }),
+    [platform],
+  );
+  const [storageState, setStorageState] = useState<StorageState>(storage.state());
+  const db = storageState.status === 'READY' ? { repos: storageState.repos } : null;
   const [acks, setAcks] = useState<Acknowledgements | null>(null);
   const [route, setRoute] = useState<Route>({ name: 'check' });
   const [entry, setEntry] = useState(EMPTY_ENTRY);
@@ -57,13 +68,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
 
   useEffect(() => {
     void consent.load().then(setAcks);
-    if (!PROFILE.persistHistory) return;
-    void (async () => {
-      const driver = await platform.openEncryptedDatabase();
-      const { repos } = await openStorage(driver, { now: () => new Date().toISOString(), newId: () => [...platform.randomBytes(16)].map((b) => b.toString(16).padStart(2, '0')).join('') });
-      setDb({ driver, repos });
-    })();
-  }, [platform]);
+    void storage.start().then(setStorageState);
+  }, [storage]);
 
   // Android Back: from any screen other than the entry screen, go back to it instead of leaving the
   // app (iOS has no Back button; the listener is a no-op there).
@@ -146,7 +152,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   if (documentsNeedingAcknowledgement(acks).length > 0) {
     return wrap(banner, <FirstLaunch pilot={PROFILE.kind === 'pilot'} onOpenDoc={openDoc} onAccept={() => { const a = acknowledge(acks, new Date().toISOString()); void consent.save(a); setAcks(a); }} />);
   }
-  if (route.name === 'history') return wrap(banner, <History repos={db?.repos ?? null} enabled={PROFILE.persistHistory} onBack={home} />);
+  if (route.name === 'history') return wrap(banner, <History repos={db?.repos ?? null} enabled={PROFILE.persistHistory} failure={storageState.status === 'FAILED' ? storageState.reason : null} onBack={home} />);
   if (route.name === 'about') {
     return wrap(
       banner,
@@ -162,8 +168,9 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
           setScanInfo(null);
           setScanPhase({ phase: 'idle' });
           setRoute({ name: 'check' });
-          if (db) await deleteAllData(db.driver, platform.keyStore);
-          setDb(null);
+          const after = await storage.deleteAll();
+          setStorageState(after);
+          if (after.status === 'FAILED') throw new Error('delete failed'); // About shows the failure, not "deleted"
           await consent.clear();
           setAcks({});
         }}

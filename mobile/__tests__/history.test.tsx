@@ -43,3 +43,11 @@ test('item 6: the saved check is shown with the bottle it was made for', async (
   expect(t).toContain('SYNTHLOT2');
   expect(t).not.toContain('62756-142-02');
 });
+
+test('item 7: a storage failure is shown on the History screen, not a silently empty list', async () => {
+  let r!: ReactTestRenderer;
+  await act(async () => {
+    r = create(<History repos={null} enabled failure="KEY" onBack={() => undefined} />);
+  });
+  expect(text(r)).toContain('secure key');
+});

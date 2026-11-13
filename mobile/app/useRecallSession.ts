@@ -28,11 +28,18 @@ export interface RecallSession {
 
 export function useRecallSession(platform: PlatformServices, repos: Repositories | null): RecallSession {
   const app = useRef<RecallCheck | null>(null);
+  // Review item 7: the engine is rebuilt whenever storage changes (opened, deleted, recreated), so
+  // it never keeps repositories from a deleted database.
+  const appRepos = useRef<Repositories | null>(null);
   const [state, setState] = useState<WorkflowState>(initialState());
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const getApp = useCallback(() => {
+    if (appRepos.current !== repos) {
+      app.current = null;
+      appRepos.current = repos;
+    }
     app.current ??= createRecallCheck({
       transport: platform.transport,
       now: () => new Date().toISOString(),

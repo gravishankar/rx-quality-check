@@ -330,6 +330,12 @@ export const COPY = {
     madeUnder: (v: string) => `Checked with drug list and policy version ${v}`,
     outdated: 'Made with an older drug list or policy. Check again for a current result.',
     deleteOne: 'Delete',
+    storageFailed: {
+      KEY: 'Saved checks cannot be opened: the phone’s secure key for them is not available. Nothing new will be saved.',
+      OPEN: 'Saved checks cannot be opened on this phone right now. Nothing new will be saved.',
+      MIGRATION: 'Saved checks were made by a newer or different version of the app and cannot be opened. Nothing new will be saved.',
+      DELETE: 'Deleting the data on this phone did not finish. Please try again, or remove the app’s storage in the phone’s settings.',
+    },
     /** Which bottle a saved check was made for (review item 6). */
     fillLine: (ndc: string, lot: string | null, checkedAt: string) => `Bottle: NDC ${ndc}${lot ? `, lot ${lot}` : ', no lot entered'}. Checked ${checkedAt}.`,
   },

@@ -17,7 +17,7 @@ interface Row {
   fill: string | null;
 }
 
-export function History({ repos, enabled, onBack }: { repos: Repositories | null; enabled: boolean; onBack: () => void }) {
+export function History({ repos, enabled, onBack, failure = null }: { repos: Repositories | null; enabled: boolean; onBack: () => void; failure?: 'KEY' | 'OPEN' | 'MIGRATION' | 'DELETE' | null }) {
   const [rows, setRows] = useState<Row[] | null>(null);
   useEffect(() => {
     if (!enabled || !repos) return;
@@ -39,6 +39,7 @@ export function History({ repos, enabled, onBack }: { repos: Repositories | null
   return (
     <>
       <H1>{COPY.history.title}</H1>
+      {failure ? <P>{COPY.history.storageFailed[failure]}</P> : null}
       {!enabled ? <P>{COPY.history.disabled}</P> : rows === null ? <P>Loading…</P> : rows.length === 0 ? <P>{COPY.history.empty}</P> : null}
       {rows?.map((r) => (
         <Section key={r.id} title={r.name}>
