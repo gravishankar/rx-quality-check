@@ -5,7 +5,8 @@
  *
  *  - start():     OFF (disabled build) · READY (new generation) · FAILED (KEY | OPEN | MIGRATION)
  *  - deleteAll(): destroys the database and its key, then opens fresh storage (new generation);
- *                 a failure is FAILED (DELETE), never reported as done
+ *                 a failure is FAILED (DELETE), never reported as done; the database and key stay
+ *                 the deletion target until each is actually deleted, so a retry finishes the job
  *  - Every READY state carries a generation. Repositories from an older generation refuse every
  *    operation with StorageInvalidated, so a callback that finishes after delete-all cannot write
  *    into (or read from) the new database.
@@ -75,6 +76,10 @@ export function createStorageLifecycle(o: StorageLifecycleOptions): StorageLifec
   let current: StorageState = { status: o.enabled ? 'OPENING' : 'OFF' };
   let generation = 0;
   let driver: SqlDriver | null = null;
+  /** A database whose destruction was requested and has not yet succeeded. */
+  let pendingDestroy: SqlDriver | null = null;
+  /** True from a successful destroy until the key is deleted (also when there was no open database). */
+  let keyPending = true;
   let ticket = 0; // the latest start/delete request; older ones are discarded when they finish
 
   const set = (s: StorageState) => {
@@ -119,12 +124,21 @@ export function createStorageLifecycle(o: StorageLifecycleOptions): StorageLifec
     },
     async deleteAll() {
       const my = ++ticket;
-      const old = driver;
+      // Review round 2, issue 4: the database stays the deletion target until destroy succeeds, and
+      // the key until its deletion succeeds, so a retry finishes whatever is left.
+      if (driver) pendingDestroy = driver;
       driver = null;
       set({ status: 'DELETING' }); // invalidates every handle of the previous generation
       try {
-        if (old) await old.destroy();
-        if (o.keyStore) await o.keyStore.deleteKey();
+        if (pendingDestroy) {
+          await pendingDestroy.destroy();
+          pendingDestroy = null;
+          keyPending = true;
+        }
+        if (o.keyStore && keyPending) {
+          await o.keyStore.deleteKey();
+          keyPending = false;
+        }
       } catch {
         return set({ status: 'FAILED', reason: 'DELETE' });
       }
