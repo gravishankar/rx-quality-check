@@ -168,13 +168,18 @@ export function createLivePorts(o: LivePortsOptions): Ports {
           else incomplete = true;
           continue;
         }
+        // Review round 2, issue 2: a declared source that the directory does not list under its NDC,
+        // or lists with another formulation, is a rejected branch: the chain is not fully verified.
+        let branchVerified = false;
         for (const rec of res.data.results) {
           const p = directoryProductFrom(rec);
           if (productKeyOfProductNdc(p.productNdc) !== productKeyOfProductNdc(src) || !sameFormulation(identity, p)) continue;
+          branchVerified = true;
           if (!verified.includes(p.productNdc)) verified.push(p.productNdc);
           if (p.isOriginalPackager === false) await walk(p.productNdc, p.splSetId ?? null, depth + 1);
           else if (p.isOriginalPackager !== true) incomplete = true;
         }
+        if (!branchVerified) incomplete = true;
       }
     };
     await walk(identity.productNdc, identity.splSetId ?? null, 0);

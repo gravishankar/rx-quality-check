@@ -176,3 +176,37 @@ function sourceQualified(id: MedicationIdentity) {
   const f = evaluateRecallEvidence(id, bundle(planRecallQueries(id), { ingredient_text: [enf('enf_text_tamsulosin')], product_ndc: [realNoMatch()], control: [control()] }));
   return f.limitations.includes('SOURCE_PRODUCT_NOT_ESTABLISHED');
 }
+
+// Review round 2, issues 2 and 3 --------------------------------------------------------------------
+const withStrength = (l: OpenFdaNdcProduct, strength: string): OpenFdaNdcProduct => ({ ...l, active_ingredients: (l.active_ingredients ?? []).map((a) => ({ ...a, strength })) });
+const withIngredientName = (l: OpenFdaNdcProduct, name: string): OpenFdaNdcProduct => ({ ...l, active_ingredients: (l.active_ingredients ?? []).map((a) => ({ ...a, name })) });
+
+test('R2-2: one verified branch plus a declared source that is rejected (different formulation) → partial, not verified', async () => {
+  const spl = await realSplWithExtraSource('99999-001');
+  const rejected = withStrength(listing('99999-001', true, setId(9)), '80 mg/mL'); // SYNTHETIC conflicting formulation
+  const e = await portsWith({ spl: { [FUROSEMIDE_SET]: spl }, products: { '99999-001': rejected } }).enrichIdentity!(furosemide());
+  assert.equal(e.sourceProductStatus, 'PARTIAL');
+  assert.deepEqual(e.relatedSourceProductNdcs, ['0054-3294'], 'the rejected source is never used for matching');
+});
+
+test('R2-2: a declared source whose directory answer lists no product with that NDC → partial, not verified', async () => {
+  const spl = await realSplWithExtraSource('99999-001');
+  const elsewhere = listing('99999-002', true, setId(9)); // SYNTHETIC: answer for a different product NDC
+  const e = await portsWith({ spl: { [FUROSEMIDE_SET]: spl }, products: { '99999-001': elsewhere } }).enrichIdentity!(furosemide());
+  assert.equal(e.sourceProductStatus, 'PARTIAL');
+});
+
+test('R2-3: source verification compares salts — same ingredient, other salt is not the same formulation', () => {
+  const p = directoryProductFrom(sourceRecord);
+  const id = furosemide();
+  assert.equal(sameFormulation(id, p), true, 'guard: the real source matches');
+  const otherSalt = directoryProductFrom(withIngredientName(sourceRecord, 'FUROSEMIDE SODIUM')); // SYNTHETIC salt
+  assert.notEqual(otherSalt.ingredients[0]?.salt ?? null, id.ingredients[0]?.salt ?? null, 'fixture check: salts differ');
+  assert.equal(sameFormulation(id, otherSalt), false);
+});
+
+test('R2-3: a declared source with another salt is not verified in the chain', async () => {
+  const e = await portsWith({ products: { '0054-3294': withIngredientName(listing('0054-3294', true, setId(1)), 'FUROSEMIDE SODIUM') } }).enrichIdentity!(furosemide());
+  assert.notEqual(e.sourceProductStatus, 'VERIFIED');
+  assert.deepEqual(e.relatedSourceProductNdcs, []);
+});
