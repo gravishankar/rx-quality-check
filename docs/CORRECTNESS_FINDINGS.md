@@ -19,13 +19,13 @@ device behavior not verifiable here · **M** missing or future feature.
 | 2 | Recall query omits aliases; pagination ≠ search coverage | P1 | D | Fixed (C2a–b) |
 | 3 | Incomplete repackager-source resolution | P1 | D/T | Fixed for traversal and qualifiers (C3); OD-33 decision needed for classification |
 | 4 | Malformed freshness dates fail open | P1 | D | Fixed (C4) |
-| 5 | Offline matching ignores lot and package | P2 | D | see §2 |
-| 6 | History pairs latest assessment with oldest fill | P2 | D | see §2 |
-| 7 | Delete-all leaves stale storage in the session | P2 | D | see §2 |
-| 8 | Scanner image retention, external camera | P2 | T/V | see §2 |
-| 9 | Encryption and native privacy need device evidence | P2 | V | Deferred (device gate) |
-| 10 | Lot confirmation: UI and engine disagree | P3 | D | see §3 |
-| 11 | Release mechanism forces a guess | P3 | T | see §3 |
+| 5 | Offline matching ignores lot and package | P2 | D | Fixed |
+| 6 | History pairs latest assessment with oldest fill | P2 | D | Fixed |
+| 7 | Delete-all leaves stale storage in the session | P2 | D | Fixed (shared lifecycle); device check remains |
+| 8 | Scanner image retention, external camera | P2 | T/V | Fixed in code and copy; device check remains |
+| 9 | Encryption and native privacy need device evidence | P2 | V | Code-checkable parts pinned; rest deferred (device gate) |
+| 10 | Lot confirmation: UI and engine disagree | P3 | D | Fixed |
+| 11 | Release mechanism forces a guess | P3 | T | Fixed (no guess, no check); OD-34 decision |
 | 12 | Refill comparison and recheck not surfaced | P3 | M | Deferred (persistence gate) |
 | 13 | Identity-source provenance and completeness | Follow-up | M | Partly addressed (PARTIAL status); rest deferred |
 | 14 | Keep business logic platform-independent | Follow-up | T | Maintained; enforced by boundary tests |
@@ -58,7 +58,7 @@ device behavior not verifiable here · **M** missing or future feature.
 | Regression tests | `c2_alias_search_coverage.test.ts` (5, real task2 responses; alias "rsv" SYNTHETIC); `tests/integration/c2_alias_search.test.ts` (2, recorded openFDA `tests/fixtures/c2/`) |
 | Fix | Each ingredient searched as (name OR alias…), deduplicated, deterministic order; terms outside the client's safe character set are left out and then reported. Separate `coverage.searchAdequate` (every name and alias; product-NDC search; every verified source NDC) feeds `coverage.complete`; limitation `SEARCH_TERMS_INCOMPLETE` with patient copy; a saved result without it is downgraded. `hctz` added to the **proposed** catalog only, with evidence |
 | Evidence | Commit `f0387cc`. Recorded case: 0 records lost; D-0886-2022 now a possible match; 16 other newly found records ruled out by strength or combination, none confirmed. F1 regression checks unchanged and passing |
-| Remaining | Query-plan version is tracked through `RULESET_VERSION`; a separate plan version is planned with the item 5 fingerprint. Aliases are reviewed catalog data only (no fuzzy matching) |
+| Remaining | Aliases are reviewed catalog data only (no fuzzy matching). Query-plan version `2` recorded on every plan and finding (`f40d229`); `RULESET_VERSION` 0.3.0 → 0.4.0 so earlier saved results are stale |
 | Disposition | **Fixed** |
 
 ### Item 3 — repackager source resolution
@@ -72,7 +72,7 @@ device behavior not verifiable here · **M** missing or future feature.
 | Regression tests | `c3_source_chain.test.ts` (10): real furosemide chain guard; SYNTHETIC partial branch, depth limit, cycle, later SPL outage, unreadable SPL, swapped-strength source; patient view for PARTIAL, NOT_CHECKED, original packager |
 | Fix | New status `PARTIAL` (verified branches kept for matching, completeness reported separately); unreadable SPL → `UNAVAILABLE`; product never its own source; PARTIAL and unchecked-unknown-packager get the limitation and a patient qualifier |
 | Evidence | Commit `7523d6c` |
-| Remaining | (a) **OD-33 decision needed**: notices of the same ingredient/strength/form that name *other* NDCs are ruled out even when one could be the unknown source; recommendation: show them as possible matches. (b) Missing SPL set id and source-NDC-not-found: handled (`NOT_ESTABLISHED` / incomplete) — targeted tests to add. (c) Durable per-branch provenance → item 13 |
+| Remaining | (a) **OD-33 decision needed**: notices of the same ingredient/strength/form that name *other* NDCs are ruled out even when one could be the unknown source; recommendation: show them as possible matches. (b) Missing SPL set id and source-NDC-not-found: tested (`f40d229`). (c) Durable per-branch provenance → item 13 |
 | Disposition | **Fixed** (traversal, qualifiers) · **Decision needed** (OD-33) |
 
 ### Item 4 — freshness dates
@@ -98,43 +98,118 @@ identity or a no-match (existing RG-1 tests plus `c4`, `c5`).
 
 ## 2. Saved-result integrity and patient data (Priority 2 — before persistence)
 
-Persistence is **off** in every build that exists (`buildProfile.ts`: development `persistHistory:
-false`; pilot only when encryption is verified on a device). Exposure today is nil; these block enabling it.
+Persistence is **off** in every build that exists (`mobile/src/app/buildProfile.ts`: development
+`persistHistory: false`; pilot only once encryption is verified on a device). Patient exposure today is
+nil; these fixes are prerequisites for turning it on, not permission to.
 
-| # | Locations | Plan / status |
-|---|---|---|
-| 5 | `storage/repositories.ts:45` `identityLookupKey`, `:242` `latestFor` | Reproduce with different lots/packages; reuse only for an exact fill fingerprint (product, package, lot, strengths, salts, form, release, rules/policy/catalog/query-plan versions) and reassess stored records against the current identity |
-| 6 | `app/screens/History.tsx:27`, `storage/repositories.ts:144` | Join assessment to its `fill_id`; repository + screen regression with multiple fills |
-| 7 | `app/AppRoot.tsx:165`, `app/useRecallSession.ts:36` | Explicit storage lifecycle (open → ready → deleting → recreated / failed); session rebuilt on change; visible failures for key, open, migration and delete |
-| 8 | `RxScannerModule.java:110` | Code-traced: deleted on success, cancel, analysis error; leftovers cleared at next start; deletion result ignored; camera app receives a write grant. Plan: check deletion results, revoke URI grants, document the trust boundary; in-app camera assessed as an option |
-| 9 | native | Device evidence required (see §5) |
+### Item 5 — offline reuse ignored lot and package
+
+| | |
+|---|---|
+| Patient impact | High once persistence is on: "Recall match found" for lot JKU4639A offered offline for a bottle from another lot, or a result made under older rules |
+| Locations | `storage/repositories.ts:45` `identityLookupKey` (fill fingerprint); `latestFor` (store) |
+| Reproduced | Yes (real Sun metformin ER and recall D-0325-2021; other lots and package SYNTHETIC) |
+| Regression tests | `p_saved_results.test.ts`: different lot, no lot, different package, other policy version, and different strength / salt / form / release |
+| Fix | Reuse only for an identical fill fingerprint (level, product, package, lot, each ingredient's salt and strength, form, release) made under the running rules, policy and catalog; otherwise nothing is reused and the patient sees "could not reach FDA" |
+| Remaining | Reusable public evidence is the 24 h source cache; re-evaluating stored raw records offline against a new fill is not implemented (conservative: no result) |
+| Evidence · disposition | `ee6de2c` · **Fixed** |
+
+### Item 6 — history joined to the wrong fill
+
+| | |
+|---|---|
+| Locations | `app/screens/History.tsx`; `storage/repositories.ts` `latestWithFill` |
+| Reproduced | Yes: repository test, and the History screen (jest) showed the oldest bottle |
+| Regression tests | `p_saved_results.test.ts` (item 6); `mobile/__tests__/history.test.tsx` (fails on the old screen) |
+| Fix | Assessment joined by its own `fill_id`; History says which bottle (NDC, lot) and when it was checked |
+| Evidence · disposition | `ee6de2c` · **Fixed** |
+
+### Item 7 — storage and session lifecycle
+
+| | |
+|---|---|
+| Locations | `storage/lifecycle.ts` (new, shared); `app/AppRoot.tsx`; `app/useRecallSession.ts`; `app/screens/History.tsx` |
+| Reproduced | Yes: old repositories are dead after delete-all and nothing re-opened storage (test 1); session memoized the first repositories (code-traced) |
+| Regression tests | `p_storage_lifecycle.test.ts` (7, real SQLite): delete then save again; stale handle refused; failed deletion; key / open / migration failures; disabled build never opens; slow start after delete-all discarded. `history.test.tsx`: storage failure shown |
+| Fix | States OFF · OPENING · READY(generation) · DELETING · FAILED(KEY, OPEN, MIGRATION, DELETE). Delete-all destroys database and key, then opens fresh storage; older handles refuse every call; the session rebuilds its engine when storage changes; failures are shown; a failed delete is reported as failed |
+| Remaining | Native SQLCipher open/delete on a device (item 9) |
+| Evidence · disposition | `59ec48e` · **Fixed** (device check remains) |
+
+### Item 8 — scanner image and the camera app
+
+| | |
+|---|---|
+| Locations | `RxScannerModule.java` (`scanLabel`, `onActivityResult`, `deletePhoto`, `revokeGrant`, `cleanUpFailedLaunch`); `copy/en.ts`; `docs/PRIVACY.md` |
+| Reproduced | Yes (code): deletion results ignored; URI grant never revoked; launch failure left state; copy promised "never saved to your photos"; PRIVACY.md said "not written to disk" |
+| Regression tests | `p_scanner_privacy.test.ts` (3); `architecture_boundaries.test.ts` updated |
+| Fix | Grant revoked on return and on launch failure; every deletion checked, an undeletable file emptied and removed at next start; copy and PRIVACY.md describe the camera-app trust boundary. Java compiles (`:app:compileDevReleaseJavaWithJavac`) |
+| Remaining | Device check: cache contents after success, cancel, error and a killed process; per-camera-app copies and network use. An in-app camera would remove the trust boundary — recorded as a future option, not implemented |
+| Evidence · disposition | `dc5bd2e` · **Fixed in code and copy; device check remains** |
+
+### Item 9 — encryption and native privacy
+
+Pinned without a device (`p_native_privacy.test.ts`, `617c0bb`): no console or Android log calls in app
+code; backup and device-transfer exclusions for every data domain; transport omits credentials and
+refuses redirects. Everything in §5 remains **unverified** and blocks enabling persistence.
 
 ## 3. Confirmation and workflow (Priority 3)
 
-| # | Locations | Plan / status |
-|---|---|---|
-| 10 | `app/screens/Confirm.tsx:21`, `state/machine.ts:328` | Readiness from the engine's list; explicit "use this lot / correct it / continue without a lot"; unconfirmed scanned lot never used |
-| 11 | `app/screens/Confirm.tsx:45` | "I can't tell" with guidance; no guessed release enters a confirmed identity (see §4 for the decision) |
-| 12 | `rules/refill.ts`, `storage/repositories.ts:230`, History | Deferred until persistence: surfaced refill changes, recheck action, and a review of grouping saved records by ingredient set |
+### Item 10 — lot confirmation
+
+| | |
+|---|---|
+| Locations | `app/screens.ts` (model `required`, `ready`, `stillNeeded`, `confirmationEvent`); `app/screens/Confirm.tsx`; `state/machine.ts` `applyUserConfirmation` and the confirmation gate |
+| Reproduced | Yes: "use this lot" sent the way the old screen did left the patient on CONFIRM; the engine used any lot sent even without the patient confirming it |
+| Regression tests | `w_confirmation.test.ts` (6); jest `flows.test.tsx` (lot choice and "still needed" message; continue without lot → possible match, lot never sent) |
+| Fix | Readiness from the engine's requirement list with a "Still needed" message; explicit "Use lot …" / "Continue without the lot number"; correcting it goes through "Change details"; a lot is used only with "use" |
+| Evidence · disposition | `726d62e` · **Fixed**. Existing tests that sent an unconfirmed lot now send an explicit "use" |
+
+### Item 11 — release mechanism
+
+"I can't tell" shows where to look on the label and suggests the pharmacist; no check starts and no
+guessed release enters a confirmed identity (`w_confirmation.test.ts`, jest `flows.test.tsx`; `726d62e`).
+**Decision OD-34**: whether to offer a check with the release left unknown. **Fixed** (conservative).
+
+### Item 12 — refill comparison and recheck
+
+**Deferred — gate: before persistence is enabled.** Needed: show refill changes (product, labeler,
+strength, salt, form, release), a recheck action with sources, dates and assessment age, and a review of
+grouping saved records by ingredient set (today metformin IR and ER group under one medication —
+`medicationKey`). Refill rules themselves are fixed (item 1).
 
 ## 4. Architecture and future work
 
 | # | Disposition |
 |---|---|
-| 13 | Partly addressed: traversal completeness is now separate from verified relationships (`PARTIAL`). Durable source records (SPL version, retrieval date, per-branch outcome) deferred — gate: before any feature that shows or stores source relationships beyond the current check |
-| 14 | Maintained: all fixes are in shared TypeScript (`rules/`, `services/`, `presentation/`); `architecture_boundaries.test.ts` enforces no I/O/clock in rules (it caught and forced a fix in C4) |
-| 15 | Deferred: Android-only scanner, iOS backup exclusion, profile separation, ATS review, Keychain-on-reinstall policy. Gate: each before the matching iOS capability is enabled. No iOS readiness claimed |
-| 16 | Deferred, not part of this work: facility provenance, inspections, warning letters, import alerts, comparisons, monitoring. No scores or rankings |
+| 13 | Partly addressed: traversal completeness is separate from verified relationships (`PARTIAL`); query-plan version recorded. **Deferred:** durable source records (SPL version, retrieval date, per-branch outcome, conflicts). Gate: before any feature that shows or stores source relationships beyond the current check. No plant or facility inference |
+| 14 | Maintained: every fix is shared TypeScript (`rules/`, `services/`, `storage/lifecycle.ts`, `app/screens.ts`, `presentation/`); native code changed only for the photo file and grant. `architecture_boundaries.test.ts` enforces pure rules (it caught a clock use in C4) |
+| 15 | **Deferred** (iOS gate): Android-only scanner, iOS backup exclusion, profile separation, ATS review, Keychain-on-reinstall policy. No iOS readiness claimed |
+| 16 | **Deferred** (out of MVP scope): facility provenance, inspections, warning letters, import alerts, comparisons, monitoring. No scores or rankings |
 
-## 5. Device-dependent checks (cannot be done in this environment)
+## 5. Device-dependent checks (no device in this environment)
 
-Encrypted DB file and sidecars; wrong-key failure; key deletion/reset; backup and device-transfer
-exclusion on a device; release logs; scanner network silence; native redirect/cookie behavior;
-app-switcher exposure (OD-21); uninstall/reinstall; camera-app copies of the photo.
+All unverified; each blocks enabling persistence or the pilot: encrypted database file and `-wal`/`-shm`
+sidecars; wrong-key failure; key deletion and reset after delete-all; backup and device-transfer
+exclusion on a real device; release logcat; scanner network silence during OCR; whether React Native's
+Android networking honors `credentials: 'omit'` and `redirect: 'error'` (its shared cookie jar may still
+store cookies); app-switcher thumbnail (OD-21); uninstall/reinstall; photo cache after a killed process;
+camera-app copies of the photo.
 
-## 6. F1, F2, F3 and catalog
+## 6. Verification (revision `ec66d16`)
+
+| Command | Result |
+|---|---|
+| `npm test` | 523 tests, 523 pass, 0 fail, 0 skipped |
+| `npm run typecheck`, `npm run mobile:typecheck` | pass |
+| `npm run mobile:test` (jest) | 37 tests in 3 suites, all pass |
+| `npm run e2e` (recorded) | 13 scenarios pass |
+| `npm run config:validate` | OK |
+| Gradle `:app:compileDevReleaseJavaWithJavac` | pass (no device run) |
+
+## 7. F1, F2, F3 and catalog
 
 F1 kept with its regression checks: **no regressions observed in the recorded cases and conflation
-checks**, not proof that no false negatives exist. F2 after these fixes. F3's drug stays inactive.
+checks**, not proof that no false negatives exist. **F2 done** (`ec66d16`): infusion wording read as
+non-oral; on all 670 recorded notices exactly 6 change, all IV bags or infusion pumps. F3's drug stays inactive.
 Route-dependent and policy-held drugs stay inactive. Stage 1 stays on hold; coverage percentages are
 estimates of potential reach, not recall accuracy or readiness.

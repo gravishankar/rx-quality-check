@@ -92,6 +92,17 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Build 9 (2026-11-13) | Build 8 with team wording: the development banner says "for internal testing only" |
 | Status | **Build 9 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`; builds 1–7 merged into `main`). Task 4D not started |
 
+## Task 4H — Independent-review remediation (correctness, saved results, confirmation)
+
+| | |
+|---|---|
+| Scope | Every finding of the independent review of `b9c5989` (16 items), plus F2. Register: `docs/CORRECTNESS_FINDINGS.md` |
+| Done | Items 1–8, 10, 11 fixed with failing-first regression tests; item 9 code-checkable parts pinned; F2 done; `RULESET_VERSION` 0.4.0, query plan v2 |
+| Open decisions | OD-33 (unknown-source notices naming other NDCs), OD-34 (check with release unknown) |
+| Deferred with gates | Item 9 device checks and item 12 (before persistence); items 13, 15, 16 (before the matching capability) |
+| Not done by design | No drug activation, no persistence enabled, no push, merge or distribution, no iOS or provenance work |
+| Status | **Complete — awaiting review** (branch `task-4h/correctness-findings`, local) |
+
 ## Task 4G — Broader drug coverage with a bundled drug directory (proposed, not approved)
 
 Goal: check almost any oral prescription generic, not only the 14 listed drugs, while making fewer
