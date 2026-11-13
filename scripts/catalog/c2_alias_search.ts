@@ -14,6 +14,7 @@ import { runEffect, DEFAULT_RX_RULES, type Ports } from '../../mobile/src/engine
 import { createOpenFdaClient } from '../../mobile/src/services/openfda.ts';
 import { liveTransport, loadCassette, recordingTransport, replayTransport, saveCassette, type Cassette } from '../lib/cassette.ts';
 import type { MedicationIdentity } from '../../mobile/src/models/identity.ts';
+import { holdSourceResolved } from './f1_before_after.ts';
 import type { OpenFdaNdcProduct } from '../../mobile/src/models/openfda.ts';
 
 const isMain = !!process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -67,7 +68,9 @@ export async function runC2Comparison() {
   const out = [];
   for (const c of CASES) {
     const rec = ex[c.id]!;
-    const base = identityFromProduct(directoryProductFrom(rec), rec.packaging?.[0]?.package_ndc ?? null, null);
+    // Isolation: this comparison measures C2 only; the source product is held resolved (SYNTHETIC for
+    // repackaged exemplars). OD-33's effect is measured by runOd33Comparison in f1_before_after.ts.
+    const base = holdSourceResolved(identityFromProduct(directoryProductFrom(rec), rec.packaging?.[0]?.package_ndc ?? null, null));
     const before = await assess(base);
     const after = await assess(withCatalogAliases(base, CATALOG.ingredients));
     out.push({ case: c.id, product_ndc: rec.product_ndc, before, after,

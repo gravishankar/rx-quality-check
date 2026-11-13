@@ -188,6 +188,8 @@ export const COPY = {
       sourceUnavailable: 'We could not check whether this product was repackaged from another product.',
       sourcePartial:
         'This product was repackaged, and we could confirm only part of where it came from. Recalls listed under the original product may not have been found.',
+      sourceUnresolvedPossible:
+        'Some notices below name other products’ codes. We could not confirm which product yours was repackaged from, so they may apply to it. Ask your pharmacist which manufacturer’s product you received.',
       sourceNotChecked:
         'We did not check whether this product was repackaged from another product. If it was, recalls listed under the original product may not have been found.',
       lotNotProvided: 'Some recalls apply only to certain lot numbers. You did not enter a lot number.',

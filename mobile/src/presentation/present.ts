@@ -403,6 +403,7 @@ export function presentResult(input: PresentInput): ResultView {
     if ((identity.sourceProductStatus ?? 'NOT_CHECKED') === 'NOT_CHECKED' && sourceProductUncertain(identity)) qualifiers.push(COPY.result.qualifiers.sourceNotChecked);
     if (identity.lot === null && f.potential.concat(f.confirmed).some((r) => r.reasons.includes('LOT_REQUIRED'))) qualifiers.push(COPY.result.qualifiers.lotNotProvided);
   }
+  if (f.potential.some((r) => r.reasons.includes('SOURCE_PRODUCT_UNRESOLVED'))) qualifiers.push(COPY.result.qualifiers.sourceUnresolvedPossible);
   if (input.origin === 'SAVED') qualifiers.push(COPY.errors.offline(asOf));
 
   const headline =

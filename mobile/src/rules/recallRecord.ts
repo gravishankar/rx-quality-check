@@ -21,6 +21,7 @@ import { readIngredientsFromText } from './ingredients.ts';
 import { compareLot, parseLotScope } from './lot.ts';
 import { extractNdcsWithKeys, packageKey, productKeyOfProductNdc } from './ndc.ts';
 import { extractStrengthExpressions, sameStrength, sameStrengthSet } from './strength.ts';
+import { sourceProductUncertain } from './sourceProduct.ts';
 import { orderByAppearance } from './identity.ts';
 
 const REQUIRED_STRING_FIELDS = [
@@ -277,8 +278,15 @@ export function assessRecord(identity: MedicationIdentity, raw: unknown, foundBy
 
   // R-EV-4: explicit evidence of a different product.
   if (attrs.differences.length > 0) return done('OTHER_PRODUCT', 'NOT_APPLICABLE', attrs.differences);
+  // OD-33 (approved 2026-11-13): when where this product came from is unresolved, a notice that is
+  // ruled out only because it names other NDCs could be about the unknown source product. With no
+  // independent evidence of a different product (checked above), it stays a possible match.
+  const sourceUnresolved = sourceProductUncertain(identity);
   if (textProductKeys.size > 0) {
-    if (textNdc.unparsedMentions === 0) return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['TEXT_NDC_NAMES_OTHER_PRODUCTS']);
+    if (textNdc.unparsedMentions === 0) {
+      if (sourceUnresolved) return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['SOURCE_PRODUCT_UNRESOLVED', 'TEXT_NDC_NAMES_OTHER_PRODUCTS', ...attrs.unknowns]);
+      return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['TEXT_NDC_NAMES_OTHER_PRODUCTS']);
+    }
     // R-EV-5: an NDC list we could not fully read never rules the product out.
     return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['TEXT_NDC_LIST_INCOMPLETE', ...attrs.unknowns]);
   }
@@ -291,6 +299,7 @@ export function assessRecord(identity: MedicationIdentity, raw: unknown, foundBy
   if (structured.length > 0 && textNdc.unparsedMentions === 0) {
     const labeler = productKey.slice(0, 5);
     if (!structured.some((k) => k.slice(0, 5) === labeler)) {
+      if (sourceUnresolved) return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['SOURCE_PRODUCT_UNRESOLVED', 'STRUCTURED_NDC_EXCLUDES_PRODUCT', ...attrs.unknowns]);
       return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['STRUCTURED_NDC_EXCLUDES_PRODUCT']);
     }
   }

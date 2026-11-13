@@ -43,6 +43,11 @@ const accordAtorvastatin80 = () => productIdentity(firstNdcRecord('ndc_prod_1672
 const ascendAtorvastatin80 = () => productIdentity(firstNdcRecord('ndc_prod_67877-514'), '67877-514-90');
 const camberHydrocodoneApap = (lot: string | null = null) => productIdentity(firstNdcRecord('ndc_prod_31722-997'), '31722-997-01', lot);
 const aphenaTamsulosin = () => productIdentity(apiNdcRecord('ndc_tamsulosin'), '71610-910-30');
+// SYNTHETIC source status: Aphena repackages, and openFDA omits is_original_packager for it, so its
+// real source is unresolved (OD-33 keeps other labelers' same-strength notices as possible matches —
+// see the OD-33 test below). Tests of coverage mechanics (RG-1, RG-2, pagination, RC-5) need a
+// no-match baseline, so they treat the source as resolved to isolate the behavior they test.
+const tamsulosinSourceResolved = () => ({ ...aphenaTamsulosin(), isOriginalPackager: true, sourceProductStatus: 'NOT_APPLICABLE' as const });
 const quallentRosuvastatin10 = () => productIdentity(apiNdcRecord('ndc_rosuvastatin'), '82009-018-10');
 
 // Complete, real query results per identity.
@@ -190,14 +195,14 @@ test('RC-3: no NDC and no openfda block, same ingredient/strength/form → POSSI
 test('RC-5: a record missing a required field is UNRESOLVED, never "other product"; alone it makes the finding UNRESOLVED', () => {
   const rec = recordFrom(enf('enf_text_tamsulosin'), 'D-1844-2019');
   const { product_description: _d, ...broken } = rec;
-  const r = assessRecord(aphenaTamsulosin(), broken, ['ingredient_text']);
+  const r = assessRecord(tamsulosinSourceResolved(), broken, ['ingredient_text']);
   assert.equal(r.classification, 'UNRESOLVED');
   // Inject it into an otherwise complete OK page (cached data path; the live service would reject the page).
   const page = enf('enf_text_tamsulosin');
   assert.equal(page.kind, 'OK');
   if (page.kind === 'OK') {
     const injected: EnforcementPage = { ...page, data: { ...page.data, results: [...page.data.results.filter((x) => x.recall_number !== 'D-1844-2019'), broken as unknown as OpenFdaEnforcement] } };
-    const f = evaluate(aphenaTamsulosin(), { ...TAMSULOSIN(), ingredient_text: [injected] });
+    const f = evaluate(tamsulosinSourceResolved(), { ...TAMSULOSIN(), ingredient_text: [injected] });
     assert.equal(f.finding, 'UNRESOLVED');
     assert.ok(f.limitations.includes('SOME_RECORDS_UNPARSEABLE'));
   }
@@ -261,7 +266,7 @@ test('ID-3: name-only combination identity can only reach POTENTIAL_MATCH, label
 // ---------------------------------------------------------------- incorrect / unmatched NDC, NO_MATCH_FOUND
 
 test('NO_MATCH_FOUND only with complete coverage, and always with coverage, dates and limitations', () => {
-  const f = evaluate(aphenaTamsulosin(), TAMSULOSIN());
+  const f = evaluate(tamsulosinSourceResolved(), TAMSULOSIN());
   assert.equal(f.finding, 'NO_MATCH_FOUND');
   assert.ok(f.coverage.complete);
   assert.equal(f.coverage.positiveControl.status, 'PASSED');
@@ -275,9 +280,21 @@ test('NO_MATCH_FOUND only with complete coverage, and always with coverage, date
     assert.ok(f.limitations.includes(l), l);
   }
   assert.equal(f.notApplicable.length, 5, 'every evaluated record stays visible');
-  const ex = selectExplanation(aphenaTamsulosin(), f);
+  const ex = selectExplanation(tamsulosinSourceResolved(), f);
   assert.equal(ex.headline, 'RESULT_NO_MATCH_FOUND');
   assert.deepEqual(ex.sections.slice(-2), ['SOURCES_AND_DATES', 'STANDING_DISCLAIMER']);
+});
+
+test('OD-33: the real Aphena tamsulosin (repackager, source unresolved) keeps compatible notices naming other NDCs as possible matches', () => {
+  const f = evaluate(aphenaTamsulosin(), TAMSULOSIN());
+  assert.equal(f.finding, 'POTENTIAL_MATCH');
+  // D-1844-2019 names Macleods 33342-159, the product the RP-4 test assumes Aphena repackaged.
+  for (const n of ['D-1844-2019', 'D-1066-2019', 'D-1253-2015']) {
+    const r = f.potential.find((x) => x.recallNumber === n);
+    assert.ok(r?.reasons.includes('SOURCE_PRODUCT_UNRESOLVED'), n);
+  }
+  // Independent evidence still rules records out.
+  assert.deepEqual(f.notApplicable.map((x) => [x.recallNumber, x.reasons[0]]), [['D-0069-2018', 'COMBINATION_PRODUCT'], ['D-914-2015', 'NON_ORAL_OR_NOT_FINISHED_PRODUCT']]);
 });
 
 test('rosuvastatin 10 mg (Quallent): other labelers\' 10 mg recalls name other NDCs → NO_MATCH_FOUND', () => {
@@ -307,10 +324,10 @@ const FAILURES: [string, () => EnforcementPage][] = [
 ];
 
 test('RG-1: every injected failure on every query turns a would-be NO_MATCH_FOUND into UNRESOLVED', () => {
-  assert.equal(evaluate(aphenaTamsulosin(), TAMSULOSIN()).finding, 'NO_MATCH_FOUND', 'baseline');
+  assert.equal(evaluate(tamsulosinSourceResolved(), TAMSULOSIN()).finding, 'NO_MATCH_FOUND', 'baseline');
   for (const q of ['ingredient_text', 'product_ndc', 'control']) {
     for (const [label, fail] of FAILURES) {
-      const f = evaluate(aphenaTamsulosin(), { ...TAMSULOSIN(), [q]: [fail()] });
+      const f = evaluate(tamsulosinSourceResolved(), { ...TAMSULOSIN(), [q]: [fail()] });
       assert.equal(f.finding, 'UNRESOLVED', `${q}: ${label}`);
       assert.equal(f.coverage.complete, false, `${q}: ${label}`);
     }
@@ -333,7 +350,7 @@ test('RG-2: misspelled/renamed field answers "no matches" — the multi-field po
   const drifted = enf('enf_misspelled_field');
   assert.equal(drifted.kind, 'NO_MATCH');
   // ...so only the control, which uses the same fields, can expose it.
-  const f = evaluate(aphenaTamsulosin(), { ...TAMSULOSIN(), control: [controlDrifted()] });
+  const f = evaluate(tamsulosinSourceResolved(), { ...TAMSULOSIN(), control: [controlDrifted()] });
   assert.equal(f.finding, 'UNRESOLVED');
   assert.equal(f.coverage.positiveControl.status, 'FAILED');
   assert.ok(f.limitations.includes('POSITIVE_CONTROL_NOT_PASSED'));
@@ -347,14 +364,14 @@ test('RG-2: a control that returns the record but whose NDC the parser cannot re
     ...c,
     data: { ...c.data, results: c.data.results.map((r) => ({ ...r, product_description: r.product_description.replace('62756-142-02', '62756 142 02') })) },
   };
-  const f = evaluate(aphenaTamsulosin(), { ...TAMSULOSIN(), control: [broken] });
+  const f = evaluate(tamsulosinSourceResolved(), { ...TAMSULOSIN(), control: [broken] });
   assert.equal(f.coverage.positiveControl.status, 'FAILED');
   assert.equal(f.finding, 'UNRESOLVED');
 });
 
 test('a query that was never run blocks NO_MATCH_FOUND', () => {
   const { product_ndc: _skip, ...rest } = TAMSULOSIN();
-  const f = evaluate(aphenaTamsulosin(), rest);
+  const f = evaluate(tamsulosinSourceResolved(), rest);
   assert.equal(f.finding, 'UNRESOLVED');
   assert.equal(f.coverage.queries.find((q) => q.queryId === 'product_ndc')?.status, 'NOT_RUN');
 });
@@ -378,7 +395,7 @@ test('pagination: pages out of order, a failed second page, or a trimmed page ar
   const failedP2 = evaluate(lupinAmlodipine5(), { ...AMLODIPINE_455(), ingredient_text: [enf('enf_text_amlodipine_p1'), realServerError()] });
   assert.equal(failedP2.coverage.queries[0]?.status, 'SOURCE_UNAVAILABLE');
   assert.equal(failedP2.finding, 'UNRESOLVED');
-  const trimmed = evaluate(aphenaTamsulosin(), { ...TAMSULOSIN(), ingredient_text: [firstRecordsOnly(enf('enf_text_tamsulosin'), 3)] });
+  const trimmed = evaluate(tamsulosinSourceResolved(), { ...TAMSULOSIN(), ingredient_text: [firstRecordsOnly(enf('enf_text_tamsulosin'), 3)] });
   assert.equal(trimmed.finding, 'UNRESOLVED');
   // Task 1 fixtures were trimmed to 3 of N records: also incomplete.
   const t1 = evaluate(accordAtorvastatin40(), { ingredient_text: [apiEnforcement('enforcement_atorvastatin')], product_ndc: [enf('enf_pndc_16729-046')], control: [control()] });

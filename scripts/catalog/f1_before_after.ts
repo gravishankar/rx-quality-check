@@ -85,13 +85,36 @@ async function assess(identity: MedicationIdentity) {
   return { search: ev.bundle.plan.queries.find((q) => q.id === 'ingredient_text')?.search ?? '', retrieved: [...new Set(retrieved)], finding: f.finding, records };
 }
 
+/** Hold the source product as resolved, to isolate a change from OD-33 (labeled SYNTHETIC where used). */
+export const holdSourceResolved = (id: MedicationIdentity): MedicationIdentity => ({ ...id, isOriginalPackager: true, sourceProductStatus: 'NOT_APPLICABLE' });
+
+/**
+ * OD-33 on the recorded F1 exemplars: the same identity with its real source information (no
+ * enrichment run: packager flag as openFDA publishes it) versus held resolved.
+ */
+export async function runOd33Comparison() {
+  const ex = await exemplars();
+  const out = [];
+  for (const c of CASES) {
+    const rec = ex[c.id]!;
+    const real = identityFromProduct(directoryProductFrom(rec), rec.packaging?.[0]?.package_ndc ?? null, null);
+    const a = await assess(real), b = await assess(holdSourceResolved(real));
+    out.push({ case: c.id, labeler: rec.labeler_name, isOriginalPackager: real.isOriginalPackager ?? null, resolved: b.finding, unresolved: a.finding,
+      keptByOd33: Object.keys(a.records).filter((n) => (a.records[n] ?? '').startsWith('POTENTIAL') && (b.records[n] ?? '').startsWith('NOT_APPLICABLE')),
+      otherChanges: Object.keys(a.records).filter((n) => a.records[n] !== b.records[n] && !(((a.records[n] ?? '').startsWith('POTENTIAL (SOURCE_PRODUCT_UNRESOLVED')))) });
+  }
+  return out;
+}
+
 export async function runF1Comparison() {
 const ex = await exemplars();
 const out = [];
 for (const c of CASES) {
   const rec = ex[c.id]!;
   const pkg = rec.packaging?.[0]?.package_ndc ?? null;
-  const after = identityFromProduct(directoryProductFrom(rec), pkg, null);
+  // Isolation: this comparison measures F1 only, so the exemplar's source product is held resolved
+  // (SYNTHETIC for repackaged exemplars). OD-33's effect on the same data: runOd33Comparison().
+  const after = holdSourceResolved(identityFromProduct(directoryProductFrom(rec), pkg, null));
   const actives = rec.active_ingredients ?? [];
   const before: MedicationIdentity = { ...after, ingredients: after.ingredients.map((i, k) => { const o = oldSplit(actives[k]?.name ?? i.name); return { ...i, name: o.name, salt: o.salt }; }) };
   const b = await assess(before), a = await assess(after);
