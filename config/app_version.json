@@ -1,7 +1,7 @@
 {
   "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the project team); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.8",
-  "build_number": 9,
+  "version": "0.1.9",
+  "build_number": 10,
   "history": [
     {
       "build_number": 1,
@@ -90,6 +90,14 @@
       "apk_sha256": "d2481cc0a01064ee1f4236363b45df06fb84030c4f06a40b0f38bc6f5dc1d3fc",
       "note": "Same as build 8 except the development banner now reads 'for internal testing only' (team wording throughout the app and docs). Two APKs: universal (71.2 MB; apk_sha256) and ARM64-only (33.3 MB; apk_sha256_arm64).",
       "apk_sha256_arm64": "be575247ac8b3e90f6893e04b1c3431e86fda6a94e22e3fb3389cb398883241a"
+    },
+    {
+      "build_number": 10,
+      "version": "0.1.9",
+      "task": "4H (device verification build)",
+      "commit": "task-4h/correctness-findings (see apk notes)",
+      "label": "MedLuma (DEV)",
+      "note": "Controlled device-verification build of the Task 4H fixes (review rounds 1-3 passed). Development profile: history/persistence off, catalog unchanged (no activation). For the team's own test device only; not for distribution."
     }
   ]
 }
