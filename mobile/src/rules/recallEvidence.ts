@@ -221,6 +221,30 @@ export function searchIsAdequate(identity: MedicationIdentity, plan: RecallQuery
   return identity.relatedSourceProductNdcs.every((n) => ndcSearches.has(`openfda.product_ndc:${quote(n)}`));
 }
 
+/**
+ * True when a recall listed under the product this one was repackaged from might not be found:
+ * the source was not established, could not be checked, was only partly resolved (C3), or was never
+ * checked for a product not known to be its original packager.
+ */
+export function sourceProductUncertain(identity: MedicationIdentity): boolean {
+  switch (identity.sourceProductStatus) {
+    case 'NOT_ESTABLISHED':
+    case 'UNAVAILABLE':
+    case 'PARTIAL':
+      return true;
+    case 'NOT_CHECKED':
+    case undefined:
+      return identity.level === 'PRODUCT' && identity.productNdc !== null && identity.isOriginalPackager !== true;
+    case 'VERIFIED':
+    case 'NOT_APPLICABLE':
+      return false;
+    default: {
+      const never: never = identity.sourceProductStatus;
+      return never;
+    }
+  }
+}
+
 /** Evaluate all retrieved recall evidence for a confirmed identity. Pure and deterministic. */
 export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: RecallEvidenceBundle): RecallFinding {
   const readouts = bundle.plan.queries.map((q) => readQuery(q, bundle));
@@ -275,9 +299,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
   if (unresolved.length > 0) limitations.push('SOME_RECORDS_UNPARSEABLE');
   // A repackaged product whose source could not be verified: recalls naming the original product's
   // NDC cannot be matched, so a negative result is weaker than usual.
-  if (identity.sourceProductStatus === 'NOT_ESTABLISHED' || identity.sourceProductStatus === 'UNAVAILABLE') {
-    limitations.push('SOURCE_PRODUCT_NOT_ESTABLISHED');
-  }
+  if (sourceProductUncertain(identity)) limitations.push('SOURCE_PRODUCT_NOT_ESTABLISHED');
 
   const queries = [...readouts.map((r) => r.coverage), control.coverage];
   const dates = queries.map((q) => q.datasetLastUpdated).filter((d): d is string => d !== null).sort();

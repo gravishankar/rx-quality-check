@@ -142,6 +142,7 @@ export const COPY = {
     sourceVerified: 'Declared in the repackager’s FDA labeling and found in the FDA NDC Directory.',
     sourceUnknown: 'We could not confirm which product this was repackaged from.',
     sourceNotChecked: 'Not checked.',
+    sourcePartial: 'Only partly confirmed: part of the chain of repackaging could not be checked.',
     conflict: 'FDA records give different information for this product. We did not choose one.',
     releaseValues: { IR: 'Regular release', ER: 'Extended release', DR: 'Delayed release', UNSPECIFIED: 'Not known' },
   },
@@ -173,6 +174,10 @@ export const COPY = {
       sourceNotEstablished:
         'This product appears to be repackaged, and we could not confirm the original product. Recalls listed under the original product may not have been found.',
       sourceUnavailable: 'We could not check whether this product was repackaged from another product.',
+      sourcePartial:
+        'This product was repackaged, and we could confirm only part of where it came from. Recalls listed under the original product may not have been found.',
+      sourceNotChecked:
+        'We did not check whether this product was repackaged from another product. If it was, recalls listed under the original product may not have been found.',
       lotNotProvided: 'Some recalls apply only to certain lot numbers. You did not enter a lot number.',
       userEnteredIdentity: 'The medication details were entered by you and were not matched to an FDA product listing.',
     },

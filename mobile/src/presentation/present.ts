@@ -12,6 +12,7 @@ import { COPY } from '../copy/en.ts';
 import type { RecallFinding, RecordAssessment } from '../models/evidence.ts';
 import type { LabelExtraction, MedicationIdentity } from '../models/identity.ts';
 import type { ExclusionDecision } from '../models/policy.ts';
+import { sourceProductUncertain } from '../rules/recallEvidence.ts';
 
 /** Acceptance policy for freshness (EVIDENCE_AND_CLAIMS_POLICY.md §5). */
 export const FRESHNESS = {
@@ -179,6 +180,9 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
   switch (identity.sourceProductStatus) {
     case 'VERIFIED':
       out.push(f('source', COPY.fields.source, identity.relatedSourceProductNdcs.join(', '), 'VERIFIED_SOURCE', COPY.fields.sourceVerified));
+      break;
+    case 'PARTIAL':
+      out.push(f('source', COPY.fields.source, identity.relatedSourceProductNdcs.join(', '), 'UNVERIFIED', COPY.fields.sourcePartial));
       break;
     case 'NOT_ESTABLISHED':
     case 'UNAVAILABLE':
@@ -393,6 +397,8 @@ export function presentResult(input: PresentInput): ResultView {
     if (identity.level !== 'PRODUCT') qualifiers.push(COPY.result.qualifiers.productNotIdentified, COPY.result.qualifiers.userEnteredIdentity);
     if (identity.sourceProductStatus === 'NOT_ESTABLISHED') qualifiers.push(COPY.result.qualifiers.sourceNotEstablished);
     if (identity.sourceProductStatus === 'UNAVAILABLE') qualifiers.push(COPY.result.qualifiers.sourceUnavailable);
+    if (identity.sourceProductStatus === 'PARTIAL') qualifiers.push(COPY.result.qualifiers.sourcePartial);
+    if ((identity.sourceProductStatus ?? 'NOT_CHECKED') === 'NOT_CHECKED' && sourceProductUncertain(identity)) qualifiers.push(COPY.result.qualifiers.sourceNotChecked);
     if (identity.lot === null && f.potential.concat(f.confirmed).some((r) => r.reasons.includes('LOT_REQUIRED'))) qualifiers.push(COPY.result.qualifiers.lotNotProvided);
   }
   if (input.origin === 'SAVED') qualifiers.push(COPY.errors.offline(asOf));
