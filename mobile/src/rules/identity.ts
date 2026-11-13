@@ -18,7 +18,7 @@ import type { OpenFdaEnvelope, OpenFdaNdcProduct } from '../models/openfda.ts';
 import { compareRelease, formEvidenceFromText, fromDirectoryDosageForm } from './doseForm.ts';
 import { readIngredientsFromText, splitIngredientName } from './ingredients.ts';
 import { packageKey, type NdcParseResult } from './ndc.ts';
-import { normalizeStrength, parsePrintedStrength, sameStrengthSet } from './strength.ts';
+import { normalizeStrength, parsePrintedStrength, sameStrength, sameStrengthSet } from './strength.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Directory products
@@ -138,7 +138,8 @@ export type CrossValidationIssue =
   | 'DRUG_NAME_NOT_PRINTED'
   | 'STRENGTH_NOT_PRINTED'
   | 'RELEASE_NOT_PRINTED'
-  | 'RELEASE_CONFLICTING';
+  | 'RELEASE_CONFLICTING'
+  | 'STRENGTH_ASSOCIATION_UNCLEAR';
 
 export interface CrossValidation {
   status: 'PASS' | 'MISMATCH' | 'NEEDS_CONFIRMATION';
@@ -154,6 +155,7 @@ export interface CrossValidation {
 export function crossValidate(
   printed: PrintedFields,
   product: Pick<DirectoryProduct, 'ingredients' | 'doseForm' | 'release'>,
+  aliases: Readonly<Record<string, string>> = {},
 ): CrossValidation {
   const mismatches: CrossValidationIssue[] = [];
   const confirmations: CrossValidationIssue[] = [];
@@ -163,7 +165,7 @@ export function crossValidate(
   if (nameText.trim() === '') {
     confirmations.push('DRUG_NAME_NOT_PRINTED');
   } else {
-    const r = readIngredientsFromText(nameText, product.ingredients.map((i) => i.name));
+    const r = readIngredientsFromText(nameText, product.ingredients.map((i) => i.name), aliases);
     if (r.found.length === 0) mismatches.push('INGREDIENT_MISMATCH');
     else if (r.missing.length > 0 || r.partners.length > 0) mismatches.push('COMBINATION_MISMATCH');
   }
@@ -174,6 +176,23 @@ export function crossValidate(
     confirmations.push('STRENGTH_NOT_PRINTED');
   } else if (productStrengths.some((s) => s === null) || !sameStrengthSet(printedStrength, productStrengths as Strength[])) {
     mismatches.push('STRENGTH_MISMATCH');
+  } else if (product.ingredients.length > 1) {
+    // Review item 1: the printed strengths belong to the ingredients in the order the label names
+    // them. Swapped strengths are a different product even though the set of values is the same.
+    const names = product.ingredients.map((i) => i.name);
+    const read = readIngredientsFromText(nameText, names, aliases);
+    if (read.found.length === names.length && new Set(names).size === names.length && printedStrength.length === names.length) {
+      const ordered = orderByAppearance(nameText, names, aliases);
+      const paired = ordered.every((n, k) => {
+        const want = product.ingredients.find((i) => i.name === n)?.strength;
+        const got = printedStrength[k];
+        return want != null && got !== undefined && sameStrength(got, want);
+      });
+      if (!paired) mismatches.push('STRENGTH_MISMATCH');
+    } else {
+      // Which printed strength belongs to which ingredient cannot be told: ask the patient.
+      confirmations.push('STRENGTH_ASSOCIATION_UNCLEAR');
+    }
   }
 
   const fe = formEvidenceFromText(allText);

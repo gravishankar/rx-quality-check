@@ -143,12 +143,12 @@ async function resolveIdentity(x: LabelExtraction, discardNdc: boolean, ports: P
       case 'RATE_LIMITED':
         return { type: 'LOOKUP_RATE_LIMITED', retryAfterSeconds: conf.retryAfterSeconds };
       case 'RESOLVED': {
-        const cv = crossValidate(printed, conf.product);
+        const cv = crossValidate(printed, conf.product, catalogAliases(cfg));
         if (cv.status === 'MISMATCH') return { type: 'CROSS_VALIDATION_FAILED', detail: cv.mismatches.join(',') };
         return { type: 'IDENTITY_RESOLVED', identity: await finish(identityFromProduct(conf.product, conf.packageNdc, null), ports, cfg) };
       }
       case 'AMBIGUOUS': {
-        const consistent = conf.options.filter((o) => crossValidate(printed, o.product).status !== 'MISMATCH');
+        const consistent = conf.options.filter((o) => crossValidate(printed, o.product, catalogAliases(cfg)).status !== 'MISMATCH');
         if (consistent.length === 0) return { type: 'CROSS_VALIDATION_FAILED', detail: 'no candidate matches the printed label' };
         if (consistent.length === 1) {
           const o = consistent[0] as (typeof consistent)[number];
@@ -163,17 +163,25 @@ async function resolveIdentity(x: LabelExtraction, discardNdc: boolean, ports: P
   return { type: 'IDENTITY_PARTIAL', identity: await finish(r.identity, ports, cfg) };
 }
 
-function requiredConfirmations(identity: MedicationIdentity, x: LabelExtraction | null, ndcDiscarded: boolean): string[] {
+export function requiredConfirmations(identity: MedicationIdentity, x: LabelExtraction | null, ndcDiscarded: boolean): string[] {
   const out = new Set<string>();
   if (x) {
     const printed = printedFrom(x);
-    const cv = identity.level === 'PRODUCT' ? crossValidate(printed, identity) : null;
+    const aliases: Record<string, string> = {};
+    for (const i of identity.ingredients) for (const a of i.aliases ?? []) aliases[a] = i.name;
+    const cv = identity.level === 'PRODUCT' ? crossValidate(printed, identity, aliases) : null;
     for (const f of fieldsNeedingConfirmation(x, { ndcCrossValidated: cv !== null && cv.status === 'PASS' && !ndcDiscarded })) out.add(f);
     for (const c of cv?.confirmations ?? []) {
-      if (c === 'STRENGTH_NOT_PRINTED') out.add('strength');
+      if (c === 'STRENGTH_NOT_PRINTED' || c === 'STRENGTH_ASSOCIATION_UNCLEAR') out.add('strength');
       if (c === 'DRUG_NAME_NOT_PRINTED') out.add('drugName');
       if (c === 'RELEASE_NOT_PRINTED' || c === 'RELEASE_CONFLICTING') out.add('release');
     }
+    // Review item 1/C5: two different NDCs read from one label — the patient confirms which applies.
+    const keySets = x.ndcTexts
+      .map((t) => parseNdcInput(t.value))
+      .filter((p) => p.kind !== 'INVALID')
+      .map((p) => new Set(p.candidates.map((c) => c.packageNdc.replace(/-/g, ''))));
+    if (keySets.some((a, i) => keySets.slice(i + 1).some((b) => ![...a].some((k) => b.has(k))))) out.add('ndc');
   }
   if (identity.release === 'UNSPECIFIED') out.add('release');
   // A chosen or derived identity is always shown for confirmation as a whole.
