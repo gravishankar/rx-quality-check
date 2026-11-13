@@ -134,9 +134,9 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             pendingUri = uri;
             activity.startActivityForResult(i, REQUEST);
         } catch (ActivityNotFoundException e) {
-            rejectWithPhoto(promise, "NO_CAMERA_APP", "No camera app is available on this phone.", cleanUpFailedLaunch(activity));
+            rejectWithPhoto(promise, "NO_CAMERA_APP", "No camera app is available on this phone.", cleanUpFailedLaunch(activity) && !leftoverRemaining);
         } catch (Exception e) {
-            rejectWithPhoto(promise, "SCAN_FAILED", "The camera could not be opened.", cleanUpFailedLaunch(activity));
+            rejectWithPhoto(promise, "SCAN_FAILED", "The camera could not be opened.", cleanUpFailedLaunch(activity) && !leftoverRemaining);
         }
     }
 
@@ -221,11 +221,14 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
             out.putBoolean("photoDeleted", gone);
             p.resolve(out);
         } catch (Throwable e) {
-            rejectWithPhoto(p, "SCAN_FAILED", describe(e), deletePhoto(f));
+            rejectWithPhoto(p, "SCAN_FAILED", describe(e), deletePhoto(f) && !leftoverRemaining);
         }
     }
 
-    /** Reject, telling the app whether the label photo was removed (review round 2, issue 5). */
+    /**
+     * Reject, telling the app whether the label photo storage is clean (review rounds 2 and 3): the
+     * current photo removed AND no leftover from an earlier, interrupted scan remaining.
+     */
     private static void rejectWithPhoto(Promise p, String code, String message, boolean photoDeleted) {
         WritableMap info = Arguments.createMap();
         info.putBoolean("photoDeleted", photoDeleted);
