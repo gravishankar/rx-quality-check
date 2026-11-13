@@ -1,0 +1,11 @@
+body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1a1a1a; max-width: 100%; margin: 0; }
+h1 { font-size: 18pt; margin: 0 0 10pt; } h2 { font-size: 13.5pt; margin: 16pt 0 6pt; border-bottom: 1px solid #ccc; padding-bottom: 3pt; }
+h3 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+table { border-collapse: collapse; width: calc(100% - 2px); margin: 6pt 0 10pt; font-size: 9.5pt; page-break-inside: auto; }
+th, td { border: 1px solid #bbb; padding: 4pt 6pt; vertical-align: top; text-align: left; overflow-wrap: anywhere; } th { background: #eee; }
+tr { page-break-inside: avoid; }
+code { font-family: Menlo, Consolas, monospace; font-size: 9pt; background: #f2f2f2; padding: 0 2pt; word-break: break-all; }
+pre { background: #f2f2f2; padding: 6pt 8pt; white-space: pre-wrap; word-break: break-all; } pre code { background: none; }
+blockquote { margin: 8pt 0; padding: 4pt 10pt; border-left: 3px solid #888; background: #f7f7f7; }
+a { color: #1a4f9c; text-decoration: none; }
+.footer-note { color: #666; font-size: 8.5pt; margin-top: 18pt; }

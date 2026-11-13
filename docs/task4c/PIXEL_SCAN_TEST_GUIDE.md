@@ -1,44 +1,10 @@
 # Pixel Scan Test Guide — development build 0.1.8 (build 9)
 
-> **Build 9** is build 8 with one wording change: the development banner now says "for internal
-> testing only".
-
-> **Build 8** is build 7 with smaller text-reading models (APK 41.4 → 33.3 MB). Screens and results
-> are unchanged. Please check that scanning still reads labels as well as build 7 did, and note the
-> scan time shown in the development detail line.
-
-> **Device result for build 6 (team's Pixel, 2026-11-12):** a label was scanned and the recall check
-> completed (no matching recall), but the result listed every FDA record checked in full. **Build 7**
-> keeps the scanner unchanged and redesigns the result screen to put a summary first (section 4a below).
-
-> **Device result for build 4 (team's Pixel, 2026-11-12):** every scan ended with "We couldn't read
-> your label — The photo could not be read." Cause: the barcode library's `read()` was called with a
-> null crop rectangle, which its Kotlin API rejects, so every analysis threw. Fixed in build 5; text and
-> barcodes now fail independently, and development builds show a "Technical detail" line on this
-> screen. Please use build 5.
-
-> **Device result for build 5 (team's Pixel, 2026-11-12):** no crash, but every photo — the test
-> labels and a real pharmacy vial — ended with "We could not find any text or barcode… Technical
-> detail (development): 0 text lines, 1 barcodes". The barcode reader worked; the text reader returned
-> nothing. Cause (reproduced on a computer): the app took the OCR character list from ONNX Runtime's
-> metadata API, which does not return the 6,623 entries the recognition model needs (on a computer it
-> returns 6,621 and garbles one character; on the phone evidently nothing usable), so every text line
-> decoded as empty and was silently dropped. **Build 6** reads the list directly from the model file,
-> checks its size against the model (a mismatch now shows a TEXT_FAILED technical detail instead of
-> "0 text lines"), and also:
-> - uses the newer PaddleOCR PP-OCRv4 mobile models;
-> - reads text from a 3200-pixel copy of the photo (was 1600), because on the real vial photo the
->   print was only ~15 pixels tall;
-> - keeps a known drug name even when the strength is unreadable (the form then asks you for the
->   strength — it is never guessed), and corrects "S" read for "5" right after a drug name;
-> - shows OCR counts in the development detail line: "text regions N (empty E, unclear U); dictionary 6623".
->
-> On a computer, the same code on a real vial photo taken by the team now reads "AMLODIPINE" and "5 MG"
-> (the photo is not stored in the repository). This is **not** a phone result; please re-test.
+> **Build 9** (0.1.8) is the current build. What changed in each build, and what happened on the
+> Pixel, is listed under *Build history* at the end.
 
 For the project team only. Goal: photograph a label on your Pixel, confirm what was read, and reach the recall-check
-result **without typing the NDC**. Record what actually happens; nothing in this guide has been run
-on a phone yet.
+result **without typing the NDC**. Record what actually happens.
 
 ## 1. Install
 
@@ -150,3 +116,41 @@ adb logcat -b crash -d > ~/Desktop/medluma-crash.txt
 That file contains only crash traces (the app logs no label text). If **Scan medication label** is
 missing and you only see the typed form with "Scanning is not available on this phone yet", the
 native scanner module was not found at run time — report that; it is the main untested risk.
+
+## Build history
+
+> **Build 9** is build 8 with one wording change: the development banner now says "for internal
+> testing only".
+
+> **Build 8** is build 7 with smaller text-reading models (APK 41.4 → 33.3 MB). Screens and results
+> are unchanged. Please check that scanning still reads labels as well as build 7 did, and note the
+> scan time shown in the development detail line.
+
+> **Device result for build 6 (team's Pixel, 2026-11-12):** a label was scanned and the recall check
+> completed (no matching recall), but the result listed every FDA record checked in full. **Build 7**
+> keeps the scanner unchanged and redesigns the result screen to put a summary first (section 4a below).
+
+> **Device result for build 4 (team's Pixel, 2026-11-12):** every scan ended with "We couldn't read
+> your label — The photo could not be read." Cause: the barcode library's `read()` was called with a
+> null crop rectangle, which its Kotlin API rejects, so every analysis threw. Fixed in build 5; text and
+> barcodes now fail independently, and development builds show a "Technical detail" line on this
+> screen. Please use build 5.
+
+> **Device result for build 5 (team's Pixel, 2026-11-12):** no crash, but every photo — the test
+> labels and a real pharmacy vial — ended with "We could not find any text or barcode… Technical
+> detail (development): 0 text lines, 1 barcodes". The barcode reader worked; the text reader returned
+> nothing. Cause (reproduced on a computer): the app took the OCR character list from ONNX Runtime's
+> metadata API, which does not return the 6,623 entries the recognition model needs (on a computer it
+> returns 6,621 and garbles one character; on the phone evidently nothing usable), so every text line
+> decoded as empty and was silently dropped. **Build 6** reads the list directly from the model file,
+> checks its size against the model (a mismatch now shows a TEXT_FAILED technical detail instead of
+> "0 text lines"), and also:
+> - uses the newer PaddleOCR PP-OCRv4 mobile models;
+> - reads text from a 3200-pixel copy of the photo (was 1600), because on the real vial photo the
+>   print was only ~15 pixels tall;
+> - keeps a known drug name even when the strength is unreadable (the form then asks you for the
+>   strength — it is never guessed), and corrects "S" read for "5" right after a drug name;
+> - shows OCR counts in the development detail line: "text regions N (empty E, unclear U); dictionary 6623".
+>
+> On a computer, the same code on a real vial photo taken by the team now reads "AMLODIPINE" and "5 MG"
+> (the photo is not stored in the repository). This is **not** a phone result; please re-test.

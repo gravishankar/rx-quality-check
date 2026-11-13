@@ -38,7 +38,7 @@ Every result has a label at the top of the result box, a headline, and next step
 |---|---|---|---|
 | **Recall match found** | "Available recall information matches the medication details you provided." | A recall record names this product and its conditions (e.g. your lot) appear to apply | That FDA verified your supply |
 | **Possible recall match** | "This medication may be affected by a reported recall…" | A recall might apply; something (often the lot) is unknown | That it does not apply |
-| **No matching recall found in the FDA records checked** | "No matching recall was identified in the sources successfully checked as of <date>. This does not establish…" | Every search completed and nothing matched *in those records* | That the medication is safe or recall-free |
+| **No matching recall found in the FDA records checked** | "No matching recall was identified in the sources successfully checked as of [date]. This does not establish…" | Every search completed and nothing matched *in those records* | That the medication is safe or recall-free |
 | **Could not determine** | "We could not reliably determine whether this medication is affected by a recall." | Something failed, was incomplete, too old or inconsistent | A no-match |
 
 No result is ever shown in green or with a check mark.
@@ -56,7 +56,7 @@ Result column: write PASS / FAIL / NOTE for the device run.
 | F-05 | Evidence labels | On the confirmation screen | Product, ingredient, form, release, labeler: *From FDA records*; NDC note "A listing is not FDA approval…"; labeler note; lot: *Entered by you…* with "Turn on the lot number item below…" | UI: confirmed recall | |
 | F-06 | Confirmation required | Press *Yes, these details match my label* before switching every item on | Button stays disabled until every required item is on | UI: confirmed recall | |
 | F-07 | Confirmed recall incl. lot | Switch all items on (including the lot), confirm | Spinner "Searching FDA recall records…"; label **Recall match found**; D-0325-2021 under *Recalls that match your product*; "Your lot number appears in this recall's list of lots."; next steps incl. pharmacist and "Do not stop, change or replace…" | UI: confirmed recall | |
-| F-08 | Source attribution & time | On the F-07 result | *What we checked*: "Retrieved on this phone: <time>", "FDA recall data last updated: <date>", searches completed, search check passed, "not updated automatically", "this medication only" | UI: confirmed recall | |
+| F-08 | Source attribution & time | On the F-07 result | *What we checked*: "Retrieved on this phone: [time]", "FDA recall data last updated: [date]", searches completed, search check passed, "not updated automatically", "this medication only" | UI: confirmed recall | |
 | F-09 | Official record | Tap *Official FDA record* under D-0325-2021 | Browser opens api.fda.gov showing that recall | UI: confirmed recall | |
 | F-10 | Possible match (no lot) | D2 (do not enter a lot) | **Possible recall match**; "You did not enter a lot number" qualifier | UI: possible recall | |
 | F-11 | Lot not listed | D3, switch on the lot item | Not *Recall match found*; record text "Your lot number was not found in the listed lots. That does not mean your supply is unaffected." | Engine tests | |
