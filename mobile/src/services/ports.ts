@@ -93,6 +93,9 @@ export function sameFormulation(a: MedicationIdentity, b: ReturnType<typeof dire
   for (const ia of a.ingredients) {
     const ib = b.ingredients.find((x) => x.name === ia.name);
     if (!ia.strength || !ib?.strength || !sameStrength(ia.strength, ib.strength)) return false;
+    // Review round 2, issue 3: the salt is part of the formulation (an unknown salt on either side
+    // cannot be verified as the same).
+    if ((ia.salt ?? null) !== (ib.salt ?? null)) return false;
   }
   return a.doseForm === b.doseForm && a.release === b.release;
 }
