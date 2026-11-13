@@ -169,7 +169,7 @@ test('scanner dependencies (Task 4C): no ML Kit or analytics; ONNX Runtime pinne
   assert.match(sh, /ai\/onnxruntime\/telemetry/);
   const mod = readFileSync(join(ROOT, 'mobile', 'android', 'app', 'src', 'main', 'java', 'org', 'rxrecallcheck', 'app', 'scanner', 'RxScannerModule.java'), 'utf8');
   assert.doesNotMatch(mod, /java\.net|HttpURLConnection|okhttp|Log\.(d|i|v|w|e)\(/, 'scanner module: no network, no logging');
-  assert.match(mod, /deleteQuietly\(f\)/);
+  assert.match(mod, /deletePhoto\(f\)/);
 });
 
 test('scanner native module (Pixel defect, build 4): barcode read gets a non-null crop rectangle; text and barcodes fail independently', () => {
