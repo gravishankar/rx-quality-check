@@ -1,77 +1,140 @@
-# Findings register — independent review of `b9c5989` (branch `task-4h/correctness-findings`)
+# Findings register — independent code review of `b9c5989`
 
-**What this covers.** Every concern raised in the independent review of `task-4g/f1-staged-coverage` at
-`b9c59895` (F1 included), checked against the current revision of this branch. The review document
-itself was not available in the working session; this register follows the review items as listed in
-the team's instructions of 2026-11-13. Items will be reconciled against the full review text when it
-is shared (open item R-0).
+| | |
+|---|---|
+| Review baseline | `gravishankar/rx-quality-check`, branch `task-4g/f1-staged-coverage`, commit `b9c59895de84abbc8ec9e7d68ab38f0e53f38cab` (F1 included) |
+| Remediation branch | `task-4h/correctness-findings` (from `f7d7bae`, which is `b9c5989` plus F1 decision records). Local only: not pushed, not merged |
+| Line numbers | Current revision of this branch unless marked "review" |
+| Rules | Failing regression test before each fix (`tests/regression/`); real recorded FDA data where possible; synthetic values labeled SYNTHETIC; no drug activation, no persistence enabled, no distribution, no claim of patient readiness |
 
-**Rules followed.** Each reproducible defect gets a failing regression test **before** the fix
-(`tests/regression/`), then a small separate commit. Real FDA responses are used where possible;
-synthetic values are labeled SYNTHETIC. Nothing here activates drugs, merges into `main`, builds for
-distribution, enables persistence or claims patient readiness. Stage 1 activation stays on hold.
+**Kinds.** **D** verified defect (failing test before fix) · **T** code-traced concern · **V** native or
+device behavior not verifiable here · **M** missing or future feature.
+**Dispositions.** Fixed · Not reproduced (with evidence) · Deferred (with gate) · Decision needed.
 
-**Categories.**
-- **D — reproduced defect:** a failing test showed it before the fix.
-- **T — code-traced concern:** found by reading the code; a test pins the behavior.
-- **V — device behavior:** depends on a real phone, camera app or OS; cannot be verified here.
-- **M — missing or future feature:** not a defect in what exists; needs a build-out with a gate.
+## Summary
 
-**Status values:** Fixed · In progress · Planned · Decision needed · Deferred (with gate) · Not reproduced.
+| # | Finding | Priority | Kind | Disposition |
+|---|---|---|---|---|
+| 1 | Ingredient strengths lose their association with names | P1 | D | Fixed (C1a–c, C5); two limitations recorded |
+| 2 | Recall query omits aliases; pagination ≠ search coverage | P1 | D | Fixed (C2a–b) |
+| 3 | Incomplete repackager-source resolution | P1 | D/T | Fixed for traversal and qualifiers (C3); OD-33 decision needed for classification |
+| 4 | Malformed freshness dates fail open | P1 | D | Fixed (C4) |
+| 5 | Offline matching ignores lot and package | P2 | D | see §2 |
+| 6 | History pairs latest assessment with oldest fill | P2 | D | see §2 |
+| 7 | Delete-all leaves stale storage in the session | P2 | D | see §2 |
+| 8 | Scanner image retention, external camera | P2 | T/V | see §2 |
+| 9 | Encryption and native privacy need device evidence | P2 | V | Deferred (device gate) |
+| 10 | Lot confirmation: UI and engine disagree | P3 | D | see §3 |
+| 11 | Release mechanism forces a guess | P3 | T | see §3 |
+| 12 | Refill comparison and recheck not surfaced | P3 | M | Deferred (persistence gate) |
+| 13 | Identity-source provenance and completeness | Follow-up | M | Partly addressed (PARTIAL status); rest deferred |
+| 14 | Keep business logic platform-independent | Follow-up | T | Maintained; enforced by boundary tests |
+| 15 | iOS not verified or feature-complete | Follow-up | M | Deferred (iOS gate) |
+| 16 | Provenance, regulatory evidence, monitoring | Future | M | Deferred (out of MVP) |
 
-## 1. Medication and recall accuracy
+## 1. Medication and recall accuracy (Priority 1)
 
-| ID | Cat. | Finding | Patient impact | Reproduced | Affected code | Regression test | Fix / plan | Status · evidence |
-|---|---|---|---|---|---|---|---|---|
-| C1a | D | A typed or scanned combination written with an abbreviation ("APAP/CODEINE 300-30MG") paired the strengths with the wrong ingredients | Confirmation shows acetaminophen 30 mg + codeine 300 mg; catalog strength rules and refill checks judge the wrong values | Yes | `rules/identity.ts` `orderByAppearance`, `identityFromPrintedFields` | `c1_ingredient_association.test.ts` | Ingredient position found by name or alias | Fixed `a868c3b` |
-| C1b | D | Recall comparison treated a combination's strengths as an unordered set (swapped strengths compared equal) | A recall of amlodipine 20 / atorvastatin 10 could be kept as a match for amlodipine 10 / atorvastatin 20 | Yes (SYNTHETIC recall text, real products) | `rules/recallRecord.ts` `compareAttributes` | same | Per-ingredient comparison when the text names every ingredient; otherwise the old set comparison (never claims an unseen difference) | Fixed `a868c3b` |
-| C1c | D | Refill comparison: swapped strengths and salt changes not reported | Doxycycline hyclate → monohydrate, or swapped combination strengths, showed "no change" | Yes | `rules/refill.ts` `diffFills` | same | Per-ingredient strengths; new `SALT_CHANGED` (re-evaluate, check with pharmacist) | Fixed `a868c3b` |
-| C1d | T | Identity cross-validation (label vs FDA listing) of combination strengths | Same as C1a for scanned NDC products | Covered by C1a/C1b changes; cross-validation uses the per-ingredient pairing from C1a | `rules/identity.ts` `crossValidate` | to add: swapped-strength cross-validation case | Add guard test | Planned |
-| C2a | D | Recall text search ignored ingredient aliases | Recalls that name an ingredient only by an abbreviation are never retrieved. Real data: 18 oral HCTZ-combination notices say only "HCTZ", including D-0886-2022, which names the Lupin losartan/HCTZ 100/25 mg NDC | Yes (live openFDA 2026-11-13; recorded) | `rules/recallEvidence.ts` `planRecallQueries` | `c2_alias_search_coverage.test.ts`; `tests/integration/c2_alias_search.test.ts` (recorded) | Each ingredient searched as (name OR alias); `hctz` alias added to the proposed catalog with evidence | Fixed `f0387cc`. No record lost; 17 newly retrieved records ruled out by strength or combination, D-0886-2022 now a possible match |
-| C2b | D | "All pages retrieved" was treated as complete coverage even when the search omitted terms or required NDC searches | A fully paged but incomplete search could produce "No matching recall found" | Yes | `evaluateRecallEvidence` | same | New `coverage.searchAdequate` (every name and alias, product-NDC and source-NDC searches) feeds `complete`; limitation `SEARCH_TERMS_INCOMPLETE` with patient copy; presentation also downgrades a saved result without it | Fixed `f0387cc` |
-| C3a | T | Repackager source chain: one verified branch marks the whole chain `VERIFIED` even when another branch was unavailable, unreadable or cut off | No source qualifier on the result, although part of the source chain was not checked | To reproduce | `services/ports.ts` `sourceProducts` | `c3_source_chain.test.ts` | Partial chains get their own status, keep their qualifier and stop a no-match from being unqualified | In progress |
-| C3b | T | Depth limit (3) reached silently | As C3a | To reproduce | same | same | Depth limit counts as incomplete | In progress |
-| C3c | T | Unreadable or product-less SPL treated like "no source declared" | Reported as not established (qualified) rather than unavailable | To reproduce | same | same | Unreadable/absent product → unavailable | In progress |
-| C3d | T | Packager status unknown and source not checked (`NOT_CHECKED`) gives no result qualifier | Possible unqualified "No matching recall found" for a repackaged product (against OD-17) | To reproduce | `presentation/present.ts` | same | Qualify `NOT_CHECKED` when the product is not known to be the original packager | In progress |
-| C3e | T | Cycles in the source chain | None expected (visited set) | Guard only | `sourceProducts` | same | Guard test | In progress |
-| C3f | T | With an unknown source, recall records naming other NDCs are ruled out as "other product", though one of them could be the unknown source | Possible missed relevant recall for repackaged products; today a qualified no-match | Code-traced | `rules/recallRecord.ts` | — | **Decision needed (OD-33)**: keep OD-17 qualified no-match, or show such same-strength records as possible matches | Decision needed |
-| C4a | T | Malformed FDA dataset date passes the freshness check (`Date.parse` → NaN compares false) | "No matching recall found" shown with an unusable data date | To reproduce | `present.ts` `noMatchIsSupported` | `c4_dates_and_missing_info.test.ts` | Strict ISO date parse; malformed → cannot support a no-match | Planned |
-| C4b | T | Future dataset date (or evaluated-before-dataset) passes | As C4a | To reproduce | same | same | Future dates rejected | Planned |
-| C4c | T | Malformed or future evaluation time | Already rejected (age must be 0–24 h) | To verify | same | same | Guard test | Planned |
-| C5 | T | Missing or conflicting information silently becoming a confirmed identity or a negative finding | Wrong medication checked, or false reassurance | To probe (empty fields, conflicting NDC/name, conflicting release, combination with missing strength) | `engine/runner.ts`, `state/machine.ts` | same | Fix any path found | Planned |
+### Item 1 — ingredient–strength association
 
-## 2. Patient data and saved-result integrity
+| | |
+|---|---|
+| Patient impact | High. A combination with swapped strengths (e.g. hydrocodone 5 / acetaminophen 325 vs 325 / 5) could be accepted as the scanned product, matched to the wrong recall notice, or pass a refill with no warning |
+| Review locations | `identity.ts:175`, `strength.ts:79`, `refill.ts:53` (review) |
+| Current locations | `rules/identity.ts:155` `crossValidate`; `rules/identity.ts` `orderByAppearance`; `rules/recallRecord.ts:93` `sameStrengthFor`; `rules/refill.ts:39` `diffFills`; `services/ports.ts` `sameFormulation`; `engine/runner.ts` `requiredConfirmations` |
+| Reproduced | Yes, each path, before its fix |
+| Regression tests | `tests/regression/c1_ingredient_association.test.ts` (6): abbreviation "APAP/CODEINE 300-30MG"; reordered names guard; recall notice with swapped vs reordered strengths (SYNTHETIC text); refill hyclate→monohydrate (different salt); refill swapped strengths; refill reordered guard. `c5_missing_conflicting.test.ts` (5): cross-validation of a real Camber hydrocodone/APAP listing against a SYNTHETIC swapped listing; alias label "HYDROCODONE/APAP"; two different NDCs on one label; "BIT" limitation. `c3_source_chain.test.ts`: source verification with swapped strengths |
+| Fix | Each strength is paired with the ingredient the text names in that position (name or alias); swapped strengths are a strength difference everywhere; refill adds `SALT_CHANGED`; an unclear pairing on a label asks the patient to confirm the strength; two different NDCs read from one label require NDC confirmation |
+| Evidence | Commits `a868c3b`, `7523d6c`, `ec2d387`; all tests listed pass |
+| Remaining limitations | (a) A recall notice that does not name every ingredient keeps the unordered comparison; such a notice can only be a *possible* match (never confirmed without the product NDC in its text). (b) The pharmacy abbreviation "BIT" (bitartrate) is read as an extra ingredient → conservative mismatch, so the NDC is set aside (test pins this). (c) Unknown or unreadable strengths already require confirmation (`STRENGTH_NOT_PRINTED`); no change |
+| Disposition | **Fixed** |
 
-| ID | Cat. | Finding | Patient impact | Reproduced | Affected code | Regression test | Fix / plan | Status · evidence |
-|---|---|---|---|---|---|---|---|---|
-| P1 | T | Offline reuse of a saved assessment keyed by product only; lot and package ignored, and the stored finding is shown without reassessment | A result about lot A (e.g. "recall match found" or "not in the listed lots") shown for a bottle from lot B or another package | To reproduce | `storage/repositories.ts` `latestFor` | `p_saved_results.test.ts` | Reuse only for the same product, package and lot; otherwise reassess the stored records against the current identity or show nothing | Planned |
-| P2 | T | History joins a medication's latest assessment to its **first** fill | Saved result displayed with the wrong bottle's details | To reproduce | `app/screens/History.tsx` | same | Join by `assessment.fill_id` | Planned |
-| P3a | T | After "Delete all data", the database is not recreated and the session keeps the destroyed database handle | Later checks fail or silently stop saving | To reproduce | `app/AppRoot.tsx`, `app/useRecallSession.ts` | jest screen test | Recreate storage after delete; rebuild the session when storage changes | Planned |
-| P3b | T | Database open, key or migration failure is swallowed | History silently off; no message | To reproduce | `AppRoot.tsx` | jest screen test | Visible storage error; nothing saved | Planned |
-| P3c | T | Delete-all failure (destroy or key deletion throws) | Consent cleared or not, no message | To reproduce | `AppRoot.tsx` `onDeleteAll` | jest screen test | Visible failure; do not report success | Planned |
-| P4 | T/V | Image cleanup on success, cancel, error, process interruption | Photo of a label left on the phone | Code-traced: deleted on success, cancel and error; a photo left by a killed process is deleted at next start | `RxScannerModule.java` | JVM/unit where possible | Device verification needed | Device check |
-| P5 | V | External camera app access | The phone's camera app writes the photo; some camera apps may keep their own copy | Device-dependent | `scanLabel` (system camera intent) | — | Device check per camera app; in-app camera is a future option | Device check |
-| P6 | T | Backups | Saved data copied to cloud backup | Code-traced: `allowBackup=false`, `fullBackupContent=false`, data extraction rules | `AndroidManifest.xml` | to add: manifest test | Pin with a test | Planned |
-| P7 | T | Logs | Label or medication content in logs | Code-traced: no `console.*` in `mobile/src`, `mobile/app`; native module logs nothing | — | existing privacy guard + to add grep test | Pin with a test | Planned |
-| P8 | V/M | App-switcher exposure (recents thumbnail) | Medication visible in the recents screen | Not protected (OD-21 open) | `MainActivity` | — | Decision OD-21; device check | Decision needed |
-| P9 | T | Network requests carry only public identifiers | — | Existing privacy-guard tests (Task 3); C2 adds alias terms only (public ingredient names) | `services/openfda.ts` SAFE_SEARCH | existing | Re-run | Planned |
-| P10 | V | Encryption at rest on a device | — | Not verifiable here; persistence stays off in development builds | `platform/native.ts` | — | Gate: on-device verification before persistence is enabled | Deferred (gate) |
+### Item 2 — aliases in recall search; pagination vs search coverage
 
-## 3. Confirmation and patient workflow
+| | |
+|---|---|
+| Patient impact | High. Notices that use only an abbreviation were never retrieved. Live openFDA (2026-11-13): 18 oral HCTZ-combination notices say only "HCTZ", including D-0886-2022, which names the Lupin losartan/HCTZ 100/25 mg NDC. Today's active catalog: 0 hydrocodone notices use only "APAP" (no live false negative in the active catalog) |
+| Locations | `rules/recallEvidence.ts:91` `planRecallQueries`; `:236` `searchIsAdequate`; `evaluateRecallEvidence` |
+| Reproduced | Yes: plan omitted the alias; a fully paged but alias-less search produced `NO_MATCH_FOUND` |
+| Regression tests | `c2_alias_search_coverage.test.ts` (5, real task2 responses; alias "rsv" SYNTHETIC); `tests/integration/c2_alias_search.test.ts` (2, recorded openFDA `tests/fixtures/c2/`) |
+| Fix | Each ingredient searched as (name OR alias…), deduplicated, deterministic order; terms outside the client's safe character set are left out and then reported. Separate `coverage.searchAdequate` (every name and alias; product-NDC search; every verified source NDC) feeds `coverage.complete`; limitation `SEARCH_TERMS_INCOMPLETE` with patient copy; a saved result without it is downgraded. `hctz` added to the **proposed** catalog only, with evidence |
+| Evidence | Commit `f0387cc`. Recorded case: 0 records lost; D-0886-2022 now a possible match; 16 other newly found records ruled out by strength or combination, none confirmed. F1 regression checks unchanged and passing |
+| Remaining | Query-plan version is tracked through `RULESET_VERSION`; a separate plan version is planned with the item 5 fingerprint. Aliases are reviewed catalog data only (no fuzzy matching) |
+| Disposition | **Fixed** |
 
-| ID | Cat. | Finding | Patient impact | Reproduced | Affected code | Regression test | Fix / plan | Status · evidence |
-|---|---|---|---|---|---|---|---|---|
-| W1 | T | Confirm button readiness ignores a required lot confirmation; the engine then stays on the same screen | Button looks ready, nothing happens | To reproduce | `app/screens/Confirm.tsx` vs `runner.requiredConfirmations` | jest screen test | Readiness from the engine's required list | Planned |
-| W2 | T | No explicit way to continue without a scanned lot | User must confirm a lot they may not trust | To reproduce | `Confirm.tsx`, `screens.ts` | same | "Continue without the lot" choice; result says lot not used | Planned |
-| W3 | T | Release mechanism must be IR/ER/DR; no "cannot tell" | Forces a guess that changes which recalls are ruled out | To reproduce | `Confirm.tsx`, `machine.ts` | same | "I can't tell" keeps the release unknown: recalls are not ruled out by release, release-dependent exclusions need clarification, a no-match is qualified | Planned |
-| W4 | M | Refill changes not shown to the patient | A changed manufacturer, strength or salt goes unnoticed | — | `refill.ts` result unused in screens | — | Show refill changes when history is enabled | Deferred (gate: persistence) |
-| W5 | M | No recheck of a saved medication, with sources and dates | — | — | History screen | — | Recheck button reusing the confirmed identity | Deferred (gate: persistence) |
+### Item 3 — repackager source resolution
 
-## 4. Other items
+| | |
+|---|---|
+| Patient impact | Medium–high. Part of the source chain could be unchecked while the result showed no source qualifier |
+| Locations | `services/ports.ts:123` `sourceProducts`; `rules/recallEvidence.ts:251` `sourceProductUncertain`; `rules/recallRecord.ts:267` (RP-4); `presentation/present.ts` |
+| Reproduced | Yes: partial branch, depth limit, cycle (product listed as its own source), later SPL failure → all `VERIFIED`; unreadable SPL → "not established"; unknown packager never checked → no qualifier |
+| Patient-visible behavior (checked before deciding) | `UNAVAILABLE`/`NOT_ESTABLISHED` already showed "No matching recall found in the FDA records checked" **with** a repackaging qualifier (OD-17). The gaps were `VERIFIED` hiding a partial chain and `NOT_CHECKED` with no qualifier |
+| Regression tests | `c3_source_chain.test.ts` (10): real furosemide chain guard; SYNTHETIC partial branch, depth limit, cycle, later SPL outage, unreadable SPL, swapped-strength source; patient view for PARTIAL, NOT_CHECKED, original packager |
+| Fix | New status `PARTIAL` (verified branches kept for matching, completeness reported separately); unreadable SPL → `UNAVAILABLE`; product never its own source; PARTIAL and unchecked-unknown-packager get the limitation and a patient qualifier |
+| Evidence | Commit `7523d6c` |
+| Remaining | (a) **OD-33 decision needed**: notices of the same ingredient/strength/form that name *other* NDCs are ruled out even when one could be the unknown source; recommendation: show them as possible matches. (b) Missing SPL set id and source-NDC-not-found: handled (`NOT_ESTABLISHED` / incomplete) — targeted tests to add. (c) Durable per-branch provenance → item 13 |
+| Disposition | **Fixed** (traversal, qualifiers) · **Decision needed** (OD-33) |
 
-| ID | Item | Status |
+### Item 4 — freshness dates
+
+| | |
+|---|---|
+| Patient impact | High. "No matching recall found" with an unusable data date |
+| Locations | `presentation/present.ts:216` `noMatchIsSupported`; `rules/recallEvidence.ts:65` `datasetDateUsable`; `readQuery` |
+| Reproduced | Yes: "last week", "2026-13-45", "", future date → no-match; dataset date changing between pages unseen |
+| Regression tests | `c4_dates.test.ts` (9): real tamsulosin and amlodipine responses with SYNTHETIC dates; later-page failure; invalid or future evaluation time (device clock behind) |
+| Fix | Strict YYYY-MM-DD calendar check; date must not be after a valid UTC evaluation time; checked at evaluation (limitation `DATASET_DATE_INVALID`) and again when presenting saved results; date change between pages → inconsistent pagination. Dataset, retrieval and evaluation times stay separate fields |
+| Evidence | Commit `13fe113` |
+| Disposition | **Fixed** |
+
+### Related: missing or conflicting information (C5)
+
+Probed: empty extraction, missing strength, combination with a missing strength, conflicting
+release text, two different NDCs, swapped label strengths. Already conservative before this work:
+missing name/strength/form → `MISSING_INFORMATION`; unprinted or conflicting release → release must be
+stated; missing strength on an NDC product → strength confirmation. Fixed here: swapped label strengths
+and two different NDCs (above). No path was found where missing information became a confirmed
+identity or a no-match (existing RG-1 tests plus `c4`, `c5`).
+
+## 2. Saved-result integrity and patient data (Priority 2 — before persistence)
+
+Persistence is **off** in every build that exists (`buildProfile.ts`: development `persistHistory:
+false`; pilot only when encryption is verified on a device). Exposure today is nil; these block enabling it.
+
+| # | Locations | Plan / status |
 |---|---|---|
-| F1 | Salt-word fix | Approved (bounded). Its regression checks stay. Wording: no regressions observed in the tested cases. |
-| F2 | IV/infusion wording over-includes | Scheduled after the shared accuracy fixes |
-| F3 | Mixed-salt drug (dextroamphetamine/amphetamine) | Stays inactive until mixed-salt handling is independently validated |
-| R-0 | Reconcile this register against the full review document | Open — review text not available in the session |
+| 5 | `storage/repositories.ts:45` `identityLookupKey`, `:242` `latestFor` | Reproduce with different lots/packages; reuse only for an exact fill fingerprint (product, package, lot, strengths, salts, form, release, rules/policy/catalog/query-plan versions) and reassess stored records against the current identity |
+| 6 | `app/screens/History.tsx:27`, `storage/repositories.ts:144` | Join assessment to its `fill_id`; repository + screen regression with multiple fills |
+| 7 | `app/AppRoot.tsx:165`, `app/useRecallSession.ts:36` | Explicit storage lifecycle (open → ready → deleting → recreated / failed); session rebuilt on change; visible failures for key, open, migration and delete |
+| 8 | `RxScannerModule.java:110` | Code-traced: deleted on success, cancel, analysis error; leftovers cleared at next start; deletion result ignored; camera app receives a write grant. Plan: check deletion results, revoke URI grants, document the trust boundary; in-app camera assessed as an option |
+| 9 | native | Device evidence required (see §5) |
+
+## 3. Confirmation and workflow (Priority 3)
+
+| # | Locations | Plan / status |
+|---|---|---|
+| 10 | `app/screens/Confirm.tsx:21`, `state/machine.ts:328` | Readiness from the engine's list; explicit "use this lot / correct it / continue without a lot"; unconfirmed scanned lot never used |
+| 11 | `app/screens/Confirm.tsx:45` | "I can't tell" with guidance; no guessed release enters a confirmed identity (see §4 for the decision) |
+| 12 | `rules/refill.ts`, `storage/repositories.ts:230`, History | Deferred until persistence: surfaced refill changes, recheck action, and a review of grouping saved records by ingredient set |
+
+## 4. Architecture and future work
+
+| # | Disposition |
+|---|---|
+| 13 | Partly addressed: traversal completeness is now separate from verified relationships (`PARTIAL`). Durable source records (SPL version, retrieval date, per-branch outcome) deferred — gate: before any feature that shows or stores source relationships beyond the current check |
+| 14 | Maintained: all fixes are in shared TypeScript (`rules/`, `services/`, `presentation/`); `architecture_boundaries.test.ts` enforces no I/O/clock in rules (it caught and forced a fix in C4) |
+| 15 | Deferred: Android-only scanner, iOS backup exclusion, profile separation, ATS review, Keychain-on-reinstall policy. Gate: each before the matching iOS capability is enabled. No iOS readiness claimed |
+| 16 | Deferred, not part of this work: facility provenance, inspections, warning letters, import alerts, comparisons, monitoring. No scores or rankings |
+
+## 5. Device-dependent checks (cannot be done in this environment)
+
+Encrypted DB file and sidecars; wrong-key failure; key deletion/reset; backup and device-transfer
+exclusion on a device; release logs; scanner network silence; native redirect/cookie behavior;
+app-switcher exposure (OD-21); uninstall/reinstall; camera-app copies of the photo.
+
+## 6. F1, F2, F3 and catalog
+
+F1 kept with its regression checks: **no regressions observed in the recorded cases and conflation
+checks**, not proof that no false negatives exist. F2 after these fixes. F3's drug stays inactive.
+Route-dependent and policy-held drugs stay inactive. Stage 1 stays on hold; coverage percentages are
+estimates of potential reach, not recall accuracy or readiness.
