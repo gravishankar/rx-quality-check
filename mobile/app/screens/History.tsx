@@ -14,6 +14,7 @@ interface Row {
   name: string;
   view: ResultView | null;
   versions: string | null;
+  fill: string | null;
 }
 
 export function History({ repos, enabled, onBack }: { repos: Repositories | null; enabled: boolean; onBack: () => void }) {
@@ -23,10 +24,13 @@ export function History({ repos, enabled, onBack }: { repos: Repositories | null
     void (async () => {
       const out: Row[] = [];
       for (const m of await repos.medications.list()) {
-        const a = await repos.assessments.latestForMedication(m.id);
-        const fill = (await repos.fills.history(m.id))[0];
-        const view = a && fill ? presentResult({ identity: fill.identity, finding: a.finding, now: new Date().toISOString(), origin: 'SAVED' }) : null;
-        out.push({ id: m.id, name: m.displayName, view, versions: a ? `${a.versions.catalogVersion} / ${a.versions.policyVersion}` : null });
+        // The assessment is shown with the exact fill it was made for (review item 6).
+        const latest = await repos.assessments.latestWithFill(m.id);
+        const a = latest?.assessment ?? null;
+        const view = latest ? presentResult({ identity: latest.fill.identity, finding: latest.assessment.finding, now: new Date().toISOString(), origin: 'SAVED' }) : null;
+        const fi = latest?.fill.identity;
+        const fill = latest && fi ? COPY.history.fillLine(fi.packageNdc ?? fi.productNdc ?? 'not identified', fi.lot, new Date(latest.assessment.evaluatedAt).toLocaleString()) : null;
+        out.push({ id: m.id, name: m.displayName, view, versions: a ? `${a.versions.catalogVersion} / ${a.versions.policyVersion}` : null, fill });
       }
       setRows(out);
     })();
@@ -38,6 +42,7 @@ export function History({ repos, enabled, onBack }: { repos: Repositories | null
       {!enabled ? <P>{COPY.history.disabled}</P> : rows === null ? <P>Loading…</P> : rows.length === 0 ? <P>{COPY.history.empty}</P> : null}
       {rows?.map((r) => (
         <Section key={r.id} title={r.name}>
+          {r.fill ? <P muted>{r.fill}</P> : null}
           {r.view ? (
             <Card tone={r.view.tone}>
               <P>{r.view.headline}</P>

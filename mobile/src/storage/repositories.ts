@@ -9,7 +9,7 @@
  */
 import type { RecallFinding } from '../models/evidence.ts';
 import type { MedicationIdentity } from '../models/identity.ts';
-import { productKeyOfProductNdc } from '../rules/ndc.ts';
+import { packageKey, productKeyOfProductNdc } from '../rules/ndc.ts';
 import { diffFills, type RefillDiff } from '../rules/refill.ts';
 import type { CachedResult } from '../state/machine.ts';
 import type { CachedResponse, SourceCache, AssessmentStore } from '../services/ports.ts';
@@ -41,14 +41,21 @@ export function medicationKey(identity: MedicationIdentity): string {
   return identity.ingredients.map((i) => i.name).sort().join('+');
 }
 
-/** Exact identity for reusing a saved assessment offline: the product, else the full clinical drug. */
+/**
+ * Fingerprint of one confirmed fill for reusing a saved assessment offline (review item 5). Lot and
+ * package can change whether a recall applies, so both are part of it, with the product, every
+ * ingredient's salt and strength, the form and the release mechanism. Two fills share a saved result
+ * only when every part is identical.
+ */
 export function identityLookupKey(identity: MedicationIdentity): string {
-  if (identity.productNdc !== null) return `product:${productKeyOfProductNdc(identity.productNdc)}`;
   const ings = identity.ingredients
-    .map((i) => `${i.name}:${i.strength ? `${i.strength.value}${i.strength.unit}/${i.strength.per}` : '?'}`)
+    .map((i) => `${i.name}:${i.salt ?? '-'}:${i.strength ? `${i.strength.value}${i.strength.unit}/${i.strength.per}` : '?'}`)
     .sort()
     .join('+');
-  return `clinical:${ings}|${identity.doseForm}|${identity.release}`;
+  const product = identity.productNdc !== null ? productKeyOfProductNdc(identity.productNdc) : '-';
+  const pkg = identity.packageNdc !== null ? packageKey(identity.packageNdc) : '-';
+  const lot = identity.lot !== null ? identity.lot.trim().toUpperCase() : '-';
+  return [identity.level, `product:${product}`, `package:${pkg}`, `lot:${lot}`, ings, identity.doseForm, identity.release].join('|');
 }
 
 export interface Repositories {
@@ -66,6 +73,8 @@ export interface Repositories {
   assessments: {
     save(fillId: string, finding: RecallFinding, versions: ConfigVersions): Promise<string>;
     latestForMedication(medicationId: string): Promise<SavedAssessment | null>;
+    /** The newest assessment together with the exact fill it was made for (review item 6). */
+    latestWithFill(medicationId: string): Promise<{ assessment: SavedAssessment; fill: { id: string; scannedAt: string; identity: MedicationIdentity } } | null>;
     listForMedication(medicationId: string): Promise<SavedAssessment[]>;
     listMadeUnder(filter: Partial<ConfigVersions>): Promise<SavedAssessment[]>;
   };
@@ -174,6 +183,15 @@ export function createRepositories(db: SqlDriver, deps: RepoDeps): Repositories 
         const rows = await db.all(`${ASSESSMENT_SELECT} WHERE f.medication_id = ? ORDER BY a.saved_at DESC, a.rowid DESC LIMIT 1`, [medicationId]);
         return rows[0] ? rowToAssessment(rows[0]) : null;
       },
+      async latestWithFill(medicationId) {
+        const rows = await db.all(`${ASSESSMENT_SELECT} WHERE f.medication_id = ? ORDER BY a.saved_at DESC, a.rowid DESC LIMIT 1`, [medicationId]);
+        const row = rows[0];
+        if (!row) return null;
+        const assessment = rowToAssessment(row);
+        const fills = await db.all<{ id: string; scanned_at: string; identity_json: string }>(`SELECT id, scanned_at, identity_json FROM fill WHERE id = ?`, [assessment.fillId]);
+        const f = fills[0];
+        return f ? { assessment, fill: { id: f.id, scannedAt: f.scanned_at, identity: JSON.parse(f.identity_json) as MedicationIdentity } } : null;
+      },
       async listForMedication(medicationId) {
         return (await db.all(`${ASSESSMENT_SELECT} WHERE f.medication_id = ? ORDER BY a.saved_at, a.rowid`, [medicationId])).map(rowToAssessment);
       },
@@ -245,9 +263,10 @@ export function createAssessmentStore(repos: Repositories, versions: ConfigVersi
       if (!med) return null;
       const want = identityLookupKey(identity);
       const fills = new Map((await repos.fills.history(med.id)).map((f) => [f.id, f.identity]));
+      // Same fill fingerprint and made under the running rules, policy and catalog (review item 5).
       const matching = (await repos.assessments.listForMedication(med.id)).filter((a) => {
         const fi = fills.get(a.fillId);
-        return fi !== undefined && identityLookupKey(fi) === want;
+        return fi !== undefined && identityLookupKey(fi) === want && !isStale(a, versions);
       });
       const a = matching[matching.length - 1];
       const fi = a ? fills.get(a.fillId) : undefined;

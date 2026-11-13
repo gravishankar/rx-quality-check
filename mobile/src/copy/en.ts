@@ -330,6 +330,8 @@ export const COPY = {
     madeUnder: (v: string) => `Checked with drug list and policy version ${v}`,
     outdated: 'Made with an older drug list or policy. Check again for a current result.',
     deleteOne: 'Delete',
+    /** Which bottle a saved check was made for (review item 6). */
+    fillLine: (ndc: string, lot: string | null, checkedAt: string) => `Bottle: NDC ${ndc}${lot ? `, lot ${lot}` : ', no lot entered'}. Checked ${checkedAt}.`,
   },
 
   about: {
