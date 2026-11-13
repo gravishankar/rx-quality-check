@@ -98,7 +98,7 @@ test('J1 happy path: Sun metformin ER label with NDC and lot → CONFIRMED_MATCH
   assert.deepEqual(r1.state.ctx.requiredConfirmations, ['identity', 'lot']);
   assert.equal(audit.recallQueries.length, 0, 'nothing is fetched before the user confirms');
 
-  const r2 = await dispatch(r1.state, { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot'], lot: 'JKU4639A' }, ports, cfg);
+  const r2 = await dispatch(r1.state, { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot'], lot: 'JKU4639A', lotChoice: 'USE' }, ports, cfg);
   assert.deepEqual(r2.trace.map((t) => t.to), ['FETCH_EVIDENCE', 'EVALUATE', 'EXPLAIN']);
   assert.equal(r2.state.ctx.finding?.finding, 'CONFIRMED_MATCH');
   assert.equal(r2.state.ctx.explanation?.headline, 'RESULT_CONFIRMED_MATCH');
@@ -198,7 +198,7 @@ test('a failing text query does not hide the known recall found by the structure
   });
   const x = label({ ndcTexts: [ocr('62756-142-02')], drugName: ocr('METFORMIN HCL ER'), strength: ocr('500 MG'), doseForm: ocr('TABLET') });
   const r1 = await scan(x, ports);
-  const r2 = await dispatch(r1.state, { type: 'USER_CONFIRMED', confirmedFields: r1.state.ctx.requiredConfirmations, lot: 'JKU4639A' }, ports, cfg);
+  const r2 = await dispatch(r1.state, { type: 'USER_CONFIRMED', confirmedFields: [...r1.state.ctx.requiredConfirmations, 'lot'], lot: 'JKU4639A', lotChoice: 'USE' }, ports, cfg);
   assert.equal(r2.state.name, 'EXPLAIN');
   assert.equal(r2.state.ctx.finding?.finding, 'CONFIRMED_MATCH');
   assert.ok(r2.state.ctx.finding?.limitations.includes('SOME_QUERIES_INCOMPLETE'));

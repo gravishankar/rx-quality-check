@@ -90,7 +90,8 @@ async function start(p: PlatformServices) {
   return r;
 }
 async function confirmAll(r: ReactTestRenderer) {
-  for (const s of r.root.findAllByType(Switch)) if (!/release|regular/i.test(String(s.props.accessibilityLabel))) await act(async () => s.props.onValueChange(true));
+  const skip = new Set<string>([COPY.confirm.lotNotUsed, COPY.confirm.releaseUnknown]);
+  for (const s of r.root.findAllByType(Switch)) if (!/release|regular/i.test(String(s.props.accessibilityLabel)) && !skip.has(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
   const reg = r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === COPY.confirm.releaseIR);
   if (reg) await act(async () => reg.props.onValueChange(true));
   await press(r, COPY.confirm.confirmAll);

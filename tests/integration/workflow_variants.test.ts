@@ -67,7 +67,7 @@ function ports(opts: { recallsFail?: boolean } = {}) {
 
 const CAPTURE = { type: 'CAPTURED', capture: { kind: 'MANUAL', extraction: LABEL } } as const;
 const CONFIRM_ALL = (s: { ctx: WorkflowState['ctx'] }) =>
-  ({ type: 'USER_CONFIRMED', confirmedFields: s.ctx.requiredConfirmations, lot: 'JKU4639A' }) as const;
+  ({ type: 'USER_CONFIRMED' as const, confirmedFields: [...s.ctx.requiredConfirmations, 'lot'], lot: 'JKU4639A', lotChoice: 'USE' as const });
 
 // ---------------------------------------------------------------- the default workflow is unchanged
 

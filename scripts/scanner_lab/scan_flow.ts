@@ -42,7 +42,7 @@ export async function runLabelFlow(label: { file: string; ocr_lines: { text: str
     const m = screenFor(r.state, { now: now(), persistHistory: false });
     if (m.kind === 'CONFIRM') {
       confirmScreen = { fields: m.fields.map((f) => ({ key: f.key, evidence: f.evidence, value: f.value })), notice: m.notice };
-      r = await app.send(r.state, confirmationEvent(m.items.map((i) => i.key), m.lot, m.askRelease ? 'IR' : null));
+      r = await app.send(r.state, confirmationEvent(m.items.map((i) => i.key), m.lot, m.askRelease ? 'IR' : null, m.lot ? 'USE' : null));
     }
   }
   const m = screenFor(r.state, { now: now(), persistHistory: false });

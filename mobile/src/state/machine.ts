@@ -94,7 +94,8 @@ export interface WorkflowContext {
    * Recorded only by a USER_CONFIRMED event: the fields the user confirmed, for the identity with
    * this exclusion key. Required by the safety gates before any evidence effect.
    */
-  confirmation: { fields: string[]; exclusionKey: string } | null;
+  /** `lotChoice` NOT_USED: the patient chose to continue without the lot that was read (review item 10). */
+  confirmation: { fields: string[]; exclusionKey: string; lotChoice?: 'USE' | 'NOT_USED' } | null;
   unconfirmed: string[];
   missing: string[];
   bundle: RecallEvidenceBundle | null;
@@ -136,7 +137,7 @@ export type WorkflowEvent =
    * The user reviewed the identity. `lot` is the lot the user confirmed (or null). `release` is
    * required when the identity's release mechanism was not printed (field 'release').
    */
-  | { type: 'USER_CONFIRMED'; confirmedFields: string[]; lot: string | null; release?: ReleaseMechanism }
+  | { type: 'USER_CONFIRMED'; confirmedFields: string[]; lot: string | null; release?: ReleaseMechanism; lotChoice?: 'USE' | 'NOT_USED' }
   | { type: 'EVIDENCE_READY'; bundle: RecallEvidenceBundle }
   | { type: 'SOURCE_FAILED'; detail: string; partial: RecallEvidenceBundle | null }
   | { type: 'RATE_LIMITED'; retryAfterSeconds: number | null; partial: RecallEvidenceBundle | null }
@@ -326,7 +327,8 @@ export interface ConfirmationResult {
  * gates require. Exposed so workflow variants can move or extend the confirmation step.
  */
 export function applyUserConfirmation(ctx: WorkflowContext, e: Extract<WorkflowEvent, { type: 'USER_CONFIRMED' }>): ConfirmationResult {
-  const unconfirmed = ctx.requiredConfirmations.filter((f) => !e.confirmedFields.includes(f));
+  // The lot requirement is met by confirming the lot, or by explicitly continuing without it.
+  const unconfirmed = ctx.requiredConfirmations.filter((f) => !e.confirmedFields.includes(f) && !(f === 'lot' && e.lotChoice === 'NOT_USED'));
   const current = ctx.identity;
   // An unprinted release mechanism must be stated by the user, not assumed.
   const releaseMissing = current !== null && current.release === 'UNSPECIFIED' && (e.release === undefined || e.release === 'UNSPECIFIED');
@@ -336,7 +338,7 @@ export function applyUserConfirmation(ctx: WorkflowContext, e: Extract<WorkflowE
   const identity: MedicationIdentity = {
     ...current,
     release: current.release === 'UNSPECIFIED' && e.release !== undefined ? e.release : current.release,
-    lot: e.lot !== null && e.lot.trim() !== '' ? e.lot : null,
+    lot: e.lotChoice !== 'NOT_USED' && e.confirmedFields.includes('lot') && e.lot !== null && e.lot.trim() !== '' ? e.lot : null,
   };
   return {
     complete: true,
@@ -344,7 +346,7 @@ export function applyUserConfirmation(ctx: WorkflowContext, e: Extract<WorkflowE
       ...ctx,
       identity,
       unconfirmed: [],
-      confirmation: { fields: [...e.confirmedFields], exclusionKey: exclusionKeyOf(identity) },
+      confirmation: { fields: [...e.confirmedFields], exclusionKey: exclusionKeyOf(identity), ...(e.lotChoice ? { lotChoice: e.lotChoice } : {}) },
       attempts: 0,
       failedStep: null,
       rateLimitAutoRetried: false,
@@ -650,7 +652,7 @@ export const RX_SAFETY_GATES: readonly RxGate[] = [
       const c = to.ctx.confirmation;
       if (c === null) return 'identity not confirmed by the user';
       if (!c.fields.includes('identity')) return 'the identity itself was not confirmed';
-      const missing = to.ctx.requiredConfirmations.filter((f) => !c.fields.includes(f));
+      const missing = to.ctx.requiredConfirmations.filter((f) => !c.fields.includes(f) && !(f === 'lot' && c.lotChoice === 'NOT_USED'));
       if (missing.length > 0) return `unconfirmed: ${missing.join(', ')}`;
       if (to.ctx.identity === null || c.exclusionKey !== exclusionKeyOf(to.ctx.identity)) return 'confirmation was for a different identity';
       if (to.ctx.identity.release === 'UNSPECIFIED') return 'release mechanism not confirmed';

@@ -217,7 +217,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
             scanNotes={scanInfo?.notes ?? []}
             onRescan={scanInfo !== null ? () => void scan() : undefined}
             onEdit={typeInstead}
-            onConfirm={(ticked, release) => void session.send(confirmationEvent(ticked, m.lot, release))}
+            onConfirm={(ticked, release, lotChoice) => void session.send(confirmationEvent(ticked, m.lot, release, lotChoice))}
           />
           {scanInfo?.details ? <P muted>{scanInfo.details}</P> : null}
         </>,
