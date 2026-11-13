@@ -13,7 +13,9 @@ and evidence. Only the static APK checks in §3 were run.
 | Source | branch `task-4h/correctness-findings`, commit `94c0eacdad3e51b7aec765063c77fc6e0677303f` (reviewed head `0405eb6` + build-number record). Local only, not pushed or merged |
 | Profile | development: persistence (saved history) **off**, catalog unchanged (no activation), draft configuration allowed, DEV banner |
 | Variant | `devRelease`: release-mode, **not debuggable**, signed with the development key (same key as build 9, so it installs over build 9) |
-| APK files | see §3 (file names, sizes, SHA-256) |
+| APK files | `medluma-dev-v0.1.9-b10-arm64-v8a.apk` — 33,332,890 bytes, SHA-256 `92b2aa3b51dda5e26a6070860955a7c6d7b5b486a7841749149138c83b616337` (use this on the Pixel) |
+| | `medluma-dev-v0.1.9-b10-universal.apk` — 71,218,967 bytes, SHA-256 `497256c06f805f648d838933b6384aa9e245a04c438b12a4602506480f1e7c4d` |
+| Signing certificate | SHA-256 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7` (development key; same as build 9) |
 | Use | the team's own test device only; not for distribution |
 
 Record for every session: device model, Android version and security patch level (Settings → About
@@ -71,9 +73,18 @@ use `PKG=org.rxrecallcheck.app.dev`. Keep every screenshot and command output as
 
 ## 6. Results
 
-### Static APK checks (build environment)
+### Static APK checks (build environment, ARM64 APK; these do not replace the device checks)
 
-Filled in below after the build.
+| Check | Method | Result |
+|---|---|---|
+| Package and version | `aapt2 dump badging` | `org.rxrecallcheck.app.dev`, versionCode 10, versionName 0.1.9-dev, target SDK 36 — **PASS** |
+| Permissions | `aapt2 dump permissions` | Only `INTERNET` (plus the library-generated, app-private `DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`); no CAMERA, storage or network-state permission — **PASS** |
+| Not debuggable | manifest | no `android:debuggable` — **PASS** (this is also why V1–V4 and V6b need option A, B or C) |
+| Backup exclusion (declared) | manifest | `allowBackup=false`, `fullBackupContent=false`, `dataExtractionRules` set — **PASS** as declared; device behavior is V9 |
+| Network policy (declared) | manifest | `usesCleartextTraffic=false`, network security config: system CAs only, no cleartext — **PASS** as declared; device behavior is V11 |
+| Exported components | manifest | the launcher activity, and `androidx.profileinstaller.ProfileInstallReceiver` guarded by `android.permission.DUMP` (system/shell only); the photo FileProvider is not exported — **PASS** |
+| Telemetry | build privacy gate (manifest and dex scan) | none found — **PASS** |
+| Signing | `apksigner verify --print-certs` | development certificate, identical to build 9 — **PASS** |
 
 ### Device checks
 
