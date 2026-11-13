@@ -2,7 +2,7 @@
  * Build profiles (OD-18, ADR-0001). The profile is fixed at bundle time
  * (mobile/config/build_profile.json, written by the build scripts) and cannot be changed in the app.
  *
- *  - development: owner testing only. Clearly labeled. Accepts draft configuration. Saved history
+ *  - development: internal testing only. Clearly labeled. Accepts draft configuration. Saved history
  *    is DISABLED (in-memory only) until SQLCipher encryption is verified on a device. Safety gates,
  *    the evidence policy and the presentation rules are identical to pilot.
  *  - pilot: external evaluation. Refuses draft configuration (fail closed). Built only when

@@ -1,7 +1,8 @@
-# Functional Test Plan — development build 0.1.2 (build 3)
+# Functional Test Plan — development build 0.1.8 (build 9)
 
-> Build 4 (0.1.3, Task 4C) adds scanning; scan tests are in `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.
-> The manual-entry tests below still apply through *Type the details instead*.
+> Builds 4 and later add scanning; scan tests are in `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`, and the
+> result-screen checks R1–R10 in its section 4a. The typed-entry tests below apply through *Type the
+> details instead*. No Android phone? Use `docs/TEST_ON_COMPUTER.md`.
 
 Purpose: check, on a real Android phone, that the app does what it should, and that its wording never
 goes beyond the evidence. Install first: `docs/INSTALL_ON_ANDROID.md`.
@@ -37,7 +38,7 @@ Every result has a label at the top of the result box, a headline, and next step
 |---|---|---|---|
 | **Recall match found** | "Available recall information matches the medication details you provided." | A recall record names this product and its conditions (e.g. your lot) appear to apply | That FDA verified your supply |
 | **Possible recall match** | "This medication may be affected by a reported recall…" | A recall might apply; something (often the lot) is unknown | That it does not apply |
-| **No match in the records checked** | "No matching recall was identified in the sources successfully checked as of <date>. This does not establish…" | Every search completed and nothing matched *in those records* | That the medication is safe or recall-free |
+| **No matching recall found in the FDA records checked** | "No matching recall was identified in the sources successfully checked as of <date>. This does not establish…" | Every search completed and nothing matched *in those records* | That the medication is safe or recall-free |
 | **Could not determine** | "We could not reliably determine whether this medication is affected by a recall." | Something failed, was incomplete, too old or inconsistent | A no-match |
 
 No result is ever shown in green or with a check mark.
@@ -48,9 +49,9 @@ Result column: write PASS / FAIL / NOTE for the device run.
 
 | # | Area | Steps | Expected | Automated | Device |
 |---|---|---|---|---|---|
-| F-01 | Install & launch | Install build 3, open | "MedLuma (DEV)"; purple DEVELOPMENT BUILD / evaluation prototype banner; "Before you start" | UI: first launch | |
+| F-01 | Install & launch | Install build 9, open | "MedLuma (DEV)"; purple DEVELOPMENT BUILD / evaluation prototype banner; "Before you start" | UI: first launch | |
 | F-02 | Legal documents | On "Before you start", open Terms, Privacy, Medical Disclaimer; Back | Each opens, marked draft; Back returns | UI: first launch | |
-| F-03 | Version | About and privacy | "version 0.1.2 (build 3)" | Unit: version | |
+| F-03 | Version | About and privacy | "version 0.1.8 (build 9)" | Unit: version | |
 | F-04 | Manual entry & identification | Enter D1, *Find this medication* | Spinner "Looking up your medication…", then *Is this your medication?* | UI: confirmed recall | |
 | F-05 | Evidence labels | On the confirmation screen | Product, ingredient, form, release, labeler: *From FDA records*; NDC note "A listing is not FDA approval…"; labeler note; lot: *Entered by you…* with "Turn on the lot number item below…" | UI: confirmed recall | |
 | F-06 | Confirmation required | Press *Yes, these details match my label* before switching every item on | Button stays disabled until every required item is on | UI: confirmed recall | |
@@ -59,7 +60,7 @@ Result column: write PASS / FAIL / NOTE for the device run.
 | F-09 | Official record | Tap *Official FDA record* under D-0325-2021 | Browser opens api.fda.gov showing that recall | UI: confirmed recall | |
 | F-10 | Possible match (no lot) | D2 (do not enter a lot) | **Possible recall match**; "You did not enter a lot number" qualifier | UI: possible recall | |
 | F-11 | Lot not listed | D3, switch on the lot item | Not *Recall match found*; record text "Your lot number was not found in the listed lots. That does not mean your supply is unaffected." | Engine tests | |
-| F-12 | No match | D4 | **No match in the records checked** with date and "This does not establish…"; *Other recall records we checked* listed; no "safe" anywhere | UI: no match found | |
+| F-12 | No match | D4 | **No matching recall found in the FDA records checked** with date and "This does not establish…"; *Records for a different product* counted, listed under *Show these … records*; no "safe" anywhere | UI: no match found | |
 | F-13 | Excluded | D5 | "We don't check this medication… No recall check was done."; rule EXCL-WARFARIN; "Not checking some medications does not mean other medications are safe." | UI: excluded | |
 | F-14 | Unsupported | D6 | "This medication or form is not covered by this version of the app. No recall check was done." | UI: unsupported | |
 | F-15 | Unknown NDC | D7 | Box **NDC not found**: "We could not find this NDC in FDA's directory…"; fields *Entered by you, not checked against FDA records*; release question shown | UI: unknown NDC | |

@@ -7,7 +7,7 @@ Product name: {{PRODUCT_NAME}} is a provisional working name inserted from confi
 Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in the United States.
 
 > This is a draft prepared for review by qualified legal counsel. It is not legal advice and has not
-> been approved. Bracketed items must be completed by the owner. Nothing in this draft limits rights or
+> been approved. Bracketed items must be completed by the project team. Nothing in this draft limits rights or
 > obligations that cannot be limited by law.
 
 ## 1. Who we are
@@ -61,7 +61,7 @@ needed for lookups are sent to FDA and NLM services.
 
 ## 7. Pilot status
 
-The app is provided for a limited evaluation. Features may change or stop working. [OWNER: describe
+The app is provided for a limited evaluation. Features may change or stop working. [TEAM: describe
 pilot duration, eligibility and how participants are enrolled.]
 
 ## 8. Warranties and limitation of liability [REQUIRES LEGAL REVIEW]
@@ -79,7 +79,7 @@ version may not by itself establish an enforceable agreement.]
 
 ## 10. Governing law and disputes
 
-[OWNER/COUNSEL: governing law, venue and dispute terms.]
+[TEAM/COUNSEL: governing law, venue and dispute terms.]
 
 ## 11. Contact and reporting problems
 

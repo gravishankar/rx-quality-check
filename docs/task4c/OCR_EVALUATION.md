@@ -117,7 +117,7 @@ No third-party camera library is used: the photo comes from the phone's camera a
 
 ## 8a. Device results and build 6 changes (reported separately from automated results)
 
-**Physical device (owner's Pixel), 2026-11-12:**
+**Physical device (team's Pixel), 2026-11-12:**
 
 | Build | What happened | Cause |
 |---|---|---|
@@ -144,7 +144,7 @@ Build 6 settings, measured on the 32 synthetic labels (text only, before extract
 flow ends at "Possible recall match" instead of "Recall match found" (never "no match"), and a
 scanned lot is always shown as read from the label for the user to check.
 
-The owner's real vial photo (kept out of the repository), through the full extractor: builds 4–5
+A real vial photo taken by the team (kept out of the repository), through the full extractor: builds 4–5
 settings → no drug fields; PP-OCRv3 at 3200 → "AMLODIPINESMGT" (now corrected to AMLODIPINE 5 MG);
 **PP-OCRv4 at 3200 → AMLODIPINE, 5 MG**. The dose form ("TA…") and NDC were not legible in that
 photo, so the app would open the form prefilled and ask for the rest. One photo is not an accuracy
@@ -153,7 +153,7 @@ measurement.
 ## 8b. Smaller models (build 8)
 
 Measured on a computer with ONNX Runtime 1.28.0 (the app's version), image 3200 / detector 960.
-Field counts are on the 32 synthetic labels; "real vial" is the owner's photo through the full extractor.
+Field counts are on the 32 synthetic labels; "real vial" is a real vial photo taken by the team through the full extractor.
 
 | Variant | Models (MB, uncompressed) | Name | Strength | NDC | Mfr | Lot | Real vial |
 |---|---|---|---|---|---|---|---|

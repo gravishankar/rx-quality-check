@@ -6,7 +6,7 @@
 #                                    signing properties exist OUTSIDE the repository
 #
 # Signing material lives in ~/.rx-recall-check/ (never in the repository). The development key is
-# generated there on first use. The pilot key must be created and kept by the owner on their own
+# generated there on first use. The pilot key must be created and kept by the project team on their own
 # machine (not in this cloud environment).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

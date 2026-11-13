@@ -1,20 +1,23 @@
-# Pixel Scan Test Guide — development build 0.1.7 (build 8)
+# Pixel Scan Test Guide — development build 0.1.8 (build 9)
+
+> **Build 9** is build 8 with one wording change: the development banner now says "for internal
+> testing only".
 
 > **Build 8** is build 7 with smaller text-reading models (APK 41.4 → 33.3 MB). Screens and results
 > are unchanged. Please check that scanning still reads labels as well as build 7 did, and note the
 > scan time shown in the development detail line.
 
-> **Device result for build 6 (owner's Pixel, 2026-11-12):** a label was scanned and the recall check
+> **Device result for build 6 (team's Pixel, 2026-11-12):** a label was scanned and the recall check
 > completed (no matching recall), but the result listed every FDA record checked in full. **Build 7**
 > keeps the scanner unchanged and redesigns the result screen to put a summary first (section 4a below).
 
-> **Device result for build 4 (owner's Pixel, 2026-11-12):** every scan ended with "We couldn't read
+> **Device result for build 4 (team's Pixel, 2026-11-12):** every scan ended with "We couldn't read
 > your label — The photo could not be read." Cause: the barcode library's `read()` was called with a
 > null crop rectangle, which its Kotlin API rejects, so every analysis threw. Fixed in build 5; text and
 > barcodes now fail independently, and development builds show a "Technical detail" line on this
 > screen. Please use build 5.
 
-> **Device result for build 5 (owner's Pixel, 2026-11-12):** no crash, but every photo — the test
+> **Device result for build 5 (team's Pixel, 2026-11-12):** no crash, but every photo — the test
 > labels and a real pharmacy vial — ended with "We could not find any text or barcode… Technical
 > detail (development): 0 text lines, 1 barcodes". The barcode reader worked; the text reader returned
 > nothing. Cause (reproduced on a computer): the app took the OCR character list from ONNX Runtime's
@@ -30,32 +33,32 @@
 >   strength — it is never guessed), and corrects "S" read for "5" right after a drug name;
 > - shows OCR counts in the development detail line: "text regions N (empty E, unclear U); dictionary 6623".
 >
-> On a computer, the same code on the owner's real vial photo now reads "AMLODIPINE" and "5 MG"
+> On a computer, the same code on a real vial photo taken by the team now reads "AMLODIPINE" and "5 MG"
 > (the photo is not stored in the repository). This is **not** a phone result; please re-test.
 
-Owner-only. Goal: photograph a label on your Pixel, confirm what was read, and reach the recall-check
+For the project team only. Goal: photograph a label on your Pixel, confirm what was read, and reach the recall-check
 result **without typing the NDC**. Record what actually happens; nothing in this guide has been run
 on a phone yet.
 
 ## 1. Install
 
-Use the attached **`medluma-dev-v0.1.7-b8-arm64-v8a.apk`** (33.3 MB). Universal fallback:
-`medluma-dev-v0.1.7-b8-universal.apk` (71.2 MB). Full steps (download, checksum, install, Play Protect
+Use the attached **`medluma-dev-v0.1.8-b9-arm64-v8a.apk`** (33.3 MB). Universal fallback:
+`medluma-dev-v0.1.8-b9-universal.apk` (71.2 MB). Full steps (download, checksum, install, Play Protect
 prompt): `docs/INSTALL_ON_ANDROID.md`.
 
 | File | SHA-256 |
 |---|---|
-| medluma-dev-v0.1.7-b8-arm64-v8a.apk | `9bbf1f6c59c1b8ed2cdbfa74effbc83f31eb54ecbb62d4d48d894c0016e5ab0b` |
-| medluma-dev-v0.1.7-b8-universal.apk | `d3fd7596dced8fb6b797e97f67538717a888bc8747a35c4a1f7f966cb280331a` |
+| medluma-dev-v0.1.8-b9-arm64-v8a.apk | `be575247ac8b3e90f6893e04b1c3431e86fda6a94e22e3fb3389cb398883241a` |
+| medluma-dev-v0.1.8-b9-universal.apk | `d2481cc0a01064ee1f4236363b45df06fb84030c4f06a40b0f38bc6f5dc1d3fc` |
 
 On the Mac:
 
 ```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.7-b8-arm64-v8a.apk
+shasum -a 256 ~/Downloads/medluma-dev-v0.1.8-b9-arm64-v8a.apk
 ```
 
-It installs over builds 1–7. Open **MedLuma (DEV)** → *About and privacy* should show
-**version 0.1.7 (build 8)**.
+It installs over builds 1–8. Open **MedLuma (DEV)** → *About and privacy* should show
+**version 0.1.8 (build 9)**.
 
 If a scan still fails, the error screen now shows a grey **Technical detail (development)** line —
 please send a screenshot of it (test labels only); it contains no label content.
@@ -90,7 +93,7 @@ on-phone timing — please write it down.
 | # | Label (PDF page) | Expected (verified with live FDA data on 2026-11-12 using the same OCR code on a computer) |
 |---|---|---|
 | S1 | Pharmacy label, metformin ER, NDC printed | Product 62756-142-02 under *Matched in FDA records*; result **Possible recall match** (no lot on pharmacy labels) |
-| S2 | Pharmacy label, rosuvastatin | Product 82009-018-10 matched; result **No match in the records checked** with the date (or a newer FDA result) |
+| S2 | Pharmacy label, rosuvastatin | Product 82009-018-10 matched; result **No matching recall found in the FDA records checked** with the date (or a newer FDA result) |
 | S3 | Pharmacy label, warfarin | **We don't check this medication** — no recall check |
 | S4 | Pharmacy label without NDC, metformin ER | Fields under *Read from your label*; product "Not identified"; **Possible recall match** |
 | S5 | Pharmacy label, sertraline | **Not covered by this version** |

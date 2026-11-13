@@ -1,10 +1,10 @@
-# First Device Test Runbook — owner only
+# First Device Test Runbook — internal testing
 
 > **Updated in Task 4A.2:** for installation use `docs/INSTALL_ON_ANDROID.md` (beginner-friendly,
 > MacBook steps, current build 3) and for testing use `docs/FUNCTIONAL_TEST_PLAN.md` (F-01…F-30).
 > This runbook remains valid for build 2.
 
-For the owner's first test of the **development** APK on their own Android phone. Do not give this
+For the team's first test of the **development** APK on their own Android phone. Do not give this
 APK to anyone else: it accepts draft configuration, is signed with a development key, and has had no
 legal, clinical or security review. Record every result in `docs/ANDROID_DEVICE_TEST_PLAN.md`.
 
@@ -98,7 +98,7 @@ checksum. Turn *Install unknown apps* back off afterwards.
 ## 5. Launch
 
 Open **MedLuma (DEV)** from the app drawer. Expected:
-- a purple banner on every screen: "DEVELOPMENT BUILD — evaluation prototype for owner testing only.
+- a purple banner on every screen: "DEVELOPMENT BUILD — evaluation prototype for internal testing only.
   Not clinically validated. Saved history is turned off.";
 - the first-launch notice ("Before you start") with links to Terms, Privacy and Medical Disclaimer,
   each marked as a draft. Open each link once, go back, then tap *I understand*.

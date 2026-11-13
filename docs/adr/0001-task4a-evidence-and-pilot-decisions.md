@@ -1,6 +1,6 @@
 # ADR-0001 — Task 4A decisions: approval, uncertainty, build profiles, query order, per-medication checks
 
-- Status: **Accepted by the product owner in the Task 4A brief (2026-11-12)**. Recorded by the implementer.
+- Status: **Accepted by the project team in the Task 4A brief (2026-11-12)**. Recorded by the implementer.
 - Scope: Rx Recall Check v0.1.0 Android pilot (and the iOS build that will share the same code).
 - Related: `docs/IMPLEMENTATION_PLAN.md` §8 (OD-2, OD-4, OD-17, OD-18, OD-19),
   `docs/EVIDENCE_AND_CLAIMS_POLICY.md`, `docs/RELEASE_READINESS_CHECKLIST.md`.
@@ -80,4 +80,4 @@ are not shown as "no match" (`FRESHNESS` in `presentation/present.ts`).
 ## Consequences
 
 - A pilot build cannot be produced today: `npm run release:gate` reports 14 blockers.
-- The development APK is for owner testing only and must not be distributed.
+- The development APK is for internal testing only and must not be distributed.

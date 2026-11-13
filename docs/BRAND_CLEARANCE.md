@@ -8,7 +8,7 @@
 - **Result:** **Meaningful conflicts found** (below). `config/brand.json` records
   `name_status: PROVISIONAL_CONFLICTS_FOUND`, and the release gate blocks any pilot build until counsel
   sets `CLEARED_BY_COUNSEL`. No permanent rebrand was made: application IDs, bundle IDs, signing
-  identities and the repository name are unchanged. MedLuma appears only in the owner-only
+  identities and the repository name are unchanged. MedLuma appears only in the internal
   development build and in draft documents.
 
 ## 1. Method and limitations
@@ -42,7 +42,7 @@ store listing. Whether Medcast holds or has applied for U.S. or international re
 
 ### 2.2 Similar names in health
 
-| Name | Owner / use | Status found | Source |
+| Name | Holder / use | Status found | Source |
 |---|---|---|---|
 | Luma Health (LUMAPAY, TOTAL PATIENT ENGAGEMENT …) | Luma Health, Inc., San Mateo CA — patient engagement software | Several live U.S. marks reported by third-party indexes | https://trademarks.justia.com/owners/luma-health-inc-4589719 ; https://markinton.com/company/luma-health-inc |
 | MEDILUME (Reg. 2476213) | Medical illuminators | Cancelled 2008 | https://trademark.justia.com/755/79/medilume-75579233.html |
@@ -67,12 +67,12 @@ No app named exactly "MedLuma" was found on the Apple App Store or Google Play t
 
 MedLuma has a **meaningful conflict**: an identical name for healthcare information software. A
 permanent rebrand to MedLuma is **not recommended** until a trademark attorney reviews it. Options
-for the owner:
+for the project team:
 
 1. Ask counsel for a full clearance search and opinion on MedLuma (U.S. classes 9, 42 and 44 at
    minimum; foreign rights of Medcast).
 2. Shortlist alternative names and screen them the same way before investing in brand assets.
-3. Keep MedLuma as an internal code name only (owner-only builds), which is the current state.
+3. Keep MedLuma as an internal code name only (internal builds), which is the current state.
 
 ## 4. Requirements before any public use of a name (any name)
 
@@ -83,6 +83,6 @@ for the owner:
   checks for impersonation and confusingly similar names).
 - Domain availability for the chosen name.
 - Search for confusingly similar names in health and pharmacy (sound, appearance, meaning).
-- Decision by the owner, recorded with the counsel opinion; then set `name_status` to
+- Decision by the project team, recorded with the counsel opinion; then set `name_status` to
   `CLEARED_BY_COUNSEL` in `config/brand.json` and decide separately whether to change application
   IDs (Android IDs cannot change after distribution).

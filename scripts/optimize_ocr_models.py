@@ -10,7 +10,7 @@ scripts/fetch_ocr_models.sh.
    The embedded character list (metadata key "character") is rewritten to match.
 2. Weight-only 8-bit quantization, per output channel, for Conv/MatMul weights: every weight of
    1,024+ elements in the detector; only the 3 largest layers (200,000+ elements) in the recognizer,
-   because quantizing all of it dropped a letter on the owner's real vial photo ("ALODIPINE"). Each
+   because quantizing all of it dropped a letter on a real vial photo taken by the team ("ALODIPINE"). Each
    weight is stored as int8 plus a float scale and rebuilt by Cast + Mul (valid in the models' opset
    12; ONNX Runtime folds these constants at load), so the network still computes in float; only the
    stored weights are rounded (accuracy re-measured in docs/task4c/OCR_EVALUATION.md).

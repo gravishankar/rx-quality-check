@@ -7,10 +7,10 @@ Use only the test medications and test labels below. Never enter your own medica
 details. This is a test version (not clinically validated).
 
 **What you need:** a Mac (2020 or newer works best), about 20 GB free disk space, internet, and
-these two files from the owner:
+these two files from the team:
 
-- **The app:** `medluma-dev-v0.1.7-b8-arm64-v8a.apk` if your Mac has an Apple chip (Apple menu →
-  About This Mac → "Chip: Apple M…"); otherwise `medluma-dev-v0.1.7-b8-universal.apk`.
+- **The app:** `medluma-dev-v0.1.8-b9-arm64-v8a.apk` if your Mac has an Apple chip (Apple menu →
+  About This Mac → "Chip: Apple M…"); otherwise `medluma-dev-v0.1.8-b9-universal.apk`.
 - **The test labels:** `scan-test-labels-SYNTHETIC.pdf` (7 made-up labels, one per page, each with
   its expected result).
 

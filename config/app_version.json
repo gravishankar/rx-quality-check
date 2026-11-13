@@ -1,7 +1,7 @@
 {
-  "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.7",
-  "build_number": 8,
+  "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the project team); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
+  "version": "0.1.8",
+  "build_number": 9,
   "history": [
     {
       "build_number": 1,
@@ -38,7 +38,7 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "a081b282dac61643c5d75d0ea65cec9042efd25b9b33d14e433cdeec3cb31d5f",
-      "note": "Scanner-first development build (versionName 0.1.3-dev, versionCode 4): on-device OCR (PaddleOCR PP-OCRv3 / ONNX Runtime 1.28.0, no telemetry) and barcodes (ZXing-cpp). ARM64 38.9 MB, universal 76.7 MB. DEVICE RESULT (owner, Pixel, 2026-11-12): every scan failed with \"The photo could not be read\" — fixed in build 5.",
+      "note": "Scanner-first development build (versionName 0.1.3-dev, versionCode 4): on-device OCR (PaddleOCR PP-OCRv3 / ONNX Runtime 1.28.0, no telemetry) and barcodes (ZXing-cpp). ARM64 38.9 MB, universal 76.7 MB. DEVICE RESULT (team, Pixel, 2026-11-12): every scan failed with \"The photo could not be read\" — fixed in build 5.",
       "apk_sha256_arm64": "629a7035a63044f0611362ef764f283529084deffb9af8b62f03186c77d4d958"
     },
     {
@@ -48,7 +48,7 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "b827210c0415b4cefaffb1e77a63cefb324b4c2a709257bb9f3e7b4591a4fdf8",
-      "note": "Fixes the Pixel scan failure of build 4 (ZXing-cpp read() called with a null crop rectangle threw on every scan); text and barcodes now fail independently; development builds show the technical cause. DEVICE RESULT (owner's Pixel, 2026-11-12): no crash, but every photo gave '0 text lines' (barcode still decoded). Cause: the OCR dictionary was taken from ONNX Runtime's metadata API, which did not give the 6,623 entries the model needs, so every line decoded empty and was dropped.",
+      "note": "Fixes the Pixel scan failure of build 4 (ZXing-cpp read() called with a null crop rectangle threw on every scan); text and barcodes now fail independently; development builds show the technical cause. DEVICE RESULT (team's Pixel, 2026-11-12): no crash, but every photo gave '0 text lines' (barcode still decoded). Cause: the OCR dictionary was taken from ONNX Runtime's metadata API, which did not give the 6,623 entries the model needs, so every line decoded empty and was dropped.",
       "apk_sha256_arm64": "9972d0368bae90832c23048ef897818a96d78d6bb37a319ea886bb133b49835f"
     },
     {
@@ -58,7 +58,7 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f",
-      "note": "OCR dictionary read from the model file and checked against the model (a mismatch now fails loudly); PP-OCRv4 models; text read from a 3200-px copy of the photo (was 1600); extractor reads a known drug name without a strength and fixes S/5 after a drug name; development detail shows OCR counts. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). DEVICE RESULT (owner's Pixel, 2026-11-12): a label was scanned successfully and the recall check completed with no matching recall; the result listed every FDA record checked in full, which led to the build 7 summary-first result screen. (Which label, Pixel model and Android version: not yet reported.)",
+      "note": "OCR dictionary read from the model file and checked against the model (a mismatch now fails loudly); PP-OCRv4 models; text read from a 3200-px copy of the photo (was 1600); extractor reads a known drug name without a strength and fixes S/5 after a drug name; development detail shows OCR counts. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). DEVICE RESULT (team's Pixel, 2026-11-12): a label was scanned successfully and the recall check completed with no matching recall; the result listed every FDA record checked in full, which led to the build 7 summary-first result screen. (Which label, Pixel model and Android version: not yet reported.)",
       "apk_sha256_arm64": "4873b40d497dc10f30ec0ddf51b99778f0a872961da8c4dd9cacccc65fff82a6"
     },
     {
@@ -68,7 +68,7 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c",
-      "note": "Summary-first result screen: record counts by group; limits and disclaimer directly below the result; matching, possibly matching and unreadable records always shown as cards with plain-language details; records the engine excluded are counted once each by a fixed primary-reason order and listed only on request. Categories and matching logic unchanged. Scanner unchanged from build 6. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). EMULATOR RESULT (owner, 2026-11-12, Android Emulator on a laptop): details typed in, results as expected. Scanning was not tried on the emulator. Not yet tested on the Pixel.",
+      "note": "Summary-first result screen: record counts by group; limits and disclaimer directly below the result; matching, possibly matching and unreadable records always shown as cards with plain-language details; records the engine excluded are counted once each by a fixed primary-reason order and listed only on request. Categories and matching logic unchanged. Scanner unchanged from build 6. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). EMULATOR RESULT (team, 2026-11-12, Android Emulator on a laptop): details typed in, results as expected. Scanning was not tried on the emulator. Not yet tested on the Pixel.",
       "apk_sha256_arm64": "c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73"
     },
     {
@@ -78,8 +78,18 @@
       "commit": "task-4c/scanner",
       "label": "MedLuma (DEV)",
       "apk_sha256": "d3fd7596dced8fb6b797e97f67538717a888bc8747a35c4a1f7f966cb280331a",
-      "note": "Smaller OCR models (scripts/optimize_ocr_models.py): recognizer limited to the 105 characters used on US labels, 8-bit weights (detector fully, recognizer 3 largest layers). Models 15.6 MB -> 6.9 MB. Same field accuracy on the 32 synthetic labels; owner's real vial photo still reads AMLODIPINE 5 MG (computer, not phone). App behaviour otherwise unchanged from build 7. Two APKs: universal (71.2 MB; apk_sha256) and ARM64-only (33.3 MB; apk_sha256_arm64), down from 79.3 / 41.4 MB.",
+      "note": "Smaller OCR models (scripts/optimize_ocr_models.py): recognizer limited to the 105 characters used on US labels, 8-bit weights (detector fully, recognizer 3 largest layers). Models 15.6 MB -> 6.9 MB. Same field accuracy on the 32 synthetic labels; team's real vial photo still reads AMLODIPINE 5 MG (computer, not phone). App behaviour otherwise unchanged from build 7. Two APKs: universal (71.2 MB; apk_sha256) and ARM64-only (33.3 MB; apk_sha256_arm64), down from 79.3 / 41.4 MB.",
       "apk_sha256_arm64": "9bbf1f6c59c1b8ed2cdbfa74effbc83f31eb54ecbb62d4d48d894c0016e5ab0b"
+    },
+    {
+      "build_number": 9,
+      "version": "0.1.8",
+      "task": "4C (wording)",
+      "commit": "task-4c/scanner",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "d2481cc0a01064ee1f4236363b45df06fb84030c4f06a40b0f38bc6f5dc1d3fc",
+      "note": "Same as build 8 except the development banner now reads 'for internal testing only' (team wording throughout the app and docs). Two APKs: universal (71.2 MB; apk_sha256) and ARM64-only (33.3 MB; apk_sha256_arm64).",
+      "apk_sha256_arm64": "be575247ac8b3e90f6893e04b1c3431e86fda6a94e22e3fb3389cb398883241a"
     }
   ]
 }

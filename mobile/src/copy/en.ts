@@ -26,7 +26,7 @@ export const COPY = {
     tagline: BRAND.tagline,
     feature: FEATURE,
     pilotBanner: 'Evaluation prototype. Not clinically validated. Do not use as the only basis for medication decisions.',
-    devBanner: 'DEVELOPMENT BUILD — evaluation prototype for owner testing only. Not clinically validated. Saved history is turned off.',
+    devBanner: 'DEVELOPMENT BUILD — evaluation prototype for internal testing only. Not clinically validated. Saved history is turned off.',
     provisionalName: `${NAME} is a working name and may change.`,
   },
 

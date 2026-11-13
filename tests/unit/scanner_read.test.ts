@@ -187,7 +187,7 @@ test('nothing read → NOTHING_READ; text without drug fields → NO_DRUG_FIELDS
   assert.deepEqual(readScan({ lines: [{ text: 'SYNTHETIC PHARMACY', score: 0.9 }], barcodes: [] }, VOCAB).problems, ['NO_DRUG_FIELDS']);
 });
 
-// Drug lines as the app's OCR core read them from the owner's real pharmacy-vial photo (Task 4C,
+// Drug lines as the app's OCR core read them from the a real pharmacy-vial photo taken by the team (Task 4C,
 // build 5 investigation). Only the drug line is reproduced; the photo and its other lines (personal
 // details) are not in the repository.
 test('real-photo drug lines: "S" read for "5" between a known drug name and MG is corrected', () => {

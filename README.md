@@ -10,11 +10,11 @@ A privacy-first, phone-only Android app (React Native + TypeScript) that helps p
 their generic medication from a pharmacy bottle or original manufacturer packaging and see publicly
 available FDA recall and regulatory quality information — including what **cannot** be determined.
 
-> **Status:** Task 4C (scanner-first) — awaiting the owner's Pixel test and review. Current development
+> **Status:** Task 4C (scanner-first) — awaiting the team's Pixel test and review. Current development
 > build: 0.1.3 (build 4) with on-device label scanning; test with `docs/task4c/PIXEL_SCAN_TEST_GUIDE.md`.
 > Earlier: Task 4A.2 (functional validation), build 3. Earlier: Task 4A
 > (Android pilot: evidence safety, legal and regulatory readiness). A React Native app (Android first, iOS-ready) runs the Task 3 engine. Only a **development
-> APK** exists, for the owner's testing; a pilot build is blocked by `npm run release:gate`
+> APK** exists, for internal testing; a pilot build is blocked by `npm run release:gate`
 > (approvals, legal/clinical/regulatory sign-offs and on-device encryption verification are
 > missing). This is an evaluation prototype: not clinically validated, not reviewed by counsel, not
 > FDA-cleared. See `docs/IMPLEMENTATION_PLAN.md` and `docs/RELEASE_READINESS_CHECKLIST.md`.
@@ -58,7 +58,7 @@ scripts/                 API feasibility harness, Task 2 fixture capture, re-exp
 - `docs/BRAND_AND_PRODUCT_STRATEGY.md`, `docs/BRAND_CLEARANCE.md`
 - `docs/INSTALL_ON_ANDROID.md`, `docs/FUNCTIONAL_TEST_PLAN.md`, `docs/UX_REVIEW_4A2.md` — Task 4A.2
 - `docs/TEST_ON_COMPUTER.md` — test the development app on a Mac or Windows laptop with the Android Emulator (no Android phone needed)
-- `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — owner-only first phone test (build 2)
+- `docs/FIRST_DEVICE_TEST_RUNBOOK.md` — internal first phone test (build 2)
 
 - `docs/EVIDENCE_AND_CLAIMS_POLICY.md` — what the app may say, the evidence each statement needs, and the tests enforcing it
 - `docs/LEGAL_REGULATORY_REVIEW.md` — issues list for counsel (no compliance conclusions)
