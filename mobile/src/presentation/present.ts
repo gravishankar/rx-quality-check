@@ -213,6 +213,7 @@ function noMatchIsSupported(identity: MedicationIdentity, f: RecallFinding, eval
   const inconsistent: string[] = [];
   const stale: string[] = [];
   if (!f.coverage.complete) inconsistent.push(COPY.result.downgrade.incomplete);
+  if (f.coverage.searchAdequate !== true) inconsistent.push(COPY.result.downgrade.searchIncomplete);
   if (f.coverage.positiveControl.status !== 'PASSED') inconsistent.push(COPY.result.downgrade.controlFailed);
   if (f.coverage.queries.some((q) => q.status !== 'COMPLETE')) inconsistent.push(COPY.result.downgrade.incomplete);
   if (f.confirmed.length + f.potential.length > 0) inconsistent.push('records that match or might match were present');
@@ -332,6 +333,7 @@ const LIMITATION_TEXT: Partial<Record<RecallFinding['limitations'][number], stri
   PRODUCT_NOT_IDENTIFIED: COPY.result.qualifiers.productNotIdentified,
   LOT_NOT_PROVIDED: COPY.result.qualifiers.lotNotProvided,
   SOME_QUERIES_INCOMPLETE: COPY.result.downgrade.incomplete,
+  SEARCH_TERMS_INCOMPLETE: COPY.result.downgrade.searchIncomplete,
   POSITIVE_CONTROL_NOT_PASSED: COPY.result.downgrade.controlFailed,
   SOME_RECORDS_UNPARSEABLE: COPY.result.downgrade.unreadable,
   SOURCE_PRODUCT_NOT_ESTABLISHED: COPY.result.qualifiers.sourceNotEstablished,

@@ -160,6 +160,7 @@ export type Limitation =
   | 'PRODUCT_NOT_IDENTIFIED'
   | 'LOT_NOT_PROVIDED'
   | 'SOME_QUERIES_INCOMPLETE'
+  | 'SEARCH_TERMS_INCOMPLETE'
   | 'POSITIVE_CONTROL_NOT_PASSED'
   | 'SOME_RECORDS_UNPARSEABLE'
   | 'SOURCE_PRODUCT_NOT_ESTABLISHED';
@@ -172,7 +173,14 @@ export interface RecallFinding {
   unresolved: RecordAssessment[];
   notApplicable: RecordAssessment[];
   coverage: {
+    /** Every query fully retrieved, the positive control passed, and the search was adequate. */
     complete: boolean;
+    /**
+     * The plan asked for every ingredient name and alias and every required NDC (C2). Distinct from
+     * pagination: all pages of an inadequate search can be retrieved and still miss records.
+     * Optional only so results saved before C2 still read; absent is treated as not adequate.
+     */
+    searchAdequate?: boolean;
     queries: QueryCoverage[];
     positiveControl: PositiveControlResult;
     datasetLastUpdated: string | null;

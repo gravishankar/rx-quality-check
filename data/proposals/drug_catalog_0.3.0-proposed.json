@@ -362,11 +362,16 @@
       "name": "hydrochlorothiazide",
       "rxcui": "5487",
       "tty": "IN",
-      "aliases": [],
+      "aliases": [
+        "hctz"
+      ],
       "precise_ingredients": [],
       "provenance": {
         "source": "RxNav /REST/rxcui.json?name=hydrochlorothiazide&search=0, /rxcui/5487/properties.json and /related.json?tty=PIN",
         "verified_on": "2026-11-13"
+      },
+      "alias_provenance": {
+        "hctz": "openFDA drug enforcement, 2026-11-13: 18 oral recall notices name hydrochlorothiazide only as \"HCTZ\" (e.g. D-0886-2022, D-1096-2018, D-1030-2020). Correctness finding C2."
       }
     },
     {
@@ -3006,7 +3011,7 @@
         "source": "Task 1 brief; Document B (docs/references/Drugs Exclusion List.md) Medicare Part D 2023 top-15 list minus apixaban (excluded).",
         "verified_on": "2026-11-12"
       },
-      "notes": "Listed as narrow therapeutic index in Document A §3. No NTI-specific patient messaging in v0.1 (see docs/references adoption table, A-12)."
+      "notes": "Listed as narrow therapeutic index in Document A \u00a73. No NTI-specific patient messaging in v0.1 (see docs/references adoption table, A-12)."
     },
     {
       "id": "lisinopril",
@@ -5758,6 +5763,12 @@
       "version": "0.3.0-proposed",
       "change": "Proposed: add 147 drugs (130 active, 17 inactive pending review) from the CMS Part D 2023 top 200 generic names by total claims, after RxNav, openFDA and exclusion-policy checks. Metoprolol succinate gains release_types [ER] to stay distinct from the new metoprolol tartrate [IR].",
       "source": "CMS MUP_DPR_RY25_P04_V10_DY23_Geo.csv; RxNav; openFDA NDC Directory and enforcement (2026-11-13)"
+    },
+    {
+      "date": "2026-11-13",
+      "version": "0.3.0-proposed",
+      "change": "Add alias \"hctz\" to hydrochlorothiazide (recall notices use it; correctness finding C2).",
+      "source": "openFDA drug enforcement, 2026-11-13"
     }
   ]
 }

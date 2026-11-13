@@ -180,6 +180,7 @@ export const COPY = {
       staleResult: (asOf: string) => `This result is from ${asOf}. It is too old to rely on. Please check again.`,
       staleSource: (date: string) => `FDA’s recall data was last updated on ${date}, which is older than we accept. Please check again later.`,
       incomplete: 'Some FDA records could not be retrieved or read completely.',
+      searchIncomplete: 'Our search of FDA’s recall records did not cover every name this medication is known by, so we cannot say no recall was found.',
       controlFailed: 'Our check that FDA’s recall search is working did not pass.',
       inconsistent: 'The result did not meet our evidence rules, so we are not showing it. This has been flagged for review.',
       unreadable: 'Some recall records could not be read.',

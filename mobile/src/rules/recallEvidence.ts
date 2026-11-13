@@ -48,17 +48,39 @@ export const PAGE_LIMIT = 100;
 
 const quote = (s: string) => `"${s.replace(/["\\]/g, '')}"`;
 
+/** Terms a search may carry: the characters openFDA's client accepts inside a quoted phrase. */
+const SAFE_TERM = /^[a-z0-9 .-]+$/;
+
+/** Every term the ingredient-text search must ask for: each ingredient's name and its aliases. */
+export function requiredSearchTerms(identity: MedicationIdentity): string[][] {
+  const by = new Map<string, Set<string>>();
+  for (const i of identity.ingredients) {
+    const name = i.name.toLowerCase();
+    const set = by.get(name) ?? new Set<string>([name]);
+    for (const a of i.aliases ?? []) set.add(a.toLowerCase());
+    by.set(name, set);
+  }
+  return [...by.keys()].sort().map((n) => [n, ...[...(by.get(n) ?? [])].filter((t) => t !== n).sort()]);
+}
+
+const termClause = (t: string) => `product_description:${quote(t)}`;
+
 /**
  * Plan recall queries for a confirmed identity. Only public identifiers are used: ingredient base
  * names and product NDCs. Lot numbers, labels and OCR text are never part of a query.
  */
 export function planRecallQueries(identity: MedicationIdentity): RecallQueryPlan {
   const queries: RecallQuery[] = [];
-  const names = [...new Set(identity.ingredients.map((i) => i.name.toLowerCase()))].sort();
+  // One group per ingredient: its name OR any alias (C2). Terms the client would refuse are left
+  // out here and then reported by searchIsAdequate, so the result cannot be a no-match.
+  const groups = requiredSearchTerms(identity).map((terms) => terms.filter((t) => SAFE_TERM.test(t)));
   queries.push({
     id: 'ingredient_text',
     kind: 'INGREDIENT_TEXT',
-    search: names.map((n) => `product_description:${quote(n)}`).join(' AND '),
+    search: groups
+      .filter((g) => g.length > 0)
+      .map((g) => (g.length === 1 ? termClause(g[0] as string) : `(${g.map(termClause).join(' OR ')})`))
+      .join(' AND '),
     pageLimit: PAGE_LIMIT,
   });
   if (identity.level === 'PRODUCT' && identity.productNdc !== null) {
@@ -183,6 +205,22 @@ const STANDING_LIMITATIONS: Limitation[] = [
   'TEXT_QUERY_MAY_MISS_ABBREVIATIONS',
 ];
 
+/**
+ * Search adequacy (C2), separate from pagination: did the plan ask for everything it should have?
+ * The ingredient-text search must name every ingredient and every alias; a product identified by NDC
+ * must have its product-NDC search; every related source NDC must have its own search. A plan that
+ * misses any of these cannot support a no-match, however completely its pages were retrieved.
+ */
+export function searchIsAdequate(identity: MedicationIdentity, plan: RecallQueryPlan): boolean {
+  const text = plan.queries.filter((q) => q.kind === 'INGREDIENT_TEXT').map((q) => q.search);
+  if (text.length !== 1) return false;
+  const search = text[0] as string;
+  if (!requiredSearchTerms(identity).every((terms) => terms.every((t) => search.includes(termClause(t))))) return false;
+  const ndcSearches = new Set(plan.queries.filter((q) => q.kind !== 'INGREDIENT_TEXT' && q.kind !== 'POSITIVE_CONTROL').map((q) => q.search));
+  if (identity.level === 'PRODUCT' && identity.productNdc !== null && !ndcSearches.has(`openfda.product_ndc:${quote(identity.productNdc)}`)) return false;
+  return identity.relatedSourceProductNdcs.every((n) => ndcSearches.has(`openfda.product_ndc:${quote(n)}`));
+}
+
 /** Evaluate all retrieved recall evidence for a confirmed identity. Pure and deterministic. */
 export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: RecallEvidenceBundle): RecallFinding {
   const readouts = bundle.plan.queries.map((q) => readQuery(q, bundle));
@@ -219,7 +257,8 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
 
   const queriesComplete = readouts.every((r) => r.coverage.status === 'COMPLETE');
   const controlPassed = control.result.status === 'PASSED';
-  const complete = queriesComplete && controlPassed;
+  const searchAdequate = searchIsAdequate(identity, bundle.plan);
+  const complete = queriesComplete && controlPassed && searchAdequate;
 
   let finding: FindingClass;
   if (confirmed.length > 0) finding = 'CONFIRMED_MATCH';
@@ -232,6 +271,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
   if (identity.lot === null) limitations.push('LOT_NOT_PROVIDED');
   if (!queriesComplete) limitations.push('SOME_QUERIES_INCOMPLETE');
   if (!controlPassed) limitations.push('POSITIVE_CONTROL_NOT_PASSED');
+  if (!searchAdequate) limitations.push('SEARCH_TERMS_INCOMPLETE');
   if (unresolved.length > 0) limitations.push('SOME_RECORDS_UNPARSEABLE');
   // A repackaged product whose source could not be verified: recalls naming the original product's
   // NDC cannot be matched, so a negative result is weaker than usual.
@@ -250,6 +290,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
     notApplicable,
     coverage: {
       complete,
+      searchAdequate,
       queries,
       positiveControl: control.result,
       datasetLastUpdated: dates[0] ?? null,
