@@ -25,6 +25,8 @@ export interface RecallQuery {
 }
 
 export interface RecallQueryPlan {
+  /** Query-plan version (QUERY_PLAN_VERSION); optional only so older recorded bundles still read. */
+  version?: string;
   queries: RecallQuery[];
   /** The positive control the session must pass before NO_MATCH_FOUND may be reported (RG-2). */
   positiveControl: PositiveControlSpec;
@@ -182,6 +184,8 @@ export interface RecallFinding {
      * Optional only so results saved before C2 still read; absent is treated as not adequate.
      */
     searchAdequate?: boolean;
+    /** Version of the query plan the searches were built with (review item 2). */
+    queryPlanVersion?: string;
     queries: QueryCoverage[];
     positiveControl: PositiveControlResult;
     datasetLastUpdated: string | null;

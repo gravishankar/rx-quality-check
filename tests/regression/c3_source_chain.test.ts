@@ -59,6 +59,7 @@ function portsWith(f: Fakes) {
       const p = f.products?.[ndc];
       if (p === undefined) return realFda.ndcByProduct(ndc);
       if (p === 'UNAVAILABLE') return unavailable('OPENFDA', 'synthetic', 'NETWORK_ERROR', 'SYNTHETIC outage', RETRIEVED_AT);
+      if ((p as { kind?: string }).kind === 'NO_MATCH') return { kind: 'NO_MATCH', meta: { source: 'OPENFDA', url: 'synthetic', httpStatus: 404, retrievedAt: RETRIEVED_AT, elapsedMs: 0, headers: {} } } as never;
       return { kind: 'OK', data: { meta: { last_updated: '2026-11-04', results: { skip: 0, limit: 10, total: 1 } }, results: [p] }, meta: { source: 'OPENFDA', url: 'synthetic', httpStatus: 200, retrievedAt: RETRIEVED_AT, elapsedMs: 0, headers: {} } } as never;
     },
   };
@@ -155,3 +156,23 @@ test('C3 guard: an original packager carries no source qualifier', () => {
   assert.ok(!f.limitations.includes('SOURCE_PRODUCT_NOT_ESTABLISHED'));
   assert.equal(view.qualifiers.filter((q) => /repackag/i.test(q)).length, 0);
 });
+
+test('C3 missing SPL identifier: a repackager without an SPL set id is never "verified"', async () => {
+  const e = await portsWith({}).enrichIdentity!({ ...furosemide(), splSetId: null, isOriginalPackager: false });
+  assert.equal(e.sourceProductStatus, 'NOT_ESTABLISHED');
+  assert.ok(sourceQualified(e));
+});
+
+test('C3 source NDC not found in the directory: not verified; a second, found source makes the chain partial', async () => {
+  const notFound = { kind: 'NO_MATCH' } as const;
+  const only = await portsWith({ spl: { [FUROSEMIDE_SET]: miniSpl('68094-756', ['99999-009']) }, products: { '99999-009': notFound as never } }).enrichIdentity!(furosemide());
+  assert.equal(only.sourceProductStatus, 'NOT_ESTABLISHED');
+  const spl = await realSplWithExtraSource('99999-009');
+  const both = await portsWith({ spl: { [FUROSEMIDE_SET]: spl }, products: { '99999-009': notFound as never } }).enrichIdentity!(furosemide());
+  assert.equal(both.sourceProductStatus, 'PARTIAL');
+});
+
+function sourceQualified(id: MedicationIdentity) {
+  const f = evaluateRecallEvidence(id, bundle(planRecallQueries(id), { ingredient_text: [enf('enf_text_tamsulosin')], product_ndc: [realNoMatch()], control: [control()] }));
+  return f.limitations.includes('SOURCE_PRODUCT_NOT_ESTABLISHED');
+}

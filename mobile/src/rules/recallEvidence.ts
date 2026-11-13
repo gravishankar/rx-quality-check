@@ -46,6 +46,12 @@ export const POSITIVE_CONTROL: PositiveControlSpec = {
 
 export const PAGE_LIMIT = 100;
 
+/**
+ * Version of the recall query plan. 1: ingredient names joined with AND. 2 (Task 4H, review item 2):
+ * each ingredient searched by its name OR any reviewed alias. Recorded with every finding.
+ */
+export const QUERY_PLAN_VERSION = '2';
+
 const quote = (s: string) => `"${s.replace(/["\\]/g, '')}"`;
 
 /** A calendar date written exactly as YYYY-MM-DD that exists (2026-02-30 does not). */
@@ -118,7 +124,7 @@ export function planRecallQueries(identity: MedicationIdentity): RecallQueryPlan
       pageLimit: PAGE_LIMIT,
     });
   });
-  return { queries, positiveControl: POSITIVE_CONTROL };
+  return { version: QUERY_PLAN_VERSION, queries, positiveControl: POSITIVE_CONTROL };
 }
 
 interface PageData {
@@ -339,6 +345,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
     coverage: {
       complete,
       searchAdequate,
+      queryPlanVersion: bundle.plan.version ?? '1',
       queries,
       positiveControl: control.result,
       // An unusable date is carried as-is (never replaced by a valid one) so every reader rejects it.

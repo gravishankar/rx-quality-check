@@ -62,3 +62,15 @@ test('C2 coverage: guard — the fixed plan with the same real answers is adequa
   assert.equal(f.coverage.complete, true);
   assert.equal(f.finding, 'NO_MATCH_FOUND');
 });
+
+test('C2 (review item 2): the query-plan version is recorded with every plan and finding', async () => {
+  const { QUERY_PLAN_VERSION } = await import('../../mobile/src/rules/recallEvidence.ts');
+  const { RULESET_VERSION } = await import('../../mobile/src/rules/version.ts');
+  const id = productIdentity(apiNdcRecord('ndc_rosuvastatin'), '82009-018-10');
+  const plan = planRecallQueries(id);
+  assert.equal(plan.version, QUERY_PLAN_VERSION);
+  assert.equal(QUERY_PLAN_VERSION, '2', '1 = names only; 2 = each ingredient searched by name OR aliases');
+  const f = evaluateRecallEvidence(id, bundle(plan, ROSUVASTATIN_PAGES()));
+  assert.equal(f.coverage.queryPlanVersion, '2');
+  assert.notEqual(RULESET_VERSION, '0.3.0', 'rules changed in Task 4H: saved results made under 0.3.0 are stale');
+});
