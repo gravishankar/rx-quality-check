@@ -186,6 +186,8 @@ export const COPY = {
       staleSource: (date: string) => `FDA’s recall data was last updated on ${date}, which is older than we accept. Please check again later.`,
       incomplete: 'Some FDA records could not be retrieved or read completely.',
       searchIncomplete: 'Our search of FDA’s recall records did not cover every name this medication is known by, so we cannot say no recall was found.',
+      datasetDateInvalid: 'The date FDA gave for its recall data could not be read or is in the future, so we cannot rely on this search.',
+      datasetDateUnknown: 'FDA did not say when its recall data was last updated.',
       controlFailed: 'Our check that FDA’s recall search is working did not pass.',
       inconsistent: 'The result did not meet our evidence rules, so we are not showing it. This has been flagged for review.',
       unreadable: 'Some recall records could not be read.',

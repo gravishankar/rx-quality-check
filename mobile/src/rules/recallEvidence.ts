@@ -48,6 +48,25 @@ export const PAGE_LIMIT = 100;
 
 const quote = (s: string) => `"${s.replace(/["\\]/g, '')}"`;
 
+/** A calendar date written exactly as YYYY-MM-DD that exists (2026-02-30 does not). */
+export function isCalendarDate(s: string): boolean {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (!m) return false;
+  const y = Number(m[1]), mo = Number(m[2]), d = Number(m[3]);
+  const leap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][mo - 1];
+  return days !== undefined && d >= 1 && d <= days;
+}
+
+/**
+ * C4: a dataset date can support a result only if it is a real calendar date that is not after the
+ * evaluation, and the evaluation time is a valid UTC instant (ISO-8601 with Z, as stored).
+ */
+export function datasetDateUsable(date: string, evaluatedAt: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}T[0-9:.]+Z$/.test(evaluatedAt) || !Number.isFinite(Date.parse(evaluatedAt))) return false;
+  return isCalendarDate(date) && date <= evaluatedAt.slice(0, 10);
+}
+
 /** Terms a search may carry: the characters openFDA's client accepts inside a quoted phrase. */
 const SAFE_TERM = /^[a-z0-9 .-]+$/;
 
@@ -164,6 +183,9 @@ export function readQuery(query: RecallQuery, bundle: RecallEvidenceBundle): Que
     if (total === null) {
       total = d.total;
       cov.datasetLastUpdated = d.lastUpdated;
+    } else if (d.lastUpdated !== cov.datasetLastUpdated) {
+      // C4: pages from two different releases of the dataset cannot be combined.
+      return { coverage: { ...cov, status: 'INCONSISTENT_PAGINATION', totalReported: total, detail: `dataset date changed from ${cov.datasetLastUpdated} to ${d.lastUpdated} between pages` }, records };
     } else if (d.total !== total) {
       return { coverage: { ...cov, status: 'INCONSISTENT_PAGINATION', totalReported: total, detail: `total changed from ${total} to ${d.total} between pages` }, records };
     }
@@ -282,7 +304,9 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
   const queriesComplete = readouts.every((r) => r.coverage.status === 'COMPLETE');
   const controlPassed = control.result.status === 'PASSED';
   const searchAdequate = searchIsAdequate(identity, bundle.plan);
-  const complete = queriesComplete && controlPassed && searchAdequate;
+  const queryDates = [...readouts.map((r) => r.coverage), control.coverage].map((q) => q.datasetLastUpdated).filter((d): d is string => d !== null);
+  const datesUsable = queryDates.every((d) => datasetDateUsable(d, bundle.evaluatedAt));
+  const complete = queriesComplete && controlPassed && searchAdequate && datesUsable;
 
   let finding: FindingClass;
   if (confirmed.length > 0) finding = 'CONFIRMED_MATCH';
@@ -296,6 +320,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
   if (!queriesComplete) limitations.push('SOME_QUERIES_INCOMPLETE');
   if (!controlPassed) limitations.push('POSITIVE_CONTROL_NOT_PASSED');
   if (!searchAdequate) limitations.push('SEARCH_TERMS_INCOMPLETE');
+  if (!datesUsable) limitations.push('DATASET_DATE_INVALID');
   if (unresolved.length > 0) limitations.push('SOME_RECORDS_UNPARSEABLE');
   // A repackaged product whose source could not be verified: recalls naming the original product's
   // NDC cannot be matched, so a negative result is weaker than usual.
@@ -303,6 +328,7 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
 
   const queries = [...readouts.map((r) => r.coverage), control.coverage];
   const dates = queries.map((q) => q.datasetLastUpdated).filter((d): d is string => d !== null).sort();
+  const invalidDate = dates.find((d) => !datasetDateUsable(d, bundle.evaluatedAt));
 
   return {
     finding,
@@ -315,7 +341,8 @@ export function evaluateRecallEvidence(identity: MedicationIdentity, bundle: Rec
       searchAdequate,
       queries,
       positiveControl: control.result,
-      datasetLastUpdated: dates[0] ?? null,
+      // An unusable date is carried as-is (never replaced by a valid one) so every reader rejects it.
+      datasetLastUpdated: invalidDate ?? dates[0] ?? null,
     },
     limitations,
     rulesetVersion: RULESET_VERSION,
