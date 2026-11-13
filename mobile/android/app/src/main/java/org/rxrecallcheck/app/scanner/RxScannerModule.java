@@ -222,8 +222,8 @@ public final class RxScannerModule extends ReactContextBaseJavaModule {
     private synchronized PpOcr engine() throws Exception {
         if (ocr == null) {
             long t0 = System.nanoTime();
-            byte[] det = asset("ocr/ch_PP-OCRv4_det_infer.onnx");
-            byte[] rec = asset("ocr/ch_PP-OCRv4_rec_infer.onnx");
+            byte[] det = asset("ocr/ppocrv4_det_w8.onnx");
+            byte[] rec = asset("ocr/ppocrv4_rec_latin.onnx");
             java.util.List<String> dict = PpOcr.dictionaryFromModelBytes(rec);
             dictSize = dict.size();
             ocr = new PpOcr(det, rec, dict, DET_MAX_SIDE);

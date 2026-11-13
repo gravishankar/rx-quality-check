@@ -98,7 +98,8 @@ expected; `PIXEL_SCAN_TEST_GUIDE.md`).
 |---|---|---|
 | 3 (no scanner) | 15.2 MB | 29.6 MB |
 | 4–5 (scanner, PP-OCRv3) | 38.9 MB | 76.7 MB |
-| 6 (PP-OCRv4) | **41.4 MB** | **79.3 MB** |
+| 6–7 (PP-OCRv4) | 41.4 MB | 79.3 MB |
+| 8 (PP-OCRv4, shrunk) | **33.3 MB** | **71.2 MB** |
 
 Breakdown of the increase (ARM64, compressed): ONNX Runtime 1.28.0 ~11 MB, recognition model
 ~9.6 MB, detection model ~2.2 MB, ZXing-cpp ~0.7 MB. Safe future reductions (not done): ONNX Runtime
@@ -148,6 +149,26 @@ settings → no drug fields; PP-OCRv3 at 3200 → "AMLODIPINESMGT" (now correcte
 **PP-OCRv4 at 3200 → AMLODIPINE, 5 MG**. The dose form ("TA…") and NDC were not legible in that
 photo, so the app would open the form prefilled and ask for the rest. One photo is not an accuracy
 measurement.
+
+## 8b. Smaller models (build 8)
+
+Measured on a computer with ONNX Runtime 1.28.0 (the app's version), image 3200 / detector 960.
+Field counts are on the 32 synthetic labels; "real vial" is the owner's photo through the full extractor.
+
+| Variant | Models (MB, uncompressed) | Name | Strength | NDC | Mfr | Lot | Real vial |
+|---|---|---|---|---|---|---|---|
+| Build 7: PP-OCRv4 as published | 15.6 | 32/32 | 30/32 | 28/28 | 21/22 | 4/4 | AMLODIPINE 5 MG |
+| PP-OCRv6 tiny (onnxocr 4.0.0, Apache-2.0) | 6.2 | 32/32 | 32/32 | 28/28 | 21/22 | 4/4 | **nothing read** |
+| v4 detector + v6 tiny recognizer | 9.2 | 32/32 | 32/32 | 28/28 | 21/22 | 4/4 | **nothing read** ("AMLODPNeSMGT") |
+| v4, recognizer limited to 105 characters | 12.4 | 32/32 | 30/32 | 28/28 | 21/22 | 4/4 | AMLODIPINE 5 MG |
+| + all weights 8-bit | 3.4 | 32/32 | 30/32 | 28/28 | 21/22 | 4/4 | **ALODIPINE** 5 MG |
+| **Build 8:** 105 characters, detector 8-bit, recognizer's 3 largest layers 8-bit | **6.9** | 32/32 | 30/32 | 28/28 | 21/22 | 4/4 | AMLODIPINE 5 MG |
+
+The English-only PP-OCRv4 recognizer found on PyPI (`paddleocr-onnx`) declares no license and was not
+used. A cut-down ONNX Runtime (only these models' operators) needs a source build of ONNX Runtime,
+whose repository is not reachable from the build environment; it remains the largest single item
+(10.6 MB). R8 code shrinking was not enabled (needs a device test). All 64 automated scan flows give
+the same outcomes as build 7. Phone accuracy and timing of build 8: not yet measured.
 
 ## 9. Decision requested (OD-27)
 

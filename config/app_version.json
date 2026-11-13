@@ -1,7 +1,7 @@
 {
   "$comment": "App version and build number (Task 4A.2). Single source for the Android versionName/versionCode, the iOS MARKETING_VERSION/CURRENT_PROJECT_VERSION and the version shown in the app. Increase build_number for every APK given to anyone (including the owner); never reuse one. After editing run `npm run version:bundle`. Separate from config/brand.json (the product name may change; versions do not restart).",
-  "version": "0.1.6",
-  "build_number": 7,
+  "version": "0.1.7",
+  "build_number": 8,
   "history": [
     {
       "build_number": 1,
@@ -70,6 +70,16 @@
       "apk_sha256": "6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c",
       "note": "Summary-first result screen: record counts by group; limits and disclaimer directly below the result; matching, possibly matching and unreadable records always shown as cards with plain-language details; records the engine excluded are counted once each by a fixed primary-reason order and listed only on request. Categories and matching logic unchanged. Scanner unchanged from build 6. Two APKs: universal (79.3 MB; apk_sha256) and ARM64-only (41.4 MB; apk_sha256_arm64). EMULATOR RESULT (owner, 2026-11-12, Android Emulator on a laptop): details typed in, results as expected. Scanning was not tried on the emulator. Not yet tested on the Pixel.",
       "apk_sha256_arm64": "c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73"
+    },
+    {
+      "build_number": 8,
+      "version": "0.1.7",
+      "task": "4C (smaller APK)",
+      "commit": "task-4c/scanner",
+      "label": "MedLuma (DEV)",
+      "apk_sha256": "d3fd7596dced8fb6b797e97f67538717a888bc8747a35c4a1f7f966cb280331a",
+      "note": "Smaller OCR models (scripts/optimize_ocr_models.py): recognizer limited to the 105 characters used on US labels, 8-bit weights (detector fully, recognizer 3 largest layers). Models 15.6 MB -> 6.9 MB. Same field accuracy on the 32 synthetic labels; owner's real vial photo still reads AMLODIPINE 5 MG (computer, not phone). App behaviour otherwise unchanged from build 7. Two APKs: universal (71.2 MB; apk_sha256) and ARM64-only (33.3 MB; apk_sha256_arm64), down from 79.3 / 41.4 MB.",
+      "apk_sha256_arm64": "9bbf1f6c59c1b8ed2cdbfa74effbc83f31eb54ecbb62d4d48d894c0016e5ab0b"
     }
   ]
 }

@@ -138,7 +138,9 @@ verified on a device.
 ## Scanner (Task 4C)
 
 - `scripts/android_build.sh` first runs `scripts/fetch_ocr_models.sh`, which downloads the PaddleOCR
-  PP-OCRv4 mobile ONNX models (Apache-2.0; builds 4–5 used PP-OCRv3) from the pinned RapidOCR 1.4.4 wheel on PyPI, verifies SHA-256 of
+  PP-OCRv4 mobile ONNX models (Apache-2.0; builds 4–5 used PP-OCRv3) from the pinned RapidOCR 1.4.4 wheel on PyPI,
+  then shrinks them with `scripts/optimize_ocr_models.py` (build 8: 105-character recognizer, 8-bit
+  weights; needs Python 3 and installs pinned `onnx`/`numpy` from PyPI into a temporary environment), verifies SHA-256 of
   the wheel and each model, and places them in `mobile/android/app/src/main/assets/ocr/` (not committed).
 - Dependencies: `onnxruntime-android:1.28.0` (pinned below the version that adds telemetry),
   `io.github.zxing-cpp:android:3.1.1`.
@@ -162,6 +164,8 @@ verified on a device.
 | Task 4C build 6, universal | same | MedLuma (DEV) | `bc9e74ead9ff10b78859c7ff50ecef7073201b9b7cb40748e010f1346baca92f` | Sent; archived |
 | Task 4C build 7, ARM64 (0.1.6-dev, summary-first result) | same | MedLuma (DEV) | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` | Sent; archived |
 | Task 4C build 7, universal | same | MedLuma (DEV) | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` | Sent; archived |
+| Task 4C build 8, ARM64 (0.1.7-dev, smaller OCR models) | same | MedLuma (DEV) | `9bbf1f6c59c1b8ed2cdbfa74effbc83f31eb54ecbb62d4d48d894c0016e5ab0b` | Sent; archived |
+| Task 4C build 8, universal | same | MedLuma (DEV) | `d3fd7596dced8fb6b797e97f67538717a888bc8747a35c4a1f7f966cb280331a` | Sent; archived |
 
 Both are signed with the same development certificate (SHA-256
 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7`, DN still names the earlier

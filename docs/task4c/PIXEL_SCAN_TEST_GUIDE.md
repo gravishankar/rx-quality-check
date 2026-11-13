@@ -1,4 +1,8 @@
-# Pixel Scan Test Guide — development build 0.1.6 (build 7)
+# Pixel Scan Test Guide — development build 0.1.7 (build 8)
+
+> **Build 8** is build 7 with smaller text-reading models (APK 41.4 → 33.3 MB). Screens and results
+> are unchanged. Please check that scanning still reads labels as well as build 7 did, and note the
+> scan time shown in the development detail line.
 
 > **Device result for build 6 (owner's Pixel, 2026-11-12):** a label was scanned and the recall check
 > completed (no matching recall), but the result listed every FDA record checked in full. **Build 7**
@@ -35,23 +39,23 @@ on a phone yet.
 
 ## 1. Install
 
-Use the attached **`medluma-dev-v0.1.6-b7-arm64-v8a.apk`** (41.4 MB). Universal fallback:
-`medluma-dev-v0.1.6-b7-universal.apk` (79.3 MB). Full steps (download, checksum, install, Play Protect
+Use the attached **`medluma-dev-v0.1.7-b8-arm64-v8a.apk`** (33.3 MB). Universal fallback:
+`medluma-dev-v0.1.7-b8-universal.apk` (71.2 MB). Full steps (download, checksum, install, Play Protect
 prompt): `docs/INSTALL_ON_ANDROID.md`.
 
 | File | SHA-256 |
 |---|---|
-| medluma-dev-v0.1.6-b7-arm64-v8a.apk | `c0b44b6ba2ff3d7b57891faf822f199ff2c82d24034797d286c0b3ece54b6d73` |
-| medluma-dev-v0.1.6-b7-universal.apk | `6140ea29adb03375576bfd79feea689181167c76736452a1b544739e13abee3c` |
+| medluma-dev-v0.1.7-b8-arm64-v8a.apk | `9bbf1f6c59c1b8ed2cdbfa74effbc83f31eb54ecbb62d4d48d894c0016e5ab0b` |
+| medluma-dev-v0.1.7-b8-universal.apk | `d3fd7596dced8fb6b797e97f67538717a888bc8747a35c4a1f7f966cb280331a` |
 
 On the Mac:
 
 ```bash
-shasum -a 256 ~/Downloads/medluma-dev-v0.1.6-b7-arm64-v8a.apk
+shasum -a 256 ~/Downloads/medluma-dev-v0.1.7-b8-arm64-v8a.apk
 ```
 
-It installs over builds 1–6. Open **MedLuma (DEV)** → *About and privacy* should show
-**version 0.1.6 (build 7)**.
+It installs over builds 1–7. Open **MedLuma (DEV)** → *About and privacy* should show
+**version 0.1.7 (build 8)**.
 
 If a scan still fails, the error screen now shows a grey **Technical detail (development)** line —
 please send a screenshot of it (test labels only); it contains no label content.

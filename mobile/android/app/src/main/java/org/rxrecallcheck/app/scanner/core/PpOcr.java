@@ -60,9 +60,25 @@ public final class PpOcr implements AutoCloseable {
     // which is limited on the long side for phone speed.
     private static final float[] DET_MEAN = {0.485f, 0.456f, 0.406f};
     private static final float[] DET_STD = {0.229f, 0.224f, 0.225f};
-    private static final float BIN_THRESH = 0.3f;
-    private static final float BOX_THRESH = 0.5f;
-    private static final float UNCLIP_RATIO = 1.6f;
+    /** Detector post-processing thresholds; each model family publishes its own (inference.yml). */
+    public static final class DetParams {
+        public final float binThresh, boxThresh, unclipRatio;
+
+        public DetParams(float binThresh, float boxThresh, float unclipRatio) {
+            this.binThresh = binThresh;
+            this.boxThresh = boxThresh;
+            this.unclipRatio = unclipRatio;
+        }
+
+        /** PP-OCRv3/v4 (RapidOCR defaults). */
+        public static final DetParams V4 = new DetParams(0.3f, 0.5f, 1.6f);
+        /** PP-OCRv6 (PaddleOCR inference.yml: thresh 0.2, box_thresh 0.4, unclip_ratio 1.4). */
+        public static final DetParams V6 = new DetParams(0.2f, 0.4f, 1.4f);
+    }
+
+    private final float BIN_THRESH;
+    private final float BOX_THRESH;
+    private final float UNCLIP_RATIO;
     private static final int REC_H = 48;
     private static final int REC_MAX_W = 960;
     private static final float TEXT_SCORE = 0.5f;
@@ -74,6 +90,13 @@ public final class PpOcr implements AutoCloseable {
     private final int detMaxSide;
 
     public PpOcr(byte[] detModel, byte[] recModel, List<String> dictionary, int detMaxSide) throws OrtException {
+        this(detModel, recModel, dictionary, detMaxSide, DetParams.V4);
+    }
+
+    public PpOcr(byte[] detModel, byte[] recModel, List<String> dictionary, int detMaxSide, DetParams params) throws OrtException {
+        this.BIN_THRESH = params.binThresh;
+        this.BOX_THRESH = params.boxThresh;
+        this.UNCLIP_RATIO = params.unclipRatio;
         this.env = OrtEnvironment.getEnvironment();
         OrtSession.SessionOptions o = new OrtSession.SessionOptions();
         o.setIntraOpNumThreads(Math.max(1, Math.min(4, Runtime.getRuntime().availableProcessors())));
@@ -300,7 +323,7 @@ public final class PpOcr implements AutoCloseable {
         return (float) Math.hypot(r[2 * a] - r[2 * b], r[2 * a + 1] - r[2 * b + 1]);
     }
 
-    private static float[] unclip(float[] r) {
+    private float[] unclip(float[] r) {
         float w = side(r, 0, 1), h = side(r, 1, 2);
         float d = w * h * UNCLIP_RATIO / (2 * (w + h));
         float cx = 0, cy = 0;
@@ -448,6 +471,14 @@ public final class PpOcr implements AutoCloseable {
             default: throw new IllegalArgumentException("unsupported wire type " + wire);
         }
         if (pos[0] > b.length) throw new IllegalArgumentException("truncated model");
+    }
+
+    /** A PaddleOCR dictionary file (one character per line, UTF-8), for models without embedded metadata. */
+    public static List<String> dictionaryFromText(byte[] utf8) {
+        String t = new String(utf8, java.nio.charset.StandardCharsets.UTF_8).replace("\r\n", "\n");
+        List<String> out = new ArrayList<>();
+        for (String c : t.split("\n", -1)) if (!c.isEmpty()) out.add(c);
+        return out;
     }
 
     private static List<String> splitDictionary(String chars) {

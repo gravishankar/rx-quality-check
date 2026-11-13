@@ -17,8 +17,8 @@ import java.util.List;
 public class DesktopLab {
     public static void main(String[] a) throws Exception {
         File models = new File(a[0]);
-        byte[] det = Files.readAllBytes(new File(models, "ch_PP-OCRv4_det_infer.onnx").toPath());
-        byte[] rec = Files.readAllBytes(new File(models, "ch_PP-OCRv4_rec_infer.onnx").toPath());
+        byte[] det = Files.readAllBytes(new File(models, "ppocrv4_det_w8.onnx").toPath());
+        byte[] rec = Files.readAllBytes(new File(models, "ppocrv4_rec_latin.onnx").toPath());
         int detMax = a.length > 2 ? Integer.parseInt(a[2]) : 960;
         int imgMax = a.length > 3 ? Integer.parseInt(a[3]) : 3200;
         List<String> dict = PpOcr.dictionaryFromModelBytes(rec);

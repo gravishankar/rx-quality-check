@@ -86,9 +86,10 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Unchanged | Recall engine, safety gates, evidence classification, presentation downgrade rules, data, policy |
 | Device fixes | Build 5: barcode reader null crop rectangle (build 4 failed every scan). Build 6: OCR dictionary read from the model file (build 5 read no text), PaddleOCR PP-OCRv4, 3200-px recognition source, extractor fixes |
 | Build 7 (approved 2026-11-12) | Summary-first result screen (`docs/EVIDENCE_AND_CLAIMS_POLICY.md` §3a): counts by group, limits directly below the result, prominent match/possible/unreadable cards, excluded records counted by a fixed primary reason and listed on request, plain-language record details. Categories and matching logic unchanged |
+| Build 8 (approved 2026-11-13) | Smaller APK (41.4 → 33.3 MB ARM64): OCR models limited to the 105 characters of US labels and partly stored in 8 bits (`scripts/optimize_ocr_models.py`, deterministic, outputs pinned by SHA-256); same automated accuracy; no screen or rule changes |
 | Device results | Build 4: every scan failed. Build 5: no text read. Build 6: label scanned, recall check completed (no matching recall). Build 7: typed-entry flow gave the expected results on the Android Emulator (owner, laptop); scanning and the Pixel test not yet done |
 | Not done | iOS scanner (Apple Vision/ONNX Runtime iOS later) |
-| Status | **Build 7 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`). Task 4D not started |
+| Status | **Build 8 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`; builds 1–7 merged into `main`). Task 4D not started |
 
 ## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
 

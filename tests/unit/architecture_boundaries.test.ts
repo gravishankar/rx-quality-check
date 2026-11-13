@@ -191,7 +191,24 @@ test('scanner OCR dictionary (Pixel defect, build 5): read from the model file, 
   assert.doesNotMatch(mod, /dictionaryFromMetadata/);
   assert.match(mod, /PpOcr\.dictionaryFromModelBytes\(rec\)/);
   assert.match(core, /does not fit model classes/, 'a dictionary/model mismatch fails loudly instead of returning no text');
-  assert.match(mod, /ocr\/ch_PP-OCRv4_(det|rec)_infer\.onnx/);
+  assert.match(mod, /ocr\/ppocrv4_det_w8\.onnx/);
+  assert.match(mod, /ocr\/ppocrv4_rec_latin\.onnx/);
   const fetch = readFileSync(join(ROOT, 'scripts', 'fetch_ocr_models.sh'), 'utf8');
   assert.match(fetch, /rapidocr_onnxruntime-1\.4\.4-py3-none-any\.whl/);
+});
+
+test('scanner models (build 8): shrunk deterministically from pinned sources, outputs pinned by SHA-256', () => {
+  const fetch = readFileSync(join(ROOT, 'scripts', 'fetch_ocr_models.sh'), 'utf8');
+  const opt = readFileSync(join(ROOT, 'scripts', 'optimize_ocr_models.py'), 'utf8');
+  for (const v of ['WHEEL_SHA', 'SRC_DET_SHA', 'SRC_REC_SHA', 'DET_SHA', 'REC_SHA']) assert.match(fetch, new RegExp(`${v}="[0-9a-f]{64}"`), v);
+  assert.match(fetch, /PY_PINS="onnx==[\d.]+ numpy==[\d.]+"/, 'tool versions pinned');
+  assert.match(fetch, /--only-binary=:all:/);
+  assert.match(fetch, /check "\$DEST\/\$DET" "\$DET_SHA"/);
+  assert.match(fetch, /check "\$DEST\/\$REC" "\$REC_SHA"/);
+  // The recognizer keeps the characters of US labels; quantizing all of it misread the real vial.
+  assert.match(opt, /KEEP = \[chr\(c\) for c in range\(33, 127\)\]/);
+  assert.match(opt, /REC_MIN_ELEMENTS = 200_000/);
+  // No opset change (opset 12 Squeeze/Reduce semantics); dequantization by Cast + Mul.
+  assert.doesNotMatch(opt, /imp\.version\s*=/);
+  assert.doesNotMatch(opt, /"DequantizeLinear"/);
 });
