@@ -71,6 +71,7 @@ export const COPY = {
     correct: 'Correct the details',
     unavailable: 'Scanning is not available on this phone yet. Please type the details.',
     cancelled: 'No photo was taken.',
+    photoNotDeletedTitle: 'Label photo still on this phone',
     photoNotDeleted:
       'This app could not remove the label photo from its private storage on this phone. It will try again the next time the app starts. The photo was not uploaded.',
     problemTitle: 'We couldn’t read your label',

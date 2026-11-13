@@ -400,3 +400,96 @@ test('R2-5 guard: a removed photo adds no notice', async () => {
   await press(r, COPY.scan.button);
   expect(allText(r)).not.toContain('could not be removed');
 });
+
+// ---------------------------------------------------------------------------------------------
+// Review round 3 (R2-5 follow-up): the cleanup warning must survive every identification outcome.
+// Scanner outputs are SYNTHETIC OCR lines; NDC Directory answers for the ambiguous case are SYNTHETIC
+// copies of the real Sun metformin ER record with altered NDCs (as in tests/integration/workflow).
+// ---------------------------------------------------------------------------------------------
+const ocrOnly = (...lines: string[]): ScanOutput => ({ lines: lines.map((text) => ({ text, score: 0.99 })), barcodes: [], photoDeleted: false });
+const ndcUrl = (n: string) => `https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc%3A%22${n}%22&limit=10`;
+function platformWith(results: (ScanOutput | Error)[], over: Record<string, Entry | 'THROW'>) {
+  const p = platform(results);
+  const inner = p.transport.get.bind(p.transport);
+  p.transport = {
+    async get(url: string, o?: unknown) {
+      const x = over[url];
+      if (x === 'THROW') {
+        p.requests.push(url);
+        throw new TypeError('Network request failed (SYNTHETIC)');
+      }
+      if (x) {
+        p.requests.push(url);
+        return x;
+      }
+      return inner(url, o as never);
+    },
+  } as typeof p.transport;
+  return p;
+}
+
+test('R3: excluded medication (warfarin) → the cleanup warning is still shown', async () => {
+  const r = await start(platform([ocrOnly('WARFARIN 5 MG TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.notAssessed.EXCLUDED.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: unsupported medication (metoprolol tartrate) → warning shown', async () => {
+  const r = await start(platform([ocrOnly('METOPROLOL TARTRATE 25 MG TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.notAssessed.UNSUPPORTED.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: missing information (no strength read) → warning shown', async () => {
+  const r = await start(platform([ocrOnly('METFORMIN HCL ER TABLETS')]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted);
+});
+
+async function waitText(r: ReactTestRenderer, s: string, ms = 30_000) {
+  const t0 = performance.now();
+  while (performance.now() - t0 < ms && !allText(r).includes(s)) await act(async () => new Promise((res) => setTimeout(res, 200)));
+}
+
+test('R3: source error (FDA directory unreachable, after the engine\'s retries) → warning shown', async () => {
+  const r = await start(platformWith([ocrOnly('NDC 62756-142-02', 'METFORMIN HCL ER 500 MG TABLET')], { [ndcUrl('62756-142-02')]: 'THROW' }));
+  await press(r, COPY.scan.button);
+  await waitText(r, COPY.errors.sourceUnavailable.headline);
+  const t = allText(r);
+  expect(t).toContain(COPY.errors.sourceUnavailable.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+}, 40_000);
+
+test('R3: ambiguous product (two FDA listings fit) → warning shown on the choice screen', async () => {
+  const real = JSON.parse(entries[ndcUrl('62756-142-02')]!.bodyText).results[0];
+  const rec = (productNdc: string, pkg: string) => ({ status: 200, headers: { 'content-type': 'application/json' }, bodyText: JSON.stringify({ meta: { last_updated: '2026-11-11', results: { skip: 0, limit: 1, total: 1 } }, results: [{ ...real, product_ndc: productNdc, packaging: [{ package_ndc: pkg, description: 'SYNTHETIC' }] }] }) });
+  const notFound = { status: 404, headers: { 'content-type': 'application/json' }, bodyText: '{"error":{"code":"NOT_FOUND","message":"No matches found!"}}' };
+  // SYNTHETIC UPC-A carrying the 10 NDC digits 6275614202 (three possible NDC readings).
+  const upc: ScanOutput = { ...ocrOnly('METFORMIN HCL ER 500 MG TABLET'), barcodes: [{ format: 'UPC_A', text: '362756142022', symbology: null }] };
+  const r = await start(platformWith([upc], {
+    [ndcUrl('6275-6142-02')]: rec('6275-6142', '6275-6142-02'),
+    [ndcUrl('62756-142-02')]: rec('62756-142', '62756-142-02'),
+    [ndcUrl('62756-1420-2')]: notFound,
+  }));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.errors.ambiguous);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: the warning stays across screens until a later scan reports the photo storage clean', async () => {
+  const r = await start(platform([ocrOnly('WARFARIN 5 MG TABLETS'), { ...label('01_'), photoDeleted: true }]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.notAssessed.EXCLUDED.headline);
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted);
+  await press(r, 'Back');
+  expect(allText(r)).toContain(COPY.scan.button); // home
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted); // still reported
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.confirm.title);
+  expect(allText(r)).not.toContain(COPY.scan.photoNotDeleted); // the later scan reported clean storage
+});
