@@ -92,6 +92,69 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Build 9 (2026-11-13) | Build 8 with team wording: the development banner says "for internal testing only" |
 | Status | **Build 9 delivered — awaiting Pixel test and review** (branch `task-4c/scanner`; builds 1–7 merged into `main`). Task 4D not started |
 
+## Task 4G — Broader drug coverage with a bundled drug directory (proposed, not approved)
+
+Goal: check almost any oral prescription generic, not only the 14 listed drugs, while making fewer
+network calls and never sounding more certain about an unreviewed drug than the evidence allows.
+Depends on OD-30, OD-31 and OD-32. Recorded 2026-11-13; not started.
+
+**Two coverage tiers (OD-30, option C).**
+
+| Tier | Which drugs | What changes for the user |
+|---|---|---|
+| Reviewed | The drug catalog (today 14), each entry verified by hand | Nothing: results as today |
+| General | Any other product the directory shows as oral and prescription-only, after every exclusion step | Checked with the same rules, plus a fixed qualifier: "This medication hasn't been individually reviewed. Recall notices that use other names may not be found." A general-tier result never shows the plain no-match without it |
+
+Unchanged: the exclusion policy runs first; combination products, unusual forms and conflicting FDA
+records give "needs clarification"; OTC and non-oral products stay out; recall matching rules,
+categories and wording rules are the same.
+
+**Bundled drug directory (OD-31).** Slow-changing identity data ships in the app and is refreshed
+with each release; recalls stay live.
+
+| Data | Source (fetched at build time, not by the phone) | Stored | Measured 2026-11-13 |
+|---|---|---|---|
+| Oral prescription products: product NDC, package NDCs, generic and brand name, ingredients and strengths, dosage form, labeler, marketing category, FDA pharmacologic class, RxCUIs | openFDA NDC Directory | Bundled, versioned, with snapshot date | 40,884 products (sample: 2.3 packages each); compact table about 8.5 MB, about 2.0 MB compressed |
+| Ingredient names, salts and RxNorm codes | RxNav | Bundled | Only those of the products above (RxNorm has 14,718 ingredients and 3,688 salts in total) |
+| Recalls | openFDA enforcement | **Never bundled; always live** | — |
+
+Lookup order on the phone: local directory → if the code is not found, the live NDC Directory (as
+today). A hit older than the age limit (proposed 90 days) is either re-confirmed live or shown with a
+"product details as of [snapshot date]" qualifier (to decide in OD-31). Effects:
+
+- **Fewer calls:** identity lookups (about 2–4 per check) disappear for known products; recall
+  searches (3 queries plus the search check) stay.
+- **Privacy:** the exclusion check runs entirely on the phone for known products, so an excluded drug
+  sends nothing anywhere (today its NDC reaches openFDA once).
+- **Scanner:** the label reader's vocabulary comes from the directory's ingredient names, not just the 14
+  drugs.
+
+**Build-time refresh.** A script downloads the sources, filters to oral prescription products, writes a
+compact versioned table, reports what changed against the previous snapshot (added, removed and changed
+products), and the change summary is reviewed before release. `download.open.fda.gov` (the bulk file,
+26.9 MB) is blocked in the current build environment; either allow that host for builds or page through
+`api.fda.gov` (search_after paging).
+
+**Safeguards before release.**
+
+1. OD-32 decided: whether the exclusion criteria widen (for example, narrow-therapeutic-index drugs such
+   as lithium, phenytoin or digoxin) before the general tier ships.
+2. A coverage run over a sample of common drugs (the top 200 generics), with live recorded data: the share
+   of each result category and the cases where a recall notice used another name. Reviewed by the team.
+3. Counsel review of the broader claim and of the general-tier qualifier wording.
+
+**Acceptance.** Every reviewed-tier test still passes unchanged. A general-tier no-match always carries
+the qualifier (tested on all four categories). An unlisted anticoagulant or immunosuppressant from the
+directory gives "needs clarification" with no network call. An excluded drug scanned or typed sends no
+request. A product missing from the directory falls back to the live lookup, and a failed live lookup is
+never a no-match. The directory file is validated by schema and pinned by SHA-256. Its date is shown
+in each result's sources. APK growth stays within the agreed budget (proposed: 3 MB).
+
+**Tests.** Directory parsing and validation, lookup order and fallback, age limit, exclusion fully on the
+phone, general-tier qualifier in every category, network audit (no request for excluded drugs),
+recorded-data flows for at least 20 drugs outside the catalog, including a combination product, an
+extended-release product, a brand-only recall notice and an unlisted blood thinner.
+
 ## Earlier placeholder — pilot hardening (superseded by the Task 4B proposal)
 
 Candidate scope (to be approved): persist acknowledgements and history in the encrypted database once
@@ -167,3 +230,6 @@ No iOS IPA is built in Task 4A.
 | OD-27 | Scanner OCR/barcode engine. **Task 4C evidence:** ML Kit depends on Google's Clearcut data transport (usage logs); open-source PaddleOCR + ONNX Runtime 1.28.0 + ZXing-cpp used instead (ONNX Runtime ≥ 1.29 adds Microsoft telemetry — pinned below it, gated in the build). Final decision after the Pixel test. | Project team | After the Pixel test |
 | OD-28 | **Approved (Task 4C).** Privacy drafts updated; the app ended up needing no CAMERA permission (photo via the camera app). | Project team + counsel | — |
 | OD-29 | **Approved (Task 4C):** facility-level evidence for all candidate facilities equally; company-level evidence separately. | Project team | — |
+| OD-30 | **Proposed, recommended (2026-11-13):** coverage option C — two tiers: the reviewed catalog as today, plus a general tier for any other oral prescription product, checked with the same rules and a fixed "not individually reviewed" qualifier (Task 4G). Alternatives: A, a larger curated list; B, open coverage without tiers | Project team | Before Task 4G |
+| OD-31 | **Proposed (2026-11-13):** bundle a drug directory (openFDA NDC Directory, oral prescription products, plus RxNorm names and codes) refreshed with each release; local lookup first, live lookup on a miss; recalls always live. Decide the age limit (proposed 90 days), what happens past it (live re-check or dated qualifier), the APK budget (proposed 3 MB) and the build-time source host | Project team (+ counsel glance) | Before Task 4G |
+| OD-32 | **Open (2026-11-13):** widen the exclusion criteria before the general tier ships? Today: anticoagulants and transplant immunosuppressants. Candidates to consider: narrow-therapeutic-index drugs (e.g. lithium, phenytoin, digoxin). Same rule as today: by published class or criterion, never drug by drug | Project team (+ clinical review) | Before Task 4G release |
