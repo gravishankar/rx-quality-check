@@ -8,7 +8,7 @@ drug list stays at the current 14 drugs until we approve a stage.
 - **F1 approved as a bounded correction.** No catalog activation and no distribution yet.
 - **Staged expansion approved in principle; Stage 1 on hold** until the shared correctness findings
   (`docs/CORRECTNESS_FINDINGS.md`) are resolved.
-- **F2 scheduled after the shared correctness fixes.**
+- **F2 done after the shared correctness fixes (Task 4H):** infusion wording read as non-oral; on all 670 recorded notices exactly 6 change, all IV bags or infusion pumps (D-0639-2016, D-1210-2019, D-0440-2018, D-0007-2022, D-1812-2019, D-0619-2016).
 - **F3:** dextroamphetamine/amphetamine stays inactive until its mixed-salt handling is independently
   validated.
 
@@ -92,9 +92,9 @@ What this shows:
 - **Reviewed by hand:** 7 chlorhexidine records moved from "possible" to "ruled out": four oral-care kits
   (toothbrushes, swabs, solutions) and three chlorhexidine + alcohol skin swabs. Before F1 the app
   could not read "chlorhexidine" in these notices.
-- **Known over-inclusion (F2):** one IV clindamycin infusion record ("120MG in NS … Homepumps") is
-  shown as a *possible* match for the oral solution, because "in NS"/"homepump" are not yet recognised
-  as non-oral wording. It errs toward caution; F2 would fix it.
+- **Over-inclusion fixed by F2 (Task 4H):** the IV clindamycin infusion record ("120MG in NS …
+  Homepumps") was shown as a *possible* match for the oral solution; F2 reads that wording as non-oral
+  and rules it out (`tests/regression/f2_infusion_wording.test.ts`).
 - **Controls unchanged:** metformin ER (a current drug) and potassium chloride ER retrieve and classify
   exactly as before.
 

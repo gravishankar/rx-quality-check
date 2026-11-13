@@ -58,7 +58,7 @@ test('controls unchanged: a current drug and a mineral product retrieve and clas
   }
 });
 
-test('documented classification changes (reviewed by hand): kits and skin swabs ruled out; one IV record over-included (follow-up F2)', () => {
+test('documented classification changes (reviewed by hand): kits and skin swabs ruled out; the IV infusion record ruled out by F2', () => {
   const chg = row('chlorhexidine gluconate oral rinse').changed;
   const toNa = chg.filter((c) => (c.after ?? '').startsWith('NOT_APPLICABLE')).map((c) => c.recall).sort();
   // D-0402..0405-2018: Sage Q.Care oral-care kits (toothbrushes, swabs, solutions); D-0570..0572-2022:
@@ -70,7 +70,8 @@ test('documented classification changes (reviewed by hand): kits and skin swabs 
     assert.doesNotMatch(c.after ?? '', /INGREDIENT_NOT_IN_TEXT/, 'the change is only that the ingredient is now read in the notice');
   }
   const iv = row('clindamycin palmitate oral solution').newly_retrieved.find((n) => n.recall === 'D-0639-2016');
-  assert.match(iv?.after ?? '', /^POTENTIAL/, 'known over-inclusion: IV infusion wording ("in NS", "Homepumps") not yet recognised as non-oral (F2)');
+  // F2: infusion wording ("in NS", "Homepumps") is now read as non-oral, so this IV infusion is ruled out.
+  assert.match(iv?.after ?? '', /^NOT_APPLICABLE .*NON_ORAL_OR_NOT_FINISHED_PRODUCT/);
 });
 
 test('RxNorm-wide: F1 reads no ingredient name as an ingredient the app checks or excludes (recorded RxNorm 02-Nov-2026)', () => {
