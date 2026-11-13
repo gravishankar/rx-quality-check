@@ -1,81 +1,115 @@
-# Try MedLuma (DEV) on a Mac or Windows Laptop
+# Try MedLuma (DEV) on a Mac — virtual Pixel 8
 
-No Android phone needed. You'll run a free "virtual Android phone" in a window on your computer.
-It takes about 30–45 minutes the first time, mostly waiting for downloads.
+No Android phone needed. You'll run a free virtual Pixel 8 in a window on your Mac, install the app,
+then type in or scan test labels. About 30–45 minutes the first time, mostly downloads.
 
-Use only the test medications listed below. Never enter your own medication or personal details.
-This is a test version (not clinically validated). The owner has used this setup on a laptop: typing the
-details worked as expected. Please tell us if something looks different.
+Use only the test medications and test labels below. Never enter your own medication or personal
+details. This is a test version (not clinically validated).
 
-## 1. Get the app file
+**What you need:** a Mac (2020 or newer works best), about 20 GB free disk space, internet, and
+these two files from the owner:
 
-Download the file the owner shared with you:
+- **The app:** `medluma-dev-v0.1.6-b7-arm64-v8a.apk` if your Mac has an Apple chip (Apple menu →
+  About This Mac → "Chip: Apple M…"); otherwise `medluma-dev-v0.1.6-b7-universal.apk`.
+- **The test labels:** `scan-test-labels-SYNTHETIC.pdf` (7 made-up labels, one per page, each with
+  its expected result).
 
-- **Mac with an Apple chip (M1, M2, M3, M4):** `medluma-dev-v0.1.6-b7-arm64-v8a.apk`
-- **Any other Mac, or a Windows laptop:** `medluma-dev-v0.1.6-b7-universal.apk`
+## 1. Install Android Studio
 
-Not sure which Mac you have? Apple menu → **About This Mac** → "Chip: Apple M…" means an Apple chip.
+1. Go to **developer.android.com/studio** and click **Download Android Studio**. Pick **Mac with
+   Apple chip** or **Mac with Intel chip** to match your Mac.
+2. Open the downloaded file and drag **Android Studio** into **Applications**.
+3. Open **Android Studio** from Applications. If macOS asks whether to open it, click **Open**.
+4. In the setup window choose **Standard**, then click **Next**, accept the licenses, and click
+   **Finish**. Wait for the downloads to complete. No account or sign-in needed.
 
-## 2. Install Android Studio
+## 2. Create the virtual Pixel 8 (with your Mac's camera)
 
-1. Go to **developer.android.com/studio** and click **Download**.
-2. Install it like any other app, then open it.
-3. When it asks, choose **Standard** and click **Next / Accept / Finish** until it's done downloading.
-   No account or sign-in needed.
+1. On the **Welcome to Android Studio** window, click **More Actions → Virtual Device Manager**.
+2. Click **+** (Create Virtual Device), choose **Pixel 8**, click **Next**.
+3. Keep the suggested Android version. If it shows a download arrow, click it and wait. Click **Next**.
+4. **Set the camera** (needed for scanning):
+   - Click **Show Advanced Settings** (in newer versions: the **Additional settings** tab).
+   - Find **Camera** and set **Back** to **Webcam0**. That's your Mac's built-in camera.
+5. Click **Finish**.
+6. Click **▶** next to **Pixel 8**. A phone appears on your screen. The first start takes a few
+   minutes.
 
-## 3. Start a virtual phone
+If macOS asks to let **qemu** or **Android Studio** use the camera, click **Allow**.
 
-1. On the welcome window, click **More Actions → Virtual Device Manager**.
-2. Click **+**, choose **Pixel 8**, click **Next**, keep the suggested Android version (click the
-   download arrow if shown), click **Next**, then **Finish**.
-3. Click **▶** next to the phone. A phone appears on your screen (the first start takes a few minutes).
+## 3. Install the app
 
-## 4. Install the app
+Drag the app file from **Downloads** onto the virtual phone. Wait about 30 seconds, then swipe up on
+the phone's home screen and open **MedLuma (DEV)**. Tap **I understand**.
 
-Drag the app file from your **Downloads** folder onto the virtual phone. After about 30 seconds,
-swipe up on the phone's home screen and open **MedLuma (DEV)**.
+## 4. Try it by typing
 
-## 5. Try it
+Tap **Type the details instead** and enter:
 
-1. Tap **I understand**.
-2. Tap **Type the details instead** and enter:
+| Field | Type |
+| --- | --- |
+| NDC | `62756-142-02` |
+| Drug name | `METFORMIN HCL ER` |
+| Strength | `500 MG` |
+| Form | `TABLET` |
 
-   | Field | Type |
-   |---|---|
-   | NDC | `62756-142-02` |
-   | Drug name | `METFORMIN HCL ER` |
-   | Strength | `500 MG` |
-   | Form | `TABLET` |
+Tap **Find this medication**, switch on each item, then tap **Yes, these details match my label**.
+You should see **Possible recall match**, a one-line summary of the records checked, and **Important
+limits of this result**.
 
-3. Tap **Find this medication**, switch on each item, then tap **Yes, these details match my label**.
-4. You should see **Possible recall match**, a one-line summary of the records checked, and
-   **Important limits of this result**.
-
-More to try:
-
-| Enter | You should see |
-|---|---|
+| Also try | You should see |
+| --- | --- |
 | Same as above, plus Lot number `JKU4639A` | **Recall match found** |
 | NDC `82009-018-10`, `ROSUVASTATIN CALCIUM`, `10 MG`, `TABLET` | **No matching recall found in the FDA records checked** |
 | NDC `67046-2072-3`, `WARFARIN SODIUM`, `1 MG`, `TABLET` | **We don't check this medication** |
 
-On each result, try **Show these … records** and **Official FDA record**.
+## 5. Scan a test label
 
-Scanning with your laptop's camera usually can't read small labels. Typing the details is the way to
-test on a computer.
+**Yes — you hold the label up to your Mac's camera** (the small lens at the top centre of the
+screen). The virtual phone uses it as its back camera, so it only works if you set **Back: Webcam0**
+in step 2.
+
+1. **Get a label ready.** Either print a page of `scan-test-labels-SYNTHETIC.pdf`, or open the PDF on
+   your phone or tablet, zoom until the label fills the screen, and turn the brightness up.
+   **Start with page S6 or S7**: their barcodes are the easiest for a laptop camera.
+2. In the app, tap **Scan medication label**. The virtual phone's camera opens and shows what your
+   Mac's camera sees.
+3. **Hold the label 15–25 cm (6–10 inches) in front of the Mac's camera**, flat and facing it,
+   steady, so the label fills most of the picture. Avoid glare from lamps or windows.
+4. Click the round **shutter** button on the virtual phone, then the **✓** (accept) button.
+5. The app shows "Reading your label on this phone…", then *Is this your medication?*. Check the
+   details, switch each item on, and tap **Yes, these details match my label**.
+
+| Page | Expected result |
+| --- | --- |
+| S6 (bottle with barcode and lot) | Product matched; switch on the lot → **Recall match found** |
+| S7 (carton with square 2-D barcode) | Product, lot and expiry from the barcode → **Recall match found** |
+| S1 (pharmacy label) | **Possible recall match** |
+| S2 (pharmacy label) | **No matching recall found in the FDA records checked** |
+| S3 (warfarin) | **We don't check this medication** |
+
+**If it says "We couldn't read your label":** move the label a little closer or farther, hold it
+steadier, add light, or try S7. Laptop cameras can't focus up close and have low resolution, so
+small printed text often won't read on a Mac even though it reads on a real phone. That's expected;
+note it and use typing instead.
+
+**If the camera shows a 3-D room instead of your Mac's camera:** the camera setting didn't apply.
+Close the virtual phone, then in **Virtual Device Manager** click the **pencil** next to Pixel 8,
+set **Camera → Back: Webcam0** again, click **Finish**, and start it with **▶**.
+
+**If the picture is black:** open **System Settings → Privacy & Security → Camera**, turn on
+**Android Studio** (or **qemu**), then restart the virtual phone.
 
 ## 6. Tell us what happened
 
-Take a screenshot (Mac: **Cmd + Shift + 4**; Windows: **Win + Shift + S**) and note:
+Take a screenshot (**Cmd + Shift + 4**, then drag) and note what you entered or scanned and what the
+screen said.
 
-- what you entered and what the screen said
-- Mac or Windows
+## Other problems
 
-## If something goes wrong
-
-- **The virtual phone won't start (Windows):** your laptop may need a setting called
-  "virtualization" turned on. Send a screenshot of the message and we'll help.
-- **"App not installed":** you probably have the wrong file. Use the **universal** file.
+- **"App not installed":** use the **universal** app file.
 - **"We couldn't reach FDA's data":** check your internet connection and try again.
+- **Windows laptop:** the same steps work. Use the universal file. If the virtual phone won't start,
+  the laptop may need "virtualization" turned on — send a screenshot of the message.
 
-When you're done, you can uninstall Android Studio like any other app.
+When you're done, you can delete Android Studio from Applications like any other app.

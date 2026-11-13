@@ -16,7 +16,7 @@ import generate_labels as g  # noqa: E402
 
 CASES = [
     ("S1", "pharmacy", 0, "11h", "Pharmacy label, metformin ER (NDC printed)", "Product matched in FDA records (NDC 62756-142-02). After confirming: 'Possible recall match' (no lot on a pharmacy label)."),
-    ("S2", "pharmacy", 1, "10h", "Pharmacy label, rosuvastatin (NDC printed)", "Product matched in FDA records (82009-018-10). After confirming: 'No match in the records checked' with the date (or a newer FDA result)."),
+    ("S2", "pharmacy", 1, "10h", "Pharmacy label, rosuvastatin (NDC printed)", "Product matched in FDA records (82009-018-10). After confirming: 'No matching recall found in the FDA records checked' with the date (or a newer FDA result)."),
     ("S3", "pharmacy", 2, "11u", "Pharmacy label, warfarin (NDC printed)", "'We don't check this medication' (excluded by policy). No recall check."),
     ("S4", "pharmacy_nondc", 0, None, "Pharmacy label without NDC, metformin ER", "Fields shown as 'Read from your label'; product not identified; result 'Possible recall match' at ingredient level."),
     ("S5", "pharmacy", 5, "10h", "Pharmacy label, sertraline", "'Not covered by this version of the app.' No recall check."),
