@@ -3,7 +3,7 @@
 **Status: device checks NOT RUN.** No Android device is reachable from the cloud environment that
 prepared this build (no device or computer is connected to it, and it cannot run an emulator). Every
 device check below is **UNTESTED** until someone runs it on the Pixel and fills in the observed result
-and evidence. Only the static APK checks in §3 were run.
+and evidence. Only the static APK checks (§3, results in §6) were run.
 
 ## 1. Build under test
 
@@ -34,12 +34,12 @@ Filled in from `aapt2` and `apksigner` on the built files (results in §6).
 
 ## 4. Inspection access (decided: option A, build 11)
 
-This build is **not debuggable**, so the app's private storage (`/data/data/org.rxrecallcheck.app.dev/`:
-the photo cache `cache/scans/` and database files) cannot be listed or read on a normal, unrooted Pixel
-(`adb shell run-as` is refused). Checks V1–V4 (photo files) and V6b (database file on disk) therefore
-cannot be verified *independently* with build 10; only the app's own report is observable.
+Build 10 was **not debuggable**, so the app's private storage (`/data/data/org.rxrecallcheck.app.dev/`:
+the photo cache `cache/scans/` and database files) could not be listed or read on a normal, unrooted
+Pixel (`adb shell run-as` is refused). With build 10, checks V1–V4 (photo files) and V6b (database file
+on disk) could not be verified *independently*; only the app's own report was observable.
 
-Options (decision for the team; not implemented):
+Options that were considered:
 - **A. Debuggable verification variant** of the development flavor (`run-as` allowed). Lets the tester
   list the photo cache and copy the self-test database file. The development build holds no patient data
   (persistence off). Pilot builds stay non-debuggable (release gate).
