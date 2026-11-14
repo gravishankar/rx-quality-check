@@ -103,6 +103,18 @@ inference. Labeler/manufacturer names are kept only for product identity and rec
 | Not done by design | No drug activation, no persistence enabled, no push, merge or distribution, no iOS or provenance work |
 | Status | **Complete — awaiting review** (branch `task-4h/correctness-findings`, local) |
 
+## Next work, in order (recorded 2026-11-14; nothing here is started without approval)
+
+| # | Work | Kind | Gate / dependency | Status |
+|---|---|---|---|---|
+| N1 | Controlled device verification of build 11 (`docs/DEVICE_VERIFICATION_4H.md`, V0–V12) | Verification | Needs the team's Pixel; build 11 is debuggable for inspection | Build ready; checks not run |
+| N2 | Refill comparison surfaced to the patient (changed product, labeler, strength, salt, form, release), tied to the exact fill, with source dates and assessment age | **Outstanding MVP requirement** | Before persistence is enabled; includes reviewing whether saved records that share an ingredient set are the same patient medication (today `medicationKey` groups metformin IR and ER together) | Not started |
+| N3 | Saved-medication recheck: re-run a saved medication's check on demand, showing what changed and when | **Outstanding MVP requirement** | Before persistence is enabled; depends on N2's grouping review | Not started |
+| N4 | Persistence enabled for pilot | Release gate | N1 encryption and deletion checks passed on a device, N2, N3, durable source records for saved results (register item 13) | Not started |
+| N5 | Extended catalog Stage 1 — first batch (`docs/CATALOG_STAGE1_READINESS.md`) | Catalog | Gates G2–G8 there; no activation without team approval | Recommendation only |
+| N6 | Provenance use-case and source feasibility assessment (continues the Task 4B proposal): which patient questions provenance would answer, which public sources can support them (SPL establishment data, FDA inspection and enforcement datasets), their coverage, freshness and identifiers, and the limits (no inference of the plant behind a patient's lot) | Assessment (research only) | After the MVP correctness and persistence work; durable source records (register item 13) are a prerequisite for any provenance feature | Planned, not started |
+| N7 | iOS capabilities (scanner, backup exclusion, profile separation, ATS, Keychain policy) | Platform | Each before the matching iOS capability is enabled | Deferred |
+
 ## Task 4G — Broader drug coverage with a bundled drug directory (proposed, not approved)
 
 Goal: check almost any oral prescription generic, not only the 14 listed drugs, while making fewer
