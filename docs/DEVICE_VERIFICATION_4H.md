@@ -1,9 +1,8 @@
 # Device verification — Task 4H build 11 (controlled, synthetic data only)
 
-**Status: device checks NOT RUN.** No Android device is reachable from the cloud environment that
-prepared this build (no device or computer is connected to it, and it cannot run an emulator). Every
-device check below is **UNTESTED** until someone runs it on the Pixel and fills in the observed result
-and evidence. Only the static APK checks (§3, results in §6) were run.
+**Status: phone-only checks run once by the team (2026-11-14, reported, see §6); checks that need a
+computer (adb) are still UNTESTED.** No Android device is reachable from the cloud environment that
+prepared this build, so results come from the team's own sessions on the Pixel. Only the static APK checks (§3, results in §6) were run.
 
 ## 1. Build under test
 
@@ -103,8 +102,36 @@ use `PKG=org.rxrecallcheck.app.dev`. Keep every screenshot and command output as
 
 ### Device checks
 
-| Passed | Failed | Untested |
-|---|---|---|
-| — | — | V0–V12 (no device available to the preparing session) |
+Session 1 — 2026-11-14, team tester, build 11 on the team's Pixel (model, Android version and camera app
+not yet recorded). Phone-only steps from the simplified checklist; result reported by the tester as
+"worked as expected". **Evidence: tester's report in the project conversation; no screenshots attached
+yet.** Each row is therefore "passed (reported)", not independently evidenced.
+
+| Step (phone only) | Check | Expected | Reported | Status |
+|---|---|---|---|---|
+| 1 | V0 build identity (About screen) | 0.1.10, build 11 | as expected | Passed (reported) |
+| 2 | Same label scanned twice | Same details and result both times | as expected when the label was read accurately; an earlier pair of scans differed, explained by scan accuracy (see note) | Passed (reported), with note |
+| 3 | No-NDC label (S4) | "Checking without an NDC" box; possible recall match; no request to rescan | as expected | Passed (reported) |
+| 4 | V2 cancel | "No photo was taken."; no photo warning | as expected | Passed (reported) |
+| 5 | V3a blank page | "We couldn't read your label"; photo tips; no result | as expected | Passed (reported) |
+| 6 | V4 app closed mid-scan (app-level part) | No warning, or the "Label photo still on this phone" warning until a later clean scan | as expected (which of the two was seen is not recorded) | Passed (reported) — outcome detail needed |
+| 7 | V5 camera app copy | No label photos in Google Photos | as expected | Passed (reported) |
+| 8 | V6a, V7 encryption self-test | All steps passed, incl. wrong key | as expected | Passed (reported) |
+| 9 | V8 delete all (app-level part) | Deleted; first-launch notice returns; next check works; self-test passes again | as expected | Passed (reported) |
+| 10 | V12 recents thumbnail | Result expected to be **visible** (OD-21 open) | as expected | **Known gap confirmed**, not a pass |
+
+**Note on step 2 (scan accuracy).** An earlier pair of scans of the same bottle gave different results (no
+matching recall vs. one possible match for another strength). The tester reports scan accuracy made the
+difference: when the label was read accurately the results agreed. The app's result follows the details
+the patient confirms, so a misread that is confirmed (for example a strength) changes the result. Follow-up
+for the team: consider making the strength and form confirmation more prominent; no code change made.
+
+Still **untested** (need a Mac with `adb` and the USB cable): V1–V4 file-level checks of the photo cache,
+V3b (camera app disabled), V6b (database file encrypted on disk), V8 file-level deletion, V9 backup,
+V10 release logs, V11 networking. Not run in any session: none failed.
+
+| Passed (reported) | Failed | Untested | Known gap |
+|---|---|---|---|
+| V0, V2, V3a, V4 (app level), V5, V6a, V7, V8 (app level), scan consistency, no-NDC flow | — | V1–V4 file level, V3b, V6b, V8 file level, V9, V10, V11 | V12 (recents thumbnail visible; OD-21) |
 
 Any failure is reported to the team before further activation is proposed.
