@@ -1,4 +1,4 @@
-# Device verification — Task 4H build 10 (controlled, synthetic data only)
+# Device verification — Task 4H build 11 (controlled, synthetic data only)
 
 **Status: device checks NOT RUN.** No Android device is reachable from the cloud environment that
 prepared this build (no device or computer is connected to it, and it cannot run an emulator). Every
@@ -9,14 +9,15 @@ and evidence. Only the static APK checks in §3 were run.
 
 | | |
 |---|---|
-| App | MedLuma (DEV), package `org.rxrecallcheck.app.dev`, version 0.1.9, build 10 |
-| Source | branch `task-4h/correctness-findings`, commit `94c0eacdad3e51b7aec765063c77fc6e0677303f` (reviewed head `0405eb6` + build-number record). Local only, not pushed or merged |
+| App | MedLuma (DEV), package `org.rxrecallcheck.app.dev`, version 0.1.10, build 11 |
+| Source | branch `task-4h/correctness-findings`, commit `2d5939526abfcd91b2c51deb73d68a89953e0a00` (all checks rerun at that commit: 559 core tests, 60 screen tests, 13 recorded scenarios, both type checks, config validation). Local only, not pushed or merged |
 | Profile | development: persistence (saved history) **off**, catalog unchanged (no activation), draft configuration allowed, DEV banner |
-| Variant | `devRelease`: release-mode, **not debuggable**, signed with the development key (same key as build 9, so it installs over build 9) |
-| APK files | `medluma-dev-v0.1.9-b10-arm64-v8a.apk` — 33,332,890 bytes, SHA-256 `92b2aa3b51dda5e26a6070860955a7c6d7b5b486a7841749149138c83b616337` (use this on the Pixel) |
-| | `medluma-dev-v0.1.9-b10-universal.apk` — 71,218,967 bytes, SHA-256 `497256c06f805f648d838933b6384aa9e245a04c438b12a4602506480f1e7c4d` |
-| Signing certificate | SHA-256 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7` (development key; same as build 9) |
-| Use | the team's own test device only; not for distribution |
+| Variant | `devRelease` built with `scripts/android_build.sh verify`: **debuggable** (option A, for `adb shell run-as` inspection), signed with the development key (same as builds 9 and 10; installs over them) |
+| Phone APK | `medluma-verify-v0.1.10-b11-arm64-v8a.apk` — 36,806,031 bytes, SHA-256 `44c56c120abbd7e46b28e439687044d26768600d885293a3391c4d3697389700` |
+| | `medluma-verify-v0.1.10-b11-universal.apk` — 77,784,040 bytes, SHA-256 `af08500cc4d2a3ccd48a4727f410ecbf85790e0515f8b0bbe0ca0a0ecf6fd043` |
+| Signing certificate | SHA-256 `d76ad6369817ebc09f08483c4be50334aa691b5c5c1a761349e2224530562af7` |
+| Use | the team's own test device only; never for distribution. Uninstall after verification |
+| Previous build | build 10 (0.1.9, commit `94c0eac`, not debuggable) — superseded for verification; its static checks are kept in §6 for the record |
 
 Record for every session: device model, Android version and security patch level (Settings → About
 phone), camera app name and version, date, tester.
@@ -31,7 +32,7 @@ its own test database (`SELF_TEST_DB`), never the app's database; normal medicat
 
 Filled in from `aapt2` and `apksigner` on the built files (results in §6).
 
-## 4. Inspection access — a decision is needed before some checks can be done
+## 4. Inspection access (decided: option A, build 11)
 
 This build is **not debuggable**, so the app's private storage (`/data/data/org.rxrecallcheck.app.dev/`:
 the photo cache `cache/scans/` and database files) cannot be listed or read on a normal, unrooted Pixel
@@ -47,7 +48,10 @@ Options (decision for the team; not implemented):
   adds code to the reviewed build.
 - **C. Rooted test phone** (not the team's everyday Pixel).
 
-Recommendation: A, as a separate build 11 used only for verification.
+**Chosen: A** (team direction 2026-11-14). Build 11 is debuggable, so V1–V4 and V6b can be inspected
+with `adb shell run-as org.rxrecallcheck.app.dev …`. Gradle refuses the debuggable mode for any pilot or
+non-development build (checked). Because the build is debuggable, V0's expected flags now include
+DEBUGGABLE; V10 (logs) should also be repeated on a non-debuggable build before any pilot.
 
 ## 5. Checks
 
@@ -56,14 +60,14 @@ use `PKG=org.rxrecallcheck.app.dev`. Keep every screenshot and command output as
 
 | ID | Check | Procedure | Expected | Access | Observed | Evidence | Status |
 |---|---|---|---|---|---|---|---|
-| V0 | Build identity | Install the ARM64 APK (`adb install -r <apk>`). About screen: version and build. `adb shell dumpsys package $PKG \| grep -E "versionName\|versionCode\|flags="` | 0.1.9, build 10; flags without DEBUGGABLE and without ALLOW_BACKUP | adb | | | UNTESTED |
-| V1 | Photo cleanup after a successful scan | Scan page S6. `adb shell run-as $PKG ls -la cache/scans` | Directory empty; no cleanup warning on screen | **needs option A** (else: only "no warning shown" is observable) | | | UNTESTED |
-| V2 | …after cancel | Scan, then back out of the camera without taking a photo. Same listing | Empty; "No photo was taken." and no cleanup warning | needs A | | | UNTESTED |
-| V3 | …after errors | (a) scan a blank page (nothing readable); (b) disable the camera app (Settings → Apps → Camera → Disable) and tap Scan → "No camera app"; re-enable after | Empty after each; app shows the problem, never a result | needs A | | | UNTESTED |
-| V4 | …after process termination and restart | Tap Scan, take the photo, and **before accepting** run `adb shell am kill $PKG` (or swipe the app away). Then list `cache/scans` (a leftover may exist), start the app, tap Scan, list again | After restart the leftover is removed at the next scan start; if it cannot be removed, the warning "Label photo still on this phone" appears on every screen | needs A | | | UNTESTED |
+| V0 | Build identity | Install the ARM64 APK (`adb install -r <apk>`). About screen: version and build. `adb shell dumpsys package $PKG \| grep -E "versionName\|versionCode\|flags="` | 0.1.10, build 11; flags include DEBUGGABLE (verification build) and not ALLOW_BACKUP | adb | | | UNTESTED |
+| V1 | Photo cleanup after a successful scan | Scan page S6. `adb shell run-as $PKG ls -la cache/scans` | Directory empty; no cleanup warning on screen | adb (`run-as`, build 11) | | | UNTESTED |
+| V2 | …after cancel | Scan, then back out of the camera without taking a photo. Same listing | Empty; "No photo was taken." and no cleanup warning | adb (`run-as`, build 11) | | | UNTESTED |
+| V3 | …after errors | (a) scan a blank page (nothing readable); (b) disable the camera app (Settings → Apps → Camera → Disable) and tap Scan → "No camera app"; re-enable after | Empty after each; app shows the problem, never a result | adb (`run-as`, build 11) | | | UNTESTED |
+| V4 | …after process termination and restart | Tap Scan, take the photo, and **before accepting** run `adb shell am kill $PKG` (or swipe the app away). Then list `cache/scans` (a leftover may exist), start the app, tap Scan, list again | After restart the leftover is removed at the next scan start; if it cannot be removed, the warning "Label photo still on this phone" appears on every screen | adb (`run-as`, build 11) | | | UNTESTED |
 | V5 | External camera behavior | Scan with the default camera (Pixel Camera). Afterwards open Google Photos and Files → Images → Camera | No label photo in Photos/DCIM. Record the camera app and version; repeat with any other installed camera app | device only | | | UNTESTED |
 | V6a | SQLCipher present; right key reads | About → Encryption self-test (development builds) | Steps "SQLCipher compiled in" (cipher version shown), "Read back with the right key", "Test database deleted" all pass | device only | | | UNTESTED |
-| V6b | Database file encrypted on disk | During the self-test, copy the test database file and read its first 16 bytes | Not `SQLite format 3` | needs A or B | | | UNTESTED |
+| V6b | Database file encrypted on disk | During the self-test, copy the test database file and read its first 16 bytes | Not `SQLite format 3` | adb (`run-as`, build 11) | | | UNTESTED |
 | V7 | Wrong-key rejection | Same self-test, step "Unreadable with a different key" | Pass (refused or no data) | device only | | | UNTESTED |
 | V8 | Deletion and key-reset recovery | About → Delete all data → confirm; then scan S6 and check again; then the self-test again | Delete reports success (or a visible failure); the first-launch notice returns; the next check works; the self-test passes afterwards. Real-database delete/retry is **not exercisable** while persistence is off; the lifecycle is covered by tests against a file-backed SQLite database (not SQLCipher on a device) | device only | | | UNTESTED |
 | V9 | Backup exclusion | `adb shell dumpsys package $PKG \| grep flags=` (no ALLOW_BACKUP). `adb shell bmgr backupnow $PKG` | Backup refused or zero app data; no ALLOW_BACKUP flag | adb | | | UNTESTED |
@@ -73,7 +77,18 @@ use `PKG=org.rxrecallcheck.app.dev`. Keep every screenshot and command output as
 
 ## 6. Results
 
-### Static APK checks (build environment, ARM64 APK; these do not replace the device checks)
+### Static APK checks — build 11 (ARM64 APK)
+
+| Check | Result |
+|---|---|
+| Package and version | `org.rxrecallcheck.app.dev`, versionCode 11, versionName 0.1.10-dev — **PASS** |
+| Debuggable (verification build) | `android:debuggable=true` — **as intended** for option A; never for pilot (Gradle refusal checked) |
+| Permissions | only `INTERNET` (+ library-generated app-private permission) — **PASS** |
+| Backup and network (declared) | `allowBackup=false`, `usesCleartextTraffic=false` — **PASS** as declared |
+| Telemetry | build privacy gate and dex scan: none — **PASS** |
+| Signing | development certificate `d76ad636…562af7`, same as builds 9–10 — **PASS** |
+
+### Static APK checks — build 10 (ARM64 APK; kept for the record; these do not replace the device checks)
 
 | Check | Method | Result |
 |---|---|---|

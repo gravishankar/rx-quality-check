@@ -105,9 +105,11 @@
       "build_number": 11,
       "version": "0.1.10",
       "task": "4H (controlled verification build, debuggable)",
-      "commit": "see apk notes",
+      "commit": "2d5939526abfcd91b2c51deb73d68a89953e0a00",
       "label": "MedLuma (DEV)",
-      "note": "Controlled internal verification build: development flavor made debuggable (scripts/android_build.sh verify) so the photo cache and database files can be inspected with adb run-as. Adds photo guidance, no-NDC explanation, unreadable vs missing-details screens. Persistence off, catalog unchanged. For the team's own test device only; never for distribution."
+      "note": "Controlled internal verification build: development flavor made debuggable (scripts/android_build.sh verify) so the photo cache and database files can be inspected with adb run-as. Adds photo guidance, no-NDC explanation, unreadable vs missing-details screens. Persistence off, catalog unchanged. For the team's own test device only; never for distribution. Two APKs: universal (77.8 MB; apk_sha256) and ARM64-only (36.8 MB; apk_sha256_arm64), file names medluma-verify-*.",
+      "apk_sha256": "af08500cc4d2a3ccd48a4727f410ecbf85790e0515f8b0bbe0ca0a0ecf6fd043",
+      "apk_sha256_arm64": "44c56c120abbd7e46b28e439687044d26768600d885293a3391c4d3697389700"
     }
   ]
 }
