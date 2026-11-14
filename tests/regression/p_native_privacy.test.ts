@@ -30,3 +30,14 @@ test('item 9: the transport asks for no cookies or credentials and refuses redir
   assert.match(t, /credentials: 'omit'/);
   assert.match(t, /redirect: 'error'/);
 });
+
+test('verification builds: debuggable only when explicitly requested, never for pilot (Task 4H option A)', () => {
+  const g = readFileSync(join(ROOT, 'mobile/android/app/build.gradle'), 'utf8');
+  assert.match(g, /def verificationDebuggable = project\.findProperty\("rxVerificationDebuggable"\) == "true"/);
+  assert.match(g, /debuggable verificationDebuggable/);
+  assert.match(g, /verificationDebuggable && gradle\.startParameter\.taskNames\.any \{ it\.toLowerCase\(\)\.contains\("pilot"\) \|\| !it\.toLowerCase\(\)\.contains\("dev"\) \}/);
+  const sh = readFileSync(join(ROOT, 'scripts/android_build.sh'), 'utf8');
+  const pilot = sh.slice(sh.indexOf('  pilot)'), sh.indexOf(';;', sh.indexOf('  pilot)')));
+  assert.doesNotMatch(pilot, /rxVerificationDebuggable/);
+  assert.match(sh, /verify\)[\s\S]*?EXTRA="-PrxVerificationDebuggable=true"/);
+});

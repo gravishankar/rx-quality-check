@@ -2,6 +2,7 @@
 # Build a standalone Android APK (no Metro needed). See docs/ANDROID_BUILD_AND_INSTALL.md.
 #
 #   scripts/android_build.sh dev     development APK (labeled DEV, history off, draft config allowed)
+#   scripts/android_build.sh verify  development APK made debuggable for controlled device verification only
 #   scripts/android_build.sh pilot   pilot APK — only if `npm run release:gate` passes and the pilot
 #                                    signing properties exist OUTSIDE the repository
 #
@@ -46,6 +47,15 @@ case "$MODE" in
     fi
     write_profile development false
     TASK=assembleDevRelease
+    EXTRA=""
+    OUT="$ROOT/mobile/android/app/build/outputs/apk/dev/release/app-dev-release.apk"
+    ;;
+  verify)
+    # Controlled device verification build (Task 4H): development flavor, debuggable so a tester can
+    # inspect the app's private storage. Same development signing key. Never for distribution.
+    write_profile development false
+    TASK=assembleDevRelease
+    EXTRA="-PrxVerificationDebuggable=true"
     OUT="$ROOT/mobile/android/app/build/outputs/apk/dev/release/app-dev-release.apk"
     ;;
   pilot)
@@ -71,9 +81,9 @@ BUILD="$(node -p "require('$ROOT/config/app_version.json').build_number")"
 DEST="$ROOT/mobile/build/apk"
 mkdir -p "$DEST"
 # 1) Universal APK (arm64-v8a, armeabi-v7a, x86_64). 2) ARM64-only APK (most phones since ~2017).
-(cd "$ROOT/mobile/android" && ./gradlew --no-daemon "$TASK")
+(cd "$ROOT/mobile/android" && ./gradlew --no-daemon ${EXTRA:-} "$TASK")
 cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-universal.apk"
-(cd "$ROOT/mobile/android" && ./gradlew --no-daemon -PreactNativeArchitectures=arm64-v8a "$TASK")
+(cd "$ROOT/mobile/android" && ./gradlew --no-daemon ${EXTRA:-} -PreactNativeArchitectures=arm64-v8a "$TASK")
 cp "$OUT" "$DEST/$NAME-$FLAVOR-v$VER-b$BUILD-arm64-v8a.apk"
 # Privacy gate (Task 4C): refuse an APK with unexpected permissions or any known telemetry component.
 BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)"
