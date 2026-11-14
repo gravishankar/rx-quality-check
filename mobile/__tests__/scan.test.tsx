@@ -506,3 +506,60 @@ test('photo guidance: what to photograph, how close, and accepting the photo are
   expect(t).toContain(COPY.scan.nothingRead);
   expect(t).toContain(COPY.scan.howToTitle);
 });
+
+// ---------------------------------------------------------------------------------------------
+// Labels without an NDC; unreadable vs missing information (team feedback after build 10).
+// ---------------------------------------------------------------------------------------------
+test('guidance: an NDC is optional — the steps never require one, and say many pharmacy labels have none', () => {
+  const all = COPY.scan.howTo.join(' ');
+  expect(all).toMatch(/many pharmacy labels do not show an NDC/i);
+  expect(all).not.toMatch(/NDC (is )?(required|needed)|must (show|include) (the|an) NDC/i);
+});
+
+test('no-NDC label (SYNTHETIC pharmacy label 19, metformin ER 500 mg, no NDC anywhere): confirmation explains the limits, the check runs on name/strength/form, and the result is a qualified possible match', async () => {
+  const p = platform([label('19_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  let t = allText(r);
+  expect(t).toContain(COPY.confirm.title);
+  expect(t).toContain(COPY.confirm.noNdcTitle);
+  for (const line of COPY.confirm.noNdc) expect(t).toContain(line);
+  expect(t).not.toContain(COPY.scan.problemTitle); // no request to rescan for an NDC the label does not have
+  await tickIdentityItems(r);
+  expect(confirmEnabled(r)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  t = allText(r);
+  expect(t).toContain(COPY.result.POTENTIAL.headline);
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+  expect(t).toContain(COPY.result.qualifiers.productNotIdentified);
+  // No product-NDC recall search was possible (the positive control, recall_number D-0325-2021, always names one).
+  expect(p.requests.some((u) => u.includes('openfda.product_ndc') && !u.includes('recall_number'))).toBe(false);
+});
+
+test('unreadable photo (nothing read): retake guidance first, typing offered', async () => {
+  const r = await start(platform([{ lines: [], barcodes: [] }]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.howToTitle);
+  expect(t).toContain(COPY.scan.typeInstead);
+});
+
+test('text read but no drug details found: says rescanning will not add what the label lacks; typing first; pharmacist guidance; no photo tips', async () => {
+  const r = await start(platform([ocrOnly('SYNTHETIC PHARMACY #1234', 'TAKE 1 TABLET BY MOUTH DAILY')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.noDrugFields);
+  expect(t).toContain(COPY.scan.notFoundHelp);
+  expect(t).not.toContain(COPY.scan.howToTitle);
+  const buttons = r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button').map((n) => textOf(n));
+  expect(buttons.findIndex((b) => b.includes(COPY.scan.typeInstead))).toBeLessThan(buttons.findIndex((b) => b.includes(COPY.scan.rescan)));
+});
+
+test('details missing after a read (no strength): asks to fill in from the label and to ask the pharmacist, never to guess', async () => {
+  const r = await start(platform([ocrOnly('METFORMIN HCL ER TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.partialRead);
+  expect(t).toContain(COPY.scan.missingHelp);
+});

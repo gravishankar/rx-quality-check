@@ -78,6 +78,8 @@ export type ScreenModel =
       askRelease: boolean;
       lot: string | null;
       notice: string | null;
+      /** No NDC was read or typed: explain what can and cannot be checked from name, strength and form. */
+      noNdc: boolean;
       /** Every confirmation the engine requires (review item 10): the screen's readiness follows it. */
       required: string[];
       /** A lot was read or typed: the patient must choose to use it or continue without it. */
@@ -155,6 +157,7 @@ export function screenFor(s: WorkflowState, o: ScreenOptions): ScreenModel {
         askRelease,
         lot,
         notice,
+        noNdc: !ndcTyped && c.identity.productNdc === null,
         required: [...keys],
         lotChoiceRequired,
         releaseUnknownHelp: [...COPY.confirm.releaseUnknownHelp],

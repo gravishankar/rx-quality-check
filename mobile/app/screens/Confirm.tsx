@@ -30,6 +30,11 @@ export function Confirm({ model, onConfirm, onEdit, busy, scanned, scanNotes, on
         </Card>
       ) : null}
       <P>{scanned ? COPY.scan.scannedNote : COPY.confirm.intro}</P>
+      {model.noNdc ? (
+        <Card tone="NEUTRAL" label={COPY.confirm.noNdcTitle}>
+          {COPY.confirm.noNdc.map((l) => <P key={l}>{l}</P>)}
+        </Card>
+      ) : null}
       {(scanNotes ?? []).map((n) => (
         <Card key={n} tone="CAUTION" label={COPY.scan.groups.NEEDS_INPUT}>
           <P>{n}</P>

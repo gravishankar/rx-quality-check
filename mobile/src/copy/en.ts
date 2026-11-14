@@ -62,8 +62,8 @@ export const COPY = {
     /** Shown before the camera opens (the phone's camera app cannot show our guidance). */
     howToTitle: 'What to photograph',
     howTo: [
-      'Pharmacy bottle: turn it so the label part with the drug name, strength and NDC faces the camera. The bottle is curved, so put the drug name in the middle of the photo.',
-      'Original bottle or box: photograph the barcode, or the side with the drug name, strength and NDC.',
+      'Pharmacy bottle: turn it so the part of the label with the drug name, strength and form (for example “TABLET”) faces the camera. The bottle is curved, so put the drug name in the middle of the photo. If the label also shows an NDC (a 10- or 11-digit product number), include it; many pharmacy labels do not show an NDC, and that is fine.',
+      'Original sealed bottle or box (not a pharmacy bottle): photograph the barcode, or the side with the drug name, strength and NDC.',
       'Hold the phone about 10–15 cm (4–6 inches) from the label so the label fills most of the photo. Tap the screen to focus and hold still.',
       'Use good light and avoid glare. Keep your fingers off the printed text.',
       'After you take the photo, tap the camera’s button to keep it (often a tick mark or “OK”), so this app can read it.',
@@ -81,7 +81,10 @@ export const COPY = {
       'This app could not remove the label photo from its private storage on this phone. It will try again the next time the app starts. The photo was not uploaded.',
     problemTitle: 'We couldn’t read your label',
     nothingRead: 'We could not find any text or barcode in the photo.',
-    noDrugFields: 'We found text, but not a drug name, strength or NDC.',
+    noDrugFields: 'We read text in the photo, but not a drug name this app recognizes.',
+    notFoundHelp:
+      'Scanning again will not help if the label does not show the drug name. Please type the details from your label. If your label does not show the drug name, strength or form, ask your pharmacist; do not guess.',
+    missingHelp: 'If your label does not show a detail (for example the strength), do not guess. Your pharmacist can tell you.',
     failed: 'The photo could not be read.',
     retryTips: 'Try again following the steps below, or type the details.',
     barcodeTextDiffer: 'The barcode and the printed NDC point to different products. We will check both against FDA records; please look at your label carefully.',
@@ -120,6 +123,13 @@ export const COPY = {
     releaseER: 'Yes, extended release (ER, XR, XL, SR)',
     releaseDR: 'Yes, delayed release (DR, EC)',
     lotConfirm: 'I checked the lot number against my package',
+    noNdcTitle: 'Checking without an NDC',
+    noNdc: [
+      'Your label has no NDC we could use (the product number that identifies the exact manufacturer’s product). That is common on pharmacy labels.',
+      'We can still check FDA recall records by drug name, strength and form. Recalls of a different strength or form are ruled out.',
+      'Without an NDC we cannot tell which manufacturer made your medication. A recall of the same drug, strength and form by any manufacturer is shown as a possible match, and a lot number cannot confirm a match.',
+      'Your pharmacist can tell you the manufacturer or NDC of your fill.',
+    ],
     lotQuestion: 'Lot number',
     lotUse: (lot: string) => `Use lot ${lot}. I checked it against my package.`,
     lotNotUsed: 'Continue without the lot number. Some recalls apply only to certain lots, so the result will be less specific.',
@@ -190,7 +200,8 @@ export const COPY = {
       headline: 'We could not reliably determine whether this medication is affected by a recall.',
     },
     qualifiers: {
-      productNotIdentified: 'We could not identify your exact product, so we checked by ingredient, strength and form only.',
+      productNotIdentified:
+        'We could not identify your exact product (no NDC), so we checked by ingredient, strength and form only. We cannot tell which manufacturer made your medication, so recalls of the same drug, strength and form by any manufacturer are possible matches. Your pharmacist can tell you the manufacturer or NDC of your fill.',
       sourceNotEstablished:
         'This product appears to be repackaged, and we could not confirm the original product. Recalls listed under the original product may not have been found.',
       sourceUnavailable: 'We could not check whether this product was repackaged from another product.',

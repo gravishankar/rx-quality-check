@@ -62,7 +62,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   // Task 4C: scanning is the primary path where a scanner exists; typing is the fallback.
   const canScan = platform.scanner !== undefined;
   const [mode, setMode] = useState<'scan' | 'type'>(canScan ? 'scan' : 'type');
-  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; reason?: string; notice?: string; detail?: string }>({ phase: 'idle' });
+  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; kind?: 'UNREADABLE' | 'NOT_FOUND'; reason?: string; notice?: string; detail?: string }>({ phase: 'idle' });
   const [scanInfo, setScanInfo] = useState<ScanInfo | null>(null);
   const [photoLeft, setPhotoLeft] = useState(false);
   const session = useRecallSession(platform, db?.repos ?? null);
@@ -132,7 +132,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       setEntry(entryFromExtraction(r.extraction));
       if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
         const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
-        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
+        const nothing = r.problems.includes('NOTHING_READ');
+        setScanPhase({ phase: 'problem', kind: nothing ? 'UNREADABLE' : 'NOT_FOUND', reason: nothing ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
         return;
       }
       const t = out.timings;
@@ -209,7 +210,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     return wrap(banner, <Working text={text} />);
   }
   if (scanPhase.phase === 'reading') return wrap(banner, <Working text={COPY.scan.reading} />);
-  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} onRescan={() => void scan()} onType={typeInstead} />);
+  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} kind={scanPhase.kind ?? 'UNREADABLE'} onRescan={() => void scan()} onType={typeInstead} />);
   if (session.state.name === 'SCAN') {
     if (mode === 'scan' && canScan) return wrap(banner, <><ScanHome busy={session.busy} notice={scanPhase.notice ?? null} onScan={() => void scan()} onType={typeInstead} />{nav}</>);
     return wrap(banner, <><Entry busy={session.busy} notice={canScan ? null : COPY.scan.unavailable} value={entry} onChange={setEntry} onSubmit={(e) => { setScanInfo(null); void session.start(e); }} />{nav}</>);
@@ -221,7 +222,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       return wrap(banner, <Working text={m.text} />);
     case 'ENTRY_PROBLEM':
       // After a scan that read only some fields, say so: the form is prefilled from the photo.
-      return wrap(banner, <><Entry busy={session.busy} notice={scanInfo !== null && m.text === COPY.errors.missing ? COPY.scan.partialRead : m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
+      return wrap(banner, <><Entry busy={session.busy} notice={scanInfo !== null && m.text === COPY.errors.missing ? `${COPY.scan.partialRead} ${COPY.scan.missingHelp}` : m.text === COPY.errors.missing ? `${m.text} ${COPY.scan.missingHelp}` : m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
     case 'CHOOSE_PRODUCT':
       return wrap(banner, <Choose model={m} onChoose={(index) => void session.send({ type: 'CANDIDATE_CHOSEN', index })} onDone={home} />);
     case 'CONFIRM':
