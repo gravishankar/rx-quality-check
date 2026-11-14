@@ -493,3 +493,16 @@ test('R3: the warning stays across screens until a later scan reports the photo 
   expect(allText(r)).toContain(COPY.confirm.title);
   expect(allText(r)).not.toContain(COPY.scan.photoNotDeleted); // the later scan reported clean storage
 });
+
+test('photo guidance: what to photograph, how close, and accepting the photo are shown before the camera opens, and again after a failed read', async () => {
+  const r = await start(platform([{ lines: [], barcodes: [] }]));
+  let t = allText(r);
+  expect(t).toContain(COPY.scan.howToTitle);
+  for (const step of COPY.scan.howTo) expect(t).toContain(step);
+  // The guidance comes before the scan button, not after it.
+  expect(t.indexOf(COPY.scan.howToTitle)).toBeLessThan(t.indexOf(COPY.scan.button));
+  await press(r, COPY.scan.button);
+  t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.howToTitle);
+});

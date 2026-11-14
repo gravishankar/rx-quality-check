@@ -59,9 +59,14 @@ export const COPY = {
     title: FEATURE,
     intro: 'Take a photo of your pharmacy label, or of the barcode on the original bottle or box.',
     button: 'Scan medication label',
-    tips: [
-      'Lay the bottle flat, or turn it so the drug name and NDC face the camera.',
-      'Use good light and avoid glare. Fill the screen with the label.',
+    /** Shown before the camera opens (the phone's camera app cannot show our guidance). */
+    howToTitle: 'What to photograph',
+    howTo: [
+      'Pharmacy bottle: turn it so the label part with the drug name, strength and NDC faces the camera. The bottle is curved, so put the drug name in the middle of the photo.',
+      'Original bottle or box: photograph the barcode, or the side with the drug name, strength and NDC.',
+      'Hold the phone about 10–15 cm (4–6 inches) from the label so the label fills most of the photo. Tap the screen to focus and hold still.',
+      'Use good light and avoid glare. Keep your fingers off the printed text.',
+      'After you take the photo, tap the camera’s button to keep it (often a tick mark or “OK”), so this app can read it.',
     ],
     privacy: 'Your phone’s camera app takes the photo. This app reads it on this phone, deletes its copy right away and never uploads it. Some camera apps keep their own copy of photos; check your camera app’s settings.',
     typeInstead: 'Type the details instead',
@@ -78,7 +83,7 @@ export const COPY = {
     nothingRead: 'We could not find any text or barcode in the photo.',
     noDrugFields: 'We found text, but not a drug name, strength or NDC.',
     failed: 'The photo could not be read.',
-    retryTips: 'Try again with more light, closer to the label, and without glare. Or type the details.',
+    retryTips: 'Try again following the steps below, or type the details.',
     barcodeTextDiffer: 'The barcode and the printed NDC point to different products. We will check both against FDA records; please look at your label carefully.',
     groups: {
       VERIFIED: 'Matched in FDA records',
