@@ -1,0 +1,2827 @@
+[
+ {
+  "rank": 1,
+  "cms": [
+   "Atorvastatin Calcium"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "atorvastatin",
+  "exemplar": "0093-5056",
+  "identity_names": [
+   "atorvastatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "atorvastatin (by RXCUI)",
+  "recall_search": "product_description:\"atorvastatin\"",
+  "recall_records": 68
+ },
+ {
+  "rank": 2,
+  "cms": [
+   "Amlodipine Besylate"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "amlodipine",
+  "exemplar": "0480-0083",
+  "identity_names": [
+   "amlodipine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amlodipine (by RXCUI)",
+  "recall_search": "product_description:\"amlodipine\"",
+  "recall_records": 98
+ },
+ {
+  "rank": 3,
+  "cms": [
+   "Levothyroxine Sodium"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "levothyroxine",
+  "exemplar": "0480-8690",
+  "identity_names": [
+   "levothyroxine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "levothyroxine (by RXCUI)",
+  "recall_search": "product_description:\"levothyroxine\"",
+  "recall_records": 188
+ },
+ {
+  "rank": 4,
+  "cms": [
+   "Lisinopril"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "lisinopril",
+  "exemplar": "0591-0405",
+  "identity_names": [
+   "lisinopril"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lisinopril (by RXCUI)",
+  "recall_search": "product_description:\"lisinopril\"",
+  "recall_records": 41
+ },
+ {
+  "rank": 5,
+  "cms": [
+   "Gabapentin"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "gabapentin",
+  "exemplar": "0121-1067",
+  "identity_names": [
+   "gabapentin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "gabapentin (by RXCUI)",
+  "recall_search": "product_description:\"gabapentin\"",
+  "recall_records": 25
+ },
+ {
+  "rank": 6,
+  "cms": [
+   "Losartan Potassium"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "losartan",
+  "exemplar": "0615-7958",
+  "identity_names": [
+   "losartan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "losartan (by RXCUI)",
+  "recall_search": "product_description:\"losartan\"",
+  "recall_records": 117
+ },
+ {
+  "rank": 7,
+  "cms": [
+   "Metformin Hcl"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "metformin",
+  "exemplar": "0378-6001",
+  "identity_names": [
+   "metformin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "metformin (by RXCUI)",
+  "recall_search": "product_description:\"metformin\"",
+  "recall_records": 91
+ },
+ {
+  "rank": 8,
+  "cms": [
+   "Metoprolol Succinate"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "metoprolol_succinate",
+  "exemplar": "0615-7823",
+  "identity_names": [
+   "metoprolol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "metoprolol_succinate (by RXCUI)",
+  "recall_search": "product_description:\"metoprolol\"",
+  "recall_records": 43
+ },
+ {
+  "rank": 9,
+  "cms": [
+   "Omeprazole"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "omeprazole",
+  "exemplar": "0615-8079",
+  "identity_names": [
+   "omeprazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "omeprazole (by RXCUI)",
+  "recall_search": "product_description:\"omeprazole\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 10,
+  "cms": [
+   "Rosuvastatin Calcium"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "rosuvastatin",
+  "exemplar": "0615-8532",
+  "identity_names": [
+   "rosuvastatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "rosuvastatin (by RXCUI)",
+  "recall_search": "product_description:\"rosuvastatin\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 11,
+  "cms": [
+   "Pantoprazole Sodium"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "pantoprazole",
+  "exemplar": "0378-6688",
+  "identity_names": [
+   "pantoprazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "pantoprazole (by RXCUI)",
+  "recall_search": "product_description:\"pantoprazole\"",
+  "recall_records": 27
+ },
+ {
+  "rank": 12,
+  "cms": [
+   "Furosemide"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "furosemide",
+  "exemplar": "0054-3294",
+  "identity_names": [
+   "furosemide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "furosemide (by RXCUI)",
+  "recall_search": "product_description:\"furosemide\"",
+  "recall_records": 14
+ },
+ {
+  "rank": 13,
+  "cms": [
+   "Apixaban"
+  ],
+  "expected": "EXCLUDED_BY_POLICY",
+  "drug_id": null,
+  "exemplar": "0115-1721",
+  "identity_names": [
+   "apixaban"
+  ],
+  "local": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "enriched": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"apixaban\"",
+  "recall_records": 0
+ },
+ {
+  "rank": 14,
+  "cms": [
+   "Hydrocodone/Acetaminophen"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "hydrocodone_acetaminophen",
+  "exemplar": "0054-0843",
+  "identity_names": [
+   "hydrocodone",
+   "acetaminophen"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "hydrocodone_acetaminophen (by RXCUI)",
+  "recall_search": "product_description:\"acetaminophen\" AND product_description:\"hydrocodone\"",
+  "recall_records": 16
+ },
+ {
+  "rank": 15,
+  "cms": [
+   "Tamsulosin Hcl"
+  ],
+  "expected": "EXISTING",
+  "drug_id": "tamsulosin",
+  "exemplar": "0115-8211",
+  "identity_names": [
+   "tamsulosin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "tamsulosin (by RXCUI)",
+  "recall_search": "product_description:\"tamsulosin\"",
+  "recall_records": 5
+ },
+ {
+  "rank": 16,
+  "cms": [
+   "Albuterol Sulfate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "albuterol",
+  "exemplar": "51407-367",
+  "identity_names": [
+   "albuterol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "albuterol (by RXCUI)",
+  "recall_search": "product_description:\"albuterol\"",
+  "recall_records": 42
+ },
+ {
+  "rank": 17,
+  "cms": [
+   "Hydrochlorothiazide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "hydrochlorothiazide",
+  "exemplar": "0172-2083",
+  "identity_names": [
+   "hydrochlorothiazide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "hydrochlorothiazide (by RXCUI)",
+  "recall_search": "product_description:\"hydrochlorothiazide\"",
+  "recall_records": 128
+ },
+ {
+  "rank": 18,
+  "cms": [
+   "Trazodone Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "trazodone",
+  "exemplar": "0555-0711",
+  "identity_names": [
+   "trazodone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "trazodone (by RXCUI)",
+  "recall_search": "product_description:\"trazodone\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 19,
+  "cms": [
+   "Metoprolol Tartrate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "metoprolol_tartrate",
+  "exemplar": "0378-0018",
+  "identity_names": [
+   "metoprolol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "metoprolol_tartrate (by RXCUI)",
+  "recall_search": "product_description:\"metoprolol\"",
+  "recall_records": 43
+ },
+ {
+  "rank": 20,
+  "cms": [
+   "Simvastatin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "simvastatin",
+  "exemplar": "0615-7992",
+  "identity_names": [
+   "simvastatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "simvastatin (by RXCUI)",
+  "recall_search": "product_description:\"simvastatin\"",
+  "recall_records": 41
+ },
+ {
+  "rank": 21,
+  "cms": [
+   "Potassium Chloride"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "potassium_chloride",
+  "exemplar": "0121-0948",
+  "identity_names": [
+   "potassium chloride"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "potassium_chloride (by RXCUI)",
+  "recall_search": "product_description:\"potassium chloride\"",
+  "recall_records": 48
+ },
+ {
+  "rank": 22,
+  "cms": [
+   "Sertraline Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "sertraline",
+  "exemplar": "0615-8596",
+  "identity_names": [
+   "sertraline"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "sertraline (by RXCUI)",
+  "recall_search": "product_description:\"sertraline\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 23,
+  "cms": [
+   "Carvedilol"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "carvedilol",
+  "exemplar": "0093-0051",
+  "identity_names": [
+   "carvedilol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "carvedilol (by RXCUI)",
+  "recall_search": "product_description:\"carvedilol\"",
+  "recall_records": 25
+ },
+ {
+  "rank": 24,
+  "cms": [
+   "Prednisone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "prednisone",
+  "exemplar": "0054-0017",
+  "identity_names": [
+   "prednisone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "prednisone (by RXCUI)",
+  "recall_search": "product_description:\"prednisone\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 26,
+  "cms": [
+   "Clopidogrel Bisulfate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "clopidogrel",
+  "exemplar": "0093-7314",
+  "identity_names": [
+   "clopidogrel"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"clopidogrel\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 27,
+  "cms": [
+   "Tramadol Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "tramadol",
+  "exemplar": "0093-3301",
+  "identity_names": [
+   "tramadol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "tramadol (by RXCUI)",
+  "recall_search": "product_description:\"tramadol\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 28,
+  "cms": [
+   "Famotidine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "famotidine",
+  "exemplar": "0172-5728",
+  "identity_names": [
+   "famotidine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "famotidine (by RXCUI)",
+  "recall_search": "product_description:\"famotidine\"",
+  "recall_records": 23
+ },
+ {
+  "rank": 29,
+  "cms": [
+   "Duloxetine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "duloxetine",
+  "exemplar": "0228-2890",
+  "identity_names": [
+   "duloxetine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "duloxetine (by RXCUI)",
+  "recall_search": "product_description:\"duloxetine\"",
+  "recall_records": 63
+ },
+ {
+  "rank": 30,
+  "cms": [
+   "Montelukast Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "montelukast",
+  "exemplar": "0781-5560",
+  "identity_names": [
+   "montelukast"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "montelukast (by RXCUI)",
+  "recall_search": "product_description:\"montelukast\"",
+  "recall_records": 14
+ },
+ {
+  "rank": 31,
+  "cms": [
+   "Escitalopram Oxalate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "escitalopram",
+  "exemplar": "0615-8475",
+  "identity_names": [
+   "escitalopram"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"escitalopram\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 32,
+  "cms": [
+   "Alprazolam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "alprazolam",
+  "exemplar": "0054-3068",
+  "identity_names": [
+   "alprazolam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "alprazolam (by RXCUI)",
+  "recall_search": "product_description:\"alprazolam\"",
+  "recall_records": 33
+ },
+ {
+  "rank": 33,
+  "cms": [
+   "Meloxicam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "meloxicam",
+  "exemplar": "0615-8040",
+  "identity_names": [
+   "meloxicam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "meloxicam (by RXCUI)",
+  "recall_search": "product_description:\"meloxicam\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 35,
+  "cms": [
+   "Pravastatin Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "pravastatin",
+  "exemplar": "0093-7201",
+  "identity_names": [
+   "pravastatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "pravastatin (by RXCUI)",
+  "recall_search": "product_description:\"pravastatin\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 36,
+  "cms": [
+   "Quetiapine Fumarate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "quetiapine",
+  "exemplar": "0054-0220",
+  "identity_names": [
+   "quetiapine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "quetiapine (by RXCUI)",
+  "recall_search": "product_description:\"quetiapine\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 37,
+  "cms": [
+   "Allopurinol"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "allopurinol",
+  "exemplar": "0378-0137",
+  "identity_names": [
+   "allopurinol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "allopurinol (by RXCUI)",
+  "recall_search": "product_description:\"allopurinol\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 38,
+  "cms": [
+   "Bupropion Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "bupropion",
+  "exemplar": "0115-5445",
+  "identity_names": [
+   "bupropion"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "bupropion (by RXCUI)",
+  "recall_search": "product_description:\"bupropion\"",
+  "recall_records": 44
+ },
+ {
+  "rank": 39,
+  "cms": [
+   "Amoxicillin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "amoxicillin",
+  "exemplar": "0093-2263",
+  "identity_names": [
+   "amoxicillin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amoxicillin (by RXCUI)",
+  "recall_search": "product_description:\"amoxicillin\"",
+  "recall_records": 20
+ },
+ {
+  "rank": 40,
+  "cms": [
+   "Oxycodone Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "oxycodone",
+  "exemplar": "0054-0390",
+  "identity_names": [
+   "oxycodone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "oxycodone (by RXCUI)",
+  "recall_search": "product_description:\"oxycodone\"",
+  "recall_records": 25
+ },
+ {
+  "rank": 42,
+  "cms": [
+   "Clonazepam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "clonazepam",
+  "exemplar": "0093-0832",
+  "identity_names": [
+   "clonazepam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "clonazepam (by RXCUI)",
+  "recall_search": "product_description:\"clonazepam\"",
+  "recall_records": 15
+ },
+ {
+  "rank": 43,
+  "cms": [
+   "Oxycodone Hcl/Acetaminophen"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "oxycodone_acetaminophen",
+  "exemplar": "0406-0512",
+  "identity_names": [
+   "oxycodone",
+   "acetaminophen"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "oxycodone_acetaminophen (by RXCUI)",
+  "recall_search": "product_description:\"acetaminophen\" AND product_description:\"oxycodone\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 44,
+  "cms": [
+   "Diclofenac Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "diclofenac",
+  "exemplar": "0228-2550",
+  "identity_names": [
+   "diclofenac"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "diclofenac (by RXCUI)",
+  "recall_search": "product_description:\"diclofenac\"",
+  "recall_records": 29
+ },
+ {
+  "rank": 45,
+  "cms": [
+   "Azithromycin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "azithromycin",
+  "exemplar": "0093-2026",
+  "identity_names": [
+   "azithromycin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "azithromycin (by RXCUI)",
+  "recall_search": "product_description:\"azithromycin\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 46,
+  "cms": [
+   "Alendronate Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "alendronate",
+  "exemplar": "0054-0282",
+  "identity_names": [
+   "alendronate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "alendronate (by RXCUI)",
+  "recall_search": "product_description:\"alendronate\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 47,
+  "cms": [
+   "Empagliflozin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "empagliflozin",
+  "exemplar": "0597-0152",
+  "identity_names": [
+   "empagliflozin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "empagliflozin (by RXCUI)",
+  "recall_search": "product_description:\"empagliflozin\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 48,
+  "cms": [
+   "Lorazepam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "lorazepam",
+  "exemplar": "0054-3532",
+  "identity_names": [
+   "lorazepam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lorazepam (by RXCUI)",
+  "recall_search": "product_description:\"lorazepam\"",
+  "recall_records": 21
+ },
+ {
+  "rank": 49,
+  "cms": [
+   "Semaglutide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "semaglutide",
+  "exemplar": "0169-1704",
+  "identity_names": [
+   "semaglutide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "semaglutide (by RXCUI)",
+  "recall_search": "product_description:\"semaglutide\"",
+  "recall_records": 57
+ },
+ {
+  "rank": 50,
+  "cms": [
+   "Spironolactone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "spironolactone",
+  "exemplar": "0378-0243",
+  "identity_names": [
+   "spironolactone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "spironolactone (by RXCUI)",
+  "recall_search": "product_description:\"spironolactone\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 51,
+  "cms": [
+   "Mirtazapine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "mirtazapine",
+  "exemplar": "0378-3515",
+  "identity_names": [
+   "mirtazapine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "mirtazapine (by RXCUI)",
+  "recall_search": "product_description:\"mirtazapine\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 52,
+  "cms": [
+   "Zolpidem Tartrate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "zolpidem",
+  "exemplar": "0781-5315",
+  "identity_names": [
+   "zolpidem"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "zolpidem (by RXCUI)",
+  "recall_search": "product_description:\"zolpidem\"",
+  "recall_records": 10
+ },
+ {
+  "rank": 53,
+  "cms": [
+   "Glipizide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "glipizide",
+  "exemplar": "0591-0460",
+  "identity_names": [
+   "glipizide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "glipizide (by RXCUI)",
+  "recall_search": "product_description:\"glipizide\"",
+  "recall_records": 14
+ },
+ {
+  "rank": 54,
+  "cms": [
+   "Donepezil Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "donepezil",
+  "exemplar": "0615-7951",
+  "identity_names": [
+   "donepezil"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "donepezil (by RXCUI)",
+  "recall_search": "product_description:\"donepezil\"",
+  "recall_records": 6
+ },
+ {
+  "rank": 55,
+  "cms": [
+   "Ibuprofen"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ibuprofen",
+  "exemplar": "0472-2002",
+  "identity_names": [
+   "ibuprofen"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ibuprofen (by RXCUI)",
+  "recall_search": "product_description:\"ibuprofen\"",
+  "recall_records": 68
+ },
+ {
+  "rank": 56,
+  "cms": [
+   "Fluoxetine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "fluoxetine",
+  "exemplar": "0093-7198",
+  "identity_names": [
+   "fluoxetine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "fluoxetine (by RXCUI)",
+  "recall_search": "product_description:\"fluoxetine\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 57,
+  "cms": [
+   "Cephalexin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "cephalexin",
+  "exemplar": "0093-2238",
+  "identity_names": [
+   "cephalexin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "cephalexin (by RXCUI)",
+  "recall_search": "product_description:\"cephalexin\"",
+  "recall_records": 24
+ },
+ {
+  "rank": 58,
+  "cms": [
+   "Buspirone Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "buspirone",
+  "exemplar": "0093-0053",
+  "identity_names": [
+   "buspirone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "buspirone (by RXCUI)",
+  "recall_search": "product_description:\"buspirone\"",
+  "recall_records": 10
+ },
+ {
+  "rank": 59,
+  "cms": [
+   "Ezetimibe"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ezetimibe",
+  "exemplar": "0904-7103",
+  "identity_names": [
+   "ezetimibe"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ezetimibe (by RXCUI)",
+  "recall_search": "product_description:\"ezetimibe\"",
+  "recall_records": 18
+ },
+ {
+  "rank": 60,
+  "cms": [
+   "Citalopram Hydrobromide"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "citalopram",
+  "exemplar": "0054-0062",
+  "identity_names": [
+   "citalopram"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"citalopram\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 61,
+  "cms": [
+   "Finasteride"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "finasteride",
+  "exemplar": "0615-8562",
+  "identity_names": [
+   "finasteride"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "finasteride (by RXCUI)",
+  "recall_search": "product_description:\"finasteride\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 62,
+  "cms": [
+   "Cyclobenzaprine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "cyclobenzaprine",
+  "exemplar": "0093-3420",
+  "identity_names": [
+   "cyclobenzaprine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "cyclobenzaprine (by RXCUI)",
+  "recall_search": "product_description:\"cyclobenzaprine\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 63,
+  "cms": [
+   "Amoxicillin/Potassium Clav"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "amoxicillin_clavulanate",
+  "exemplar": "0093-2274",
+  "identity_names": [
+   "amoxicillin",
+   "clavulanate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amoxicillin_clavulanate (by RXCUI)",
+  "recall_search": "product_description:\"amoxicillin\" AND product_description:\"clavulanate\"",
+  "recall_records": 5
+ },
+ {
+  "rank": 64,
+  "cms": [
+   "Pregabalin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "pregabalin",
+  "exemplar": "0904-6991",
+  "identity_names": [
+   "pregabalin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "pregabalin (by RXCUI)",
+  "recall_search": "product_description:\"pregabalin\"",
+  "recall_records": 10
+ },
+ {
+  "rank": 65,
+  "cms": [
+   "Atenolol"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "atenolol",
+  "exemplar": "0093-0752",
+  "identity_names": [
+   "atenolol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "atenolol (by RXCUI)",
+  "recall_search": "product_description:\"atenolol\"",
+  "recall_records": 5
+ },
+ {
+  "rank": 66,
+  "cms": [
+   "Rivaroxaban"
+  ],
+  "expected": "EXCLUDED_BY_POLICY",
+  "drug_id": null,
+  "exemplar": "14445-147",
+  "identity_names": [
+   "rivaroxaban"
+  ],
+  "local": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "enriched": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"rivaroxaban\"",
+  "recall_records": 3
+ },
+ {
+  "rank": 67,
+  "cms": [
+   "Tizanidine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "tizanidine",
+  "exemplar": "0615-8468",
+  "identity_names": [
+   "tizanidine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "tizanidine (by RXCUI)",
+  "recall_search": "product_description:\"tizanidine\"",
+  "recall_records": 14
+ },
+ {
+  "rank": 68,
+  "cms": [
+   "Diltiazem Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "diltiazem",
+  "exemplar": "0093-0318",
+  "identity_names": [
+   "diltiazem"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "diltiazem (by RXCUI)",
+  "recall_search": "product_description:\"diltiazem\"",
+  "recall_records": 52
+ },
+ {
+  "rank": 71,
+  "cms": [
+   "Venlafaxine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "venlafaxine",
+  "exemplar": "0093-7384",
+  "identity_names": [
+   "venlafaxine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "venlafaxine (by RXCUI)",
+  "recall_search": "product_description:\"venlafaxine\"",
+  "recall_records": 29
+ },
+ {
+  "rank": 72,
+  "cms": [
+   "Doxycycline Hyclate",
+   "Doxycycline Monohydrate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "doxycycline",
+  "exemplar": "0143-2112",
+  "identity_names": [
+   "doxycycline"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"doxycycline\"",
+  "recall_records": 30
+ },
+ {
+  "rank": 73,
+  "cms": [
+   "Hydralazine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "hydralazine",
+  "exemplar": "0615-7973",
+  "identity_names": [
+   "hydralazine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "hydralazine (by RXCUI)",
+  "recall_search": "product_description:\"hydralazine\"",
+  "recall_records": 18
+ },
+ {
+  "rank": 74,
+  "cms": [
+   "Lisinopril/Hydrochlorothiazide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "lisinopril_hydrochlorothiazide",
+  "exemplar": "0591-0860",
+  "identity_names": [
+   "lisinopril",
+   "hydrochlorothiazide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lisinopril_hydrochlorothiazide (by RXCUI)",
+  "recall_search": "product_description:\"hydrochlorothiazide\" AND product_description:\"lisinopril\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 76,
+  "cms": [
+   "Memantine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "memantine",
+  "exemplar": "0615-8192",
+  "identity_names": [
+   "memantine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "memantine (by RXCUI)",
+  "recall_search": "product_description:\"memantine\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 77,
+  "cms": [
+   "Warfarin Sodium"
+  ],
+  "expected": "EXCLUDED_BY_POLICY",
+  "drug_id": null,
+  "exemplar": "0093-1712",
+  "identity_names": [
+   "warfarin"
+  ],
+  "local": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "enriched": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"warfarin\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 78,
+  "cms": [
+   "Oxybutynin Chloride"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "oxybutynin",
+  "exemplar": "0615-8219",
+  "identity_names": [
+   "oxybutynin chloride"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "oxybutynin (by RXCUI)",
+  "recall_search": "product_description:\"oxybutynin chloride\"",
+  "recall_records": 10
+ },
+ {
+  "rank": 79,
+  "cms": [
+   "Methylprednisolone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "methylprednisolone",
+  "exemplar": "0603-4593",
+  "identity_names": [
+   "methylprednisolone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "methylprednisolone (by RXCUI)",
+  "recall_search": "product_description:\"methylprednisolone\"",
+  "recall_records": 93
+ },
+ {
+  "rank": 81,
+  "cms": [
+   "Losartan/Hydrochlorothiazide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "losartan_hydrochlorothiazide",
+  "exemplar": "0093-7367",
+  "identity_names": [
+   "losartan",
+   "hydrochlorothiazide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "losartan_hydrochlorothiazide (by RXCUI)",
+  "recall_search": "product_description:\"hydrochlorothiazide\" AND product_description:\"losartan\"",
+  "recall_records": 27
+ },
+ {
+  "rank": 82,
+  "cms": [
+   "Divalproex Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "valproate",
+  "exemplar": "0378-0472",
+  "identity_names": [
+   "divalproex"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "valproate (by NAME)",
+  "recall_search": "product_description:\"divalproex\"",
+  "recall_records": 16
+ },
+ {
+  "rank": 84,
+  "cms": [
+   "Celecoxib"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "celecoxib",
+  "exemplar": "0591-3982",
+  "identity_names": [
+   "celecoxib"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "celecoxib (by RXCUI)",
+  "recall_search": "product_description:\"celecoxib\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 85,
+  "cms": [
+   "Baclofen"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "baclofen",
+  "exemplar": "0172-4096",
+  "identity_names": [
+   "baclofen"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "baclofen (by RXCUI)",
+  "recall_search": "product_description:\"baclofen\"",
+  "recall_records": 71
+ },
+ {
+  "rank": 86,
+  "cms": [
+   "Ciprofloxacin Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ciprofloxacin",
+  "exemplar": "0143-9928",
+  "identity_names": [
+   "ciprofloxacin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ciprofloxacin (by RXCUI)",
+  "recall_search": "product_description:\"ciprofloxacin\"",
+  "recall_records": 28
+ },
+ {
+  "rank": 87,
+  "cms": [
+   "Isosorbide Mononitrate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "isosorbide_mononitrate",
+  "exemplar": "0228-2620",
+  "identity_names": [
+   "isosorbide"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"isosorbide\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 88,
+  "cms": [
+   "Glimepiride"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "glimepiride",
+  "exemplar": "0615-8332",
+  "identity_names": [
+   "glimepiride"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "glimepiride (by RXCUI)",
+  "recall_search": "product_description:\"glimepiride\"",
+  "recall_records": 21
+ },
+ {
+  "rank": 89,
+  "cms": [
+   "Levetiracetam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "levetiracetam",
+  "exemplar": "0121-0799",
+  "identity_names": [
+   "levetiracetam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "levetiracetam (by RXCUI)",
+  "recall_search": "product_description:\"levetiracetam\"",
+  "recall_records": 18
+ },
+ {
+  "rank": 91,
+  "cms": [
+   "Sulfamethoxazole/Trimethoprim"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "sulfamethoxazole_trimethoprim",
+  "exemplar": "0615-8121",
+  "identity_names": [
+   "sulfamethoxazole",
+   "trimethoprim"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "sulfamethoxazole_trimethoprim (by RXCUI)",
+  "recall_search": "product_description:\"sulfamethoxazole\" AND product_description:\"trimethoprim\"",
+  "recall_records": 16
+ },
+ {
+  "rank": 93,
+  "cms": [
+   "Dapagliflozin Propanediol"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "dapagliflozin",
+  "exemplar": "69097-388",
+  "identity_names": [
+   "dapagliflozin"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"dapagliflozin\"",
+  "recall_records": 1
+ },
+ {
+  "rank": 94,
+  "cms": [
+   "Estradiol"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "estradiol",
+  "exemplar": "0555-0886",
+  "identity_names": [
+   "estradiol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "estradiol (by RXCUI)",
+  "recall_search": "product_description:\"estradiol\"",
+  "recall_records": 295
+ },
+ {
+  "rank": 95,
+  "cms": [
+   "Hydroxyzine Hcl",
+   "Hydroxyzine Pamoate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "hydroxyzine",
+  "exemplar": "0093-5060",
+  "identity_names": [
+   "hydroxyzine"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"hydroxyzine\"",
+  "recall_records": 24
+ },
+ {
+  "rank": 96,
+  "cms": [
+   "Lamotrigine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "lamotrigine",
+  "exemplar": "0115-1526",
+  "identity_names": [
+   "lamotrigine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lamotrigine (by RXCUI)",
+  "recall_search": "product_description:\"lamotrigine\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 98,
+  "cms": [
+   "Ondansetron",
+   "Ondansetron Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ondansetron",
+  "exemplar": "0054-0064",
+  "identity_names": [
+   "ondansetron"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ondansetron (by RXCUI)",
+  "recall_search": "product_description:\"ondansetron\"",
+  "recall_records": 24
+ },
+ {
+  "rank": 99,
+  "cms": [
+   "Sitagliptin Phosphate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "sitagliptin",
+  "exemplar": "0480-2607",
+  "identity_names": [
+   "sitagliptin"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"sitagliptin\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 100,
+  "cms": [
+   "Valsartan"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "valsartan",
+  "exemplar": "0378-5807",
+  "identity_names": [
+   "valsartan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "valsartan (by RXCUI)",
+  "recall_search": "product_description:\"valsartan\"",
+  "recall_records": 138
+ },
+ {
+  "rank": 101,
+  "cms": [
+   "Aripiprazole"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "aripiprazole",
+  "exemplar": "0615-8375",
+  "identity_names": [
+   "aripiprazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "aripiprazole (by RXCUI)",
+  "recall_search": "product_description:\"aripiprazole\"",
+  "recall_records": 29
+ },
+ {
+  "rank": 103,
+  "cms": [
+   "Propranolol Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "propranolol",
+  "exemplar": "0054-3727",
+  "identity_names": [
+   "propranolol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "propranolol (by RXCUI)",
+  "recall_search": "product_description:\"propranolol\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 104,
+  "cms": [
+   "Risperidone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "risperidone",
+  "exemplar": "0615-8196",
+  "identity_names": [
+   "risperidone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "risperidone (by RXCUI)",
+  "recall_search": "product_description:\"risperidone\"",
+  "recall_records": 6
+ },
+ {
+  "rank": 105,
+  "cms": [
+   "Olanzapine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "olanzapine",
+  "exemplar": "0093-5245",
+  "identity_names": [
+   "olanzapine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "olanzapine (by RXCUI)",
+  "recall_search": "product_description:\"olanzapine\"",
+  "recall_records": 21
+ },
+ {
+  "rank": 106,
+  "cms": [
+   "Nitrofurantoin Monohyd/M-Cryst"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "nitrofurantoin",
+  "exemplar": "0185-0122",
+  "identity_names": [
+   "nitrofurantoin",
+   "nitrofurantoin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "nitrofurantoin (by RXCUI)",
+  "recall_search": "product_description:\"nitrofurantoin\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 107,
+  "cms": [
+   "Nystatin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "nystatin",
+  "exemplar": "0093-0983",
+  "identity_names": [
+   "nystatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "nystatin (by RXCUI)",
+  "recall_search": "product_description:\"nystatin\"",
+  "recall_records": 29
+ },
+ {
+  "rank": 108,
+  "cms": [
+   "Ketoconazole"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ketoconazole",
+  "exemplar": "35573-433",
+  "identity_names": [
+   "ketoconazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ketoconazole (by RXCUI)",
+  "recall_search": "product_description:\"ketoconazole\"",
+  "recall_records": 10
+ },
+ {
+  "rank": 109,
+  "cms": [
+   "Mirabegron"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "mirabegron",
+  "exemplar": "67184-0571",
+  "identity_names": [
+   "mirabegron"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "mirabegron (by RXCUI)",
+  "recall_search": "product_description:\"mirabegron\"",
+  "recall_records": 1
+ },
+ {
+  "rank": 110,
+  "cms": [
+   "Amitriptyline Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "amitriptyline",
+  "exemplar": "0781-1486",
+  "identity_names": [
+   "amitriptyline"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amitriptyline (by RXCUI)",
+  "recall_search": "product_description:\"amitriptyline\"",
+  "recall_records": 6
+ },
+ {
+  "rank": 111,
+  "cms": [
+   "Carbidopa/Levodopa"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "carbidopa_levodopa",
+  "exemplar": "0378-0088",
+  "identity_names": [
+   "carbidopa",
+   "levodopa"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "carbidopa_levodopa (by RXCUI)",
+  "recall_search": "product_description:\"carbidopa\" AND product_description:\"levodopa\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 112,
+  "cms": [
+   "Clonidine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "clonidine",
+  "exemplar": "0228-2127",
+  "identity_names": [
+   "clonidine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "clonidine (by RXCUI)",
+  "recall_search": "product_description:\"clonidine\"",
+  "recall_records": 92
+ },
+ {
+  "rank": 113,
+  "cms": [
+   "Nifedipine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "nifedipine",
+  "exemplar": "0615-8549",
+  "identity_names": [
+   "nifedipine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "nifedipine (by RXCUI)",
+  "recall_search": "product_description:\"nifedipine\"",
+  "recall_records": 21
+ },
+ {
+  "rank": 114,
+  "cms": [
+   "Prednisolone Acetate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "prednisolone",
+  "exemplar": "0121-0759",
+  "identity_names": [
+   "prednisolone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "prednisolone (by RXCUI)",
+  "recall_search": "product_description:\"prednisolone\"",
+  "recall_records": 34
+ },
+ {
+  "rank": 115,
+  "cms": [
+   "Fluconazole"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "fluconazole",
+  "exemplar": "0904-6500",
+  "identity_names": [
+   "fluconazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "fluconazole (by RXCUI)",
+  "recall_search": "product_description:\"fluconazole\"",
+  "recall_records": 23
+ },
+ {
+  "rank": 116,
+  "cms": [
+   "Paroxetine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "paroxetine",
+  "exemplar": "0378-7001",
+  "identity_names": [
+   "paroxetine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "paroxetine (by RXCUI)",
+  "recall_search": "product_description:\"paroxetine\"",
+  "recall_records": 25
+ },
+ {
+  "rank": 118,
+  "cms": [
+   "Ropinirole Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ropinirole",
+  "exemplar": "0228-3640",
+  "identity_names": [
+   "ropinirole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ropinirole (by RXCUI)",
+  "recall_search": "product_description:\"ropinirole\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 119,
+  "cms": [
+   "Topiramate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "topiramate",
+  "exemplar": "0480-2356",
+  "identity_names": [
+   "topiramate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "topiramate (by RXCUI)",
+  "recall_search": "product_description:\"topiramate\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 120,
+  "cms": [
+   "Sacubitril/Valsartan"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "sacubitril_valsartan",
+  "exemplar": "0904-7580",
+  "identity_names": [
+   "sacubitril",
+   "valsartan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "sacubitril_valsartan (by RXCUI)",
+  "recall_search": "product_description:\"sacubitril\" AND product_description:\"valsartan\"",
+  "recall_records": 0
+ },
+ {
+  "rank": 121,
+  "cms": [
+   "Pioglitazone Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "pioglitazone",
+  "exemplar": "0093-7271",
+  "identity_names": [
+   "pioglitazone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "pioglitazone (by RXCUI)",
+  "recall_search": "product_description:\"pioglitazone\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 122,
+  "cms": [
+   "Olmesartan Medoxomil"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "olmesartan",
+  "exemplar": "0527-2425",
+  "identity_names": [
+   "olmesartan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "olmesartan (by RXCUI)",
+  "recall_search": "product_description:\"olmesartan\"",
+  "recall_records": 18
+ },
+ {
+  "rank": 125,
+  "cms": [
+   "Diazepam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "diazepam",
+  "exemplar": "0054-3185",
+  "identity_names": [
+   "diazepam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "diazepam (by RXCUI)",
+  "recall_search": "product_description:\"diazepam\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 126,
+  "cms": [
+   "Valacyclovir Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "valacyclovir",
+  "exemplar": "0378-4275",
+  "identity_names": [
+   "valacyclovir"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "valacyclovir (by RXCUI)",
+  "recall_search": "product_description:\"valacyclovir\"",
+  "recall_records": 5
+ },
+ {
+  "rank": 127,
+  "cms": [
+   "Naproxen"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "naproxen",
+  "exemplar": "0054-3630",
+  "identity_names": [
+   "naproxen"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "naproxen (by RXCUI)",
+  "recall_search": "product_description:\"naproxen\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 128,
+  "cms": [
+   "Amiodarone Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "amiodarone",
+  "exemplar": "0245-0144",
+  "identity_names": [
+   "amiodarone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amiodarone (by RXCUI)",
+  "recall_search": "product_description:\"amiodarone\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 129,
+  "cms": [
+   "Triamterene/Hydrochlorothiazid"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "triamterene_hydrochlorothiazide",
+  "exemplar": "0591-0348",
+  "identity_names": [
+   "triamterene",
+   "hydrochlorothiazide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "triamterene_hydrochlorothiazide (by RXCUI)",
+  "recall_search": "product_description:\"hydrochlorothiazide\" AND product_description:\"triamterene\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 130,
+  "cms": [
+   "Chlorthalidone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "chlorthalidone",
+  "exemplar": "0378-0213",
+  "identity_names": [
+   "chlorthalidone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "chlorthalidone (by RXCUI)",
+  "recall_search": "product_description:\"chlorthalidone\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 131,
+  "cms": [
+   "Esomeprazole Magnesium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "esomeprazole",
+  "exemplar": "0378-2350",
+  "identity_names": [
+   "esomeprazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "esomeprazole (by RXCUI)",
+  "recall_search": "product_description:\"esomeprazole\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 133,
+  "cms": [
+   "Meclizine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "meclizine",
+  "exemplar": "0615-8514",
+  "identity_names": [
+   "meclizine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "meclizine (by RXCUI)",
+  "recall_search": "product_description:\"meclizine\"",
+  "recall_records": 16
+ },
+ {
+  "rank": 134,
+  "cms": [
+   "Timolol Maleate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "timolol",
+  "exemplar": "0378-0221",
+  "identity_names": [
+   "timolol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "timolol (by RXCUI)",
+  "recall_search": "product_description:\"timolol\"",
+  "recall_records": 34
+ },
+ {
+  "rank": 135,
+  "cms": [
+   "Torsemide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "torsemide",
+  "exemplar": "0054-0077",
+  "identity_names": [
+   "torsemide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "torsemide (by RXCUI)",
+  "recall_search": "product_description:\"torsemide\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 136,
+  "cms": [
+   "Lovastatin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "lovastatin",
+  "exemplar": "0093-0576",
+  "identity_names": [
+   "lovastatin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lovastatin (by RXCUI)",
+  "recall_search": "product_description:\"lovastatin\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 137,
+  "cms": [
+   "Hydrocortisone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "hydrocortisone",
+  "exemplar": "0115-1696",
+  "identity_names": [
+   "hydrocortisone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "hydrocortisone (by RXCUI)",
+  "recall_search": "product_description:\"hydrocortisone\"",
+  "recall_records": 71
+ },
+ {
+  "rank": 138,
+  "cms": [
+   "Morphine Sulfate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "morphine",
+  "exemplar": "0115-1277",
+  "identity_names": [
+   "morphine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "morphine (by RXCUI)",
+  "recall_search": "product_description:\"morphine\"",
+  "recall_records": 189
+ },
+ {
+  "rank": 142,
+  "cms": [
+   "Acetaminophen With Codeine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "acetaminophen_codeine",
+  "exemplar": "0121-0504",
+  "identity_names": [
+   "acetaminophen",
+   "codeine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "acetaminophen_codeine (by RXCUI)",
+  "recall_search": "product_description:\"acetaminophen\" AND product_description:\"codeine\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 143,
+  "cms": [
+   "Methocarbamol"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "methocarbamol",
+  "exemplar": "0276-0510",
+  "identity_names": [
+   "methocarbamol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "methocarbamol (by RXCUI)",
+  "recall_search": "product_description:\"methocarbamol\"",
+  "recall_records": 12
+ },
+ {
+  "rank": 144,
+  "cms": [
+   "Nitroglycerin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "nitroglycerin",
+  "exemplar": "45802-210",
+  "identity_names": [
+   "nitroglycerin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "nitroglycerin (by RXCUI)",
+  "recall_search": "product_description:\"nitroglycerin\"",
+  "recall_records": 19
+ },
+ {
+  "rank": 145,
+  "cms": [
+   "Levofloxacin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "levofloxacin",
+  "exemplar": "0527-1948",
+  "identity_names": [
+   "levofloxacin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "levofloxacin (by RXCUI)",
+  "recall_search": "product_description:\"levofloxacin\"",
+  "recall_records": 23
+ },
+ {
+  "rank": 146,
+  "cms": [
+   "Irbesartan"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "irbesartan",
+  "exemplar": "29300-212",
+  "identity_names": [
+   "irbesartan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "irbesartan (by RXCUI)",
+  "recall_search": "product_description:\"irbesartan\"",
+  "recall_records": 31
+ },
+ {
+  "rank": 147,
+  "cms": [
+   "Chlorhexidine Gluconate"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "chlorhexidine",
+  "exemplar": "0116-0101",
+  "identity_names": [
+   "chlorhexidine"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"chlorhexidine\"",
+  "recall_records": 86
+ },
+ {
+  "rank": 148,
+  "cms": [
+   "Hydroxychloroquine Sulfate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "hydroxychloroquine",
+  "exemplar": "0093-2401",
+  "identity_names": [
+   "hydroxychloroquine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "hydroxychloroquine (by RXCUI)",
+  "recall_search": "product_description:\"hydroxychloroquine\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 149,
+  "cms": [
+   "Temazepam"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "temazepam",
+  "exemplar": "0228-2076",
+  "identity_names": [
+   "temazepam"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "temazepam (by RXCUI)",
+  "recall_search": "product_description:\"temazepam\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 150,
+  "cms": [
+   "Dicyclomine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "dicyclomine",
+  "exemplar": "0054-0622",
+  "identity_names": [
+   "dicyclomine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "dicyclomine (by RXCUI)",
+  "recall_search": "product_description:\"dicyclomine\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 152,
+  "cms": [
+   "Methotrexate Sodium"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "methotrexate",
+  "exemplar": "0054-4550",
+  "identity_names": [
+   "methotrexate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "methotrexate (by RXCUI)",
+  "recall_search": "product_description:\"methotrexate\"",
+  "recall_records": 14
+ },
+ {
+  "rank": 153,
+  "cms": [
+   "Tiotropium Bromide"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "tiotropium",
+  "exemplar": "68180-964",
+  "identity_names": [
+   "tiotropium bromide"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"tiotropium bromide\"",
+  "recall_records": 5
+ },
+ {
+  "rank": 154,
+  "cms": [
+   "Linaclotide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "linaclotide",
+  "exemplar": "0456-1201",
+  "identity_names": [
+   "linaclotide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "linaclotide (by RXCUI)",
+  "recall_search": "product_description:\"linaclotide\"",
+  "recall_records": 1
+ },
+ {
+  "rank": 156,
+  "cms": [
+   "Sucralfate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "sucralfate",
+  "exemplar": "0093-2210",
+  "identity_names": [
+   "sucralfate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "sucralfate (by RXCUI)",
+  "recall_search": "product_description:\"sucralfate\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 157,
+  "cms": [
+   "Clindamycin Hcl"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "clindamycin",
+  "exemplar": "0009-0760",
+  "identity_names": [
+   "clindamycin"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"clindamycin\"",
+  "recall_records": 50
+ },
+ {
+  "rank": 158,
+  "cms": [
+   "Benazepril Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "benazepril",
+  "exemplar": "23155-749",
+  "identity_names": [
+   "benazepril"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "benazepril (by RXCUI)",
+  "recall_search": "product_description:\"benazepril\"",
+  "recall_records": 13
+ },
+ {
+  "rank": 159,
+  "cms": [
+   "Bumetanide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "bumetanide",
+  "exemplar": "0185-0128",
+  "identity_names": [
+   "bumetanide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "bumetanide (by RXCUI)",
+  "recall_search": "product_description:\"bumetanide\"",
+  "recall_records": 6
+ },
+ {
+  "rank": 160,
+  "cms": [
+   "Doxazosin Mesylate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "doxazosin",
+  "exemplar": "0093-2067",
+  "identity_names": [
+   "doxazosin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "doxazosin (by RXCUI)",
+  "recall_search": "product_description:\"doxazosin\"",
+  "recall_records": 16
+ },
+ {
+  "rank": 161,
+  "cms": [
+   "Dextroamphetamine/Amphetamine"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "dextroamphetamine_amphetamine",
+  "exemplar": "0115-1486",
+  "identity_names": [
+   "dextroamphetamine saccharate",
+   "amphetamine aspartate",
+   "dextroamphetamine",
+   "amphetamine"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"amphetamine\" AND product_description:\"amphetamine aspartate\" AND product_description:\"dextroamphetamine\" AND product_description:\"dextroamphetamine saccharate\"",
+  "recall_records": 35
+ },
+ {
+  "rank": 163,
+  "cms": [
+   "Metronidazole"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "metronidazole",
+  "exemplar": "0904-7126",
+  "identity_names": [
+   "metronidazole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "metronidazole (by RXCUI)",
+  "recall_search": "product_description:\"metronidazole\"",
+  "recall_records": 15
+ },
+ {
+  "rank": 164,
+  "cms": [
+   "Levocetirizine Dihydrochloride"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "levocetirizine",
+  "exemplar": "0093-7701",
+  "identity_names": [
+   "levocetirizine"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"levocetirizine\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 166,
+  "cms": [
+   "Enalapril Maleate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "enalapril",
+  "exemplar": "0904-7309",
+  "identity_names": [
+   "enalapril"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "enalapril (by RXCUI)",
+  "recall_search": "product_description:\"enalapril\"",
+  "recall_records": 22
+ },
+ {
+  "rank": 167,
+  "cms": [
+   "Cyclosporine"
+  ],
+  "expected": "EXCLUDED_BY_POLICY",
+  "drug_id": null,
+  "exemplar": "0074-3108",
+  "identity_names": [
+   "cyclosporine"
+  ],
+  "local": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "enriched": "EXCLUDED:POLICY_LISTED_EXCLUDED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"cyclosporine\"",
+  "recall_records": 27
+ },
+ {
+  "rank": 168,
+  "cms": [
+   "Cefdinir"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "cefdinir",
+  "exemplar": "0093-3160",
+  "identity_names": [
+   "cefdinir"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "cefdinir (by RXCUI)",
+  "recall_search": "product_description:\"cefdinir\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 170,
+  "cms": [
+   "Benztropine Mesylate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "benztropine",
+  "exemplar": "0603-2433",
+  "identity_names": [
+   "benztropine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "benztropine (by RXCUI)",
+  "recall_search": "product_description:\"benztropine\"",
+  "recall_records": 4
+ },
+ {
+  "rank": 171,
+  "cms": [
+   "Icosapent Ethyl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "icosapent_ethyl",
+  "exemplar": "0054-0508",
+  "identity_names": [
+   "icosapent ethyl"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "icosapent_ethyl (by RXCUI)",
+  "recall_search": "product_description:\"icosapent ethyl\"",
+  "recall_records": 3
+ },
+ {
+  "rank": 172,
+  "cms": [
+   "Fenofibrate",
+   "Fenofibrate Nanocrystallized"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "fenofibrate",
+  "exemplar": "0115-5511",
+  "identity_names": [
+   "fenofibrate"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "fenofibrate (by RXCUI)",
+  "recall_search": "product_description:\"fenofibrate\"",
+  "recall_records": 11
+ },
+ {
+  "rank": 174,
+  "cms": [
+   "Lactulose"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "lactulose",
+  "exemplar": "0116-4005",
+  "identity_names": [
+   "lactulose"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "lactulose (by RXCUI)",
+  "recall_search": "product_description:\"lactulose\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 175,
+  "cms": [
+   "Acyclovir"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "acyclovir",
+  "exemplar": "0472-0082",
+  "identity_names": [
+   "acyclovir"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "acyclovir (by RXCUI)",
+  "recall_search": "product_description:\"acyclovir\"",
+  "recall_records": 19
+ },
+ {
+  "rank": 178,
+  "cms": [
+   "Sumatriptan Succinate"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "sumatriptan",
+  "exemplar": "0378-5630",
+  "identity_names": [
+   "sumatriptan"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "sumatriptan (by RXCUI)",
+  "recall_search": "product_description:\"sumatriptan\"",
+  "recall_records": 9
+ },
+ {
+  "rank": 181,
+  "cms": [
+   "Pramipexole Di-Hcl"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "pramipexole",
+  "exemplar": "0615-8551",
+  "identity_names": [
+   "pramipexole"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"pramipexole\"",
+  "recall_records": 23
+ },
+ {
+  "rank": 183,
+  "cms": [
+   "Digoxin"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "digoxin",
+  "exemplar": "0115-9811",
+  "identity_names": [
+   "digoxin"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"digoxin\"",
+  "recall_records": 7
+ },
+ {
+  "rank": 184,
+  "cms": [
+   "Amlodipine Besylate/Benazepril"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "amlodipine_benazepril",
+  "exemplar": "23155-920",
+  "identity_names": [
+   "amlodipine",
+   "benazepril"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "amlodipine_benazepril (by RXCUI)",
+  "recall_search": "product_description:\"amlodipine\" AND product_description:\"benazepril\"",
+  "recall_records": 8
+ },
+ {
+  "rank": 186,
+  "cms": [
+   "Verapamil Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "verapamil",
+  "exemplar": "0378-6320",
+  "identity_names": [
+   "verapamil"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "verapamil (by RXCUI)",
+  "recall_search": "product_description:\"verapamil\"",
+  "recall_records": 17
+ },
+ {
+  "rank": 187,
+  "cms": [
+   "Valsartan/Hydrochlorothiazide"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "valsartan_hydrochlorothiazide",
+  "exemplar": "0378-6321",
+  "identity_names": [
+   "valsartan",
+   "hydrochlorothiazide"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "valsartan_hydrochlorothiazide (by RXCUI)",
+  "recall_search": "product_description:\"hydrochlorothiazide\" AND product_description:\"valsartan\"",
+  "recall_records": 40
+ },
+ {
+  "rank": 188,
+  "cms": [
+   "Anastrozole"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "anastrozole",
+  "exemplar": "0093-7536",
+  "identity_names": [
+   "anastrozole"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "anastrozole (by RXCUI)",
+  "recall_search": "product_description:\"anastrozole\"",
+  "recall_records": 54
+ },
+ {
+  "rank": 189,
+  "cms": [
+   "Ramipril"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ramipril",
+  "exemplar": "0054-0106",
+  "identity_names": [
+   "ramipril"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ramipril (by RXCUI)",
+  "recall_search": "product_description:\"ramipril\"",
+  "recall_records": 6
+ },
+ {
+  "rank": 190,
+  "cms": [
+   "Ketorolac Tromethamine"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "ketorolac",
+  "exemplar": "0093-0314",
+  "identity_names": [
+   "ketorolac"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"ketorolac\"",
+  "recall_records": 58
+ },
+ {
+  "rank": 191,
+  "cms": [
+   "Ergocalciferol (Vitamin D2)"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "ergocalciferol",
+  "exemplar": "42291-266",
+  "identity_names": [
+   "ergocalciferol"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "ergocalciferol (by RXCUI)",
+  "recall_search": "product_description:\"ergocalciferol\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 194,
+  "cms": [
+   "Linagliptin"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "linagliptin",
+  "exemplar": "0597-0140",
+  "identity_names": [
+   "linagliptin"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "linagliptin (by RXCUI)",
+  "recall_search": "product_description:\"linagliptin\"",
+  "recall_records": 2
+ },
+ {
+  "rank": 196,
+  "cms": [
+   "Lidocaine"
+  ],
+  "expected": "PROPOSED_INACTIVE",
+  "drug_id": "lidocaine",
+  "exemplar": "0054-3500",
+  "identity_names": [
+   "lidocaine"
+  ],
+  "local": "UNSUPPORTED:DRUG_DISABLED",
+  "enriched": "UNSUPPORTED:DRUG_DISABLED",
+  "matched_drug": "",
+  "recall_search": "product_description:\"lidocaine\"",
+  "recall_records": 369
+ },
+ {
+  "rank": 197,
+  "cms": [
+   "Promethazine Hcl"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "promethazine",
+  "exemplar": "0116-4023",
+  "identity_names": [
+   "promethazine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "promethazine (by RXCUI)",
+  "recall_search": "product_description:\"promethazine\"",
+  "recall_records": 18
+ },
+ {
+  "rank": 198,
+  "cms": [
+   "Dexamethasone"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "dexamethasone",
+  "exemplar": "0054-3176",
+  "identity_names": [
+   "dexamethasone"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "dexamethasone (by RXCUI)",
+  "recall_search": "product_description:\"dexamethasone\"",
+  "recall_records": 81
+ },
+ {
+  "rank": 200,
+  "cms": [
+   "Colchicine"
+  ],
+  "expected": "PROPOSED_ACTIVE",
+  "drug_id": "colchicine",
+  "exemplar": "0254-0460",
+  "identity_names": [
+   "colchicine"
+  ],
+  "local": "ELIGIBLE",
+  "enriched": "ELIGIBLE",
+  "matched_drug": "colchicine (by RXCUI)",
+  "recall_search": "product_description:\"colchicine\"",
+  "recall_records": 6
+ }
+]

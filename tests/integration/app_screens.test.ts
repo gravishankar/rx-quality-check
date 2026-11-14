@@ -76,13 +76,13 @@ test('confirmation: each item must be ticked; an incomplete confirmation does no
   assert.equal(m.kind, 'CONFIRM');
   if (m.kind !== 'CONFIRM') return;
   assert.ok(m.fields.some((f) => f.evidence === 'VERIFIED_SOURCE'));
-  assert.ok(m.items.some((i) => i.key === 'lot'), 'lot confirmation offered');
+  assert.ok(m.lotChoiceRequired && m.lot === 'JKU4639A', 'lot choice offered (use / continue without)');
   const before = app.audit.entries.length;
   const partial = await app.send(r.state, confirmationEvent([], null, null));
   assert.notEqual(partial.state.name, 'FETCH_EVIDENCE');
   assert.ok(!['EXPLAIN', 'SAVED'].includes(partial.state.name));
   assert.equal(app.audit.entries.filter((e) => e.host === 'api.fda.gov' && e.url.includes('enforcement')).length, app.audit.entries.slice(0, before).filter((e) => e.url.includes('enforcement')).length);
-  const full = await app.send(r.state, confirmationEvent(m.items.map((i) => i.key), m.lot, m.askRelease ? 'ER' : null));
+  const full = await app.send(r.state, confirmationEvent(m.items.map((i) => i.key), m.lot, m.askRelease ? 'ER' : null, 'USE'));
   const shown = screenFor(full.state, { now: NOW, persistHistory: false });
   assert.ok(shown.kind === 'RESULT' && shown.view.category === 'CONFIRMED', JSON.stringify(shown.kind));
   assert.ok(app.audit.entries.every((e) => !e.url.includes('JKU4639A')), 'lot never transmitted');

@@ -32,7 +32,39 @@ const SALT_CANONICAL: Record<string, string> = {
   etexilate: 'etexilate',
   mofetil: 'mofetil',
   medoxomil: 'medoxomil',
+  // F1 (extended drug list, 2026-11-13): salt words that kept the recall search on the salt name
+  // ("clopidogrel bisulfate") and missed recall notices that use the ingredient name. Deliberately NOT
+  // salt words: "dinitrate" (isosorbide dinitrate is a different ingredient from the mononitrate),
+  // "chloride" (potassium chloride would become "potassium"), "aspartate"/"saccharate" (mixed-salt
+  // amphetamine products need their own handling).
+  bisulfate: 'bisulfate',
+  oxalate: 'oxalate',
+  hydrobromide: 'hydrobromide',
+  hbr: 'hydrobromide',
+  hyclate: 'hyclate',
+  mononitrate: 'mononitrate',
+  propanediol: 'propanediol',
+  phosphate: 'phosphate',
+  gluconate: 'gluconate',
+  palmitate: 'palmitate',
+  tromethamine: 'tromethamine',
+  pamoate: 'pamoate',
+  // The same products are published as "hydrochloride" and "dihydrochloride" (e.g. hydroxyzine);
+  // treating them as different salts would wrongly rule recalls out as DIFFERENT_SALT.
+  dihydrochloride: 'hydrochloride',
 };
+
+const F1_SALT_WORDS = new Set(['bisulfate', 'oxalate', 'hydrobromide', 'hbr', 'hyclate', 'mononitrate', 'propanediol', 'phosphate', 'gluconate', 'palmitate', 'tromethamine', 'pamoate', 'dihydrochloride']);
+
+/**
+ * Minerals and metals. A salt word after these is part of the ingredient's name, not a salt of it:
+ * "sodium phosphate", "calcium gluconate", "ferrous sulfate" and "potassium chloride" are distinct
+ * RxNorm ingredients, never "sodium", "calcium", "ferrous" or "potassium".
+ */
+const MINERAL_BASES = new Set([
+  'sodium', 'potassium', 'calcium', 'magnesium', 'lithium', 'zinc', 'ferrous', 'ferric', 'iron', 'aluminum', 'aluminium',
+  'copper', 'cupric', 'manganese', 'chromium', 'chromic', 'ammonium', 'silver', 'bismuth', 'strontium', 'barium', 'cobalt', 'selenium',
+]);
 const HYDRATE_WORDS = new Set(['trihydrate', 'monohydrate', 'dihydrate', 'sesquihydrate', 'hemihydrate', 'anhydrous', 'hydrate']);
 
 /**
@@ -66,13 +98,28 @@ export function splitIngredientName(published: string): { name: string; salt: st
   let salt: string | null = null;
   for (const w of words) {
     const s = canonicalSalt(w);
-    if (s !== null && base.length > 0) {
+    if (s !== null && base.length > 0 && !base.every((b) => MINERAL_BASES.has(b))) {
       salt ??= s;
       continue;
     }
     if (isHydrateWord(w)) continue;
     if (salt !== null) continue; // words after the salt (rare) are not part of the base name
     base.push(w);
+  }
+  // An F1 salt word is only a salt at the end of the name (other salt and hydrate words may follow
+  // it): "acidulated phosphate fluoride" is one ingredient, not "acidulated" + phosphate. Words that
+  // were salt words before F1 keep their earlier reading.
+  if (salt !== null) {
+    const firstSalt = words.findIndex((w, i) => i >= base.length && canonicalSalt(w) !== null);
+    if (!F1_SALT_WORDS.has(words[firstSalt] ?? '')) {
+      const name = base.join(' ');
+      return { name: NAME_SYNONYMS[name] ?? name, salt };
+    }
+    const tail = words.slice(firstSalt);
+    if (!tail.every((w) => canonicalSalt(w) !== null || isHydrateWord(w))) {
+      const whole = words.filter((w) => !isHydrateWord(w)).join(' ');
+      return { name: NAME_SYNONYMS[whole] ?? whole, salt: null };
+    }
   }
   const name = base.join(' ');
   return { name: NAME_SYNONYMS[name] ?? name, salt };

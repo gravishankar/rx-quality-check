@@ -113,6 +113,14 @@ android {
         versionName versionJson.version
     }
 
+    // Task 4H device verification: never debuggable unless explicitly requested, and never for pilot.
+    def verificationDebuggable = project.findProperty("rxVerificationDebuggable") == "true"
+    // Checked against the tasks requested on the command line (every graph contains a skipped
+    // prePilotReleaseBuild task, so task-graph names cannot be used).
+    if (verificationDebuggable && gradle.startParameter.taskNames.any { it.toLowerCase().contains("pilot") || !it.toLowerCase().contains("dev") }) {
+        throw new GradleException("rxVerificationDebuggable is for development-flavor verification builds only; refusing ${gradle.startParameter.taskNames}.")
+    }
+
     flavorDimensions = ["profile"]
     productFlavors {
         dev {
@@ -147,6 +155,12 @@ android {
     }
 
     buildTypes {
+        release {
+            // Controlled device verification (Task 4H, option A): `scripts/android_build.sh verify`
+            // sets -PrxVerificationDebuggable=true so a tester can inspect the app's private storage
+            // with `adb shell run-as`. Development flavor only; a pilot build in this mode is refused below.
+            debuggable verificationDebuggable
+        }
         debug {
             // Debug variants exist for local development with Metro only; they are never distributed.
         }

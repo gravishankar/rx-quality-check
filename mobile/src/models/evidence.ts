@@ -25,6 +25,8 @@ export interface RecallQuery {
 }
 
 export interface RecallQueryPlan {
+  /** Query-plan version (QUERY_PLAN_VERSION); optional only so older recorded bundles still read. */
+  version?: string;
   queries: RecallQuery[];
   /** The positive control the session must pass before NO_MATCH_FOUND may be reported (RG-2). */
   positiveControl: PositiveControlSpec;
@@ -113,6 +115,9 @@ export type RecordReason =
   | 'DIFFERENT_SALT'
   | 'STRENGTH_DIFFERS'
   | 'STRENGTH_NOT_STATED'
+  | 'STRENGTH_PARTIALLY_STATED'
+  | 'STRENGTH_ASSOCIATION_UNCLEAR'
+  | 'SOURCE_PRODUCT_UNRESOLVED'
   | 'DOSE_FORM_DIFFERS'
   | 'DOSE_FORM_NOT_STATED'
   | 'RELEASE_DIFFERS'
@@ -160,6 +165,8 @@ export type Limitation =
   | 'PRODUCT_NOT_IDENTIFIED'
   | 'LOT_NOT_PROVIDED'
   | 'SOME_QUERIES_INCOMPLETE'
+  | 'SEARCH_TERMS_INCOMPLETE'
+  | 'DATASET_DATE_INVALID'
   | 'POSITIVE_CONTROL_NOT_PASSED'
   | 'SOME_RECORDS_UNPARSEABLE'
   | 'SOURCE_PRODUCT_NOT_ESTABLISHED';
@@ -172,7 +179,16 @@ export interface RecallFinding {
   unresolved: RecordAssessment[];
   notApplicable: RecordAssessment[];
   coverage: {
+    /** Every query fully retrieved, the positive control passed, and the search was adequate. */
     complete: boolean;
+    /**
+     * The plan asked for every ingredient name and alias and every required NDC (C2). Distinct from
+     * pagination: all pages of an inadequate search can be retrieved and still miss records.
+     * Optional only so results saved before C2 still read; absent is treated as not adequate.
+     */
+    searchAdequate?: boolean;
+    /** Version of the query plan the searches were built with (review item 2). */
+    queryPlanVersion?: string;
     queries: QueryCoverage[];
     positiveControl: PositiveControlResult;
     datasetLastUpdated: string | null;

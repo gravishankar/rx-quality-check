@@ -58,11 +58,39 @@ const CONFIRM_TEXT: Record<string, string> = {
   release: 'I answered the release-type question from my label.',
 };
 
+export type LotChoice = 'USE' | 'NOT_USED';
+/** The release answer: a mechanism, or 'UNKNOWN' when the patient cannot tell (never a guess). */
+export type ReleaseChoice = ReleaseMechanism | 'UNKNOWN';
+export interface ConfirmSelection {
+  ticked: string[];
+  lotChoice: LotChoice | null;
+  release: ReleaseChoice | null;
+}
+
 export type ScreenModel =
   | { kind: 'WORKING'; text: string }
   | { kind: 'ENTRY_PROBLEM'; text: string; missing: string[] }
   | { kind: 'CHOOSE_PRODUCT'; text: string; options: { index: number; title: string; fields: FieldView[] }[] }
-  | { kind: 'CONFIRM'; fields: FieldView[]; items: ConfirmItem[]; askRelease: boolean; lot: string | null; notice: string | null }
+  | {
+      kind: 'CONFIRM';
+      fields: FieldView[];
+      items: ConfirmItem[];
+      askRelease: boolean;
+      lot: string | null;
+      notice: string | null;
+      /** No NDC was read or typed: explain what can and cannot be checked from name, strength and form. */
+      noNdc: boolean;
+      /** Every confirmation the engine requires (review item 10): the screen's readiness follows it. */
+      required: string[];
+      /** A lot was read or typed: the patient must choose to use it or continue without it. */
+      lotChoiceRequired: boolean;
+      /** Shown when the patient says they cannot tell the release mechanism (review item 11). */
+      releaseUnknownHelp: string[];
+      /** True when the choices satisfy every engine requirement. */
+      ready(sel: ConfirmSelection): boolean;
+      /** What is still needed, in plain words, when not ready. */
+      stillNeeded(sel: ConfirmSelection): string[];
+    }
   | { kind: 'RESULT'; view: ResultView; fields: FieldView[]; canSave: boolean; saved: boolean; saveError: string | null }
   | { kind: 'NOT_ASSESSED'; view: NotAssessedView }
   | { kind: 'SOURCE_PROBLEM'; headline: string; body: string; canRetry: boolean };
@@ -110,12 +138,32 @@ export function screenFor(s: WorkflowState, o: ScreenOptions): ScreenModel {
       if (!c.identity) return { kind: 'SOURCE_PROBLEM', headline: COPY.errors.generic, body: '', canRetry: false };
       const keys = c.requiredConfirmations.length > 0 ? c.requiredConfirmations : ['identity'];
       const lot = c.extraction?.lot?.value ?? null;
-      const items = keys.filter((k) => k !== 'release').map((k) => ({ key: k, text: CONFIRM_TEXT[k] ?? `I checked: ${k}` }));
-      if (lot && !keys.includes('lot')) items.push({ key: 'lot', text: COPY.confirm.lotConfirm });
+      // Lot and release are answered by their own choices, not by a tick (review items 10, 11).
+      const items = keys.filter((k) => k !== 'release' && k !== 'lot').map((k) => ({ key: k, text: CONFIRM_TEXT[k] ?? `I checked: ${k}` }));
+      const askRelease = keys.includes('release');
+      const lotChoiceRequired = lot !== null;
+      const stillNeeded = (sel: ConfirmSelection): string[] => [
+        ...items.filter((i) => !sel.ticked.includes(i.key)).map((i) => i.text),
+        ...(lotChoiceRequired && sel.lotChoice === null ? [COPY.confirm.needLotChoice] : []),
+        ...(askRelease && (sel.release === null || sel.release === 'UNKNOWN' || sel.release === 'UNSPECIFIED') ? [COPY.confirm.needRelease] : []),
+      ];
       // An NDC was typed but no FDA listing was used: say so (OD-23), instead of only "Not identified".
       const ndcTyped = (c.extraction?.ndcTexts.length ?? 0) > 0;
       const notice = ndcTyped && c.identity.productNdc === null ? COPY.confirm.ndcNotFound : null;
-      return { kind: 'CONFIRM', fields: identityFields(c.identity, c.extraction), items, askRelease: keys.includes('release'), lot, notice };
+      return {
+        kind: 'CONFIRM',
+        fields: identityFields(c.identity, c.extraction),
+        items,
+        askRelease,
+        lot,
+        notice,
+        noNdc: !ndcTyped && c.identity.productNdc === null,
+        required: [...keys],
+        lotChoiceRequired,
+        releaseUnknownHelp: [...COPY.confirm.releaseUnknownHelp],
+        ready: (sel) => stillNeeded(sel).length === 0,
+        stillNeeded,
+      };
     }
     case 'EXPLAIN':
     case 'SAVED':
@@ -146,8 +194,20 @@ export function screenFor(s: WorkflowState, o: ScreenOptions): ScreenModel {
   }
 }
 
-/** Build the USER_CONFIRMED event from what the user ticked. The machine rejects missing fields. */
-export function confirmationEvent(ticked: string[], lot: string | null, release: ReleaseMechanism | null) {
-  const fields = [...new Set([...ticked, ...(release ? ['release'] : [])])].sort();
-  return { type: 'USER_CONFIRMED' as const, confirmedFields: fields, lot: ticked.includes('lot') ? lot : null, ...(release ? { release } : {}) };
+/**
+ * Build the USER_CONFIRMED event from the patient's choices. The lot is used only with an explicit
+ * "use this lot"; "continue without the lot" sends none. A release of 'UNKNOWN' is not sent, so the
+ * engine keeps the release unconfirmed and no check starts (review items 10, 11).
+ */
+export function confirmationEvent(ticked: string[], lot: string | null, release: ReleaseChoice | null, lotChoice?: LotChoice | null) {
+  const choice: LotChoice | null = lotChoice ?? (ticked.includes('lot') ? 'USE' : null);
+  const stated = release !== null && release !== 'UNKNOWN' && release !== 'UNSPECIFIED' ? release : null;
+  const fields = [...new Set([...ticked.filter((t) => t !== 'lot'), ...(choice === 'USE' ? ['lot'] : []), ...(stated ? ['release'] : [])])].sort();
+  return {
+    type: 'USER_CONFIRMED' as const,
+    confirmedFields: fields,
+    lot: choice === 'USE' ? lot : null,
+    ...(choice ? { lotChoice: choice } : {}),
+    ...(stated ? { release: stated } : {}),
+  };
 }

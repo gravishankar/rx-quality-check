@@ -19,8 +19,7 @@ import type { CachedResult, Capture } from '../state/machine.ts';
 import type { LabelExtraction } from '../models/identity.ts';
 import { directoryProductFrom } from '../rules/identity.ts';
 import { packageKey, productKeyOfProductNdc } from '../rules/ndc.ts';
-import { sameStrengthSet } from '../rules/strength.ts';
-import type { Strength } from '../models/identity.ts';
+import { sameStrength } from '../rules/strength.ts';
 import type { OpenFdaClient, NdcDirectoryOutcome } from './openfda.ts';
 import { enforcementUrl, ndcUrl } from './openfda.ts';
 import { conceptsOf, type RxNavClient } from './rxnav.ts';
@@ -86,12 +85,18 @@ async function cached<T>(
   return r;
 }
 
-function sameFormulation(a: MedicationIdentity, b: ReturnType<typeof directoryProductFrom>): boolean {
+export function sameFormulation(a: MedicationIdentity, b: ReturnType<typeof directoryProductFrom>): boolean {
   const names = (xs: { name: string }[]) => xs.map((x) => x.name).sort().join('+');
   if (names(a.ingredients) !== names(b.ingredients)) return false;
-  const sa = a.ingredients.map((i) => i.strength);
-  const sb = b.ingredients.map((i) => i.strength);
-  if (sa.some((s) => s === null) || sb.some((s) => s === null) || !sameStrengthSet(sa as Strength[], sb as Strength[])) return false;
+  // Each ingredient's own strength (C1/C3): swapped combination strengths are a different product.
+  if (new Set(a.ingredients.map((i) => i.name)).size !== a.ingredients.length) return false;
+  for (const ia of a.ingredients) {
+    const ib = b.ingredients.find((x) => x.name === ia.name);
+    if (!ia.strength || !ib?.strength || !sameStrength(ia.strength, ib.strength)) return false;
+    // Review round 2, issue 3: the salt is part of the formulation (an unknown salt on either side
+    // cannot be verified as the same).
+    if ((ia.salt ?? null) !== (ib.salt ?? null)) return false;
+  }
   return a.doseForm === b.doseForm && a.release === b.release;
 }
 
@@ -127,35 +132,58 @@ export function createLivePorts(o: LivePortsOptions): Ports {
       return { ...identity, sourceProductStatus: identity.isOriginalPackager === false ? 'NOT_ESTABLISHED' : 'NOT_CHECKED' };
     }
     const verified: string[] = [];
+    // unavailable: a lookup failed. incomplete: the chain could not be followed to its end (depth
+    // limit, a cycle, an unreadable SPL further down, or a source whose packager status is unknown).
     let unavailable = false;
+    let incomplete = false;
+    const self = productKeyOfProductNdc(identity.productNdc);
     const visited = new Set<string>();
     const walk = async (productNdc: string, setId: string | null, depth: number): Promise<void> => {
       const key = productKeyOfProductNdc(productNdc);
-      if (key === null || visited.has(key) || depth >= MAX_SOURCE_DEPTH || setId === null) return;
+      if (key === null || setId === null) return void (incomplete = true);
+      if (visited.has(key)) return void (incomplete = true);
+      if (depth >= MAX_SOURCE_DEPTH) return void (incomplete = true);
       visited.add(key);
       const spl = await o.dailymed!.splXml(setId);
       if (spl.kind !== 'OK') {
         if (spl.kind !== 'NO_MATCH') unavailable = true;
+        else if (depth > 0) incomplete = true;
         return;
       }
       const reading = sourceProductsFromSpl(spl.data, productNdc);
-      if (reading.kind !== 'SOURCES') return;
+      if (reading.kind === 'UNREADABLE') return void (unavailable = true);
+      if (reading.kind !== 'SOURCES') {
+        // A source that is itself a repackager but declares nothing: the chain stops short.
+        if (depth > 0) incomplete = true;
+        return;
+      }
       for (const src of reading.sourceProductNdcs) {
+        if (productKeyOfProductNdc(src) === self) {
+          incomplete = true; // the chain leads back to the product itself
+          continue;
+        }
         const res = await lookupProduct(src);
         if (res.kind !== 'OK') {
           if (res.kind !== 'NO_MATCH') unavailable = true;
+          else incomplete = true;
           continue;
         }
+        // Review round 2, issue 2: a declared source that the directory does not list under its NDC,
+        // or lists with another formulation, is a rejected branch: the chain is not fully verified.
+        let branchVerified = false;
         for (const rec of res.data.results) {
           const p = directoryProductFrom(rec);
           if (productKeyOfProductNdc(p.productNdc) !== productKeyOfProductNdc(src) || !sameFormulation(identity, p)) continue;
+          branchVerified = true;
           if (!verified.includes(p.productNdc)) verified.push(p.productNdc);
           if (p.isOriginalPackager === false) await walk(p.productNdc, p.splSetId ?? null, depth + 1);
+          else if (p.isOriginalPackager !== true) incomplete = true;
         }
+        if (!branchVerified) incomplete = true;
       }
     };
     await walk(identity.productNdc, identity.splSetId ?? null, 0);
-    const status = verified.length > 0 ? 'VERIFIED' : unavailable ? 'UNAVAILABLE' : 'NOT_ESTABLISHED';
+    const status = verified.length > 0 ? (unavailable || incomplete ? 'PARTIAL' : 'VERIFIED') : unavailable ? 'UNAVAILABLE' : 'NOT_ESTABLISHED';
     return { ...identity, relatedSourceProductNdcs: verified, sourceProductStatus: status };
   }
 

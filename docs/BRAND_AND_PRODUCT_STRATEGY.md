@@ -10,7 +10,7 @@ conflict (`docs/BRAND_CLEARANCE.md`); nothing here is trademark clearance or leg
 | First feature | **Medication Recall Check** | `config/brand.json` → `features.recall_check` |
 | Version | 0.1.0 | `config/brand.json` → `app_version` (Android `versionName`, app About screen) |
 | Legal entity | `[LEGAL ENTITY NAME]` — not yet provided | `config/brand.json` → `legal_entity` |
-| Unchanged identifiers | Android/iOS ID `org.rxrecallcheck.app`, repository `rx-quality-check`, signing keys | Not derived from the brand; change only after owner approval of a final name |
+| Unchanged identifiers | Android/iOS ID `org.rxrecallcheck.app`, repository `rx-quality-check`, signing keys | Not derived from the brand; change only after team approval of a final name |
 
 ## 1. Positioning: consumer first
 
@@ -83,5 +83,5 @@ for the current working name.
 ## 7. Naming clearance requirements
 
 See `docs/BRAND_CLEARANCE.md` §4. In short: counsel clearance (USPTO, state, common law; classes 9,
-42, 44), app-store and domain availability, similar-name review, owner decision. Until then the
-name is used only in owner-only builds and draft documents, and the release gate blocks a pilot.
+42, 44), app-store and domain availability, similar-name review, team decision. Until then the
+name is used only in internal builds and draft documents, and the release gate blocks a pilot.

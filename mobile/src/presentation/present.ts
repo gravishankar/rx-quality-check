@@ -12,6 +12,7 @@ import { COPY } from '../copy/en.ts';
 import type { RecallFinding, RecordAssessment } from '../models/evidence.ts';
 import type { LabelExtraction, MedicationIdentity } from '../models/identity.ts';
 import type { ExclusionDecision } from '../models/policy.ts';
+import { datasetDateUsable, sourceProductUncertain } from '../rules/recallEvidence.ts';
 
 /** Acceptance policy for freshness (EVIDENCE_AND_CLAIMS_POLICY.md §5). */
 export const FRESHNESS = {
@@ -180,6 +181,9 @@ export function identityFields(identity: MedicationIdentity, extraction: LabelEx
     case 'VERIFIED':
       out.push(f('source', COPY.fields.source, identity.relatedSourceProductNdcs.join(', '), 'VERIFIED_SOURCE', COPY.fields.sourceVerified));
       break;
+    case 'PARTIAL':
+      out.push(f('source', COPY.fields.source, identity.relatedSourceProductNdcs.join(', '), 'UNVERIFIED', COPY.fields.sourcePartial));
+      break;
     case 'NOT_ESTABLISHED':
     case 'UNAVAILABLE':
       out.push(f('source', COPY.fields.source, 'Unknown', 'UNAVAILABLE', COPY.fields.sourceUnknown));
@@ -213,6 +217,7 @@ function noMatchIsSupported(identity: MedicationIdentity, f: RecallFinding, eval
   const inconsistent: string[] = [];
   const stale: string[] = [];
   if (!f.coverage.complete) inconsistent.push(COPY.result.downgrade.incomplete);
+  if (f.coverage.searchAdequate !== true) inconsistent.push(COPY.result.downgrade.searchIncomplete);
   if (f.coverage.positiveControl.status !== 'PASSED') inconsistent.push(COPY.result.downgrade.controlFailed);
   if (f.coverage.queries.some((q) => q.status !== 'COMPLETE')) inconsistent.push(COPY.result.downgrade.incomplete);
   if (f.confirmed.length + f.potential.length > 0) inconsistent.push('records that match or might match were present');
@@ -221,7 +226,8 @@ function noMatchIsSupported(identity: MedicationIdentity, f: RecallFinding, eval
   const ageH = (Date.parse(now) - Date.parse(evaluatedAt)) / 3_600_000;
   if (!(ageH >= 0 && ageH <= FRESHNESS.maxResultAgeHours)) stale.push(COPY.result.downgrade.staleResult(isoMinute(evaluatedAt)));
   const ds = f.coverage.datasetLastUpdated;
-  if (ds === null) inconsistent.push('FDA dataset date unknown');
+  if (ds === null) inconsistent.push(COPY.result.downgrade.datasetDateUnknown);
+  else if (!datasetDateUsable(ds, evaluatedAt)) inconsistent.push(COPY.result.downgrade.datasetDateInvalid);
   else if ((Date.parse(evaluatedAt) - Date.parse(`${ds}T00:00:00Z`)) / 86_400_000 > FRESHNESS.maxDatasetAgeDays) stale.push(COPY.result.downgrade.staleSource(ds));
   return { inconsistent: [...new Set(inconsistent)], stale };
 }
@@ -332,6 +338,8 @@ const LIMITATION_TEXT: Partial<Record<RecallFinding['limitations'][number], stri
   PRODUCT_NOT_IDENTIFIED: COPY.result.qualifiers.productNotIdentified,
   LOT_NOT_PROVIDED: COPY.result.qualifiers.lotNotProvided,
   SOME_QUERIES_INCOMPLETE: COPY.result.downgrade.incomplete,
+  SEARCH_TERMS_INCOMPLETE: COPY.result.downgrade.searchIncomplete,
+  DATASET_DATE_INVALID: COPY.result.downgrade.datasetDateInvalid,
   POSITIVE_CONTROL_NOT_PASSED: COPY.result.downgrade.controlFailed,
   SOME_RECORDS_UNPARSEABLE: COPY.result.downgrade.unreadable,
   SOURCE_PRODUCT_NOT_ESTABLISHED: COPY.result.qualifiers.sourceNotEstablished,
@@ -391,8 +399,11 @@ export function presentResult(input: PresentInput): ResultView {
     if (identity.level !== 'PRODUCT') qualifiers.push(COPY.result.qualifiers.productNotIdentified, COPY.result.qualifiers.userEnteredIdentity);
     if (identity.sourceProductStatus === 'NOT_ESTABLISHED') qualifiers.push(COPY.result.qualifiers.sourceNotEstablished);
     if (identity.sourceProductStatus === 'UNAVAILABLE') qualifiers.push(COPY.result.qualifiers.sourceUnavailable);
+    if (identity.sourceProductStatus === 'PARTIAL') qualifiers.push(COPY.result.qualifiers.sourcePartial);
+    if ((identity.sourceProductStatus ?? 'NOT_CHECKED') === 'NOT_CHECKED' && sourceProductUncertain(identity)) qualifiers.push(COPY.result.qualifiers.sourceNotChecked);
     if (identity.lot === null && f.potential.concat(f.confirmed).some((r) => r.reasons.includes('LOT_REQUIRED'))) qualifiers.push(COPY.result.qualifiers.lotNotProvided);
   }
+  if (f.potential.some((r) => r.reasons.includes('SOURCE_PRODUCT_UNRESOLVED'))) qualifiers.push(COPY.result.qualifiers.sourceUnresolvedPossible);
   if (input.origin === 'SAVED') qualifiers.push(COPY.errors.offline(asOf));
 
   const headline =

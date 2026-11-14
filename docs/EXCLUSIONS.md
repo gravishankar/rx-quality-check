@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Policy version | `0.2.0-draft` (schema 2; editing guide: `docs/EXCLUSION_POLICY_GUIDE.md`) |
-| Status | **Proposed — pending owner approval (OD-2)** |
+| Status | **Proposed — pending team approval (OD-2)** |
 | Machine-readable policy | `data/exclusion_policy.json` |
 | Source | Document B, `docs/references/Drugs Exclusion List.md` |
 | Last reviewed | 2026-11-12 |
@@ -22,7 +22,7 @@
 
 ## Task 3 decisions
 
-- Azathioprine and mycophenolate are excluded **by ingredient, regardless of indication** (product owner, 2026-11-12). This resolves the §4 review flag.
+- Azathioprine and mycophenolate are excluded **by ingredient, regardless of indication** (project team, 2026-11-12). This resolves the §4 review flag.
 - **OTC products are excluded** from MVP v0.1 (policy rule `OTC-MVP`; OD-3 closed).
 - The administration-based rule stays an open decision (OD-1), encoded as route rule `ADMIN-NON-ORAL` with interim decision `UNSUPPORTED`.
 - Precedence, conflict resolution and fail-closed behavior: `docs/EXCLUSION_POLICY_GUIDE.md` §3.

@@ -74,6 +74,9 @@ export function formEvidenceFromText(text: string): TextFormEvidence {
 
   const nonOral: NonOralSignal[] = [];
   if (/\bINJECTIONS?\b|\bINJECTABLE\b|\bVIALS?\b|\bINTRAVENOUS\b|\bI\.?V\.?\b(?=\s)|\bMDV\b|\bSDV\b/.test(upper)) nonOral.push('INJECTION');
+  // F2: infusion wording (diluent named after "in", infusion devices, parenteral nutrition). "Syringe"
+  // alone is not a signal: oral syringes exist.
+  if (/\bIN (?:NS|D5W|D5NS|D5LR|LR|SWFI|NACL|0\.9% (?:NACL|SODIUM CHLORIDE)|NORMAL SALINE|DEXTROSE)\b|\bHOMEPUMPS?\b|\bELASTOMERIC\b|\bINFUSIONS?\b|\bIVPB\b|\bPIGGYBACK\b|\bTPN\b|\bPARENTERAL\b/.test(upper) && !nonOral.includes('INJECTION')) nonOral.push('INJECTION');
   if (/\bCREAM\b|\bOINTMENT\b|\bGEL\b|\bLOTION\b|\bTOPICAL\b|\bPATCH\b/.test(upper)) nonOral.push('TOPICAL');
   if (/\bOPHTHALMIC\b|\bEYE DROPS?\b/.test(upper)) nonOral.push('OPHTHALMIC');
   if (/\bINHALATION\b|\bNEBULI[ZS]ER\b|\bSVN\b|\bINHALER\b/.test(upper)) nonOral.push('INHALATION');

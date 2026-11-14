@@ -125,7 +125,7 @@ test('EX-7: metoprolol tartrate (single ingredient) → UNSUPPORTED / SALT_NOT_I
   if (s.ok) assert.equal(decide(s.identity).decision, 'ELIGIBLE');
 });
 
-test('OTC products are EXCLUDED by policy rule OTC-MVP (product owner decision, Task 3; closes OD-3)', () => {
+test('OTC products are EXCLUDED by policy rule OTC-MVP (project team decision, Task 3; closes OD-3)', () => {
   // Task 2 returned UNSUPPORTED / OTC_PENDING_DECISION while OD-3 was open.
   const d = decide(fromNdc('ndc_omeprazole_otc'));
   assert.equal(d.decision, 'EXCLUDED');

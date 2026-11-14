@@ -116,8 +116,10 @@ async function type(r: ReactTestRenderer, label: string, value: string) {
   await act(async () => input.props.onChangeText(value));
 }
 
+// Confirms everything: "use this lot" (not "continue without it") and never "I can't tell".
+const OPPOSITE_CHOICES = new Set<string>([COPY.confirm.lotNotUsed, COPY.confirm.releaseUnknown]);
 async function toggleAll(r: ReactTestRenderer, except: (label: string) => boolean = () => false) {
-  for (const s of r.root.findAllByType(Switch)) if (!except(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
+  for (const s of r.root.findAllByType(Switch)) if (!except(s.props.accessibilityLabel) && !OPPOSITE_CHOICES.has(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
 }
 
 async function start(p = platform()) {
@@ -468,3 +470,55 @@ test('build 7, offline: a failed lookup never shows a summary or a no-match', as
   expect(t).not.toContain(COPY.result.categoryLabel.NO_MATCH);
   expect(t).not.toContain(COPY.result.excluded.title);
 }, 60_000);
+
+test('item 10: with a lot entered, the button waits for a lot choice and says what is missing; "continue without" checks without the lot', async () => {
+  const { r, p } = await start();
+  await accept(r);
+  await enter(r, { ...SUN, lot: 'JKU4639A' });
+  await toggleAll(r, (l) => l === COPY.confirm.lotUse('JKU4639A'));
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(false);
+  expect(allText(r)).toContain(COPY.confirm.needLotChoice);
+  const notUsed = r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === COPY.confirm.lotNotUsed)!;
+  await act(async () => notUsed.props.onValueChange(true));
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  const t = allText(r);
+  expect(t).toContain(COPY.result.POTENTIAL.headline); // the lot was not used: never "recall match found"
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+  expect(p.requests.every((u) => !u.includes('JKU4639A'))).toBe(true);
+});
+
+test('item 11: "I can\'t tell" the release type shows where to look and to ask a pharmacist, and no check starts', async () => {
+  const { r, p } = await start();
+  await accept(r);
+  await enter(r, { ndc: '', name: 'METFORMIN', strength: '500 MG', form: 'TABLET' }); // release not printed
+  expect(allText(r)).toContain(COPY.confirm.releaseQuestion);
+  const before = p.requests.filter((u) => u.includes('enforcement')).length;
+  await toggleAll(r, (l) => [COPY.confirm.releaseIR, COPY.confirm.releaseER, COPY.confirm.releaseDR].includes(l));
+  const unknown = r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === COPY.confirm.releaseUnknown)!;
+  await act(async () => unknown.props.onValueChange(true));
+  const t = allText(r);
+  for (const h of COPY.confirm.releaseUnknownHelp) expect(t).toContain(h);
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(false);
+  expect(p.requests.filter((u) => u.includes('enforcement')).length).toBe(before);
+});
+
+test('explicit: "I can\'t tell" blocks the check; after finding "ER" on the label the patient can choose it and the check runs', async () => {
+  const { r, p } = await start();
+  await accept(r);
+  await enter(r, { ndc: '', name: 'METFORMIN', strength: '500 MG', form: 'TABLET' });
+  const sw = (l: string) => r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === l)!;
+  for (const s of r.root.findAllByType(Switch)) if (![COPY.confirm.releaseIR, COPY.confirm.releaseER, COPY.confirm.releaseDR, COPY.confirm.releaseUnknown].includes(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
+  await act(async () => sw(COPY.confirm.releaseUnknown).props.onValueChange(true));
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(false);
+  expect(allText(r)).toContain(COPY.confirm.needRelease);
+  const before = p.requests.filter((u) => u.includes('enforcement')).length;
+  await act(async () => sw(COPY.confirm.releaseER).props.onValueChange(true));
+  expect(sw(COPY.confirm.releaseUnknown).props.value).toBe(false);
+  expect(allText(r)).not.toContain(COPY.confirm.releaseUnknownHelp[0]);
+  expect(isEnabled(r, COPY.confirm.confirmAll)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  expect(p.requests.filter((u) => u.includes('enforcement')).length).toBeGreaterThan(before);
+  expect(allText(r)).toContain(COPY.result.limitsTitle); // a result screen, with its limits
+  expect(allText(r)).not.toContain(COPY.confirm.title);
+});

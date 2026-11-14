@@ -8,7 +8,9 @@ servers and collects no data.
 **Task 4C (implemented, Android):** *Scan medication label* opens the phone's camera app through
 `ACTION_IMAGE_CAPTURE`, which writes one photo into the app's private cache (`cache/scans/`, shared
 with the camera app only through a non-exported FileProvider for that photo). The app decodes it into
-memory, deletes the file immediately (also on failure and on cancel; leftovers are cleared at start),
+memory, deletes the file immediately and checks that it is gone (also on failure, cancel and camera
+launch failure; a file that cannot be deleted is emptied; leftovers from an interrupted process are
+cleared at the next start), revokes the camera app's access to the file when it returns,
 runs text recognition (PaddleOCR PP-OCRv3 on ONNX Runtime 1.28.0) and barcode decoding (ZXing-cpp) on
 the phone, and returns only recognized lines and barcode payloads to the app. The app holds **no
 CAMERA permission**, writes nothing to the gallery, uploads nothing and logs nothing. All label text
@@ -19,7 +21,8 @@ any permission other than INTERNET or any known telemetry component appears in t
 
 
 - Camera frames are processed in memory by an on-device OCR and barcode engine (selection in Task 5, OD-5).
-- Images are not written to disk and not uploaded. Temporary buffers are released after extraction. Saving a label photo is out of scope for v0.1.
+- **Trust boundary (review item 8):** the photo is taken by the phone's camera app, a separate app this app does not control. It writes the photo into this app's private cache; some camera apps may also keep their own copy or use the network on their own. This app cannot verify or prevent that (device check, per camera app). An in-app camera would remove this boundary; it is assessed as a future option, not implemented.
+- The photo is briefly written to the app's private cache (above), then deleted; it is never uploaded or saved by this app. Temporary buffers are released after extraction. Saving a label photo is out of scope for v0.1.
 - **Engine requirement:** the selected OCR/barcode library must run with no network access at inference time and must not transmit images, text or usage metrics. Libraries that download models or send diagnostics (some vendor SDKs do) must be configured to disable this, or be rejected. This is verified in Task 5 with a network capture during scanning (TEST_PLAN PV-3).
 - Extracted text is shown to the user for confirmation and then reduced to structured fields; raw OCR text is not persisted.
 

@@ -2,21 +2,20 @@
  * Root component: a small state-based router (no navigation library). Screens render screen
  * models from src/app/screens.ts; every result passes through the presentation layer.
  */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { COPY } from '../src/copy/en.ts';
 import { confirmationEvent, entryFromExtraction, screenFor } from '../src/app/screens.ts';
-import { readScan } from '../src/scanner/readScan.ts';
+import { photoLeftBehind, readScan } from '../src/scanner/readScan.ts';
 import { vocabularyFromConfig } from '../src/scanner/vocabulary.ts';
 import { acknowledge, documentsNeedingAcknowledgement, memoryConsentStore, type Acknowledgements, type ConsentStore } from '../src/legal/consent.ts';
 import { LEGAL_DOCUMENTS, type LegalDocumentId } from '../src/legal/documents.ts';
-import { deleteAllData, openStorage, type Repositories } from '../src/storage/repositories.ts';
-import type { SqlDriver } from '../src/storage/driver.ts';
+import { createStorageLifecycle, type StorageState } from '../src/storage/lifecycle.ts';
 import { CATALOG_JSON, POLICY_JSON, PROFILE } from './config.ts';
 import type { PlatformServices } from './platform/types.ts';
 import { useRecallSession } from './useRecallSession.ts';
-import { Banner, Link, P, Screen, Working } from './ui/kit.tsx';
+import { Banner, Card, Link, P, Screen, Working } from './ui/kit.tsx';
 import { About } from './screens/About.tsx';
 import { Choose } from './screens/Choose.tsx';
 import { Confirm } from './screens/Confirm.tsx';
@@ -44,26 +43,34 @@ type Route = { name: 'check' } | { name: 'history' } | { name: 'about' } | { nam
 const defaultConsent = memoryConsentStore();
 
 export function AppRoot({ platform, consent = defaultConsent }: { platform: PlatformServices; consent?: ConsentStore }) {
-  const [db, setDb] = useState<{ driver: SqlDriver; repos: Repositories } | null>(null);
+  // Review item 7: one lifecycle owns the database (open, delete, recreate, failures).
+  const storage = useMemo(
+    () =>
+      createStorageLifecycle({
+        enabled: PROFILE.persistHistory,
+        open: () => platform.openEncryptedDatabase(),
+        keyStore: platform.keyStore,
+        deps: { now: () => new Date().toISOString(), newId: () => [...platform.randomBytes(16)].map((b) => b.toString(16).padStart(2, '0')).join('') },
+      }),
+    [platform],
+  );
+  const [storageState, setStorageState] = useState<StorageState>(storage.state());
+  const db = storageState.status === 'READY' ? { repos: storageState.repos } : null;
   const [acks, setAcks] = useState<Acknowledgements | null>(null);
   const [route, setRoute] = useState<Route>({ name: 'check' });
   const [entry, setEntry] = useState(EMPTY_ENTRY);
   // Task 4C: scanning is the primary path where a scanner exists; typing is the fallback.
   const canScan = platform.scanner !== undefined;
   const [mode, setMode] = useState<'scan' | 'type'>(canScan ? 'scan' : 'type');
-  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; reason?: string; notice?: string; detail?: string }>({ phase: 'idle' });
+  const [scanPhase, setScanPhase] = useState<{ phase: 'idle' | 'reading' | 'problem'; kind?: 'UNREADABLE' | 'NOT_FOUND'; reason?: string; notice?: string; detail?: string }>({ phase: 'idle' });
   const [scanInfo, setScanInfo] = useState<ScanInfo | null>(null);
+  const [photoLeft, setPhotoLeft] = useState(false);
   const session = useRecallSession(platform, db?.repos ?? null);
 
   useEffect(() => {
     void consent.load().then(setAcks);
-    if (!PROFILE.persistHistory) return;
-    void (async () => {
-      const driver = await platform.openEncryptedDatabase();
-      const { repos } = await openStorage(driver, { now: () => new Date().toISOString(), newId: () => [...platform.randomBytes(16)].map((b) => b.toString(16).padStart(2, '0')).join('') });
-      setDb({ driver, repos });
-    })();
-  }, [platform]);
+    void storage.start().then(setStorageState);
+  }, [storage]);
 
   // Android Back: from any screen other than the entry screen, go back to it instead of leaving the
   // app (iOS has no Back button; the listener is a no-op there).
@@ -83,7 +90,19 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     return () => sub.remove();
   }, [atHome, route, session, canScan]);
 
-  const banner = <Banner dev={PROFILE.kind === 'development'} text={PROFILE.kind === 'development' ? COPY.app.devBanner : COPY.app.pilotBanner} />;
+  // Review round 3: a label photo the scanner could not remove is reported on every screen, whatever
+  // the identification outcome (excluded, unsupported, missing information, ambiguous, source error,
+  // confirmation, result), until a later scan reports the photo storage clean.
+  const banner = (
+    <>
+      <Banner dev={PROFILE.kind === 'development'} text={PROFILE.kind === 'development' ? COPY.app.devBanner : COPY.app.pilotBanner} />
+      {photoLeft ? (
+        <Card tone="CAUTION" label={COPY.scan.photoNotDeletedTitle}>
+          <P>{COPY.scan.photoNotDeleted}</P>
+        </Card>
+      ) : null}
+    </>
+  );
   const openDoc = (id: LegalDocumentId) => setRoute({ name: 'doc', id, back: route });
   const openUrl = (u: string) => void platform.openUrl(u);
   const home = useCallback(() => {
@@ -101,16 +120,20 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     setScanInfo(null);
     setScanPhase({ phase: 'reading' });
     try {
-      const out = await platform.scanner.scanLabel();
-      if (out === null) {
+      const res = await platform.scanner.scanLabel();
+      // Review round 2, issue 5: a photo the scanner could not remove is always reported.
+      setPhotoLeft(photoLeftBehind(res));
+      if (res === null || 'cancelled' in res) {
         setScanPhase({ phase: 'idle', notice: COPY.scan.cancelled });
         return;
       }
+      const out = res;
       const r = readScan(out, VOCABULARY);
       setEntry(entryFromExtraction(r.extraction));
       if (r.problems.includes('NOTHING_READ') || r.problems.includes('NO_DRUG_FIELDS')) {
         const detail = PROFILE.kind === 'development' ? `${out.lines.length} text lines, ${out.barcodes.length} barcodes${ocrStatsText(out)}${out.warnings?.length ? `; ${out.warnings.join('; ')}` : ''}` : undefined;
-        setScanPhase({ phase: 'problem', reason: r.problems.includes('NOTHING_READ') ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
+        const nothing = r.problems.includes('NOTHING_READ');
+        setScanPhase({ phase: 'problem', kind: nothing ? 'UNREADABLE' : 'NOT_FOUND', reason: nothing ? COPY.scan.nothingRead : COPY.scan.noDrugFields, ...(detail ? { detail } : {}) });
         return;
       }
       const t = out.timings;
@@ -128,6 +151,8 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       // Development builds show the technical cause (exception type and location; no label content).
       const err = e as { code?: string; message?: string };
       const detail = PROFILE.kind === 'development' ? `${err.code ?? 'ERROR'}: ${err.message ?? String(e)}` : undefined;
+      // An error that does not report the photo leaves the earlier status unchanged (never "clean").
+      if (photoLeftBehind(e)) setPhotoLeft(true);
       setScanPhase({ phase: 'problem', reason: COPY.scan.failed, ...(detail ? { detail } : {}) });
     }
   }, [platform, session]);
@@ -146,7 +171,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
   if (documentsNeedingAcknowledgement(acks).length > 0) {
     return wrap(banner, <FirstLaunch pilot={PROFILE.kind === 'pilot'} onOpenDoc={openDoc} onAccept={() => { const a = acknowledge(acks, new Date().toISOString()); void consent.save(a); setAcks(a); }} />);
   }
-  if (route.name === 'history') return wrap(banner, <History repos={db?.repos ?? null} enabled={PROFILE.persistHistory} onBack={home} />);
+  if (route.name === 'history') return wrap(banner, <History repos={db?.repos ?? null} enabled={PROFILE.persistHistory} failure={storageState.status === 'FAILED' ? storageState.reason : null} onBack={home} />);
   if (route.name === 'about') {
     return wrap(
       banner,
@@ -162,8 +187,9 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
           setScanInfo(null);
           setScanPhase({ phase: 'idle' });
           setRoute({ name: 'check' });
-          if (db) await deleteAllData(db.driver, platform.keyStore);
-          setDb(null);
+          const after = await storage.deleteAll();
+          setStorageState(after);
+          if (after.status === 'FAILED') throw new Error('delete failed'); // About shows the failure, not "deleted"
           await consent.clear();
           setAcks({});
         }}
@@ -184,7 +210,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
     return wrap(banner, <Working text={text} />);
   }
   if (scanPhase.phase === 'reading') return wrap(banner, <Working text={COPY.scan.reading} />);
-  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} onRescan={() => void scan()} onType={typeInstead} />);
+  if (scanPhase.phase === 'problem') return wrap(banner, <ScanProblem reason={scanPhase.reason ?? COPY.scan.failed} detail={scanPhase.detail ?? null} kind={scanPhase.kind ?? 'UNREADABLE'} onRescan={() => void scan()} onType={typeInstead} />);
   if (session.state.name === 'SCAN') {
     if (mode === 'scan' && canScan) return wrap(banner, <><ScanHome busy={session.busy} notice={scanPhase.notice ?? null} onScan={() => void scan()} onType={typeInstead} />{nav}</>);
     return wrap(banner, <><Entry busy={session.busy} notice={canScan ? null : COPY.scan.unavailable} value={entry} onChange={setEntry} onSubmit={(e) => { setScanInfo(null); void session.start(e); }} />{nav}</>);
@@ -196,7 +222,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
       return wrap(banner, <Working text={m.text} />);
     case 'ENTRY_PROBLEM':
       // After a scan that read only some fields, say so: the form is prefilled from the photo.
-      return wrap(banner, <><Entry busy={session.busy} notice={scanInfo !== null && m.text === COPY.errors.missing ? COPY.scan.partialRead : m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
+      return wrap(banner, <><Entry busy={session.busy} notice={scanInfo !== null && m.text === COPY.errors.missing ? `${COPY.scan.partialRead} ${COPY.scan.missingHelp}` : m.text === COPY.errors.missing ? `${m.text} ${COPY.scan.missingHelp}` : m.text} value={entry} onChange={setEntry} onSubmit={(e) => { session.reset(); void session.start(e); }} />{nav}</>);
     case 'CHOOSE_PRODUCT':
       return wrap(banner, <Choose model={m} onChoose={(index) => void session.send({ type: 'CANDIDATE_CHOSEN', index })} onDone={home} />);
     case 'CONFIRM':
@@ -210,7 +236,7 @@ export function AppRoot({ platform, consent = defaultConsent }: { platform: Plat
             scanNotes={scanInfo?.notes ?? []}
             onRescan={scanInfo !== null ? () => void scan() : undefined}
             onEdit={typeInstead}
-            onConfirm={(ticked, release) => void session.send(confirmationEvent(ticked, m.lot, release))}
+            onConfirm={(ticked, release, lotChoice) => void session.send(confirmationEvent(ticked, m.lot, release, lotChoice))}
           />
           {scanInfo?.details ? <P muted>{scanInfo.details}</P> : null}
         </>,

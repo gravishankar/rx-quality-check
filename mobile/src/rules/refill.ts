@@ -5,7 +5,7 @@
  */
 import type { MedicationIdentity } from '../models/identity.ts';
 import { productKeyOfProductNdc } from './ndc.ts';
-import { sameStrengthSet } from './strength.ts';
+import { sameStrength } from './strength.ts';
 import type { Strength } from '../models/identity.ts';
 
 export type RefillChangeKind =
@@ -13,6 +13,7 @@ export type RefillChangeKind =
   | 'LABELER_CHANGED'
   | 'INGREDIENTS_CHANGED'
   | 'STRENGTH_CHANGED'
+  | 'SALT_CHANGED'
   | 'DOSE_FORM_CHANGED'
   | 'RELEASE_CHANGED'
   | 'PRODUCT_NOW_UNKNOWN'
@@ -53,11 +54,21 @@ export function diffFills(previous: MedicationIdentity, current: MedicationIdent
   const names = (i: MedicationIdentity) => i.ingredients.map((x) => x.name).sort().join('+');
   if (names(previous) !== names(current)) add('INGREDIENTS_CHANGED', names(previous), names(current), true);
   else {
-    const ps = previous.ingredients.map((x) => x.strength);
-    const cs = current.ingredients.map((x) => x.strength);
-    const comparable = ps.every((s) => s !== null) && cs.every((s) => s !== null);
-    if (!comparable || !sameStrengthSet(ps as Strength[], cs as Strength[])) {
-      add('STRENGTH_CHANGED', fmtStrengths(previous), fmtStrengths(current), true);
+    // C1: compare each ingredient with the same ingredient, never as an unordered set of strengths.
+    const byName = (i: MedicationIdentity) => new Map(i.ingredients.map((x) => [x.name, x]));
+    const pm = byName(previous), cm = byName(current);
+    const dup = (i: MedicationIdentity) => new Set(i.ingredients.map((x) => x.name)).size !== i.ingredients.length;
+    let strengthChanged = dup(previous) || dup(current);
+    const saltChanges: string[] = [];
+    for (const [n, p] of pm) {
+      const c = cm.get(n)!;
+      if (p.strength === null || c.strength === null || !sameStrength(p.strength, c.strength)) strengthChanged = true;
+      if (p.salt !== null && c.salt !== null && p.salt !== c.salt) saltChanges.push(`${n}: ${p.salt} -> ${c.salt}`);
+    }
+    if (strengthChanged) add('STRENGTH_CHANGED', fmtStrengths(previous), fmtStrengths(current), true);
+    if (saltChanges.length > 0) {
+      const salts = (i: MedicationIdentity) => i.ingredients.map((x) => `${x.name} ${x.salt ?? '?'}`).join(' + ');
+      add('SALT_CHANGED', salts(previous), salts(current), true);
     }
   }
   if (previous.doseForm !== current.doseForm) add('DOSE_FORM_CHANGED', previous.doseForm, current.doseForm, true);

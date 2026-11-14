@@ -16,5 +16,5 @@ You are testing an **evaluation prototype** of {{PRODUCT_NAME}}.
 - The app is installed outside an app store. Install only the file provided by **[LEGAL ENTITY
   NAME]** and check its SHA-256 checksum against the one we provide.
 - Your data stays on your phone. Uninstall the app or use "Delete all data" at any time.
-- [OWNER/COUNSEL: pilot duration, participant eligibility, any study consent or IRB requirements,
+- [TEAM/COUNSEL: pilot duration, participant eligibility, any study consent or IRB requirements,
   compensation if any, and how participation ends.]

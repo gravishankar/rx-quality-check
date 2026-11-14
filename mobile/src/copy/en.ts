@@ -26,7 +26,7 @@ export const COPY = {
     tagline: BRAND.tagline,
     feature: FEATURE,
     pilotBanner: 'Evaluation prototype. Not clinically validated. Do not use as the only basis for medication decisions.',
-    devBanner: 'DEVELOPMENT BUILD — evaluation prototype for owner testing only. Not clinically validated. Saved history is turned off.',
+    devBanner: 'DEVELOPMENT BUILD — evaluation prototype for internal testing only. Not clinically validated. Saved history is turned off.',
     provisionalName: `${NAME} is a working name and may change.`,
   },
 
@@ -45,7 +45,7 @@ export const COPY = {
       'It can tell you when a recall record appears to match, might match, or when no match was found in the records it could check.',
       'It cannot tell you whether a medication is right for you. Only your pharmacist or prescriber can.',
       'Your medication details stay on this phone. Only public drug codes are sent to FDA and the National Library of Medicine.',
-      'If you scan a label, the photo is read on this phone and deleted right away. It is never uploaded.',
+      'If you scan a label, your phone’s camera app takes the photo. This app reads it on this phone, deletes its copy right away and never uploads it. Some camera apps keep their own copy; check your camera app’s settings.',
       'This app checks only when you ask. It does not send alerts about new recalls.',
     ],
     readTerms: 'Read the Terms of Use',
@@ -59,11 +59,16 @@ export const COPY = {
     title: FEATURE,
     intro: 'Take a photo of your pharmacy label, or of the barcode on the original bottle or box.',
     button: 'Scan medication label',
-    tips: [
-      'Lay the bottle flat, or turn it so the drug name and NDC face the camera.',
-      'Use good light and avoid glare. Fill the screen with the label.',
+    /** Shown before the camera opens (the phone's camera app cannot show our guidance). */
+    howToTitle: 'What to photograph',
+    howTo: [
+      'Pharmacy bottle: turn it so the part of the label with the drug name, strength and form (for example “TABLET”) faces the camera. The bottle is curved, so put the drug name in the middle of the photo. If the label also shows an NDC (a 10- or 11-digit product number), include it; many pharmacy labels do not show an NDC, and that is fine.',
+      'Original sealed bottle or box (not a pharmacy bottle): photograph the barcode, or the side with the drug name, strength and NDC.',
+      'Hold the phone about 10–15 cm (4–6 inches) from the label so the label fills most of the photo. Tap the screen to focus and hold still.',
+      'Use good light and avoid glare. Keep your fingers off the printed text.',
+      'After you take the photo, tap the camera’s button to keep it (often a tick mark or “OK”), so this app can read it.',
     ],
-    privacy: 'The photo is read on this phone and deleted right away. It is never uploaded or saved to your photos.',
+    privacy: 'Your phone’s camera app takes the photo. This app reads it on this phone, deletes its copy right away and never uploads it. Some camera apps keep their own copy of photos; check your camera app’s settings.',
     typeInstead: 'Type the details instead',
     reading: 'Reading your label on this phone…',
     scannedNote: 'These details were read from your photo. Please check each one against your label.',
@@ -71,11 +76,17 @@ export const COPY = {
     correct: 'Correct the details',
     unavailable: 'Scanning is not available on this phone yet. Please type the details.',
     cancelled: 'No photo was taken.',
+    photoNotDeletedTitle: 'Label photo still on this phone',
+    photoNotDeleted:
+      'This app could not remove the label photo from its private storage on this phone. It will try again the next time the app starts. The photo was not uploaded.',
     problemTitle: 'We couldn’t read your label',
     nothingRead: 'We could not find any text or barcode in the photo.',
-    noDrugFields: 'We found text, but not a drug name, strength or NDC.',
+    noDrugFields: 'We read text in the photo, but not a drug name this app recognizes.',
+    notFoundHelp:
+      'Scanning again will not help if the label does not show the drug name. Please type the details from your label. If your label does not show the drug name, strength or form, ask your pharmacist; do not guess.',
+    missingHelp: 'If your label does not show a detail (for example the strength), do not guess. Your pharmacist can tell you.',
     failed: 'The photo could not be read.',
-    retryTips: 'Try again with more light, closer to the label, and without glare. Or type the details.',
+    retryTips: 'Try again following the steps below, or type the details.',
     barcodeTextDiffer: 'The barcode and the printed NDC point to different products. We will check both against FDA records; please look at your label carefully.',
     groups: {
       VERIFIED: 'Matched in FDA records',
@@ -112,6 +123,25 @@ export const COPY = {
     releaseER: 'Yes, extended release (ER, XR, XL, SR)',
     releaseDR: 'Yes, delayed release (DR, EC)',
     lotConfirm: 'I checked the lot number against my package',
+    noNdcTitle: 'Checking without an NDC',
+    noNdc: [
+      'Your label has no NDC we could use (the product number that identifies the exact manufacturer’s product). That is common on pharmacy labels.',
+      'We can still check FDA recall records by drug name, strength and form. Recalls of a different strength or form are ruled out.',
+      'Without an NDC we cannot tell which manufacturer made your medication. A recall of the same drug, strength and form by any manufacturer is shown as a possible match, and a lot number cannot confirm a match.',
+      'Your pharmacist can tell you the manufacturer or NDC of your fill.',
+    ],
+    lotQuestion: 'Lot number',
+    lotUse: (lot: string) => `Use lot ${lot}. I checked it against my package.`,
+    lotNotUsed: 'Continue without the lot number. Some recalls apply only to certain lots, so the result will be less specific.',
+    lotCorrect: 'To correct the lot number, choose “Change details”.',
+    needLotChoice: 'Choose whether to use the lot number.',
+    releaseUnknown: 'I can’t tell',
+    needRelease: 'Answer the release-type question from your label.',
+    releaseUnknownHelp: [
+      'Look on the label next to the drug name for ER, XR, XL, SR, CR, DR or EC. If none is there, it is usually regular release, but we will not assume that.',
+      'Your pharmacist can tell you which one you have. We cannot check this medication until you know, because recalls often apply to only one type.',
+    ],
+    stillNeeded: 'Still needed:',
     ndcNotFoundTitle: 'NDC not found',
     ndcNotFound: 'We could not find this NDC in FDA’s directory. The details below are what you typed. They were not checked against FDA records.',
   },
@@ -142,6 +172,7 @@ export const COPY = {
     sourceVerified: 'Declared in the repackager’s FDA labeling and found in the FDA NDC Directory.',
     sourceUnknown: 'We could not confirm which product this was repackaged from.',
     sourceNotChecked: 'Not checked.',
+    sourcePartial: 'Only partly confirmed: part of the chain of repackaging could not be checked.',
     conflict: 'FDA records give different information for this product. We did not choose one.',
     releaseValues: { IR: 'Regular release', ER: 'Extended release', DR: 'Delayed release', UNSPECIFIED: 'Not known' },
   },
@@ -169,10 +200,17 @@ export const COPY = {
       headline: 'We could not reliably determine whether this medication is affected by a recall.',
     },
     qualifiers: {
-      productNotIdentified: 'We could not identify your exact product, so we checked by ingredient, strength and form only.',
+      productNotIdentified:
+        'We could not identify your exact product (no NDC), so we checked by ingredient, strength and form only. We cannot tell which manufacturer made your medication, so recalls of the same drug, strength and form by any manufacturer are possible matches. Your pharmacist can tell you the manufacturer or NDC of your fill.',
       sourceNotEstablished:
         'This product appears to be repackaged, and we could not confirm the original product. Recalls listed under the original product may not have been found.',
       sourceUnavailable: 'We could not check whether this product was repackaged from another product.',
+      sourcePartial:
+        'This product was repackaged, and we could confirm only part of where it came from. Recalls listed under the original product may not have been found.',
+      sourceUnresolvedPossible:
+        'Some notices below name other products’ codes. We could not confirm which product yours was repackaged from, so they may apply to it. Ask your pharmacist which manufacturer’s product you received.',
+      sourceNotChecked:
+        'We did not check whether this product was repackaged from another product. If it was, recalls listed under the original product may not have been found.',
       lotNotProvided: 'Some recalls apply only to certain lot numbers. You did not enter a lot number.',
       userEnteredIdentity: 'The medication details were entered by you and were not matched to an FDA product listing.',
     },
@@ -180,6 +218,9 @@ export const COPY = {
       staleResult: (asOf: string) => `This result is from ${asOf}. It is too old to rely on. Please check again.`,
       staleSource: (date: string) => `FDA’s recall data was last updated on ${date}, which is older than we accept. Please check again later.`,
       incomplete: 'Some FDA records could not be retrieved or read completely.',
+      searchIncomplete: 'Our search of FDA’s recall records did not cover every name this medication is known by, so we cannot say no recall was found.',
+      datasetDateInvalid: 'The date FDA gave for its recall data could not be read or is in the future, so we cannot rely on this search.',
+      datasetDateUnknown: 'FDA did not say when its recall data was last updated.',
       controlFailed: 'Our check that FDA’s recall search is working did not pass.',
       inconsistent: 'The result did not meet our evidence rules, so we are not showing it. This has been flagged for review.',
       unreadable: 'Some recall records could not be read.',
@@ -322,6 +363,14 @@ export const COPY = {
     madeUnder: (v: string) => `Checked with drug list and policy version ${v}`,
     outdated: 'Made with an older drug list or policy. Check again for a current result.',
     deleteOne: 'Delete',
+    storageFailed: {
+      KEY: 'Saved checks cannot be opened: the phone’s secure key for them is not available. Nothing new will be saved.',
+      OPEN: 'Saved checks cannot be opened on this phone right now. Nothing new will be saved.',
+      MIGRATION: 'Saved checks were made by a newer or different version of the app and cannot be opened. Nothing new will be saved.',
+      DELETE: 'Deleting the data on this phone did not finish. Please try again, or remove the app’s storage in the phone’s settings.',
+    },
+    /** Which bottle a saved check was made for (review item 6). */
+    fillLine: (ndc: string, lot: string | null, checkedAt: string) => `Bottle: NDC ${ndc}${lot ? `, lot ${lot}` : ', no lot entered'}. Checked ${checkedAt}.`,
   },
 
   about: {

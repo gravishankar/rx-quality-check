@@ -1,0 +1,4512 @@
+[
+ {
+  "rank": 1,
+  "drug_id": "atorvastatin",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 395,
+  "eligible_this": 395,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 394,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 395
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ATORVASTATIN CALCIUM TRIHYDRATE": 310,
+   "ATORVASTATIN CALCIUM PROPYLENE GLYCOL SOLVATE": 67,
+   "ATORVASTATIN": 18
+  },
+  "dea_schedule": {
+   "none": 395
+  }
+ },
+ {
+  "rank": 2,
+  "drug_id": "amlodipine",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 199,
+  "eligible_this": 199,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 193,
+   "SOLUTION": 5,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 199
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMLODIPINE BESYLATE": 196,
+   "AMLODIPINE BENZOATE": 1,
+   "AMLODIPINE": 2
+  },
+  "dea_schedule": {
+   "none": 199
+  }
+ },
+ {
+  "rank": 3,
+  "drug_id": "levothyroxine",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 553,
+  "eligible_this": 553,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 510,
+   "SOLUTION": 16,
+   "CAPSULE": 27
+  },
+  "release": {
+   "IR": 553
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LEVOTHYROXINE SODIUM": 553
+  },
+  "dea_schedule": {
+   "none": 553
+  }
+ },
+ {
+  "rank": 4,
+  "drug_id": "lisinopril",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 267,
+  "eligible_this": 267,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 266,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 267
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LISINOPRIL": 267
+  },
+  "dea_schedule": {
+   "none": 267
+  }
+ },
+ {
+  "rank": 5,
+  "drug_id": "gabapentin",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 582,
+  "eligible_this": 582,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 210,
+   "CAPSULE": 353,
+   "SUSPENSION": 1,
+   "SOLUTION": 18
+  },
+  "release": {
+   "IR": 580,
+   "ER": 2
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "GABAPENTIN": 580,
+   "GABAPENTIN ENACARBIL": 2
+  },
+  "dea_schedule": {
+   "none": 582
+  }
+ },
+ {
+  "rank": 6,
+  "drug_id": "losartan",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 208,
+  "eligible_this": 208,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 207,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 208
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LOSARTAN POTASSIUM": 208
+  },
+  "dea_schedule": {
+   "none": 208
+  }
+ },
+ {
+  "rank": 7,
+  "drug_id": "metformin",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 449,
+  "eligible_this": 449,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 442,
+   "SOLUTION": 7
+  },
+  "release": {
+   "ER": 179,
+   "IR": 270
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METFORMIN HYDROCHLORIDE": 449
+  },
+  "dea_schedule": {
+   "none": 449
+  }
+ },
+ {
+  "rank": 8,
+  "drug_id": "metoprolol_succinate",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 475,
+  "eligible_this": 249,
+  "eligible_other": {
+   "metoprolol_tartrate": 212
+  },
+  "needs_clarification": {
+   "SALT_UNKNOWN": 14
+  },
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 466,
+   "CAPSULE": 8,
+   "SOLUTION": 1
+  },
+  "release": {
+   "ER": 263,
+   "IR": 212
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METOPROLOL SUCCINATE": 249,
+   "METOPROLOL TARTRATE": 226
+  },
+  "dea_schedule": {
+   "none": 475
+  }
+ },
+ {
+  "rank": 9,
+  "drug_id": "omeprazole",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 176,
+  "eligible_this": 176,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 174,
+   "OTHER": 2
+  },
+  "release": {
+   "DR": 176
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OMEPRAZOLE": 174,
+   "OMEPRAZOLE MAGNESIUM": 2
+  },
+  "dea_schedule": {
+   "none": 176
+  }
+ },
+ {
+  "rank": 10,
+  "drug_id": "rosuvastatin",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 282,
+  "eligible_this": 282,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 282
+  },
+  "release": {
+   "IR": 282
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ROSUVASTATIN CALCIUM": 249,
+   "ROSUVASTATIN": 33
+  },
+  "dea_schedule": {
+   "none": 282
+  }
+ },
+ {
+  "rank": 11,
+  "drug_id": "pantoprazole",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 138,
+  "eligible_this": 138,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 129,
+   "SUSPENSION": 3,
+   "OTHER": 6
+  },
+  "release": {
+   "DR": 133,
+   "IR": 5
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PANTOPRAZOLE SODIUM": 138
+  },
+  "dea_schedule": {
+   "none": 138
+  }
+ },
+ {
+  "rank": 12,
+  "drug_id": "furosemide",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 136,
+  "eligible_this": 136,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 130,
+   "SOLUTION": 6
+  },
+  "release": {
+   "IR": 136
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FUROSEMIDE": 136
+  },
+  "dea_schedule": {
+   "none": 136
+  }
+ },
+ {
+  "rank": 14,
+  "drug_id": "hydrocodone_acetaminophen",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 208,
+  "eligible_this": 208,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 196,
+   "SOLUTION": 11,
+   "OTHER": 1
+  },
+  "release": {
+   "IR": 208
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDROCODONE BITARTRATE": 208,
+   "ACETAMINOPHEN": 208
+  },
+  "dea_schedule": {
+   "CII": 208
+  }
+ },
+ {
+  "rank": 15,
+  "drug_id": "tamsulosin",
+  "status": "ACTIVE",
+  "decision": "EXISTING",
+  "products": 63,
+  "eligible_this": 63,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 63
+  },
+  "release": {
+   "IR": 63
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TAMSULOSIN HYDROCHLORIDE": 63
+  },
+  "dea_schedule": {
+   "none": 63
+  }
+ },
+ {
+  "rank": 16,
+  "drug_id": "albuterol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 27,
+  "eligible_this": 27,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SOLUTION": 6,
+   "TABLET": 20,
+   "OTHER": 1
+  },
+  "release": {
+   "IR": 27
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ALBUTEROL SULFATE": 27
+  },
+  "dea_schedule": {
+   "none": 27
+  }
+ },
+ {
+  "rank": 17,
+  "drug_id": "hydrochlorothiazide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 170,
+  "eligible_this": 170,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 133,
+   "CAPSULE": 35,
+   "SUSPENSION": 1,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 170
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDROCHLOROTHIAZIDE": 170
+  },
+  "dea_schedule": {
+   "none": 170
+  }
+ },
+ {
+  "rank": 18,
+  "drug_id": "trazodone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 169,
+  "eligible_this": 169,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 168,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 169
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TRAZODONE HYDROCHLORIDE": 169
+  },
+  "dea_schedule": {
+   "none": 169
+  }
+ },
+ {
+  "rank": 19,
+  "drug_id": "metoprolol_tartrate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 475,
+  "eligible_this": 212,
+  "eligible_other": {
+   "metoprolol_succinate": 249
+  },
+  "needs_clarification": {
+   "SALT_UNKNOWN": 14
+  },
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 466,
+   "CAPSULE": 8,
+   "SOLUTION": 1
+  },
+  "release": {
+   "ER": 263,
+   "IR": 212
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METOPROLOL SUCCINATE": 249,
+   "METOPROLOL TARTRATE": 226
+  },
+  "dea_schedule": {
+   "none": 475
+  }
+ },
+ {
+  "rank": 20,
+  "drug_id": "simvastatin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 160,
+  "eligible_this": 160,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 160
+  },
+  "release": {
+   "IR": 160
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SIMVASTATIN": 160
+  },
+  "dea_schedule": {
+   "none": 160
+  }
+ },
+ {
+  "rank": 21,
+  "drug_id": "potassium_chloride",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 260,
+  "eligible_this": 260,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 160,
+   "CAPSULE": 28,
+   "SOLUTION": 71,
+   "OTHER": 1
+  },
+  "release": {
+   "ER": 179,
+   "IR": 81
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "POTASSIUM CHLORIDE": 260
+  },
+  "dea_schedule": {
+   "none": 260
+  }
+ },
+ {
+  "rank": 22,
+  "drug_id": "sertraline",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 229,
+  "eligible_this": 229,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 203,
+   "CAPSULE": 20,
+   "SOLUTION": 6
+  },
+  "release": {
+   "IR": 229
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SERTRALINE HYDROCHLORIDE": 229
+  },
+  "dea_schedule": {
+   "none": 229
+  }
+ },
+ {
+  "rank": 23,
+  "drug_id": "carvedilol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 207,
+  "eligible_this": 207,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 174,
+   "CAPSULE": 33
+  },
+  "release": {
+   "IR": 174,
+   "ER": 33
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CARVEDILOL": 174,
+   "CARVEDILOL PHOSPHATE": 33
+  },
+  "dea_schedule": {
+   "none": 207
+  }
+ },
+ {
+  "rank": 24,
+  "drug_id": "prednisone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 317,
+  "eligible_this": 317,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 314,
+   "SOLUTION": 3
+  },
+  "release": {
+   "IR": 312,
+   "DR": 5
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PREDNISONE": 317
+  },
+  "dea_schedule": {
+   "none": 317
+  }
+ },
+ {
+  "rank": 26,
+  "drug_id": "clopidogrel",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 68,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 68
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 68
+  },
+  "release": {
+   "IR": 68
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CLOPIDOGREL BISULFATE": 66,
+   "CLOPIDOGREL": 2
+  },
+  "dea_schedule": {
+   "none": 68
+  }
+ },
+ {
+  "rank": 27,
+  "drug_id": "tramadol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 126,
+  "eligible_this": 126,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 119,
+   "CAPSULE": 6,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 68,
+   "ER": 58
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TRAMADOL HYDROCHLORIDE": 126
+  },
+  "dea_schedule": {
+   "CIV": 126
+  }
+ },
+ {
+  "rank": 28,
+  "drug_id": "famotidine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 176,
+  "eligible_this": 176,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SUSPENSION": 24,
+   "TABLET": 151,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 176
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FAMOTIDINE": 176
+  },
+  "dea_schedule": {
+   "none": 176
+  }
+ },
+ {
+  "rank": 29,
+  "drug_id": "duloxetine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 205,
+  "eligible_this": 205,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 205
+  },
+  "release": {
+   "DR": 205
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DULOXETINE HYDROCHLORIDE": 205
+  },
+  "dea_schedule": {
+   "none": 205
+  }
+ },
+ {
+  "rank": 30,
+  "drug_id": "montelukast",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 93,
+  "eligible_this": 93,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 89,
+   "OTHER": 4
+  },
+  "release": {
+   "IR": 93
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MONTELUKAST SODIUM": 83,
+   "MONTELUKAST": 10
+  },
+  "dea_schedule": {
+   "none": 93
+  }
+ },
+ {
+  "rank": 31,
+  "drug_id": "escitalopram",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 155,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 155
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 147,
+   "CAPSULE": 1,
+   "SOLUTION": 7
+  },
+  "release": {
+   "IR": 155
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ESCITALOPRAM OXALATE": 155
+  },
+  "dea_schedule": {
+   "none": 155
+  }
+ },
+ {
+  "rank": 32,
+  "drug_id": "alprazolam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 141,
+  "eligible_this": 141,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 140,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 117,
+   "ER": 24
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ALPRAZOLAM": 141
+  },
+  "dea_schedule": {
+   "CIV": 141
+  }
+ },
+ {
+  "rank": 33,
+  "drug_id": "meloxicam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 151,
+  "eligible_this": 151,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 144,
+   "CAPSULE": 4,
+   "SUSPENSION": 3
+  },
+  "release": {
+   "IR": 151
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MELOXICAM": 151
+  },
+  "dea_schedule": {
+   "none": 151
+  }
+ },
+ {
+  "rank": 35,
+  "drug_id": "pravastatin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 185,
+  "eligible_this": 185,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 185
+  },
+  "release": {
+   "IR": 185
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PRAVASTATIN SODIUM": 185
+  },
+  "dea_schedule": {
+   "none": 185
+  }
+ },
+ {
+  "rank": 36,
+  "drug_id": "quetiapine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 349,
+  "eligible_this": 349,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 349
+  },
+  "release": {
+   "IR": 258,
+   "ER": 91
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "QUETIAPINE FUMARATE": 344,
+   "QUETIAPINE": 5
+  },
+  "dea_schedule": {
+   "none": 349
+  }
+ },
+ {
+  "rank": 37,
+  "drug_id": "allopurinol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 171,
+  "eligible_this": 171,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 171
+  },
+  "release": {
+   "IR": 171
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ALLOPURINOL": 171
+  },
+  "dea_schedule": {
+   "none": 171
+  }
+ },
+ {
+  "rank": 38,
+  "drug_id": "bupropion",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 345,
+  "eligible_this": 345,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 345
+  },
+  "release": {
+   "IR": 85,
+   "ER": 260
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BUPROPION HYDROCHLORIDE": 339,
+   "BUPROPION HYDROBROMIDE": 6
+  },
+  "dea_schedule": {
+   "none": 345
+  }
+ },
+ {
+  "rank": 39,
+  "drug_id": "amoxicillin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 278,
+  "eligible_this": 278,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 122,
+   "TABLET": 62,
+   "SUSPENSION": 94
+  },
+  "release": {
+   "IR": 278
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMOXICILLIN": 278
+  },
+  "dea_schedule": {
+   "none": 278
+  }
+ },
+ {
+  "rank": 40,
+  "drug_id": "oxycodone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 160,
+  "eligible_this": 160,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 127,
+   "SOLUTION": 25,
+   "CAPSULE": 8
+  },
+  "release": {
+   "IR": 147,
+   "ER": 13
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OXYCODONE HYDROCHLORIDE": 155,
+   "OXYCODONE": 5
+  },
+  "dea_schedule": {
+   "CII": 160
+  }
+ },
+ {
+  "rank": 42,
+  "drug_id": "clonazepam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 145,
+  "eligible_this": 145,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 145
+  },
+  "release": {
+   "IR": 145
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CLONAZEPAM": 145
+  },
+  "dea_schedule": {
+   "CIV": 145
+  }
+ },
+ {
+  "rank": 43,
+  "drug_id": "oxycodone_acetaminophen",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 136,
+  "eligible_this": 136,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 133,
+   "SOLUTION": 3
+  },
+  "release": {
+   "IR": 136
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OXYCODONE HYDROCHLORIDE": 132,
+   "ACETAMINOPHEN": 136,
+   "OXYCODONE": 4
+  },
+  "dea_schedule": {
+   "CII": 136
+  }
+ },
+ {
+  "rank": 44,
+  "drug_id": "diclofenac",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 210,
+  "eligible_this": 210,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 189,
+   "SOLUTION": 9,
+   "CAPSULE": 12
+  },
+  "release": {
+   "IR": 79,
+   "ER": 11,
+   "DR": 120
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DICLOFENAC POTASSIUM": 72,
+   "DICLOFENAC SODIUM": 138
+  },
+  "dea_schedule": {
+   "none": 210
+  }
+ },
+ {
+  "rank": 45,
+  "drug_id": "azithromycin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 187,
+  "eligible_this": 187,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 132,
+   "SUSPENSION": 55
+  },
+  "release": {
+   "IR": 187
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AZITHROMYCIN DIHYDRATE": 149,
+   "AZITHROMYCIN MONOHYDRATE": 38
+  },
+  "dea_schedule": {
+   "none": 187
+  }
+ },
+ {
+  "rank": 46,
+  "drug_id": "alendronate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 36,
+  "eligible_this": 36,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 34,
+   "SOLUTION": 2
+  },
+  "release": {
+   "IR": 36
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ALENDRONATE SODIUM": 36
+  },
+  "dea_schedule": {
+   "none": 36
+  }
+ },
+ {
+  "rank": 47,
+  "drug_id": "empagliflozin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 11,
+  "eligible_this": 11,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 11
+  },
+  "release": {
+   "IR": 11
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "EMPAGLIFLOZIN": 11
+  },
+  "dea_schedule": {
+   "none": 11
+  }
+ },
+ {
+  "rank": 48,
+  "drug_id": "lorazepam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 127,
+  "eligible_this": 127,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 116,
+   "CAPSULE": 5,
+   "OTHER": 5,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 122,
+   "ER": 5
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LORAZEPAM": 127
+  },
+  "dea_schedule": {
+   "CIV": 127
+  }
+ },
+ {
+  "rank": 49,
+  "drug_id": "semaglutide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 10,
+  "eligible_this": 10,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 10
+  },
+  "release": {
+   "IR": 10
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SEMAGLUTIDE": 10
+  },
+  "dea_schedule": {
+   "none": 10
+  }
+ },
+ {
+  "rank": 50,
+  "drug_id": "spironolactone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 179,
+  "eligible_this": 179,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 173,
+   "SUSPENSION": 6
+  },
+  "release": {
+   "IR": 179
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SPIRONOLACTONE": 179
+  },
+  "dea_schedule": {
+   "none": 179
+  }
+ },
+ {
+  "rank": 51,
+  "drug_id": "mirtazapine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 144,
+  "eligible_this": 144,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 144
+  },
+  "release": {
+   "IR": 144
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MIRTAZAPINE": 144
+  },
+  "dea_schedule": {
+   "none": 144
+  }
+ },
+ {
+  "rank": 52,
+  "drug_id": "zolpidem",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 138,
+  "eligible_this": 138,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 135,
+   "CAPSULE": 3
+  },
+  "release": {
+   "IR": 105,
+   "ER": 33
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ZOLPIDEM TARTRATE": 138
+  },
+  "dea_schedule": {
+   "CIV": 138
+  }
+ },
+ {
+  "rank": 53,
+  "drug_id": "glipizide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 143,
+  "eligible_this": 143,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 143
+  },
+  "release": {
+   "IR": 104,
+   "ER": 39
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "GLIPIZIDE": 143
+  },
+  "dea_schedule": {
+   "none": 143
+  }
+ },
+ {
+  "rank": 54,
+  "drug_id": "donepezil",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 73,
+  "eligible_this": 73,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 73
+  },
+  "release": {
+   "IR": 73
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DONEPEZIL HYDROCHLORIDE": 73
+  },
+  "dea_schedule": {
+   "none": 73
+  }
+ },
+ {
+  "rank": 55,
+  "drug_id": "ibuprofen",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 319,
+  "eligible_this": 319,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 310,
+   "SUSPENSION": 9
+  },
+  "release": {
+   "IR": 319
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "IBUPROFEN": 319
+  },
+  "dea_schedule": {
+   "none": 319
+  }
+ },
+ {
+  "rank": 56,
+  "drug_id": "fluoxetine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 227,
+  "eligible_this": 227,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 169,
+   "TABLET": 48,
+   "OTHER": 3,
+   "SOLUTION": 7
+  },
+  "release": {
+   "IR": 226,
+   "DR": 1
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FLUOXETINE HYDROCHLORIDE": 226,
+   "FLUOXETINE": 1
+  },
+  "dea_schedule": {
+   "none": 227
+  }
+ },
+ {
+  "rank": 57,
+  "drug_id": "cephalexin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 182,
+  "eligible_this": 182,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 140,
+   "SUSPENSION": 36,
+   "TABLET": 6
+  },
+  "release": {
+   "IR": 182
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CEPHALEXIN": 182
+  },
+  "dea_schedule": {
+   "none": 182
+  }
+ },
+ {
+  "rank": 58,
+  "drug_id": "buspirone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 277,
+  "eligible_this": 277,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 270,
+   "CAPSULE": 7
+  },
+  "release": {
+   "IR": 277
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BUSPIRONE HYDROCHLORIDE": 270,
+   "BUSPIRONE": 7
+  },
+  "dea_schedule": {
+   "none": 277
+  }
+ },
+ {
+  "rank": 59,
+  "drug_id": "ezetimibe",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 42,
+  "eligible_this": 42,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 42
+  },
+  "release": {
+   "IR": 42
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "EZETIMIBE": 42
+  },
+  "dea_schedule": {
+   "none": 42
+  }
+ },
+ {
+  "rank": 60,
+  "drug_id": "citalopram",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 116,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 116
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 108,
+   "CAPSULE": 2,
+   "SOLUTION": 6
+  },
+  "release": {
+   "IR": 116
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CITALOPRAM HYDROBROMIDE": 116
+  },
+  "dea_schedule": {
+   "none": 116
+  }
+ },
+ {
+  "rank": 61,
+  "drug_id": "finasteride",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 72,
+  "eligible_this": 72,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 72
+  },
+  "release": {
+   "IR": 72
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FINASTERIDE": 72
+  },
+  "dea_schedule": {
+   "none": 72
+  }
+ },
+ {
+  "rank": 62,
+  "drug_id": "cyclobenzaprine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 242,
+  "eligible_this": 242,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 33,
+   "TABLET": 209
+  },
+  "release": {
+   "ER": 33,
+   "IR": 209
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CYCLOBENZAPRINE HYDROCHLORIDE": 242
+  },
+  "dea_schedule": {
+   "none": 242
+  }
+ },
+ {
+  "rank": 63,
+  "drug_id": "amoxicillin_clavulanate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 205,
+  "eligible_this": 205,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 136,
+   "SUSPENSION": 69
+  },
+  "release": {
+   "ER": 3,
+   "IR": 202
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMOXICILLIN": 205,
+   "CLAVULANATE POTASSIUM": 199,
+   "AMOXICILLIN SODIUM": 3,
+   "CLAVULANIC ACID": 6
+  },
+  "dea_schedule": {
+   "none": 205
+  }
+ },
+ {
+  "rank": 64,
+  "drug_id": "pregabalin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 542,
+  "eligible_this": 542,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 526,
+   "SOLUTION": 4,
+   "TABLET": 12
+  },
+  "release": {
+   "IR": 530,
+   "ER": 12
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PREGABALIN": 542
+  },
+  "dea_schedule": {
+   "CV": 542
+  }
+ },
+ {
+  "rank": 65,
+  "drug_id": "atenolol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 129,
+  "eligible_this": 129,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 129
+  },
+  "release": {
+   "IR": 129
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ATENOLOL": 129
+  },
+  "dea_schedule": {
+   "none": 129
+  }
+ },
+ {
+  "rank": 67,
+  "drug_id": "tizanidine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 200,
+  "eligible_this": 200,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 119,
+   "CAPSULE": 80,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 200
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TIZANIDINE HYDROCHLORIDE": 200
+  },
+  "dea_schedule": {
+   "none": 200
+  }
+ },
+ {
+  "rank": 68,
+  "drug_id": "diltiazem",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 280,
+  "eligible_this": 280,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 193,
+   "TABLET": 87
+  },
+  "release": {
+   "ER": 228,
+   "IR": 52
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DILTIAZEM HYDROCHLORIDE": 279,
+   "DILTIAZEM HCL": 1
+  },
+  "dea_schedule": {
+   "none": 280
+  }
+ },
+ {
+  "rank": 71,
+  "drug_id": "venlafaxine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 334,
+  "eligible_this": 334,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 162,
+   "TABLET": 172
+  },
+  "release": {
+   "ER": 213,
+   "IR": 121
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "VENLAFAXINE HYDROCHLORIDE": 333,
+   "VENLAFAXINE BESYLATE MONOHYDRATE": 1
+  },
+  "dea_schedule": {
+   "none": 334
+  }
+ },
+ {
+  "rank": 72,
+  "drug_id": "doxycycline",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 311,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 311
+  },
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 164,
+   "TABLET": 143,
+   "SUSPENSION": 4
+  },
+  "release": {
+   "IR": 291,
+   "DR": 20
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DOXYCYCLINE HYCLATE": 202,
+   "DOXYCYCLINE": 109
+  },
+  "dea_schedule": {
+   "none": 311
+  }
+ },
+ {
+  "rank": 73,
+  "drug_id": "hydralazine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 120,
+  "eligible_this": 120,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 120
+  },
+  "release": {
+   "IR": 120
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDRALAZINE HYDROCHLORIDE": 120
+  },
+  "dea_schedule": {
+   "none": 120
+  }
+ },
+ {
+  "rank": 74,
+  "drug_id": "lisinopril_hydrochlorothiazide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 96,
+  "eligible_this": 96,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 96
+  },
+  "release": {
+   "IR": 96
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LISINOPRIL": 96,
+   "HYDROCHLOROTHIAZIDE": 96
+  },
+  "dea_schedule": {
+   "none": 96
+  }
+ },
+ {
+  "rank": 76,
+  "drug_id": "memantine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 120,
+  "eligible_this": 120,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 77,
+   "SOLUTION": 5,
+   "CAPSULE": 38
+  },
+  "release": {
+   "IR": 82,
+   "ER": 38
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MEMANTINE HYDROCHLORIDE": 120
+  },
+  "dea_schedule": {
+   "none": 120
+  }
+ },
+ {
+  "rank": 78,
+  "drug_id": "oxybutynin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 115,
+  "eligible_this": 115,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 111,
+   "SOLUTION": 4
+  },
+  "release": {
+   "ER": 61,
+   "IR": 54
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OXYBUTYNIN CHLORIDE": 115
+  },
+  "dea_schedule": {
+   "none": 115
+  }
+ },
+ {
+  "rank": 79,
+  "drug_id": "methylprednisolone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 53,
+  "eligible_this": 53,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 53
+  },
+  "release": {
+   "IR": 53
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METHYLPREDNISOLONE": 53
+  },
+  "dea_schedule": {
+   "none": 53
+  }
+ },
+ {
+  "rank": 81,
+  "drug_id": "losartan_hydrochlorothiazide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 111,
+  "eligible_this": 111,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 111
+  },
+  "release": {
+   "IR": 111
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LOSARTAN POTASSIUM": 111,
+   "HYDROCHLOROTHIAZIDE": 111
+  },
+  "dea_schedule": {
+   "none": 111
+  }
+ },
+ {
+  "rank": 82,
+  "drug_id": "valproate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 211,
+  "eligible_this": 211,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 163,
+   "CAPSULE": 29,
+   "SOLUTION": 19
+  },
+  "release": {
+   "ER": 71,
+   "IR": 42,
+   "DR": 98
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DIVALPROEX SODIUM": 181,
+   "VALPROIC ACID": 30
+  },
+  "dea_schedule": {
+   "none": 211
+  }
+ },
+ {
+  "rank": 84,
+  "drug_id": "celecoxib",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 238,
+  "eligible_this": 238,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 236,
+   "OTHER": 1,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 238
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CELECOXIB": 238
+  },
+  "dea_schedule": {
+   "none": 238
+  }
+ },
+ {
+  "rank": 85,
+  "drug_id": "baclofen",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 216,
+  "eligible_this": 216,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 200,
+   "OTHER": 4,
+   "SOLUTION": 8,
+   "SUSPENSION": 4
+  },
+  "release": {
+   "IR": 216
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BACLOFEN": 216
+  },
+  "dea_schedule": {
+   "none": 216
+  }
+ },
+ {
+  "rank": 86,
+  "drug_id": "ciprofloxacin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 169,
+  "eligible_this": 169,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 169
+  },
+  "release": {
+   "IR": 169
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CIPROFLOXACIN HYDROCHLORIDE": 169
+  },
+  "dea_schedule": {
+   "none": 169
+  }
+ },
+ {
+  "rank": 87,
+  "drug_id": "isosorbide_mononitrate",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 62,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 62
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 62
+  },
+  "release": {
+   "ER": 48,
+   "IR": 14
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ISOSORBIDE MONONITRATE": 62
+  },
+  "dea_schedule": {
+   "none": 62
+  }
+ },
+ {
+  "rank": 88,
+  "drug_id": "glimepiride",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 105,
+  "eligible_this": 105,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 105
+  },
+  "release": {
+   "IR": 105
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "GLIMEPIRIDE": 105
+  },
+  "dea_schedule": {
+   "none": 105
+  }
+ },
+ {
+  "rank": 89,
+  "drug_id": "levetiracetam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 238,
+  "eligible_this": 238,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 208,
+   "SOLUTION": 30
+  },
+  "release": {
+   "IR": 207,
+   "ER": 31
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LEVETIRACETAM": 238
+  },
+  "dea_schedule": {
+   "none": 238
+  }
+ },
+ {
+  "rank": 91,
+  "drug_id": "sulfamethoxazole_trimethoprim",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 96,
+  "eligible_this": 96,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 81,
+   "SUSPENSION": 15
+  },
+  "release": {
+   "IR": 96
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SULFAMETHOXAZOLE": 96,
+   "TRIMETHOPRIM": 96
+  },
+  "dea_schedule": {
+   "none": 96
+  }
+ },
+ {
+  "rank": 93,
+  "drug_id": "dapagliflozin",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 50,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 50
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 50
+  },
+  "release": {
+   "IR": 50
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DAPAGLIFLOZIN PROPANEDIOL": 12,
+   "DAPAGLIFLOZIN": 38
+  },
+  "dea_schedule": {
+   "none": 50
+  }
+ },
+ {
+  "rank": 94,
+  "drug_id": "estradiol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 69,
+  "eligible_this": 69,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 69
+  },
+  "release": {
+   "IR": 69
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ESTRADIOL": 69
+  },
+  "dea_schedule": {
+   "none": 69
+  }
+ },
+ {
+  "rank": 95,
+  "drug_id": "hydroxyzine",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 274,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 274
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 178,
+   "CAPSULE": 82,
+   "SOLUTION": 14
+  },
+  "release": {
+   "IR": 274
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDROXYZINE HYDROCHLORIDE": 43,
+   "HYDROXYZINE DIHYDROCHLORIDE": 149,
+   "HYDROXYZINE PAMOATE": 82
+  },
+  "dea_schedule": {
+   "none": 274
+  }
+ },
+ {
+  "rank": 96,
+  "drug_id": "lamotrigine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 287,
+  "eligible_this": 287,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 286,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 206,
+   "ER": 81
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LAMOTRIGINE": 287
+  },
+  "dea_schedule": {
+   "none": 287
+  }
+ },
+ {
+  "rank": 98,
+  "drug_id": "ondansetron",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 219,
+  "eligible_this": 219,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 205,
+   "SOLUTION": 14
+  },
+  "release": {
+   "IR": 219
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ONDANSETRON": 97,
+   "ONDANSETRON HYDROCHLORIDE": 122
+  },
+  "dea_schedule": {
+   "none": 219
+  }
+ },
+ {
+  "rank": 99,
+  "drug_id": "sitagliptin",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 36,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 36
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 35,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 36
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SITAGLIPTIN": 13,
+   "SITAGLIPTIN PHOSPHATE": 23
+  },
+  "dea_schedule": {
+   "none": 36
+  }
+ },
+ {
+  "rank": 100,
+  "drug_id": "valsartan",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 145,
+  "eligible_this": 145,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 141,
+   "SOLUTION": 4
+  },
+  "release": {
+   "IR": 145
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "VALSARTAN": 145
+  },
+  "dea_schedule": {
+   "none": 145
+  }
+ },
+ {
+  "rank": 101,
+  "drug_id": "aripiprazole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 267,
+  "eligible_this": 267,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 253,
+   "SOLUTION": 11,
+   "OTHER": 3
+  },
+  "release": {
+   "IR": 267
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ARIPIPRAZOLE": 267
+  },
+  "dea_schedule": {
+   "none": 267
+  }
+ },
+ {
+  "rank": 103,
+  "drug_id": "propranolol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 211,
+  "eligible_this": 211,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 63,
+   "TABLET": 139,
+   "SOLUTION": 9
+  },
+  "release": {
+   "ER": 63,
+   "IR": 148
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PROPRANOLOL HYDROCHLORIDE": 211
+  },
+  "dea_schedule": {
+   "none": 211
+  }
+ },
+ {
+  "rank": 104,
+  "drug_id": "risperidone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 169,
+  "eligible_this": 169,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 156,
+   "SOLUTION": 13
+  },
+  "release": {
+   "IR": 169
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "RISPERIDONE": 169
+  },
+  "dea_schedule": {
+   "none": 169
+  }
+ },
+ {
+  "rank": 105,
+  "drug_id": "olanzapine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 205,
+  "eligible_this": 205,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 205
+  },
+  "release": {
+   "IR": 205
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OLANZAPINE": 205
+  },
+  "dea_schedule": {
+   "none": 205
+  }
+ },
+ {
+  "rank": 106,
+  "drug_id": "nitrofurantoin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 138,
+  "eligible_this": 138,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 126,
+   "SUSPENSION": 12
+  },
+  "release": {
+   "IR": 138
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "NITROFURANTOIN": 136,
+   "NITROFURANTOIN MONOHYDRATE": 65
+  },
+  "dea_schedule": {
+   "none": 138
+  }
+ },
+ {
+  "rank": 107,
+  "drug_id": "nystatin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 28,
+  "eligible_this": 27,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "ROUTE_OUT_OF_SCOPE": 1
+  },
+  "excluded": {},
+  "forms": {
+   "SUSPENSION": 19,
+   "TABLET": 8,
+   "OTHER": 1
+  },
+  "release": {
+   "IR": 28
+  },
+  "co_routes": {
+   "TOPICAL": 1
+  },
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "NYSTATIN": 28
+  },
+  "dea_schedule": {
+   "none": 28
+  }
+ },
+ {
+  "rank": 108,
+  "drug_id": "ketoconazole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 13,
+  "eligible_this": 13,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 13
+  },
+  "release": {
+   "IR": 13
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "KETOCONAZOLE": 12,
+   "LEVOKETOCONAZOLE": 1
+  },
+  "dea_schedule": {
+   "none": 13
+  }
+ },
+ {
+  "rank": 109,
+  "drug_id": "mirabegron",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 23,
+  "eligible_this": 23,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 21,
+   "SUSPENSION": 2
+  },
+  "release": {
+   "ER": 23
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MIRABEGRON": 23
+  },
+  "dea_schedule": {
+   "none": 23
+  }
+ },
+ {
+  "rank": 110,
+  "drug_id": "amitriptyline",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 212,
+  "eligible_this": 212,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 212
+  },
+  "release": {
+   "IR": 212
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMITRIPTYLINE HYDROCHLORIDE": 212
+  },
+  "dea_schedule": {
+   "none": 212
+  }
+ },
+ {
+  "rank": 111,
+  "drug_id": "carbidopa_levodopa",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 98,
+  "eligible_this": 98,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 90,
+   "CAPSULE": 8
+  },
+  "release": {
+   "IR": 68,
+   "ER": 30
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CARBIDOPA": 98,
+   "LEVODOPA": 98
+  },
+  "dea_schedule": {
+   "none": 98
+  }
+ },
+ {
+  "rank": 112,
+  "drug_id": "clonidine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 147,
+  "eligible_this": 147,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 144,
+   "SUSPENSION": 1,
+   "SOLUTION": 2
+  },
+  "release": {
+   "IR": 133,
+   "ER": 14
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CLONIDINE HYDROCHLORIDE": 144,
+   "CLONIDINE": 3
+  },
+  "dea_schedule": {
+   "none": 147
+  }
+ },
+ {
+  "rank": 113,
+  "drug_id": "nifedipine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 130,
+  "eligible_this": 130,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 9,
+   "TABLET": 121
+  },
+  "release": {
+   "IR": 9,
+   "ER": 121
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "NIFEDIPINE": 130
+  },
+  "dea_schedule": {
+   "none": 130
+  }
+ },
+ {
+  "rank": 114,
+  "drug_id": "prednisolone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 39,
+  "eligible_this": 39,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SOLUTION": 29,
+   "TABLET": 10
+  },
+  "release": {
+   "IR": 39
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PREDNISOLONE": 11,
+   "PREDNISOLONE SODIUM PHOSPHATE": 28
+  },
+  "dea_schedule": {
+   "none": 39
+  }
+ },
+ {
+  "rank": 115,
+  "drug_id": "fluconazole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 153,
+  "eligible_this": 153,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 142,
+   "SUSPENSION": 11
+  },
+  "release": {
+   "IR": 153
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FLUCONAZOLE": 153
+  },
+  "dea_schedule": {
+   "none": 153
+  }
+ },
+ {
+  "rank": 116,
+  "drug_id": "paroxetine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 168,
+  "eligible_this": 168,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 163,
+   "SUSPENSION": 2,
+   "CAPSULE": 3
+  },
+  "release": {
+   "IR": 137,
+   "ER": 31
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PAROXETINE HYDROCHLORIDE HEMIHYDRATE": 96,
+   "PAROXETINE HYDROCHLORIDE": 47,
+   "PAROXETINE HYDROCHLORIDE ANHYDROUS": 22,
+   "PAROXETINE MESYLATE": 3
+  },
+  "dea_schedule": {
+   "none": 168
+  }
+ },
+ {
+  "rank": 118,
+  "drug_id": "ropinirole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 149,
+  "eligible_this": 149,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 149
+  },
+  "release": {
+   "ER": 40,
+   "IR": 109
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ROPINIROLE HYDROCHLORIDE": 144,
+   "ROPINIROLE": 5
+  },
+  "dea_schedule": {
+   "none": 149
+  }
+ },
+ {
+  "rank": 119,
+  "drug_id": "topiramate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 302,
+  "eligible_this": 302,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 190,
+   "CAPSULE": 109,
+   "SOLUTION": 3
+  },
+  "release": {
+   "IR": 213,
+   "ER": 89
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TOPIRAMATE": 302
+  },
+  "dea_schedule": {
+   "none": 302
+  }
+ },
+ {
+  "rank": 120,
+  "drug_id": "sacubitril_valsartan",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 103,
+  "eligible_this": 103,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 101,
+   "OTHER": 2
+  },
+  "release": {
+   "IR": 103
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SACUBITRIL": 103,
+   "VALSARTAN": 103
+  },
+  "dea_schedule": {
+   "none": 103
+  }
+ },
+ {
+  "rank": 121,
+  "drug_id": "pioglitazone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 68,
+  "eligible_this": 68,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 68
+  },
+  "release": {
+   "IR": 68
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PIOGLITAZONE HYDROCHLORIDE": 65,
+   "PIOGLITAZONE": 3
+  },
+  "dea_schedule": {
+   "none": 68
+  }
+ },
+ {
+  "rank": 122,
+  "drug_id": "olmesartan",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 131,
+  "eligible_this": 131,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 131
+  },
+  "release": {
+   "IR": 131
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "OLMESARTAN MEDOXOMIL": 131
+  },
+  "dea_schedule": {
+   "none": 131
+  }
+ },
+ {
+  "rank": 125,
+  "drug_id": "diazepam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 88,
+  "eligible_this": 88,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SOLUTION": 8,
+   "TABLET": 80
+  },
+  "release": {
+   "IR": 88
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DIAZEPAM": 88
+  },
+  "dea_schedule": {
+   "CIV": 88
+  }
+ },
+ {
+  "rank": 126,
+  "drug_id": "valacyclovir",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 115,
+  "eligible_this": 115,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 115
+  },
+  "release": {
+   "IR": 115
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "VALACYCLOVIR HYDROCHLORIDE": 115
+  },
+  "dea_schedule": {
+   "none": 115
+  }
+ },
+ {
+  "rank": 127,
+  "drug_id": "naproxen",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 223,
+  "eligible_this": 223,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 217,
+   "SUSPENSION": 6
+  },
+  "release": {
+   "IR": 196,
+   "DR": 14,
+   "ER": 13
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "NAPROXEN": 176,
+   "NAPROXEN SODIUM": 47
+  },
+  "dea_schedule": {
+   "none": 223
+  }
+ },
+ {
+  "rank": 128,
+  "drug_id": "amiodarone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 43,
+  "eligible_this": 43,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 43
+  },
+  "release": {
+   "IR": 43
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMIODARONE HYDROCHLORIDE": 43
+  },
+  "dea_schedule": {
+   "none": 43
+  }
+ },
+ {
+  "rank": 129,
+  "drug_id": "triamterene_hydrochlorothiazide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 69,
+  "eligible_this": 69,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 24,
+   "TABLET": 45
+  },
+  "release": {
+   "IR": 69
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TRIAMTERENE": 69,
+   "HYDROCHLOROTHIAZIDE": 69
+  },
+  "dea_schedule": {
+   "none": 69
+  }
+ },
+ {
+  "rank": 130,
+  "drug_id": "chlorthalidone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 105,
+  "eligible_this": 105,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 105
+  },
+  "release": {
+   "IR": 105
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CHLORTHALIDONE": 105
+  },
+  "dea_schedule": {
+   "none": 105
+  }
+ },
+ {
+  "rank": 131,
+  "drug_id": "esomeprazole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 125,
+  "eligible_this": 125,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 102,
+   "OTHER": 18,
+   "SUSPENSION": 5
+  },
+  "release": {
+   "DR": 114,
+   "IR": 10,
+   "ER": 1
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ESOMEPRAZOLE MAGNESIUM": 80,
+   "ESOMEPRAZOLE MAGNESIUM DIHYDRATE": 19,
+   "ESOMEPRAZOLE MAGNESIUM TRIHYDRATE": 22,
+   "ESOMEPRAZOLE": 2,
+   "ESOMEPRAZOLE STRONTIUM": 2
+  },
+  "dea_schedule": {
+   "none": 125
+  }
+ },
+ {
+  "rank": 133,
+  "drug_id": "meclizine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 71,
+  "eligible_this": 71,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 71
+  },
+  "release": {
+   "IR": 71
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MECLIZINE HYDROCHLORIDE": 71
+  },
+  "dea_schedule": {
+   "none": 71
+  }
+ },
+ {
+  "rank": 134,
+  "drug_id": "timolol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 4,
+  "eligible_this": 4,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 4
+  },
+  "release": {
+   "IR": 4
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TIMOLOL MALEATE": 4
+  },
+  "dea_schedule": {
+   "none": 4
+  }
+ },
+ {
+  "rank": 135,
+  "drug_id": "torsemide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 63,
+  "eligible_this": 63,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 63
+  },
+  "release": {
+   "IR": 63
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TORSEMIDE": 63
+  },
+  "dea_schedule": {
+   "none": 63
+  }
+ },
+ {
+  "rank": 136,
+  "drug_id": "lovastatin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 72,
+  "eligible_this": 72,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 72
+  },
+  "release": {
+   "IR": 72
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LOVASTATIN": 72
+  },
+  "dea_schedule": {
+   "none": 72
+  }
+ },
+ {
+  "rank": 137,
+  "drug_id": "hydrocortisone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 54,
+  "eligible_this": 54,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 49,
+   "OTHER": 4,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 54
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDROCORTISONE": 54
+  },
+  "dea_schedule": {
+   "none": 54
+  }
+ },
+ {
+  "rank": 138,
+  "drug_id": "morphine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 115,
+  "eligible_this": 115,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 59,
+   "SOLUTION": 28,
+   "CAPSULE": 26,
+   "OTHER": 2
+  },
+  "release": {
+   "IR": 43,
+   "ER": 72
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "MORPHINE SULFATE": 111,
+   "MORPHINE": 4
+  },
+  "dea_schedule": {
+   "CII": 115
+  }
+ },
+ {
+  "rank": 142,
+  "drug_id": "acetaminophen_codeine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 74,
+  "eligible_this": 74,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 71,
+   "SOLUTION": 3
+  },
+  "release": {
+   "IR": 74
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ACETAMINOPHEN": 74,
+   "CODEINE PHOSPHATE": 74
+  },
+  "dea_schedule": {
+   "CIII": 69,
+   "CII": 2,
+   "CV": 3
+  }
+ },
+ {
+  "rank": 143,
+  "drug_id": "methocarbamol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 200,
+  "eligible_this": 200,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 199,
+   "SUSPENSION": 1
+  },
+  "release": {
+   "IR": 200
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METHOCARBAMOL": 200
+  },
+  "dea_schedule": {
+   "none": 200
+  }
+ },
+ {
+  "rank": 144,
+  "drug_id": "nitroglycerin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 12,
+  "eligible_this": 12,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "OTHER": 9,
+   "CAPSULE": 3
+  },
+  "release": {
+   "IR": 12
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "NITROGLYCERIN": 12
+  },
+  "dea_schedule": {
+   "none": 12
+  }
+ },
+ {
+  "rank": 145,
+  "drug_id": "levofloxacin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 97,
+  "eligible_this": 97,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 95,
+   "SOLUTION": 2
+  },
+  "release": {
+   "IR": 97
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LEVOFLOXACIN": 97
+  },
+  "dea_schedule": {
+   "none": 97
+  }
+ },
+ {
+  "rank": 146,
+  "drug_id": "irbesartan",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 83,
+  "eligible_this": 83,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 83
+  },
+  "release": {
+   "IR": 83
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "IRBESARTAN": 83
+  },
+  "dea_schedule": {
+   "none": 83
+  }
+ },
+ {
+  "rank": 147,
+  "drug_id": "chlorhexidine",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 35,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 35
+  },
+  "excluded": {},
+  "forms": {
+   "OTHER": 32,
+   "SOLUTION": 3
+  },
+  "release": {
+   "IR": 35
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CHLORHEXIDINE GLUCONATE": 35
+  },
+  "dea_schedule": {
+   "none": 35
+  }
+ },
+ {
+  "rank": 148,
+  "drug_id": "hydroxychloroquine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 58,
+  "eligible_this": 58,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 58
+  },
+  "release": {
+   "IR": 58
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "HYDROXYCHLOROQUINE SULFATE": 58
+  },
+  "dea_schedule": {
+   "none": 58
+  }
+ },
+ {
+  "rank": 149,
+  "drug_id": "temazepam",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 88,
+  "eligible_this": 88,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 88
+  },
+  "release": {
+   "IR": 88
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TEMAZEPAM": 88
+  },
+  "dea_schedule": {
+   "CIV": 88
+  }
+ },
+ {
+  "rank": 150,
+  "drug_id": "dicyclomine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 121,
+  "eligible_this": 121,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 50,
+   "TABLET": 67,
+   "SOLUTION": 4
+  },
+  "release": {
+   "IR": 121
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DICYCLOMINE HYDROCHLORIDE": 121
+  },
+  "dea_schedule": {
+   "none": 121
+  }
+ },
+ {
+  "rank": 152,
+  "drug_id": "methotrexate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 36,
+  "eligible_this": 36,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 34,
+   "SOLUTION": 2
+  },
+  "release": {
+   "IR": 36
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METHOTREXATE SODIUM": 29,
+   "METHOTREXATE": 7
+  },
+  "dea_schedule": {
+   "none": 36
+  }
+ },
+ {
+  "rank": 153,
+  "drug_id": "tiotropium",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 4,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 4
+  },
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 4
+  },
+  "release": {
+   "IR": 4
+  },
+  "co_routes": {
+   "RESPIRATORY (INHALATION)": 4
+  },
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "TIOTROPIUM BROMIDE MONOHYDRATE": 4
+  },
+  "dea_schedule": {
+   "none": 4
+  }
+ },
+ {
+  "rank": 154,
+  "drug_id": "linaclotide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 4,
+  "eligible_this": 4,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 4
+  },
+  "release": {
+   "IR": 4
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LINACLOTIDE": 4
+  },
+  "dea_schedule": {
+   "none": 4
+  }
+ },
+ {
+  "rank": 156,
+  "drug_id": "sucralfate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 70,
+  "eligible_this": 70,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SUSPENSION": 24,
+   "TABLET": 46
+  },
+  "release": {
+   "IR": 70
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SUCRALFATE": 70
+  },
+  "dea_schedule": {
+   "none": 70
+  }
+ },
+ {
+  "rank": 157,
+  "drug_id": "clindamycin",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 103,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 103
+  },
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 94,
+   "SOLUTION": 9
+  },
+  "release": {
+   "IR": 103
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CLINDAMYCIN HYDROCHLORIDE": 94,
+   "CLINDAMYCIN PALMITATE HYDROCHLORIDE": 9
+  },
+  "dea_schedule": {
+   "none": 103
+  }
+ },
+ {
+  "rank": 158,
+  "drug_id": "benazepril",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 88,
+  "eligible_this": 88,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 88
+  },
+  "release": {
+   "IR": 88
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BENAZEPRIL HYDROCHLORIDE": 88
+  },
+  "dea_schedule": {
+   "none": 88
+  }
+ },
+ {
+  "rank": 159,
+  "drug_id": "bumetanide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 95,
+  "eligible_this": 95,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 95
+  },
+  "release": {
+   "IR": 95
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BUMETANIDE": 95
+  },
+  "dea_schedule": {
+   "none": 95
+  }
+ },
+ {
+  "rank": 160,
+  "drug_id": "doxazosin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 130,
+  "eligible_this": 130,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 130
+  },
+  "release": {
+   "IR": 128,
+   "ER": 2
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DOXAZOSIN MESYLATE": 130
+  },
+  "dea_schedule": {
+   "none": 130
+  }
+ },
+ {
+  "rank": 161,
+  "drug_id": "dextroamphetamine_amphetamine",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 218,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 218
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 113,
+   "CAPSULE": 105
+  },
+  "release": {
+   "IR": 119,
+   "ER": 99
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DEXTROAMPHETAMINE SACCHARATE": 218,
+   "AMPHETAMINE ASPARTATE": 15,
+   "DEXTROAMPHETAMINE SULFATE": 218,
+   "AMPHETAMINE SULFATE": 218,
+   "AMPHETAMINE ASPARTATE MONOHYDRATE": 203
+  },
+  "dea_schedule": {
+   "CII": 218
+  }
+ },
+ {
+  "rank": 163,
+  "drug_id": "metronidazole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 121,
+  "eligible_this": 121,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 115,
+   "CAPSULE": 4,
+   "SUSPENSION": 2
+  },
+  "release": {
+   "IR": 120,
+   "ER": 1
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "METRONIDAZOLE": 121
+  },
+  "dea_schedule": {
+   "none": 121
+  }
+ },
+ {
+  "rank": 164,
+  "drug_id": "levocetirizine",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 45,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 45
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 39,
+   "SOLUTION": 6
+  },
+  "release": {
+   "IR": 45
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LEVOCETIRIZINE DIHYDROCHLORIDE": 45
+  },
+  "dea_schedule": {
+   "none": 45
+  }
+ },
+ {
+  "rank": 166,
+  "drug_id": "enalapril",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 107,
+  "eligible_this": 107,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 99,
+   "SOLUTION": 8
+  },
+  "release": {
+   "IR": 107
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ENALAPRIL MALEATE": 107
+  },
+  "dea_schedule": {
+   "none": 107
+  }
+ },
+ {
+  "rank": 168,
+  "drug_id": "cefdinir",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 81,
+  "eligible_this": 81,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "SUSPENSION": 38,
+   "CAPSULE": 43
+  },
+  "release": {
+   "IR": 81
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "CEFDINIR": 75,
+   "CEFDINIR MONOHYDRATE": 6
+  },
+  "dea_schedule": {
+   "none": 81
+  }
+ },
+ {
+  "rank": 170,
+  "drug_id": "benztropine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 51,
+  "eligible_this": 51,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 51
+  },
+  "release": {
+   "IR": 51
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "BENZTROPINE MESYLATE": 51
+  },
+  "dea_schedule": {
+   "none": 51
+  }
+ },
+ {
+  "rank": 171,
+  "drug_id": "icosapent_ethyl",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 39,
+  "eligible_this": 39,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 39
+  },
+  "release": {
+   "IR": 39
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ICOSAPENT ETHYL": 39
+  },
+  "dea_schedule": {
+   "none": 39
+  }
+ },
+ {
+  "rank": 172,
+  "drug_id": "fenofibrate",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 219,
+  "eligible_this": 219,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 159,
+   "CAPSULE": 60
+  },
+  "release": {
+   "IR": 209,
+   "DR": 10
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "FENOFIBRATE": 209,
+   "FENOFIBRIC ACID": 10
+  },
+  "dea_schedule": {
+   "none": 219
+  }
+ },
+ {
+  "rank": 174,
+  "drug_id": "lactulose",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 36,
+  "eligible_this": 28,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "ROUTE_OUT_OF_SCOPE": 8
+  },
+  "excluded": {},
+  "forms": {
+   "SOLUTION": 36
+  },
+  "release": {
+   "IR": 36
+  },
+  "co_routes": {
+   "RECTAL": 8
+  },
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LACTULOSE": 36
+  },
+  "dea_schedule": {
+   "none": 36
+  }
+ },
+ {
+  "rank": 175,
+  "drug_id": "acyclovir",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 156,
+  "eligible_this": 156,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 112,
+   "CAPSULE": 33,
+   "SUSPENSION": 11
+  },
+  "release": {
+   "IR": 156
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ACYCLOVIR": 156
+  },
+  "dea_schedule": {
+   "none": 156
+  }
+ },
+ {
+  "rank": 178,
+  "drug_id": "sumatriptan",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 74,
+  "eligible_this": 74,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 74
+  },
+  "release": {
+   "IR": 74
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "SUMATRIPTAN SUCCINATE": 74
+  },
+  "dea_schedule": {
+   "none": 74
+  }
+ },
+ {
+  "rank": 181,
+  "drug_id": "pramipexole",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 137,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 137
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 137
+  },
+  "release": {
+   "IR": 94,
+   "ER": 43
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PRAMIPEXOLE DIHYDROCHLORIDE": 137
+  },
+  "dea_schedule": {
+   "none": 137
+  }
+ },
+ {
+  "rank": 183,
+  "drug_id": "digoxin",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 47,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 47
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 43,
+   "SOLUTION": 4
+  },
+  "release": {
+   "IR": 47
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DIGOXIN": 47
+  },
+  "dea_schedule": {
+   "none": 47
+  }
+ },
+ {
+  "rank": 184,
+  "drug_id": "amlodipine_benazepril",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 93,
+  "eligible_this": 93,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 93
+  },
+  "release": {
+   "IR": 93
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "AMLODIPINE BESYLATE": 93,
+   "BENAZEPRIL HYDROCHLORIDE": 93
+  },
+  "dea_schedule": {
+   "none": 93
+  }
+ },
+ {
+  "rank": 186,
+  "drug_id": "verapamil",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 84,
+  "eligible_this": 84,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 71,
+   "CAPSULE": 13
+  },
+  "release": {
+   "ER": 34,
+   "IR": 46,
+   "DR": 4
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "VERAPAMIL HYDROCHLORIDE": 84
+  },
+  "dea_schedule": {
+   "none": 84
+  }
+ },
+ {
+  "rank": 187,
+  "drug_id": "valsartan_hydrochlorothiazide",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 104,
+  "eligible_this": 104,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 104
+  },
+  "release": {
+   "IR": 104
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "VALSARTAN": 104,
+   "HYDROCHLOROTHIAZIDE": 104
+  },
+  "dea_schedule": {
+   "none": 104
+  }
+ },
+ {
+  "rank": 188,
+  "drug_id": "anastrozole",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 41,
+  "eligible_this": 41,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 41
+  },
+  "release": {
+   "IR": 41
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ANASTROZOLE": 41
+  },
+  "dea_schedule": {
+   "none": 41
+  }
+ },
+ {
+  "rank": 189,
+  "drug_id": "ramipril",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 69,
+  "eligible_this": 69,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 69
+  },
+  "release": {
+   "IR": 69
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "RAMIPRIL": 69
+  },
+  "dea_schedule": {
+   "none": 69
+  }
+ },
+ {
+  "rank": 190,
+  "drug_id": "ketorolac",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 54,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 54
+  },
+  "excluded": {},
+  "forms": {
+   "TABLET": 54
+  },
+  "release": {
+   "IR": 54
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "KETOROLAC TROMETHAMINE": 54
+  },
+  "dea_schedule": {
+   "none": 54
+  }
+ },
+ {
+  "rank": 191,
+  "drug_id": "ergocalciferol",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 38,
+  "eligible_this": 38,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "CAPSULE": 38
+  },
+  "release": {
+   "IR": 38
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "ERGOCALCIFEROL": 38
+  },
+  "dea_schedule": {
+   "none": 38
+  }
+ },
+ {
+  "rank": 194,
+  "drug_id": "linagliptin",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 3,
+  "eligible_this": 3,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 3
+  },
+  "release": {
+   "IR": 3
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LINAGLIPTIN": 3
+  },
+  "dea_schedule": {
+   "none": 3
+  }
+ },
+ {
+  "rank": 196,
+  "drug_id": "lidocaine",
+  "status": "INACTIVE",
+  "decision": "PROPOSED_INACTIVE",
+  "products": 22,
+  "eligible_this": 0,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {
+   "DRUG_DISABLED": 22
+  },
+  "excluded": {},
+  "forms": {
+   "SOLUTION": 22
+  },
+  "release": {
+   "IR": 22
+  },
+  "co_routes": {
+   "TOPICAL": 15
+  },
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "LIDOCAINE HYDROCHLORIDE": 18,
+   "LIDOCAINE HYDROCHLORIDE ANHYDROUS": 4
+  },
+  "dea_schedule": {
+   "none": 22
+  }
+ },
+ {
+  "rank": 197,
+  "drug_id": "promethazine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 91,
+  "eligible_this": 91,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 79,
+   "SOLUTION": 12
+  },
+  "release": {
+   "IR": 91
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "PROMETHAZINE HYDROCHLORIDE": 91
+  },
+  "dea_schedule": {
+   "none": 91
+  }
+ },
+ {
+  "rank": 198,
+  "drug_id": "dexamethasone",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 145,
+  "eligible_this": 145,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 135,
+   "SOLUTION": 10
+  },
+  "release": {
+   "IR": 145
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "DEXAMETHASONE": 145
+  },
+  "dea_schedule": {
+   "none": 145
+  }
+ },
+ {
+  "rank": 200,
+  "drug_id": "colchicine",
+  "status": "ACTIVE",
+  "decision": "PROPOSED_ACTIVE",
+  "products": 48,
+  "eligible_this": 48,
+  "eligible_other": {},
+  "needs_clarification": {},
+  "unsupported": {},
+  "excluded": {},
+  "forms": {
+   "TABLET": 35,
+   "CAPSULE": 12,
+   "SOLUTION": 1
+  },
+  "release": {
+   "IR": 48
+  },
+  "co_routes": {},
+  "epc_signal_hits": [],
+  "salts_seen": {
+   "COLCHICINE": 48
+  },
+  "dea_schedule": {
+   "none": 48
+  }
+ }
+]

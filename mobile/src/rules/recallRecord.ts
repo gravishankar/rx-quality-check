@@ -20,7 +20,8 @@ import { compareRelease, formEvidenceFromText, productSegment } from './doseForm
 import { readIngredientsFromText } from './ingredients.ts';
 import { compareLot, parseLotScope } from './lot.ts';
 import { extractNdcsWithKeys, packageKey, productKeyOfProductNdc } from './ndc.ts';
-import { extractStrengthExpressions, sameStrengthSet } from './strength.ts';
+import { extractStrengthExpressions, sameStrength, sameStrengthSet, type StrengthExpression } from './strength.ts';
+import { sourceProductUncertain } from './sourceProduct.ts';
 
 const REQUIRED_STRING_FIELDS = [
   'recall_number',
@@ -84,6 +85,48 @@ interface AttributeComparison {
   unknowns: RecordReason[];
 }
 
+type Pairing = 'SAME' | 'DIFFERENT' | 'UNKNOWN';
+
+/**
+ * Order of the ingredient names that belong to one strength expression (review round 2, issue 1):
+ * the shortest run of text just before the expression (after the previous expression) that names
+ * every ingredient, each exactly once. Null when no such run exists: the pairing is not established.
+ */
+function localOrder(text: string, from: number, to: number, names: readonly string[], aliases: Readonly<Record<string, string>>): string[] | null {
+  const lower = text.slice(from, to).toLowerCase();
+  const hits: { at: number; name: string }[] = [];
+  const terms: [string, string][] = [...names.map((n): [string, string] => [n, n]), ...Object.entries(aliases).filter(([, v]) => names.includes(v))];
+  for (const [term, name] of terms) {
+    const re = new RegExp(`(^|[^a-z])${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![a-z])`, 'g');
+    for (const m of lower.matchAll(re)) hits.push({ at: (m.index ?? 0) + (m[1]?.length ?? 0), name });
+  }
+  hits.sort((x, y) => x.at - y.at);
+  const seen = new Set<string>();
+  let start = hits.length;
+  for (let k = hits.length - 1; k >= 0 && seen.size < names.length; k--) {
+    seen.add((hits[k] as { name: string }).name);
+    start = k;
+  }
+  if (seen.size < names.length) return null;
+  const run = hits.slice(start).map((h) => h.name);
+  return new Set(run).size === run.length ? run : null;
+}
+
+/**
+ * Compare one strength expression with the product (C1, review round 2). A difference is claimed
+ * only when proven: the values differ as a multiset (no pairing can match), or the locally
+ * established pairing differs. Equal values with an unestablished pairing are UNKNOWN, never SAME.
+ */
+function strengthPairing(e: StrengthExpression, from: number, identity: MedicationIdentity, ids: readonly Strength[], text: string, aliases: Readonly<Record<string, string>>): Pairing {
+  const names = identity.ingredients.map((i) => i.name);
+  if (!sameStrengthSet(e.components, ids)) return 'DIFFERENT';
+  if (names.length < 2) return 'SAME';
+  if (new Set(names).size !== names.length || e.index === undefined) return 'UNKNOWN';
+  const order = localOrder(text, from, e.index, names, aliases);
+  if (order === null) return 'UNKNOWN';
+  return order.every((n, k) => sameStrength(e.components[k] as Strength, ids[names.indexOf(n)] as Strength)) ? 'SAME' : 'DIFFERENT';
+}
+
 /** Compare identity attributes with what the record's text explicitly states. */
 export function compareAttributes(identity: MedicationIdentity, description: string): AttributeComparison {
   const differences: RecordReason[] = [];
@@ -112,15 +155,37 @@ export function compareAttributes(identity: MedicationIdentity, description: str
     unknowns.push('STRENGTH_NOT_STATED');
   } else {
     const ids = idStrengths as Strength[];
+    let source = seg;
     let exprs = extractStrengthExpressions(seg);
-    if (exprs.length === 0) exprs = extractStrengthExpressions(description);
-    const comparable = exprs.filter((e) =>
+    if (exprs.length === 0) {
+      source = description;
+      exprs = extractStrengthExpressions(description);
+    }
+    // Each expression's local window starts where the previous expression ended.
+    const windows = exprs.map((e, k) => {
+      const prev = k > 0 ? exprs[k - 1] : undefined;
+      return prev && prev.index !== undefined ? prev.index + prev.text.length : 0;
+    });
+    const comparable = exprs.map((e, k) => ({ e, from: windows[k] as number })).filter(({ e }) =>
       e.components.every((c) => ids.some((s) => s.unit === c.unit && s.per === c.per)),
     );
     if (comparable.length === 0) {
       unknowns.push('STRENGTH_NOT_STATED');
-    } else if (!comparable.some((e) => sameStrengthSet(e.components, ids))) {
-      differences.push('STRENGTH_DIFFERS');
+    } else {
+      const results = comparable.map(({ e, from }) =>
+        e.components.length !== ids.length
+          ? // Review item 1 (fallback): a different number of values than ingredients proves a
+            // difference only if none of its values equals any of the product's strengths.
+            e.components.some((c) => ids.some((s) => sameStrength(c, s)))
+            ? 'PARTIAL'
+            : 'DIFFERENT'
+          : strengthPairing(e, from, identity, ids, source, aliases),
+      );
+      if (!results.includes('SAME')) {
+        if (results.includes('UNKNOWN')) unknowns.push('STRENGTH_ASSOCIATION_UNCLEAR');
+        else if (results.includes('PARTIAL')) unknowns.push('STRENGTH_PARTIALLY_STATED');
+        else differences.push('STRENGTH_DIFFERS');
+      }
     }
   }
 
@@ -256,8 +321,15 @@ export function assessRecord(identity: MedicationIdentity, raw: unknown, foundBy
 
   // R-EV-4: explicit evidence of a different product.
   if (attrs.differences.length > 0) return done('OTHER_PRODUCT', 'NOT_APPLICABLE', attrs.differences);
+  // OD-33 (approved 2026-11-13): when where this product came from is unresolved, a notice that is
+  // ruled out only because it names other NDCs could be about the unknown source product. With no
+  // independent evidence of a different product (checked above), it stays a possible match.
+  const sourceUnresolved = sourceProductUncertain(identity);
   if (textProductKeys.size > 0) {
-    if (textNdc.unparsedMentions === 0) return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['TEXT_NDC_NAMES_OTHER_PRODUCTS']);
+    if (textNdc.unparsedMentions === 0) {
+      if (sourceUnresolved) return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['SOURCE_PRODUCT_UNRESOLVED', 'TEXT_NDC_NAMES_OTHER_PRODUCTS', ...attrs.unknowns]);
+      return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['TEXT_NDC_NAMES_OTHER_PRODUCTS']);
+    }
     // R-EV-5: an NDC list we could not fully read never rules the product out.
     return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['TEXT_NDC_LIST_INCOMPLETE', ...attrs.unknowns]);
   }
@@ -270,6 +342,7 @@ export function assessRecord(identity: MedicationIdentity, raw: unknown, foundBy
   if (structured.length > 0 && textNdc.unparsedMentions === 0) {
     const labeler = productKey.slice(0, 5);
     if (!structured.some((k) => k.slice(0, 5) === labeler)) {
+      if (sourceUnresolved) return done('POSSIBLE_MATCH', 'POTENTIAL_MATCH', ['SOURCE_PRODUCT_UNRESOLVED', 'STRUCTURED_NDC_EXCLUDES_PRODUCT', ...attrs.unknowns]);
       return done('OTHER_PRODUCT', 'NOT_APPLICABLE', ['STRUCTURED_NDC_EXCLUDES_PRODUCT']);
     }
   }

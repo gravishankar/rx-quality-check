@@ -129,7 +129,7 @@ export interface MedicationIdentity {
   /** Carried from the NDC Directory record for source-product resolution. */
   isOriginalPackager?: boolean | null;
   splSetId?: string | null;
-  sourceProductStatus?: 'NOT_APPLICABLE' | 'VERIFIED' | 'NOT_ESTABLISHED' | 'UNAVAILABLE' | 'NOT_CHECKED';
+  sourceProductStatus?: 'NOT_APPLICABLE' | 'VERIFIED' | 'PARTIAL' | 'NOT_ESTABLISHED' | 'UNAVAILABLE' | 'NOT_CHECKED';
   /** User-confirmed lot, if any. Never transmitted. */
   lot: string | null;
 }

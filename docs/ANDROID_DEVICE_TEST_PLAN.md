@@ -4,7 +4,7 @@ Status at Task 4A: **not executed.** No physical device or emulator was availabl
 environment. Every item below is pending. Results are recorded in the table at the end, with device
 model, Android version, build SHA-256 and date.
 
-Owner step-by-step instructions: `docs/INSTALL_ON_ANDROID.md` and `docs/FUNCTIONAL_TEST_PLAN.md` (Task 4A.2; supersedes `docs/FIRST_DEVICE_TEST_RUNBOOK.md`). Install the development APK (`docs/ANDROID_BUILD_AND_INSTALL.md`). Use only public example NDCs;
+Step-by-step instructions: `docs/INSTALL_ON_ANDROID.md` and `docs/FUNCTIONAL_TEST_PLAN.md` (Task 4A.2; supersedes `docs/FIRST_DEVICE_TEST_RUNBOOK.md`). Install the development APK (`docs/ANDROID_BUILD_AND_INSTALL.md`). Use only public example NDCs;
 do not enter real patient information.
 
 ## 1. Installation and launch

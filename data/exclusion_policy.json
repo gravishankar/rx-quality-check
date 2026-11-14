@@ -245,7 +245,7 @@
       "include_combinations": true,
       "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
       "verified_on": "2026-11-12",
-      "note": "Excluded by ingredient regardless of indication (product owner decision, Task 3 brief, 2026-11-12). 265323 mycophenolate (IN), 7145 mycophenolic acid (IN), 408142 mycophenolate sodium (PIN)."
+      "note": "Excluded by ingredient regardless of indication (project team decision, Task 3 brief, 2026-11-12). 265323 mycophenolate (IN), 7145 mycophenolic acid (IN), 408142 mycophenolate sodium (PIN)."
     },
     {
       "id": "EXCL-AZATHIOPRINE",
@@ -264,7 +264,7 @@
       "include_combinations": true,
       "source": "docs/references/Drugs Exclusion List.md; RxCUIs and names from RxNav /REST/rxcui/{id}/properties.json (RxNorm 02-Nov-2026)",
       "verified_on": "2026-11-12",
-      "note": "Excluded by ingredient regardless of indication (product owner decision, Task 3 brief, 2026-11-12)."
+      "note": "Excluded by ingredient regardless of indication (project team decision, Task 3 brief, 2026-11-12)."
     }
   ],
   "route_rules": [
@@ -288,7 +288,7 @@
       ],
       "decision": "EXCLUDED",
       "explanation": "Over-the-counter products are not assessed in this version of the app. This is a scope choice, not a finding about the medication.",
-      "source": "Product owner decision in the Task 3 brief (2026-11-12): exclude OTC products from MVP v0.1 (closes OD-3).",
+      "source": "Project team decision in the Task 3 brief (2026-11-12): exclude OTC products from MVP v0.1 (closes OD-3).",
       "decided_on": "2026-11-12"
     }
   ],
@@ -304,7 +304,7 @@
       "date": "2026-11-12",
       "version": "0.2.0-draft",
       "change": "Schema 2: ingredient rules with ids, RxNorm names, formulation scope (applies_to), combination handling and explanations; class explanations and explicit unlisted-signal behavior; administration rule kept as OPEN_DECISION; OTC products excluded (OD-3 closed); azathioprine and mycophenolate confirmed as ingredient-based exclusions.",
-      "source": "Task 3 brief (product owner decisions); RxNav 02-Nov-2026",
+      "source": "Task 3 brief (project team decisions); RxNav 02-Nov-2026",
       "approved_by": null
     }
   ]

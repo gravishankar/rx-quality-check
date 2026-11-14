@@ -1,2 +1,4 @@
 PaddleOCR PP-OCRv4 mobile models (Apache License 2.0), https://github.com/PaddlePaddle/PaddleOCR
 ONNX conversion as distributed in rapidocr-onnxruntime 1.4.4 (Apache License 2.0).
+Modified for this app: recognizer limited to 105 characters; weights stored in 8 bits
+(scripts/optimize_ocr_models.py).

@@ -90,7 +90,8 @@ async function start(p: PlatformServices) {
   return r;
 }
 async function confirmAll(r: ReactTestRenderer) {
-  for (const s of r.root.findAllByType(Switch)) if (!/release|regular/i.test(String(s.props.accessibilityLabel))) await act(async () => s.props.onValueChange(true));
+  const skip = new Set<string>([COPY.confirm.lotNotUsed, COPY.confirm.releaseUnknown]);
+  for (const s of r.root.findAllByType(Switch)) if (!/release|regular/i.test(String(s.props.accessibilityLabel)) && !skip.has(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
   const reg = r.root.findAllByType(Switch).find((s) => s.props.accessibilityLabel === COPY.confirm.releaseIR);
   if (reg) await act(async () => reg.props.onValueChange(true));
   await press(r, COPY.confirm.confirmAll);
@@ -240,4 +241,325 @@ test('real vial photo, drug line only ("AMLODIPINEMGTA"): name is prefilled, str
   expect(field(COPY.entry.nameLabel)).toBe('AMLODIPINE');
   expect(field(COPY.entry.strengthLabel)).toBe('');
   expect(t).not.toMatch(/No matching recall|Recall match found|Possible recall match/);
+});
+
+// ---------------------------------------------------------------------------------------------
+// Review items 10-11, explicit choices (no happy-path helper): every lot or release choice below is
+// made by name, and the unchosen alternative is checked to be off.
+// ---------------------------------------------------------------------------------------------
+const LOT_AND_RELEASE = new Set<string>([COPY.confirm.lotNotUsed, COPY.confirm.releaseUnknown, COPY.confirm.releaseIR, COPY.confirm.releaseER, COPY.confirm.releaseDR]);
+const switches = (r: ReactTestRenderer) => r.root.findAllByType(Switch);
+const sw = (r: ReactTestRenderer, label: string) => switches(r).find((s) => s.props.accessibilityLabel === label);
+const isLotUse = (l: unknown) => typeof l === 'string' && l.startsWith('Use lot ');
+/** Tick only the identity items (each "matches my label" statement); never a lot or release choice. */
+async function tickIdentityItems(r: ReactTestRenderer) {
+  for (const s of switches(r)) if (!LOT_AND_RELEASE.has(s.props.accessibilityLabel) && !isLotUse(s.props.accessibilityLabel)) await act(async () => s.props.onValueChange(true));
+}
+const setSwitch = async (r: ReactTestRenderer, label: string, on: boolean) => {
+  const s = sw(r, label);
+  if (!s) throw new Error(`no switch "${label}":\n${allText(r)}`);
+  await act(async () => s.props.onValueChange(on));
+};
+const confirmEnabled = (r: ReactTestRenderer) => {
+  const b = r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button' && textOf(n).includes(COPY.confirm.confirmAll));
+  return b.length > 0 && !b[b.length - 1]!.props.disabled;
+};
+
+test('explicit: scanned lot, "continue without the lot" → check runs without it (possible match, never confirmed); the lot is never sent', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  expect(confirmEnabled(r)).toBe(false);
+  expect(allText(r)).toContain(COPY.confirm.needLotChoice);
+  await setSwitch(r, COPY.confirm.lotNotUsed, true);
+  expect(sw(r, COPY.confirm.lotUse('JKU4639A'))?.props.value).toBe(false);
+  expect(confirmEnabled(r)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  const t = allText(r);
+  expect(t).toContain(COPY.result.POTENTIAL.headline);
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+  expect(t).toContain(COPY.result.qualifiers.lotNotProvided);
+  expect(p.requests.join('\n')).not.toContain('JKU4639A');
+});
+
+test('explicit: lot choices are exclusive, and changing your mind is honoured (not used → use → confirmed match)', async () => {
+  const r = await start(platform([label('23_')]));
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  await setSwitch(r, COPY.confirm.lotNotUsed, true);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  expect(sw(r, COPY.confirm.lotNotUsed)?.props.value).toBe(false);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), false);
+  expect(confirmEnabled(r)).toBe(false); // un-choosing returns to "still needed"
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.confirm.confirmAll);
+  expect(allText(r)).toContain(COPY.result.CONFIRMED.headline);
+});
+
+test('explicit: correcting the lot through "Correct the details" uses only the corrected lot, and asks again', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.scan.correct);
+  const lotField = r.root.findAll((n) => n.type === TextInput && n.props.accessibilityLabel === COPY.entry.lotLabel)[0]!;
+  await act(async () => lotField.props.onChangeText('SYNTH999')); // SYNTHETIC corrected lot
+  await press(r, COPY.entry.submit);
+  const t = allText(r);
+  expect(t).toContain('SYNTH999');
+  expect(sw(r, COPY.confirm.lotUse('JKU4639A'))).toBeUndefined();
+  expect(sw(r, COPY.confirm.lotUse('SYNTH999'))?.props.value).toBe(false); // earlier choice not carried over
+  await tickIdentityItems(r);
+  await setSwitch(r, COPY.confirm.lotUse('SYNTH999'), true);
+  await press(r, COPY.confirm.confirmAll);
+  const after = allText(r);
+  expect(after).not.toContain(COPY.result.CONFIRMED.headline); // SYNTH999 is not a listed lot
+  expect(after).toContain(COPY.result.POTENTIAL.headline);
+  expect(p.requests.join('\n')).not.toMatch(/JKU4639A|SYNTH999/);
+});
+
+test('explicit: rescanning replaces the earlier label; an earlier lot choice never carries over', async () => {
+  const p = platform([label('23_'), label('01_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  await press(r, COPY.scan.rescan);
+  const t = allText(r);
+  expect(p.scans).toBe(2);
+  expect(t).not.toContain('JKU4639A');
+  expect(switches(r).some((s) => isLotUse(s.props.accessibilityLabel))).toBe(false); // pharmacy label: no lot
+  await tickIdentityItems(r);
+  await press(r, COPY.confirm.confirmAll);
+  const after = allText(r);
+  expect(after).toContain(COPY.result.POTENTIAL.headline);
+  expect(after).toContain(COPY.result.qualifiers.lotNotProvided);
+});
+
+test('explicit: repeated confirmation — a press while something is missing does nothing; completing it runs exactly one check', async () => {
+  const p = platform([label('23_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  await tickIdentityItems(r);
+  const before = p.requests.filter((u) => u.includes('enforcement')).length;
+  const btn = () => r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button' && textOf(n).includes(COPY.confirm.confirmAll)).pop()!;
+  expect(btn().props.disabled).toBe(true);
+  expect(p.requests.filter((u) => u.includes('enforcement')).length).toBe(before);
+  await setSwitch(r, COPY.confirm.lotUse('JKU4639A'), true);
+  const b = btn();
+  await act(async () => {
+    b.props.onPress();
+    b.props.onPress(); // double tap
+  });
+  await flush();
+  expect(allText(r)).toContain(COPY.result.CONFIRMED.headline);
+  const controls = p.requests.filter((u) => u.includes('D-0325-2021') && u.includes('recall_number'));
+  expect(controls.length).toBe(1); // one positive control → one recall check
+});
+
+// ---------------------------------------------------------------------------------------------
+// Review round 2, issue 5: the native scanner reports when the label photo could not be removed
+// (SYNTHETIC native results below); every caller path must tell the patient.
+// ---------------------------------------------------------------------------------------------
+const notDeleted = (out: ScanOutput): ScanOutput => ({ ...out, photoDeleted: false });
+
+test('R2-5: photo not removed after a successful read → the patient is told, and the check continues', async () => {
+  const r = await start(platform([notDeleted(label('01_'))]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+  expect(t).toContain(COPY.confirm.title);
+});
+
+test('R2-5: photo not removed after a cancelled photo → told', async () => {
+  const r = await start(platform([{ cancelled: true, photoDeleted: false } as never]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.cancelled);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5: photo not removed when nothing could be read → told', async () => {
+  const r = await start(platform([notDeleted({ lines: [], barcodes: [] })]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5: photo not removed when the scanner fails → told', async () => {
+  const r = await start(platform([Object.assign(new Error('SYNTHETIC'), { code: 'SCAN_FAILED', userInfo: { photoDeleted: false } })]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.failed);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R2-5 guard: a removed photo adds no notice', async () => {
+  const r = await start(platform([{ ...label('01_'), photoDeleted: true }]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).not.toContain('could not be removed');
+});
+
+// ---------------------------------------------------------------------------------------------
+// Review round 3 (R2-5 follow-up): the cleanup warning must survive every identification outcome.
+// Scanner outputs are SYNTHETIC OCR lines; NDC Directory answers for the ambiguous case are SYNTHETIC
+// copies of the real Sun metformin ER record with altered NDCs (as in tests/integration/workflow).
+// ---------------------------------------------------------------------------------------------
+const ocrOnly = (...lines: string[]): ScanOutput => ({ lines: lines.map((text) => ({ text, score: 0.99 })), barcodes: [], photoDeleted: false });
+const ndcUrl = (n: string) => `https://api.fda.gov/drug/ndc.json?search=packaging.package_ndc%3A%22${n}%22&limit=10`;
+function platformWith(results: (ScanOutput | Error)[], over: Record<string, Entry | 'THROW'>) {
+  const p = platform(results);
+  const inner = p.transport.get.bind(p.transport);
+  p.transport = {
+    async get(url: string, o?: unknown) {
+      const x = over[url];
+      if (x === 'THROW') {
+        p.requests.push(url);
+        throw new TypeError('Network request failed (SYNTHETIC)');
+      }
+      if (x) {
+        p.requests.push(url);
+        return x;
+      }
+      return inner(url, o as never);
+    },
+  } as typeof p.transport;
+  return p;
+}
+
+test('R3: excluded medication (warfarin) → the cleanup warning is still shown', async () => {
+  const r = await start(platform([ocrOnly('WARFARIN 5 MG TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.notAssessed.EXCLUDED.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: unsupported medication (metoprolol tartrate) → warning shown', async () => {
+  const r = await start(platform([ocrOnly('METOPROLOL TARTRATE 25 MG TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.notAssessed.UNSUPPORTED.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: missing information (no strength read) → warning shown', async () => {
+  const r = await start(platform([ocrOnly('METFORMIN HCL ER TABLETS')]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted);
+});
+
+async function waitText(r: ReactTestRenderer, s: string, ms = 30_000) {
+  const t0 = performance.now();
+  while (performance.now() - t0 < ms && !allText(r).includes(s)) await act(async () => new Promise((res) => setTimeout(res, 200)));
+}
+
+test('R3: source error (FDA directory unreachable, after the engine\'s retries) → warning shown', async () => {
+  const r = await start(platformWith([ocrOnly('NDC 62756-142-02', 'METFORMIN HCL ER 500 MG TABLET')], { [ndcUrl('62756-142-02')]: 'THROW' }));
+  await press(r, COPY.scan.button);
+  await waitText(r, COPY.errors.sourceUnavailable.headline);
+  const t = allText(r);
+  expect(t).toContain(COPY.errors.sourceUnavailable.headline);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+}, 40_000);
+
+test('R3: ambiguous product (two FDA listings fit) → warning shown on the choice screen', async () => {
+  const real = JSON.parse(entries[ndcUrl('62756-142-02')]!.bodyText).results[0];
+  const rec = (productNdc: string, pkg: string) => ({ status: 200, headers: { 'content-type': 'application/json' }, bodyText: JSON.stringify({ meta: { last_updated: '2026-11-11', results: { skip: 0, limit: 1, total: 1 } }, results: [{ ...real, product_ndc: productNdc, packaging: [{ package_ndc: pkg, description: 'SYNTHETIC' }] }] }) });
+  const notFound = { status: 404, headers: { 'content-type': 'application/json' }, bodyText: '{"error":{"code":"NOT_FOUND","message":"No matches found!"}}' };
+  // SYNTHETIC UPC-A carrying the 10 NDC digits 6275614202 (three possible NDC readings).
+  const upc: ScanOutput = { ...ocrOnly('METFORMIN HCL ER 500 MG TABLET'), barcodes: [{ format: 'UPC_A', text: '362756142022', symbology: null }] };
+  const r = await start(platformWith([upc], {
+    [ndcUrl('6275-6142-02')]: rec('6275-6142', '6275-6142-02'),
+    [ndcUrl('62756-142-02')]: rec('62756-142', '62756-142-02'),
+    [ndcUrl('62756-1420-2')]: notFound,
+  }));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.errors.ambiguous);
+  expect(t).toContain(COPY.scan.photoNotDeleted);
+});
+
+test('R3: the warning stays across screens until a later scan reports the photo storage clean', async () => {
+  const r = await start(platform([ocrOnly('WARFARIN 5 MG TABLETS'), { ...label('01_'), photoDeleted: true }]));
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.notAssessed.EXCLUDED.headline);
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted);
+  await press(r, 'Back');
+  expect(allText(r)).toContain(COPY.scan.button); // home
+  expect(allText(r)).toContain(COPY.scan.photoNotDeleted); // still reported
+  await press(r, COPY.scan.button);
+  expect(allText(r)).toContain(COPY.confirm.title);
+  expect(allText(r)).not.toContain(COPY.scan.photoNotDeleted); // the later scan reported clean storage
+});
+
+test('photo guidance: what to photograph, how close, and accepting the photo are shown before the camera opens, and again after a failed read', async () => {
+  const r = await start(platform([{ lines: [], barcodes: [] }]));
+  let t = allText(r);
+  expect(t).toContain(COPY.scan.howToTitle);
+  for (const step of COPY.scan.howTo) expect(t).toContain(step);
+  // The guidance comes before the scan button, not after it.
+  expect(t.indexOf(COPY.scan.howToTitle)).toBeLessThan(t.indexOf(COPY.scan.button));
+  await press(r, COPY.scan.button);
+  t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.howToTitle);
+});
+
+// ---------------------------------------------------------------------------------------------
+// Labels without an NDC; unreadable vs missing information (team feedback after build 10).
+// ---------------------------------------------------------------------------------------------
+test('guidance: an NDC is optional — the steps never require one, and say many pharmacy labels have none', () => {
+  const all = COPY.scan.howTo.join(' ');
+  expect(all).toMatch(/many pharmacy labels do not show an NDC/i);
+  expect(all).not.toMatch(/NDC (is )?(required|needed)|must (show|include) (the|an) NDC/i);
+});
+
+test('no-NDC label (SYNTHETIC pharmacy label 19, metformin ER 500 mg, no NDC anywhere): confirmation explains the limits, the check runs on name/strength/form, and the result is a qualified possible match', async () => {
+  const p = platform([label('19_')]);
+  const r = await start(p);
+  await press(r, COPY.scan.button);
+  let t = allText(r);
+  expect(t).toContain(COPY.confirm.title);
+  expect(t).toContain(COPY.confirm.noNdcTitle);
+  for (const line of COPY.confirm.noNdc) expect(t).toContain(line);
+  expect(t).not.toContain(COPY.scan.problemTitle); // no request to rescan for an NDC the label does not have
+  await tickIdentityItems(r);
+  expect(confirmEnabled(r)).toBe(true);
+  await press(r, COPY.confirm.confirmAll);
+  t = allText(r);
+  expect(t).toContain(COPY.result.POTENTIAL.headline);
+  expect(t).not.toContain(COPY.result.CONFIRMED.headline);
+  expect(t).toContain(COPY.result.qualifiers.productNotIdentified);
+  // No product-NDC recall search was possible (the positive control, recall_number D-0325-2021, always names one).
+  expect(p.requests.some((u) => u.includes('openfda.product_ndc') && !u.includes('recall_number'))).toBe(false);
+});
+
+test('unreadable photo (nothing read): retake guidance first, typing offered', async () => {
+  const r = await start(platform([{ lines: [], barcodes: [] }]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.nothingRead);
+  expect(t).toContain(COPY.scan.howToTitle);
+  expect(t).toContain(COPY.scan.typeInstead);
+});
+
+test('text read but no drug details found: says rescanning will not add what the label lacks; typing first; pharmacist guidance; no photo tips', async () => {
+  const r = await start(platform([ocrOnly('SYNTHETIC PHARMACY #1234', 'TAKE 1 TABLET BY MOUTH DAILY')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.noDrugFields);
+  expect(t).toContain(COPY.scan.notFoundHelp);
+  expect(t).not.toContain(COPY.scan.howToTitle);
+  const buttons = r.root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityRole === 'button').map((n) => textOf(n));
+  expect(buttons.findIndex((b) => b.includes(COPY.scan.typeInstead))).toBeLessThan(buttons.findIndex((b) => b.includes(COPY.scan.rescan)));
+});
+
+test('details missing after a read (no strength): asks to fill in from the label and to ask the pharmacist, never to guess', async () => {
+  const r = await start(platform([ocrOnly('METFORMIN HCL ER TABLETS')]));
+  await press(r, COPY.scan.button);
+  const t = allText(r);
+  expect(t).toContain(COPY.scan.partialRead);
+  expect(t).toContain(COPY.scan.missingHelp);
 });

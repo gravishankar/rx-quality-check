@@ -7,7 +7,7 @@ Product name: {{PRODUCT_NAME}} is a provisional working name inserted from confi
 Applies to: {{PRODUCT_NAME}} pilot v0.1.0 (Android). Intended audience: users in the United States.
 
 > Draft for legal review. It describes the app's actual design (docs/PRIVACY.md) and must be checked
-> against the final build before publication. Bracketed items require owner input. Some state laws
+> against the final build before publication. Bracketed items require project-team input. Some state laws
 > (for example Washington's My Health My Data Act, Nevada SB 370, Connecticut's consumer health data
 > provisions) may require a separate consumer health data privacy policy; counsel to confirm.
 
@@ -77,7 +77,7 @@ do so on your phone. [COUNSEL: add state-specific rights statements as required.
 
 ## 9. Changes
 
-New versions are shown in the app. [OWNER: effective date.]
+New versions are shown in the app. [TEAM: effective date.]
 
 ## 10. Contact
 

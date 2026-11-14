@@ -1,7 +1,7 @@
 # Release Readiness Checklist — v0.1.0 pilot (working name MedLuma; see config/brand.json)
 
-No APK may be given to anyone other than the owner until **every** item below is satisfied and
-`npm run release:gate` reports no blockers. Development APKs are for the owner's own testing only.
+No APK may be given to anyone outside the project team until **every** item below is satisfied and
+`npm run release:gate` reports no blockers. Development APKs are for internal testing only.
 
 Automated tests show that the code enforces its rules. They are **not** clinical validation, legal
 review or regulatory clearance.
@@ -16,14 +16,14 @@ reviewed (document version or commit). The release gate rejects a sign-off witho
 | `regulatory_classification` | Regulatory classification | Regulatory counsel | `docs/LEGAL_REGULATORY_REVIEW.md` topics 1–3; intended-use statement | **Not signed** |
 | `legal_review` | Legal review | Counsel | Five documents in `docs/legal/`; topics 4–12 | **Not signed** |
 | `clinical_pharmacist_wording_review` | Clinical / pharmacist wording review | Licensed pharmacist or clinician | `mobile/src/copy/en.ts`, `docs/EVIDENCE_AND_CLAIMS_POLICY.md`, exclusion policy rationale | **Not signed** |
-| `configuration_approval` | Configuration approval (OD-2) | Product owner | Exact catalog and policy versions; set status `APPROVED` with effective date | **Not signed** |
+| `configuration_approval` | Configuration approval (OD-2) | Project team | Exact catalog and policy versions; set status `APPROVED` with effective date | **Not signed** |
 | `security_testing` | Security testing | Security reviewer | Encryption at rest, key storage, backup exclusion, network allowlist, log scan, dependency review | **Not signed** |
 | `android_device_testing` | Android device testing | Tester | `docs/ANDROID_DEVICE_TEST_PLAN.md` on ≥ 2 physical devices / Android versions | **Not signed** |
 
 ## B. Configuration and documents
 
 - [ ] Product name cleared by trademark counsel; `config/brand.json` `name_status` set to
-      `CLEARED_BY_COUNSEL` by the owner (currently `PROVISIONAL_CONFLICTS_FOUND` — docs/BRAND_CLEARANCE.md, OD-24)
+      `CLEARED_BY_COUNSEL` by the project team (currently `PROVISIONAL_CONFLICTS_FOUND` — docs/BRAND_CLEARANCE.md, OD-24)
 - [ ] Decision whether to change application/bundle IDs to match the final name (before first distribution)
 
 - [ ] `data/drug_catalog.json` status `APPROVED` (currently `DRAFT_PENDING_APPROVAL`)
@@ -48,7 +48,7 @@ reviewed (document version or commit). The release gate rejects a sign-off witho
 
 ## D. Build
 
-- [ ] Pilot signing key created and stored by the owner **outside the repository and outside the
+- [ ] Pilot signing key created and stored by the project team **outside the repository and outside the
       cloud environment**; properties file path passed with `-PrxrcPilotSigning=…`
 - [ ] `npm run android:pilot` succeeds; SHA-256 recorded and given to testers
 - [ ] All tests, typecheck, config tests, e2e (recorded and live) pass on the release commit

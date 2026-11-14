@@ -7,7 +7,7 @@
 import type { KeyStore, SqlDriver } from '../../src/storage/driver.ts';
 import type { HttpTransport } from '../../src/services/transport.ts';
 import type { SelfTestResult } from '../../src/storage/encryptionSelfTest.ts';
-import type { ScanOutput } from '../../src/scanner/readScan.ts';
+import type { ScanCancelled, ScanOutput } from '../../src/scanner/readScan.ts';
 
 export interface PlatformServices {
   /** HTTPS transport (React Native fetch). Wrapped by the guarded transport in the composition root. */
@@ -29,5 +29,5 @@ export interface PlatformServices {
    * barcodes on the phone, deletes the photo, and returns what was read. Resolves null if the user
    * cancels. Absent on platforms without a scanner — the app then offers manual entry only.
    */
-  scanner?: { scanLabel(): Promise<ScanOutput | null> };
+  scanner?: { scanLabel(): Promise<ScanOutput | ScanCancelled | null> };
 }

@@ -220,7 +220,7 @@ testing.
 
 ## Summary of required reviews
 
-| Review | Owner | Status |
+| Review | Responsible | Status |
 |---|---|---|
 | Regulatory classification (topics 1–3) | Regulatory counsel | Not started |
 | Privacy (4–7) and consumer health data policy | Privacy counsel | Not started |

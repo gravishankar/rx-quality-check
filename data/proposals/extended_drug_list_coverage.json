@@ -1,0 +1,1612 @@
+[
+ {
+  "rank": 1,
+  "drug_id": "atorvastatin",
+  "decision": "EXISTING",
+  "claims": 68495916,
+  "rx_products_exact_any_route": 395,
+  "oral_only_products": 395,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 2,
+  "drug_id": "amlodipine",
+  "decision": "EXISTING",
+  "claims": 47540195,
+  "rx_products_exact_any_route": 200,
+  "oral_only_products": 200,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 3,
+  "drug_id": "levothyroxine",
+  "decision": "EXISTING",
+  "claims": 46609036,
+  "rx_products_exact_any_route": 584,
+  "oral_only_products": 553,
+  "oral_share": 0.947,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 4,
+  "drug_id": "lisinopril",
+  "decision": "EXISTING",
+  "claims": 36069353,
+  "rx_products_exact_any_route": 274,
+  "oral_only_products": 274,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 5,
+  "drug_id": "gabapentin",
+  "decision": "EXISTING",
+  "claims": 35149588,
+  "rx_products_exact_any_route": 583,
+  "oral_only_products": 583,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 6,
+  "drug_id": "losartan",
+  "decision": "EXISTING",
+  "claims": 33196550,
+  "rx_products_exact_any_route": 208,
+  "oral_only_products": 208,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 7,
+  "drug_id": "metformin",
+  "decision": "EXISTING",
+  "claims": 33107562,
+  "rx_products_exact_any_route": 449,
+  "oral_only_products": 449,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 8,
+  "drug_id": "metoprolol_succinate",
+  "decision": "EXISTING",
+  "claims": 29696750,
+  "rx_products_exact_any_route": 498,
+  "oral_only_products": 476,
+  "oral_share": 0.956,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 9,
+  "drug_id": "omeprazole",
+  "decision": "EXISTING",
+  "claims": 28132175,
+  "rx_products_exact_any_route": 176,
+  "oral_only_products": 176,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 10,
+  "drug_id": "rosuvastatin",
+  "decision": "EXISTING",
+  "claims": 25907213,
+  "rx_products_exact_any_route": 282,
+  "oral_only_products": 282,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 11,
+  "drug_id": "pantoprazole",
+  "decision": "EXISTING",
+  "claims": 23654268,
+  "rx_products_exact_any_route": 168,
+  "oral_only_products": 138,
+  "oral_share": 0.821,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 12,
+  "drug_id": "furosemide",
+  "decision": "EXISTING",
+  "claims": 23023929,
+  "rx_products_exact_any_route": 221,
+  "oral_only_products": 137,
+  "oral_share": 0.62,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 14,
+  "drug_id": "hydrocodone_acetaminophen",
+  "decision": "EXISTING",
+  "claims": 20015432,
+  "rx_products_exact_any_route": 208,
+  "oral_only_products": 208,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 15,
+  "drug_id": "tamsulosin",
+  "decision": "EXISTING",
+  "claims": 19859696,
+  "rx_products_exact_any_route": 64,
+  "oral_only_products": 64,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 16,
+  "drug_id": "albuterol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 19688815,
+  "rx_products_exact_any_route": 131,
+  "oral_only_products": 27,
+  "oral_share": 0.206,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 17,
+  "drug_id": "hydrochlorothiazide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 18347405,
+  "rx_products_exact_any_route": 170,
+  "oral_only_products": 170,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 18,
+  "drug_id": "trazodone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 17032783,
+  "rx_products_exact_any_route": 169,
+  "oral_only_products": 169,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 19,
+  "drug_id": "metoprolol_tartrate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 16235425,
+  "rx_products_exact_any_route": 498,
+  "oral_only_products": 476,
+  "oral_share": 0.956,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 20,
+  "drug_id": "simvastatin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 15947590,
+  "rx_products_exact_any_route": 160,
+  "oral_only_products": 160,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 21,
+  "drug_id": "potassium_chloride",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 15382335,
+  "rx_products_exact_any_route": 285,
+  "oral_only_products": 261,
+  "oral_share": 0.916,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 22,
+  "drug_id": "sertraline",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 15258687,
+  "rx_products_exact_any_route": 229,
+  "oral_only_products": 229,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 23,
+  "drug_id": "carvedilol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 15175020,
+  "rx_products_exact_any_route": 207,
+  "oral_only_products": 207,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 24,
+  "drug_id": "prednisone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 14985485,
+  "rx_products_exact_any_route": 317,
+  "oral_only_products": 317,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 26,
+  "drug_id": "clopidogrel",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 13031458,
+  "rx_products_exact_any_route": 68,
+  "oral_only_products": 68,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 27,
+  "drug_id": "tramadol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 12883350,
+  "rx_products_exact_any_route": 126,
+  "oral_only_products": 126,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 28,
+  "drug_id": "famotidine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 12743061,
+  "rx_products_exact_any_route": 194,
+  "oral_only_products": 176,
+  "oral_share": 0.907,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 29,
+  "drug_id": "duloxetine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 12231525,
+  "rx_products_exact_any_route": 205,
+  "oral_only_products": 205,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 30,
+  "drug_id": "montelukast",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 11943280,
+  "rx_products_exact_any_route": 93,
+  "oral_only_products": 93,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 31,
+  "drug_id": "escitalopram",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 11831986,
+  "rx_products_exact_any_route": 155,
+  "oral_only_products": 155,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 32,
+  "drug_id": "alprazolam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 11674615,
+  "rx_products_exact_any_route": 141,
+  "oral_only_products": 141,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 33,
+  "drug_id": "meloxicam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 11301668,
+  "rx_products_exact_any_route": 153,
+  "oral_only_products": 151,
+  "oral_share": 0.987,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 35,
+  "drug_id": "pravastatin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 9605809,
+  "rx_products_exact_any_route": 185,
+  "oral_only_products": 185,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 36,
+  "drug_id": "quetiapine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 9472557,
+  "rx_products_exact_any_route": 349,
+  "oral_only_products": 349,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 37,
+  "drug_id": "allopurinol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 9282458,
+  "rx_products_exact_any_route": 175,
+  "oral_only_products": 171,
+  "oral_share": 0.977,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 38,
+  "drug_id": "bupropion",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 9078063,
+  "rx_products_exact_any_route": 345,
+  "oral_only_products": 345,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 39,
+  "drug_id": "amoxicillin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 9023192,
+  "rx_products_exact_any_route": 280,
+  "oral_only_products": 280,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 40,
+  "drug_id": "oxycodone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8924419,
+  "rx_products_exact_any_route": 161,
+  "oral_only_products": 161,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 42,
+  "drug_id": "clonazepam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8855573,
+  "rx_products_exact_any_route": 145,
+  "oral_only_products": 145,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 43,
+  "drug_id": "oxycodone_acetaminophen",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8671673,
+  "rx_products_exact_any_route": 136,
+  "oral_only_products": 136,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 44,
+  "drug_id": "diclofenac",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8631549,
+  "rx_products_exact_any_route": 348,
+  "oral_only_products": 210,
+  "oral_share": 0.603,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 45,
+  "drug_id": "azithromycin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8261233,
+  "rx_products_exact_any_route": 202,
+  "oral_only_products": 187,
+  "oral_share": 0.926,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 46,
+  "drug_id": "alendronate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8211446,
+  "rx_products_exact_any_route": 36,
+  "oral_only_products": 36,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 47,
+  "drug_id": "empagliflozin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8149965,
+  "rx_products_exact_any_route": 11,
+  "oral_only_products": 11,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 48,
+  "drug_id": "lorazepam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8088872,
+  "rx_products_exact_any_route": 146,
+  "oral_only_products": 127,
+  "oral_share": 0.87,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 49,
+  "drug_id": "semaglutide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8000462,
+  "rx_products_exact_any_route": 26,
+  "oral_only_products": 10,
+  "oral_share": 0.385,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 50,
+  "drug_id": "spironolactone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7954357,
+  "rx_products_exact_any_route": 182,
+  "oral_only_products": 182,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 51,
+  "drug_id": "mirtazapine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7837419,
+  "rx_products_exact_any_route": 144,
+  "oral_only_products": 144,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 52,
+  "drug_id": "zolpidem",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7771210,
+  "rx_products_exact_any_route": 142,
+  "oral_only_products": 138,
+  "oral_share": 0.972,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 53,
+  "drug_id": "glipizide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7751298,
+  "rx_products_exact_any_route": 145,
+  "oral_only_products": 145,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 54,
+  "drug_id": "donepezil",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7655818,
+  "rx_products_exact_any_route": 73,
+  "oral_only_products": 73,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 55,
+  "drug_id": "ibuprofen",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7216984,
+  "rx_products_exact_any_route": 325,
+  "oral_only_products": 320,
+  "oral_share": 0.985,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 56,
+  "drug_id": "fluoxetine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7198477,
+  "rx_products_exact_any_route": 227,
+  "oral_only_products": 226,
+  "oral_share": 0.996,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 57,
+  "drug_id": "cephalexin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7109186,
+  "rx_products_exact_any_route": 184,
+  "oral_only_products": 184,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 58,
+  "drug_id": "buspirone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 7108008,
+  "rx_products_exact_any_route": 277,
+  "oral_only_products": 277,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 59,
+  "drug_id": "ezetimibe",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6992500,
+  "rx_products_exact_any_route": 42,
+  "oral_only_products": 42,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 60,
+  "drug_id": "citalopram",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 6899092,
+  "rx_products_exact_any_route": 116,
+  "oral_only_products": 116,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 61,
+  "drug_id": "finasteride",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6891435,
+  "rx_products_exact_any_route": 72,
+  "oral_only_products": 72,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 62,
+  "drug_id": "cyclobenzaprine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6853578,
+  "rx_products_exact_any_route": 244,
+  "oral_only_products": 243,
+  "oral_share": 0.996,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 63,
+  "drug_id": "amoxicillin_clavulanate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6834726,
+  "rx_products_exact_any_route": 205,
+  "oral_only_products": 205,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 64,
+  "drug_id": "pregabalin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6778280,
+  "rx_products_exact_any_route": 542,
+  "oral_only_products": 542,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 65,
+  "drug_id": "atenolol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6713810,
+  "rx_products_exact_any_route": 129,
+  "oral_only_products": 129,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 67,
+  "drug_id": "tizanidine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6510163,
+  "rx_products_exact_any_route": 200,
+  "oral_only_products": 200,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 68,
+  "drug_id": "diltiazem",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 6393852,
+  "rx_products_exact_any_route": 299,
+  "oral_only_products": 280,
+  "oral_share": 0.936,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 71,
+  "drug_id": "venlafaxine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5976979,
+  "rx_products_exact_any_route": 334,
+  "oral_only_products": 334,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 72,
+  "drug_id": "doxycycline",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 7687929,
+  "rx_products_exact_any_route": 337,
+  "oral_only_products": 312,
+  "oral_share": 0.926,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 73,
+  "drug_id": "hydralazine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5806142,
+  "rx_products_exact_any_route": 144,
+  "oral_only_products": 120,
+  "oral_share": 0.833,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 74,
+  "drug_id": "lisinopril_hydrochlorothiazide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5771925,
+  "rx_products_exact_any_route": 96,
+  "oral_only_products": 96,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 76,
+  "drug_id": "memantine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5684839,
+  "rx_products_exact_any_route": 120,
+  "oral_only_products": 120,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 78,
+  "drug_id": "oxybutynin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5408933,
+  "rx_products_exact_any_route": 116,
+  "oral_only_products": 115,
+  "oral_share": 0.991,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 79,
+  "drug_id": "methylprednisolone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5401458,
+  "rx_products_exact_any_route": 144,
+  "oral_only_products": 53,
+  "oral_share": 0.368,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 81,
+  "drug_id": "losartan_hydrochlorothiazide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5191911,
+  "rx_products_exact_any_route": 111,
+  "oral_only_products": 111,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 82,
+  "drug_id": "valproate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 5009951,
+  "rx_products_exact_any_route": 216,
+  "oral_only_products": 211,
+  "oral_share": 0.977,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 84,
+  "drug_id": "celecoxib",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4988964,
+  "rx_products_exact_any_route": 238,
+  "oral_only_products": 238,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 85,
+  "drug_id": "baclofen",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4969215,
+  "rx_products_exact_any_route": 237,
+  "oral_only_products": 216,
+  "oral_share": 0.911,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 86,
+  "drug_id": "ciprofloxacin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4829389,
+  "rx_products_exact_any_route": 202,
+  "oral_only_products": 170,
+  "oral_share": 0.842,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 87,
+  "drug_id": "isosorbide_mononitrate",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 4807944,
+  "rx_products_exact_any_route": 62,
+  "oral_only_products": 62,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 88,
+  "drug_id": "glimepiride",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4697311,
+  "rx_products_exact_any_route": 105,
+  "oral_only_products": 105,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 89,
+  "drug_id": "levetiracetam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4657288,
+  "rx_products_exact_any_route": 306,
+  "oral_only_products": 238,
+  "oral_share": 0.778,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 91,
+  "drug_id": "sulfamethoxazole_trimethoprim",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4603185,
+  "rx_products_exact_any_route": 105,
+  "oral_only_products": 96,
+  "oral_share": 0.914,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 93,
+  "drug_id": "dapagliflozin",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 4296969,
+  "rx_products_exact_any_route": 50,
+  "oral_only_products": 50,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 94,
+  "drug_id": "estradiol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4286117,
+  "rx_products_exact_any_route": 274,
+  "oral_only_products": 72,
+  "oral_share": 0.263,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 95,
+  "drug_id": "hydroxyzine",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 5779729,
+  "rx_products_exact_any_route": 280,
+  "oral_only_products": 274,
+  "oral_share": 0.979,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 96,
+  "drug_id": "lamotrigine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 4214448,
+  "rx_products_exact_any_route": 287,
+  "oral_only_products": 287,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 98,
+  "drug_id": "ondansetron",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 8065764,
+  "rx_products_exact_any_route": 271,
+  "oral_only_products": 219,
+  "oral_share": 0.808,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 99,
+  "drug_id": "sitagliptin",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 4027265,
+  "rx_products_exact_any_route": 36,
+  "oral_only_products": 36,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 100,
+  "drug_id": "valsartan",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3968024,
+  "rx_products_exact_any_route": 145,
+  "oral_only_products": 145,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 101,
+  "drug_id": "aripiprazole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3915571,
+  "rx_products_exact_any_route": 269,
+  "oral_only_products": 267,
+  "oral_share": 0.993,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 103,
+  "drug_id": "propranolol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3835234,
+  "rx_products_exact_any_route": 218,
+  "oral_only_products": 211,
+  "oral_share": 0.968,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 104,
+  "drug_id": "risperidone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3820299,
+  "rx_products_exact_any_route": 176,
+  "oral_only_products": 169,
+  "oral_share": 0.96,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 105,
+  "drug_id": "olanzapine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3813076,
+  "rx_products_exact_any_route": 219,
+  "oral_only_products": 205,
+  "oral_share": 0.936,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 106,
+  "drug_id": "nitrofurantoin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3776730,
+  "rx_products_exact_any_route": 140,
+  "oral_only_products": 140,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 107,
+  "drug_id": "nystatin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3687948,
+  "rx_products_exact_any_route": 91,
+  "oral_only_products": 28,
+  "oral_share": 0.308,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 108,
+  "drug_id": "ketoconazole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3658054,
+  "rx_products_exact_any_route": 58,
+  "oral_only_products": 13,
+  "oral_share": 0.224,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 109,
+  "drug_id": "mirabegron",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3650058,
+  "rx_products_exact_any_route": 23,
+  "oral_only_products": 23,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 110,
+  "drug_id": "amitriptyline",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3642822,
+  "rx_products_exact_any_route": 212,
+  "oral_only_products": 212,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 111,
+  "drug_id": "carbidopa_levodopa",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3547852,
+  "rx_products_exact_any_route": 99,
+  "oral_only_products": 98,
+  "oral_share": 0.99,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 112,
+  "drug_id": "clonidine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3543472,
+  "rx_products_exact_any_route": 175,
+  "oral_only_products": 147,
+  "oral_share": 0.84,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 113,
+  "drug_id": "nifedipine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3539567,
+  "rx_products_exact_any_route": 133,
+  "oral_only_products": 133,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 114,
+  "drug_id": "prednisolone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3534278,
+  "rx_products_exact_any_route": 57,
+  "oral_only_products": 39,
+  "oral_share": 0.684,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 115,
+  "drug_id": "fluconazole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3508060,
+  "rx_products_exact_any_route": 164,
+  "oral_only_products": 153,
+  "oral_share": 0.933,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 116,
+  "drug_id": "paroxetine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3497303,
+  "rx_products_exact_any_route": 169,
+  "oral_only_products": 168,
+  "oral_share": 0.994,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 118,
+  "drug_id": "ropinirole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3299998,
+  "rx_products_exact_any_route": 149,
+  "oral_only_products": 149,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 119,
+  "drug_id": "topiramate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3204833,
+  "rx_products_exact_any_route": 303,
+  "oral_only_products": 303,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 120,
+  "drug_id": "sacubitril_valsartan",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3198752,
+  "rx_products_exact_any_route": 103,
+  "oral_only_products": 103,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 121,
+  "drug_id": "pioglitazone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3073371,
+  "rx_products_exact_any_route": 68,
+  "oral_only_products": 68,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 122,
+  "drug_id": "olmesartan",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3003478,
+  "rx_products_exact_any_route": 131,
+  "oral_only_products": 131,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 125,
+  "drug_id": "diazepam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2955220,
+  "rx_products_exact_any_route": 129,
+  "oral_only_products": 88,
+  "oral_share": 0.682,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 126,
+  "drug_id": "valacyclovir",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2953135,
+  "rx_products_exact_any_route": 116,
+  "oral_only_products": 116,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 127,
+  "drug_id": "naproxen",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2913656,
+  "rx_products_exact_any_route": 223,
+  "oral_only_products": 223,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 128,
+  "drug_id": "amiodarone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2884995,
+  "rx_products_exact_any_route": 72,
+  "oral_only_products": 43,
+  "oral_share": 0.597,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 129,
+  "drug_id": "triamterene_hydrochlorothiazide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2882734,
+  "rx_products_exact_any_route": 69,
+  "oral_only_products": 69,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 130,
+  "drug_id": "chlorthalidone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2827233,
+  "rx_products_exact_any_route": 105,
+  "oral_only_products": 105,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 131,
+  "drug_id": "esomeprazole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2823488,
+  "rx_products_exact_any_route": 129,
+  "oral_only_products": 125,
+  "oral_share": 0.969,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 133,
+  "drug_id": "meclizine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2782004,
+  "rx_products_exact_any_route": 72,
+  "oral_only_products": 72,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 134,
+  "drug_id": "timolol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2765364,
+  "rx_products_exact_any_route": 77,
+  "oral_only_products": 4,
+  "oral_share": 0.052,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 135,
+  "drug_id": "torsemide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2739184,
+  "rx_products_exact_any_route": 63,
+  "oral_only_products": 63,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 136,
+  "drug_id": "lovastatin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2738534,
+  "rx_products_exact_any_route": 72,
+  "oral_only_products": 72,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 137,
+  "drug_id": "hydrocortisone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2713231,
+  "rx_products_exact_any_route": 198,
+  "oral_only_products": 54,
+  "oral_share": 0.273,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 138,
+  "drug_id": "morphine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2687564,
+  "rx_products_exact_any_route": 154,
+  "oral_only_products": 116,
+  "oral_share": 0.753,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 142,
+  "drug_id": "acetaminophen_codeine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2524047,
+  "rx_products_exact_any_route": 75,
+  "oral_only_products": 75,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 143,
+  "drug_id": "methocarbamol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2513195,
+  "rx_products_exact_any_route": 214,
+  "oral_only_products": 200,
+  "oral_share": 0.935,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 144,
+  "drug_id": "nitroglycerin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2495243,
+  "rx_products_exact_any_route": 103,
+  "oral_only_products": 12,
+  "oral_share": 0.117,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 145,
+  "drug_id": "levofloxacin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2446240,
+  "rx_products_exact_any_route": 124,
+  "oral_only_products": 97,
+  "oral_share": 0.782,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 146,
+  "drug_id": "irbesartan",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2443364,
+  "rx_products_exact_any_route": 83,
+  "oral_only_products": 83,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 147,
+  "drug_id": "chlorhexidine",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 2443173,
+  "rx_products_exact_any_route": 54,
+  "oral_only_products": 35,
+  "oral_share": 0.648,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 148,
+  "drug_id": "hydroxychloroquine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2375157,
+  "rx_products_exact_any_route": 58,
+  "oral_only_products": 58,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 149,
+  "drug_id": "temazepam",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2364315,
+  "rx_products_exact_any_route": 88,
+  "oral_only_products": 88,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 150,
+  "drug_id": "dicyclomine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2337339,
+  "rx_products_exact_any_route": 129,
+  "oral_only_products": 121,
+  "oral_share": 0.938,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 152,
+  "drug_id": "methotrexate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2323208,
+  "rx_products_exact_any_route": 78,
+  "oral_only_products": 36,
+  "oral_share": 0.462,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 153,
+  "drug_id": "tiotropium",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 2298858,
+  "rx_products_exact_any_route": 6,
+  "oral_only_products": 0,
+  "oral_share": 0.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 154,
+  "drug_id": "linaclotide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2261914,
+  "rx_products_exact_any_route": 4,
+  "oral_only_products": 4,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 156,
+  "drug_id": "sucralfate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2223838,
+  "rx_products_exact_any_route": 70,
+  "oral_only_products": 70,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 157,
+  "drug_id": "clindamycin",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 2222276,
+  "rx_products_exact_any_route": 210,
+  "oral_only_products": 103,
+  "oral_share": 0.49,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 158,
+  "drug_id": "benazepril",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2209363,
+  "rx_products_exact_any_route": 88,
+  "oral_only_products": 88,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 159,
+  "drug_id": "bumetanide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2191740,
+  "rx_products_exact_any_route": 127,
+  "oral_only_products": 95,
+  "oral_share": 0.748,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 160,
+  "drug_id": "doxazosin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2182347,
+  "rx_products_exact_any_route": 130,
+  "oral_only_products": 130,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 161,
+  "drug_id": "dextroamphetamine_amphetamine",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 2137883,
+  "rx_products_exact_any_route": 218,
+  "oral_only_products": 218,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 163,
+  "drug_id": "metronidazole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2106632,
+  "rx_products_exact_any_route": 176,
+  "oral_only_products": 121,
+  "oral_share": 0.688,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 164,
+  "drug_id": "levocetirizine",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 2092693,
+  "rx_products_exact_any_route": 45,
+  "oral_only_products": 45,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 166,
+  "drug_id": "enalapril",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2056056,
+  "rx_products_exact_any_route": 107,
+  "oral_only_products": 107,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 168,
+  "drug_id": "cefdinir",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 2008033,
+  "rx_products_exact_any_route": 81,
+  "oral_only_products": 81,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 170,
+  "drug_id": "benztropine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1990446,
+  "rx_products_exact_any_route": 56,
+  "oral_only_products": 51,
+  "oral_share": 0.911,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 171,
+  "drug_id": "icosapent_ethyl",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1983920,
+  "rx_products_exact_any_route": 39,
+  "oral_only_products": 39,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 172,
+  "drug_id": "fenofibrate",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 3816055,
+  "rx_products_exact_any_route": 219,
+  "oral_only_products": 219,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 174,
+  "drug_id": "lactulose",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1913784,
+  "rx_products_exact_any_route": 37,
+  "oral_only_products": 28,
+  "oral_share": 0.757,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 175,
+  "drug_id": "acyclovir",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1899052,
+  "rx_products_exact_any_route": 204,
+  "oral_only_products": 156,
+  "oral_share": 0.765,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 178,
+  "drug_id": "sumatriptan",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1795531,
+  "rx_products_exact_any_route": 118,
+  "oral_only_products": 74,
+  "oral_share": 0.627,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 181,
+  "drug_id": "pramipexole",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 1741633,
+  "rx_products_exact_any_route": 137,
+  "oral_only_products": 137,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 183,
+  "drug_id": "digoxin",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 1676083,
+  "rx_products_exact_any_route": 59,
+  "oral_only_products": 47,
+  "oral_share": 0.797,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 184,
+  "drug_id": "amlodipine_benazepril",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1666390,
+  "rx_products_exact_any_route": 93,
+  "oral_only_products": 93,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 186,
+  "drug_id": "verapamil",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1656910,
+  "rx_products_exact_any_route": 135,
+  "oral_only_products": 84,
+  "oral_share": 0.622,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 187,
+  "drug_id": "valsartan_hydrochlorothiazide",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1621363,
+  "rx_products_exact_any_route": 104,
+  "oral_only_products": 104,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 188,
+  "drug_id": "anastrozole",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1613420,
+  "rx_products_exact_any_route": 41,
+  "oral_only_products": 41,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 189,
+  "drug_id": "ramipril",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1584563,
+  "rx_products_exact_any_route": 69,
+  "oral_only_products": 69,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 190,
+  "drug_id": "ketorolac",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 1551666,
+  "rx_products_exact_any_route": 193,
+  "oral_only_products": 55,
+  "oral_share": 0.285,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 191,
+  "drug_id": "ergocalciferol",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1550641,
+  "rx_products_exact_any_route": 38,
+  "oral_only_products": 38,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 194,
+  "drug_id": "linagliptin",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1495809,
+  "rx_products_exact_any_route": 3,
+  "oral_only_products": 3,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 196,
+  "drug_id": "lidocaine",
+  "decision": "PROPOSED_INACTIVE",
+  "claims": 1458645,
+  "rx_products_exact_any_route": 417,
+  "oral_only_products": 7,
+  "oral_share": 0.017,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 197,
+  "drug_id": "promethazine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1418152,
+  "rx_products_exact_any_route": 131,
+  "oral_only_products": 91,
+  "oral_share": 0.695,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 198,
+  "drug_id": "dexamethasone",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1412844,
+  "rx_products_exact_any_route": 247,
+  "oral_only_products": 147,
+  "oral_share": 0.595,
+  "sample_capped_at_1000": false
+ },
+ {
+  "rank": 200,
+  "drug_id": "colchicine",
+  "decision": "PROPOSED_ACTIVE",
+  "claims": 1380446,
+  "rx_products_exact_any_route": 48,
+  "oral_only_products": 48,
+  "oral_share": 1.0,
+  "sample_capped_at_1000": false
+ }
+]

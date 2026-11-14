@@ -18,7 +18,7 @@ import type { OpenFdaEnvelope, OpenFdaNdcProduct } from '../models/openfda.ts';
 import { compareRelease, formEvidenceFromText, fromDirectoryDosageForm } from './doseForm.ts';
 import { readIngredientsFromText, splitIngredientName } from './ingredients.ts';
 import { packageKey, type NdcParseResult } from './ndc.ts';
-import { normalizeStrength, parsePrintedStrength, sameStrengthSet } from './strength.ts';
+import { normalizeStrength, parsePrintedStrength, sameStrength, sameStrengthSet } from './strength.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Directory products
@@ -138,7 +138,8 @@ export type CrossValidationIssue =
   | 'DRUG_NAME_NOT_PRINTED'
   | 'STRENGTH_NOT_PRINTED'
   | 'RELEASE_NOT_PRINTED'
-  | 'RELEASE_CONFLICTING';
+  | 'RELEASE_CONFLICTING'
+  | 'STRENGTH_ASSOCIATION_UNCLEAR';
 
 export interface CrossValidation {
   status: 'PASS' | 'MISMATCH' | 'NEEDS_CONFIRMATION';
@@ -154,6 +155,7 @@ export interface CrossValidation {
 export function crossValidate(
   printed: PrintedFields,
   product: Pick<DirectoryProduct, 'ingredients' | 'doseForm' | 'release'>,
+  aliases: Readonly<Record<string, string>> = {},
 ): CrossValidation {
   const mismatches: CrossValidationIssue[] = [];
   const confirmations: CrossValidationIssue[] = [];
@@ -163,7 +165,7 @@ export function crossValidate(
   if (nameText.trim() === '') {
     confirmations.push('DRUG_NAME_NOT_PRINTED');
   } else {
-    const r = readIngredientsFromText(nameText, product.ingredients.map((i) => i.name));
+    const r = readIngredientsFromText(nameText, product.ingredients.map((i) => i.name), aliases);
     if (r.found.length === 0) mismatches.push('INGREDIENT_MISMATCH');
     else if (r.missing.length > 0 || r.partners.length > 0) mismatches.push('COMBINATION_MISMATCH');
   }
@@ -174,6 +176,23 @@ export function crossValidate(
     confirmations.push('STRENGTH_NOT_PRINTED');
   } else if (productStrengths.some((s) => s === null) || !sameStrengthSet(printedStrength, productStrengths as Strength[])) {
     mismatches.push('STRENGTH_MISMATCH');
+  } else if (product.ingredients.length > 1) {
+    // Review item 1: the printed strengths belong to the ingredients in the order the label names
+    // them. Swapped strengths are a different product even though the set of values is the same.
+    const names = product.ingredients.map((i) => i.name);
+    const read = readIngredientsFromText(nameText, names, aliases);
+    if (read.found.length === names.length && new Set(names).size === names.length && printedStrength.length === names.length) {
+      const ordered = orderByAppearance(nameText, names, aliases);
+      const paired = ordered.every((n, k) => {
+        const want = product.ingredients.find((i) => i.name === n)?.strength;
+        const got = printedStrength[k];
+        return want != null && got !== undefined && sameStrength(got, want);
+      });
+      if (!paired) mismatches.push('STRENGTH_MISMATCH');
+    } else {
+      // Which printed strength belongs to which ingredient cannot be told: ask the patient.
+      confirmations.push('STRENGTH_ASSOCIATION_UNCLEAR');
+    }
   }
 
   const fe = formEvidenceFromText(allText);
@@ -285,7 +304,7 @@ export function identityFromPrintedFields(
     return { ok: false, missing: [...new Set(missing)], detail: 'printed fields do not establish ingredient, strength and form' };
   }
   // Ingredient order in the strength follows printed order; pair them in the order found in text.
-  const ordered = orderByAppearance(name, ingredientNames);
+  const ordered = orderByAppearance(name, ingredientNames, aliases);
   const ingredients: IdentityIngredient[] = ordered.map((n, i) => ({
     name: n,
     salt: reading.salts[n] ?? null,
@@ -313,12 +332,18 @@ export function identityFromPrintedFields(
   };
 }
 
-function orderByAppearance(text: string, names: string[]): string[] {
+/**
+ * Order ingredients by where they appear in the printed text. An ingredient printed only as an
+ * abbreviation ("APAP") is found at the abbreviation's position (C1: otherwise strengths were paired
+ * with the wrong ingredient, e.g. "APAP/CODEINE 300-30MG" read as codeine 300 mg).
+ */
+export function orderByAppearance(text: string, names: string[], aliases: Readonly<Record<string, string>> = {}): string[] {
   const lower = text.toLowerCase();
-  const pos = (n: string) => {
-    const i = lower.indexOf(n);
-    return i < 0 ? Number.MAX_SAFE_INTEGER : i;
+  const at = (word: string) => {
+    const m = new RegExp(`(^|[^a-z])${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![a-z])`).exec(lower);
+    return m ? m.index + m[1]!.length : Number.MAX_SAFE_INTEGER;
   };
+  const pos = (n: string) => Math.min(at(n), ...Object.entries(aliases).filter(([, v]) => v === n).map(([a]) => at(a.toLowerCase())));
   return [...names].sort((a, b) => pos(a) - pos(b));
 }
 

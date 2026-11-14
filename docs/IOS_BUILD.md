@@ -73,7 +73,7 @@ and items B-iOS-1 to B-iOS-3 must be closed.
 1. **Apple Developer Program** membership for the legal entity (organization enrollment needs a D-U-N-S
    number). Register the bundle ID.
 2. **Signing**: automatic signing in Xcode with the team's distribution certificate; certificates and
-   provisioning profiles stay in the owner's keychain/Apple account, never in the repository.
+   provisioning profiles stay in the team's keychain/Apple account, never in the repository.
 3. **Archive**: Product → Archive (Release configuration, pilot profile), then *Distribute App →
    App Store Connect*.
 4. **TestFlight**: internal testers (team members) need no review; external testers require Beta App

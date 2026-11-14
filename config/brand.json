@@ -1,5 +1,5 @@
 {
-  "$comment": "Single source of the product identity (Task 4A.1). Separate from drug data, exclusion policy, workflow logic and regulatory evidence. Consumers: scripts/bundle_brand.ts (generates mobile/src/brand/brand.ts and the iOS display name), scripts/bundle_legal_docs.ts ({{PRODUCT_NAME}}), mobile/android/app/build.gradle (app label). After editing run `npm run brand:bundle && npm run legal:bundle`. Package IDs and signing identities are NOT derived from this file and must not change until the owner approves a final brand.",
+  "$comment": "Single source of the product identity (Task 4A.1). Separate from drug data, exclusion policy, workflow logic and regulatory evidence. Consumers: scripts/bundle_brand.ts (generates mobile/src/brand/brand.ts and the iOS display name), scripts/bundle_legal_docs.ts ({{PRODUCT_NAME}}), mobile/android/app/build.gradle (app label). After editing run `npm run brand:bundle && npm run legal:bundle`. Package IDs and signing identities are NOT derived from this file and must not change until the project team approves a final brand.",
   "schema": 1,
   "product_name": "MedLuma",
   "name_status": "PROVISIONAL_CONFLICTS_FOUND",

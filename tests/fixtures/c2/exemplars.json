@@ -1,0 +1,169 @@
+{
+ "losartan/HCTZ 100/25 Lupin": {
+  "product_ndc": "68180-217",
+  "generic_name": "Losartan Potassium and Hydrochlorothiazide",
+  "labeler_name": "Lupin Pharmaceuticals, Inc.",
+  "brand_name": "Losartan Potassium and Hydrochlorothiazide",
+  "active_ingredients": [
+   {
+    "name": "HYDROCHLOROTHIAZIDE",
+    "strength": "25 mg/1"
+   },
+   {
+    "name": "LOSARTAN POTASSIUM",
+    "strength": "100 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "68180-217-06",
+    "description": "30 TABLET in 1 BOTTLE (68180-217-06)",
+    "marketing_start_date": "20101006",
+    "sample": false
+   },
+   {
+    "package_ndc": "68180-217-09",
+    "description": "90 TABLET in 1 BOTTLE (68180-217-09)",
+    "marketing_start_date": "20101006",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20271231",
+  "openfda": {
+   "manufacturer_name": [
+    "Lupin Pharmaceuticals, Inc."
+   ],
+   "rxcui": [
+    "979464",
+    "979468",
+    "979471"
+   ],
+   "spl_set_id": [
+    "ee1eaaf6-050b-48af-942b-5e3451edc164"
+   ],
+   "is_original_packager": [
+    true
+   ],
+   "upc": [
+    "0368180215066",
+    "0368180217060"
+   ],
+   "nui": [
+    "N0000175359",
+    "N0000175419",
+    "M0471776"
+   ],
+   "pharm_class_pe": [
+    "Increased Diuresis [PE]"
+   ],
+   "pharm_class_epc": [
+    "Thiazide Diuretic [EPC]"
+   ],
+   "pharm_class_cs": [
+    "Thiazides [CS]"
+   ],
+   "unii": [
+    "0J48LPH2TH",
+    "3ST302B24A"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET",
+  "spl_id": "84f3649d-3ced-4765-ba22-d0fbaeffa820",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20101006",
+  "product_id": "68180-217_84f3649d-3ced-4765-ba22-d0fbaeffa820",
+  "application_number": "ANDA078245",
+  "brand_name_base": "Losartan Potassium and Hydrochlorothiazide",
+  "pharm_class": [
+   "Angiotensin 2 Receptor Antagonists [MoA]",
+   "Angiotensin 2 Receptor Blocker [EPC]",
+   "Increased Diuresis [PE]",
+   "Thiazide Diuretic [EPC]",
+   "Thiazides [CS]"
+  ]
+ },
+ "valsartan/HCTZ tablet": {
+  "product_ndc": "50090-5345",
+  "generic_name": "Valsartan and Hydrochlorothiazide",
+  "labeler_name": "A-S Medication Solutions",
+  "brand_name": "Valsartan and Hydrochlorothiazide",
+  "active_ingredients": [
+   {
+    "name": "VALSARTAN",
+    "strength": "320 mg/1"
+   },
+   {
+    "name": "HYDROCHLOROTHIAZIDE",
+    "strength": "25 mg/1"
+   }
+  ],
+  "finished": true,
+  "packaging": [
+   {
+    "package_ndc": "50090-5345-0",
+    "description": "90 TABLET, FILM COATED in 1 BOTTLE (50090-5345-0)",
+    "marketing_start_date": "20201105",
+    "sample": false
+   }
+  ],
+  "listing_expiration_date": "20261231",
+  "openfda": {
+   "manufacturer_name": [
+    "A-S Medication Solutions"
+   ],
+   "rxcui": [
+    "636045"
+   ],
+   "spl_set_id": [
+    "ef100fa1-dd63-4287-8543-480a82ace168"
+   ],
+   "nui": [
+    "N0000000070",
+    "N0000175561",
+    "N0000175359",
+    "N0000175419",
+    "M0471776"
+   ],
+   "pharm_class_moa": [
+    "Angiotensin 2 Receptor Antagonists [MoA]"
+   ],
+   "pharm_class_epc": [
+    "Angiotensin 2 Receptor Blocker [EPC]",
+    "Thiazide Diuretic [EPC]"
+   ],
+   "pharm_class_pe": [
+    "Increased Diuresis [PE]"
+   ],
+   "pharm_class_cs": [
+    "Thiazides [CS]"
+   ],
+   "unii": [
+    "80M03YXJ7I",
+    "0J48LPH2TH"
+   ]
+  },
+  "marketing_category": "ANDA",
+  "dosage_form": "TABLET, FILM COATED",
+  "spl_id": "48d61518-d6f5-4b1e-8d5f-88cdd766a17d",
+  "product_type": "HUMAN PRESCRIPTION DRUG",
+  "route": [
+   "ORAL"
+  ],
+  "marketing_start_date": "20130419",
+  "product_id": "50090-5345_48d61518-d6f5-4b1e-8d5f-88cdd766a17d",
+  "application_number": "ANDA203145",
+  "brand_name_base": "Valsartan and Hydrochlorothiazide",
+  "pharm_class": [
+   "Angiotensin 2 Receptor Antagonists [MoA]",
+   "Angiotensin 2 Receptor Blocker [EPC]",
+   "Increased Diuresis [PE]",
+   "Thiazide Diuretic [EPC]",
+   "Thiazides [CS]"
+  ]
+ }
+}

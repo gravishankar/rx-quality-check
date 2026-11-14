@@ -71,9 +71,11 @@ test('saving is offered only when the build persists history', () => {
   assert.ok(on.kind === 'RESULT' && on.canSave);
 });
 
-test('confirmation event: lot sent only if its item was ticked; release recorded when answered', () => {
+test('confirmation event: lot sent only with an explicit "use this lot"; release recorded only when a type is stated', () => {
   assert.deepEqual(confirmationEvent(['identity'], 'ABC123', null), { type: 'USER_CONFIRMED', confirmedFields: ['identity'], lot: null });
-  assert.deepEqual(confirmationEvent(['lot', 'identity'], 'ABC123', 'ER'), { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot', 'release'], lot: 'ABC123', release: 'ER' });
+  assert.deepEqual(confirmationEvent(['lot', 'identity'], 'ABC123', 'ER'), { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot', 'release'], lot: 'ABC123', lotChoice: 'USE', release: 'ER' });
+  assert.deepEqual(confirmationEvent(['identity'], 'ABC123', 'ER', 'USE'), { type: 'USER_CONFIRMED', confirmedFields: ['identity', 'lot', 'release'], lot: 'ABC123', lotChoice: 'USE', release: 'ER' });
+  assert.deepEqual(confirmationEvent(['identity'], 'ABC123', 'UNKNOWN', 'NOT_USED'), { type: 'USER_CONFIRMED', confirmedFields: ['identity'], lot: null, lotChoice: 'NOT_USED' });
 });
 
 test('confirmation: an NDC that is not in the FDA directory is reported (OD-23); typed lot shown as entered, not confirmed', async () => {
